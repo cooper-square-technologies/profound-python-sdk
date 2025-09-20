@@ -35,8 +35,8 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/stainless-sdks/profound-python"
-Repository = "https://github.com/stainless-sdks/profound-python"
+Homepage = "https://github.com/cooper-square-technologies/profound-python-sdk"
+Repository = "https://github.com/cooper-square-technologies/profound-python-sdk"
 
 [project.optional-dependencies]
 aiohttp = ["aiohttp", "httpx_aiohttp>=0.1.8"]
@@ -124,7 +124,7 @@ path = "README.md"
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
 # replace relative links with absolute links
 pattern = '\[(.+?)\]\(((?!https?://)\S+?)\)'
-replacement = '[\1](https://github.com/stainless-sdks/profound-python/tree/main/\g<2>)'
+replacement = '[\1](https://github.com/cooper-square-technologies/profound-python-sdk/tree/main/\g<2>)'
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
