@@ -1,0 +1,613 @@
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+from __future__ import annotations
+
+from typing import Dict, List, Union, Iterable
+from datetime import datetime
+from typing_extensions import Literal
+
+import httpx
+
+from ..types import (
+    report_query_citations_params,
+    report_query_sentiment_params,
+    report_query_visibility_params,
+)
+from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
+from .._utils import maybe_transform, async_maybe_transform
+from .._compat import cached_property
+from .._resource import SyncAPIResource, AsyncAPIResource
+from .._response import (
+    to_raw_response_wrapper,
+    to_streamed_response_wrapper,
+    async_to_raw_response_wrapper,
+    async_to_streamed_response_wrapper,
+)
+from .._base_client import make_request_options
+from ..types.response import Response
+from ..types.pagination_param import PaginationParam
+from ..types.report_query_citations_response import ReportQueryCitationsResponse
+
+__all__ = ["ReportsResource", "AsyncReportsResource"]
+
+
+class ReportsResource(SyncAPIResource):
+    @cached_property
+    def with_raw_response(self) -> ReportsResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/stainless-sdks/profound-python#accessing-raw-response-data-eg-headers
+        """
+        return ReportsResourceWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> ReportsResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/stainless-sdks/profound-python#with_streaming_response
+        """
+        return ReportsResourceWithStreamingResponse(self)
+
+    def query_citations(
+        self,
+        *,
+        category_id: str,
+        end_date: Union[str, datetime],
+        metrics: List[Literal["count", "share_of_voice"]],
+        start_date: Union[str, datetime],
+        date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
+        dimensions: List[Literal["hostname", "path", "date", "region", "topic", "model", "tag"]] | Omit = omit,
+        filters: Iterable[report_query_citations_params.Filter] | Omit = omit,
+        order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
+        pagination: PaginationParam | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ReportQueryCitationsResponse:
+        """Get citations for a given category.
+
+        Args:
+          end_date: End date for the report.
+
+        Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full
+              ISO timestamp.
+
+          start_date: Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or
+              full ISO timestamp.
+
+          date_interval: Date interval for the report. (only used with date dimension)
+
+          dimensions: Dimensions to group the report by.
+
+          filters: List of filters to apply to the report. Each filter has an operator, field, and
+              value.
+
+          order_by: Custom ordering of the report results.
+
+              The order is a record of key-value pairs where:
+
+              - key is the field to order by, which can be a metric or dimension
+              - value is the direction of the order, either 'asc' for ascending or 'desc' for
+                descending.
+
+              When not specified, the default order is the first metric in the query
+              descending.
+
+          pagination: Pagination settings for the report results.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/v1/reports/citations",
+            body=maybe_transform(
+                {
+                    "category_id": category_id,
+                    "end_date": end_date,
+                    "metrics": metrics,
+                    "start_date": start_date,
+                    "date_interval": date_interval,
+                    "dimensions": dimensions,
+                    "filters": filters,
+                    "order_by": order_by,
+                    "pagination": pagination,
+                },
+                report_query_citations_params.ReportQueryCitationsParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ReportQueryCitationsResponse,
+        )
+
+    def query_sentiment(
+        self,
+        *,
+        category_id: str,
+        end_date: Union[str, datetime],
+        metrics: List[Literal["positive", "negative"]],
+        start_date: Union[str, datetime],
+        date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
+        dimensions: List[Literal["theme", "date", "region", "topic", "model", "asset_name", "tag"]] | Omit = omit,
+        filters: Iterable[report_query_sentiment_params.Filter] | Omit = omit,
+        order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
+        pagination: PaginationParam | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> Response:
+        """Get citations for a given category.
+
+        Args:
+          end_date: End date for the report.
+
+        Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full
+              ISO timestamp.
+
+          start_date: Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or
+              full ISO timestamp.
+
+          date_interval: Date interval for the report. (only used with date dimension)
+
+          dimensions: Dimensions to group the report by.
+
+          filters: List of filters to apply to the report. Each filter has an operator, field, and
+              value.
+
+          order_by: Custom ordering of the report results.
+
+              The order is a record of key-value pairs where:
+
+              - key is the field to order by, which can be a metric or dimension
+              - value is the direction of the order, either 'asc' for ascending or 'desc' for
+                descending.
+
+              When not specified, the default order is the first metric in the query
+              descending.
+
+          pagination: Pagination settings for the report results.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/v1/reports/sentiment",
+            body=maybe_transform(
+                {
+                    "category_id": category_id,
+                    "end_date": end_date,
+                    "metrics": metrics,
+                    "start_date": start_date,
+                    "date_interval": date_interval,
+                    "dimensions": dimensions,
+                    "filters": filters,
+                    "order_by": order_by,
+                    "pagination": pagination,
+                },
+                report_query_sentiment_params.ReportQuerySentimentParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Response,
+        )
+
+    def query_visibility(
+        self,
+        *,
+        category_id: str,
+        end_date: Union[str, datetime],
+        metrics: List[Literal["share_of_voice", "mentions_count", "visibility_score"]],
+        start_date: Union[str, datetime],
+        date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
+        dimensions: List[Literal["date", "region", "topic", "model", "asset_name", "prompt", "tag"]] | Omit = omit,
+        filters: Iterable[report_query_visibility_params.Filter] | Omit = omit,
+        order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
+        pagination: PaginationParam | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> Response:
+        """Query visibility report.
+
+        Args:
+          end_date: End date for the report.
+
+        Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full
+              ISO timestamp.
+
+          start_date: Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or
+              full ISO timestamp.
+
+          date_interval: Date interval for the report. (only used with date dimension)
+
+          dimensions: Dimensions to group the report by.
+
+          filters: List of filters to apply to the report. Each filter has an operator, field, and
+              value.
+
+          order_by: Custom ordering of the report results.
+
+              The order is a record of key-value pairs where:
+
+              - key is the field to order by, which can be a metric or dimension
+              - value is the direction of the order, either 'asc' for ascending or 'desc' for
+                descending.
+
+              When not specified, the default order is the first metric in the query
+              descending.
+
+          pagination: Pagination settings for the report results.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/v1/reports/visibility",
+            body=maybe_transform(
+                {
+                    "category_id": category_id,
+                    "end_date": end_date,
+                    "metrics": metrics,
+                    "start_date": start_date,
+                    "date_interval": date_interval,
+                    "dimensions": dimensions,
+                    "filters": filters,
+                    "order_by": order_by,
+                    "pagination": pagination,
+                },
+                report_query_visibility_params.ReportQueryVisibilityParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Response,
+        )
+
+
+class AsyncReportsResource(AsyncAPIResource):
+    @cached_property
+    def with_raw_response(self) -> AsyncReportsResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/stainless-sdks/profound-python#accessing-raw-response-data-eg-headers
+        """
+        return AsyncReportsResourceWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncReportsResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/stainless-sdks/profound-python#with_streaming_response
+        """
+        return AsyncReportsResourceWithStreamingResponse(self)
+
+    async def query_citations(
+        self,
+        *,
+        category_id: str,
+        end_date: Union[str, datetime],
+        metrics: List[Literal["count", "share_of_voice"]],
+        start_date: Union[str, datetime],
+        date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
+        dimensions: List[Literal["hostname", "path", "date", "region", "topic", "model", "tag"]] | Omit = omit,
+        filters: Iterable[report_query_citations_params.Filter] | Omit = omit,
+        order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
+        pagination: PaginationParam | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ReportQueryCitationsResponse:
+        """Get citations for a given category.
+
+        Args:
+          end_date: End date for the report.
+
+        Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full
+              ISO timestamp.
+
+          start_date: Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or
+              full ISO timestamp.
+
+          date_interval: Date interval for the report. (only used with date dimension)
+
+          dimensions: Dimensions to group the report by.
+
+          filters: List of filters to apply to the report. Each filter has an operator, field, and
+              value.
+
+          order_by: Custom ordering of the report results.
+
+              The order is a record of key-value pairs where:
+
+              - key is the field to order by, which can be a metric or dimension
+              - value is the direction of the order, either 'asc' for ascending or 'desc' for
+                descending.
+
+              When not specified, the default order is the first metric in the query
+              descending.
+
+          pagination: Pagination settings for the report results.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/v1/reports/citations",
+            body=await async_maybe_transform(
+                {
+                    "category_id": category_id,
+                    "end_date": end_date,
+                    "metrics": metrics,
+                    "start_date": start_date,
+                    "date_interval": date_interval,
+                    "dimensions": dimensions,
+                    "filters": filters,
+                    "order_by": order_by,
+                    "pagination": pagination,
+                },
+                report_query_citations_params.ReportQueryCitationsParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ReportQueryCitationsResponse,
+        )
+
+    async def query_sentiment(
+        self,
+        *,
+        category_id: str,
+        end_date: Union[str, datetime],
+        metrics: List[Literal["positive", "negative"]],
+        start_date: Union[str, datetime],
+        date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
+        dimensions: List[Literal["theme", "date", "region", "topic", "model", "asset_name", "tag"]] | Omit = omit,
+        filters: Iterable[report_query_sentiment_params.Filter] | Omit = omit,
+        order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
+        pagination: PaginationParam | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> Response:
+        """Get citations for a given category.
+
+        Args:
+          end_date: End date for the report.
+
+        Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full
+              ISO timestamp.
+
+          start_date: Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or
+              full ISO timestamp.
+
+          date_interval: Date interval for the report. (only used with date dimension)
+
+          dimensions: Dimensions to group the report by.
+
+          filters: List of filters to apply to the report. Each filter has an operator, field, and
+              value.
+
+          order_by: Custom ordering of the report results.
+
+              The order is a record of key-value pairs where:
+
+              - key is the field to order by, which can be a metric or dimension
+              - value is the direction of the order, either 'asc' for ascending or 'desc' for
+                descending.
+
+              When not specified, the default order is the first metric in the query
+              descending.
+
+          pagination: Pagination settings for the report results.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/v1/reports/sentiment",
+            body=await async_maybe_transform(
+                {
+                    "category_id": category_id,
+                    "end_date": end_date,
+                    "metrics": metrics,
+                    "start_date": start_date,
+                    "date_interval": date_interval,
+                    "dimensions": dimensions,
+                    "filters": filters,
+                    "order_by": order_by,
+                    "pagination": pagination,
+                },
+                report_query_sentiment_params.ReportQuerySentimentParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Response,
+        )
+
+    async def query_visibility(
+        self,
+        *,
+        category_id: str,
+        end_date: Union[str, datetime],
+        metrics: List[Literal["share_of_voice", "mentions_count", "visibility_score"]],
+        start_date: Union[str, datetime],
+        date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
+        dimensions: List[Literal["date", "region", "topic", "model", "asset_name", "prompt", "tag"]] | Omit = omit,
+        filters: Iterable[report_query_visibility_params.Filter] | Omit = omit,
+        order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
+        pagination: PaginationParam | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> Response:
+        """Query visibility report.
+
+        Args:
+          end_date: End date for the report.
+
+        Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full
+              ISO timestamp.
+
+          start_date: Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or
+              full ISO timestamp.
+
+          date_interval: Date interval for the report. (only used with date dimension)
+
+          dimensions: Dimensions to group the report by.
+
+          filters: List of filters to apply to the report. Each filter has an operator, field, and
+              value.
+
+          order_by: Custom ordering of the report results.
+
+              The order is a record of key-value pairs where:
+
+              - key is the field to order by, which can be a metric or dimension
+              - value is the direction of the order, either 'asc' for ascending or 'desc' for
+                descending.
+
+              When not specified, the default order is the first metric in the query
+              descending.
+
+          pagination: Pagination settings for the report results.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/v1/reports/visibility",
+            body=await async_maybe_transform(
+                {
+                    "category_id": category_id,
+                    "end_date": end_date,
+                    "metrics": metrics,
+                    "start_date": start_date,
+                    "date_interval": date_interval,
+                    "dimensions": dimensions,
+                    "filters": filters,
+                    "order_by": order_by,
+                    "pagination": pagination,
+                },
+                report_query_visibility_params.ReportQueryVisibilityParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Response,
+        )
+
+
+class ReportsResourceWithRawResponse:
+    def __init__(self, reports: ReportsResource) -> None:
+        self._reports = reports
+
+        self.query_citations = to_raw_response_wrapper(
+            reports.query_citations,
+        )
+        self.query_sentiment = to_raw_response_wrapper(
+            reports.query_sentiment,
+        )
+        self.query_visibility = to_raw_response_wrapper(
+            reports.query_visibility,
+        )
+
+
+class AsyncReportsResourceWithRawResponse:
+    def __init__(self, reports: AsyncReportsResource) -> None:
+        self._reports = reports
+
+        self.query_citations = async_to_raw_response_wrapper(
+            reports.query_citations,
+        )
+        self.query_sentiment = async_to_raw_response_wrapper(
+            reports.query_sentiment,
+        )
+        self.query_visibility = async_to_raw_response_wrapper(
+            reports.query_visibility,
+        )
+
+
+class ReportsResourceWithStreamingResponse:
+    def __init__(self, reports: ReportsResource) -> None:
+        self._reports = reports
+
+        self.query_citations = to_streamed_response_wrapper(
+            reports.query_citations,
+        )
+        self.query_sentiment = to_streamed_response_wrapper(
+            reports.query_sentiment,
+        )
+        self.query_visibility = to_streamed_response_wrapper(
+            reports.query_visibility,
+        )
+
+
+class AsyncReportsResourceWithStreamingResponse:
+    def __init__(self, reports: AsyncReportsResource) -> None:
+        self._reports = reports
+
+        self.query_citations = async_to_streamed_response_wrapper(
+            reports.query_citations,
+        )
+        self.query_sentiment = async_to_streamed_response_wrapper(
+            reports.query_sentiment,
+        )
+        self.query_visibility = async_to_streamed_response_wrapper(
+            reports.query_visibility,
+        )
