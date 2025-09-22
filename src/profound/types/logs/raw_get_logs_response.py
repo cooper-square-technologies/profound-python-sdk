@@ -7,10 +7,10 @@ from typing_extensions import TypeAlias
 from ..._models import BaseModel
 from ..response import Response
 
-__all__ = ["RawGetLogsResponse", "UnionMember0"]
+__all__ = ["RawGetLogsResponse", "LogVisitList"]
 
 
-class UnionMember0(BaseModel):
+class LogVisitList(BaseModel):
     host: str
 
     ip: str
@@ -36,4 +36,4 @@ class UnionMember0(BaseModel):
     referer: Optional[str] = None
 
 
-RawGetLogsResponse: TypeAlias = Union[List[UnionMember0], Response]
+RawGetLogsResponse: TypeAlias = Union[List[LogVisitList], Response]
