@@ -5,7 +5,7 @@ from datetime import datetime
 
 from .._models import BaseModel
 
-__all__ = ["PromptGetAnswersResponse", "Data"]
+__all__ = ["PromptAnswersResponse", "Data"]
 
 
 class Data(BaseModel):
@@ -38,7 +38,7 @@ class Data(BaseModel):
     topic: Optional[str] = None
 
 
-class PromptGetAnswersResponse(BaseModel):
+class PromptAnswersResponse(BaseModel):
     data: List[Data]
 
     info: Dict[str, object]

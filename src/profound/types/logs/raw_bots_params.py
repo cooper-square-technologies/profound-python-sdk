@@ -10,10 +10,10 @@ from ..._types import SequenceNotStr
 from ..._utils import PropertyInfo
 from ..pagination_param import PaginationParam
 
-__all__ = ["RawGetLogsParams", "Filter"]
+__all__ = ["RawBotsParams", "Filter"]
 
 
-class RawGetLogsParams(TypedDict, total=False):
+class RawBotsParams(TypedDict, total=False):
     domain: Required[str]
     """Domain to query logs for."""
 
@@ -31,17 +31,16 @@ class RawGetLogsParams(TypedDict, total=False):
 
     dimensions: List[
         Literal[
-            "timestamp",
             "method",
-            "host",
             "path",
             "status_code",
             "ip",
             "user_agent",
             "referer",
-            "bytes_sent",
-            "duration_ms",
             "query_params",
+            "bot_name",
+            "bot_provider",
+            "bot_types",
         ]
     ]
     """Dimensions to group the report by."""
@@ -76,7 +75,20 @@ class RawGetLogsParams(TypedDict, total=False):
 
 
 class Filter(TypedDict, total=False):
-    field: Required[Literal["method", "path", "status_code", "ip", "user_agent", "referer", "query_params"]]
+    field: Required[
+        Literal[
+            "method",
+            "path",
+            "status_code",
+            "ip",
+            "user_agent",
+            "referer",
+            "query_params",
+            "bot_name",
+            "bot_provider",
+            "bot_types",
+        ]
+    ]
 
     operator: Required[
         Literal[

@@ -747,7 +747,7 @@ class TestProfound:
         respx_mock.get("/v1/org/categories").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            client.org.categories.with_streaming_response.list().__enter__()
+            client.organizations.categories.with_streaming_response.list().__enter__()
 
         assert _get_open_connections(self.client) == 0
 
@@ -757,7 +757,7 @@ class TestProfound:
         respx_mock.get("/v1/org/categories").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            client.org.categories.with_streaming_response.list().__enter__()
+            client.organizations.categories.with_streaming_response.list().__enter__()
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
@@ -786,7 +786,7 @@ class TestProfound:
 
         respx_mock.get("/v1/org/categories").mock(side_effect=retry_handler)
 
-        response = client.org.categories.with_raw_response.list()
+        response = client.organizations.categories.with_raw_response.list()
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -810,7 +810,9 @@ class TestProfound:
 
         respx_mock.get("/v1/org/categories").mock(side_effect=retry_handler)
 
-        response = client.org.categories.with_raw_response.list(extra_headers={"x-stainless-retry-count": Omit()})
+        response = client.organizations.categories.with_raw_response.list(
+            extra_headers={"x-stainless-retry-count": Omit()}
+        )
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
@@ -833,7 +835,9 @@ class TestProfound:
 
         respx_mock.get("/v1/org/categories").mock(side_effect=retry_handler)
 
-        response = client.org.categories.with_raw_response.list(extra_headers={"x-stainless-retry-count": "42"})
+        response = client.organizations.categories.with_raw_response.list(
+            extra_headers={"x-stainless-retry-count": "42"}
+        )
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
 
@@ -1586,7 +1590,7 @@ class TestAsyncProfound:
         respx_mock.get("/v1/org/categories").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            await async_client.org.categories.with_streaming_response.list().__aenter__()
+            await async_client.organizations.categories.with_streaming_response.list().__aenter__()
 
         assert _get_open_connections(self.client) == 0
 
@@ -1598,7 +1602,7 @@ class TestAsyncProfound:
         respx_mock.get("/v1/org/categories").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            await async_client.org.categories.with_streaming_response.list().__aenter__()
+            await async_client.organizations.categories.with_streaming_response.list().__aenter__()
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
@@ -1628,7 +1632,7 @@ class TestAsyncProfound:
 
         respx_mock.get("/v1/org/categories").mock(side_effect=retry_handler)
 
-        response = await client.org.categories.with_raw_response.list()
+        response = await client.organizations.categories.with_raw_response.list()
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -1653,7 +1657,9 @@ class TestAsyncProfound:
 
         respx_mock.get("/v1/org/categories").mock(side_effect=retry_handler)
 
-        response = await client.org.categories.with_raw_response.list(extra_headers={"x-stainless-retry-count": Omit()})
+        response = await client.organizations.categories.with_raw_response.list(
+            extra_headers={"x-stainless-retry-count": Omit()}
+        )
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
@@ -1677,7 +1683,9 @@ class TestAsyncProfound:
 
         respx_mock.get("/v1/org/categories").mock(side_effect=retry_handler)
 
-        response = await client.org.categories.with_raw_response.list(extra_headers={"x-stainless-retry-count": "42"})
+        response = await client.organizations.categories.with_raw_response.list(
+            extra_headers={"x-stainless-retry-count": "42"}
+        )
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
 

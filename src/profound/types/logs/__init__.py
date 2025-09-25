@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from .raw_get_bots_params import RawGetBotsParams as RawGetBotsParams
-from .raw_get_logs_params import RawGetLogsParams as RawGetLogsParams
-from .raw_get_bots_response import RawGetBotsResponse as RawGetBotsResponse
-from .raw_get_logs_response import RawGetLogsResponse as RawGetLogsResponse
+from .raw_bots_params import RawBotsParams as RawBotsParams
+from .raw_logs_params import RawLogsParams as RawLogsParams
+from .raw_bots_response import RawBotsResponse as RawBotsResponse
+from .raw_logs_response import RawLogsResponse as RawLogsResponse

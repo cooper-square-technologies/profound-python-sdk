@@ -29,8 +29,8 @@ from ._base_client import (
     SyncAPIClient,
     AsyncAPIClient,
 )
-from .resources.org import org
 from .resources.logs import logs
+from .resources.organizations import organizations
 
 __all__ = [
     "Timeout",
@@ -45,7 +45,7 @@ __all__ = [
 
 
 class Profound(SyncAPIClient):
-    org: org.OrgResource
+    organizations: organizations.OrganizationsResource
     prompts: prompts.PromptsResource
     reports: reports.ReportsResource
     logs: logs.LogsResource
@@ -110,7 +110,7 @@ class Profound(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.org = org.OrgResource(self)
+        self.organizations = organizations.OrganizationsResource(self)
         self.prompts = prompts.PromptsResource(self)
         self.reports = reports.ReportsResource(self)
         self.logs = logs.LogsResource(self)
@@ -236,7 +236,7 @@ class Profound(SyncAPIClient):
 
 
 class AsyncProfound(AsyncAPIClient):
-    org: org.AsyncOrgResource
+    organizations: organizations.AsyncOrganizationsResource
     prompts: prompts.AsyncPromptsResource
     reports: reports.AsyncReportsResource
     logs: logs.AsyncLogsResource
@@ -301,7 +301,7 @@ class AsyncProfound(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.org = org.AsyncOrgResource(self)
+        self.organizations = organizations.AsyncOrganizationsResource(self)
         self.prompts = prompts.AsyncPromptsResource(self)
         self.reports = reports.AsyncReportsResource(self)
         self.logs = logs.AsyncLogsResource(self)
@@ -428,7 +428,7 @@ class AsyncProfound(AsyncAPIClient):
 
 class ProfoundWithRawResponse:
     def __init__(self, client: Profound) -> None:
-        self.org = org.OrgResourceWithRawResponse(client.org)
+        self.organizations = organizations.OrganizationsResourceWithRawResponse(client.organizations)
         self.prompts = prompts.PromptsResourceWithRawResponse(client.prompts)
         self.reports = reports.ReportsResourceWithRawResponse(client.reports)
         self.logs = logs.LogsResourceWithRawResponse(client.logs)
@@ -436,7 +436,7 @@ class ProfoundWithRawResponse:
 
 class AsyncProfoundWithRawResponse:
     def __init__(self, client: AsyncProfound) -> None:
-        self.org = org.AsyncOrgResourceWithRawResponse(client.org)
+        self.organizations = organizations.AsyncOrganizationsResourceWithRawResponse(client.organizations)
         self.prompts = prompts.AsyncPromptsResourceWithRawResponse(client.prompts)
         self.reports = reports.AsyncReportsResourceWithRawResponse(client.reports)
         self.logs = logs.AsyncLogsResourceWithRawResponse(client.logs)
@@ -444,7 +444,7 @@ class AsyncProfoundWithRawResponse:
 
 class ProfoundWithStreamedResponse:
     def __init__(self, client: Profound) -> None:
-        self.org = org.OrgResourceWithStreamingResponse(client.org)
+        self.organizations = organizations.OrganizationsResourceWithStreamingResponse(client.organizations)
         self.prompts = prompts.PromptsResourceWithStreamingResponse(client.prompts)
         self.reports = reports.ReportsResourceWithStreamingResponse(client.reports)
         self.logs = logs.LogsResourceWithStreamingResponse(client.logs)
@@ -452,7 +452,7 @@ class ProfoundWithStreamedResponse:
 
 class AsyncProfoundWithStreamedResponse:
     def __init__(self, client: AsyncProfound) -> None:
-        self.org = org.AsyncOrgResourceWithStreamingResponse(client.org)
+        self.organizations = organizations.AsyncOrganizationsResourceWithStreamingResponse(client.organizations)
         self.prompts = prompts.AsyncPromptsResourceWithStreamingResponse(client.prompts)
         self.reports = reports.AsyncReportsResourceWithStreamingResponse(client.reports)
         self.logs = logs.AsyncLogsResourceWithStreamingResponse(client.logs)

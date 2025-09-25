@@ -35,7 +35,7 @@ client = Profound(
     query_api_key=os.environ.get("PROFOUND_API_KEY"),  # This is the default and can be omitted
 )
 
-org_items = client.org.categories.list()
+org_items = client.organizations.categories.list()
 ```
 
 While you can provide a `query_api_key` keyword argument,
@@ -58,7 +58,7 @@ client = AsyncProfound(
 
 
 async def main() -> None:
-    org_items = await client.org.categories.list()
+    org_items = await client.organizations.categories.list()
 
 
 asyncio.run(main())
@@ -90,7 +90,7 @@ async def main() -> None:
         query_api_key="My Query API Key",
         http_client=DefaultAioHttpClient(),
     ) as client:
-        org_items = await client.org.categories.list()
+        org_items = await client.organizations.categories.list()
 
 
 asyncio.run(main())
@@ -116,7 +116,7 @@ from profound import Profound
 
 client = Profound()
 
-response = client.prompts.get_answers(
+response = client.prompts.answers(
     category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
     end_date=datetime.fromisoformat("2019-12-27T18:11:19.117"),
     start_date=datetime.fromisoformat("2019-12-27T18:11:19.117"),
@@ -141,7 +141,7 @@ from profound import Profound
 client = Profound()
 
 try:
-    client.org.categories.list()
+    client.organizations.categories.list()
 except profound.APIConnectionError as e:
     print("The server could not be reached")
     print(e.__cause__)  # an underlying Exception, likely raised within httpx.
@@ -184,7 +184,7 @@ client = Profound(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).org.categories.list()
+client.with_options(max_retries=5).organizations.categories.list()
 ```
 
 ### Timeouts
@@ -207,7 +207,7 @@ client = Profound(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).org.categories.list()
+client.with_options(timeout=5.0).organizations.categories.list()
 ```
 
 On timeout, an `APITimeoutError` is thrown.
@@ -248,10 +248,10 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from profound import Profound
 
 client = Profound()
-response = client.org.categories.with_raw_response.list()
+response = client.organizations.categories.with_raw_response.list()
 print(response.headers.get('X-My-Header'))
 
-category = response.parse()  # get the object that `org.categories.list()` would have returned
+category = response.parse()  # get the object that `organizations.categories.list()` would have returned
 print(category)
 ```
 
@@ -266,7 +266,7 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.org.categories.with_streaming_response.list() as response:
+with client.organizations.categories.with_streaming_response.list() as response:
     print(response.headers.get("X-My-Header"))
 
     for line in response.iter_lines():

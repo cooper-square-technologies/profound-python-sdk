@@ -7,7 +7,7 @@ from datetime import datetime
 
 import httpx
 
-from ..types import prompt_get_answers_params
+from ..types import prompt_answers_params
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -20,7 +20,7 @@ from .._response import (
 )
 from .._base_client import make_request_options
 from ..types.pagination_param import PaginationParam
-from ..types.prompt_get_answers_response import PromptGetAnswersResponse
+from ..types.prompt_answers_response import PromptAnswersResponse
 
 __all__ = ["PromptsResource", "AsyncPromptsResource"]
 
@@ -45,14 +45,14 @@ class PromptsResource(SyncAPIResource):
         """
         return PromptsResourceWithStreamingResponse(self)
 
-    def get_answers(
+    def answers(
         self,
         *,
         category_id: str,
         end_date: Union[str, datetime],
         start_date: Union[str, datetime],
-        filters: Iterable[prompt_get_answers_params.Filter] | Omit = omit,
-        include: prompt_get_answers_params.Include | Omit = omit,
+        filters: Iterable[prompt_answers_params.Filter] | Omit = omit,
+        include: prompt_answers_params.Include | Omit = omit,
         pagination: PaginationParam | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -60,7 +60,7 @@ class PromptsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> PromptGetAnswersResponse:
+    ) -> PromptAnswersResponse:
         """
         Get the answers for the prompts.
 
@@ -86,12 +86,12 @@ class PromptsResource(SyncAPIResource):
                     "include": include,
                     "pagination": pagination,
                 },
-                prompt_get_answers_params.PromptGetAnswersParams,
+                prompt_answers_params.PromptAnswersParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=PromptGetAnswersResponse,
+            cast_to=PromptAnswersResponse,
         )
 
 
@@ -115,14 +115,14 @@ class AsyncPromptsResource(AsyncAPIResource):
         """
         return AsyncPromptsResourceWithStreamingResponse(self)
 
-    async def get_answers(
+    async def answers(
         self,
         *,
         category_id: str,
         end_date: Union[str, datetime],
         start_date: Union[str, datetime],
-        filters: Iterable[prompt_get_answers_params.Filter] | Omit = omit,
-        include: prompt_get_answers_params.Include | Omit = omit,
+        filters: Iterable[prompt_answers_params.Filter] | Omit = omit,
+        include: prompt_answers_params.Include | Omit = omit,
         pagination: PaginationParam | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -130,7 +130,7 @@ class AsyncPromptsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> PromptGetAnswersResponse:
+    ) -> PromptAnswersResponse:
         """
         Get the answers for the prompts.
 
@@ -156,12 +156,12 @@ class AsyncPromptsResource(AsyncAPIResource):
                     "include": include,
                     "pagination": pagination,
                 },
-                prompt_get_answers_params.PromptGetAnswersParams,
+                prompt_answers_params.PromptAnswersParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=PromptGetAnswersResponse,
+            cast_to=PromptAnswersResponse,
         )
 
 
@@ -169,8 +169,8 @@ class PromptsResourceWithRawResponse:
     def __init__(self, prompts: PromptsResource) -> None:
         self._prompts = prompts
 
-        self.get_answers = to_raw_response_wrapper(
-            prompts.get_answers,
+        self.answers = to_raw_response_wrapper(
+            prompts.answers,
         )
 
 
@@ -178,8 +178,8 @@ class AsyncPromptsResourceWithRawResponse:
     def __init__(self, prompts: AsyncPromptsResource) -> None:
         self._prompts = prompts
 
-        self.get_answers = async_to_raw_response_wrapper(
-            prompts.get_answers,
+        self.answers = async_to_raw_response_wrapper(
+            prompts.answers,
         )
 
 
@@ -187,8 +187,8 @@ class PromptsResourceWithStreamingResponse:
     def __init__(self, prompts: PromptsResource) -> None:
         self._prompts = prompts
 
-        self.get_answers = to_streamed_response_wrapper(
-            prompts.get_answers,
+        self.answers = to_streamed_response_wrapper(
+            prompts.answers,
         )
 
 
@@ -196,6 +196,6 @@ class AsyncPromptsResourceWithStreamingResponse:
     def __init__(self, prompts: AsyncPromptsResource) -> None:
         self._prompts = prompts
 
-        self.get_answers = async_to_streamed_response_wrapper(
-            prompts.get_answers,
+        self.answers = async_to_streamed_response_wrapper(
+            prompts.answers,
         )

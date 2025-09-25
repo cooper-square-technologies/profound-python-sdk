@@ -6,10 +6,10 @@ from .info import Info
 from .result import Result
 from .._models import BaseModel
 
-__all__ = ["ReportQueryCitationsResponse"]
+__all__ = ["ReportCitationsResponse"]
 
 
-class ReportQueryCitationsResponse(BaseModel):
+class ReportCitationsResponse(BaseModel):
     data: List[Result]
 
     info: Info
