@@ -83,15 +83,15 @@ class Profound(SyncAPIClient):
         """Construct a new synchronous Profound client instance.
 
         This automatically infers the following arguments from their corresponding environment variables if they are not provided:
-        - `header_api_key` from `COINGECKO_PRO_API_KEY`
-        - `query_api_key` from `COINGECKO_DEMO_API_KEY`
+        - `header_api_key` from `PROFOUND_API_KEY`
+        - `query_api_key` from `PROFOUND_API_KEY`
         """
         if header_api_key is None:
-            header_api_key = os.environ.get("COINGECKO_PRO_API_KEY")
+            header_api_key = os.environ.get("PROFOUND_API_KEY")
         self.header_api_key = header_api_key
 
         if query_api_key is None:
-            query_api_key = os.environ.get("COINGECKO_DEMO_API_KEY")
+            query_api_key = os.environ.get("PROFOUND_API_KEY")
         self.query_api_key = query_api_key
 
         if base_url is None:
@@ -274,15 +274,15 @@ class AsyncProfound(AsyncAPIClient):
         """Construct a new async AsyncProfound client instance.
 
         This automatically infers the following arguments from their corresponding environment variables if they are not provided:
-        - `header_api_key` from `COINGECKO_PRO_API_KEY`
-        - `query_api_key` from `COINGECKO_DEMO_API_KEY`
+        - `header_api_key` from `PROFOUND_API_KEY`
+        - `query_api_key` from `PROFOUND_API_KEY`
         """
         if header_api_key is None:
-            header_api_key = os.environ.get("COINGECKO_PRO_API_KEY")
+            header_api_key = os.environ.get("PROFOUND_API_KEY")
         self.header_api_key = header_api_key
 
         if query_api_key is None:
-            query_api_key = os.environ.get("COINGECKO_DEMO_API_KEY")
+            query_api_key = os.environ.get("PROFOUND_API_KEY")
         self.query_api_key = query_api_key
 
         if base_url is None:
