@@ -3,8 +3,8 @@
 from typing import List
 from typing_extensions import TypeAlias
 
-from .org_item import OrgItem
+from .organizations.org_item import OrgItem
 
-__all__ = ["CategoryRetrieveTagsResponse"]
+__all__ = ["OrganizationModelsResponse"]
 
-CategoryRetrieveTagsResponse: TypeAlias = List[OrgItem]
+OrganizationModelsResponse: TypeAlias = List[OrgItem]

@@ -6,7 +6,7 @@ from datetime import datetime
 from .org_item import OrgItem
 from ..._models import BaseModel
 
-__all__ = ["CategoryRetrievePromptsResponse", "Data"]
+__all__ = ["CategoryPromptsResponse", "Data"]
 
 
 class Data(BaseModel):
@@ -27,5 +27,5 @@ class Data(BaseModel):
     tags: Optional[List[OrgItem]] = None
 
 
-class CategoryRetrievePromptsResponse(BaseModel):
+class CategoryPromptsResponse(BaseModel):
     data: List[Data]

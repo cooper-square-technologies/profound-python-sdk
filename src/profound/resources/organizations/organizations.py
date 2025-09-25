@@ -22,38 +22,38 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.org_retrieve_models_response import OrgRetrieveModelsResponse
-from ...types.org_retrieve_domains_response import OrgRetrieveDomainsResponse
-from ...types.org_retrieve_regions_response import OrgRetrieveRegionsResponse
+from ...types.organization_models_response import OrganizationModelsResponse
+from ...types.organization_domains_response import OrganizationDomainsResponse
+from ...types.organization_regions_response import OrganizationRegionsResponse
 
-__all__ = ["OrgResource", "AsyncOrgResource"]
+__all__ = ["OrganizationsResource", "AsyncOrganizationsResource"]
 
 
-class OrgResource(SyncAPIResource):
+class OrganizationsResource(SyncAPIResource):
     @cached_property
     def categories(self) -> CategoriesResource:
         return CategoriesResource(self._client)
 
     @cached_property
-    def with_raw_response(self) -> OrgResourceWithRawResponse:
+    def with_raw_response(self) -> OrganizationsResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#accessing-raw-response-data-eg-headers
         """
-        return OrgResourceWithRawResponse(self)
+        return OrganizationsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> OrgResourceWithStreamingResponse:
+    def with_streaming_response(self) -> OrganizationsResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#with_streaming_response
         """
-        return OrgResourceWithStreamingResponse(self)
+        return OrganizationsResourceWithStreamingResponse(self)
 
-    def retrieve_domains(
+    def domains(
         self,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -62,17 +62,17 @@ class OrgResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> OrgRetrieveDomainsResponse:
+    ) -> OrganizationDomainsResponse:
         """Get the organization domains."""
         return self._get(
             "/v1/org/domains",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=OrgRetrieveDomainsResponse,
+            cast_to=OrganizationDomainsResponse,
         )
 
-    def retrieve_models(
+    def models(
         self,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -81,17 +81,17 @@ class OrgResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> OrgRetrieveModelsResponse:
+    ) -> OrganizationModelsResponse:
         """Get the organization models."""
         return self._get(
             "/v1/org/models",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=OrgRetrieveModelsResponse,
+            cast_to=OrganizationModelsResponse,
         )
 
-    def retrieve_regions(
+    def regions(
         self,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -100,42 +100,42 @@ class OrgResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> OrgRetrieveRegionsResponse:
+    ) -> OrganizationRegionsResponse:
         """Get the organization regions."""
         return self._get(
             "/v1/org/regions",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=OrgRetrieveRegionsResponse,
+            cast_to=OrganizationRegionsResponse,
         )
 
 
-class AsyncOrgResource(AsyncAPIResource):
+class AsyncOrganizationsResource(AsyncAPIResource):
     @cached_property
     def categories(self) -> AsyncCategoriesResource:
         return AsyncCategoriesResource(self._client)
 
     @cached_property
-    def with_raw_response(self) -> AsyncOrgResourceWithRawResponse:
+    def with_raw_response(self) -> AsyncOrganizationsResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#accessing-raw-response-data-eg-headers
         """
-        return AsyncOrgResourceWithRawResponse(self)
+        return AsyncOrganizationsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncOrgResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncOrganizationsResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#with_streaming_response
         """
-        return AsyncOrgResourceWithStreamingResponse(self)
+        return AsyncOrganizationsResourceWithStreamingResponse(self)
 
-    async def retrieve_domains(
+    async def domains(
         self,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -144,17 +144,17 @@ class AsyncOrgResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> OrgRetrieveDomainsResponse:
+    ) -> OrganizationDomainsResponse:
         """Get the organization domains."""
         return await self._get(
             "/v1/org/domains",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=OrgRetrieveDomainsResponse,
+            cast_to=OrganizationDomainsResponse,
         )
 
-    async def retrieve_models(
+    async def models(
         self,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -163,17 +163,17 @@ class AsyncOrgResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> OrgRetrieveModelsResponse:
+    ) -> OrganizationModelsResponse:
         """Get the organization models."""
         return await self._get(
             "/v1/org/models",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=OrgRetrieveModelsResponse,
+            cast_to=OrganizationModelsResponse,
         )
 
-    async def retrieve_regions(
+    async def regions(
         self,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -182,88 +182,88 @@ class AsyncOrgResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> OrgRetrieveRegionsResponse:
+    ) -> OrganizationRegionsResponse:
         """Get the organization regions."""
         return await self._get(
             "/v1/org/regions",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=OrgRetrieveRegionsResponse,
+            cast_to=OrganizationRegionsResponse,
         )
 
 
-class OrgResourceWithRawResponse:
-    def __init__(self, org: OrgResource) -> None:
-        self._org = org
+class OrganizationsResourceWithRawResponse:
+    def __init__(self, organizations: OrganizationsResource) -> None:
+        self._organizations = organizations
 
-        self.retrieve_domains = to_raw_response_wrapper(
-            org.retrieve_domains,
+        self.domains = to_raw_response_wrapper(
+            organizations.domains,
         )
-        self.retrieve_models = to_raw_response_wrapper(
-            org.retrieve_models,
+        self.models = to_raw_response_wrapper(
+            organizations.models,
         )
-        self.retrieve_regions = to_raw_response_wrapper(
-            org.retrieve_regions,
+        self.regions = to_raw_response_wrapper(
+            organizations.regions,
         )
 
     @cached_property
     def categories(self) -> CategoriesResourceWithRawResponse:
-        return CategoriesResourceWithRawResponse(self._org.categories)
+        return CategoriesResourceWithRawResponse(self._organizations.categories)
 
 
-class AsyncOrgResourceWithRawResponse:
-    def __init__(self, org: AsyncOrgResource) -> None:
-        self._org = org
+class AsyncOrganizationsResourceWithRawResponse:
+    def __init__(self, organizations: AsyncOrganizationsResource) -> None:
+        self._organizations = organizations
 
-        self.retrieve_domains = async_to_raw_response_wrapper(
-            org.retrieve_domains,
+        self.domains = async_to_raw_response_wrapper(
+            organizations.domains,
         )
-        self.retrieve_models = async_to_raw_response_wrapper(
-            org.retrieve_models,
+        self.models = async_to_raw_response_wrapper(
+            organizations.models,
         )
-        self.retrieve_regions = async_to_raw_response_wrapper(
-            org.retrieve_regions,
+        self.regions = async_to_raw_response_wrapper(
+            organizations.regions,
         )
 
     @cached_property
     def categories(self) -> AsyncCategoriesResourceWithRawResponse:
-        return AsyncCategoriesResourceWithRawResponse(self._org.categories)
+        return AsyncCategoriesResourceWithRawResponse(self._organizations.categories)
 
 
-class OrgResourceWithStreamingResponse:
-    def __init__(self, org: OrgResource) -> None:
-        self._org = org
+class OrganizationsResourceWithStreamingResponse:
+    def __init__(self, organizations: OrganizationsResource) -> None:
+        self._organizations = organizations
 
-        self.retrieve_domains = to_streamed_response_wrapper(
-            org.retrieve_domains,
+        self.domains = to_streamed_response_wrapper(
+            organizations.domains,
         )
-        self.retrieve_models = to_streamed_response_wrapper(
-            org.retrieve_models,
+        self.models = to_streamed_response_wrapper(
+            organizations.models,
         )
-        self.retrieve_regions = to_streamed_response_wrapper(
-            org.retrieve_regions,
+        self.regions = to_streamed_response_wrapper(
+            organizations.regions,
         )
 
     @cached_property
     def categories(self) -> CategoriesResourceWithStreamingResponse:
-        return CategoriesResourceWithStreamingResponse(self._org.categories)
+        return CategoriesResourceWithStreamingResponse(self._organizations.categories)
 
 
-class AsyncOrgResourceWithStreamingResponse:
-    def __init__(self, org: AsyncOrgResource) -> None:
-        self._org = org
+class AsyncOrganizationsResourceWithStreamingResponse:
+    def __init__(self, organizations: AsyncOrganizationsResource) -> None:
+        self._organizations = organizations
 
-        self.retrieve_domains = async_to_streamed_response_wrapper(
-            org.retrieve_domains,
+        self.domains = async_to_streamed_response_wrapper(
+            organizations.domains,
         )
-        self.retrieve_models = async_to_streamed_response_wrapper(
-            org.retrieve_models,
+        self.models = async_to_streamed_response_wrapper(
+            organizations.models,
         )
-        self.retrieve_regions = async_to_streamed_response_wrapper(
-            org.retrieve_regions,
+        self.regions = async_to_streamed_response_wrapper(
+            organizations.regions,
         )
 
     @cached_property
     def categories(self) -> AsyncCategoriesResourceWithStreamingResponse:
-        return AsyncCategoriesResourceWithStreamingResponse(self._org.categories)
+        return AsyncCategoriesResourceWithStreamingResponse(self._organizations.categories)

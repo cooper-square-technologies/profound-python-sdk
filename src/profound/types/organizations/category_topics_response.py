@@ -5,6 +5,6 @@ from typing_extensions import TypeAlias
 
 from .org_item import OrgItem
 
-__all__ = ["CategoryRetrieveTopicsResponse"]
+__all__ = ["CategoryTopicsResponse"]
 
-CategoryRetrieveTopicsResponse: TypeAlias = List[OrgItem]
+CategoryTopicsResponse: TypeAlias = List[OrgItem]

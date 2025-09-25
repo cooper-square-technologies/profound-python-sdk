@@ -6,10 +6,10 @@ from typing_extensions import TypeAlias
 
 from .._models import BaseModel
 
-__all__ = ["OrgRetrieveDomainsResponse", "OrgRetrieveDomainsResponseItem"]
+__all__ = ["OrganizationDomainsResponse", "OrganizationDomainsResponseItem"]
 
 
-class OrgRetrieveDomainsResponseItem(BaseModel):
+class OrganizationDomainsResponseItem(BaseModel):
     id: str
 
     created_at: datetime
@@ -17,4 +17,4 @@ class OrgRetrieveDomainsResponseItem(BaseModel):
     name: str
 
 
-OrgRetrieveDomainsResponse: TypeAlias = List[OrgRetrieveDomainsResponseItem]
+OrganizationDomainsResponse: TypeAlias = List[OrganizationDomainsResponseItem]

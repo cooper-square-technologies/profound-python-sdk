@@ -1,13 +1,5 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from .org import (
-    OrgResource,
-    AsyncOrgResource,
-    OrgResourceWithRawResponse,
-    AsyncOrgResourceWithRawResponse,
-    OrgResourceWithStreamingResponse,
-    AsyncOrgResourceWithStreamingResponse,
-)
 from .categories import (
     CategoriesResource,
     AsyncCategoriesResource,
@@ -15,6 +7,14 @@ from .categories import (
     AsyncCategoriesResourceWithRawResponse,
     CategoriesResourceWithStreamingResponse,
     AsyncCategoriesResourceWithStreamingResponse,
+)
+from .organizations import (
+    OrganizationsResource,
+    AsyncOrganizationsResource,
+    OrganizationsResourceWithRawResponse,
+    AsyncOrganizationsResourceWithRawResponse,
+    OrganizationsResourceWithStreamingResponse,
+    AsyncOrganizationsResourceWithStreamingResponse,
 )
 
 __all__ = [
@@ -24,10 +24,10 @@ __all__ = [
     "AsyncCategoriesResourceWithRawResponse",
     "CategoriesResourceWithStreamingResponse",
     "AsyncCategoriesResourceWithStreamingResponse",
-    "OrgResource",
-    "AsyncOrgResource",
-    "OrgResourceWithRawResponse",
-    "AsyncOrgResourceWithRawResponse",
-    "OrgResourceWithStreamingResponse",
-    "AsyncOrgResourceWithStreamingResponse",
+    "OrganizationsResource",
+    "AsyncOrganizationsResource",
+    "OrganizationsResourceWithRawResponse",
+    "AsyncOrganizationsResourceWithRawResponse",
+    "OrganizationsResourceWithStreamingResponse",
+    "AsyncOrganizationsResourceWithStreamingResponse",
 ]

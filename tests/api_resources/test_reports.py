@@ -11,7 +11,7 @@ from profound import Profound, AsyncProfound
 from tests.utils import assert_matches_type
 from profound.types import (
     Response,
-    ReportQueryCitationsResponse,
+    ReportCitationsResponse,
 )
 from profound._utils import parse_datetime
 
@@ -23,19 +23,19 @@ class TestReports:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_query_citations(self, client: Profound) -> None:
-        report = client.reports.query_citations(
+    def test_method_citations(self, client: Profound) -> None:
+        report = client.reports.citations(
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             metrics=["count"],
             start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
         )
-        assert_matches_type(ReportQueryCitationsResponse, report, path=["response"])
+        assert_matches_type(ReportCitationsResponse, report, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_query_citations_with_all_params(self, client: Profound) -> None:
-        report = client.reports.query_citations(
+    def test_method_citations_with_all_params(self, client: Profound) -> None:
+        report = client.reports.citations(
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             metrics=["count"],
@@ -55,12 +55,12 @@ class TestReports:
                 "offset": 0,
             },
         )
-        assert_matches_type(ReportQueryCitationsResponse, report, path=["response"])
+        assert_matches_type(ReportCitationsResponse, report, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_query_citations(self, client: Profound) -> None:
-        response = client.reports.with_raw_response.query_citations(
+    def test_raw_response_citations(self, client: Profound) -> None:
+        response = client.reports.with_raw_response.citations(
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             metrics=["count"],
@@ -70,12 +70,12 @@ class TestReports:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         report = response.parse()
-        assert_matches_type(ReportQueryCitationsResponse, report, path=["response"])
+        assert_matches_type(ReportCitationsResponse, report, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_query_citations(self, client: Profound) -> None:
-        with client.reports.with_streaming_response.query_citations(
+    def test_streaming_response_citations(self, client: Profound) -> None:
+        with client.reports.with_streaming_response.citations(
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             metrics=["count"],
@@ -85,14 +85,14 @@ class TestReports:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             report = response.parse()
-            assert_matches_type(ReportQueryCitationsResponse, report, path=["response"])
+            assert_matches_type(ReportCitationsResponse, report, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_query_sentiment(self, client: Profound) -> None:
-        report = client.reports.query_sentiment(
+    def test_method_sentiment(self, client: Profound) -> None:
+        report = client.reports.sentiment(
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             metrics=["positive"],
@@ -102,8 +102,8 @@ class TestReports:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_query_sentiment_with_all_params(self, client: Profound) -> None:
-        report = client.reports.query_sentiment(
+    def test_method_sentiment_with_all_params(self, client: Profound) -> None:
+        report = client.reports.sentiment(
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             metrics=["positive"],
@@ -127,8 +127,8 @@ class TestReports:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_query_sentiment(self, client: Profound) -> None:
-        response = client.reports.with_raw_response.query_sentiment(
+    def test_raw_response_sentiment(self, client: Profound) -> None:
+        response = client.reports.with_raw_response.sentiment(
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             metrics=["positive"],
@@ -142,8 +142,8 @@ class TestReports:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_query_sentiment(self, client: Profound) -> None:
-        with client.reports.with_streaming_response.query_sentiment(
+    def test_streaming_response_sentiment(self, client: Profound) -> None:
+        with client.reports.with_streaming_response.sentiment(
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             metrics=["positive"],
@@ -159,8 +159,8 @@ class TestReports:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_query_visibility(self, client: Profound) -> None:
-        report = client.reports.query_visibility(
+    def test_method_visibility(self, client: Profound) -> None:
+        report = client.reports.visibility(
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             metrics=["share_of_voice"],
@@ -170,8 +170,8 @@ class TestReports:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_query_visibility_with_all_params(self, client: Profound) -> None:
-        report = client.reports.query_visibility(
+    def test_method_visibility_with_all_params(self, client: Profound) -> None:
+        report = client.reports.visibility(
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             metrics=["share_of_voice"],
@@ -195,8 +195,8 @@ class TestReports:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_query_visibility(self, client: Profound) -> None:
-        response = client.reports.with_raw_response.query_visibility(
+    def test_raw_response_visibility(self, client: Profound) -> None:
+        response = client.reports.with_raw_response.visibility(
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             metrics=["share_of_voice"],
@@ -210,8 +210,8 @@ class TestReports:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_query_visibility(self, client: Profound) -> None:
-        with client.reports.with_streaming_response.query_visibility(
+    def test_streaming_response_visibility(self, client: Profound) -> None:
+        with client.reports.with_streaming_response.visibility(
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             metrics=["share_of_voice"],
@@ -233,19 +233,19 @@ class TestAsyncReports:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_query_citations(self, async_client: AsyncProfound) -> None:
-        report = await async_client.reports.query_citations(
+    async def test_method_citations(self, async_client: AsyncProfound) -> None:
+        report = await async_client.reports.citations(
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             metrics=["count"],
             start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
         )
-        assert_matches_type(ReportQueryCitationsResponse, report, path=["response"])
+        assert_matches_type(ReportCitationsResponse, report, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_query_citations_with_all_params(self, async_client: AsyncProfound) -> None:
-        report = await async_client.reports.query_citations(
+    async def test_method_citations_with_all_params(self, async_client: AsyncProfound) -> None:
+        report = await async_client.reports.citations(
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             metrics=["count"],
@@ -265,12 +265,12 @@ class TestAsyncReports:
                 "offset": 0,
             },
         )
-        assert_matches_type(ReportQueryCitationsResponse, report, path=["response"])
+        assert_matches_type(ReportCitationsResponse, report, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_query_citations(self, async_client: AsyncProfound) -> None:
-        response = await async_client.reports.with_raw_response.query_citations(
+    async def test_raw_response_citations(self, async_client: AsyncProfound) -> None:
+        response = await async_client.reports.with_raw_response.citations(
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             metrics=["count"],
@@ -280,12 +280,12 @@ class TestAsyncReports:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         report = await response.parse()
-        assert_matches_type(ReportQueryCitationsResponse, report, path=["response"])
+        assert_matches_type(ReportCitationsResponse, report, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_query_citations(self, async_client: AsyncProfound) -> None:
-        async with async_client.reports.with_streaming_response.query_citations(
+    async def test_streaming_response_citations(self, async_client: AsyncProfound) -> None:
+        async with async_client.reports.with_streaming_response.citations(
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             metrics=["count"],
@@ -295,14 +295,14 @@ class TestAsyncReports:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             report = await response.parse()
-            assert_matches_type(ReportQueryCitationsResponse, report, path=["response"])
+            assert_matches_type(ReportCitationsResponse, report, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_query_sentiment(self, async_client: AsyncProfound) -> None:
-        report = await async_client.reports.query_sentiment(
+    async def test_method_sentiment(self, async_client: AsyncProfound) -> None:
+        report = await async_client.reports.sentiment(
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             metrics=["positive"],
@@ -312,8 +312,8 @@ class TestAsyncReports:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_query_sentiment_with_all_params(self, async_client: AsyncProfound) -> None:
-        report = await async_client.reports.query_sentiment(
+    async def test_method_sentiment_with_all_params(self, async_client: AsyncProfound) -> None:
+        report = await async_client.reports.sentiment(
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             metrics=["positive"],
@@ -337,8 +337,8 @@ class TestAsyncReports:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_query_sentiment(self, async_client: AsyncProfound) -> None:
-        response = await async_client.reports.with_raw_response.query_sentiment(
+    async def test_raw_response_sentiment(self, async_client: AsyncProfound) -> None:
+        response = await async_client.reports.with_raw_response.sentiment(
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             metrics=["positive"],
@@ -352,8 +352,8 @@ class TestAsyncReports:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_query_sentiment(self, async_client: AsyncProfound) -> None:
-        async with async_client.reports.with_streaming_response.query_sentiment(
+    async def test_streaming_response_sentiment(self, async_client: AsyncProfound) -> None:
+        async with async_client.reports.with_streaming_response.sentiment(
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             metrics=["positive"],
@@ -369,8 +369,8 @@ class TestAsyncReports:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_query_visibility(self, async_client: AsyncProfound) -> None:
-        report = await async_client.reports.query_visibility(
+    async def test_method_visibility(self, async_client: AsyncProfound) -> None:
+        report = await async_client.reports.visibility(
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             metrics=["share_of_voice"],
@@ -380,8 +380,8 @@ class TestAsyncReports:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_query_visibility_with_all_params(self, async_client: AsyncProfound) -> None:
-        report = await async_client.reports.query_visibility(
+    async def test_method_visibility_with_all_params(self, async_client: AsyncProfound) -> None:
+        report = await async_client.reports.visibility(
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             metrics=["share_of_voice"],
@@ -405,8 +405,8 @@ class TestAsyncReports:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_query_visibility(self, async_client: AsyncProfound) -> None:
-        response = await async_client.reports.with_raw_response.query_visibility(
+    async def test_raw_response_visibility(self, async_client: AsyncProfound) -> None:
+        response = await async_client.reports.with_raw_response.visibility(
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             metrics=["share_of_voice"],
@@ -420,8 +420,8 @@ class TestAsyncReports:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_query_visibility(self, async_client: AsyncProfound) -> None:
-        async with async_client.reports.with_streaming_response.query_visibility(
+    async def test_streaming_response_visibility(self, async_client: AsyncProfound) -> None:
+        async with async_client.reports.with_streaming_response.visibility(
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             metrics=["share_of_voice"],

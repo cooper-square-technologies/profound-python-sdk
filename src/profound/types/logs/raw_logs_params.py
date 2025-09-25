@@ -6,35 +6,51 @@ from typing import Dict, List, Union, Iterable
 from datetime import datetime
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
-from .._types import SequenceNotStr
-from .._utils import PropertyInfo
-from .pagination_param import PaginationParam
+from ..._types import SequenceNotStr
+from ..._utils import PropertyInfo
+from ..pagination_param import PaginationParam
 
-__all__ = ["ReportQueryCitationsParams", "Filter"]
+__all__ = ["RawLogsParams", "Filter"]
 
 
-class ReportQueryCitationsParams(TypedDict, total=False):
-    category_id: Required[str]
+class RawLogsParams(TypedDict, total=False):
+    domain: Required[str]
+    """Domain to query logs for."""
 
-    end_date: Required[Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]]
-    """End date for the report.
-
-    Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
-    """
-
-    metrics: Required[List[Literal["count", "share_of_voice"]]]
+    metrics: Required[List[Literal["count"]]]
 
     start_date: Required[Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]]
-    """Start date for the report.
+    """Start date for logs.
 
-    Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
+    Accepts: YYYY-MM-DD, YYYY-MM-DD HH:MM, YYYY-MM-DD HH:MM:SS, or full ISO
+    timestamp.
     """
 
     date_interval: Literal["day", "week", "month", "year"]
     """Date interval for the report. (only used with date dimension)"""
 
-    dimensions: List[Literal["hostname", "path", "date", "region", "topic", "model", "tag"]]
+    dimensions: List[
+        Literal[
+            "timestamp",
+            "method",
+            "host",
+            "path",
+            "status_code",
+            "ip",
+            "user_agent",
+            "referer",
+            "bytes_sent",
+            "duration_ms",
+            "query_params",
+        ]
+    ]
     """Dimensions to group the report by."""
+
+    end_date: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
+    """End date for logs.
+
+    Accepts same formats as start_date. Defaults to now if omitted.
+    """
 
     filters: Iterable[Filter]
     """List of filters to apply to the report.
@@ -60,7 +76,7 @@ class ReportQueryCitationsParams(TypedDict, total=False):
 
 
 class Filter(TypedDict, total=False):
-    field: Required[Literal["hostname", "path", "region", "topic", "model", "tag"]]
+    field: Required[Literal["method", "path", "status_code", "ip", "user_agent", "referer", "query_params"]]
 
     operator: Required[
         Literal[

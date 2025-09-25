@@ -6,50 +6,35 @@ from typing import Dict, List, Union, Iterable
 from datetime import datetime
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
-from ..._types import SequenceNotStr
-from ..._utils import PropertyInfo
-from ..pagination_param import PaginationParam
+from .._types import SequenceNotStr
+from .._utils import PropertyInfo
+from .pagination_param import PaginationParam
 
-__all__ = ["RawGetBotsParams", "Filter"]
+__all__ = ["ReportVisibilityParams", "Filter"]
 
 
-class RawGetBotsParams(TypedDict, total=False):
-    domain: Required[str]
-    """Domain to query logs for."""
+class ReportVisibilityParams(TypedDict, total=False):
+    category_id: Required[str]
 
-    metrics: Required[List[Literal["count"]]]
+    end_date: Required[Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]]
+    """End date for the report.
+
+    Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
+    """
+
+    metrics: Required[List[Literal["share_of_voice", "mentions_count", "visibility_score"]]]
 
     start_date: Required[Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]]
-    """Start date for logs.
+    """Start date for the report.
 
-    Accepts: YYYY-MM-DD, YYYY-MM-DD HH:MM, YYYY-MM-DD HH:MM:SS, or full ISO
-    timestamp.
+    Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
     """
 
     date_interval: Literal["day", "week", "month", "year"]
     """Date interval for the report. (only used with date dimension)"""
 
-    dimensions: List[
-        Literal[
-            "method",
-            "path",
-            "status_code",
-            "ip",
-            "user_agent",
-            "referer",
-            "query_params",
-            "bot_name",
-            "bot_provider",
-            "bot_types",
-        ]
-    ]
+    dimensions: List[Literal["date", "region", "topic", "model", "asset_name", "prompt", "tag"]]
     """Dimensions to group the report by."""
-
-    end_date: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
-    """End date for logs.
-
-    Accepts same formats as start_date. Defaults to now if omitted.
-    """
 
     filters: Iterable[Filter]
     """List of filters to apply to the report.
@@ -75,20 +60,7 @@ class RawGetBotsParams(TypedDict, total=False):
 
 
 class Filter(TypedDict, total=False):
-    field: Required[
-        Literal[
-            "method",
-            "path",
-            "status_code",
-            "ip",
-            "user_agent",
-            "referer",
-            "query_params",
-            "bot_name",
-            "bot_provider",
-            "bot_types",
-        ]
-    ]
+    field: Required[Literal["region", "topic", "model", "asset_name", "prompt", "tag"]]
 
     operator: Required[
         Literal[

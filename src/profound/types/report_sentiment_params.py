@@ -10,10 +10,10 @@ from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 from .pagination_param import PaginationParam
 
-__all__ = ["ReportQuerySentimentParams", "Filter"]
+__all__ = ["ReportSentimentParams", "Filter"]
 
 
-class ReportQuerySentimentParams(TypedDict, total=False):
+class ReportSentimentParams(TypedDict, total=False):
     category_id: Required[str]
 
     end_date: Required[Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]]

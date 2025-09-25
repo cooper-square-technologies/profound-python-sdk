@@ -1,13 +1,5 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from .org import (
-    OrgResource,
-    AsyncOrgResource,
-    OrgResourceWithRawResponse,
-    AsyncOrgResourceWithRawResponse,
-    OrgResourceWithStreamingResponse,
-    AsyncOrgResourceWithStreamingResponse,
-)
 from .logs import (
     LogsResource,
     AsyncLogsResource,
@@ -32,14 +24,22 @@ from .reports import (
     ReportsResourceWithStreamingResponse,
     AsyncReportsResourceWithStreamingResponse,
 )
+from .organizations import (
+    OrganizationsResource,
+    AsyncOrganizationsResource,
+    OrganizationsResourceWithRawResponse,
+    AsyncOrganizationsResourceWithRawResponse,
+    OrganizationsResourceWithStreamingResponse,
+    AsyncOrganizationsResourceWithStreamingResponse,
+)
 
 __all__ = [
-    "OrgResource",
-    "AsyncOrgResource",
-    "OrgResourceWithRawResponse",
-    "AsyncOrgResourceWithRawResponse",
-    "OrgResourceWithStreamingResponse",
-    "AsyncOrgResourceWithStreamingResponse",
+    "OrganizationsResource",
+    "AsyncOrganizationsResource",
+    "OrganizationsResourceWithRawResponse",
+    "AsyncOrganizationsResourceWithRawResponse",
+    "OrganizationsResourceWithStreamingResponse",
+    "AsyncOrganizationsResourceWithStreamingResponse",
     "PromptsResource",
     "AsyncPromptsResource",
     "PromptsResourceWithRawResponse",
