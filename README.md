@@ -32,18 +32,16 @@ import os
 from profound import Profound
 
 client = Profound(
-    query_api_key=os.environ.get(
-        "COINGECKO_DEMO_API_KEY"
-    ),  # This is the default and can be omitted
+    query_api_key=os.environ.get("PROFOUND_API_KEY"),  # This is the default and can be omitted
 )
 
 org_items = client.org.categories.list()
 ```
 
-While you can provide a `header_api_key` keyword argument,
+While you can provide a `query_api_key` keyword argument,
 we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
-to add `COINGECKO_PRO_API_KEY="My Header API Key"` to your `.env` file
-so that your Header API Key is not stored in source control.
+to add `PROFOUND_API_KEY="My Query API Key"` to your `.env` file
+so that your Query API Key is not stored in source control.
 
 ## Async usage
 
@@ -55,9 +53,7 @@ import asyncio
 from profound import AsyncProfound
 
 client = AsyncProfound(
-    query_api_key=os.environ.get(
-        "COINGECKO_DEMO_API_KEY"
-    ),  # This is the default and can be omitted
+    query_api_key=os.environ.get("PROFOUND_API_KEY"),  # This is the default and can be omitted
 )
 
 
