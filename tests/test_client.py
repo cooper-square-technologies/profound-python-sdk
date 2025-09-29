@@ -22,7 +22,7 @@ from profound import Profound, AsyncProfound, APIResponseValidationError
 from profound._types import Omit
 from profound._utils import asyncify
 from profound._models import BaseModel, FinalRequestOptions
-from profound._exceptions import APIStatusError, APITimeoutError, APIResponseValidationError
+from profound._exceptions import ProfoundError, APIStatusError, APITimeoutError, APIResponseValidationError
 from profound._base_client import (
     DEFAULT_TIMEOUT,
     HTTPX_DEFAULT_TIMEOUT,
@@ -37,7 +37,7 @@ from profound._base_client import (
 from .utils import update_env
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
-header_api_key = "My Header API Key"
+api_key = "My API Key"
 
 
 def _get_params(client: BaseClient[Any, Any]) -> dict[str, str]:
@@ -59,7 +59,7 @@ def _get_open_connections(client: Profound | AsyncProfound) -> int:
 
 
 class TestProfound:
-    client = Profound(base_url=base_url, header_api_key=header_api_key, _strict_response_validation=True)
+    client = Profound(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
     @pytest.mark.respx(base_url=base_url)
     def test_raw_response(self, respx_mock: MockRouter) -> None:
@@ -85,9 +85,9 @@ class TestProfound:
         copied = self.client.copy()
         assert id(copied) != id(self.client)
 
-        copied = self.client.copy(header_api_key="another My Header API Key")
-        assert copied.header_api_key == "another My Header API Key"
-        assert self.client.header_api_key == "My Header API Key"
+        copied = self.client.copy(api_key="another My API Key")
+        assert copied.api_key == "another My API Key"
+        assert self.client.api_key == "My API Key"
 
     def test_copy_default_options(self) -> None:
         # options that have a default are overridden correctly
@@ -107,10 +107,7 @@ class TestProfound:
 
     def test_copy_default_headers(self) -> None:
         client = Profound(
-            base_url=base_url,
-            header_api_key=header_api_key,
-            _strict_response_validation=True,
-            default_headers={"X-Foo": "bar"},
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
         )
         assert client.default_headers["X-Foo"] == "bar"
 
@@ -144,10 +141,7 @@ class TestProfound:
 
     def test_copy_default_query(self) -> None:
         client = Profound(
-            base_url=base_url,
-            header_api_key=header_api_key,
-            _strict_response_validation=True,
-            default_query={"foo": "bar"},
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_query={"foo": "bar"}
         )
         assert _get_params(client)["foo"] == "bar"
 
@@ -273,7 +267,7 @@ class TestProfound:
 
     def test_client_timeout_option(self) -> None:
         client = Profound(
-            base_url=base_url, header_api_key=header_api_key, _strict_response_validation=True, timeout=httpx.Timeout(0)
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, timeout=httpx.Timeout(0)
         )
 
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -284,10 +278,7 @@ class TestProfound:
         # custom timeout given to the httpx client should be used
         with httpx.Client(timeout=None) as http_client:
             client = Profound(
-                base_url=base_url,
-                header_api_key=header_api_key,
-                _strict_response_validation=True,
-                http_client=http_client,
+                base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -297,10 +288,7 @@ class TestProfound:
         # no timeout given to the httpx client should not use the httpx default
         with httpx.Client() as http_client:
             client = Profound(
-                base_url=base_url,
-                header_api_key=header_api_key,
-                _strict_response_validation=True,
-                http_client=http_client,
+                base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -310,10 +298,7 @@ class TestProfound:
         # explicitly passing the default timeout currently results in it being ignored
         with httpx.Client(timeout=HTTPX_DEFAULT_TIMEOUT) as http_client:
             client = Profound(
-                base_url=base_url,
-                header_api_key=header_api_key,
-                _strict_response_validation=True,
-                http_client=http_client,
+                base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -325,17 +310,14 @@ class TestProfound:
             async with httpx.AsyncClient() as http_client:
                 Profound(
                     base_url=base_url,
-                    header_api_key=header_api_key,
+                    api_key=api_key,
                     _strict_response_validation=True,
                     http_client=cast(Any, http_client),
                 )
 
     def test_default_headers_option(self) -> None:
         client = Profound(
-            base_url=base_url,
-            header_api_key=header_api_key,
-            _strict_response_validation=True,
-            default_headers={"X-Foo": "bar"},
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
         )
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("x-foo") == "bar"
@@ -343,7 +325,7 @@ class TestProfound:
 
         client2 = Profound(
             base_url=base_url,
-            header_api_key=header_api_key,
+            api_key=api_key,
             _strict_response_validation=True,
             default_headers={
                 "X-Foo": "stainless",
@@ -354,12 +336,19 @@ class TestProfound:
         assert request.headers.get("x-foo") == "stainless"
         assert request.headers.get("x-stainless-lang") == "my-overriding-header"
 
+    def test_validate_headers(self) -> None:
+        client = Profound(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
+        assert request.headers.get("X-API-Key") == api_key
+
+        with pytest.raises(ProfoundError):
+            with update_env(**{"PROFOUND_API_KEY": Omit()}):
+                client2 = Profound(base_url=base_url, api_key=None, _strict_response_validation=True)
+            _ = client2
+
     def test_default_query_option(self) -> None:
         client = Profound(
-            base_url=base_url,
-            header_api_key=header_api_key,
-            _strict_response_validation=True,
-            default_query={"query_param": "bar"},
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_query={"query_param": "bar"}
         )
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         url = httpx.URL(request.url)
@@ -559,9 +548,7 @@ class TestProfound:
         assert response.foo == 2
 
     def test_base_url_setter(self) -> None:
-        client = Profound(
-            base_url="https://example.com/from_init", header_api_key=header_api_key, _strict_response_validation=True
-        )
+        client = Profound(base_url="https://example.com/from_init", api_key=api_key, _strict_response_validation=True)
         assert client.base_url == "https://example.com/from_init/"
 
         client.base_url = "https://example.com/from_setter"  # type: ignore[assignment]
@@ -570,20 +557,16 @@ class TestProfound:
 
     def test_base_url_env(self) -> None:
         with update_env(PROFOUND_BASE_URL="http://localhost:5000/from/env"):
-            client = Profound(header_api_key=header_api_key, _strict_response_validation=True)
+            client = Profound(api_key=api_key, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
 
     @pytest.mark.parametrize(
         "client",
         [
+            Profound(base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True),
             Profound(
                 base_url="http://localhost:5000/custom/path/",
-                header_api_key=header_api_key,
-                _strict_response_validation=True,
-            ),
-            Profound(
-                base_url="http://localhost:5000/custom/path/",
-                header_api_key=header_api_key,
+                api_key=api_key,
                 _strict_response_validation=True,
                 http_client=httpx.Client(),
             ),
@@ -603,14 +586,10 @@ class TestProfound:
     @pytest.mark.parametrize(
         "client",
         [
+            Profound(base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True),
             Profound(
                 base_url="http://localhost:5000/custom/path/",
-                header_api_key=header_api_key,
-                _strict_response_validation=True,
-            ),
-            Profound(
-                base_url="http://localhost:5000/custom/path/",
-                header_api_key=header_api_key,
+                api_key=api_key,
                 _strict_response_validation=True,
                 http_client=httpx.Client(),
             ),
@@ -630,14 +609,10 @@ class TestProfound:
     @pytest.mark.parametrize(
         "client",
         [
+            Profound(base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True),
             Profound(
                 base_url="http://localhost:5000/custom/path/",
-                header_api_key=header_api_key,
-                _strict_response_validation=True,
-            ),
-            Profound(
-                base_url="http://localhost:5000/custom/path/",
-                header_api_key=header_api_key,
+                api_key=api_key,
                 _strict_response_validation=True,
                 http_client=httpx.Client(),
             ),
@@ -655,7 +630,7 @@ class TestProfound:
         assert request.url == "https://myapi.com/foo"
 
     def test_copied_client_does_not_close_http(self) -> None:
-        client = Profound(base_url=base_url, header_api_key=header_api_key, _strict_response_validation=True)
+        client = Profound(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         assert not client.is_closed()
 
         copied = client.copy()
@@ -666,7 +641,7 @@ class TestProfound:
         assert not client.is_closed()
 
     def test_client_context_manager(self) -> None:
-        client = Profound(base_url=base_url, header_api_key=header_api_key, _strict_response_validation=True)
+        client = Profound(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         with client as c2:
             assert c2 is client
             assert not c2.is_closed()
@@ -687,12 +662,7 @@ class TestProfound:
 
     def test_client_max_retries_validation(self) -> None:
         with pytest.raises(TypeError, match=r"max_retries cannot be None"):
-            Profound(
-                base_url=base_url,
-                header_api_key=header_api_key,
-                _strict_response_validation=True,
-                max_retries=cast(Any, None),
-            )
+            Profound(base_url=base_url, api_key=api_key, _strict_response_validation=True, max_retries=cast(Any, None))
 
     @pytest.mark.respx(base_url=base_url)
     def test_received_text_for_expected_json(self, respx_mock: MockRouter) -> None:
@@ -701,12 +671,12 @@ class TestProfound:
 
         respx_mock.get("/foo").mock(return_value=httpx.Response(200, text="my-custom-format"))
 
-        strict_client = Profound(base_url=base_url, header_api_key=header_api_key, _strict_response_validation=True)
+        strict_client = Profound(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
         with pytest.raises(APIResponseValidationError):
             strict_client.get("/foo", cast_to=Model)
 
-        client = Profound(base_url=base_url, header_api_key=header_api_key, _strict_response_validation=False)
+        client = Profound(base_url=base_url, api_key=api_key, _strict_response_validation=False)
 
         response = client.get("/foo", cast_to=Model)
         assert isinstance(response, str)  # type: ignore[unreachable]
@@ -734,7 +704,7 @@ class TestProfound:
     )
     @mock.patch("time.time", mock.MagicMock(return_value=1696004797))
     def test_parse_retry_after_header(self, remaining_retries: int, retry_after: str, timeout: float) -> None:
-        client = Profound(base_url=base_url, header_api_key=header_api_key, _strict_response_validation=True)
+        client = Profound(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
         headers = httpx.Headers({"retry-after": retry_after})
         options = FinalRequestOptions(method="get", url="/foo", max_retries=3)
@@ -892,7 +862,7 @@ class TestProfound:
 
 
 class TestAsyncProfound:
-    client = AsyncProfound(base_url=base_url, header_api_key=header_api_key, _strict_response_validation=True)
+    client = AsyncProfound(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.asyncio
@@ -920,9 +890,9 @@ class TestAsyncProfound:
         copied = self.client.copy()
         assert id(copied) != id(self.client)
 
-        copied = self.client.copy(header_api_key="another My Header API Key")
-        assert copied.header_api_key == "another My Header API Key"
-        assert self.client.header_api_key == "My Header API Key"
+        copied = self.client.copy(api_key="another My API Key")
+        assert copied.api_key == "another My API Key"
+        assert self.client.api_key == "My API Key"
 
     def test_copy_default_options(self) -> None:
         # options that have a default are overridden correctly
@@ -942,10 +912,7 @@ class TestAsyncProfound:
 
     def test_copy_default_headers(self) -> None:
         client = AsyncProfound(
-            base_url=base_url,
-            header_api_key=header_api_key,
-            _strict_response_validation=True,
-            default_headers={"X-Foo": "bar"},
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
         )
         assert client.default_headers["X-Foo"] == "bar"
 
@@ -979,10 +946,7 @@ class TestAsyncProfound:
 
     def test_copy_default_query(self) -> None:
         client = AsyncProfound(
-            base_url=base_url,
-            header_api_key=header_api_key,
-            _strict_response_validation=True,
-            default_query={"foo": "bar"},
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_query={"foo": "bar"}
         )
         assert _get_params(client)["foo"] == "bar"
 
@@ -1108,7 +1072,7 @@ class TestAsyncProfound:
 
     async def test_client_timeout_option(self) -> None:
         client = AsyncProfound(
-            base_url=base_url, header_api_key=header_api_key, _strict_response_validation=True, timeout=httpx.Timeout(0)
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, timeout=httpx.Timeout(0)
         )
 
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -1119,10 +1083,7 @@ class TestAsyncProfound:
         # custom timeout given to the httpx client should be used
         async with httpx.AsyncClient(timeout=None) as http_client:
             client = AsyncProfound(
-                base_url=base_url,
-                header_api_key=header_api_key,
-                _strict_response_validation=True,
-                http_client=http_client,
+                base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -1132,10 +1093,7 @@ class TestAsyncProfound:
         # no timeout given to the httpx client should not use the httpx default
         async with httpx.AsyncClient() as http_client:
             client = AsyncProfound(
-                base_url=base_url,
-                header_api_key=header_api_key,
-                _strict_response_validation=True,
-                http_client=http_client,
+                base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -1145,10 +1103,7 @@ class TestAsyncProfound:
         # explicitly passing the default timeout currently results in it being ignored
         async with httpx.AsyncClient(timeout=HTTPX_DEFAULT_TIMEOUT) as http_client:
             client = AsyncProfound(
-                base_url=base_url,
-                header_api_key=header_api_key,
-                _strict_response_validation=True,
-                http_client=http_client,
+                base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -1160,17 +1115,14 @@ class TestAsyncProfound:
             with httpx.Client() as http_client:
                 AsyncProfound(
                     base_url=base_url,
-                    header_api_key=header_api_key,
+                    api_key=api_key,
                     _strict_response_validation=True,
                     http_client=cast(Any, http_client),
                 )
 
     def test_default_headers_option(self) -> None:
         client = AsyncProfound(
-            base_url=base_url,
-            header_api_key=header_api_key,
-            _strict_response_validation=True,
-            default_headers={"X-Foo": "bar"},
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
         )
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("x-foo") == "bar"
@@ -1178,7 +1130,7 @@ class TestAsyncProfound:
 
         client2 = AsyncProfound(
             base_url=base_url,
-            header_api_key=header_api_key,
+            api_key=api_key,
             _strict_response_validation=True,
             default_headers={
                 "X-Foo": "stainless",
@@ -1189,12 +1141,19 @@ class TestAsyncProfound:
         assert request.headers.get("x-foo") == "stainless"
         assert request.headers.get("x-stainless-lang") == "my-overriding-header"
 
+    def test_validate_headers(self) -> None:
+        client = AsyncProfound(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
+        assert request.headers.get("X-API-Key") == api_key
+
+        with pytest.raises(ProfoundError):
+            with update_env(**{"PROFOUND_API_KEY": Omit()}):
+                client2 = AsyncProfound(base_url=base_url, api_key=None, _strict_response_validation=True)
+            _ = client2
+
     def test_default_query_option(self) -> None:
         client = AsyncProfound(
-            base_url=base_url,
-            header_api_key=header_api_key,
-            _strict_response_validation=True,
-            default_query={"query_param": "bar"},
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_query={"query_param": "bar"}
         )
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         url = httpx.URL(request.url)
@@ -1395,7 +1354,7 @@ class TestAsyncProfound:
 
     def test_base_url_setter(self) -> None:
         client = AsyncProfound(
-            base_url="https://example.com/from_init", header_api_key=header_api_key, _strict_response_validation=True
+            base_url="https://example.com/from_init", api_key=api_key, _strict_response_validation=True
         )
         assert client.base_url == "https://example.com/from_init/"
 
@@ -1405,20 +1364,18 @@ class TestAsyncProfound:
 
     def test_base_url_env(self) -> None:
         with update_env(PROFOUND_BASE_URL="http://localhost:5000/from/env"):
-            client = AsyncProfound(header_api_key=header_api_key, _strict_response_validation=True)
+            client = AsyncProfound(api_key=api_key, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
 
     @pytest.mark.parametrize(
         "client",
         [
             AsyncProfound(
-                base_url="http://localhost:5000/custom/path/",
-                header_api_key=header_api_key,
-                _strict_response_validation=True,
+                base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
             ),
             AsyncProfound(
                 base_url="http://localhost:5000/custom/path/",
-                header_api_key=header_api_key,
+                api_key=api_key,
                 _strict_response_validation=True,
                 http_client=httpx.AsyncClient(),
             ),
@@ -1439,13 +1396,11 @@ class TestAsyncProfound:
         "client",
         [
             AsyncProfound(
-                base_url="http://localhost:5000/custom/path/",
-                header_api_key=header_api_key,
-                _strict_response_validation=True,
+                base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
             ),
             AsyncProfound(
                 base_url="http://localhost:5000/custom/path/",
-                header_api_key=header_api_key,
+                api_key=api_key,
                 _strict_response_validation=True,
                 http_client=httpx.AsyncClient(),
             ),
@@ -1466,13 +1421,11 @@ class TestAsyncProfound:
         "client",
         [
             AsyncProfound(
-                base_url="http://localhost:5000/custom/path/",
-                header_api_key=header_api_key,
-                _strict_response_validation=True,
+                base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
             ),
             AsyncProfound(
                 base_url="http://localhost:5000/custom/path/",
-                header_api_key=header_api_key,
+                api_key=api_key,
                 _strict_response_validation=True,
                 http_client=httpx.AsyncClient(),
             ),
@@ -1490,7 +1443,7 @@ class TestAsyncProfound:
         assert request.url == "https://myapi.com/foo"
 
     async def test_copied_client_does_not_close_http(self) -> None:
-        client = AsyncProfound(base_url=base_url, header_api_key=header_api_key, _strict_response_validation=True)
+        client = AsyncProfound(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         assert not client.is_closed()
 
         copied = client.copy()
@@ -1502,7 +1455,7 @@ class TestAsyncProfound:
         assert not client.is_closed()
 
     async def test_client_context_manager(self) -> None:
-        client = AsyncProfound(base_url=base_url, header_api_key=header_api_key, _strict_response_validation=True)
+        client = AsyncProfound(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         async with client as c2:
             assert c2 is client
             assert not c2.is_closed()
@@ -1525,10 +1478,7 @@ class TestAsyncProfound:
     async def test_client_max_retries_validation(self) -> None:
         with pytest.raises(TypeError, match=r"max_retries cannot be None"):
             AsyncProfound(
-                base_url=base_url,
-                header_api_key=header_api_key,
-                _strict_response_validation=True,
-                max_retries=cast(Any, None),
+                base_url=base_url, api_key=api_key, _strict_response_validation=True, max_retries=cast(Any, None)
             )
 
     @pytest.mark.respx(base_url=base_url)
@@ -1539,14 +1489,12 @@ class TestAsyncProfound:
 
         respx_mock.get("/foo").mock(return_value=httpx.Response(200, text="my-custom-format"))
 
-        strict_client = AsyncProfound(
-            base_url=base_url, header_api_key=header_api_key, _strict_response_validation=True
-        )
+        strict_client = AsyncProfound(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
         with pytest.raises(APIResponseValidationError):
             await strict_client.get("/foo", cast_to=Model)
 
-        client = AsyncProfound(base_url=base_url, header_api_key=header_api_key, _strict_response_validation=False)
+        client = AsyncProfound(base_url=base_url, api_key=api_key, _strict_response_validation=False)
 
         response = await client.get("/foo", cast_to=Model)
         assert isinstance(response, str)  # type: ignore[unreachable]
@@ -1575,7 +1523,7 @@ class TestAsyncProfound:
     @mock.patch("time.time", mock.MagicMock(return_value=1696004797))
     @pytest.mark.asyncio
     async def test_parse_retry_after_header(self, remaining_retries: int, retry_after: str, timeout: float) -> None:
-        client = AsyncProfound(base_url=base_url, header_api_key=header_api_key, _strict_response_validation=True)
+        client = AsyncProfound(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
         headers = httpx.Headers({"retry-after": retry_after})
         options = FinalRequestOptions(method="get", url="/foo", max_retries=3)
