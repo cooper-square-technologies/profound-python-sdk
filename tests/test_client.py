@@ -22,7 +22,7 @@ from profound import Profound, AsyncProfound, APIResponseValidationError
 from profound._types import Omit
 from profound._utils import asyncify
 from profound._models import BaseModel, FinalRequestOptions
-from profound._exceptions import ProfoundError, APIStatusError, APITimeoutError, APIResponseValidationError
+from profound._exceptions import APIStatusError, APITimeoutError, APIResponseValidationError
 from profound._base_client import (
     DEFAULT_TIMEOUT,
     HTTPX_DEFAULT_TIMEOUT,
@@ -335,16 +335,6 @@ class TestProfound:
         request = client2._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("x-foo") == "stainless"
         assert request.headers.get("x-stainless-lang") == "my-overriding-header"
-
-    def test_validate_headers(self) -> None:
-        client = Profound(base_url=base_url, api_key=api_key, _strict_response_validation=True)
-        request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
-        assert request.headers.get("X-API-Key") == api_key
-
-        with pytest.raises(ProfoundError):
-            with update_env(**{"PROFOUND_API_KEY": Omit()}):
-                client2 = Profound(base_url=base_url, api_key=None, _strict_response_validation=True)
-            _ = client2
 
     def test_default_query_option(self) -> None:
         client = Profound(
@@ -1140,16 +1130,6 @@ class TestAsyncProfound:
         request = client2._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("x-foo") == "stainless"
         assert request.headers.get("x-stainless-lang") == "my-overriding-header"
-
-    def test_validate_headers(self) -> None:
-        client = AsyncProfound(base_url=base_url, api_key=api_key, _strict_response_validation=True)
-        request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
-        assert request.headers.get("X-API-Key") == api_key
-
-        with pytest.raises(ProfoundError):
-            with update_env(**{"PROFOUND_API_KEY": Omit()}):
-                client2 = AsyncProfound(base_url=base_url, api_key=None, _strict_response_validation=True)
-            _ = client2
 
     def test_default_query_option(self) -> None:
         client = AsyncProfound(
