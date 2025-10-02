@@ -28,9 +28,12 @@ pip install git+ssh://git@github.com/cooper-square-technologies/profound-python-
 The full API of this library can be found in [api.md](api.md).
 
 ```python
+import os
 from profound import Profound
 
-client = Profound()
+client = Profound(
+    api_key=os.environ.get("PROFOUND_API_KEY"),  # This is the default and can be omitted
+)
 
 org_items = client.organizations.categories.list()
 ```
@@ -45,10 +48,13 @@ so that your API Key is not stored in source control.
 Simply import `AsyncProfound` instead of `Profound` and use `await` with each API call:
 
 ```python
+import os
 import asyncio
 from profound import AsyncProfound
 
-client = AsyncProfound()
+client = AsyncProfound(
+    api_key=os.environ.get("PROFOUND_API_KEY"),  # This is the default and can be omitted
+)
 
 
 async def main() -> None:
@@ -81,6 +87,7 @@ from profound import AsyncProfound
 
 async def main() -> None:
     async with AsyncProfound(
+        api_key="My API Key",
         http_client=DefaultAioHttpClient(),
     ) as client:
         org_items = await client.organizations.categories.list()
