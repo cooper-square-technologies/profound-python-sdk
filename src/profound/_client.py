@@ -12,6 +12,7 @@ from . import _exceptions
 from ._qs import Querystring
 from ._types import (
     Omit,
+    Headers,
     Timeout,
     NotGiven,
     Transport,
@@ -54,13 +55,11 @@ class Profound(SyncAPIClient):
 
     # client options
     api_key: str | None
-    query_api_key: str | None
 
     def __init__(
         self,
         *,
         api_key: str | None = None,
-        query_api_key: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         max_retries: int = DEFAULT_MAX_RETRIES,
@@ -82,17 +81,11 @@ class Profound(SyncAPIClient):
     ) -> None:
         """Construct a new synchronous Profound client instance.
 
-        This automatically infers the following arguments from their corresponding environment variables if they are not provided:
-        - `api_key` from `PROFOUND_API_KEY`
-        - `query_api_key` from `PROFOUND_API_KEY`
+        This automatically infers the `api_key` argument from the `PROFOUND_API_KEY` environment variable if it is not provided.
         """
         if api_key is None:
             api_key = os.environ.get("PROFOUND_API_KEY")
         self.api_key = api_key
-
-        if query_api_key is None:
-            query_api_key = os.environ.get("PROFOUND_API_KEY")
-        self.query_api_key = query_api_key
 
         if base_url is None:
             base_url = os.environ.get("PROFOUND_BASE_URL")
@@ -139,20 +132,21 @@ class Profound(SyncAPIClient):
             **self._custom_headers,
         }
 
-    @property
     @override
-    def default_query(self) -> dict[str, object]:
-        return {
-            **super().default_query,
-            "api_key": self.query_api_key if self.query_api_key is not None else Omit(),
-            **self._custom_query,
-        }
+    def _validate_headers(self, headers: Headers, custom_headers: Headers) -> None:
+        if self.api_key and headers.get("X-API-Key"):
+            return
+        if isinstance(custom_headers.get("X-API-Key"), Omit):
+            return
+
+        raise TypeError(
+            '"Could not resolve authentication method. Expected the api_key to be set. Or for the `X-API-Key` headers to be explicitly omitted"'
+        )
 
     def copy(
         self,
         *,
         api_key: str | None = None,
-        query_api_key: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.Client | None = None,
@@ -187,7 +181,6 @@ class Profound(SyncAPIClient):
         http_client = http_client or self._client
         return self.__class__(
             api_key=api_key or self.api_key,
-            query_api_key=query_api_key or self.query_api_key,
             base_url=base_url or self.base_url,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
@@ -245,13 +238,11 @@ class AsyncProfound(AsyncAPIClient):
 
     # client options
     api_key: str | None
-    query_api_key: str | None
 
     def __init__(
         self,
         *,
         api_key: str | None = None,
-        query_api_key: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         max_retries: int = DEFAULT_MAX_RETRIES,
@@ -273,17 +264,11 @@ class AsyncProfound(AsyncAPIClient):
     ) -> None:
         """Construct a new async AsyncProfound client instance.
 
-        This automatically infers the following arguments from their corresponding environment variables if they are not provided:
-        - `api_key` from `PROFOUND_API_KEY`
-        - `query_api_key` from `PROFOUND_API_KEY`
+        This automatically infers the `api_key` argument from the `PROFOUND_API_KEY` environment variable if it is not provided.
         """
         if api_key is None:
             api_key = os.environ.get("PROFOUND_API_KEY")
         self.api_key = api_key
-
-        if query_api_key is None:
-            query_api_key = os.environ.get("PROFOUND_API_KEY")
-        self.query_api_key = query_api_key
 
         if base_url is None:
             base_url = os.environ.get("PROFOUND_BASE_URL")
@@ -330,20 +315,21 @@ class AsyncProfound(AsyncAPIClient):
             **self._custom_headers,
         }
 
-    @property
     @override
-    def default_query(self) -> dict[str, object]:
-        return {
-            **super().default_query,
-            "api_key": self.query_api_key if self.query_api_key is not None else Omit(),
-            **self._custom_query,
-        }
+    def _validate_headers(self, headers: Headers, custom_headers: Headers) -> None:
+        if self.api_key and headers.get("X-API-Key"):
+            return
+        if isinstance(custom_headers.get("X-API-Key"), Omit):
+            return
+
+        raise TypeError(
+            '"Could not resolve authentication method. Expected the api_key to be set. Or for the `X-API-Key` headers to be explicitly omitted"'
+        )
 
     def copy(
         self,
         *,
         api_key: str | None = None,
-        query_api_key: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.AsyncClient | None = None,
@@ -378,7 +364,6 @@ class AsyncProfound(AsyncAPIClient):
         http_client = http_client or self._client
         return self.__class__(
             api_key=api_key or self.api_key,
-            query_api_key=query_api_key or self.query_api_key,
             base_url=base_url or self.base_url,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
