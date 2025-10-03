@@ -22,7 +22,7 @@ from profound import Profound, AsyncProfound, APIResponseValidationError
 from profound._types import Omit
 from profound._utils import asyncify
 from profound._models import BaseModel, FinalRequestOptions
-from profound._exceptions import APIStatusError, APITimeoutError, APIResponseValidationError
+from profound._exceptions import ProfoundError, APIStatusError, APITimeoutError, APIResponseValidationError
 from profound._base_client import (
     DEFAULT_TIMEOUT,
     HTTPX_DEFAULT_TIMEOUT,
@@ -341,17 +341,10 @@ class TestProfound:
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("X-API-Key") == api_key
 
-        with update_env(**{"PROFOUND_API_KEY": Omit()}):
-            client2 = Profound(base_url=base_url, api_key=None, _strict_response_validation=True)
-
-        with pytest.raises(
-            TypeError,
-            match="Could not resolve authentication method. Expected the api_key to be set. Or for the `X-API-Key` headers to be explicitly omitted",
-        ):
-            client2._build_request(FinalRequestOptions(method="get", url="/foo"))
-
-        request2 = client2._build_request(FinalRequestOptions(method="get", url="/foo", headers={"X-API-Key": Omit()}))
-        assert request2.headers.get("X-API-Key") is None
+        with pytest.raises(ProfoundError):
+            with update_env(**{"PROFOUND_API_KEY": Omit()}):
+                client2 = Profound(base_url=base_url, api_key=None, _strict_response_validation=True)
+            _ = client2
 
     def test_default_query_option(self) -> None:
         client = Profound(
@@ -1153,17 +1146,10 @@ class TestAsyncProfound:
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("X-API-Key") == api_key
 
-        with update_env(**{"PROFOUND_API_KEY": Omit()}):
-            client2 = AsyncProfound(base_url=base_url, api_key=None, _strict_response_validation=True)
-
-        with pytest.raises(
-            TypeError,
-            match="Could not resolve authentication method. Expected the api_key to be set. Or for the `X-API-Key` headers to be explicitly omitted",
-        ):
-            client2._build_request(FinalRequestOptions(method="get", url="/foo"))
-
-        request2 = client2._build_request(FinalRequestOptions(method="get", url="/foo", headers={"X-API-Key": Omit()}))
-        assert request2.headers.get("X-API-Key") is None
+        with pytest.raises(ProfoundError):
+            with update_env(**{"PROFOUND_API_KEY": Omit()}):
+                client2 = AsyncProfound(base_url=base_url, api_key=None, _strict_response_validation=True)
+            _ = client2
 
     def test_default_query_option(self) -> None:
         client = AsyncProfound(
