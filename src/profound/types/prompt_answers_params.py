@@ -10,10 +10,10 @@ from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 from .pagination_param import PaginationParam
 
-__all__ = ["PromptGetAnswersParams", "Filter", "Include"]
+__all__ = ["PromptAnswersParams", "Filter", "Include"]
 
 
-class PromptGetAnswersParams(TypedDict, total=False):
+class PromptAnswersParams(TypedDict, total=False):
     category_id: Required[str]
 
     end_date: Required[Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]]

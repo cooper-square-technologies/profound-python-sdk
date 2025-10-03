@@ -2,21 +2,15 @@
 
 from typing import Dict, List, Union, Optional
 from datetime import datetime
-from typing_extensions import Literal, TypeAlias
+from typing_extensions import TypeAlias
 
 from ..._models import BaseModel
 from ..response import Response
 
-__all__ = ["RawGetBotsResponse", "UnionMember0"]
+__all__ = ["RawLogsResponse", "LogVisitList"]
 
 
-class UnionMember0(BaseModel):
-    bot_name: str
-
-    bot_provider: str
-
-    bot_types: List[Literal["ai_assistant", "ai_training", "index"]]
-
+class LogVisitList(BaseModel):
     host: str
 
     ip: str
@@ -42,4 +36,4 @@ class UnionMember0(BaseModel):
     referer: Optional[str] = None
 
 
-RawGetBotsResponse: TypeAlias = Union[List[UnionMember0], Response]
+RawLogsResponse: TypeAlias = Union[List[LogVisitList], Response]

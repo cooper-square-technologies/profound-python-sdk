@@ -10,10 +10,10 @@ from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 from .pagination_param import PaginationParam
 
-__all__ = ["ReportQueryVisibilityParams", "Filter"]
+__all__ = ["ReportCitationsParams", "Filter"]
 
 
-class ReportQueryVisibilityParams(TypedDict, total=False):
+class ReportCitationsParams(TypedDict, total=False):
     category_id: Required[str]
 
     end_date: Required[Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]]
@@ -22,7 +22,7 @@ class ReportQueryVisibilityParams(TypedDict, total=False):
     Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
     """
 
-    metrics: Required[List[Literal["share_of_voice", "mentions_count", "visibility_score"]]]
+    metrics: Required[List[Literal["count", "share_of_voice"]]]
 
     start_date: Required[Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]]
     """Start date for the report.
@@ -33,7 +33,7 @@ class ReportQueryVisibilityParams(TypedDict, total=False):
     date_interval: Literal["day", "week", "month", "year"]
     """Date interval for the report. (only used with date dimension)"""
 
-    dimensions: List[Literal["date", "region", "topic", "model", "asset_name", "prompt", "tag"]]
+    dimensions: List[Literal["hostname", "path", "date", "region", "topic", "model", "tag"]]
     """Dimensions to group the report by."""
 
     filters: Iterable[Filter]
@@ -60,7 +60,7 @@ class ReportQueryVisibilityParams(TypedDict, total=False):
 
 
 class Filter(TypedDict, total=False):
-    field: Required[Literal["region", "topic", "model", "asset_name", "prompt", "tag"]]
+    field: Required[Literal["hostname", "path", "region", "topic", "model", "tag"]]
 
     operator: Required[
         Literal[

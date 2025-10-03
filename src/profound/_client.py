@@ -12,6 +12,7 @@ from . import _exceptions
 from ._qs import Querystring
 from ._types import (
     Omit,
+    Headers,
     Timeout,
     NotGiven,
     Transport,
@@ -23,14 +24,14 @@ from ._utils import is_given, get_async_library
 from ._version import __version__
 from .resources import prompts, reports
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
-from ._exceptions import ProfoundError, APIStatusError
+from ._exceptions import APIStatusError
 from ._base_client import (
     DEFAULT_MAX_RETRIES,
     SyncAPIClient,
     AsyncAPIClient,
 )
-from .resources.org import org
 from .resources.logs import logs
+from .resources.organizations import organizations
 
 __all__ = [
     "Timeout",
@@ -45,7 +46,7 @@ __all__ = [
 
 
 class Profound(SyncAPIClient):
-    org: org.OrgResource
+    organizations: organizations.OrganizationsResource
     prompts: prompts.PromptsResource
     reports: reports.ReportsResource
     logs: logs.LogsResource
@@ -53,7 +54,7 @@ class Profound(SyncAPIClient):
     with_streaming_response: ProfoundWithStreamedResponse
 
     # client options
-    api_key: str
+    api_key: str | None
 
     def __init__(
         self,
@@ -84,10 +85,6 @@ class Profound(SyncAPIClient):
         """
         if api_key is None:
             api_key = os.environ.get("PROFOUND_API_KEY")
-        if api_key is None:
-            raise ProfoundError(
-                "The api_key client option must be set either by passing api_key to the client or by setting the PROFOUND_API_KEY environment variable"
-            )
         self.api_key = api_key
 
         if base_url is None:
@@ -106,7 +103,7 @@ class Profound(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.org = org.OrgResource(self)
+        self.organizations = organizations.OrganizationsResource(self)
         self.prompts = prompts.PromptsResource(self)
         self.reports = reports.ReportsResource(self)
         self.logs = logs.LogsResource(self)
@@ -122,6 +119,8 @@ class Profound(SyncAPIClient):
     @override
     def auth_headers(self) -> dict[str, str]:
         api_key = self.api_key
+        if api_key is None:
+            return {}
         return {"X-API-Key": api_key}
 
     @property
@@ -132,6 +131,17 @@ class Profound(SyncAPIClient):
             "X-Stainless-Async": "false",
             **self._custom_headers,
         }
+
+    @override
+    def _validate_headers(self, headers: Headers, custom_headers: Headers) -> None:
+        if self.api_key and headers.get("X-API-Key"):
+            return
+        if isinstance(custom_headers.get("X-API-Key"), Omit):
+            return
+
+        raise TypeError(
+            '"Could not resolve authentication method. Expected the api_key to be set. Or for the `X-API-Key` headers to be explicitly omitted"'
+        )
 
     def copy(
         self,
@@ -219,7 +229,7 @@ class Profound(SyncAPIClient):
 
 
 class AsyncProfound(AsyncAPIClient):
-    org: org.AsyncOrgResource
+    organizations: organizations.AsyncOrganizationsResource
     prompts: prompts.AsyncPromptsResource
     reports: reports.AsyncReportsResource
     logs: logs.AsyncLogsResource
@@ -227,7 +237,7 @@ class AsyncProfound(AsyncAPIClient):
     with_streaming_response: AsyncProfoundWithStreamedResponse
 
     # client options
-    api_key: str
+    api_key: str | None
 
     def __init__(
         self,
@@ -258,10 +268,6 @@ class AsyncProfound(AsyncAPIClient):
         """
         if api_key is None:
             api_key = os.environ.get("PROFOUND_API_KEY")
-        if api_key is None:
-            raise ProfoundError(
-                "The api_key client option must be set either by passing api_key to the client or by setting the PROFOUND_API_KEY environment variable"
-            )
         self.api_key = api_key
 
         if base_url is None:
@@ -280,7 +286,7 @@ class AsyncProfound(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.org = org.AsyncOrgResource(self)
+        self.organizations = organizations.AsyncOrganizationsResource(self)
         self.prompts = prompts.AsyncPromptsResource(self)
         self.reports = reports.AsyncReportsResource(self)
         self.logs = logs.AsyncLogsResource(self)
@@ -296,6 +302,8 @@ class AsyncProfound(AsyncAPIClient):
     @override
     def auth_headers(self) -> dict[str, str]:
         api_key = self.api_key
+        if api_key is None:
+            return {}
         return {"X-API-Key": api_key}
 
     @property
@@ -306,6 +314,17 @@ class AsyncProfound(AsyncAPIClient):
             "X-Stainless-Async": f"async:{get_async_library()}",
             **self._custom_headers,
         }
+
+    @override
+    def _validate_headers(self, headers: Headers, custom_headers: Headers) -> None:
+        if self.api_key and headers.get("X-API-Key"):
+            return
+        if isinstance(custom_headers.get("X-API-Key"), Omit):
+            return
+
+        raise TypeError(
+            '"Could not resolve authentication method. Expected the api_key to be set. Or for the `X-API-Key` headers to be explicitly omitted"'
+        )
 
     def copy(
         self,
@@ -394,7 +413,7 @@ class AsyncProfound(AsyncAPIClient):
 
 class ProfoundWithRawResponse:
     def __init__(self, client: Profound) -> None:
-        self.org = org.OrgResourceWithRawResponse(client.org)
+        self.organizations = organizations.OrganizationsResourceWithRawResponse(client.organizations)
         self.prompts = prompts.PromptsResourceWithRawResponse(client.prompts)
         self.reports = reports.ReportsResourceWithRawResponse(client.reports)
         self.logs = logs.LogsResourceWithRawResponse(client.logs)
@@ -402,7 +421,7 @@ class ProfoundWithRawResponse:
 
 class AsyncProfoundWithRawResponse:
     def __init__(self, client: AsyncProfound) -> None:
-        self.org = org.AsyncOrgResourceWithRawResponse(client.org)
+        self.organizations = organizations.AsyncOrganizationsResourceWithRawResponse(client.organizations)
         self.prompts = prompts.AsyncPromptsResourceWithRawResponse(client.prompts)
         self.reports = reports.AsyncReportsResourceWithRawResponse(client.reports)
         self.logs = logs.AsyncLogsResourceWithRawResponse(client.logs)
@@ -410,7 +429,7 @@ class AsyncProfoundWithRawResponse:
 
 class ProfoundWithStreamedResponse:
     def __init__(self, client: Profound) -> None:
-        self.org = org.OrgResourceWithStreamingResponse(client.org)
+        self.organizations = organizations.OrganizationsResourceWithStreamingResponse(client.organizations)
         self.prompts = prompts.PromptsResourceWithStreamingResponse(client.prompts)
         self.reports = reports.ReportsResourceWithStreamingResponse(client.reports)
         self.logs = logs.LogsResourceWithStreamingResponse(client.logs)
@@ -418,7 +437,7 @@ class ProfoundWithStreamedResponse:
 
 class AsyncProfoundWithStreamedResponse:
     def __init__(self, client: AsyncProfound) -> None:
-        self.org = org.AsyncOrgResourceWithStreamingResponse(client.org)
+        self.organizations = organizations.AsyncOrganizationsResourceWithStreamingResponse(client.organizations)
         self.prompts = prompts.AsyncPromptsResourceWithStreamingResponse(client.prompts)
         self.reports = reports.AsyncReportsResourceWithStreamingResponse(client.reports)
         self.logs = logs.AsyncLogsResourceWithStreamingResponse(client.logs)

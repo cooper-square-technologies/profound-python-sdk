@@ -18,11 +18,11 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...types.logs import raw_get_bots_params, raw_get_logs_params
+from ...types.logs import raw_bots_params, raw_logs_params
 from ..._base_client import make_request_options
 from ...types.pagination_param import PaginationParam
-from ...types.logs.raw_get_bots_response import RawGetBotsResponse
-from ...types.logs.raw_get_logs_response import RawGetLogsResponse
+from ...types.logs.raw_bots_response import RawBotsResponse
+from ...types.logs.raw_logs_response import RawLogsResponse
 
 __all__ = ["RawResource", "AsyncRawResource"]
 
@@ -34,7 +34,7 @@ class RawResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/profound-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#accessing-raw-response-data-eg-headers
         """
         return RawResourceWithRawResponse(self)
 
@@ -43,11 +43,11 @@ class RawResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/profound-python#with_streaming_response
+        For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#with_streaming_response
         """
         return RawResourceWithStreamingResponse(self)
 
-    def get_bots(
+    def bots(
         self,
         *,
         domain: str,
@@ -70,7 +70,7 @@ class RawResource(SyncAPIResource):
         ]
         | Omit = omit,
         end_date: Union[str, datetime] | Omit = omit,
-        filters: Iterable[raw_get_bots_params.Filter] | Omit = omit,
+        filters: Iterable[raw_bots_params.Filter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
         pagination: PaginationParam | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -79,7 +79,7 @@ class RawResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> RawGetBotsResponse:
+    ) -> RawBotsResponse:
         """
         Get identified bot logs with filters
 
@@ -121,7 +121,7 @@ class RawResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return cast(
-            RawGetBotsResponse,
+            RawBotsResponse,
             self._post(
                 "/v1/logs/raw/bots",
                 body=maybe_transform(
@@ -136,18 +136,16 @@ class RawResource(SyncAPIResource):
                         "order_by": order_by,
                         "pagination": pagination,
                     },
-                    raw_get_bots_params.RawGetBotsParams,
+                    raw_bots_params.RawBotsParams,
                 ),
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
                 ),
-                cast_to=cast(
-                    Any, RawGetBotsResponse
-                ),  # Union types cannot be passed in as arguments in the type system
+                cast_to=cast(Any, RawBotsResponse),  # Union types cannot be passed in as arguments in the type system
             ),
         )
 
-    def get_logs(
+    def logs(
         self,
         *,
         domain: str,
@@ -171,7 +169,7 @@ class RawResource(SyncAPIResource):
         ]
         | Omit = omit,
         end_date: Union[str, datetime] | Omit = omit,
-        filters: Iterable[raw_get_logs_params.Filter] | Omit = omit,
+        filters: Iterable[raw_logs_params.Filter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
         pagination: PaginationParam | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -180,7 +178,7 @@ class RawResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> RawGetLogsResponse:
+    ) -> RawLogsResponse:
         """
         Get all logs with filters
 
@@ -222,7 +220,7 @@ class RawResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return cast(
-            RawGetLogsResponse,
+            RawLogsResponse,
             self._post(
                 "/v1/logs/raw",
                 body=maybe_transform(
@@ -237,14 +235,12 @@ class RawResource(SyncAPIResource):
                         "order_by": order_by,
                         "pagination": pagination,
                     },
-                    raw_get_logs_params.RawGetLogsParams,
+                    raw_logs_params.RawLogsParams,
                 ),
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
                 ),
-                cast_to=cast(
-                    Any, RawGetLogsResponse
-                ),  # Union types cannot be passed in as arguments in the type system
+                cast_to=cast(Any, RawLogsResponse),  # Union types cannot be passed in as arguments in the type system
             ),
         )
 
@@ -256,7 +252,7 @@ class AsyncRawResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/profound-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#accessing-raw-response-data-eg-headers
         """
         return AsyncRawResourceWithRawResponse(self)
 
@@ -265,11 +261,11 @@ class AsyncRawResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/profound-python#with_streaming_response
+        For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#with_streaming_response
         """
         return AsyncRawResourceWithStreamingResponse(self)
 
-    async def get_bots(
+    async def bots(
         self,
         *,
         domain: str,
@@ -292,7 +288,7 @@ class AsyncRawResource(AsyncAPIResource):
         ]
         | Omit = omit,
         end_date: Union[str, datetime] | Omit = omit,
-        filters: Iterable[raw_get_bots_params.Filter] | Omit = omit,
+        filters: Iterable[raw_bots_params.Filter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
         pagination: PaginationParam | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -301,7 +297,7 @@ class AsyncRawResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> RawGetBotsResponse:
+    ) -> RawBotsResponse:
         """
         Get identified bot logs with filters
 
@@ -343,7 +339,7 @@ class AsyncRawResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return cast(
-            RawGetBotsResponse,
+            RawBotsResponse,
             await self._post(
                 "/v1/logs/raw/bots",
                 body=await async_maybe_transform(
@@ -358,18 +354,16 @@ class AsyncRawResource(AsyncAPIResource):
                         "order_by": order_by,
                         "pagination": pagination,
                     },
-                    raw_get_bots_params.RawGetBotsParams,
+                    raw_bots_params.RawBotsParams,
                 ),
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
                 ),
-                cast_to=cast(
-                    Any, RawGetBotsResponse
-                ),  # Union types cannot be passed in as arguments in the type system
+                cast_to=cast(Any, RawBotsResponse),  # Union types cannot be passed in as arguments in the type system
             ),
         )
 
-    async def get_logs(
+    async def logs(
         self,
         *,
         domain: str,
@@ -393,7 +387,7 @@ class AsyncRawResource(AsyncAPIResource):
         ]
         | Omit = omit,
         end_date: Union[str, datetime] | Omit = omit,
-        filters: Iterable[raw_get_logs_params.Filter] | Omit = omit,
+        filters: Iterable[raw_logs_params.Filter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
         pagination: PaginationParam | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -402,7 +396,7 @@ class AsyncRawResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> RawGetLogsResponse:
+    ) -> RawLogsResponse:
         """
         Get all logs with filters
 
@@ -444,7 +438,7 @@ class AsyncRawResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return cast(
-            RawGetLogsResponse,
+            RawLogsResponse,
             await self._post(
                 "/v1/logs/raw",
                 body=await async_maybe_transform(
@@ -459,14 +453,12 @@ class AsyncRawResource(AsyncAPIResource):
                         "order_by": order_by,
                         "pagination": pagination,
                     },
-                    raw_get_logs_params.RawGetLogsParams,
+                    raw_logs_params.RawLogsParams,
                 ),
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
                 ),
-                cast_to=cast(
-                    Any, RawGetLogsResponse
-                ),  # Union types cannot be passed in as arguments in the type system
+                cast_to=cast(Any, RawLogsResponse),  # Union types cannot be passed in as arguments in the type system
             ),
         )
 
@@ -475,11 +467,11 @@ class RawResourceWithRawResponse:
     def __init__(self, raw: RawResource) -> None:
         self._raw = raw
 
-        self.get_bots = to_raw_response_wrapper(
-            raw.get_bots,
+        self.bots = to_raw_response_wrapper(
+            raw.bots,
         )
-        self.get_logs = to_raw_response_wrapper(
-            raw.get_logs,
+        self.logs = to_raw_response_wrapper(
+            raw.logs,
         )
 
 
@@ -487,11 +479,11 @@ class AsyncRawResourceWithRawResponse:
     def __init__(self, raw: AsyncRawResource) -> None:
         self._raw = raw
 
-        self.get_bots = async_to_raw_response_wrapper(
-            raw.get_bots,
+        self.bots = async_to_raw_response_wrapper(
+            raw.bots,
         )
-        self.get_logs = async_to_raw_response_wrapper(
-            raw.get_logs,
+        self.logs = async_to_raw_response_wrapper(
+            raw.logs,
         )
 
 
@@ -499,11 +491,11 @@ class RawResourceWithStreamingResponse:
     def __init__(self, raw: RawResource) -> None:
         self._raw = raw
 
-        self.get_bots = to_streamed_response_wrapper(
-            raw.get_bots,
+        self.bots = to_streamed_response_wrapper(
+            raw.bots,
         )
-        self.get_logs = to_streamed_response_wrapper(
-            raw.get_logs,
+        self.logs = to_streamed_response_wrapper(
+            raw.logs,
         )
 
 
@@ -511,9 +503,9 @@ class AsyncRawResourceWithStreamingResponse:
     def __init__(self, raw: AsyncRawResource) -> None:
         self._raw = raw
 
-        self.get_bots = async_to_streamed_response_wrapper(
-            raw.get_bots,
+        self.bots = async_to_streamed_response_wrapper(
+            raw.bots,
         )
-        self.get_logs = async_to_streamed_response_wrapper(
-            raw.get_logs,
+        self.logs = async_to_streamed_response_wrapper(
+            raw.logs,
         )

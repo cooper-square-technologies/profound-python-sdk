@@ -22,7 +22,7 @@ from profound import Profound, AsyncProfound, APIResponseValidationError
 from profound._types import Omit
 from profound._utils import asyncify
 from profound._models import BaseModel, FinalRequestOptions
-from profound._exceptions import ProfoundError, APIStatusError, APITimeoutError, APIResponseValidationError
+from profound._exceptions import APIStatusError, APITimeoutError, APIResponseValidationError
 from profound._base_client import (
     DEFAULT_TIMEOUT,
     HTTPX_DEFAULT_TIMEOUT,
@@ -341,10 +341,17 @@ class TestProfound:
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("X-API-Key") == api_key
 
-        with pytest.raises(ProfoundError):
-            with update_env(**{"PROFOUND_API_KEY": Omit()}):
-                client2 = Profound(base_url=base_url, api_key=None, _strict_response_validation=True)
-            _ = client2
+        with update_env(**{"PROFOUND_API_KEY": Omit()}):
+            client2 = Profound(base_url=base_url, api_key=None, _strict_response_validation=True)
+
+        with pytest.raises(
+            TypeError,
+            match="Could not resolve authentication method. Expected the api_key to be set. Or for the `X-API-Key` headers to be explicitly omitted",
+        ):
+            client2._build_request(FinalRequestOptions(method="get", url="/foo"))
+
+        request2 = client2._build_request(FinalRequestOptions(method="get", url="/foo", headers={"X-API-Key": Omit()}))
+        assert request2.headers.get("X-API-Key") is None
 
     def test_default_query_option(self) -> None:
         client = Profound(
@@ -717,7 +724,7 @@ class TestProfound:
         respx_mock.get("/v1/org/categories").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            client.org.categories.with_streaming_response.list().__enter__()
+            client.organizations.categories.with_streaming_response.list().__enter__()
 
         assert _get_open_connections(self.client) == 0
 
@@ -727,7 +734,7 @@ class TestProfound:
         respx_mock.get("/v1/org/categories").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            client.org.categories.with_streaming_response.list().__enter__()
+            client.organizations.categories.with_streaming_response.list().__enter__()
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
@@ -756,7 +763,7 @@ class TestProfound:
 
         respx_mock.get("/v1/org/categories").mock(side_effect=retry_handler)
 
-        response = client.org.categories.with_raw_response.list()
+        response = client.organizations.categories.with_raw_response.list()
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -780,7 +787,9 @@ class TestProfound:
 
         respx_mock.get("/v1/org/categories").mock(side_effect=retry_handler)
 
-        response = client.org.categories.with_raw_response.list(extra_headers={"x-stainless-retry-count": Omit()})
+        response = client.organizations.categories.with_raw_response.list(
+            extra_headers={"x-stainless-retry-count": Omit()}
+        )
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
@@ -803,7 +812,9 @@ class TestProfound:
 
         respx_mock.get("/v1/org/categories").mock(side_effect=retry_handler)
 
-        response = client.org.categories.with_raw_response.list(extra_headers={"x-stainless-retry-count": "42"})
+        response = client.organizations.categories.with_raw_response.list(
+            extra_headers={"x-stainless-retry-count": "42"}
+        )
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
 
@@ -1142,10 +1153,17 @@ class TestAsyncProfound:
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("X-API-Key") == api_key
 
-        with pytest.raises(ProfoundError):
-            with update_env(**{"PROFOUND_API_KEY": Omit()}):
-                client2 = AsyncProfound(base_url=base_url, api_key=None, _strict_response_validation=True)
-            _ = client2
+        with update_env(**{"PROFOUND_API_KEY": Omit()}):
+            client2 = AsyncProfound(base_url=base_url, api_key=None, _strict_response_validation=True)
+
+        with pytest.raises(
+            TypeError,
+            match="Could not resolve authentication method. Expected the api_key to be set. Or for the `X-API-Key` headers to be explicitly omitted",
+        ):
+            client2._build_request(FinalRequestOptions(method="get", url="/foo"))
+
+        request2 = client2._build_request(FinalRequestOptions(method="get", url="/foo", headers={"X-API-Key": Omit()}))
+        assert request2.headers.get("X-API-Key") is None
 
     def test_default_query_option(self) -> None:
         client = AsyncProfound(
@@ -1534,7 +1552,7 @@ class TestAsyncProfound:
         respx_mock.get("/v1/org/categories").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            await async_client.org.categories.with_streaming_response.list().__aenter__()
+            await async_client.organizations.categories.with_streaming_response.list().__aenter__()
 
         assert _get_open_connections(self.client) == 0
 
@@ -1546,7 +1564,7 @@ class TestAsyncProfound:
         respx_mock.get("/v1/org/categories").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            await async_client.org.categories.with_streaming_response.list().__aenter__()
+            await async_client.organizations.categories.with_streaming_response.list().__aenter__()
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
@@ -1576,7 +1594,7 @@ class TestAsyncProfound:
 
         respx_mock.get("/v1/org/categories").mock(side_effect=retry_handler)
 
-        response = await client.org.categories.with_raw_response.list()
+        response = await client.organizations.categories.with_raw_response.list()
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -1601,7 +1619,9 @@ class TestAsyncProfound:
 
         respx_mock.get("/v1/org/categories").mock(side_effect=retry_handler)
 
-        response = await client.org.categories.with_raw_response.list(extra_headers={"x-stainless-retry-count": Omit()})
+        response = await client.organizations.categories.with_raw_response.list(
+            extra_headers={"x-stainless-retry-count": Omit()}
+        )
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
@@ -1625,7 +1645,9 @@ class TestAsyncProfound:
 
         respx_mock.get("/v1/org/categories").mock(side_effect=retry_handler)
 
-        response = await client.org.categories.with_raw_response.list(extra_headers={"x-stainless-retry-count": "42"})
+        response = await client.organizations.categories.with_raw_response.list(
+            extra_headers={"x-stainless-retry-count": "42"}
+        )
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
 

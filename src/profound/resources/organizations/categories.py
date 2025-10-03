@@ -14,10 +14,10 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.org.category_list_response import CategoryListResponse
-from ...types.org.category_retrieve_tags_response import CategoryRetrieveTagsResponse
-from ...types.org.category_retrieve_topics_response import CategoryRetrieveTopicsResponse
-from ...types.org.category_retrieve_prompts_response import CategoryRetrievePromptsResponse
+from ...types.organizations.category_list_response import CategoryListResponse
+from ...types.organizations.category_tags_response import CategoryTagsResponse
+from ...types.organizations.category_topics_response import CategoryTopicsResponse
+from ...types.organizations.category_prompts_response import CategoryPromptsResponse
 
 __all__ = ["CategoriesResource", "AsyncCategoriesResource"]
 
@@ -29,7 +29,7 @@ class CategoriesResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/profound-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#accessing-raw-response-data-eg-headers
         """
         return CategoriesResourceWithRawResponse(self)
 
@@ -38,7 +38,7 @@ class CategoriesResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/profound-python#with_streaming_response
+        For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#with_streaming_response
         """
         return CategoriesResourceWithStreamingResponse(self)
 
@@ -61,7 +61,7 @@ class CategoriesResource(SyncAPIResource):
             cast_to=CategoryListResponse,
         )
 
-    def retrieve_prompts(
+    def prompts(
         self,
         category_id: str,
         *,
@@ -71,7 +71,7 @@ class CategoriesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> CategoryRetrievePromptsResponse:
+    ) -> CategoryPromptsResponse:
         """
         Get Category Prompts
 
@@ -91,10 +91,10 @@ class CategoriesResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=CategoryRetrievePromptsResponse,
+            cast_to=CategoryPromptsResponse,
         )
 
-    def retrieve_tags(
+    def tags(
         self,
         category_id: str,
         *,
@@ -104,7 +104,7 @@ class CategoriesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> CategoryRetrieveTagsResponse:
+    ) -> CategoryTagsResponse:
         """
         Get the organization tags for a specific category.
 
@@ -124,10 +124,10 @@ class CategoriesResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=CategoryRetrieveTagsResponse,
+            cast_to=CategoryTagsResponse,
         )
 
-    def retrieve_topics(
+    def topics(
         self,
         category_id: str,
         *,
@@ -137,7 +137,7 @@ class CategoriesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> CategoryRetrieveTopicsResponse:
+    ) -> CategoryTopicsResponse:
         """
         Get the organization categories.
 
@@ -157,7 +157,7 @@ class CategoriesResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=CategoryRetrieveTopicsResponse,
+            cast_to=CategoryTopicsResponse,
         )
 
 
@@ -168,7 +168,7 @@ class AsyncCategoriesResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/profound-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#accessing-raw-response-data-eg-headers
         """
         return AsyncCategoriesResourceWithRawResponse(self)
 
@@ -177,7 +177,7 @@ class AsyncCategoriesResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/profound-python#with_streaming_response
+        For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#with_streaming_response
         """
         return AsyncCategoriesResourceWithStreamingResponse(self)
 
@@ -200,7 +200,7 @@ class AsyncCategoriesResource(AsyncAPIResource):
             cast_to=CategoryListResponse,
         )
 
-    async def retrieve_prompts(
+    async def prompts(
         self,
         category_id: str,
         *,
@@ -210,7 +210,7 @@ class AsyncCategoriesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> CategoryRetrievePromptsResponse:
+    ) -> CategoryPromptsResponse:
         """
         Get Category Prompts
 
@@ -230,10 +230,10 @@ class AsyncCategoriesResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=CategoryRetrievePromptsResponse,
+            cast_to=CategoryPromptsResponse,
         )
 
-    async def retrieve_tags(
+    async def tags(
         self,
         category_id: str,
         *,
@@ -243,7 +243,7 @@ class AsyncCategoriesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> CategoryRetrieveTagsResponse:
+    ) -> CategoryTagsResponse:
         """
         Get the organization tags for a specific category.
 
@@ -263,10 +263,10 @@ class AsyncCategoriesResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=CategoryRetrieveTagsResponse,
+            cast_to=CategoryTagsResponse,
         )
 
-    async def retrieve_topics(
+    async def topics(
         self,
         category_id: str,
         *,
@@ -276,7 +276,7 @@ class AsyncCategoriesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> CategoryRetrieveTopicsResponse:
+    ) -> CategoryTopicsResponse:
         """
         Get the organization categories.
 
@@ -296,7 +296,7 @@ class AsyncCategoriesResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=CategoryRetrieveTopicsResponse,
+            cast_to=CategoryTopicsResponse,
         )
 
 
@@ -307,14 +307,14 @@ class CategoriesResourceWithRawResponse:
         self.list = to_raw_response_wrapper(
             categories.list,
         )
-        self.retrieve_prompts = to_raw_response_wrapper(
-            categories.retrieve_prompts,
+        self.prompts = to_raw_response_wrapper(
+            categories.prompts,
         )
-        self.retrieve_tags = to_raw_response_wrapper(
-            categories.retrieve_tags,
+        self.tags = to_raw_response_wrapper(
+            categories.tags,
         )
-        self.retrieve_topics = to_raw_response_wrapper(
-            categories.retrieve_topics,
+        self.topics = to_raw_response_wrapper(
+            categories.topics,
         )
 
 
@@ -325,14 +325,14 @@ class AsyncCategoriesResourceWithRawResponse:
         self.list = async_to_raw_response_wrapper(
             categories.list,
         )
-        self.retrieve_prompts = async_to_raw_response_wrapper(
-            categories.retrieve_prompts,
+        self.prompts = async_to_raw_response_wrapper(
+            categories.prompts,
         )
-        self.retrieve_tags = async_to_raw_response_wrapper(
-            categories.retrieve_tags,
+        self.tags = async_to_raw_response_wrapper(
+            categories.tags,
         )
-        self.retrieve_topics = async_to_raw_response_wrapper(
-            categories.retrieve_topics,
+        self.topics = async_to_raw_response_wrapper(
+            categories.topics,
         )
 
 
@@ -343,14 +343,14 @@ class CategoriesResourceWithStreamingResponse:
         self.list = to_streamed_response_wrapper(
             categories.list,
         )
-        self.retrieve_prompts = to_streamed_response_wrapper(
-            categories.retrieve_prompts,
+        self.prompts = to_streamed_response_wrapper(
+            categories.prompts,
         )
-        self.retrieve_tags = to_streamed_response_wrapper(
-            categories.retrieve_tags,
+        self.tags = to_streamed_response_wrapper(
+            categories.tags,
         )
-        self.retrieve_topics = to_streamed_response_wrapper(
-            categories.retrieve_topics,
+        self.topics = to_streamed_response_wrapper(
+            categories.topics,
         )
 
 
@@ -361,12 +361,12 @@ class AsyncCategoriesResourceWithStreamingResponse:
         self.list = async_to_streamed_response_wrapper(
             categories.list,
         )
-        self.retrieve_prompts = async_to_streamed_response_wrapper(
-            categories.retrieve_prompts,
+        self.prompts = async_to_streamed_response_wrapper(
+            categories.prompts,
         )
-        self.retrieve_tags = async_to_streamed_response_wrapper(
-            categories.retrieve_tags,
+        self.tags = async_to_streamed_response_wrapper(
+            categories.tags,
         )
-        self.retrieve_topics = async_to_streamed_response_wrapper(
-            categories.retrieve_topics,
+        self.topics = async_to_streamed_response_wrapper(
+            categories.topics,
         )

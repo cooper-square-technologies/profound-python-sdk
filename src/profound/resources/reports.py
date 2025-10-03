@@ -8,11 +8,7 @@ from typing_extensions import Literal
 
 import httpx
 
-from ..types import (
-    report_query_citations_params,
-    report_query_sentiment_params,
-    report_query_visibility_params,
-)
+from ..types import report_citations_params, report_sentiment_params, report_visibility_params
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -26,7 +22,7 @@ from .._response import (
 from .._base_client import make_request_options
 from ..types.response import Response
 from ..types.pagination_param import PaginationParam
-from ..types.report_query_citations_response import ReportQueryCitationsResponse
+from ..types.report_citations_response import ReportCitationsResponse
 
 __all__ = ["ReportsResource", "AsyncReportsResource"]
 
@@ -38,7 +34,7 @@ class ReportsResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/profound-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#accessing-raw-response-data-eg-headers
         """
         return ReportsResourceWithRawResponse(self)
 
@@ -47,11 +43,11 @@ class ReportsResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/profound-python#with_streaming_response
+        For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#with_streaming_response
         """
         return ReportsResourceWithStreamingResponse(self)
 
-    def query_citations(
+    def citations(
         self,
         *,
         category_id: str,
@@ -60,7 +56,7 @@ class ReportsResource(SyncAPIResource):
         start_date: Union[str, datetime],
         date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
         dimensions: List[Literal["hostname", "path", "date", "region", "topic", "model", "tag"]] | Omit = omit,
-        filters: Iterable[report_query_citations_params.Filter] | Omit = omit,
+        filters: Iterable[report_citations_params.Filter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
         pagination: PaginationParam | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -69,7 +65,7 @@ class ReportsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ReportQueryCitationsResponse:
+    ) -> ReportCitationsResponse:
         """Get citations for a given category.
 
         Args:
@@ -123,15 +119,15 @@ class ReportsResource(SyncAPIResource):
                     "order_by": order_by,
                     "pagination": pagination,
                 },
-                report_query_citations_params.ReportQueryCitationsParams,
+                report_citations_params.ReportCitationsParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ReportQueryCitationsResponse,
+            cast_to=ReportCitationsResponse,
         )
 
-    def query_sentiment(
+    def sentiment(
         self,
         *,
         category_id: str,
@@ -140,7 +136,7 @@ class ReportsResource(SyncAPIResource):
         start_date: Union[str, datetime],
         date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
         dimensions: List[Literal["theme", "date", "region", "topic", "model", "asset_name", "tag"]] | Omit = omit,
-        filters: Iterable[report_query_sentiment_params.Filter] | Omit = omit,
+        filters: Iterable[report_sentiment_params.Filter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
         pagination: PaginationParam | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -203,7 +199,7 @@ class ReportsResource(SyncAPIResource):
                     "order_by": order_by,
                     "pagination": pagination,
                 },
-                report_query_sentiment_params.ReportQuerySentimentParams,
+                report_sentiment_params.ReportSentimentParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -211,7 +207,7 @@ class ReportsResource(SyncAPIResource):
             cast_to=Response,
         )
 
-    def query_visibility(
+    def visibility(
         self,
         *,
         category_id: str,
@@ -220,7 +216,7 @@ class ReportsResource(SyncAPIResource):
         start_date: Union[str, datetime],
         date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
         dimensions: List[Literal["date", "region", "topic", "model", "asset_name", "prompt", "tag"]] | Omit = omit,
-        filters: Iterable[report_query_visibility_params.Filter] | Omit = omit,
+        filters: Iterable[report_visibility_params.Filter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
         pagination: PaginationParam | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -283,7 +279,7 @@ class ReportsResource(SyncAPIResource):
                     "order_by": order_by,
                     "pagination": pagination,
                 },
-                report_query_visibility_params.ReportQueryVisibilityParams,
+                report_visibility_params.ReportVisibilityParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -299,7 +295,7 @@ class AsyncReportsResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/profound-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#accessing-raw-response-data-eg-headers
         """
         return AsyncReportsResourceWithRawResponse(self)
 
@@ -308,11 +304,11 @@ class AsyncReportsResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/profound-python#with_streaming_response
+        For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#with_streaming_response
         """
         return AsyncReportsResourceWithStreamingResponse(self)
 
-    async def query_citations(
+    async def citations(
         self,
         *,
         category_id: str,
@@ -321,7 +317,7 @@ class AsyncReportsResource(AsyncAPIResource):
         start_date: Union[str, datetime],
         date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
         dimensions: List[Literal["hostname", "path", "date", "region", "topic", "model", "tag"]] | Omit = omit,
-        filters: Iterable[report_query_citations_params.Filter] | Omit = omit,
+        filters: Iterable[report_citations_params.Filter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
         pagination: PaginationParam | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -330,7 +326,7 @@ class AsyncReportsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ReportQueryCitationsResponse:
+    ) -> ReportCitationsResponse:
         """Get citations for a given category.
 
         Args:
@@ -384,15 +380,15 @@ class AsyncReportsResource(AsyncAPIResource):
                     "order_by": order_by,
                     "pagination": pagination,
                 },
-                report_query_citations_params.ReportQueryCitationsParams,
+                report_citations_params.ReportCitationsParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ReportQueryCitationsResponse,
+            cast_to=ReportCitationsResponse,
         )
 
-    async def query_sentiment(
+    async def sentiment(
         self,
         *,
         category_id: str,
@@ -401,7 +397,7 @@ class AsyncReportsResource(AsyncAPIResource):
         start_date: Union[str, datetime],
         date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
         dimensions: List[Literal["theme", "date", "region", "topic", "model", "asset_name", "tag"]] | Omit = omit,
-        filters: Iterable[report_query_sentiment_params.Filter] | Omit = omit,
+        filters: Iterable[report_sentiment_params.Filter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
         pagination: PaginationParam | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -464,7 +460,7 @@ class AsyncReportsResource(AsyncAPIResource):
                     "order_by": order_by,
                     "pagination": pagination,
                 },
-                report_query_sentiment_params.ReportQuerySentimentParams,
+                report_sentiment_params.ReportSentimentParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -472,7 +468,7 @@ class AsyncReportsResource(AsyncAPIResource):
             cast_to=Response,
         )
 
-    async def query_visibility(
+    async def visibility(
         self,
         *,
         category_id: str,
@@ -481,7 +477,7 @@ class AsyncReportsResource(AsyncAPIResource):
         start_date: Union[str, datetime],
         date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
         dimensions: List[Literal["date", "region", "topic", "model", "asset_name", "prompt", "tag"]] | Omit = omit,
-        filters: Iterable[report_query_visibility_params.Filter] | Omit = omit,
+        filters: Iterable[report_visibility_params.Filter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
         pagination: PaginationParam | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -544,7 +540,7 @@ class AsyncReportsResource(AsyncAPIResource):
                     "order_by": order_by,
                     "pagination": pagination,
                 },
-                report_query_visibility_params.ReportQueryVisibilityParams,
+                report_visibility_params.ReportVisibilityParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -557,14 +553,14 @@ class ReportsResourceWithRawResponse:
     def __init__(self, reports: ReportsResource) -> None:
         self._reports = reports
 
-        self.query_citations = to_raw_response_wrapper(
-            reports.query_citations,
+        self.citations = to_raw_response_wrapper(
+            reports.citations,
         )
-        self.query_sentiment = to_raw_response_wrapper(
-            reports.query_sentiment,
+        self.sentiment = to_raw_response_wrapper(
+            reports.sentiment,
         )
-        self.query_visibility = to_raw_response_wrapper(
-            reports.query_visibility,
+        self.visibility = to_raw_response_wrapper(
+            reports.visibility,
         )
 
 
@@ -572,14 +568,14 @@ class AsyncReportsResourceWithRawResponse:
     def __init__(self, reports: AsyncReportsResource) -> None:
         self._reports = reports
 
-        self.query_citations = async_to_raw_response_wrapper(
-            reports.query_citations,
+        self.citations = async_to_raw_response_wrapper(
+            reports.citations,
         )
-        self.query_sentiment = async_to_raw_response_wrapper(
-            reports.query_sentiment,
+        self.sentiment = async_to_raw_response_wrapper(
+            reports.sentiment,
         )
-        self.query_visibility = async_to_raw_response_wrapper(
-            reports.query_visibility,
+        self.visibility = async_to_raw_response_wrapper(
+            reports.visibility,
         )
 
 
@@ -587,14 +583,14 @@ class ReportsResourceWithStreamingResponse:
     def __init__(self, reports: ReportsResource) -> None:
         self._reports = reports
 
-        self.query_citations = to_streamed_response_wrapper(
-            reports.query_citations,
+        self.citations = to_streamed_response_wrapper(
+            reports.citations,
         )
-        self.query_sentiment = to_streamed_response_wrapper(
-            reports.query_sentiment,
+        self.sentiment = to_streamed_response_wrapper(
+            reports.sentiment,
         )
-        self.query_visibility = to_streamed_response_wrapper(
-            reports.query_visibility,
+        self.visibility = to_streamed_response_wrapper(
+            reports.visibility,
         )
 
 
@@ -602,12 +598,12 @@ class AsyncReportsResourceWithStreamingResponse:
     def __init__(self, reports: AsyncReportsResource) -> None:
         self._reports = reports
 
-        self.query_citations = async_to_streamed_response_wrapper(
-            reports.query_citations,
+        self.citations = async_to_streamed_response_wrapper(
+            reports.citations,
         )
-        self.query_sentiment = async_to_streamed_response_wrapper(
-            reports.query_sentiment,
+        self.sentiment = async_to_streamed_response_wrapper(
+            reports.sentiment,
         )
-        self.query_visibility = async_to_streamed_response_wrapper(
-            reports.query_visibility,
+        self.visibility = async_to_streamed_response_wrapper(
+            reports.visibility,
         )

@@ -11,28 +11,28 @@ It is generated with [Stainless](https://www.stainless.com/).
 
 ## Documentation
 
-The full API of this library can be found in [api.md](api.md).
+The REST API documentation can be found on [docs.tryprofound.com](https://docs.tryprofound.com). The full API of this library can be found in [api.md](api.md).
 
 ## Installation
 
 ```sh
-# install from this staging repo
-pip install git+ssh://git@github.com/stainless-sdks/profound-python.git
+# install from PyPI
+pip install profound
 ```
-
-> [!NOTE]
-> Once this package is [published to PyPI](https://www.stainless.com/docs/guides/publish), this will become: `pip install profound`
 
 ## Usage
 
 The full API of this library can be found in [api.md](api.md).
 
 ```python
+import os
 from profound import Profound
 
-client = Profound()
+client = Profound(
+    api_key=os.environ.get("PROFOUND_API_KEY"),  # This is the default and can be omitted
+)
 
-org_items = client.org.categories.list()
+org_items = client.organizations.categories.list()
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -45,14 +45,17 @@ so that your API Key is not stored in source control.
 Simply import `AsyncProfound` instead of `Profound` and use `await` with each API call:
 
 ```python
+import os
 import asyncio
 from profound import AsyncProfound
 
-client = AsyncProfound()
+client = AsyncProfound(
+    api_key=os.environ.get("PROFOUND_API_KEY"),  # This is the default and can be omitted
+)
 
 
 async def main() -> None:
-    org_items = await client.org.categories.list()
+    org_items = await client.organizations.categories.list()
 
 
 asyncio.run(main())
@@ -67,8 +70,8 @@ By default, the async client uses `httpx` for HTTP requests. However, for improv
 You can enable this by installing `aiohttp`:
 
 ```sh
-# install from this staging repo
-pip install 'profound[aiohttp] @ git+ssh://git@github.com/stainless-sdks/profound-python.git'
+# install from PyPI
+pip install profound[aiohttp]
 ```
 
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
@@ -81,9 +84,10 @@ from profound import AsyncProfound
 
 async def main() -> None:
     async with AsyncProfound(
+        api_key="My API Key",
         http_client=DefaultAioHttpClient(),
     ) as client:
-        org_items = await client.org.categories.list()
+        org_items = await client.organizations.categories.list()
 
 
 asyncio.run(main())
@@ -109,7 +113,7 @@ from profound import Profound
 
 client = Profound()
 
-response = client.prompts.get_answers(
+response = client.prompts.answers(
     category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
     end_date=datetime.fromisoformat("2019-12-27T18:11:19.117"),
     start_date=datetime.fromisoformat("2019-12-27T18:11:19.117"),
@@ -134,7 +138,7 @@ from profound import Profound
 client = Profound()
 
 try:
-    client.org.categories.list()
+    client.organizations.categories.list()
 except profound.APIConnectionError as e:
     print("The server could not be reached")
     print(e.__cause__)  # an underlying Exception, likely raised within httpx.
@@ -177,7 +181,7 @@ client = Profound(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).org.categories.list()
+client.with_options(max_retries=5).organizations.categories.list()
 ```
 
 ### Timeouts
@@ -200,7 +204,7 @@ client = Profound(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).org.categories.list()
+client.with_options(timeout=5.0).organizations.categories.list()
 ```
 
 On timeout, an `APITimeoutError` is thrown.
@@ -241,16 +245,16 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from profound import Profound
 
 client = Profound()
-response = client.org.categories.with_raw_response.list()
+response = client.organizations.categories.with_raw_response.list()
 print(response.headers.get('X-My-Header'))
 
-category = response.parse()  # get the object that `org.categories.list()` would have returned
+category = response.parse()  # get the object that `organizations.categories.list()` would have returned
 print(category)
 ```
 
-These methods return an [`APIResponse`](https://github.com/stainless-sdks/profound-python/tree/main/src/profound/_response.py) object.
+These methods return an [`APIResponse`](https://github.com/cooper-square-technologies/profound-python-sdk/tree/main/src/profound/_response.py) object.
 
-The async client returns an [`AsyncAPIResponse`](https://github.com/stainless-sdks/profound-python/tree/main/src/profound/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
+The async client returns an [`AsyncAPIResponse`](https://github.com/cooper-square-technologies/profound-python-sdk/tree/main/src/profound/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
 
 #### `.with_streaming_response`
 
@@ -259,7 +263,7 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.org.categories.with_streaming_response.list() as response:
+with client.organizations.categories.with_streaming_response.list() as response:
     print(response.headers.get("X-My-Header"))
 
     for line in response.iter_lines():
@@ -354,7 +358,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/stainless-sdks/profound-python/issues) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/cooper-square-technologies/profound-python-sdk/issues) with questions, bugs, or suggestions.
 
 ### Determining the installed version
 
