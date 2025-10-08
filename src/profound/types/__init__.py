@@ -2,10 +2,10 @@
 
 from __future__ import annotations
 
+from .shared import Pagination as Pagination
 from .report_info import ReportInfo as ReportInfo
 from .report_result import ReportResult as ReportResult
 from .report_response import ReportResponse as ReportResponse
-from .pagination_param import PaginationParam as PaginationParam
 from .prompt_answers_params import PromptAnswersParams as PromptAnswersParams
 from .prompt_answers_response import PromptAnswersResponse as PromptAnswersResponse
 from .report_citations_params import ReportCitationsParams as ReportCitationsParams
