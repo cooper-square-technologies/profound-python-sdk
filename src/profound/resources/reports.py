@@ -55,7 +55,8 @@ class ReportsResource(SyncAPIResource):
         metrics: List[Literal["count", "share_of_voice"]],
         start_date: Union[str, datetime],
         date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
-        dimensions: List[Literal["hostname", "path", "date", "region", "topic", "model", "tag"]] | Omit = omit,
+        dimensions: List[Literal["hostname", "path", "date", "region", "topic", "model", "tag", "prompt"]]
+        | Omit = omit,
         filters: Iterable[report_citations_params.Filter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
         pagination: PaginationParam | Omit = omit,
@@ -135,7 +136,8 @@ class ReportsResource(SyncAPIResource):
         metrics: List[Literal["positive", "negative"]],
         start_date: Union[str, datetime],
         date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
-        dimensions: List[Literal["theme", "date", "region", "topic", "model", "asset_name", "tag"]] | Omit = omit,
+        dimensions: List[Literal["theme", "date", "region", "topic", "model", "asset_name", "tag", "prompt"]]
+        | Omit = omit,
         filters: Iterable[report_sentiment_params.Filter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
         pagination: PaginationParam | Omit = omit,
@@ -316,7 +318,8 @@ class AsyncReportsResource(AsyncAPIResource):
         metrics: List[Literal["count", "share_of_voice"]],
         start_date: Union[str, datetime],
         date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
-        dimensions: List[Literal["hostname", "path", "date", "region", "topic", "model", "tag"]] | Omit = omit,
+        dimensions: List[Literal["hostname", "path", "date", "region", "topic", "model", "tag", "prompt"]]
+        | Omit = omit,
         filters: Iterable[report_citations_params.Filter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
         pagination: PaginationParam | Omit = omit,
@@ -396,7 +399,8 @@ class AsyncReportsResource(AsyncAPIResource):
         metrics: List[Literal["positive", "negative"]],
         start_date: Union[str, datetime],
         date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
-        dimensions: List[Literal["theme", "date", "region", "topic", "model", "asset_name", "tag"]] | Omit = omit,
+        dimensions: List[Literal["theme", "date", "region", "topic", "model", "asset_name", "tag", "prompt"]]
+        | Omit = omit,
         filters: Iterable[report_sentiment_params.Filter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
         pagination: PaginationParam | Omit = omit,
