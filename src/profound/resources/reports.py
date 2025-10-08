@@ -20,8 +20,8 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.response import Response
-from ..types.pagination_param import PaginationParam
+from ..types.report_response import ReportResponse
+from ..types.shared_params.pagination import Pagination
 from ..types.report_citations_response import ReportCitationsResponse
 
 __all__ = ["ReportsResource", "AsyncReportsResource"]
@@ -55,10 +55,11 @@ class ReportsResource(SyncAPIResource):
         metrics: List[Literal["count", "share_of_voice"]],
         start_date: Union[str, datetime],
         date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
-        dimensions: List[Literal["hostname", "path", "date", "region", "topic", "model", "tag"]] | Omit = omit,
+        dimensions: List[Literal["hostname", "path", "date", "region", "topic", "model", "tag", "prompt"]]
+        | Omit = omit,
         filters: Iterable[report_citations_params.Filter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
-        pagination: PaginationParam | Omit = omit,
+        pagination: Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -135,17 +136,18 @@ class ReportsResource(SyncAPIResource):
         metrics: List[Literal["positive", "negative"]],
         start_date: Union[str, datetime],
         date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
-        dimensions: List[Literal["theme", "date", "region", "topic", "model", "asset_name", "tag"]] | Omit = omit,
+        dimensions: List[Literal["theme", "date", "region", "topic", "model", "asset_name", "tag", "prompt"]]
+        | Omit = omit,
         filters: Iterable[report_sentiment_params.Filter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
-        pagination: PaginationParam | Omit = omit,
+        pagination: Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Response:
+    ) -> ReportResponse:
         """Get citations for a given category.
 
         Args:
@@ -204,7 +206,7 @@ class ReportsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Response,
+            cast_to=ReportResponse,
         )
 
     def visibility(
@@ -218,14 +220,14 @@ class ReportsResource(SyncAPIResource):
         dimensions: List[Literal["date", "region", "topic", "model", "asset_name", "prompt", "tag"]] | Omit = omit,
         filters: Iterable[report_visibility_params.Filter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
-        pagination: PaginationParam | Omit = omit,
+        pagination: Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Response:
+    ) -> ReportResponse:
         """Query visibility report.
 
         Args:
@@ -284,7 +286,7 @@ class ReportsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Response,
+            cast_to=ReportResponse,
         )
 
 
@@ -316,10 +318,11 @@ class AsyncReportsResource(AsyncAPIResource):
         metrics: List[Literal["count", "share_of_voice"]],
         start_date: Union[str, datetime],
         date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
-        dimensions: List[Literal["hostname", "path", "date", "region", "topic", "model", "tag"]] | Omit = omit,
+        dimensions: List[Literal["hostname", "path", "date", "region", "topic", "model", "tag", "prompt"]]
+        | Omit = omit,
         filters: Iterable[report_citations_params.Filter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
-        pagination: PaginationParam | Omit = omit,
+        pagination: Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -396,17 +399,18 @@ class AsyncReportsResource(AsyncAPIResource):
         metrics: List[Literal["positive", "negative"]],
         start_date: Union[str, datetime],
         date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
-        dimensions: List[Literal["theme", "date", "region", "topic", "model", "asset_name", "tag"]] | Omit = omit,
+        dimensions: List[Literal["theme", "date", "region", "topic", "model", "asset_name", "tag", "prompt"]]
+        | Omit = omit,
         filters: Iterable[report_sentiment_params.Filter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
-        pagination: PaginationParam | Omit = omit,
+        pagination: Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Response:
+    ) -> ReportResponse:
         """Get citations for a given category.
 
         Args:
@@ -465,7 +469,7 @@ class AsyncReportsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Response,
+            cast_to=ReportResponse,
         )
 
     async def visibility(
@@ -479,14 +483,14 @@ class AsyncReportsResource(AsyncAPIResource):
         dimensions: List[Literal["date", "region", "topic", "model", "asset_name", "prompt", "tag"]] | Omit = omit,
         filters: Iterable[report_visibility_params.Filter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
-        pagination: PaginationParam | Omit = omit,
+        pagination: Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Response:
+    ) -> ReportResponse:
         """Query visibility report.
 
         Args:
@@ -545,7 +549,7 @@ class AsyncReportsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Response,
+            cast_to=ReportResponse,
         )
 
 

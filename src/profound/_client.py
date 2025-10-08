@@ -12,7 +12,6 @@ from . import _exceptions
 from ._qs import Querystring
 from ._types import (
     Omit,
-    Headers,
     Timeout,
     NotGiven,
     Transport,
@@ -24,7 +23,7 @@ from ._utils import is_given, get_async_library
 from ._version import __version__
 from .resources import prompts, reports
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
-from ._exceptions import APIStatusError
+from ._exceptions import ProfoundError, APIStatusError
 from ._base_client import (
     DEFAULT_MAX_RETRIES,
     SyncAPIClient,
@@ -54,7 +53,7 @@ class Profound(SyncAPIClient):
     with_streaming_response: ProfoundWithStreamedResponse
 
     # client options
-    api_key: str | None
+    api_key: str
 
     def __init__(
         self,
@@ -85,6 +84,10 @@ class Profound(SyncAPIClient):
         """
         if api_key is None:
             api_key = os.environ.get("PROFOUND_API_KEY")
+        if api_key is None:
+            raise ProfoundError(
+                "The api_key client option must be set either by passing api_key to the client or by setting the PROFOUND_API_KEY environment variable"
+            )
         self.api_key = api_key
 
         if base_url is None:
@@ -119,8 +122,6 @@ class Profound(SyncAPIClient):
     @override
     def auth_headers(self) -> dict[str, str]:
         api_key = self.api_key
-        if api_key is None:
-            return {}
         return {"X-API-Key": api_key}
 
     @property
@@ -131,17 +132,6 @@ class Profound(SyncAPIClient):
             "X-Stainless-Async": "false",
             **self._custom_headers,
         }
-
-    @override
-    def _validate_headers(self, headers: Headers, custom_headers: Headers) -> None:
-        if self.api_key and headers.get("X-API-Key"):
-            return
-        if isinstance(custom_headers.get("X-API-Key"), Omit):
-            return
-
-        raise TypeError(
-            '"Could not resolve authentication method. Expected the api_key to be set. Or for the `X-API-Key` headers to be explicitly omitted"'
-        )
 
     def copy(
         self,
@@ -237,7 +227,7 @@ class AsyncProfound(AsyncAPIClient):
     with_streaming_response: AsyncProfoundWithStreamedResponse
 
     # client options
-    api_key: str | None
+    api_key: str
 
     def __init__(
         self,
@@ -268,6 +258,10 @@ class AsyncProfound(AsyncAPIClient):
         """
         if api_key is None:
             api_key = os.environ.get("PROFOUND_API_KEY")
+        if api_key is None:
+            raise ProfoundError(
+                "The api_key client option must be set either by passing api_key to the client or by setting the PROFOUND_API_KEY environment variable"
+            )
         self.api_key = api_key
 
         if base_url is None:
@@ -302,8 +296,6 @@ class AsyncProfound(AsyncAPIClient):
     @override
     def auth_headers(self) -> dict[str, str]:
         api_key = self.api_key
-        if api_key is None:
-            return {}
         return {"X-API-Key": api_key}
 
     @property
@@ -314,17 +306,6 @@ class AsyncProfound(AsyncAPIClient):
             "X-Stainless-Async": f"async:{get_async_library()}",
             **self._custom_headers,
         }
-
-    @override
-    def _validate_headers(self, headers: Headers, custom_headers: Headers) -> None:
-        if self.api_key and headers.get("X-API-Key"):
-            return
-        if isinstance(custom_headers.get("X-API-Key"), Omit):
-            return
-
-        raise TypeError(
-            '"Could not resolve authentication method. Expected the api_key to be set. Or for the `X-API-Key` headers to be explicitly omitted"'
-        )
 
     def copy(
         self,

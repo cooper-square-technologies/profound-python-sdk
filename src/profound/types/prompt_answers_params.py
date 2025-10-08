@@ -8,7 +8,7 @@ from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from .._types import SequenceNotStr
 from .._utils import PropertyInfo
-from .pagination_param import PaginationParam
+from .shared_params.pagination import Pagination
 
 __all__ = ["PromptAnswersParams", "Filter", "Include"]
 
@@ -24,7 +24,7 @@ class PromptAnswersParams(TypedDict, total=False):
 
     include: Include
 
-    pagination: PaginationParam
+    pagination: Pagination
     """Pagination parameters for the results. Default is 10,000 rows with no offset."""
 
 

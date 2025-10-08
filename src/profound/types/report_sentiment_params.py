@@ -8,7 +8,7 @@ from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from .._types import SequenceNotStr
 from .._utils import PropertyInfo
-from .pagination_param import PaginationParam
+from .shared_params.pagination import Pagination
 
 __all__ = ["ReportSentimentParams", "Filter"]
 
@@ -33,7 +33,7 @@ class ReportSentimentParams(TypedDict, total=False):
     date_interval: Literal["day", "week", "month", "year"]
     """Date interval for the report. (only used with date dimension)"""
 
-    dimensions: List[Literal["theme", "date", "region", "topic", "model", "asset_name", "tag"]]
+    dimensions: List[Literal["theme", "date", "region", "topic", "model", "asset_name", "tag", "prompt"]]
     """Dimensions to group the report by."""
 
     filters: Iterable[Filter]
@@ -55,7 +55,7 @@ class ReportSentimentParams(TypedDict, total=False):
     descending.
     """
 
-    pagination: PaginationParam
+    pagination: Pagination
     """Pagination settings for the report results."""
 
 

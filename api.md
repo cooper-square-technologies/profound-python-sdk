@@ -1,3 +1,9 @@
+# Shared Types
+
+```python
+from profound.types import Pagination
+```
+
 # Organizations
 
 Types:
@@ -42,7 +48,7 @@ Methods:
 Types:
 
 ```python
-from profound.types import Pagination, PromptAnswersResponse
+from profound.types import PromptAnswersResponse
 ```
 
 Methods:
@@ -54,14 +60,14 @@ Methods:
 Types:
 
 ```python
-from profound.types import Info, Response, Result, ReportCitationsResponse
+from profound.types import ReportInfo, ReportResponse, ReportResult, ReportCitationsResponse
 ```
 
 Methods:
 
 - <code title="post /v1/reports/citations">client.reports.<a href="./src/profound/resources/reports.py">citations</a>(\*\*<a href="src/profound/types/report_citations_params.py">params</a>) -> <a href="./src/profound/types/report_citations_response.py">ReportCitationsResponse</a></code>
-- <code title="post /v1/reports/sentiment">client.reports.<a href="./src/profound/resources/reports.py">sentiment</a>(\*\*<a href="src/profound/types/report_sentiment_params.py">params</a>) -> <a href="./src/profound/types/response.py">Response</a></code>
-- <code title="post /v1/reports/visibility">client.reports.<a href="./src/profound/resources/reports.py">visibility</a>(\*\*<a href="src/profound/types/report_visibility_params.py">params</a>) -> <a href="./src/profound/types/response.py">Response</a></code>
+- <code title="post /v1/reports/sentiment">client.reports.<a href="./src/profound/resources/reports.py">sentiment</a>(\*\*<a href="src/profound/types/report_sentiment_params.py">params</a>) -> <a href="./src/profound/types/report_response.py">ReportResponse</a></code>
+- <code title="post /v1/reports/visibility">client.reports.<a href="./src/profound/resources/reports.py">visibility</a>(\*\*<a href="src/profound/types/report_visibility_params.py">params</a>) -> <a href="./src/profound/types/report_response.py">ReportResponse</a></code>
 
 # Logs
 

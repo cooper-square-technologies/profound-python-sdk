@@ -10,7 +10,7 @@ import pytest
 from profound import Profound, AsyncProfound
 from tests.utils import assert_matches_type
 from profound.types import (
-    Response,
+    ReportResponse,
     ReportCitationsResponse,
 )
 from profound._utils import parse_datetime
@@ -98,7 +98,7 @@ class TestReports:
             metrics=["positive"],
             start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
         )
-        assert_matches_type(Response, report, path=["response"])
+        assert_matches_type(ReportResponse, report, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -123,7 +123,7 @@ class TestReports:
                 "offset": 0,
             },
         )
-        assert_matches_type(Response, report, path=["response"])
+        assert_matches_type(ReportResponse, report, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -138,7 +138,7 @@ class TestReports:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         report = response.parse()
-        assert_matches_type(Response, report, path=["response"])
+        assert_matches_type(ReportResponse, report, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -153,7 +153,7 @@ class TestReports:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             report = response.parse()
-            assert_matches_type(Response, report, path=["response"])
+            assert_matches_type(ReportResponse, report, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -166,7 +166,7 @@ class TestReports:
             metrics=["share_of_voice"],
             start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
         )
-        assert_matches_type(Response, report, path=["response"])
+        assert_matches_type(ReportResponse, report, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -191,7 +191,7 @@ class TestReports:
                 "offset": 0,
             },
         )
-        assert_matches_type(Response, report, path=["response"])
+        assert_matches_type(ReportResponse, report, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -206,7 +206,7 @@ class TestReports:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         report = response.parse()
-        assert_matches_type(Response, report, path=["response"])
+        assert_matches_type(ReportResponse, report, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -221,7 +221,7 @@ class TestReports:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             report = response.parse()
-            assert_matches_type(Response, report, path=["response"])
+            assert_matches_type(ReportResponse, report, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -308,7 +308,7 @@ class TestAsyncReports:
             metrics=["positive"],
             start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
         )
-        assert_matches_type(Response, report, path=["response"])
+        assert_matches_type(ReportResponse, report, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -333,7 +333,7 @@ class TestAsyncReports:
                 "offset": 0,
             },
         )
-        assert_matches_type(Response, report, path=["response"])
+        assert_matches_type(ReportResponse, report, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -348,7 +348,7 @@ class TestAsyncReports:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         report = await response.parse()
-        assert_matches_type(Response, report, path=["response"])
+        assert_matches_type(ReportResponse, report, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -363,7 +363,7 @@ class TestAsyncReports:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             report = await response.parse()
-            assert_matches_type(Response, report, path=["response"])
+            assert_matches_type(ReportResponse, report, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -376,7 +376,7 @@ class TestAsyncReports:
             metrics=["share_of_voice"],
             start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
         )
-        assert_matches_type(Response, report, path=["response"])
+        assert_matches_type(ReportResponse, report, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -401,7 +401,7 @@ class TestAsyncReports:
                 "offset": 0,
             },
         )
-        assert_matches_type(Response, report, path=["response"])
+        assert_matches_type(ReportResponse, report, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -416,7 +416,7 @@ class TestAsyncReports:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         report = await response.parse()
-        assert_matches_type(Response, report, path=["response"])
+        assert_matches_type(ReportResponse, report, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -431,6 +431,6 @@ class TestAsyncReports:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             report = await response.parse()
-            assert_matches_type(Response, report, path=["response"])
+            assert_matches_type(ReportResponse, report, path=["response"])
 
         assert cast(Any, response.is_closed) is True

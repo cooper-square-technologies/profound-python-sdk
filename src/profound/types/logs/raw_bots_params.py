@@ -8,7 +8,7 @@ from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from ..._types import SequenceNotStr
 from ..._utils import PropertyInfo
-from ..pagination_param import PaginationParam
+from ..shared_params.pagination import Pagination
 
 __all__ = ["RawBotsParams", "Filter"]
 
@@ -70,7 +70,7 @@ class RawBotsParams(TypedDict, total=False):
     descending.
     """
 
-    pagination: PaginationParam
+    pagination: Pagination
     """Pagination settings for the report results."""
 
 
