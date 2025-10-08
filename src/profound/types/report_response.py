@@ -2,15 +2,15 @@
 
 from typing import List
 
-from .info import Info
-from .result import Result
 from .._models import BaseModel
+from .report_info import ReportInfo
+from .report_result import ReportResult
 
-__all__ = ["Response"]
+__all__ = ["ReportResponse"]
 
 
-class Response(BaseModel):
-    data: List[Result]
+class ReportResponse(BaseModel):
+    data: List[ReportResult]
 
-    info: Info
+    info: ReportInfo
     """Base model for report information."""

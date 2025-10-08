@@ -20,7 +20,7 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.response import Response
+from ..types.report_response import ReportResponse
 from ..types.pagination_param import PaginationParam
 from ..types.report_citations_response import ReportCitationsResponse
 
@@ -147,7 +147,7 @@ class ReportsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Response:
+    ) -> ReportResponse:
         """Get citations for a given category.
 
         Args:
@@ -206,7 +206,7 @@ class ReportsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Response,
+            cast_to=ReportResponse,
         )
 
     def visibility(
@@ -227,7 +227,7 @@ class ReportsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Response:
+    ) -> ReportResponse:
         """Query visibility report.
 
         Args:
@@ -286,7 +286,7 @@ class ReportsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Response,
+            cast_to=ReportResponse,
         )
 
 
@@ -410,7 +410,7 @@ class AsyncReportsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Response:
+    ) -> ReportResponse:
         """Get citations for a given category.
 
         Args:
@@ -469,7 +469,7 @@ class AsyncReportsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Response,
+            cast_to=ReportResponse,
         )
 
     async def visibility(
@@ -490,7 +490,7 @@ class AsyncReportsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Response:
+    ) -> ReportResponse:
         """Query visibility report.
 
         Args:
@@ -549,7 +549,7 @@ class AsyncReportsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Response,
+            cast_to=ReportResponse,
         )
 
 
