@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.2.0 (2025-10-08)
+
+Full Changelog: [v0.1.0...v0.2.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.1.0...v0.2.0)
+
+### ⚠ BREAKING CHANGES
+
+* **api:** move Pagination to shared models
+* **api:** rename reports models
+
+### Features
+
+* **api:** api update ([dfc3d79](https://github.com/cooper-square-technologies/profound-python-sdk/commit/dfc3d7909d6c41534e267114514bd9b94bd0bc0a))
+* **api:** manual updates ([99bf2bc](https://github.com/cooper-square-technologies/profound-python-sdk/commit/99bf2bcf8300c6bc8db63e8bfee7c9a9c4bf3bfc))
+* **api:** move Pagination to shared models ([aeae55d](https://github.com/cooper-square-technologies/profound-python-sdk/commit/aeae55d2461ad5bacb206c4e887faad4a6e904fa))
+* **api:** rename reports models ([435b4fb](https://github.com/cooper-square-technologies/profound-python-sdk/commit/435b4fb8f08c8e7526d58f7bc2515b9826062fc3))
+
 ## 0.1.0 (2025-10-03)
 
 Full Changelog: [v0.0.1...v0.1.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.0.1...v0.1.0)
