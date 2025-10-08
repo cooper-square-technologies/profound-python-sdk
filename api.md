@@ -1,3 +1,9 @@
+# Shared Types
+
+```python
+from profound.types import Pagination
+```
+
 # Organizations
 
 Types:
@@ -42,7 +48,7 @@ Methods:
 Types:
 
 ```python
-from profound.types import Pagination, PromptAnswersResponse
+from profound.types import PromptAnswersResponse
 ```
 
 Methods:

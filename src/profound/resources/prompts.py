@@ -19,8 +19,8 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.pagination_param import PaginationParam
 from ..types.prompt_answers_response import PromptAnswersResponse
+from ..types.shared_params.pagination import Pagination
 
 __all__ = ["PromptsResource", "AsyncPromptsResource"]
 
@@ -53,7 +53,7 @@ class PromptsResource(SyncAPIResource):
         start_date: Union[str, datetime],
         filters: Iterable[prompt_answers_params.Filter] | Omit = omit,
         include: prompt_answers_params.Include | Omit = omit,
-        pagination: PaginationParam | Omit = omit,
+        pagination: Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -123,7 +123,7 @@ class AsyncPromptsResource(AsyncAPIResource):
         start_date: Union[str, datetime],
         filters: Iterable[prompt_answers_params.Filter] | Omit = omit,
         include: prompt_answers_params.Include | Omit = omit,
-        pagination: PaginationParam | Omit = omit,
+        pagination: Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

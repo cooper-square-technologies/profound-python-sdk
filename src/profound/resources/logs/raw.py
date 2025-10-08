@@ -20,9 +20,9 @@ from ..._response import (
 )
 from ...types.logs import raw_bots_params, raw_logs_params
 from ..._base_client import make_request_options
-from ...types.pagination_param import PaginationParam
 from ...types.logs.raw_bots_response import RawBotsResponse
 from ...types.logs.raw_logs_response import RawLogsResponse
+from ...types.shared_params.pagination import Pagination
 
 __all__ = ["RawResource", "AsyncRawResource"]
 
@@ -72,7 +72,7 @@ class RawResource(SyncAPIResource):
         end_date: Union[str, datetime] | Omit = omit,
         filters: Iterable[raw_bots_params.Filter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
-        pagination: PaginationParam | Omit = omit,
+        pagination: Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -171,7 +171,7 @@ class RawResource(SyncAPIResource):
         end_date: Union[str, datetime] | Omit = omit,
         filters: Iterable[raw_logs_params.Filter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
-        pagination: PaginationParam | Omit = omit,
+        pagination: Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -290,7 +290,7 @@ class AsyncRawResource(AsyncAPIResource):
         end_date: Union[str, datetime] | Omit = omit,
         filters: Iterable[raw_bots_params.Filter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
-        pagination: PaginationParam | Omit = omit,
+        pagination: Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -389,7 +389,7 @@ class AsyncRawResource(AsyncAPIResource):
         end_date: Union[str, datetime] | Omit = omit,
         filters: Iterable[raw_logs_params.Filter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
-        pagination: PaginationParam | Omit = omit,
+        pagination: Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
