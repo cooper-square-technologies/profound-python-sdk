@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-from .info import Info as Info
-from .result import Result as Result
-from .response import Response as Response
+from .report_info import ReportInfo as ReportInfo
+from .report_result import ReportResult as ReportResult
+from .report_response import ReportResponse as ReportResponse
 from .pagination_param import PaginationParam as PaginationParam
 from .prompt_answers_params import PromptAnswersParams as PromptAnswersParams
 from .prompt_answers_response import PromptAnswersResponse as PromptAnswersResponse

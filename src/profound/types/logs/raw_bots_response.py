@@ -5,7 +5,7 @@ from datetime import datetime
 from typing_extensions import Literal, TypeAlias
 
 from ..._models import BaseModel
-from ..response import Response
+from ..report_response import ReportResponse
 
 __all__ = ["RawBotsResponse", "LogVisitBotList"]
 
@@ -42,4 +42,4 @@ class LogVisitBotList(BaseModel):
     referer: Optional[str] = None
 
 
-RawBotsResponse: TypeAlias = Union[List[LogVisitBotList], Response]
+RawBotsResponse: TypeAlias = Union[List[LogVisitBotList], ReportResponse]

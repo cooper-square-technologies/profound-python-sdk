@@ -4,10 +4,10 @@ from typing import Dict, Optional
 
 from .._models import BaseModel
 
-__all__ = ["Info"]
+__all__ = ["ReportInfo"]
 
 
-class Info(BaseModel):
+class ReportInfo(BaseModel):
     total_rows: int
 
     query: Optional[Dict[str, object]] = None

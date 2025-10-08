@@ -4,10 +4,10 @@ from typing import List
 
 from .._models import BaseModel
 
-__all__ = ["Result"]
+__all__ = ["ReportResult"]
 
 
-class Result(BaseModel):
+class ReportResult(BaseModel):
     dimensions: List[str]
 
     metrics: List[float]
