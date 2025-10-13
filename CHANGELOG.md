@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.1 (2025-10-11)
+
+Full Changelog: [v0.2.0...v0.2.1](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.2.0...v0.2.1)
+
+### Chores
+
+* **internal:** detect missing future annotations with ruff ([6089e80](https://github.com/cooper-square-technologies/profound-python-sdk/commit/6089e80afdf7d32aa06eaee1c3598620999d04fd))
+
 ## 0.2.0 (2025-10-08)
 
 Full Changelog: [v0.1.0...v0.2.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.1.0...v0.2.0)
