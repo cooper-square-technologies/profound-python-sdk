@@ -31,6 +31,8 @@ class Data(BaseModel):
 
     run_id: Optional[str] = None
 
+    search_queries: Optional[List[str]] = None
+
     tags: Optional[List[str]] = None
 
     themes: Optional[List[str]] = None
