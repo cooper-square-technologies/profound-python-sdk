@@ -75,6 +75,8 @@ class Include(TypedDict, total=False):
 
     run_id: bool
 
+    search_queries: bool
+
     tags: bool
 
     themes: bool
