@@ -15,7 +15,7 @@ class LogVisitBotList(BaseModel):
 
     bot_provider: str
 
-    bot_types: List[Literal["ai_assistant", "ai_training", "index"]]
+    bot_types: List[Literal["ai_assistant", "ai_training", "index", "ai_agent"]]
 
     host: str
 
