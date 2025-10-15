@@ -96,7 +96,7 @@ class TestCategories:
     @parametrize
     def test_method_tags(self, client: Profound) -> None:
         category = client.organizations.categories.tags(
-            "category_id",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(CategoryTagsResponse, category, path=["response"])
 
@@ -104,7 +104,7 @@ class TestCategories:
     @parametrize
     def test_raw_response_tags(self, client: Profound) -> None:
         response = client.organizations.categories.with_raw_response.tags(
-            "category_id",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -116,7 +116,7 @@ class TestCategories:
     @parametrize
     def test_streaming_response_tags(self, client: Profound) -> None:
         with client.organizations.categories.with_streaming_response.tags(
-            "category_id",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -138,7 +138,7 @@ class TestCategories:
     @parametrize
     def test_method_topics(self, client: Profound) -> None:
         category = client.organizations.categories.topics(
-            "category_id",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(CategoryTopicsResponse, category, path=["response"])
 
@@ -146,7 +146,7 @@ class TestCategories:
     @parametrize
     def test_raw_response_topics(self, client: Profound) -> None:
         response = client.organizations.categories.with_raw_response.topics(
-            "category_id",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -158,7 +158,7 @@ class TestCategories:
     @parametrize
     def test_streaming_response_topics(self, client: Profound) -> None:
         with client.organizations.categories.with_streaming_response.topics(
-            "category_id",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -256,7 +256,7 @@ class TestAsyncCategories:
     @parametrize
     async def test_method_tags(self, async_client: AsyncProfound) -> None:
         category = await async_client.organizations.categories.tags(
-            "category_id",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(CategoryTagsResponse, category, path=["response"])
 
@@ -264,7 +264,7 @@ class TestAsyncCategories:
     @parametrize
     async def test_raw_response_tags(self, async_client: AsyncProfound) -> None:
         response = await async_client.organizations.categories.with_raw_response.tags(
-            "category_id",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -276,7 +276,7 @@ class TestAsyncCategories:
     @parametrize
     async def test_streaming_response_tags(self, async_client: AsyncProfound) -> None:
         async with async_client.organizations.categories.with_streaming_response.tags(
-            "category_id",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -298,7 +298,7 @@ class TestAsyncCategories:
     @parametrize
     async def test_method_topics(self, async_client: AsyncProfound) -> None:
         category = await async_client.organizations.categories.topics(
-            "category_id",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(CategoryTopicsResponse, category, path=["response"])
 
@@ -306,7 +306,7 @@ class TestAsyncCategories:
     @parametrize
     async def test_raw_response_topics(self, async_client: AsyncProfound) -> None:
         response = await async_client.organizations.categories.with_raw_response.topics(
-            "category_id",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -318,7 +318,7 @@ class TestAsyncCategories:
     @parametrize
     async def test_streaming_response_topics(self, async_client: AsyncProfound) -> None:
         async with async_client.organizations.categories.with_streaming_response.topics(
-            "category_id",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
