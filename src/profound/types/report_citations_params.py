@@ -33,7 +33,9 @@ class ReportCitationsParams(TypedDict, total=False):
     date_interval: Literal["day", "week", "month", "year"]
     """Date interval for the report. (only used with date dimension)"""
 
-    dimensions: List[Literal["hostname", "path", "date", "region", "topic", "model", "tag", "prompt"]]
+    dimensions: List[
+        Literal["hostname", "path", "date", "region", "topic", "model", "tag", "prompt", "url", "root_domain"]
+    ]
     """Dimensions to group the report by."""
 
     filters: Iterable[Filter]
@@ -60,7 +62,7 @@ class ReportCitationsParams(TypedDict, total=False):
 
 
 class Filter(TypedDict, total=False):
-    field: Required[Literal["hostname", "path", "region", "topic", "model", "tag"]]
+    field: Required[Literal["hostname", "path", "region", "topic", "model", "tag", "url", "root_domain", "prompt_type"]]
 
     operator: Required[
         Literal[
