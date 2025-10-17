@@ -55,7 +55,9 @@ class ReportsResource(SyncAPIResource):
         metrics: List[Literal["count", "share_of_voice"]],
         start_date: Union[str, datetime],
         date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
-        dimensions: List[Literal["hostname", "path", "date", "region", "topic", "model", "tag", "prompt"]]
+        dimensions: List[
+            Literal["hostname", "path", "date", "region", "topic", "model", "tag", "prompt", "url", "root_domain"]
+        ]
         | Omit = omit,
         filters: Iterable[report_citations_params.Filter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
@@ -318,7 +320,9 @@ class AsyncReportsResource(AsyncAPIResource):
         metrics: List[Literal["count", "share_of_voice"]],
         start_date: Union[str, datetime],
         date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
-        dimensions: List[Literal["hostname", "path", "date", "region", "topic", "model", "tag", "prompt"]]
+        dimensions: List[
+            Literal["hostname", "path", "date", "region", "topic", "model", "tag", "prompt", "url", "root_domain"]
+        ]
         | Omit = omit,
         filters: Iterable[report_citations_params.Filter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
