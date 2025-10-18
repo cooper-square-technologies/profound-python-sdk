@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.5.1 (2025-10-18)
+
+Full Changelog: [v0.5.0...v0.5.1](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.5.0...v0.5.1)
+
+### Chores
+
+* bump `httpx-aiohttp` version to 0.1.9 ([c4d4695](https://github.com/cooper-square-technologies/profound-python-sdk/commit/c4d46955efd31cff4e9d7d22bdd943b116ef5c08))
+
 ## 0.5.0 (2025-10-17)
 
 Full Changelog: [v0.4.0...v0.5.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.4.0...v0.5.0)
