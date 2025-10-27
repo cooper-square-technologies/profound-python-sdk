@@ -65,6 +65,8 @@ class PromptsResource(SyncAPIResource):
         Get the answers for the prompts.
 
         Args:
+          filters: List of filters to apply to the answers report.
+
           pagination: Pagination parameters for the results. Default is 10,000 rows with no offset.
 
           extra_headers: Send extra headers
@@ -135,6 +137,8 @@ class AsyncPromptsResource(AsyncAPIResource):
         Get the answers for the prompts.
 
         Args:
+          filters: List of filters to apply to the answers report.
+
           pagination: Pagination parameters for the results. Default is 10,000 rows with no offset.
 
           extra_headers: Send extra headers

@@ -4,13 +4,26 @@ from __future__ import annotations
 
 from typing import Dict, List, Union, Iterable
 from datetime import datetime
-from typing_extensions import Literal, Required, Annotated, TypedDict
+from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from ..._types import SequenceNotStr
 from ..._utils import PropertyInfo
 from ..shared_params.pagination import Pagination
 
-__all__ = ["RawBotsParams", "Filter"]
+__all__ = [
+    "RawBotsParams",
+    "Filter",
+    "FilterBotNameFilter",
+    "FilterBotProviderFilter",
+    "FilterBotTypesFilter",
+    "FilterMethodFilter",
+    "FilterAppModelsAgentAnalyticsFiltersPathFilter",
+    "FilterStatusCodeFilter",
+    "FilterIPFilter",
+    "FilterUserAgentFilter",
+    "FilterRefererFilter",
+    "FilterQueryParamsFilter",
+]
 
 
 class RawBotsParams(TypedDict, total=False):
@@ -52,10 +65,7 @@ class RawBotsParams(TypedDict, total=False):
     """
 
     filters: Iterable[Filter]
-    """List of filters to apply to the report.
-
-    Each filter has an operator, field, and value.
-    """
+    """List of filters to apply to the bots logs query."""
 
     order_by: Dict[str, Literal["asc", "desc"]]
     """Custom ordering of the report results.
@@ -74,21 +84,8 @@ class RawBotsParams(TypedDict, total=False):
     """Pagination settings for the report results."""
 
 
-class Filter(TypedDict, total=False):
-    field: Required[
-        Literal[
-            "method",
-            "path",
-            "status_code",
-            "ip",
-            "user_agent",
-            "referer",
-            "query_params",
-            "bot_name",
-            "bot_provider",
-            "bot_types",
-        ]
-    ]
+class FilterBotNameFilter(TypedDict, total=False):
+    field: Required[Literal["bot_name"]]
 
     operator: Required[
         Literal[
@@ -98,14 +95,194 @@ class Filter(TypedDict, total=False):
             "not_in",
             "contains",
             "not_contains",
+            "matches",
             "contains_case_insensitive",
             "not_contains_case_insensitive",
-            "matches",
         ]
     ]
 
-    value: Required[Union[str, SequenceNotStr[str], int, Iterable[int]]]
-    """Value for the filter.
+    value: Required[Union[str, SequenceNotStr[str]]]
 
-    Can be a single value or a list of depending on the operator.
-    """
+
+class FilterBotProviderFilter(TypedDict, total=False):
+    field: Required[Literal["bot_provider"]]
+
+    operator: Required[
+        Literal[
+            "is",
+            "not_is",
+            "in",
+            "not_in",
+            "contains",
+            "not_contains",
+            "matches",
+            "contains_case_insensitive",
+            "not_contains_case_insensitive",
+        ]
+    ]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
+class FilterBotTypesFilter(TypedDict, total=False):
+    field: Required[Literal["bot_types"]]
+
+    operator: Required[
+        Literal[
+            "is",
+            "not_is",
+            "in",
+            "not_in",
+            "contains",
+            "not_contains",
+            "matches",
+            "contains_case_insensitive",
+            "not_contains_case_insensitive",
+        ]
+    ]
+
+    value: Required[
+        Union[Literal["ai_assistant", "ai_training", "index"], List[Literal["ai_assistant", "ai_training", "index"]]]
+    ]
+
+
+class FilterMethodFilter(TypedDict, total=False):
+    field: Required[Literal["method"]]
+
+    operator: Required[
+        Literal[
+            "is",
+            "not_is",
+            "in",
+            "not_in",
+            "contains",
+            "not_contains",
+            "matches",
+            "contains_case_insensitive",
+            "not_contains_case_insensitive",
+        ]
+    ]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
+class FilterAppModelsAgentAnalyticsFiltersPathFilter(TypedDict, total=False):
+    field: Required[Literal["path"]]
+
+    operator: Required[
+        Literal[
+            "is",
+            "not_is",
+            "in",
+            "not_in",
+            "contains",
+            "not_contains",
+            "matches",
+            "contains_case_insensitive",
+            "not_contains_case_insensitive",
+        ]
+    ]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
+class FilterStatusCodeFilter(TypedDict, total=False):
+    field: Required[Literal["status_code"]]
+
+    operator: Required[Literal["is", "not_is", "in", "not_in"]]
+
+    value: Required[Union[int, Iterable[int]]]
+
+
+class FilterIPFilter(TypedDict, total=False):
+    field: Required[Literal["ip"]]
+
+    operator: Required[
+        Literal[
+            "is",
+            "not_is",
+            "in",
+            "not_in",
+            "contains",
+            "not_contains",
+            "matches",
+            "contains_case_insensitive",
+            "not_contains_case_insensitive",
+        ]
+    ]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
+class FilterUserAgentFilter(TypedDict, total=False):
+    field: Required[Literal["user_agent"]]
+
+    operator: Required[
+        Literal[
+            "is",
+            "not_is",
+            "in",
+            "not_in",
+            "contains",
+            "not_contains",
+            "matches",
+            "contains_case_insensitive",
+            "not_contains_case_insensitive",
+        ]
+    ]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
+class FilterRefererFilter(TypedDict, total=False):
+    field: Required[Literal["referer"]]
+
+    operator: Required[
+        Literal[
+            "is",
+            "not_is",
+            "in",
+            "not_in",
+            "contains",
+            "not_contains",
+            "matches",
+            "contains_case_insensitive",
+            "not_contains_case_insensitive",
+        ]
+    ]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
+class FilterQueryParamsFilter(TypedDict, total=False):
+    field: Required[Literal["query_params"]]
+
+    operator: Required[
+        Literal[
+            "is",
+            "not_is",
+            "in",
+            "not_in",
+            "contains",
+            "not_contains",
+            "matches",
+            "contains_case_insensitive",
+            "not_contains_case_insensitive",
+        ]
+    ]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
+Filter: TypeAlias = Union[
+    FilterBotNameFilter,
+    FilterBotProviderFilter,
+    FilterBotTypesFilter,
+    FilterMethodFilter,
+    FilterAppModelsAgentAnalyticsFiltersPathFilter,
+    FilterStatusCodeFilter,
+    FilterIPFilter,
+    FilterUserAgentFilter,
+    FilterRefererFilter,
+    FilterQueryParamsFilter,
+]
