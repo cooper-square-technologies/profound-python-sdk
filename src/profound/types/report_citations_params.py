@@ -4,13 +4,25 @@ from __future__ import annotations
 
 from typing import Dict, List, Union, Iterable
 from datetime import datetime
-from typing_extensions import Literal, Required, Annotated, TypedDict
+from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 from .shared_params.pagination import Pagination
 
-__all__ = ["ReportCitationsParams", "Filter"]
+__all__ = [
+    "ReportCitationsParams",
+    "Filter",
+    "FilterHostnameFilter",
+    "FilterAppModelsAnswerEngineInsightsFiltersPathFilter",
+    "FilterRegionIDFilter",
+    "FilterTopicIDFilter",
+    "FilterModelIDFilter",
+    "FilterTagIDFilter",
+    "FilterURLFilter",
+    "FilterRootDomainFilter",
+    "FilterPromptTypeFilter",
+]
 
 
 class ReportCitationsParams(TypedDict, total=False):
@@ -39,10 +51,7 @@ class ReportCitationsParams(TypedDict, total=False):
     """Dimensions to group the report by."""
 
     filters: Iterable[Filter]
-    """List of filters to apply to the report.
-
-    Each filter has an operator, field, and value.
-    """
+    """List of filters to apply to the citations report."""
 
     order_by: Dict[str, Literal["asc", "desc"]]
     """Custom ordering of the report results.
@@ -61,8 +70,8 @@ class ReportCitationsParams(TypedDict, total=False):
     """Pagination settings for the report results."""
 
 
-class Filter(TypedDict, total=False):
-    field: Required[Literal["hostname", "path", "region", "topic", "model", "tag", "url", "root_domain", "prompt_type"]]
+class FilterHostnameFilter(TypedDict, total=False):
+    field: Required[Literal["hostname"]]
 
     operator: Required[
         Literal[
@@ -72,14 +81,139 @@ class Filter(TypedDict, total=False):
             "not_in",
             "contains",
             "not_contains",
+            "matches",
             "contains_case_insensitive",
             "not_contains_case_insensitive",
-            "matches",
         ]
     ]
 
-    value: Required[Union[str, SequenceNotStr[str], int, Iterable[int]]]
-    """Value for the filter.
+    value: Required[Union[str, SequenceNotStr[str]]]
 
-    Can be a single value or a list of depending on the operator.
-    """
+
+class FilterAppModelsAnswerEngineInsightsFiltersPathFilter(TypedDict, total=False):
+    field: Required[Literal["path"]]
+
+    operator: Required[
+        Literal[
+            "is",
+            "not_is",
+            "in",
+            "not_in",
+            "contains",
+            "not_contains",
+            "matches",
+            "contains_case_insensitive",
+            "not_contains_case_insensitive",
+        ]
+    ]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
+class FilterRegionIDFilter(TypedDict, total=False):
+    field: Required[Literal["region_id", "region"]]
+    """- `region` - Deprecated"""
+
+    operator: Required[Literal["is", "not_is", "in", "not_in"]]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
+class FilterTopicIDFilter(TypedDict, total=False):
+    field: Required[Literal["topic_id", "topic"]]
+    """- `topic` - Deprecated"""
+
+    operator: Required[Literal["is", "not_is", "in", "not_in"]]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
+class FilterModelIDFilter(TypedDict, total=False):
+    field: Required[Literal["model_id", "model"]]
+    """- `model` - Deprecated"""
+
+    operator: Required[Literal["is", "not_is", "in", "not_in"]]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
+class FilterTagIDFilter(TypedDict, total=False):
+    field: Required[Literal["tag_id", "tag"]]
+    """- `tag` - Deprecated"""
+
+    operator: Required[Literal["is", "not_is", "in", "not_in"]]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
+class FilterURLFilter(TypedDict, total=False):
+    field: Required[Literal["url"]]
+
+    operator: Required[
+        Literal[
+            "is",
+            "not_is",
+            "in",
+            "not_in",
+            "contains",
+            "not_contains",
+            "matches",
+            "contains_case_insensitive",
+            "not_contains_case_insensitive",
+        ]
+    ]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
+class FilterRootDomainFilter(TypedDict, total=False):
+    field: Required[Literal["root_domain"]]
+
+    operator: Required[
+        Literal[
+            "is",
+            "not_is",
+            "in",
+            "not_in",
+            "contains",
+            "not_contains",
+            "matches",
+            "contains_case_insensitive",
+            "not_contains_case_insensitive",
+        ]
+    ]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
+class FilterPromptTypeFilter(TypedDict, total=False):
+    field: Required[Literal["prompt_type"]]
+
+    operator: Required[
+        Literal[
+            "is",
+            "not_is",
+            "in",
+            "not_in",
+            "contains",
+            "not_contains",
+            "matches",
+            "contains_case_insensitive",
+            "not_contains_case_insensitive",
+        ]
+    ]
+
+    value: Required[Union[Literal["visibility", "sentiment"], List[Literal["visibility", "sentiment"]]]]
+
+
+Filter: TypeAlias = Union[
+    FilterHostnameFilter,
+    FilterAppModelsAnswerEngineInsightsFiltersPathFilter,
+    FilterRegionIDFilter,
+    FilterTopicIDFilter,
+    FilterModelIDFilter,
+    FilterTagIDFilter,
+    FilterURLFilter,
+    FilterRootDomainFilter,
+    FilterPromptTypeFilter,
+]

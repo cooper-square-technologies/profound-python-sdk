@@ -180,9 +180,9 @@ class TestReports:
             dimensions=["date"],
             filters=[
                 {
-                    "field": "region",
+                    "field": "region_id",
                     "operator": "is",
-                    "value": "string",
+                    "value": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 }
             ],
             order_by={"date": "asc"},
@@ -390,9 +390,9 @@ class TestAsyncReports:
             dimensions=["date"],
             filters=[
                 {
-                    "field": "region",
+                    "field": "region_id",
                     "operator": "is",
-                    "value": "string",
+                    "value": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 }
             ],
             order_by={"date": "asc"},

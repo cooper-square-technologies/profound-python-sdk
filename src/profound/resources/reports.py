@@ -84,8 +84,7 @@ class ReportsResource(SyncAPIResource):
 
           dimensions: Dimensions to group the report by.
 
-          filters: List of filters to apply to the report. Each filter has an operator, field, and
-              value.
+          filters: List of filters to apply to the citations report.
 
           order_by: Custom ordering of the report results.
 
@@ -165,8 +164,7 @@ class ReportsResource(SyncAPIResource):
 
           dimensions: Dimensions to group the report by.
 
-          filters: List of filters to apply to the report. Each filter has an operator, field, and
-              value.
+          filters: List of filters to apply to the sentiment report.
 
           order_by: Custom ordering of the report results.
 
@@ -245,8 +243,7 @@ class ReportsResource(SyncAPIResource):
 
           dimensions: Dimensions to group the report by.
 
-          filters: List of filters to apply to the report. Each filter has an operator, field, and
-              value.
+          filters: List of filters to apply to the visibility report.
 
           order_by: Custom ordering of the report results.
 
@@ -349,8 +346,7 @@ class AsyncReportsResource(AsyncAPIResource):
 
           dimensions: Dimensions to group the report by.
 
-          filters: List of filters to apply to the report. Each filter has an operator, field, and
-              value.
+          filters: List of filters to apply to the citations report.
 
           order_by: Custom ordering of the report results.
 
@@ -430,8 +426,7 @@ class AsyncReportsResource(AsyncAPIResource):
 
           dimensions: Dimensions to group the report by.
 
-          filters: List of filters to apply to the report. Each filter has an operator, field, and
-              value.
+          filters: List of filters to apply to the sentiment report.
 
           order_by: Custom ordering of the report results.
 
@@ -510,8 +505,7 @@ class AsyncReportsResource(AsyncAPIResource):
 
           dimensions: Dimensions to group the report by.
 
-          filters: List of filters to apply to the report. Each filter has an operator, field, and
-              value.
+          filters: List of filters to apply to the visibility report.
 
           order_by: Custom ordering of the report results.
 
