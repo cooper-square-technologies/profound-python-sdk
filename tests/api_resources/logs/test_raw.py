@@ -40,7 +40,7 @@ class TestRaw:
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             filters=[
                 {
-                    "field": "method",
+                    "field": "bot_name",
                     "operator": "is",
                     "value": "string",
                 }
@@ -176,7 +176,7 @@ class TestAsyncRaw:
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             filters=[
                 {
-                    "field": "method",
+                    "field": "bot_name",
                     "operator": "is",
                     "value": "string",
                 }

@@ -96,8 +96,7 @@ class RawResource(SyncAPIResource):
           end_date: End date for logs. Accepts same formats as start_date. Defaults to now if
               omitted.
 
-          filters: List of filters to apply to the report. Each filter has an operator, field, and
-              value.
+          filters: List of filters to apply to the bots logs query.
 
           order_by: Custom ordering of the report results.
 
@@ -195,8 +194,7 @@ class RawResource(SyncAPIResource):
           end_date: End date for logs. Accepts same formats as start_date. Defaults to now if
               omitted.
 
-          filters: List of filters to apply to the report. Each filter has an operator, field, and
-              value.
+          filters: Filters to apply to the logs query.
 
           order_by: Custom ordering of the report results.
 
@@ -314,8 +312,7 @@ class AsyncRawResource(AsyncAPIResource):
           end_date: End date for logs. Accepts same formats as start_date. Defaults to now if
               omitted.
 
-          filters: List of filters to apply to the report. Each filter has an operator, field, and
-              value.
+          filters: List of filters to apply to the bots logs query.
 
           order_by: Custom ordering of the report results.
 
@@ -413,8 +410,7 @@ class AsyncRawResource(AsyncAPIResource):
           end_date: End date for logs. Accepts same formats as start_date. Defaults to now if
               omitted.
 
-          filters: List of filters to apply to the report. Each filter has an operator, field, and
-              value.
+          filters: Filters to apply to the logs query.
 
           order_by: Custom ordering of the report results.
 

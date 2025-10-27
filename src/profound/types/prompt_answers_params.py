@@ -2,15 +2,24 @@
 
 from __future__ import annotations
 
-from typing import Union, Iterable
+from typing import List, Union, Iterable
 from datetime import datetime
-from typing_extensions import Literal, Required, Annotated, TypedDict
+from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 from .shared_params.pagination import Pagination
 
-__all__ = ["PromptAnswersParams", "Filter", "Include"]
+__all__ = [
+    "PromptAnswersParams",
+    "Filter",
+    "FilterRegionIDFilter",
+    "FilterModelIDFilter",
+    "FilterTagIDFilter",
+    "FilterPromptTypeFilter",
+    "FilterPromptFilter",
+    "Include",
+]
 
 
 class PromptAnswersParams(TypedDict, total=False):
@@ -21,6 +30,7 @@ class PromptAnswersParams(TypedDict, total=False):
     start_date: Required[Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]]
 
     filters: Iterable[Filter]
+    """List of filters to apply to the answers report."""
 
     include: Include
 
@@ -28,8 +38,35 @@ class PromptAnswersParams(TypedDict, total=False):
     """Pagination parameters for the results. Default is 10,000 rows with no offset."""
 
 
-class Filter(TypedDict, total=False):
-    field: Required[Literal["region", "topic", "model", "prompt_type", "prompt", "tag"]]
+class FilterRegionIDFilter(TypedDict, total=False):
+    field: Required[Literal["region_id", "region"]]
+    """- `region` - Deprecated"""
+
+    operator: Required[Literal["is", "not_is", "in", "not_in"]]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
+class FilterModelIDFilter(TypedDict, total=False):
+    field: Required[Literal["model_id", "model"]]
+    """- `model` - Deprecated"""
+
+    operator: Required[Literal["is", "not_is", "in", "not_in"]]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
+class FilterTagIDFilter(TypedDict, total=False):
+    field: Required[Literal["tag_id", "tag"]]
+    """- `tag` - Deprecated"""
+
+    operator: Required[Literal["is", "not_is", "in", "not_in"]]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
+class FilterPromptTypeFilter(TypedDict, total=False):
+    field: Required[Literal["prompt_type"]]
 
     operator: Required[
         Literal[
@@ -39,17 +76,38 @@ class Filter(TypedDict, total=False):
             "not_in",
             "contains",
             "not_contains",
+            "matches",
             "contains_case_insensitive",
             "not_contains_case_insensitive",
-            "matches",
         ]
     ]
 
-    value: Required[Union[str, SequenceNotStr[str], int, Iterable[int]]]
-    """Value for the filter.
+    value: Required[Union[Literal["visibility", "sentiment"], List[Literal["visibility", "sentiment"]]]]
 
-    Can be a single value or a list of depending on the operator.
-    """
+
+class FilterPromptFilter(TypedDict, total=False):
+    field: Required[Literal["prompt"]]
+
+    operator: Required[
+        Literal[
+            "is",
+            "not_is",
+            "in",
+            "not_in",
+            "contains",
+            "not_contains",
+            "matches",
+            "contains_case_insensitive",
+            "not_contains_case_insensitive",
+        ]
+    ]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
+Filter: TypeAlias = Union[
+    FilterRegionIDFilter, FilterModelIDFilter, FilterTagIDFilter, FilterPromptTypeFilter, FilterPromptFilter
+]
 
 
 class Include(TypedDict, total=False):

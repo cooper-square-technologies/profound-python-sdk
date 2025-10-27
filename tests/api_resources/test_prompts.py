@@ -37,9 +37,9 @@ class TestPrompts:
             start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             filters=[
                 {
-                    "field": "region",
+                    "field": "region_id",
                     "operator": "is",
-                    "value": "string",
+                    "value": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 }
             ],
             include={
@@ -121,9 +121,9 @@ class TestAsyncPrompts:
             start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             filters=[
                 {
-                    "field": "region",
+                    "field": "region_id",
                     "operator": "is",
-                    "value": "string",
+                    "value": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 }
             ],
             include={
