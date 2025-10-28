@@ -134,10 +134,12 @@ class ReportsResource(SyncAPIResource):
         *,
         category_id: str,
         end_date: Union[str, datetime],
-        metrics: List[Literal["positive", "negative"]],
+        metrics: List[Literal["positive", "negative", "ocurrences"]],
         start_date: Union[str, datetime],
         date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
-        dimensions: List[Literal["theme", "date", "region", "topic", "model", "asset_name", "tag", "prompt"]]
+        dimensions: List[
+            Literal["theme", "date", "region", "topic", "model", "asset_name", "tag", "prompt", "sentiment_type"]
+        ]
         | Omit = omit,
         filters: Iterable[report_sentiment_params.Filter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
@@ -396,10 +398,12 @@ class AsyncReportsResource(AsyncAPIResource):
         *,
         category_id: str,
         end_date: Union[str, datetime],
-        metrics: List[Literal["positive", "negative"]],
+        metrics: List[Literal["positive", "negative", "ocurrences"]],
         start_date: Union[str, datetime],
         date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
-        dimensions: List[Literal["theme", "date", "region", "topic", "model", "asset_name", "tag", "prompt"]]
+        dimensions: List[
+            Literal["theme", "date", "region", "topic", "model", "asset_name", "tag", "prompt", "sentiment_type"]
+        ]
         | Omit = omit,
         filters: Iterable[report_sentiment_params.Filter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
