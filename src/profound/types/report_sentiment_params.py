@@ -32,7 +32,7 @@ class ReportSentimentParams(TypedDict, total=False):
     Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
     """
 
-    metrics: Required[List[Literal["positive", "negative"]]]
+    metrics: Required[List[Literal["positive", "negative", "ocurrences"]]]
 
     start_date: Required[Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]]
     """Start date for the report.
@@ -43,7 +43,9 @@ class ReportSentimentParams(TypedDict, total=False):
     date_interval: Literal["day", "week", "month", "year"]
     """Date interval for the report. (only used with date dimension)"""
 
-    dimensions: List[Literal["theme", "date", "region", "topic", "model", "asset_name", "tag", "prompt"]]
+    dimensions: List[
+        Literal["theme", "date", "region", "topic", "model", "asset_name", "tag", "prompt", "sentiment_type"]
+    ]
     """Dimensions to group the report by."""
 
     filters: Iterable[Filter]
