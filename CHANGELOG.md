@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.8.1 (2025-10-31)
+
+Full Changelog: [v0.8.0...v0.8.1](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.8.0...v0.8.1)
+
+### Bug Fixes
+
+* **client:** close streams without requiring full consumption ([9ae7af9](https://github.com/cooper-square-technologies/profound-python-sdk/commit/9ae7af92567de6cfbe7739b2a12470b4518420f5))
+
+
+### Chores
+
+* **internal/tests:** avoid race condition with implicit client cleanup ([48e555a](https://github.com/cooper-square-technologies/profound-python-sdk/commit/48e555a385eacdb968e459946e53806dff35a028))
+
 ## 0.8.0 (2025-10-28)
 
 Full Changelog: [v0.7.0...v0.8.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.7.0...v0.8.0)
