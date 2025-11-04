@@ -32,7 +32,7 @@ class ReportSentimentParams(TypedDict, total=False):
     Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
     """
 
-    metrics: Required[List[Literal["positive", "negative", "ocurrences"]]]
+    metrics: Required[List[Literal["positive", "negative", "occurrences"]]]
 
     start_date: Required[Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]]
     """Start date for the report.

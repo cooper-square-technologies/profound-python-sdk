@@ -134,7 +134,7 @@ class ReportsResource(SyncAPIResource):
         *,
         category_id: str,
         end_date: Union[str, datetime],
-        metrics: List[Literal["positive", "negative", "ocurrences"]],
+        metrics: List[Literal["positive", "negative", "occurrences"]],
         start_date: Union[str, datetime],
         date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
         dimensions: List[
@@ -398,7 +398,7 @@ class AsyncReportsResource(AsyncAPIResource):
         *,
         category_id: str,
         end_date: Union[str, datetime],
-        metrics: List[Literal["positive", "negative", "ocurrences"]],
+        metrics: List[Literal["positive", "negative", "occurrences"]],
         start_date: Union[str, datetime],
         date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
         dimensions: List[
