@@ -1,5 +1,27 @@
 # Changelog
 
+## 0.9.0 (2025-11-12)
+
+Full Changelog: [v0.8.0...v0.9.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.8.0...v0.9.0)
+
+### Features
+
+* **api:** api update ([47d3e50](https://github.com/cooper-square-technologies/profound-python-sdk/commit/47d3e50261b0c6554bd6ce507932dd72d138cdab))
+
+
+### Bug Fixes
+
+* **client:** close streams without requiring full consumption ([9ae7af9](https://github.com/cooper-square-technologies/profound-python-sdk/commit/9ae7af92567de6cfbe7739b2a12470b4518420f5))
+* compat with Python 3.14 ([a41771d](https://github.com/cooper-square-technologies/profound-python-sdk/commit/a41771db29daa4c0f73ac248c5794eff0394f999))
+* **compat:** update signatures of `model_dump` and `model_dump_json` for Pydantic v1 ([e25c18a](https://github.com/cooper-square-technologies/profound-python-sdk/commit/e25c18a3d1d954cf005ea667c1d1cc1f2ed8f08d))
+
+
+### Chores
+
+* **internal/tests:** avoid race condition with implicit client cleanup ([48e555a](https://github.com/cooper-square-technologies/profound-python-sdk/commit/48e555a385eacdb968e459946e53806dff35a028))
+* **internal:** grammar fix (it's -&gt; its) ([8233893](https://github.com/cooper-square-technologies/profound-python-sdk/commit/82338939c32ee3997a20e30ee24aab86d97c5ec9))
+* **package:** drop Python 3.8 support ([db71ed2](https://github.com/cooper-square-technologies/profound-python-sdk/commit/db71ed2ad307fb5cefba7dd30f4374c5bb94f10e))
+
 ## 0.8.0 (2025-10-28)
 
 Full Changelog: [v0.7.0...v0.8.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.7.0...v0.8.0)
