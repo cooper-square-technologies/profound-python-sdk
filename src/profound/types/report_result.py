@@ -10,4 +10,4 @@ __all__ = ["ReportResult"]
 class ReportResult(BaseModel):
     dimensions: List[str]
 
-    metrics: List[float]
+    metrics: List[float | int]
