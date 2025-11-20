@@ -16,6 +16,7 @@ from ..._response import (
 from ..._base_client import make_request_options
 from ...types.organizations.category_list_response import CategoryListResponse
 from ...types.organizations.category_tags_response import CategoryTagsResponse
+from ...types.organizations.category_assets_response import CategoryAssetsResponse
 from ...types.organizations.category_topics_response import CategoryTopicsResponse
 from ...types.organizations.category_prompts_response import CategoryPromptsResponse
 
@@ -59,6 +60,39 @@ class CategoriesResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=CategoryListResponse,
+        )
+
+    def assets(
+        self,
+        category_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> CategoryAssetsResponse:
+        """
+        Get Category Assets
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not category_id:
+            raise ValueError(f"Expected a non-empty value for `category_id` but received {category_id!r}")
+        return self._get(
+            f"/v1/org/categories/{category_id}/assets",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=CategoryAssetsResponse,
         )
 
     def prompts(
@@ -200,6 +234,39 @@ class AsyncCategoriesResource(AsyncAPIResource):
             cast_to=CategoryListResponse,
         )
 
+    async def assets(
+        self,
+        category_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> CategoryAssetsResponse:
+        """
+        Get Category Assets
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not category_id:
+            raise ValueError(f"Expected a non-empty value for `category_id` but received {category_id!r}")
+        return await self._get(
+            f"/v1/org/categories/{category_id}/assets",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=CategoryAssetsResponse,
+        )
+
     async def prompts(
         self,
         category_id: str,
@@ -307,6 +374,9 @@ class CategoriesResourceWithRawResponse:
         self.list = to_raw_response_wrapper(
             categories.list,
         )
+        self.assets = to_raw_response_wrapper(
+            categories.assets,
+        )
         self.prompts = to_raw_response_wrapper(
             categories.prompts,
         )
@@ -324,6 +394,9 @@ class AsyncCategoriesResourceWithRawResponse:
 
         self.list = async_to_raw_response_wrapper(
             categories.list,
+        )
+        self.assets = async_to_raw_response_wrapper(
+            categories.assets,
         )
         self.prompts = async_to_raw_response_wrapper(
             categories.prompts,
@@ -343,6 +416,9 @@ class CategoriesResourceWithStreamingResponse:
         self.list = to_streamed_response_wrapper(
             categories.list,
         )
+        self.assets = to_streamed_response_wrapper(
+            categories.assets,
+        )
         self.prompts = to_streamed_response_wrapper(
             categories.prompts,
         )
@@ -360,6 +436,9 @@ class AsyncCategoriesResourceWithStreamingResponse:
 
         self.list = async_to_streamed_response_wrapper(
             categories.list,
+        )
+        self.assets = async_to_streamed_response_wrapper(
+            categories.assets,
         )
         self.prompts = async_to_streamed_response_wrapper(
             categories.prompts,
