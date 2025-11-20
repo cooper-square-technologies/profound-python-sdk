@@ -12,6 +12,7 @@ from tests.utils import assert_matches_type
 from profound.types.organizations import (
     CategoryListResponse,
     CategoryTagsResponse,
+    CategoryAssetsResponse,
     CategoryTopicsResponse,
     CategoryPromptsResponse,
 )
@@ -49,6 +50,48 @@ class TestCategories:
             assert_matches_type(CategoryListResponse, category, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_assets(self, client: Profound) -> None:
+        category = client.organizations.categories.assets(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(CategoryAssetsResponse, category, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_assets(self, client: Profound) -> None:
+        response = client.organizations.categories.with_raw_response.assets(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        category = response.parse()
+        assert_matches_type(CategoryAssetsResponse, category, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_assets(self, client: Profound) -> None:
+        with client.organizations.categories.with_streaming_response.assets(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            category = response.parse()
+            assert_matches_type(CategoryAssetsResponse, category, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_path_params_assets(self, client: Profound) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `category_id` but received ''"):
+            client.organizations.categories.with_raw_response.assets(
+                "",
+            )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -209,6 +252,48 @@ class TestAsyncCategories:
             assert_matches_type(CategoryListResponse, category, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_assets(self, async_client: AsyncProfound) -> None:
+        category = await async_client.organizations.categories.assets(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(CategoryAssetsResponse, category, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_assets(self, async_client: AsyncProfound) -> None:
+        response = await async_client.organizations.categories.with_raw_response.assets(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        category = await response.parse()
+        assert_matches_type(CategoryAssetsResponse, category, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_assets(self, async_client: AsyncProfound) -> None:
+        async with async_client.organizations.categories.with_streaming_response.assets(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            category = await response.parse()
+            assert_matches_type(CategoryAssetsResponse, category, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_path_params_assets(self, async_client: AsyncProfound) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `category_id` but received ''"):
+            await async_client.organizations.categories.with_raw_response.assets(
+                "",
+            )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
