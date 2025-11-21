@@ -11,6 +11,7 @@ Types:
 ```python
 from profound.types import (
     OrganizationDomainsResponse,
+    OrganizationListAssetsResponse,
     OrganizationModelsResponse,
     OrganizationRegionsResponse,
 )
@@ -19,6 +20,7 @@ from profound.types import (
 Methods:
 
 - <code title="get /v1/org/domains">client.organizations.<a href="./src/profound/resources/organizations/organizations.py">domains</a>() -> <a href="./src/profound/types/organization_domains_response.py">OrganizationDomainsResponse</a></code>
+- <code title="get /v1/org/assets">client.organizations.<a href="./src/profound/resources/organizations/organizations.py">list_assets</a>() -> <a href="./src/profound/types/organization_list_assets_response.py">OrganizationListAssetsResponse</a></code>
 - <code title="get /v1/org/models">client.organizations.<a href="./src/profound/resources/organizations/organizations.py">models</a>() -> <a href="./src/profound/types/organization_models_response.py">OrganizationModelsResponse</a></code>
 - <code title="get /v1/org/regions">client.organizations.<a href="./src/profound/resources/organizations/organizations.py">regions</a>() -> <a href="./src/profound/types/organization_regions_response.py">OrganizationRegionsResponse</a></code>
 

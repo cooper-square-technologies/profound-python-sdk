@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.11.0 (2025-11-21)
+
+Full Changelog: [v0.10.0...v0.11.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.10.0...v0.11.0)
+
+### Features
+
+* **api:** added `get /v1/org/assets` ([0c82b6b](https://github.com/cooper-square-technologies/profound-python-sdk/commit/0c82b6b859c3c1099d5fec3702c6cb49d5a23aa1))
+
 ## 0.10.0 (2025-11-20)
 
 Full Changelog: [v0.9.1...v0.10.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.9.1...v0.10.0)
