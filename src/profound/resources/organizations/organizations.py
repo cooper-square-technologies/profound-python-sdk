@@ -25,6 +25,7 @@ from ..._base_client import make_request_options
 from ...types.organization_models_response import OrganizationModelsResponse
 from ...types.organization_domains_response import OrganizationDomainsResponse
 from ...types.organization_regions_response import OrganizationRegionsResponse
+from ...types.organization_list_assets_response import OrganizationListAssetsResponse
 
 __all__ = ["OrganizationsResource", "AsyncOrganizationsResource"]
 
@@ -70,6 +71,25 @@ class OrganizationsResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=OrganizationDomainsResponse,
+        )
+
+    def list_assets(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> OrganizationListAssetsResponse:
+        """Get Assets"""
+        return self._get(
+            "/v1/org/assets",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=OrganizationListAssetsResponse,
         )
 
     def models(
@@ -154,6 +174,25 @@ class AsyncOrganizationsResource(AsyncAPIResource):
             cast_to=OrganizationDomainsResponse,
         )
 
+    async def list_assets(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> OrganizationListAssetsResponse:
+        """Get Assets"""
+        return await self._get(
+            "/v1/org/assets",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=OrganizationListAssetsResponse,
+        )
+
     async def models(
         self,
         *,
@@ -200,6 +239,9 @@ class OrganizationsResourceWithRawResponse:
         self.domains = to_raw_response_wrapper(
             organizations.domains,
         )
+        self.list_assets = to_raw_response_wrapper(
+            organizations.list_assets,
+        )
         self.models = to_raw_response_wrapper(
             organizations.models,
         )
@@ -218,6 +260,9 @@ class AsyncOrganizationsResourceWithRawResponse:
 
         self.domains = async_to_raw_response_wrapper(
             organizations.domains,
+        )
+        self.list_assets = async_to_raw_response_wrapper(
+            organizations.list_assets,
         )
         self.models = async_to_raw_response_wrapper(
             organizations.models,
@@ -238,6 +283,9 @@ class OrganizationsResourceWithStreamingResponse:
         self.domains = to_streamed_response_wrapper(
             organizations.domains,
         )
+        self.list_assets = to_streamed_response_wrapper(
+            organizations.list_assets,
+        )
         self.models = to_streamed_response_wrapper(
             organizations.models,
         )
@@ -256,6 +304,9 @@ class AsyncOrganizationsResourceWithStreamingResponse:
 
         self.domains = async_to_streamed_response_wrapper(
             organizations.domains,
+        )
+        self.list_assets = async_to_streamed_response_wrapper(
+            organizations.list_assets,
         )
         self.models = async_to_streamed_response_wrapper(
             organizations.models,
