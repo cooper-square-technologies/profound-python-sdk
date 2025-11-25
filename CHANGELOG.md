@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.12.0 (2025-11-25)
+
+Full Changelog: [v0.11.0...v0.12.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.11.0...v0.12.0)
+
+### Features
+
+* **api:** api update ([10996e0](https://github.com/cooper-square-technologies/profound-python-sdk/commit/10996e0ad8c482f33a97195d2a7cf1f7f33ce286))
+* **api:** api update ([6b1f48e](https://github.com/cooper-square-technologies/profound-python-sdk/commit/6b1f48e1a6fe0103afe327d5b79d26656add4f3f))
+
+
+### Chores
+
+* add Python 3.14 classifier and testing ([4041368](https://github.com/cooper-square-technologies/profound-python-sdk/commit/4041368c3f8987738cc3a5e5e33f5e0f7d0e27e9))
+
 ## 0.11.0 (2025-11-21)
 
 Full Changelog: [v0.10.0...v0.11.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.10.0...v0.11.0)
