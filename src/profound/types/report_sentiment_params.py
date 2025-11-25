@@ -44,7 +44,9 @@ class ReportSentimentParams(TypedDict, total=False):
     """Date interval for the report. (only used with date dimension)"""
 
     dimensions: List[
-        Literal["theme", "date", "region", "topic", "model", "asset_name", "tag", "prompt", "sentiment_type"]
+        Literal[
+            "theme", "date", "region", "topic", "model", "asset_id", "asset_name", "tag", "prompt", "sentiment_type"
+        ]
     ]
     """Dimensions to group the report by."""
 
