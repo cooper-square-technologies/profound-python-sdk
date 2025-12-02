@@ -18,6 +18,7 @@ __all__ = [
     "FilterTagIDFilter",
     "FilterPromptTypeFilter",
     "FilterPromptFilter",
+    "FilterPersonaIDFilter",
     "Include",
 ]
 
@@ -105,8 +106,21 @@ class FilterPromptFilter(TypedDict, total=False):
     value: Required[Union[str, SequenceNotStr[str]]]
 
 
+class FilterPersonaIDFilter(TypedDict, total=False):
+    field: Required[Literal["persona_id"]]
+
+    operator: Required[Literal["is", "not_is", "in", "not_in"]]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
 Filter: TypeAlias = Union[
-    FilterRegionIDFilter, FilterModelIDFilter, FilterTagIDFilter, FilterPromptTypeFilter, FilterPromptFilter
+    FilterRegionIDFilter,
+    FilterModelIDFilter,
+    FilterTagIDFilter,
+    FilterPromptTypeFilter,
+    FilterPromptFilter,
+    FilterPersonaIDFilter,
 ]
 
 
@@ -120,6 +134,8 @@ class Include(TypedDict, total=False):
     mentions: bool
 
     model: bool
+
+    persona: bool
 
     prompt: bool
 
