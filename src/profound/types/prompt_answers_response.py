@@ -19,6 +19,8 @@ class Data(BaseModel):
 
     model: Optional[str] = None
 
+    persona: Optional[str] = None
+
     prompt: Optional[str] = None
 
     prompt_id: Optional[str] = None
