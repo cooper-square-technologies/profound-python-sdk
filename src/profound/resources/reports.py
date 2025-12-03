@@ -56,7 +56,9 @@ class ReportsResource(SyncAPIResource):
         start_date: Union[str, datetime],
         date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
         dimensions: List[
-            Literal["hostname", "path", "date", "region", "topic", "model", "tag", "prompt", "url", "root_domain"]
+            Literal[
+                "hostname", "path", "date", "region", "topic", "model", "tag", "prompt", "url", "root_domain", "persona"
+            ]
         ]
         | Omit = omit,
         filters: Iterable[report_citations_params.Filter] | Omit = omit,
@@ -139,7 +141,17 @@ class ReportsResource(SyncAPIResource):
         date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
         dimensions: List[
             Literal[
-                "theme", "date", "region", "topic", "model", "asset_id", "asset_name", "tag", "prompt", "sentiment_type"
+                "theme",
+                "date",
+                "region",
+                "topic",
+                "model",
+                "asset_id",
+                "asset_name",
+                "tag",
+                "prompt",
+                "sentiment_type",
+                "persona",
             ]
         ]
         | Omit = omit,
@@ -221,7 +233,9 @@ class ReportsResource(SyncAPIResource):
         metrics: List[Literal["share_of_voice", "mentions_count", "visibility_score", "executions"]],
         start_date: Union[str, datetime],
         date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
-        dimensions: List[Literal["date", "region", "topic", "model", "asset_id", "asset_name", "prompt", "tag"]]
+        dimensions: List[
+            Literal["date", "region", "topic", "model", "asset_id", "asset_name", "prompt", "tag", "persona"]
+        ]
         | Omit = omit,
         filters: Iterable[report_visibility_params.Filter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
@@ -323,7 +337,9 @@ class AsyncReportsResource(AsyncAPIResource):
         start_date: Union[str, datetime],
         date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
         dimensions: List[
-            Literal["hostname", "path", "date", "region", "topic", "model", "tag", "prompt", "url", "root_domain"]
+            Literal[
+                "hostname", "path", "date", "region", "topic", "model", "tag", "prompt", "url", "root_domain", "persona"
+            ]
         ]
         | Omit = omit,
         filters: Iterable[report_citations_params.Filter] | Omit = omit,
@@ -406,7 +422,17 @@ class AsyncReportsResource(AsyncAPIResource):
         date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
         dimensions: List[
             Literal[
-                "theme", "date", "region", "topic", "model", "asset_id", "asset_name", "tag", "prompt", "sentiment_type"
+                "theme",
+                "date",
+                "region",
+                "topic",
+                "model",
+                "asset_id",
+                "asset_name",
+                "tag",
+                "prompt",
+                "sentiment_type",
+                "persona",
             ]
         ]
         | Omit = omit,
@@ -488,7 +514,9 @@ class AsyncReportsResource(AsyncAPIResource):
         metrics: List[Literal["share_of_voice", "mentions_count", "visibility_score", "executions"]],
         start_date: Union[str, datetime],
         date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
-        dimensions: List[Literal["date", "region", "topic", "model", "asset_id", "asset_name", "prompt", "tag"]]
+        dimensions: List[
+            Literal["date", "region", "topic", "model", "asset_id", "asset_name", "prompt", "tag", "persona"]
+        ]
         | Omit = omit,
         filters: Iterable[report_visibility_params.Filter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
