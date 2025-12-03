@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.13.0 (2025-12-03)
+
+Full Changelog: [v0.12.0...v0.13.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.12.0...v0.13.0)
+
+### Features
+
+* **api:** api update ([bf9299c](https://github.com/cooper-square-technologies/profound-python-sdk/commit/bf9299c3b9f844311dedbbc536c02db13db3100e))
+* **api:** api update ([a8d74d3](https://github.com/cooper-square-technologies/profound-python-sdk/commit/a8d74d33b8cc6f4d04634e6d3e8afb25662ddc0f))
+
+
+### Bug Fixes
+
+* ensure streams are always closed ([49a5d37](https://github.com/cooper-square-technologies/profound-python-sdk/commit/49a5d37750aa6adf7f671c592e9c4a6514f98105))
+
+
+### Chores
+
+* **deps:** mypy 1.18.1 has a regression, pin to 1.17 ([0715bd2](https://github.com/cooper-square-technologies/profound-python-sdk/commit/0715bd2a8b92ff962259d6dc473563788b95d6f2))
+* **docs:** use environment variables for authentication in code snippets ([426dd1c](https://github.com/cooper-square-technologies/profound-python-sdk/commit/426dd1c47cddc5e573f40c4ada52d0e58c74e37d))
+* update lockfile ([1ab8506](https://github.com/cooper-square-technologies/profound-python-sdk/commit/1ab850656e13f8555453740d58c1be30d656f7be))
+
 ## 0.12.0 (2025-11-25)
 
 Full Changelog: [v0.11.0...v0.12.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.11.0...v0.12.0)
