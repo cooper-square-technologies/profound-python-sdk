@@ -22,6 +22,7 @@ __all__ = [
     "FilterURLFilter",
     "FilterRootDomainFilter",
     "FilterPromptTypeFilter",
+    "FilterPersonaIDFilter",
 ]
 
 
@@ -46,7 +47,9 @@ class ReportCitationsParams(TypedDict, total=False):
     """Date interval for the report. (only used with date dimension)"""
 
     dimensions: List[
-        Literal["hostname", "path", "date", "region", "topic", "model", "tag", "prompt", "url", "root_domain"]
+        Literal[
+            "hostname", "path", "date", "region", "topic", "model", "tag", "prompt", "url", "root_domain", "persona"
+        ]
     ]
     """Dimensions to group the report by."""
 
@@ -206,6 +209,14 @@ class FilterPromptTypeFilter(TypedDict, total=False):
     value: Required[Union[Literal["visibility", "sentiment"], List[Literal["visibility", "sentiment"]]]]
 
 
+class FilterPersonaIDFilter(TypedDict, total=False):
+    field: Required[Literal["persona_id"]]
+
+    operator: Required[Literal["is", "not_is", "in", "not_in"]]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
 Filter: TypeAlias = Union[
     FilterHostnameFilter,
     FilterAppModelsAnswerEngineInsightsFiltersPathFilter,
@@ -216,4 +227,5 @@ Filter: TypeAlias = Union[
     FilterURLFilter,
     FilterRootDomainFilter,
     FilterPromptTypeFilter,
+    FilterPersonaIDFilter,
 ]
