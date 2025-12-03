@@ -77,6 +77,7 @@ pip install profound[aiohttp]
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
 
 ```python
+import os
 import asyncio
 from profound import DefaultAioHttpClient
 from profound import AsyncProfound
@@ -84,7 +85,7 @@ from profound import AsyncProfound
 
 async def main() -> None:
     async with AsyncProfound(
-        api_key="My API Key",
+        api_key=os.environ.get("PROFOUND_API_KEY"),  # This is the default and can be omitted
         http_client=DefaultAioHttpClient(),
     ) as client:
         org_items = await client.organizations.categories.list()
