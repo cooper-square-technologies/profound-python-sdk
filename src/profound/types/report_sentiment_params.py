@@ -20,6 +20,7 @@ __all__ = [
     "FilterModelIDFilter",
     "FilterTagIDFilter",
     "FilterPromptFilter",
+    "FilterPersonaIDFilter",
 ]
 
 
@@ -45,7 +46,17 @@ class ReportSentimentParams(TypedDict, total=False):
 
     dimensions: List[
         Literal[
-            "theme", "date", "region", "topic", "model", "asset_id", "asset_name", "tag", "prompt", "sentiment_type"
+            "theme",
+            "date",
+            "region",
+            "topic",
+            "model",
+            "asset_id",
+            "asset_name",
+            "tag",
+            "prompt",
+            "sentiment_type",
+            "persona",
         ]
     ]
     """Dimensions to group the report by."""
@@ -166,6 +177,14 @@ class FilterPromptFilter(TypedDict, total=False):
     value: Required[Union[str, SequenceNotStr[str]]]
 
 
+class FilterPersonaIDFilter(TypedDict, total=False):
+    field: Required[Literal["persona_id"]]
+
+    operator: Required[Literal["is", "not_is", "in", "not_in"]]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
 Filter: TypeAlias = Union[
     FilterAssetNameFilter,
     FilterThemeFilter,
@@ -174,4 +193,5 @@ Filter: TypeAlias = Union[
     FilterModelIDFilter,
     FilterTagIDFilter,
     FilterPromptFilter,
+    FilterPersonaIDFilter,
 ]

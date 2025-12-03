@@ -19,6 +19,7 @@ __all__ = [
     "FilterAssetNameFilter",
     "FilterTagIDFilter",
     "FilterPromptFilter",
+    "FilterPersonaIDFilter",
 ]
 
 
@@ -42,7 +43,7 @@ class ReportVisibilityParams(TypedDict, total=False):
     date_interval: Literal["day", "week", "month", "year"]
     """Date interval for the report. (only used with date dimension)"""
 
-    dimensions: List[Literal["date", "region", "topic", "model", "asset_id", "asset_name", "prompt", "tag"]]
+    dimensions: List[Literal["date", "region", "topic", "model", "asset_id", "asset_name", "prompt", "tag", "persona"]]
     """Dimensions to group the report by."""
 
     filters: Iterable[Filter]
@@ -141,6 +142,14 @@ class FilterPromptFilter(TypedDict, total=False):
     value: Required[Union[str, SequenceNotStr[str]]]
 
 
+class FilterPersonaIDFilter(TypedDict, total=False):
+    field: Required[Literal["persona_id"]]
+
+    operator: Required[Literal["is", "not_is", "in", "not_in"]]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
 Filter: TypeAlias = Union[
     FilterRegionIDFilter,
     FilterModelIDFilter,
@@ -148,4 +157,5 @@ Filter: TypeAlias = Union[
     FilterAssetNameFilter,
     FilterTagIDFilter,
     FilterPromptFilter,
+    FilterPersonaIDFilter,
 ]
