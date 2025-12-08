@@ -3,6 +3,8 @@
 from typing import Dict, List, Optional
 from datetime import datetime
 
+from pydantic import Field as FieldInfo
+
 from .._models import BaseModel
 
 __all__ = ["PromptAnswersResponse", "Data"]
@@ -18,6 +20,8 @@ class Data(BaseModel):
     mentions: Optional[List[str]] = None
 
     model: Optional[str] = None
+
+    api_model_id: Optional[str] = FieldInfo(alias="model_id", default=None)
 
     persona: Optional[str] = None
 

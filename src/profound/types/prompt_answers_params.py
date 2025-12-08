@@ -135,6 +135,8 @@ class Include(TypedDict, total=False):
 
     model: bool
 
+    model_id: bool
+
     persona: bool
 
     prompt: bool
