@@ -11,6 +11,8 @@ __all__ = ["PromptAnswersResponse", "Data"]
 
 
 class Data(BaseModel):
+    """Raw data for the answers endpoint."""
+
     asset: Optional[str] = None
 
     citations: Optional[List[str]] = None
@@ -47,6 +49,8 @@ class Data(BaseModel):
 
 
 class PromptAnswersResponse(BaseModel):
+    """Response for the answers endpoint."""
+
     data: List[Data]
 
     info: Dict[str, object]

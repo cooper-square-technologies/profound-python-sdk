@@ -85,6 +85,8 @@ class RawBotsParams(TypedDict, total=False):
 
 
 class FilterBotNameFilter(TypedDict, total=False):
+    """Filter by bot name"""
+
     field: Required[Literal["bot_name"]]
 
     operator: Required[
@@ -105,6 +107,8 @@ class FilterBotNameFilter(TypedDict, total=False):
 
 
 class FilterBotProviderFilter(TypedDict, total=False):
+    """Filter by bot provider"""
+
     field: Required[Literal["bot_provider"]]
 
     operator: Required[
@@ -125,6 +129,8 @@ class FilterBotProviderFilter(TypedDict, total=False):
 
 
 class FilterBotTypesFilter(TypedDict, total=False):
+    """Filter by bot types (ai_assistant, ai_training, or index)"""
+
     field: Required[Literal["bot_types"]]
 
     operator: Required[
@@ -147,6 +153,8 @@ class FilterBotTypesFilter(TypedDict, total=False):
 
 
 class FilterMethodFilter(TypedDict, total=False):
+    """Filter by HTTP method"""
+
     field: Required[Literal["method"]]
 
     operator: Required[
@@ -167,6 +175,8 @@ class FilterMethodFilter(TypedDict, total=False):
 
 
 class FilterAppModelsAgentAnalyticsFiltersPathFilter(TypedDict, total=False):
+    """Filter by request path"""
+
     field: Required[Literal["path"]]
 
     operator: Required[
@@ -187,6 +197,8 @@ class FilterAppModelsAgentAnalyticsFiltersPathFilter(TypedDict, total=False):
 
 
 class FilterStatusCodeFilter(TypedDict, total=False):
+    """Filter by HTTP status code"""
+
     field: Required[Literal["status_code"]]
 
     operator: Required[Literal["is", "not_is", "in", "not_in"]]
@@ -195,6 +207,8 @@ class FilterStatusCodeFilter(TypedDict, total=False):
 
 
 class FilterIPFilter(TypedDict, total=False):
+    """Filter by IP address"""
+
     field: Required[Literal["ip"]]
 
     operator: Required[
@@ -215,6 +229,8 @@ class FilterIPFilter(TypedDict, total=False):
 
 
 class FilterUserAgentFilter(TypedDict, total=False):
+    """Filter by user agent"""
+
     field: Required[Literal["user_agent"]]
 
     operator: Required[
@@ -235,6 +251,8 @@ class FilterUserAgentFilter(TypedDict, total=False):
 
 
 class FilterRefererFilter(TypedDict, total=False):
+    """Filter by referer"""
+
     field: Required[Literal["referer"]]
 
     operator: Required[
@@ -255,6 +273,8 @@ class FilterRefererFilter(TypedDict, total=False):
 
 
 class FilterQueryParamsFilter(TypedDict, total=False):
+    """Filter by query parameters"""
+
     field: Required[Literal["query_params"]]
 
     operator: Required[
