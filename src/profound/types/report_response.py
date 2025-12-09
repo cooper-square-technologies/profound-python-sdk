@@ -10,6 +10,8 @@ __all__ = ["ReportResponse"]
 
 
 class ReportResponse(BaseModel):
+    """Base response model for reports."""
+
     data: List[ReportResult]
 
     info: ReportInfo

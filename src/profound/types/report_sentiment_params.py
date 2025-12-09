@@ -82,6 +82,8 @@ class ReportSentimentParams(TypedDict, total=False):
 
 
 class FilterAssetNameFilter(TypedDict, total=False):
+    """Filter by asset name"""
+
     field: Required[Literal["asset_name"]]
 
     operator: Required[
@@ -102,6 +104,8 @@ class FilterAssetNameFilter(TypedDict, total=False):
 
 
 class FilterThemeFilter(TypedDict, total=False):
+    """Filter by theme"""
+
     field: Required[Literal["theme"]]
 
     operator: Required[
@@ -158,6 +162,8 @@ class FilterTagIDFilter(TypedDict, total=False):
 
 
 class FilterPromptFilter(TypedDict, total=False):
+    """Filter by prompt text"""
+
     field: Required[Literal["prompt"]]
 
     operator: Required[

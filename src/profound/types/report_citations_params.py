@@ -74,6 +74,8 @@ class ReportCitationsParams(TypedDict, total=False):
 
 
 class FilterHostnameFilter(TypedDict, total=False):
+    """Filter by hostname"""
+
     field: Required[Literal["hostname"]]
 
     operator: Required[
@@ -94,6 +96,8 @@ class FilterHostnameFilter(TypedDict, total=False):
 
 
 class FilterAppModelsAnswerEngineInsightsFiltersPathFilter(TypedDict, total=False):
+    """Filter by URL path"""
+
     field: Required[Literal["path"]]
 
     operator: Required[
@@ -150,6 +154,8 @@ class FilterTagIDFilter(TypedDict, total=False):
 
 
 class FilterURLFilter(TypedDict, total=False):
+    """Filter by URL"""
+
     field: Required[Literal["url"]]
 
     operator: Required[
@@ -170,6 +176,8 @@ class FilterURLFilter(TypedDict, total=False):
 
 
 class FilterRootDomainFilter(TypedDict, total=False):
+    """Filter by root domain"""
+
     field: Required[Literal["root_domain"]]
 
     operator: Required[
@@ -190,6 +198,8 @@ class FilterRootDomainFilter(TypedDict, total=False):
 
 
 class FilterPromptTypeFilter(TypedDict, total=False):
+    """Filter by prompt type (visibility or sentiment)"""
+
     field: Required[Literal["prompt_type"]]
 
     operator: Required[

@@ -87,6 +87,8 @@ class RawLogsParams(TypedDict, total=False):
 
 
 class FilterMethodFilter(TypedDict, total=False):
+    """Filter by HTTP method"""
+
     field: Required[Literal["method"]]
 
     operator: Required[
@@ -107,6 +109,8 @@ class FilterMethodFilter(TypedDict, total=False):
 
 
 class FilterHostFilter(TypedDict, total=False):
+    """Filter by host"""
+
     field: Required[Literal["host"]]
 
     operator: Required[
@@ -127,6 +131,8 @@ class FilterHostFilter(TypedDict, total=False):
 
 
 class FilterAppModelsAgentAnalyticsFiltersPathFilter(TypedDict, total=False):
+    """Filter by request path"""
+
     field: Required[Literal["path"]]
 
     operator: Required[
@@ -147,6 +153,8 @@ class FilterAppModelsAgentAnalyticsFiltersPathFilter(TypedDict, total=False):
 
 
 class FilterStatusCodeFilter(TypedDict, total=False):
+    """Filter by HTTP status code"""
+
     field: Required[Literal["status_code"]]
 
     operator: Required[Literal["is", "not_is", "in", "not_in"]]
@@ -155,6 +163,8 @@ class FilterStatusCodeFilter(TypedDict, total=False):
 
 
 class FilterIPFilter(TypedDict, total=False):
+    """Filter by IP address"""
+
     field: Required[Literal["ip"]]
 
     operator: Required[
@@ -175,6 +185,8 @@ class FilterIPFilter(TypedDict, total=False):
 
 
 class FilterUserAgentFilter(TypedDict, total=False):
+    """Filter by user agent"""
+
     field: Required[Literal["user_agent"]]
 
     operator: Required[
@@ -195,6 +207,8 @@ class FilterUserAgentFilter(TypedDict, total=False):
 
 
 class FilterRefererFilter(TypedDict, total=False):
+    """Filter by referer"""
+
     field: Required[Literal["referer"]]
 
     operator: Required[
@@ -215,6 +229,8 @@ class FilterRefererFilter(TypedDict, total=False):
 
 
 class FilterProviderFilter(TypedDict, total=False):
+    """Filter by provider"""
+
     field: Required[Literal["provider"]]
 
     operator: Required[
@@ -235,6 +251,8 @@ class FilterProviderFilter(TypedDict, total=False):
 
 
 class FilterQueryParamsFilter(TypedDict, total=False):
+    """Filter by query parameters"""
+
     field: Required[Literal["query_params"]]
 
     operator: Required[
@@ -255,6 +273,8 @@ class FilterQueryParamsFilter(TypedDict, total=False):
 
 
 class FilterBytesSentFilter(TypedDict, total=False):
+    """Filter by bytes sent"""
+
     field: Required[Literal["bytes_sent"]]
 
     operator: Required[Literal["is", "not_is", "in", "not_in"]]
@@ -263,6 +283,8 @@ class FilterBytesSentFilter(TypedDict, total=False):
 
 
 class FilterDurationMsFilter(TypedDict, total=False):
+    """Filter by duration in milliseconds"""
+
     field: Required[Literal["duration_ms"]]
 
     operator: Required[Literal["is", "not_is", "in", "not_in"]]

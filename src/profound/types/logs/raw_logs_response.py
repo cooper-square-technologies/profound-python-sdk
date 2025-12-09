@@ -11,6 +11,8 @@ __all__ = ["RawLogsResponse", "LogVisitList"]
 
 
 class LogVisitList(BaseModel):
+    """DB Model for a log visit."""
+
     host: str
 
     ip: str

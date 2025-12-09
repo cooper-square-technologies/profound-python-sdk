@@ -8,6 +8,8 @@ __all__ = ["ReportResult"]
 
 
 class ReportResult(BaseModel):
+    """Base model for report results."""
+
     dimensions: List[str]
 
     metrics: List[Union[float, int]]

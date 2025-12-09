@@ -67,6 +67,8 @@ class FilterTagIDFilter(TypedDict, total=False):
 
 
 class FilterPromptTypeFilter(TypedDict, total=False):
+    """Filter by prompt type (visibility or sentiment)"""
+
     field: Required[Literal["prompt_type"]]
 
     operator: Required[
@@ -87,6 +89,8 @@ class FilterPromptTypeFilter(TypedDict, total=False):
 
 
 class FilterPromptFilter(TypedDict, total=False):
+    """Filter by prompt text"""
+
     field: Required[Literal["prompt"]]
 
     operator: Required[
