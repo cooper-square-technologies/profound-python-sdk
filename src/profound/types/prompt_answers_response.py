@@ -2,12 +2,19 @@
 
 from typing import Dict, List, Optional
 from datetime import datetime
+from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-__all__ = ["PromptAnswersResponse", "Data"]
+__all__ = ["PromptAnswersResponse", "Data", "DataSentimentTheme"]
+
+
+class DataSentimentTheme(BaseModel):
+    name: str
+
+    type: Literal["positive", "negative"]
 
 
 class Data(BaseModel):
@@ -40,6 +47,8 @@ class Data(BaseModel):
     run_id: Optional[str] = None
 
     search_queries: Optional[List[str]] = None
+
+    sentiment_themes: Optional[List[DataSentimentTheme]] = None
 
     tags: Optional[List[str]] = None
 

@@ -157,8 +157,11 @@ class Include(TypedDict, total=False):
 
     search_queries: bool
 
+    sentiment_themes: bool
+
     tags: bool
 
     themes: bool
+    """Use 'sentiment_themes' instead"""
 
     topic: bool
