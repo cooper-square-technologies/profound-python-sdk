@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.14.0 (2025-12-12)
+
+Full Changelog: [v0.13.0...v0.14.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.13.0...v0.14.0)
+
+### Features
+
+* **api:** api update ([8864b02](https://github.com/cooper-square-technologies/profound-python-sdk/commit/8864b02d9e403962aa086dd3e204f5e21e8fb6a7))
+* **api:** api update ([7e96bac](https://github.com/cooper-square-technologies/profound-python-sdk/commit/7e96baca78ddbe24f90c38a5f4cc0f4a691b2045))
+
+
+### Bug Fixes
+
+* **types:** allow pyright to infer TypedDict types within SequenceNotStr ([c2c8d12](https://github.com/cooper-square-technologies/profound-python-sdk/commit/c2c8d120144f6fc2025716319fff1dce93ac7148))
+
+
+### Chores
+
+* add missing docstrings ([3e04a82](https://github.com/cooper-square-technologies/profound-python-sdk/commit/3e04a824af99bbee4543c781a9d592ec304dd504))
+
 ## 0.13.0 (2025-12-03)
 
 Full Changelog: [v0.12.0...v0.13.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.12.0...v0.13.0)

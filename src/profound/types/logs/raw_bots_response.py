@@ -11,6 +11,8 @@ __all__ = ["RawBotsResponse", "LogVisitBotList"]
 
 
 class LogVisitBotList(BaseModel):
+    """DB Model for a bot visit."""
+
     bot_name: str
 
     bot_provider: str

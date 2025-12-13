@@ -67,6 +67,8 @@ class FilterTagIDFilter(TypedDict, total=False):
 
 
 class FilterPromptTypeFilter(TypedDict, total=False):
+    """Filter by prompt type (visibility or sentiment)"""
+
     field: Required[Literal["prompt_type"]]
 
     operator: Required[
@@ -87,6 +89,8 @@ class FilterPromptTypeFilter(TypedDict, total=False):
 
 
 class FilterPromptFilter(TypedDict, total=False):
+    """Filter by prompt text"""
+
     field: Required[Literal["prompt"]]
 
     operator: Required[
@@ -135,6 +139,8 @@ class Include(TypedDict, total=False):
 
     model: bool
 
+    model_id: bool
+
     persona: bool
 
     prompt: bool
@@ -151,8 +157,11 @@ class Include(TypedDict, total=False):
 
     search_queries: bool
 
+    sentiment_themes: bool
+
     tags: bool
 
     themes: bool
+    """Use 'sentiment_themes' instead"""
 
     topic: bool
