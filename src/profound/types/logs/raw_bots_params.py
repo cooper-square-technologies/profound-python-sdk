@@ -85,7 +85,7 @@ class RawBotsParams(TypedDict, total=False):
 
 
 class FilterBotNameFilter(TypedDict, total=False):
-    """Filter by bot name"""
+    """Filter by bot name (user agent)"""
 
     field: Required[Literal["bot_name"]]
 
@@ -103,7 +103,74 @@ class FilterBotNameFilter(TypedDict, total=False):
         ]
     ]
 
-    value: Required[Union[str, SequenceNotStr[str]]]
+    value: Required[
+        Union[
+            Literal[
+                "Amazonbot",
+                "ClaudeBot",
+                "Claude-User",
+                "Claude-SearchBot",
+                "Applebot",
+                "Applebot-Extended",
+                "Bytespider",
+                "DeepSeek",
+                "DuckAssistBot",
+                "DuckDuckBot",
+                "Googlebot",
+                "Googlebot-News",
+                "Googlebot-Video",
+                "Googlebot-Image",
+                "Google-Extended",
+                "Storebot-Google",
+                "Google-CloudVertexBot",
+                "meta-externalfetcher",
+                "meta-externalagent",
+                "bingbot",
+                "MicrosoftPreview",
+                "ChatGPT-User",
+                "GPTBot",
+                "OAI-SearchBot",
+                "OAI-Operator",
+                "PerplexityBot",
+                "Perplexity-User",
+                "Grok-PageBrowser",
+                "YouBot",
+            ],
+            List[
+                Literal[
+                    "Amazonbot",
+                    "ClaudeBot",
+                    "Claude-User",
+                    "Claude-SearchBot",
+                    "Applebot",
+                    "Applebot-Extended",
+                    "Bytespider",
+                    "DeepSeek",
+                    "DuckAssistBot",
+                    "DuckDuckBot",
+                    "Googlebot",
+                    "Googlebot-News",
+                    "Googlebot-Video",
+                    "Googlebot-Image",
+                    "Google-Extended",
+                    "Storebot-Google",
+                    "Google-CloudVertexBot",
+                    "meta-externalfetcher",
+                    "meta-externalagent",
+                    "bingbot",
+                    "MicrosoftPreview",
+                    "ChatGPT-User",
+                    "GPTBot",
+                    "OAI-SearchBot",
+                    "OAI-Operator",
+                    "PerplexityBot",
+                    "Perplexity-User",
+                    "Grok-PageBrowser",
+                    "YouBot",
+                ]
+            ],
+        ]
+    ]
 
 
 class FilterBotProviderFilter(TypedDict, total=False):
@@ -125,7 +192,48 @@ class FilterBotProviderFilter(TypedDict, total=False):
         ]
     ]
 
-    value: Required[Union[str, SequenceNotStr[str]]]
+    value: Required[
+        Union[
+            Literal[
+                "openai",
+                "anthropic",
+                "chatgpt",
+                "deepseek",
+                "google",
+                "microsoft",
+                "perplexity",
+                "apple",
+                "bytedance",
+                "amazon",
+                "meta",
+                "duckduckgo",
+                "you",
+                "xai",
+                "grok",
+                "gemini",
+            ],
+            List[
+                Literal[
+                    "openai",
+                    "anthropic",
+                    "chatgpt",
+                    "deepseek",
+                    "google",
+                    "microsoft",
+                    "perplexity",
+                    "apple",
+                    "bytedance",
+                    "amazon",
+                    "meta",
+                    "duckduckgo",
+                    "you",
+                    "xai",
+                    "grok",
+                    "gemini",
+                ]
+            ],
+        ]
+    ]
 
 
 class FilterBotTypesFilter(TypedDict, total=False):
