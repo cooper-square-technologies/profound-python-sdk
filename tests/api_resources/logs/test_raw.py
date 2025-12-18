@@ -42,7 +42,7 @@ class TestRaw:
                 {
                     "field": "bot_name",
                     "operator": "is",
-                    "value": "string",
+                    "value": "Amazonbot",
                 }
             ],
             order_by={"date": "asc"},
@@ -178,7 +178,7 @@ class TestAsyncRaw:
                 {
                     "field": "bot_name",
                     "operator": "is",
-                    "value": "string",
+                    "value": "Amazonbot",
                 }
             ],
             order_by={"date": "asc"},
