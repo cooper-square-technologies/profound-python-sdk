@@ -56,12 +56,16 @@ class RawResource(SyncAPIResource):
         date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
         dimensions: List[
             Literal[
+                "timestamp",
                 "method",
+                "host",
                 "path",
                 "status_code",
                 "ip",
                 "user_agent",
                 "referer",
+                "bytes_sent",
+                "duration_ms",
                 "query_params",
                 "bot_name",
                 "bot_provider",
@@ -272,12 +276,16 @@ class AsyncRawResource(AsyncAPIResource):
         date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
         dimensions: List[
             Literal[
+                "timestamp",
                 "method",
+                "host",
                 "path",
                 "status_code",
                 "ip",
                 "user_agent",
                 "referer",
+                "bytes_sent",
+                "duration_ms",
                 "query_params",
                 "bot_name",
                 "bot_provider",
