@@ -44,12 +44,16 @@ class RawBotsParams(TypedDict, total=False):
 
     dimensions: List[
         Literal[
+            "timestamp",
             "method",
+            "host",
             "path",
             "status_code",
             "ip",
             "user_agent",
             "referer",
+            "bytes_sent",
+            "duration_ms",
             "query_params",
             "bot_name",
             "bot_provider",
