@@ -48,7 +48,18 @@ class ReportCitationsParams(TypedDict, total=False):
 
     dimensions: List[
         Literal[
-            "hostname", "path", "date", "region", "topic", "model", "tag", "prompt", "url", "root_domain", "persona"
+            "hostname",
+            "path",
+            "date",
+            "region",
+            "topic",
+            "model",
+            "tag",
+            "prompt",
+            "url",
+            "root_domain",
+            "persona",
+            "citation_category",
         ]
     ]
     """Dimensions to group the report by."""

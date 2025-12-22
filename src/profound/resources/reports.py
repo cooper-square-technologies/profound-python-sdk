@@ -57,7 +57,18 @@ class ReportsResource(SyncAPIResource):
         date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
         dimensions: List[
             Literal[
-                "hostname", "path", "date", "region", "topic", "model", "tag", "prompt", "url", "root_domain", "persona"
+                "hostname",
+                "path",
+                "date",
+                "region",
+                "topic",
+                "model",
+                "tag",
+                "prompt",
+                "url",
+                "root_domain",
+                "persona",
+                "citation_category",
             ]
         ]
         | Omit = omit,
@@ -338,7 +349,18 @@ class AsyncReportsResource(AsyncAPIResource):
         date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
         dimensions: List[
             Literal[
-                "hostname", "path", "date", "region", "topic", "model", "tag", "prompt", "url", "root_domain", "persona"
+                "hostname",
+                "path",
+                "date",
+                "region",
+                "topic",
+                "model",
+                "tag",
+                "prompt",
+                "url",
+                "root_domain",
+                "persona",
+                "citation_category",
             ]
         ]
         | Omit = omit,
