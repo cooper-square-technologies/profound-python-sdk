@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import os
-from typing import Any, Mapping
+from typing import TYPE_CHECKING, Any, Mapping
 from typing_extensions import Self, override
 
 import httpx
@@ -20,8 +20,8 @@ from ._types import (
     not_given,
 )
 from ._utils import is_given, get_async_library
+from ._compat import cached_property
 from ._version import __version__
-from .resources import prompts, reports
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import ProfoundError, APIStatusError
 from ._base_client import (
@@ -29,8 +29,13 @@ from ._base_client import (
     SyncAPIClient,
     AsyncAPIClient,
 )
-from .resources.logs import logs
-from .resources.organizations import organizations
+
+if TYPE_CHECKING:
+    from .resources import logs, prompts, reports, organizations
+    from .resources.prompts import PromptsResource, AsyncPromptsResource
+    from .resources.reports import ReportsResource, AsyncReportsResource
+    from .resources.logs.logs import LogsResource, AsyncLogsResource
+    from .resources.organizations.organizations import OrganizationsResource, AsyncOrganizationsResource
 
 __all__ = [
     "Timeout",
@@ -45,13 +50,6 @@ __all__ = [
 
 
 class Profound(SyncAPIClient):
-    organizations: organizations.OrganizationsResource
-    prompts: prompts.PromptsResource
-    reports: reports.ReportsResource
-    logs: logs.LogsResource
-    with_raw_response: ProfoundWithRawResponse
-    with_streaming_response: ProfoundWithStreamedResponse
-
     # client options
     api_key: str
 
@@ -106,12 +104,37 @@ class Profound(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.organizations = organizations.OrganizationsResource(self)
-        self.prompts = prompts.PromptsResource(self)
-        self.reports = reports.ReportsResource(self)
-        self.logs = logs.LogsResource(self)
-        self.with_raw_response = ProfoundWithRawResponse(self)
-        self.with_streaming_response = ProfoundWithStreamedResponse(self)
+    @cached_property
+    def organizations(self) -> OrganizationsResource:
+        from .resources.organizations import OrganizationsResource
+
+        return OrganizationsResource(self)
+
+    @cached_property
+    def prompts(self) -> PromptsResource:
+        from .resources.prompts import PromptsResource
+
+        return PromptsResource(self)
+
+    @cached_property
+    def reports(self) -> ReportsResource:
+        from .resources.reports import ReportsResource
+
+        return ReportsResource(self)
+
+    @cached_property
+    def logs(self) -> LogsResource:
+        from .resources.logs import LogsResource
+
+        return LogsResource(self)
+
+    @cached_property
+    def with_raw_response(self) -> ProfoundWithRawResponse:
+        return ProfoundWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> ProfoundWithStreamedResponse:
+        return ProfoundWithStreamedResponse(self)
 
     @property
     @override
@@ -219,13 +242,6 @@ class Profound(SyncAPIClient):
 
 
 class AsyncProfound(AsyncAPIClient):
-    organizations: organizations.AsyncOrganizationsResource
-    prompts: prompts.AsyncPromptsResource
-    reports: reports.AsyncReportsResource
-    logs: logs.AsyncLogsResource
-    with_raw_response: AsyncProfoundWithRawResponse
-    with_streaming_response: AsyncProfoundWithStreamedResponse
-
     # client options
     api_key: str
 
@@ -280,12 +296,37 @@ class AsyncProfound(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.organizations = organizations.AsyncOrganizationsResource(self)
-        self.prompts = prompts.AsyncPromptsResource(self)
-        self.reports = reports.AsyncReportsResource(self)
-        self.logs = logs.AsyncLogsResource(self)
-        self.with_raw_response = AsyncProfoundWithRawResponse(self)
-        self.with_streaming_response = AsyncProfoundWithStreamedResponse(self)
+    @cached_property
+    def organizations(self) -> AsyncOrganizationsResource:
+        from .resources.organizations import AsyncOrganizationsResource
+
+        return AsyncOrganizationsResource(self)
+
+    @cached_property
+    def prompts(self) -> AsyncPromptsResource:
+        from .resources.prompts import AsyncPromptsResource
+
+        return AsyncPromptsResource(self)
+
+    @cached_property
+    def reports(self) -> AsyncReportsResource:
+        from .resources.reports import AsyncReportsResource
+
+        return AsyncReportsResource(self)
+
+    @cached_property
+    def logs(self) -> AsyncLogsResource:
+        from .resources.logs import AsyncLogsResource
+
+        return AsyncLogsResource(self)
+
+    @cached_property
+    def with_raw_response(self) -> AsyncProfoundWithRawResponse:
+        return AsyncProfoundWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncProfoundWithStreamedResponse:
+        return AsyncProfoundWithStreamedResponse(self)
 
     @property
     @override
@@ -393,35 +434,127 @@ class AsyncProfound(AsyncAPIClient):
 
 
 class ProfoundWithRawResponse:
+    _client: Profound
+
     def __init__(self, client: Profound) -> None:
-        self.organizations = organizations.OrganizationsResourceWithRawResponse(client.organizations)
-        self.prompts = prompts.PromptsResourceWithRawResponse(client.prompts)
-        self.reports = reports.ReportsResourceWithRawResponse(client.reports)
-        self.logs = logs.LogsResourceWithRawResponse(client.logs)
+        self._client = client
+
+    @cached_property
+    def organizations(self) -> organizations.OrganizationsResourceWithRawResponse:
+        from .resources.organizations import OrganizationsResourceWithRawResponse
+
+        return OrganizationsResourceWithRawResponse(self._client.organizations)
+
+    @cached_property
+    def prompts(self) -> prompts.PromptsResourceWithRawResponse:
+        from .resources.prompts import PromptsResourceWithRawResponse
+
+        return PromptsResourceWithRawResponse(self._client.prompts)
+
+    @cached_property
+    def reports(self) -> reports.ReportsResourceWithRawResponse:
+        from .resources.reports import ReportsResourceWithRawResponse
+
+        return ReportsResourceWithRawResponse(self._client.reports)
+
+    @cached_property
+    def logs(self) -> logs.LogsResourceWithRawResponse:
+        from .resources.logs import LogsResourceWithRawResponse
+
+        return LogsResourceWithRawResponse(self._client.logs)
 
 
 class AsyncProfoundWithRawResponse:
+    _client: AsyncProfound
+
     def __init__(self, client: AsyncProfound) -> None:
-        self.organizations = organizations.AsyncOrganizationsResourceWithRawResponse(client.organizations)
-        self.prompts = prompts.AsyncPromptsResourceWithRawResponse(client.prompts)
-        self.reports = reports.AsyncReportsResourceWithRawResponse(client.reports)
-        self.logs = logs.AsyncLogsResourceWithRawResponse(client.logs)
+        self._client = client
+
+    @cached_property
+    def organizations(self) -> organizations.AsyncOrganizationsResourceWithRawResponse:
+        from .resources.organizations import AsyncOrganizationsResourceWithRawResponse
+
+        return AsyncOrganizationsResourceWithRawResponse(self._client.organizations)
+
+    @cached_property
+    def prompts(self) -> prompts.AsyncPromptsResourceWithRawResponse:
+        from .resources.prompts import AsyncPromptsResourceWithRawResponse
+
+        return AsyncPromptsResourceWithRawResponse(self._client.prompts)
+
+    @cached_property
+    def reports(self) -> reports.AsyncReportsResourceWithRawResponse:
+        from .resources.reports import AsyncReportsResourceWithRawResponse
+
+        return AsyncReportsResourceWithRawResponse(self._client.reports)
+
+    @cached_property
+    def logs(self) -> logs.AsyncLogsResourceWithRawResponse:
+        from .resources.logs import AsyncLogsResourceWithRawResponse
+
+        return AsyncLogsResourceWithRawResponse(self._client.logs)
 
 
 class ProfoundWithStreamedResponse:
+    _client: Profound
+
     def __init__(self, client: Profound) -> None:
-        self.organizations = organizations.OrganizationsResourceWithStreamingResponse(client.organizations)
-        self.prompts = prompts.PromptsResourceWithStreamingResponse(client.prompts)
-        self.reports = reports.ReportsResourceWithStreamingResponse(client.reports)
-        self.logs = logs.LogsResourceWithStreamingResponse(client.logs)
+        self._client = client
+
+    @cached_property
+    def organizations(self) -> organizations.OrganizationsResourceWithStreamingResponse:
+        from .resources.organizations import OrganizationsResourceWithStreamingResponse
+
+        return OrganizationsResourceWithStreamingResponse(self._client.organizations)
+
+    @cached_property
+    def prompts(self) -> prompts.PromptsResourceWithStreamingResponse:
+        from .resources.prompts import PromptsResourceWithStreamingResponse
+
+        return PromptsResourceWithStreamingResponse(self._client.prompts)
+
+    @cached_property
+    def reports(self) -> reports.ReportsResourceWithStreamingResponse:
+        from .resources.reports import ReportsResourceWithStreamingResponse
+
+        return ReportsResourceWithStreamingResponse(self._client.reports)
+
+    @cached_property
+    def logs(self) -> logs.LogsResourceWithStreamingResponse:
+        from .resources.logs import LogsResourceWithStreamingResponse
+
+        return LogsResourceWithStreamingResponse(self._client.logs)
 
 
 class AsyncProfoundWithStreamedResponse:
+    _client: AsyncProfound
+
     def __init__(self, client: AsyncProfound) -> None:
-        self.organizations = organizations.AsyncOrganizationsResourceWithStreamingResponse(client.organizations)
-        self.prompts = prompts.AsyncPromptsResourceWithStreamingResponse(client.prompts)
-        self.reports = reports.AsyncReportsResourceWithStreamingResponse(client.reports)
-        self.logs = logs.AsyncLogsResourceWithStreamingResponse(client.logs)
+        self._client = client
+
+    @cached_property
+    def organizations(self) -> organizations.AsyncOrganizationsResourceWithStreamingResponse:
+        from .resources.organizations import AsyncOrganizationsResourceWithStreamingResponse
+
+        return AsyncOrganizationsResourceWithStreamingResponse(self._client.organizations)
+
+    @cached_property
+    def prompts(self) -> prompts.AsyncPromptsResourceWithStreamingResponse:
+        from .resources.prompts import AsyncPromptsResourceWithStreamingResponse
+
+        return AsyncPromptsResourceWithStreamingResponse(self._client.prompts)
+
+    @cached_property
+    def reports(self) -> reports.AsyncReportsResourceWithStreamingResponse:
+        from .resources.reports import AsyncReportsResourceWithStreamingResponse
+
+        return AsyncReportsResourceWithStreamingResponse(self._client.reports)
+
+    @cached_property
+    def logs(self) -> logs.AsyncLogsResourceWithStreamingResponse:
+        from .resources.logs import AsyncLogsResourceWithStreamingResponse
+
+        return AsyncLogsResourceWithStreamingResponse(self._client.logs)
 
 
 Client = Profound

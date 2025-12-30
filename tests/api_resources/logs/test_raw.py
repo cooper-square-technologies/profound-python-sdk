@@ -36,13 +36,13 @@ class TestRaw:
             metrics=["count"],
             start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             date_interval="day",
-            dimensions=["method"],
+            dimensions=["timestamp"],
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             filters=[
                 {
                     "field": "bot_name",
                     "operator": "is",
-                    "value": "string",
+                    "value": "Amazonbot",
                 }
             ],
             order_by={"date": "asc"},
@@ -172,13 +172,13 @@ class TestAsyncRaw:
             metrics=["count"],
             start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             date_interval="day",
-            dimensions=["method"],
+            dimensions=["timestamp"],
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             filters=[
                 {
                     "field": "bot_name",
                     "operator": "is",
-                    "value": "string",
+                    "value": "Amazonbot",
                 }
             ],
             order_by={"date": "asc"},
