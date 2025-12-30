@@ -1,5 +1,27 @@
 # Changelog
 
+## 0.15.0 (2025-12-30)
+
+Full Changelog: [v0.14.0...v0.15.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.14.0...v0.15.0)
+
+### Features
+
+* **api:** api update ([f8e641f](https://github.com/cooper-square-technologies/profound-python-sdk/commit/f8e641f05936e690ca5be4be35116108b9ff2b67))
+* **api:** api update ([143d969](https://github.com/cooper-square-technologies/profound-python-sdk/commit/143d96960614b1f6c207970beda8a1140de36528))
+* **api:** api update ([8182f33](https://github.com/cooper-square-technologies/profound-python-sdk/commit/8182f33d856951a35746de2752f5cf2d1ab96696))
+
+
+### Bug Fixes
+
+* use async_to_httpx_files in patch method ([e0e219c](https://github.com/cooper-square-technologies/profound-python-sdk/commit/e0e219cc848e9794d45f53998ee6dcac46be52e5))
+
+
+### Chores
+
+* **internal:** add `--fix` argument to lint script ([57c6d49](https://github.com/cooper-square-technologies/profound-python-sdk/commit/57c6d499d0f9c7a68714067ec55ab0a1d908a14a))
+* **internal:** add missing files argument to base client ([f514b1b](https://github.com/cooper-square-technologies/profound-python-sdk/commit/f514b1b42cc88ecb4ac40fe8dea36be289603674))
+* speedup initial import ([316b0d8](https://github.com/cooper-square-technologies/profound-python-sdk/commit/316b0d8bb4e7d993ed829082616873aabc3ff6ae))
+
 ## 0.14.0 (2025-12-12)
 
 Full Changelog: [v0.13.0...v0.14.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.13.0...v0.14.0)
