@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.15.1 (2026-01-06)
+
+Full Changelog: [v0.15.0...v0.15.1](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.15.0...v0.15.1)
+
+### Chores
+
+* **internal:** codegen related update ([4638fed](https://github.com/cooper-square-technologies/profound-python-sdk/commit/4638fed067725b504f535ff22bb7e77c114756bc))
+
 ## 0.15.0 (2025-12-30)
 
 Full Changelog: [v0.14.0...v0.15.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.14.0...v0.15.0)
