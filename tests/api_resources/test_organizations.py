@@ -14,6 +14,7 @@ from profound.types import (
     OrganizationDomainsResponse,
     OrganizationRegionsResponse,
     OrganizationListAssetsResponse,
+    OrganizationGetPersonasResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -47,6 +48,34 @@ class TestOrganizations:
 
             organization = response.parse()
             assert_matches_type(OrganizationDomainsResponse, organization, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_get_personas(self, client: Profound) -> None:
+        organization = client.organizations.get_personas()
+        assert_matches_type(OrganizationGetPersonasResponse, organization, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_get_personas(self, client: Profound) -> None:
+        response = client.organizations.with_raw_response.get_personas()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        organization = response.parse()
+        assert_matches_type(OrganizationGetPersonasResponse, organization, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_get_personas(self, client: Profound) -> None:
+        with client.organizations.with_streaming_response.get_personas() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            organization = response.parse()
+            assert_matches_type(OrganizationGetPersonasResponse, organization, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -165,6 +194,34 @@ class TestAsyncOrganizations:
 
             organization = await response.parse()
             assert_matches_type(OrganizationDomainsResponse, organization, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_get_personas(self, async_client: AsyncProfound) -> None:
+        organization = await async_client.organizations.get_personas()
+        assert_matches_type(OrganizationGetPersonasResponse, organization, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_get_personas(self, async_client: AsyncProfound) -> None:
+        response = await async_client.organizations.with_raw_response.get_personas()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        organization = await response.parse()
+        assert_matches_type(OrganizationGetPersonasResponse, organization, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_get_personas(self, async_client: AsyncProfound) -> None:
+        async with async_client.organizations.with_streaming_response.get_personas() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            organization = await response.parse()
+            assert_matches_type(OrganizationGetPersonasResponse, organization, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
