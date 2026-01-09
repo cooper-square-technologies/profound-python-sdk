@@ -8,6 +8,14 @@ from .logs import (
     LogsResourceWithStreamingResponse,
     AsyncLogsResourceWithStreamingResponse,
 )
+from .content import (
+    ContentResource,
+    AsyncContentResource,
+    ContentResourceWithRawResponse,
+    AsyncContentResourceWithRawResponse,
+    ContentResourceWithStreamingResponse,
+    AsyncContentResourceWithStreamingResponse,
+)
 from .prompts import (
     PromptsResource,
     AsyncPromptsResource,
@@ -58,4 +66,10 @@ __all__ = [
     "AsyncLogsResourceWithRawResponse",
     "LogsResourceWithStreamingResponse",
     "AsyncLogsResourceWithStreamingResponse",
+    "ContentResource",
+    "AsyncContentResource",
+    "ContentResourceWithRawResponse",
+    "AsyncContentResourceWithRawResponse",
+    "ContentResourceWithStreamingResponse",
+    "AsyncContentResourceWithStreamingResponse",
 ]
