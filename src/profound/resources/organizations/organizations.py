@@ -26,6 +26,7 @@ from ...types.organization_models_response import OrganizationModelsResponse
 from ...types.organization_domains_response import OrganizationDomainsResponse
 from ...types.organization_regions_response import OrganizationRegionsResponse
 from ...types.organization_list_assets_response import OrganizationListAssetsResponse
+from ...types.organization_get_personas_response import OrganizationGetPersonasResponse
 
 __all__ = ["OrganizationsResource", "AsyncOrganizationsResource"]
 
@@ -71,6 +72,25 @@ class OrganizationsResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=OrganizationDomainsResponse,
+        )
+
+    def get_personas(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> OrganizationGetPersonasResponse:
+        """Get Personas"""
+        return self._get(
+            "/v1/org/personas",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=OrganizationGetPersonasResponse,
         )
 
     def list_assets(
@@ -174,6 +194,25 @@ class AsyncOrganizationsResource(AsyncAPIResource):
             cast_to=OrganizationDomainsResponse,
         )
 
+    async def get_personas(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> OrganizationGetPersonasResponse:
+        """Get Personas"""
+        return await self._get(
+            "/v1/org/personas",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=OrganizationGetPersonasResponse,
+        )
+
     async def list_assets(
         self,
         *,
@@ -239,6 +278,9 @@ class OrganizationsResourceWithRawResponse:
         self.domains = to_raw_response_wrapper(
             organizations.domains,
         )
+        self.get_personas = to_raw_response_wrapper(
+            organizations.get_personas,
+        )
         self.list_assets = to_raw_response_wrapper(
             organizations.list_assets,
         )
@@ -260,6 +302,9 @@ class AsyncOrganizationsResourceWithRawResponse:
 
         self.domains = async_to_raw_response_wrapper(
             organizations.domains,
+        )
+        self.get_personas = async_to_raw_response_wrapper(
+            organizations.get_personas,
         )
         self.list_assets = async_to_raw_response_wrapper(
             organizations.list_assets,
@@ -283,6 +328,9 @@ class OrganizationsResourceWithStreamingResponse:
         self.domains = to_streamed_response_wrapper(
             organizations.domains,
         )
+        self.get_personas = to_streamed_response_wrapper(
+            organizations.get_personas,
+        )
         self.list_assets = to_streamed_response_wrapper(
             organizations.list_assets,
         )
@@ -304,6 +352,9 @@ class AsyncOrganizationsResourceWithStreamingResponse:
 
         self.domains = async_to_streamed_response_wrapper(
             organizations.domains,
+        )
+        self.get_personas = async_to_streamed_response_wrapper(
+            organizations.get_personas,
         )
         self.list_assets = async_to_streamed_response_wrapper(
             organizations.list_assets,

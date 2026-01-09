@@ -91,6 +91,136 @@ class TestReports:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
+    def test_method_get_bots_report(self, client: Profound) -> None:
+        report = client.reports.get_bots_report(
+            domain="domain",
+            metrics=["count"],
+            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+        )
+        assert_matches_type(ReportResponse, report, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_get_bots_report_with_all_params(self, client: Profound) -> None:
+        report = client.reports.get_bots_report(
+            domain="domain",
+            metrics=["count"],
+            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            date_interval="day",
+            dimensions=["date"],
+            end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            filters=[
+                {
+                    "field": "path",
+                    "operator": "is",
+                    "value": "string",
+                }
+            ],
+            order_by={"date": "asc"},
+            pagination={
+                "limit": 1,
+                "offset": 0,
+            },
+        )
+        assert_matches_type(ReportResponse, report, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_get_bots_report(self, client: Profound) -> None:
+        response = client.reports.with_raw_response.get_bots_report(
+            domain="domain",
+            metrics=["count"],
+            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        report = response.parse()
+        assert_matches_type(ReportResponse, report, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_get_bots_report(self, client: Profound) -> None:
+        with client.reports.with_streaming_response.get_bots_report(
+            domain="domain",
+            metrics=["count"],
+            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            report = response.parse()
+            assert_matches_type(ReportResponse, report, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_get_referrals_report(self, client: Profound) -> None:
+        report = client.reports.get_referrals_report(
+            domain="domain",
+            metrics=["visits"],
+            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+        )
+        assert_matches_type(ReportResponse, report, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_get_referrals_report_with_all_params(self, client: Profound) -> None:
+        report = client.reports.get_referrals_report(
+            domain="domain",
+            metrics=["visits"],
+            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            date_interval="day",
+            dimensions=["date"],
+            end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            filters=[
+                {
+                    "field": "path",
+                    "operator": "is",
+                    "value": "string",
+                }
+            ],
+            order_by={"date": "asc"},
+            pagination={
+                "limit": 1,
+                "offset": 0,
+            },
+        )
+        assert_matches_type(ReportResponse, report, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_get_referrals_report(self, client: Profound) -> None:
+        response = client.reports.with_raw_response.get_referrals_report(
+            domain="domain",
+            metrics=["visits"],
+            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        report = response.parse()
+        assert_matches_type(ReportResponse, report, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_get_referrals_report(self, client: Profound) -> None:
+        with client.reports.with_streaming_response.get_referrals_report(
+            domain="domain",
+            metrics=["visits"],
+            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            report = response.parse()
+            assert_matches_type(ReportResponse, report, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
     def test_method_sentiment(self, client: Profound) -> None:
         report = client.reports.sentiment(
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -296,6 +426,136 @@ class TestAsyncReports:
 
             report = await response.parse()
             assert_matches_type(ReportCitationsResponse, report, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_get_bots_report(self, async_client: AsyncProfound) -> None:
+        report = await async_client.reports.get_bots_report(
+            domain="domain",
+            metrics=["count"],
+            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+        )
+        assert_matches_type(ReportResponse, report, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_get_bots_report_with_all_params(self, async_client: AsyncProfound) -> None:
+        report = await async_client.reports.get_bots_report(
+            domain="domain",
+            metrics=["count"],
+            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            date_interval="day",
+            dimensions=["date"],
+            end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            filters=[
+                {
+                    "field": "path",
+                    "operator": "is",
+                    "value": "string",
+                }
+            ],
+            order_by={"date": "asc"},
+            pagination={
+                "limit": 1,
+                "offset": 0,
+            },
+        )
+        assert_matches_type(ReportResponse, report, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_get_bots_report(self, async_client: AsyncProfound) -> None:
+        response = await async_client.reports.with_raw_response.get_bots_report(
+            domain="domain",
+            metrics=["count"],
+            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        report = await response.parse()
+        assert_matches_type(ReportResponse, report, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_get_bots_report(self, async_client: AsyncProfound) -> None:
+        async with async_client.reports.with_streaming_response.get_bots_report(
+            domain="domain",
+            metrics=["count"],
+            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            report = await response.parse()
+            assert_matches_type(ReportResponse, report, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_get_referrals_report(self, async_client: AsyncProfound) -> None:
+        report = await async_client.reports.get_referrals_report(
+            domain="domain",
+            metrics=["visits"],
+            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+        )
+        assert_matches_type(ReportResponse, report, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_get_referrals_report_with_all_params(self, async_client: AsyncProfound) -> None:
+        report = await async_client.reports.get_referrals_report(
+            domain="domain",
+            metrics=["visits"],
+            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            date_interval="day",
+            dimensions=["date"],
+            end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            filters=[
+                {
+                    "field": "path",
+                    "operator": "is",
+                    "value": "string",
+                }
+            ],
+            order_by={"date": "asc"},
+            pagination={
+                "limit": 1,
+                "offset": 0,
+            },
+        )
+        assert_matches_type(ReportResponse, report, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_get_referrals_report(self, async_client: AsyncProfound) -> None:
+        response = await async_client.reports.with_raw_response.get_referrals_report(
+            domain="domain",
+            metrics=["visits"],
+            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        report = await response.parse()
+        assert_matches_type(ReportResponse, report, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_get_referrals_report(self, async_client: AsyncProfound) -> None:
+        async with async_client.reports.with_streaming_response.get_referrals_report(
+            domain="domain",
+            metrics=["visits"],
+            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            report = await response.parse()
+            assert_matches_type(ReportResponse, report, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
