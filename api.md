@@ -93,3 +93,18 @@ Methods:
 
 - <code title="post /v1/logs/raw/bots">client.logs.raw.<a href="./src/profound/resources/logs/raw.py">bots</a>(\*\*<a href="src/profound/types/logs/raw_bots_params.py">params</a>) -> <a href="./src/profound/types/logs/raw_bots_response.py">RawBotsResponse</a></code>
 - <code title="post /v1/logs/raw">client.logs.raw.<a href="./src/profound/resources/logs/raw.py">logs</a>(\*\*<a href="src/profound/types/logs/raw_logs_params.py">params</a>) -> <a href="./src/profound/types/logs/raw_logs_response.py">RawLogsResponse</a></code>
+
+# Content
+
+## Optimization
+
+Types:
+
+```python
+from profound.types.content import OptimizationRetrieveResponse, OptimizationListResponse
+```
+
+Methods:
+
+- <code title="get /v1/content/{asset_id}/optimization/{content_id}">client.content.optimization.<a href="./src/profound/resources/content/optimization.py">retrieve</a>(content_id, \*, asset_id) -> <a href="./src/profound/types/content/optimization_retrieve_response.py">OptimizationRetrieveResponse</a></code>
+- <code title="get /v1/content/{asset_id}/optimization">client.content.optimization.<a href="./src/profound/resources/content/optimization.py">list</a>(asset_id, \*\*<a href="src/profound/types/content/optimization_list_params.py">params</a>) -> <a href="./src/profound/types/content/optimization_list_response.py">OptimizationListResponse</a></code>
