@@ -10,19 +10,17 @@ __all__ = ["OptimizationListResponse", "Data", "Info", "InfoQuery"]
 
 
 class Data(BaseModel):
+    id: str
+
     created_at: datetime
-
-    dify_workflow_run_id: str
-
-    document_title: str
-
-    document_version: int
 
     extracted_input: Optional[str] = None
 
-    extracted_type: Optional[str] = None
+    status: str
 
-    latest_workflow_step: Optional[str] = None
+    title: str
+
+    type: str
 
 
 class InfoQuery(BaseModel):
