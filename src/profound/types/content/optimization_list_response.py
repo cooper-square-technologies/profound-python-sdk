@@ -2,6 +2,7 @@
 
 from typing import List, Optional
 from datetime import datetime
+from typing_extensions import Literal
 
 from ..._models import BaseModel
 from ..shared.pagination import Pagination
@@ -20,7 +21,7 @@ class Data(BaseModel):
 
     title: str
 
-    type: str
+    type: Literal["file", "text", "url"]
 
 
 class InfoQuery(BaseModel):

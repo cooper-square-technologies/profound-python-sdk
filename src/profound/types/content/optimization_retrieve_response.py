@@ -68,7 +68,7 @@ class DataInputsTopic(BaseModel):
 class DataInputsUser(BaseModel):
     metadata: Dict[str, Union[int, str]]
 
-    type: str
+    type: Literal["file", "text", "url"]
 
     value: str
 
