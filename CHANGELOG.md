@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.16.0 (2026-01-12)
+
+Full Changelog: [v0.15.1...v0.16.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.15.1...v0.16.0)
+
+### Features
+
+* **api:** api update ([26a3d90](https://github.com/cooper-square-technologies/profound-python-sdk/commit/26a3d90af3a54848b45fdb8f0004d0bcfd3970de))
+* **api:** api update ([9355ae1](https://github.com/cooper-square-technologies/profound-python-sdk/commit/9355ae1b49b17b329dc07dc029c0675e208d01e1))
+* **api:** api update ([4fc5d61](https://github.com/cooper-square-technologies/profound-python-sdk/commit/4fc5d611fc73c77d3c02268e29b360639f1e6558))
+* **api:** manual updates ([8948105](https://github.com/cooper-square-technologies/profound-python-sdk/commit/89481059f7f9035fec64743f3ffb48dfb4d22dcb))
+* **api:** manual updates ([6f5fac6](https://github.com/cooper-square-technologies/profound-python-sdk/commit/6f5fac6b0bbfa2eb45297442295160c796b722eb))
+
+
+### Documentation
+
+* prominently feature MCP server setup in root SDK readmes ([aaf4f2d](https://github.com/cooper-square-technologies/profound-python-sdk/commit/aaf4f2d3140ec305fe702eb0bddf497b29dcc572))
+
 ## 0.15.1 (2026-01-06)
 
 Full Changelog: [v0.15.0...v0.15.1](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.15.0...v0.15.1)

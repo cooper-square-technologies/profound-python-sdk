@@ -8,7 +8,13 @@ from typing_extensions import Literal
 
 import httpx
 
-from ..types import report_citations_params, report_sentiment_params, report_visibility_params
+from ..types import (
+    report_citations_params,
+    report_sentiment_params,
+    report_visibility_params,
+    report_get_bots_report_params,
+    report_get_referrals_report_params,
+)
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -140,6 +146,180 @@ class ReportsResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=ReportCitationsResponse,
+        )
+
+    def get_bots_report(
+        self,
+        *,
+        domain: str,
+        metrics: List[Literal["count", "citations", "indexing", "training", "last_visit"]],
+        start_date: Union[str, datetime],
+        date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
+        dimensions: List[Literal["date", "path", "bot_name", "bot_provider"]] | Omit = omit,
+        end_date: Union[str, datetime] | Omit = omit,
+        filters: Iterable[report_get_bots_report_params.Filter] | Omit = omit,
+        order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
+        pagination: Pagination | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ReportResponse:
+        """
+        Get bot traffic report from the daily aggregated materialized view.
+
+        This endpoint queries pre-aggregated daily bot data, making it efficient for
+        large date ranges and high-traffic sites.
+
+        Metrics:
+
+        - count: unique bot visits
+        - citations: unique citation events
+        - indexing: unique indexing events
+        - training: unique training events
+        - last_visit: most recent visit timestamp
+
+        Args:
+          domain: Domain to query logs for.
+
+          start_date: Start date for logs. Accepts: YYYY-MM-DD, YYYY-MM-DD HH:MM, YYYY-MM-DD HH:MM:SS,
+              or full ISO timestamp.
+
+          date_interval: Date interval for the report. (only used with date dimension)
+
+          dimensions: Dimensions to group the report by.
+
+          end_date: End date for logs. Accepts same formats as start_date. Defaults to now if
+              omitted.
+
+          filters: Filters for bots report.
+
+          order_by: Custom ordering of the report results.
+
+              The order is a record of key-value pairs where:
+
+              - key is the field to order by, which can be a metric or dimension
+              - value is the direction of the order, either 'asc' for ascending or 'desc' for
+                descending.
+
+              When not specified, the default order is the first metric in the query
+              descending.
+
+          pagination: Pagination settings for the report results.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/v1/reports/bots",
+            body=maybe_transform(
+                {
+                    "domain": domain,
+                    "metrics": metrics,
+                    "start_date": start_date,
+                    "date_interval": date_interval,
+                    "dimensions": dimensions,
+                    "end_date": end_date,
+                    "filters": filters,
+                    "order_by": order_by,
+                    "pagination": pagination,
+                },
+                report_get_bots_report_params.ReportGetBotsReportParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ReportResponse,
+        )
+
+    def get_referrals_report(
+        self,
+        *,
+        domain: str,
+        metrics: List[Literal["visits", "last_visit"]],
+        start_date: Union[str, datetime],
+        date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
+        dimensions: List[Literal["date", "path", "referral_source"]] | Omit = omit,
+        end_date: Union[str, datetime] | Omit = omit,
+        filters: Iterable[report_get_referrals_report_params.Filter] | Omit = omit,
+        order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
+        pagination: Pagination | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ReportResponse:
+        """
+        Get referral traffic report from the daily aggregated materialized view.
+
+        This endpoint queries pre-aggregated daily referral data, making it efficient
+        for large date ranges and high-traffic sites.
+
+        Args:
+          domain: Domain to query logs for.
+
+          start_date: Start date for logs. Accepts: YYYY-MM-DD, YYYY-MM-DD HH:MM, YYYY-MM-DD HH:MM:SS,
+              or full ISO timestamp.
+
+          date_interval: Date interval for the report. (only used with date dimension)
+
+          dimensions: Dimensions to group the report by.
+
+          end_date: End date for logs. Accepts same formats as start_date. Defaults to now if
+              omitted.
+
+          filters: Filters for referrals report.
+
+          order_by: Custom ordering of the report results.
+
+              The order is a record of key-value pairs where:
+
+              - key is the field to order by, which can be a metric or dimension
+              - value is the direction of the order, either 'asc' for ascending or 'desc' for
+                descending.
+
+              When not specified, the default order is the first metric in the query
+              descending.
+
+          pagination: Pagination settings for the report results.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/v1/reports/referrals",
+            body=maybe_transform(
+                {
+                    "domain": domain,
+                    "metrics": metrics,
+                    "start_date": start_date,
+                    "date_interval": date_interval,
+                    "dimensions": dimensions,
+                    "end_date": end_date,
+                    "filters": filters,
+                    "order_by": order_by,
+                    "pagination": pagination,
+                },
+                report_get_referrals_report_params.ReportGetReferralsReportParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ReportResponse,
         )
 
     def sentiment(
@@ -434,6 +614,180 @@ class AsyncReportsResource(AsyncAPIResource):
             cast_to=ReportCitationsResponse,
         )
 
+    async def get_bots_report(
+        self,
+        *,
+        domain: str,
+        metrics: List[Literal["count", "citations", "indexing", "training", "last_visit"]],
+        start_date: Union[str, datetime],
+        date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
+        dimensions: List[Literal["date", "path", "bot_name", "bot_provider"]] | Omit = omit,
+        end_date: Union[str, datetime] | Omit = omit,
+        filters: Iterable[report_get_bots_report_params.Filter] | Omit = omit,
+        order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
+        pagination: Pagination | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ReportResponse:
+        """
+        Get bot traffic report from the daily aggregated materialized view.
+
+        This endpoint queries pre-aggregated daily bot data, making it efficient for
+        large date ranges and high-traffic sites.
+
+        Metrics:
+
+        - count: unique bot visits
+        - citations: unique citation events
+        - indexing: unique indexing events
+        - training: unique training events
+        - last_visit: most recent visit timestamp
+
+        Args:
+          domain: Domain to query logs for.
+
+          start_date: Start date for logs. Accepts: YYYY-MM-DD, YYYY-MM-DD HH:MM, YYYY-MM-DD HH:MM:SS,
+              or full ISO timestamp.
+
+          date_interval: Date interval for the report. (only used with date dimension)
+
+          dimensions: Dimensions to group the report by.
+
+          end_date: End date for logs. Accepts same formats as start_date. Defaults to now if
+              omitted.
+
+          filters: Filters for bots report.
+
+          order_by: Custom ordering of the report results.
+
+              The order is a record of key-value pairs where:
+
+              - key is the field to order by, which can be a metric or dimension
+              - value is the direction of the order, either 'asc' for ascending or 'desc' for
+                descending.
+
+              When not specified, the default order is the first metric in the query
+              descending.
+
+          pagination: Pagination settings for the report results.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/v1/reports/bots",
+            body=await async_maybe_transform(
+                {
+                    "domain": domain,
+                    "metrics": metrics,
+                    "start_date": start_date,
+                    "date_interval": date_interval,
+                    "dimensions": dimensions,
+                    "end_date": end_date,
+                    "filters": filters,
+                    "order_by": order_by,
+                    "pagination": pagination,
+                },
+                report_get_bots_report_params.ReportGetBotsReportParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ReportResponse,
+        )
+
+    async def get_referrals_report(
+        self,
+        *,
+        domain: str,
+        metrics: List[Literal["visits", "last_visit"]],
+        start_date: Union[str, datetime],
+        date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
+        dimensions: List[Literal["date", "path", "referral_source"]] | Omit = omit,
+        end_date: Union[str, datetime] | Omit = omit,
+        filters: Iterable[report_get_referrals_report_params.Filter] | Omit = omit,
+        order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
+        pagination: Pagination | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ReportResponse:
+        """
+        Get referral traffic report from the daily aggregated materialized view.
+
+        This endpoint queries pre-aggregated daily referral data, making it efficient
+        for large date ranges and high-traffic sites.
+
+        Args:
+          domain: Domain to query logs for.
+
+          start_date: Start date for logs. Accepts: YYYY-MM-DD, YYYY-MM-DD HH:MM, YYYY-MM-DD HH:MM:SS,
+              or full ISO timestamp.
+
+          date_interval: Date interval for the report. (only used with date dimension)
+
+          dimensions: Dimensions to group the report by.
+
+          end_date: End date for logs. Accepts same formats as start_date. Defaults to now if
+              omitted.
+
+          filters: Filters for referrals report.
+
+          order_by: Custom ordering of the report results.
+
+              The order is a record of key-value pairs where:
+
+              - key is the field to order by, which can be a metric or dimension
+              - value is the direction of the order, either 'asc' for ascending or 'desc' for
+                descending.
+
+              When not specified, the default order is the first metric in the query
+              descending.
+
+          pagination: Pagination settings for the report results.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/v1/reports/referrals",
+            body=await async_maybe_transform(
+                {
+                    "domain": domain,
+                    "metrics": metrics,
+                    "start_date": start_date,
+                    "date_interval": date_interval,
+                    "dimensions": dimensions,
+                    "end_date": end_date,
+                    "filters": filters,
+                    "order_by": order_by,
+                    "pagination": pagination,
+                },
+                report_get_referrals_report_params.ReportGetReferralsReportParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ReportResponse,
+        )
+
     async def sentiment(
         self,
         *,
@@ -618,6 +972,12 @@ class ReportsResourceWithRawResponse:
         self.citations = to_raw_response_wrapper(
             reports.citations,
         )
+        self.get_bots_report = to_raw_response_wrapper(
+            reports.get_bots_report,
+        )
+        self.get_referrals_report = to_raw_response_wrapper(
+            reports.get_referrals_report,
+        )
         self.sentiment = to_raw_response_wrapper(
             reports.sentiment,
         )
@@ -632,6 +992,12 @@ class AsyncReportsResourceWithRawResponse:
 
         self.citations = async_to_raw_response_wrapper(
             reports.citations,
+        )
+        self.get_bots_report = async_to_raw_response_wrapper(
+            reports.get_bots_report,
+        )
+        self.get_referrals_report = async_to_raw_response_wrapper(
+            reports.get_referrals_report,
         )
         self.sentiment = async_to_raw_response_wrapper(
             reports.sentiment,
@@ -648,6 +1014,12 @@ class ReportsResourceWithStreamingResponse:
         self.citations = to_streamed_response_wrapper(
             reports.citations,
         )
+        self.get_bots_report = to_streamed_response_wrapper(
+            reports.get_bots_report,
+        )
+        self.get_referrals_report = to_streamed_response_wrapper(
+            reports.get_referrals_report,
+        )
         self.sentiment = to_streamed_response_wrapper(
             reports.sentiment,
         )
@@ -662,6 +1034,12 @@ class AsyncReportsResourceWithStreamingResponse:
 
         self.citations = async_to_streamed_response_wrapper(
             reports.citations,
+        )
+        self.get_bots_report = async_to_streamed_response_wrapper(
+            reports.get_bots_report,
+        )
+        self.get_referrals_report = async_to_streamed_response_wrapper(
+            reports.get_referrals_report,
         )
         self.sentiment = async_to_streamed_response_wrapper(
             reports.sentiment,
