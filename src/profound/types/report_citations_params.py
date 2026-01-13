@@ -23,7 +23,6 @@ __all__ = [
     "FilterRootDomainFilter",
     "FilterPromptTypeFilter",
     "FilterPersonaIDFilter",
-    "FilterCitationCategoryFilter",
 ]
 
 
@@ -239,28 +238,6 @@ class FilterPersonaIDFilter(TypedDict, total=False):
     value: Required[Union[str, SequenceNotStr[str]]]
 
 
-class FilterCitationCategoryFilter(TypedDict, total=False):
-    """Filter by citation category"""
-
-    field: Required[Literal["citation_category"]]
-
-    operator: Required[
-        Literal[
-            "is",
-            "not_is",
-            "in",
-            "not_in",
-            "contains",
-            "not_contains",
-            "matches",
-            "contains_case_insensitive",
-            "not_contains_case_insensitive",
-        ]
-    ]
-
-    value: Required[Union[str, SequenceNotStr[str]]]
-
-
 Filter: TypeAlias = Union[
     FilterHostnameFilter,
     FilterAppModelsAnswerEngineInsightsFiltersPathFilter,
@@ -272,5 +249,4 @@ Filter: TypeAlias = Union[
     FilterRootDomainFilter,
     FilterPromptTypeFilter,
     FilterPersonaIDFilter,
-    FilterCitationCategoryFilter,
 ]
