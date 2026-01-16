@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.18.0 (2026-01-16)
+
+Full Changelog: [v0.17.0...v0.18.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.17.0...v0.18.0)
+
+### Features
+
+* **api:** api update ([b06ca33](https://github.com/cooper-square-technologies/profound-python-sdk/commit/b06ca33336a67c44864052519acb711230bbabb8))
+* **api:** api update ([cdda1d0](https://github.com/cooper-square-technologies/profound-python-sdk/commit/cdda1d0555d4a8f49064a2755168c8c6b0fd64d9))
+* **api:** api update ([8b3c2c1](https://github.com/cooper-square-technologies/profound-python-sdk/commit/8b3c2c17ee5f0ba5729951eccad4b2af4fde2da4))
+* **api:** api update ([3524987](https://github.com/cooper-square-technologies/profound-python-sdk/commit/3524987fa2b64bdf67474da7bf38cdcf68fb4370))
+* **api:** manual updates ([1dc14f1](https://github.com/cooper-square-technologies/profound-python-sdk/commit/1dc14f1c52417d73fcb71813091c2514a79bb4da))
+* **api:** manual updates ([0e9a2e4](https://github.com/cooper-square-technologies/profound-python-sdk/commit/0e9a2e4baac9a41019c26e0ecb476c3d58c59ca3))
+* **api:** moved to org ([e12696d](https://github.com/cooper-square-technologies/profound-python-sdk/commit/e12696d409c2052c27445feb62a3220ec1c3fb22))
+* **client:** add support for binary request streaming ([5e1ce87](https://github.com/cooper-square-technologies/profound-python-sdk/commit/5e1ce87f1bbbbdc5c72d763e4c39c6b9be337a7f))
+
+
+### Chores
+
+* **internal:** version bump ([3f8cdec](https://github.com/cooper-square-technologies/profound-python-sdk/commit/3f8cdece8873f5a8e40b491ad1873aebd672e250))
+* update SDK settings ([9b64552](https://github.com/cooper-square-technologies/profound-python-sdk/commit/9b64552d18412de716baf4758dea48541b572695))
+
 ## 0.17.0 (2026-01-16)
 
 Full Changelog: [v0.16.0...v0.17.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.16.0...v0.17.0)
