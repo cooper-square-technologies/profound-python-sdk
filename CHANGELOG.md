@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.18.1 (2026-01-17)
+
+Full Changelog: [v0.18.0...v0.18.1](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.18.0...v0.18.1)
+
+### Chores
+
+* **internal:** update `actions/checkout` version ([a7ada13](https://github.com/cooper-square-technologies/profound-python-sdk/commit/a7ada137690c196e367c278587a162d5c0f0e149))
+
 ## 0.18.0 (2026-01-16)
 
 Full Changelog: [v0.17.0...v0.18.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.17.0...v0.18.0)
