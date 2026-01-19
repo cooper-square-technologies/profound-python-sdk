@@ -267,3 +267,8 @@ known-first-party = ["profound", "tests"]
 "scripts/**.py" = ["T201", "T203"]
 "tests/**.py" = ["T201", "T203"]
 "examples/**.py" = ["T201", "T203"]
+
+[tool.uv.workspace]
+members = [
+    "examples",
+]
