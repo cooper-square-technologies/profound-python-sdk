@@ -16,6 +16,8 @@ class CategoryAssetsResponseItem(BaseModel):
 
     is_owned: bool
 
+    logo_url: str
+
     name: str
 
     website: str
