@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.19.0 (2026-01-19)
+
+Full Changelog: [v0.18.1...v0.19.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.18.1...v0.19.0)
+
+### Features
+
+* add notebook with examples ([0c23aac](https://github.com/cooper-square-technologies/profound-python-sdk/commit/0c23aac7bf80d6591f74f6b9fad75e3fe4bef61b))
+* **api:** api update ([3159dc4](https://github.com/cooper-square-technologies/profound-python-sdk/commit/3159dc483cc499f1d2afe7a8df863b1a3846abe7))
+* **python:** bump edition to `python.2025-11-20` ([365b035](https://github.com/cooper-square-technologies/profound-python-sdk/commit/365b0354c5a26a696d3b11fd411bb27a9335e940))
+
+
+### Chores
+
+* **style:** lint ([b67bd92](https://github.com/cooper-square-technologies/profound-python-sdk/commit/b67bd92aa8ba4d05beafc4afbdaf848d920e77da))
+
 ## 0.18.1 (2026-01-17)
 
 Full Changelog: [v0.18.0...v0.18.1](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.18.0...v0.18.1)

@@ -1,6 +1,6 @@
 [project]
 name = "profound"
-version = "0.18.1"
+version = "0.19.0"
 description = "The official Python library for the profound API"
 dynamic = ["readme"]
 license = "Apache-2.0"
