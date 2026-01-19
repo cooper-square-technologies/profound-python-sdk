@@ -107,14 +107,11 @@ class ReportsResource(SyncAPIResource):
 
           order_by: Custom ordering of the report results.
 
-              The order is a record of key-value pairs where:
+                  The order is a record of key-value pairs where:
+                  - `key` is the field to order by, which can be a metric and/or `date`, `hostname`, `path` dimensions
+                  - `value` is the direction of the order, either `asc` for ascending or `desc` for descending.
 
-              - key is the field to order by, which can be a metric or dimension
-              - value is the direction of the order, either 'asc' for ascending or 'desc' for
-                descending.
-
-              When not specified, the default order is the first metric in the query
-              descending.
+                  When not specified, the default order is the first metric in the query descending.
 
           pagination: Pagination settings for the report results.
 
@@ -573,14 +570,11 @@ class AsyncReportsResource(AsyncAPIResource):
 
           order_by: Custom ordering of the report results.
 
-              The order is a record of key-value pairs where:
+                  The order is a record of key-value pairs where:
+                  - `key` is the field to order by, which can be a metric and/or `date`, `hostname`, `path` dimensions
+                  - `value` is the direction of the order, either `asc` for ascending or `desc` for descending.
 
-              - key is the field to order by, which can be a metric or dimension
-              - value is the direction of the order, either 'asc' for ascending or 'desc' for
-                descending.
-
-              When not specified, the default order is the first metric in the query
-              descending.
+                  When not specified, the default order is the first metric in the query descending.
 
           pagination: Pagination settings for the report results.
 
