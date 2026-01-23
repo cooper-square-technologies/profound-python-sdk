@@ -14,7 +14,7 @@ __all__ = [
     "ReportCitationsParams",
     "Filter",
     "FilterHostnameFilter",
-    "FilterAppModelsAnswerEngineInsightsFiltersPathFilter",
+    "FilterPathFilter",
     "FilterRegionIDFilter",
     "FilterTopicIDFilter",
     "FilterModelIDFilter",
@@ -104,7 +104,7 @@ class FilterHostnameFilter(TypedDict, total=False):
     value: Required[Union[str, SequenceNotStr[str]]]
 
 
-class FilterAppModelsAnswerEngineInsightsFiltersPathFilter(TypedDict, total=False):
+class FilterPathFilter(TypedDict, total=False):
     """Filter by URL path"""
 
     field: Required[Literal["path"]]
@@ -260,7 +260,7 @@ class FilterCitationCategoryFilter(TypedDict, total=False):
 
 Filter: TypeAlias = Union[
     FilterHostnameFilter,
-    FilterAppModelsAnswerEngineInsightsFiltersPathFilter,
+    FilterPathFilter,
     FilterRegionIDFilter,
     FilterTopicIDFilter,
     FilterModelIDFilter,
