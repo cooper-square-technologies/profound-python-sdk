@@ -16,6 +16,7 @@ __all__ = [
     "FilterRegionIDFilter",
     "FilterModelIDFilter",
     "FilterTopicIDFilter",
+    "FilterTopicNameFilter",
     "FilterAssetNameFilter",
     "FilterTagIDFilter",
     "FilterPromptFilter",
@@ -93,6 +94,28 @@ class FilterTopicIDFilter(TypedDict, total=False):
     value: Required[Union[str, SequenceNotStr[str]]]
 
 
+class FilterTopicNameFilter(TypedDict, total=False):
+    """Filter by topic name"""
+
+    field: Required[Literal["topic_name"]]
+
+    operator: Required[
+        Literal[
+            "is",
+            "not_is",
+            "in",
+            "not_in",
+            "contains",
+            "not_contains",
+            "matches",
+            "contains_case_insensitive",
+            "not_contains_case_insensitive",
+        ]
+    ]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
 class FilterAssetNameFilter(TypedDict, total=False):
     """Filter by asset name"""
 
@@ -158,6 +181,7 @@ Filter: TypeAlias = Union[
     FilterRegionIDFilter,
     FilterModelIDFilter,
     FilterTopicIDFilter,
+    FilterTopicNameFilter,
     FilterAssetNameFilter,
     FilterTagIDFilter,
     FilterPromptFilter,
