@@ -14,9 +14,10 @@ __all__ = [
     "ReportCitationsParams",
     "Filter",
     "FilterHostnameFilter",
-    "FilterAppModelsAnswerEngineInsightsFiltersPathFilter",
+    "FilterPathFilter",
     "FilterRegionIDFilter",
     "FilterTopicIDFilter",
+    "FilterTopicNameFilter",
     "FilterModelIDFilter",
     "FilterTagIDFilter",
     "FilterURLFilter",
@@ -104,7 +105,7 @@ class FilterHostnameFilter(TypedDict, total=False):
     value: Required[Union[str, SequenceNotStr[str]]]
 
 
-class FilterAppModelsAnswerEngineInsightsFiltersPathFilter(TypedDict, total=False):
+class FilterPathFilter(TypedDict, total=False):
     """Filter by URL path"""
 
     field: Required[Literal["path"]]
@@ -140,6 +141,28 @@ class FilterTopicIDFilter(TypedDict, total=False):
     """- `topic` - Deprecated"""
 
     operator: Required[Literal["is", "not_is", "in", "not_in"]]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
+class FilterTopicNameFilter(TypedDict, total=False):
+    """Filter by topic name"""
+
+    field: Required[Literal["topic_name"]]
+
+    operator: Required[
+        Literal[
+            "is",
+            "not_is",
+            "in",
+            "not_in",
+            "contains",
+            "not_contains",
+            "matches",
+            "contains_case_insensitive",
+            "not_contains_case_insensitive",
+        ]
+    ]
 
     value: Required[Union[str, SequenceNotStr[str]]]
 
@@ -260,9 +283,10 @@ class FilterCitationCategoryFilter(TypedDict, total=False):
 
 Filter: TypeAlias = Union[
     FilterHostnameFilter,
-    FilterAppModelsAnswerEngineInsightsFiltersPathFilter,
+    FilterPathFilter,
     FilterRegionIDFilter,
     FilterTopicIDFilter,
+    FilterTopicNameFilter,
     FilterModelIDFilter,
     FilterTagIDFilter,
     FilterURLFilter,
