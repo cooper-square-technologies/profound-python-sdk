@@ -10,7 +10,12 @@ from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 from .shared_params.pagination import Pagination
 
-__all__ = ["ReportGetReferralsReportParams", "Filter", "FilterPathFilter", "FilterReferralSourceFilter"]
+__all__ = [
+    "ReportGetReferralsReportParams",
+    "Filter",
+    "FilterAppModelsAgentAnalyticsFiltersPathFilter",
+    "FilterReferralSourceFilter",
+]
 
 
 class ReportGetReferralsReportParams(TypedDict, total=False):
@@ -58,7 +63,7 @@ class ReportGetReferralsReportParams(TypedDict, total=False):
     """Pagination settings for the report results."""
 
 
-class FilterPathFilter(TypedDict, total=False):
+class FilterAppModelsAgentAnalyticsFiltersPathFilter(TypedDict, total=False):
     """Filter by request path"""
 
     field: Required[Literal["path"]]
@@ -133,4 +138,4 @@ class FilterReferralSourceFilter(TypedDict, total=False):
     ]
 
 
-Filter: TypeAlias = Union[FilterPathFilter, FilterReferralSourceFilter]
+Filter: TypeAlias = Union[FilterAppModelsAgentAnalyticsFiltersPathFilter, FilterReferralSourceFilter]
