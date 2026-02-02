@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Dict, List, Optional
+from typing import List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -8,7 +8,7 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-__all__ = ["PromptAnswersResponse", "Data", "DataSentimentTheme"]
+__all__ = ["PromptAnswersResponse", "Data", "DataSentimentTheme", "Info"]
 
 
 class DataSentimentTheme(BaseModel):
@@ -57,9 +57,13 @@ class Data(BaseModel):
     topic: Optional[str] = None
 
 
+class Info(BaseModel):
+    total_rows: int
+
+
 class PromptAnswersResponse(BaseModel):
     """Response for the answers endpoint."""
 
     data: List[Data]
 
-    info: Dict[str, object]
+    info: Info
