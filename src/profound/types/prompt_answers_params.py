@@ -19,6 +19,7 @@ __all__ = [
     "FilterPromptTypeFilter",
     "FilterPromptFilter",
     "FilterPersonaIDFilter",
+    "FilterTopicIDFilter",
     "Include",
 ]
 
@@ -118,6 +119,15 @@ class FilterPersonaIDFilter(TypedDict, total=False):
     value: Required[Union[str, SequenceNotStr[str]]]
 
 
+class FilterTopicIDFilter(TypedDict, total=False):
+    field: Required[Literal["topic_id", "topic"]]
+    """- `topic` - Deprecated"""
+
+    operator: Required[Literal["is", "not_is", "in", "not_in"]]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
 Filter: TypeAlias = Union[
     FilterRegionIDFilter,
     FilterModelIDFilter,
@@ -125,6 +135,7 @@ Filter: TypeAlias = Union[
     FilterPromptTypeFilter,
     FilterPromptFilter,
     FilterPersonaIDFilter,
+    FilterTopicIDFilter,
 ]
 
 
