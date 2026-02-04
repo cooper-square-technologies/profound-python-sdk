@@ -15,7 +15,7 @@ __all__ = [
     "Filter",
     "FilterMethodFilter",
     "FilterHostFilter",
-    "FilterPathFilter",
+    "FilterProfoundAgentAnalyticsFiltersPathFilter",
     "FilterStatusCodeFilter",
     "FilterIPFilter",
     "FilterUserAgentFilter",
@@ -130,7 +130,7 @@ class FilterHostFilter(TypedDict, total=False):
     value: Required[Union[str, SequenceNotStr[str]]]
 
 
-class FilterPathFilter(TypedDict, total=False):
+class FilterProfoundAgentAnalyticsFiltersPathFilter(TypedDict, total=False):
     """Filter by request path"""
 
     field: Required[Literal["path"]]
@@ -295,7 +295,7 @@ class FilterDurationMsFilter(TypedDict, total=False):
 Filter: TypeAlias = Union[
     FilterMethodFilter,
     FilterHostFilter,
-    FilterPathFilter,
+    FilterProfoundAgentAnalyticsFiltersPathFilter,
     FilterStatusCodeFilter,
     FilterIPFilter,
     FilterUserAgentFilter,
