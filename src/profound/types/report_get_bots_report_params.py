@@ -10,7 +10,13 @@ from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 from .shared_params.pagination import Pagination
 
-__all__ = ["ReportGetBotsReportParams", "Filter", "FilterPathFilter", "FilterBotNameFilter", "FilterBotProviderFilter"]
+__all__ = [
+    "ReportGetBotsReportParams",
+    "Filter",
+    "FilterProfoundAgentAnalyticsFiltersPathFilter",
+    "FilterBotNameFilter",
+    "FilterBotProviderFilter",
+]
 
 
 class ReportGetBotsReportParams(TypedDict, total=False):
@@ -58,7 +64,7 @@ class ReportGetBotsReportParams(TypedDict, total=False):
     """Pagination settings for the report results."""
 
 
-class FilterPathFilter(TypedDict, total=False):
+class FilterProfoundAgentAnalyticsFiltersPathFilter(TypedDict, total=False):
     """Filter by request path"""
 
     field: Required[Literal["path"]]
@@ -232,4 +238,4 @@ class FilterBotProviderFilter(TypedDict, total=False):
     ]
 
 
-Filter: TypeAlias = Union[FilterPathFilter, FilterBotNameFilter, FilterBotProviderFilter]
+Filter: TypeAlias = Union[FilterProfoundAgentAnalyticsFiltersPathFilter, FilterBotNameFilter, FilterBotProviderFilter]
