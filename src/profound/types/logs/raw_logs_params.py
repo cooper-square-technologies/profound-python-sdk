@@ -9,13 +9,13 @@ from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 from ..._types import SequenceNotStr
 from ..._utils import PropertyInfo
 from ..shared_params.pagination import Pagination
+from ..shared_params.path_filter import PathFilter
 
 __all__ = [
     "RawLogsParams",
     "Filter",
     "FilterMethodFilter",
     "FilterHostFilter",
-    "FilterPathFilter",
     "FilterStatusCodeFilter",
     "FilterIPFilter",
     "FilterUserAgentFilter",
@@ -112,28 +112,6 @@ class FilterHostFilter(TypedDict, total=False):
     """Filter by host"""
 
     field: Required[Literal["host"]]
-
-    operator: Required[
-        Literal[
-            "is",
-            "not_is",
-            "in",
-            "not_in",
-            "contains",
-            "not_contains",
-            "matches",
-            "contains_case_insensitive",
-            "not_contains_case_insensitive",
-        ]
-    ]
-
-    value: Required[Union[str, SequenceNotStr[str]]]
-
-
-class FilterPathFilter(TypedDict, total=False):
-    """Filter by request path"""
-
-    field: Required[Literal["path"]]
 
     operator: Required[
         Literal[
@@ -295,7 +273,7 @@ class FilterDurationMsFilter(TypedDict, total=False):
 Filter: TypeAlias = Union[
     FilterMethodFilter,
     FilterHostFilter,
-    FilterPathFilter,
+    PathFilter,
     FilterStatusCodeFilter,
     FilterIPFilter,
     FilterUserAgentFilter,

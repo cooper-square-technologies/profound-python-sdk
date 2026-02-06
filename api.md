@@ -1,7 +1,16 @@
 # Shared Types
 
 ```python
-from profound.types import Pagination
+from profound.types import (
+    ModelIDFilter,
+    Pagination,
+    PathFilter,
+    PersonaIDFilter,
+    PromptFilter,
+    RegionIDFilter,
+    TagIDFilter,
+    TopicIDFilter,
+)
 ```
 
 # Organizations
@@ -68,7 +77,13 @@ Methods:
 Types:
 
 ```python
-from profound.types import ReportInfo, ReportResponse, ReportResult, ReportCitationsResponse
+from profound.types import (
+    ReportInfo,
+    ReportResponse,
+    ReportResult,
+    TopicNameFilter,
+    ReportCitationsResponse,
+)
 ```
 
 Methods:

@@ -2,7 +2,16 @@
 
 from __future__ import annotations
 
-from .shared import Pagination as Pagination
+from .shared import (
+    Pagination as Pagination,
+    PathFilter as PathFilter,
+    TagIDFilter as TagIDFilter,
+    PromptFilter as PromptFilter,
+    ModelIDFilter as ModelIDFilter,
+    TopicIDFilter as TopicIDFilter,
+    RegionIDFilter as RegionIDFilter,
+    PersonaIDFilter as PersonaIDFilter,
+)
 from .report_info import ReportInfo as ReportInfo
 from .report_result import ReportResult as ReportResult
 from .report_response import ReportResponse as ReportResponse
@@ -10,6 +19,7 @@ from .prompt_answers_params import PromptAnswersParams as PromptAnswersParams
 from .prompt_answers_response import PromptAnswersResponse as PromptAnswersResponse
 from .report_citations_params import ReportCitationsParams as ReportCitationsParams
 from .report_sentiment_params import ReportSentimentParams as ReportSentimentParams
+from .topic_name_filter_param import TopicNameFilterParam as TopicNameFilterParam
 from .report_visibility_params import ReportVisibilityParams as ReportVisibilityParams
 from .report_citations_response import ReportCitationsResponse as ReportCitationsResponse
 from .organization_models_response import OrganizationModelsResponse as OrganizationModelsResponse
