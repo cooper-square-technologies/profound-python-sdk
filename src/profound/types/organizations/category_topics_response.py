@@ -3,8 +3,15 @@
 from typing import List
 from typing_extensions import TypeAlias
 
-from .org_item import OrgItem
+from ..._models import BaseModel
 
-__all__ = ["CategoryTopicsResponse"]
+__all__ = ["CategoryTopicsResponse", "CategoryTopicsResponseItem"]
 
-CategoryTopicsResponse: TypeAlias = List[OrgItem]
+
+class CategoryTopicsResponseItem(BaseModel):
+    id: str
+
+    name: str
+
+
+CategoryTopicsResponse: TypeAlias = List[CategoryTopicsResponseItem]

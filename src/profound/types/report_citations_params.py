@@ -8,22 +8,22 @@ from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from .._types import SequenceNotStr
 from .._utils import PropertyInfo
+from .topic_name_filter_param import TopicNameFilterParam
 from .shared_params.pagination import Pagination
+from .shared_params.path_filter import PathFilter
+from .shared_params.tag_id_filter import TagIDFilter
+from .shared_params.model_id_filter import ModelIDFilter
+from .shared_params.topic_id_filter import TopicIDFilter
+from .shared_params.region_id_filter import RegionIDFilter
+from .shared_params.persona_id_filter import PersonaIDFilter
 
 __all__ = [
     "ReportCitationsParams",
     "Filter",
     "FilterHostnameFilter",
-    "FilterPathFilter",
-    "FilterRegionIDFilter",
-    "FilterTopicIDFilter",
-    "FilterTopicNameFilter",
-    "FilterModelIDFilter",
-    "FilterTagIDFilter",
     "FilterURLFilter",
     "FilterRootDomainFilter",
     "FilterPromptTypeFilter",
-    "FilterPersonaIDFilter",
     "FilterCitationCategoryFilter",
 ]
 
@@ -37,7 +37,11 @@ class ReportCitationsParams(TypedDict, total=False):
     Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
     """
 
-    metrics: Required[List[Literal["count", "share_of_voice"]]]
+    metrics: Required[List[Literal["count", "citation_share"]]]
+    """Metrics to include.
+
+    `share_of_voice` is deprecated, use `citation_share` instead.
+    """
 
     start_date: Required[Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]]
     """Start date for the report.
@@ -101,86 +105,6 @@ class FilterHostnameFilter(TypedDict, total=False):
             "not_contains_case_insensitive",
         ]
     ]
-
-    value: Required[Union[str, SequenceNotStr[str]]]
-
-
-class FilterPathFilter(TypedDict, total=False):
-    """Filter by URL path"""
-
-    field: Required[Literal["path"]]
-
-    operator: Required[
-        Literal[
-            "is",
-            "not_is",
-            "in",
-            "not_in",
-            "contains",
-            "not_contains",
-            "matches",
-            "contains_case_insensitive",
-            "not_contains_case_insensitive",
-        ]
-    ]
-
-    value: Required[Union[str, SequenceNotStr[str]]]
-
-
-class FilterRegionIDFilter(TypedDict, total=False):
-    field: Required[Literal["region_id", "region"]]
-    """- `region` - Deprecated"""
-
-    operator: Required[Literal["is", "not_is", "in", "not_in"]]
-
-    value: Required[Union[str, SequenceNotStr[str]]]
-
-
-class FilterTopicIDFilter(TypedDict, total=False):
-    field: Required[Literal["topic_id", "topic"]]
-    """- `topic` - Deprecated"""
-
-    operator: Required[Literal["is", "not_is", "in", "not_in"]]
-
-    value: Required[Union[str, SequenceNotStr[str]]]
-
-
-class FilterTopicNameFilter(TypedDict, total=False):
-    """Filter by topic name"""
-
-    field: Required[Literal["topic_name"]]
-
-    operator: Required[
-        Literal[
-            "is",
-            "not_is",
-            "in",
-            "not_in",
-            "contains",
-            "not_contains",
-            "matches",
-            "contains_case_insensitive",
-            "not_contains_case_insensitive",
-        ]
-    ]
-
-    value: Required[Union[str, SequenceNotStr[str]]]
-
-
-class FilterModelIDFilter(TypedDict, total=False):
-    field: Required[Literal["model_id", "model"]]
-    """- `model` - Deprecated"""
-
-    operator: Required[Literal["is", "not_is", "in", "not_in"]]
-
-    value: Required[Union[str, SequenceNotStr[str]]]
-
-
-class FilterTagIDFilter(TypedDict, total=False):
-    field: Required[Literal["tag_id", "tag"]]
-    """- `tag` - Deprecated"""
-
-    operator: Required[Literal["is", "not_is", "in", "not_in"]]
 
     value: Required[Union[str, SequenceNotStr[str]]]
 
@@ -251,14 +175,6 @@ class FilterPromptTypeFilter(TypedDict, total=False):
     value: Required[Union[Literal["visibility", "sentiment"], List[Literal["visibility", "sentiment"]]]]
 
 
-class FilterPersonaIDFilter(TypedDict, total=False):
-    field: Required[Literal["persona_id"]]
-
-    operator: Required[Literal["is", "not_is", "in", "not_in"]]
-
-    value: Required[Union[str, SequenceNotStr[str]]]
-
-
 class FilterCitationCategoryFilter(TypedDict, total=False):
     """Filter by citation category"""
 
@@ -283,15 +199,15 @@ class FilterCitationCategoryFilter(TypedDict, total=False):
 
 Filter: TypeAlias = Union[
     FilterHostnameFilter,
-    FilterPathFilter,
-    FilterRegionIDFilter,
-    FilterTopicIDFilter,
-    FilterTopicNameFilter,
-    FilterModelIDFilter,
-    FilterTagIDFilter,
+    PathFilter,
+    RegionIDFilter,
+    TopicIDFilter,
+    TopicNameFilterParam,
+    ModelIDFilter,
+    TagIDFilter,
     FilterURLFilter,
     FilterRootDomainFilter,
     FilterPromptTypeFilter,
-    FilterPersonaIDFilter,
+    PersonaIDFilter,
     FilterCitationCategoryFilter,
 ]

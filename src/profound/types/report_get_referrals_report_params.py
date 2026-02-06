@@ -6,16 +6,11 @@ from typing import Dict, List, Union, Iterable
 from datetime import datetime
 from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
-from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 from .shared_params.pagination import Pagination
+from .shared_params.path_filter import PathFilter
 
-__all__ = [
-    "ReportGetReferralsReportParams",
-    "Filter",
-    "FilterAppModelsAgentAnalyticsFiltersPathFilter",
-    "FilterReferralSourceFilter",
-]
+__all__ = ["ReportGetReferralsReportParams", "Filter", "FilterReferralSourceFilter"]
 
 
 class ReportGetReferralsReportParams(TypedDict, total=False):
@@ -61,28 +56,6 @@ class ReportGetReferralsReportParams(TypedDict, total=False):
 
     pagination: Pagination
     """Pagination settings for the report results."""
-
-
-class FilterAppModelsAgentAnalyticsFiltersPathFilter(TypedDict, total=False):
-    """Filter by request path"""
-
-    field: Required[Literal["path"]]
-
-    operator: Required[
-        Literal[
-            "is",
-            "not_is",
-            "in",
-            "not_in",
-            "contains",
-            "not_contains",
-            "matches",
-            "contains_case_insensitive",
-            "not_contains_case_insensitive",
-        ]
-    ]
-
-    value: Required[Union[str, SequenceNotStr[str]]]
 
 
 class FilterReferralSourceFilter(TypedDict, total=False):
@@ -138,4 +111,4 @@ class FilterReferralSourceFilter(TypedDict, total=False):
     ]
 
 
-Filter: TypeAlias = Union[FilterAppModelsAgentAnalyticsFiltersPathFilter, FilterReferralSourceFilter]
+Filter: TypeAlias = Union[PathFilter, FilterReferralSourceFilter]

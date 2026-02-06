@@ -44,6 +44,7 @@ class TestPrompts:
             ],
             include={
                 "asset": True,
+                "asset_id": True,
                 "citations": True,
                 "created_at": True,
                 "mentions": True,
@@ -131,6 +132,7 @@ class TestAsyncPrompts:
             ],
             include={
                 "asset": True,
+                "asset_id": True,
                 "citations": True,
                 "created_at": True,
                 "mentions": True,

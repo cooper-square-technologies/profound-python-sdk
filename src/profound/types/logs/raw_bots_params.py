@@ -9,6 +9,7 @@ from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 from ..._types import SequenceNotStr
 from ..._utils import PropertyInfo
 from ..shared_params.pagination import Pagination
+from ..shared_params.path_filter import PathFilter
 
 __all__ = [
     "RawBotsParams",
@@ -17,7 +18,6 @@ __all__ = [
     "FilterBotProviderFilter",
     "FilterBotTypesFilter",
     "FilterMethodFilter",
-    "FilterAppModelsAgentAnalyticsFiltersPathFilter",
     "FilterStatusCodeFilter",
     "FilterIPFilter",
     "FilterUserAgentFilter",
@@ -286,28 +286,6 @@ class FilterMethodFilter(TypedDict, total=False):
     value: Required[Union[str, SequenceNotStr[str]]]
 
 
-class FilterAppModelsAgentAnalyticsFiltersPathFilter(TypedDict, total=False):
-    """Filter by request path"""
-
-    field: Required[Literal["path"]]
-
-    operator: Required[
-        Literal[
-            "is",
-            "not_is",
-            "in",
-            "not_in",
-            "contains",
-            "not_contains",
-            "matches",
-            "contains_case_insensitive",
-            "not_contains_case_insensitive",
-        ]
-    ]
-
-    value: Required[Union[str, SequenceNotStr[str]]]
-
-
 class FilterStatusCodeFilter(TypedDict, total=False):
     """Filter by HTTP status code"""
 
@@ -411,7 +389,7 @@ Filter: TypeAlias = Union[
     FilterBotProviderFilter,
     FilterBotTypesFilter,
     FilterMethodFilter,
-    FilterAppModelsAgentAnalyticsFiltersPathFilter,
+    PathFilter,
     FilterStatusCodeFilter,
     FilterIPFilter,
     FilterUserAgentFilter,
