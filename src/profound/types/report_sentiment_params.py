@@ -15,9 +15,10 @@ from .shared_params.tag_id_filter import TagIDFilter
 from .shared_params.model_id_filter import ModelIDFilter
 from .shared_params.topic_id_filter import TopicIDFilter
 from .shared_params.region_id_filter import RegionIDFilter
+from .shared_params.asset_name_filter import AssetNameFilter
 from .shared_params.persona_id_filter import PersonaIDFilter
 
-__all__ = ["ReportSentimentParams", "Filter", "FilterAssetNameFilter", "FilterThemeFilter"]
+__all__ = ["ReportSentimentParams", "Filter", "FilterThemeFilter"]
 
 
 class ReportSentimentParams(TypedDict, total=False):
@@ -77,28 +78,6 @@ class ReportSentimentParams(TypedDict, total=False):
     """Pagination settings for the report results."""
 
 
-class FilterAssetNameFilter(TypedDict, total=False):
-    """Filter by asset name"""
-
-    field: Required[Literal["asset_name"]]
-
-    operator: Required[
-        Literal[
-            "is",
-            "not_is",
-            "in",
-            "not_in",
-            "contains",
-            "not_contains",
-            "matches",
-            "contains_case_insensitive",
-            "not_contains_case_insensitive",
-        ]
-    ]
-
-    value: Required[Union[str, SequenceNotStr[str]]]
-
-
 class FilterThemeFilter(TypedDict, total=False):
     """Filter by theme"""
 
@@ -122,7 +101,7 @@ class FilterThemeFilter(TypedDict, total=False):
 
 
 Filter: TypeAlias = Union[
-    FilterAssetNameFilter,
+    AssetNameFilter,
     FilterThemeFilter,
     RegionIDFilter,
     TopicIDFilter,

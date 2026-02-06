@@ -2,6 +2,7 @@
 
 ```python
 from profound.types import (
+    AssetNameFilter,
     ModelIDFilter,
     Pagination,
     PathFilter,

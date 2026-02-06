@@ -10,6 +10,7 @@ from .shared import (
     ModelIDFilter as ModelIDFilter,
     TopicIDFilter as TopicIDFilter,
     RegionIDFilter as RegionIDFilter,
+    AssetNameFilter as AssetNameFilter,
     PersonaIDFilter as PersonaIDFilter,
 )
 from .report_info import ReportInfo as ReportInfo
