@@ -58,7 +58,7 @@ class ReportsResource(SyncAPIResource):
         *,
         category_id: str,
         end_date: Union[str, datetime],
-        metrics: List[Literal["count", "share_of_voice"]],
+        metrics: List[Literal["count", "citation_share"]],
         start_date: Union[str, datetime],
         date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
         dimensions: List[
@@ -95,6 +95,9 @@ class ReportsResource(SyncAPIResource):
 
         Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full
               ISO timestamp.
+
+          metrics: Metrics to include. `share_of_voice` is deprecated, use `citation_share`
+              instead.
 
           start_date: Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or
               full ISO timestamp.
@@ -521,7 +524,7 @@ class AsyncReportsResource(AsyncAPIResource):
         *,
         category_id: str,
         end_date: Union[str, datetime],
-        metrics: List[Literal["count", "share_of_voice"]],
+        metrics: List[Literal["count", "citation_share"]],
         start_date: Union[str, datetime],
         date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
         dimensions: List[
@@ -558,6 +561,9 @@ class AsyncReportsResource(AsyncAPIResource):
 
         Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full
               ISO timestamp.
+
+          metrics: Metrics to include. `share_of_voice` is deprecated, use `citation_share`
+              instead.
 
           start_date: Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or
               full ISO timestamp.

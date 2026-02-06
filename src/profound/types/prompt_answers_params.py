@@ -6,6 +6,7 @@ from typing import List, Union, Iterable
 from datetime import datetime
 from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
+from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 from .shared_params.pagination import Pagination
 from .shared_params.prompt_filter import PromptFilter
@@ -15,7 +16,14 @@ from .shared_params.topic_id_filter import TopicIDFilter
 from .shared_params.region_id_filter import RegionIDFilter
 from .shared_params.persona_id_filter import PersonaIDFilter
 
-__all__ = ["PromptAnswersParams", "Filter", "FilterPromptTypeFilter", "Include"]
+__all__ = [
+    "PromptAnswersParams",
+    "Filter",
+    "FilterPromptTypeFilter",
+    "FilterAssetIDFilter",
+    "FilterAssetNameFilter",
+    "Include",
+]
 
 
 class PromptAnswersParams(TypedDict, total=False):
@@ -56,13 +64,53 @@ class FilterPromptTypeFilter(TypedDict, total=False):
     value: Required[Union[Literal["visibility", "sentiment"], List[Literal["visibility", "sentiment"]]]]
 
 
+class FilterAssetIDFilter(TypedDict, total=False):
+    field: Required[Literal["asset_id"]]
+
+    operator: Required[Literal["is", "not_is", "in", "not_in"]]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
+class FilterAssetNameFilter(TypedDict, total=False):
+    """Filter by asset name"""
+
+    field: Required[Literal["asset_name"]]
+
+    operator: Required[
+        Literal[
+            "is",
+            "not_is",
+            "in",
+            "not_in",
+            "contains",
+            "not_contains",
+            "matches",
+            "contains_case_insensitive",
+            "not_contains_case_insensitive",
+        ]
+    ]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
 Filter: TypeAlias = Union[
-    RegionIDFilter, ModelIDFilter, TagIDFilter, FilterPromptTypeFilter, PromptFilter, PersonaIDFilter, TopicIDFilter
+    RegionIDFilter,
+    ModelIDFilter,
+    TagIDFilter,
+    FilterPromptTypeFilter,
+    PromptFilter,
+    PersonaIDFilter,
+    TopicIDFilter,
+    FilterAssetIDFilter,
+    FilterAssetNameFilter,
 ]
 
 
 class Include(TypedDict, total=False):
     asset: bool
+
+    asset_id: bool
 
     citations: bool
 
