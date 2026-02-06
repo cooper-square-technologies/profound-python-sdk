@@ -10,6 +10,7 @@ from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 from .topic_name_filter_param import TopicNameFilterParam
 from .shared_params.pagination import Pagination
+from .shared_params.path_filter import PathFilter
 from .shared_params.tag_id_filter import TagIDFilter
 from .shared_params.model_id_filter import ModelIDFilter
 from .shared_params.topic_id_filter import TopicIDFilter
@@ -20,7 +21,6 @@ __all__ = [
     "ReportCitationsParams",
     "Filter",
     "FilterHostnameFilter",
-    "FilterProfoundAnswerEngineInsightsFiltersPathFilter",
     "FilterURLFilter",
     "FilterRootDomainFilter",
     "FilterPromptTypeFilter",
@@ -37,7 +37,11 @@ class ReportCitationsParams(TypedDict, total=False):
     Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
     """
 
-    metrics: Required[List[Literal["count", "share_of_voice"]]]
+    metrics: Required[List[Literal["count", "citation_share"]]]
+    """Metrics to include.
+
+    `share_of_voice` is deprecated, use `citation_share` instead.
+    """
 
     start_date: Required[Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]]
     """Start date for the report.
@@ -87,28 +91,6 @@ class FilterHostnameFilter(TypedDict, total=False):
     """Filter by hostname"""
 
     field: Required[Literal["hostname"]]
-
-    operator: Required[
-        Literal[
-            "is",
-            "not_is",
-            "in",
-            "not_in",
-            "contains",
-            "not_contains",
-            "matches",
-            "contains_case_insensitive",
-            "not_contains_case_insensitive",
-        ]
-    ]
-
-    value: Required[Union[str, SequenceNotStr[str]]]
-
-
-class FilterProfoundAnswerEngineInsightsFiltersPathFilter(TypedDict, total=False):
-    """Filter by URL path"""
-
-    field: Required[Literal["path"]]
 
     operator: Required[
         Literal[
@@ -217,7 +199,7 @@ class FilterCitationCategoryFilter(TypedDict, total=False):
 
 Filter: TypeAlias = Union[
     FilterHostnameFilter,
-    FilterProfoundAnswerEngineInsightsFiltersPathFilter,
+    PathFilter,
     RegionIDFilter,
     TopicIDFilter,
     TopicNameFilterParam,

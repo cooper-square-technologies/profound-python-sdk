@@ -22,6 +22,8 @@ class Data(BaseModel):
 
     asset: Optional[str] = None
 
+    asset_id: Optional[str] = None
+
     citations: Optional[List[str]] = None
 
     created_at: Optional[datetime] = None
