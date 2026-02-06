@@ -6,11 +6,11 @@ from typing import Dict, List, Union, Iterable
 from datetime import datetime
 from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
-from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 from .shared_params.pagination import Pagination
+from .shared_params.path_filter import PathFilter
 
-__all__ = ["ReportGetBotsReportParams", "Filter", "FilterPathFilter", "FilterBotNameFilter", "FilterBotProviderFilter"]
+__all__ = ["ReportGetBotsReportParams", "Filter", "FilterBotNameFilter", "FilterBotProviderFilter"]
 
 
 class ReportGetBotsReportParams(TypedDict, total=False):
@@ -56,28 +56,6 @@ class ReportGetBotsReportParams(TypedDict, total=False):
 
     pagination: Pagination
     """Pagination settings for the report results."""
-
-
-class FilterPathFilter(TypedDict, total=False):
-    """Filter by request path"""
-
-    field: Required[Literal["path"]]
-
-    operator: Required[
-        Literal[
-            "is",
-            "not_is",
-            "in",
-            "not_in",
-            "contains",
-            "not_contains",
-            "matches",
-            "contains_case_insensitive",
-            "not_contains_case_insensitive",
-        ]
-    ]
-
-    value: Required[Union[str, SequenceNotStr[str]]]
 
 
 class FilterBotNameFilter(TypedDict, total=False):
@@ -232,4 +210,4 @@ class FilterBotProviderFilter(TypedDict, total=False):
     ]
 
 
-Filter: TypeAlias = Union[FilterPathFilter, FilterBotNameFilter, FilterBotProviderFilter]
+Filter: TypeAlias = Union[PathFilter, FilterBotNameFilter, FilterBotProviderFilter]
