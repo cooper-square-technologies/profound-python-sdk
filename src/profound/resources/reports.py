@@ -58,7 +58,7 @@ class ReportsResource(SyncAPIResource):
         *,
         category_id: str,
         end_date: Union[str, datetime],
-        metrics: List[Literal["count", "citation_share"]],
+        metrics: List[Literal["count", "citation_share", "share_of_voice"]],
         start_date: Union[str, datetime],
         date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
         dimensions: List[
@@ -524,7 +524,7 @@ class AsyncReportsResource(AsyncAPIResource):
         *,
         category_id: str,
         end_date: Union[str, datetime],
-        metrics: List[Literal["count", "citation_share"]],
+        metrics: List[Literal["count", "citation_share", "share_of_voice"]],
         start_date: Union[str, datetime],
         date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
         dimensions: List[
