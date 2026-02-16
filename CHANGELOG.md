@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.25.0 (2026-02-16)
+
+Full Changelog: [v0.24.0...v0.25.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.24.0...v0.25.0)
+
+### Features
+
+* **api:** api update ([806ed74](https://github.com/cooper-square-technologies/profound-python-sdk/commit/806ed74a22943cc3e0c5b2a94aa912f3d5fcfbac))
+
+
+### Chores
+
+* format all `api.md` files ([b20620e](https://github.com/cooper-square-technologies/profound-python-sdk/commit/b20620ef7f2a4bbd2dd16187ce2cc9055d838a6f))
+* **internal:** fix lint error on Python 3.14 ([dad311b](https://github.com/cooper-square-technologies/profound-python-sdk/commit/dad311b8613dd97aaf284a8f27542d1a421d853e))
+
 ## 0.24.0 (2026-02-10)
 
 Full Changelog: [v0.23.0...v0.24.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.23.0...v0.24.0)
