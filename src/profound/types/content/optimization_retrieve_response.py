@@ -74,11 +74,11 @@ class DataInputsUser(BaseModel):
 
 
 class DataInputs(BaseModel):
-    prompt: DataInputsPrompt
+    prompt: Optional[DataInputsPrompt] = None
 
     top_citations: List[str]
 
-    topic: DataInputsTopic
+    topic: Optional[DataInputsTopic] = None
 
     user: DataInputsUser
 
