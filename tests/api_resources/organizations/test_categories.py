@@ -24,13 +24,13 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestCategories:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list(self, client: Profound) -> None:
         category = client.organizations.categories.list()
         assert_matches_type(CategoryListResponse, category, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Profound) -> None:
         response = client.organizations.categories.with_raw_response.list()
@@ -40,7 +40,7 @@ class TestCategories:
         category = response.parse()
         assert_matches_type(CategoryListResponse, category, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Profound) -> None:
         with client.organizations.categories.with_streaming_response.list() as response:
@@ -52,7 +52,7 @@ class TestCategories:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_assets(self, client: Profound) -> None:
         category = client.organizations.categories.assets(
@@ -60,7 +60,7 @@ class TestCategories:
         )
         assert_matches_type(CategoryAssetsResponse, category, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_assets(self, client: Profound) -> None:
         response = client.organizations.categories.with_raw_response.assets(
@@ -72,7 +72,7 @@ class TestCategories:
         category = response.parse()
         assert_matches_type(CategoryAssetsResponse, category, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_assets(self, client: Profound) -> None:
         with client.organizations.categories.with_streaming_response.assets(
@@ -86,7 +86,7 @@ class TestCategories:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_assets(self, client: Profound) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `category_id` but received ''"):
@@ -94,7 +94,7 @@ class TestCategories:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_category_personas(self, client: Profound) -> None:
         category = client.organizations.categories.get_category_personas(
@@ -102,7 +102,7 @@ class TestCategories:
         )
         assert_matches_type(CategoryGetCategoryPersonasResponse, category, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_category_personas(self, client: Profound) -> None:
         response = client.organizations.categories.with_raw_response.get_category_personas(
@@ -114,7 +114,7 @@ class TestCategories:
         category = response.parse()
         assert_matches_type(CategoryGetCategoryPersonasResponse, category, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_category_personas(self, client: Profound) -> None:
         with client.organizations.categories.with_streaming_response.get_category_personas(
@@ -128,7 +128,7 @@ class TestCategories:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_get_category_personas(self, client: Profound) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `category_id` but received ''"):
@@ -136,7 +136,7 @@ class TestCategories:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_prompts(self, client: Profound) -> None:
         category = client.organizations.categories.prompts(
@@ -144,7 +144,7 @@ class TestCategories:
         )
         assert_matches_type(CategoryPromptsResponse, category, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_prompts(self, client: Profound) -> None:
         response = client.organizations.categories.with_raw_response.prompts(
@@ -156,7 +156,7 @@ class TestCategories:
         category = response.parse()
         assert_matches_type(CategoryPromptsResponse, category, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_prompts(self, client: Profound) -> None:
         with client.organizations.categories.with_streaming_response.prompts(
@@ -170,7 +170,7 @@ class TestCategories:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_prompts(self, client: Profound) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `category_id` but received ''"):
@@ -178,7 +178,7 @@ class TestCategories:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_tags(self, client: Profound) -> None:
         category = client.organizations.categories.tags(
@@ -186,7 +186,7 @@ class TestCategories:
         )
         assert_matches_type(CategoryTagsResponse, category, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_tags(self, client: Profound) -> None:
         response = client.organizations.categories.with_raw_response.tags(
@@ -198,7 +198,7 @@ class TestCategories:
         category = response.parse()
         assert_matches_type(CategoryTagsResponse, category, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_tags(self, client: Profound) -> None:
         with client.organizations.categories.with_streaming_response.tags(
@@ -212,7 +212,7 @@ class TestCategories:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_tags(self, client: Profound) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `category_id` but received ''"):
@@ -220,7 +220,7 @@ class TestCategories:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_topics(self, client: Profound) -> None:
         category = client.organizations.categories.topics(
@@ -228,7 +228,7 @@ class TestCategories:
         )
         assert_matches_type(CategoryTopicsResponse, category, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_topics(self, client: Profound) -> None:
         response = client.organizations.categories.with_raw_response.topics(
@@ -240,7 +240,7 @@ class TestCategories:
         category = response.parse()
         assert_matches_type(CategoryTopicsResponse, category, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_topics(self, client: Profound) -> None:
         with client.organizations.categories.with_streaming_response.topics(
@@ -254,7 +254,7 @@ class TestCategories:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_topics(self, client: Profound) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `category_id` but received ''"):
@@ -268,13 +268,13 @@ class TestAsyncCategories:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncProfound) -> None:
         category = await async_client.organizations.categories.list()
         assert_matches_type(CategoryListResponse, category, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncProfound) -> None:
         response = await async_client.organizations.categories.with_raw_response.list()
@@ -284,7 +284,7 @@ class TestAsyncCategories:
         category = await response.parse()
         assert_matches_type(CategoryListResponse, category, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncProfound) -> None:
         async with async_client.organizations.categories.with_streaming_response.list() as response:
@@ -296,7 +296,7 @@ class TestAsyncCategories:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_assets(self, async_client: AsyncProfound) -> None:
         category = await async_client.organizations.categories.assets(
@@ -304,7 +304,7 @@ class TestAsyncCategories:
         )
         assert_matches_type(CategoryAssetsResponse, category, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_assets(self, async_client: AsyncProfound) -> None:
         response = await async_client.organizations.categories.with_raw_response.assets(
@@ -316,7 +316,7 @@ class TestAsyncCategories:
         category = await response.parse()
         assert_matches_type(CategoryAssetsResponse, category, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_assets(self, async_client: AsyncProfound) -> None:
         async with async_client.organizations.categories.with_streaming_response.assets(
@@ -330,7 +330,7 @@ class TestAsyncCategories:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_assets(self, async_client: AsyncProfound) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `category_id` but received ''"):
@@ -338,7 +338,7 @@ class TestAsyncCategories:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_category_personas(self, async_client: AsyncProfound) -> None:
         category = await async_client.organizations.categories.get_category_personas(
@@ -346,7 +346,7 @@ class TestAsyncCategories:
         )
         assert_matches_type(CategoryGetCategoryPersonasResponse, category, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_category_personas(self, async_client: AsyncProfound) -> None:
         response = await async_client.organizations.categories.with_raw_response.get_category_personas(
@@ -358,7 +358,7 @@ class TestAsyncCategories:
         category = await response.parse()
         assert_matches_type(CategoryGetCategoryPersonasResponse, category, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_category_personas(self, async_client: AsyncProfound) -> None:
         async with async_client.organizations.categories.with_streaming_response.get_category_personas(
@@ -372,7 +372,7 @@ class TestAsyncCategories:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_get_category_personas(self, async_client: AsyncProfound) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `category_id` but received ''"):
@@ -380,7 +380,7 @@ class TestAsyncCategories:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_prompts(self, async_client: AsyncProfound) -> None:
         category = await async_client.organizations.categories.prompts(
@@ -388,7 +388,7 @@ class TestAsyncCategories:
         )
         assert_matches_type(CategoryPromptsResponse, category, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_prompts(self, async_client: AsyncProfound) -> None:
         response = await async_client.organizations.categories.with_raw_response.prompts(
@@ -400,7 +400,7 @@ class TestAsyncCategories:
         category = await response.parse()
         assert_matches_type(CategoryPromptsResponse, category, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_prompts(self, async_client: AsyncProfound) -> None:
         async with async_client.organizations.categories.with_streaming_response.prompts(
@@ -414,7 +414,7 @@ class TestAsyncCategories:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_prompts(self, async_client: AsyncProfound) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `category_id` but received ''"):
@@ -422,7 +422,7 @@ class TestAsyncCategories:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_tags(self, async_client: AsyncProfound) -> None:
         category = await async_client.organizations.categories.tags(
@@ -430,7 +430,7 @@ class TestAsyncCategories:
         )
         assert_matches_type(CategoryTagsResponse, category, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_tags(self, async_client: AsyncProfound) -> None:
         response = await async_client.organizations.categories.with_raw_response.tags(
@@ -442,7 +442,7 @@ class TestAsyncCategories:
         category = await response.parse()
         assert_matches_type(CategoryTagsResponse, category, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_tags(self, async_client: AsyncProfound) -> None:
         async with async_client.organizations.categories.with_streaming_response.tags(
@@ -456,7 +456,7 @@ class TestAsyncCategories:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_tags(self, async_client: AsyncProfound) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `category_id` but received ''"):
@@ -464,7 +464,7 @@ class TestAsyncCategories:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_topics(self, async_client: AsyncProfound) -> None:
         category = await async_client.organizations.categories.topics(
@@ -472,7 +472,7 @@ class TestAsyncCategories:
         )
         assert_matches_type(CategoryTopicsResponse, category, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_topics(self, async_client: AsyncProfound) -> None:
         response = await async_client.organizations.categories.with_raw_response.topics(
@@ -484,7 +484,7 @@ class TestAsyncCategories:
         category = await response.parse()
         assert_matches_type(CategoryTopicsResponse, category, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_topics(self, async_client: AsyncProfound) -> None:
         async with async_client.organizations.categories.with_streaming_response.topics(
@@ -498,7 +498,7 @@ class TestAsyncCategories:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_topics(self, async_client: AsyncProfound) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `category_id` but received ''"):
