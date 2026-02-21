@@ -18,7 +18,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestRaw:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_bots(self, client: Profound) -> None:
         raw = client.logs.raw.bots(
@@ -28,7 +28,7 @@ class TestRaw:
         )
         assert_matches_type(RawBotsResponse, raw, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_bots_with_all_params(self, client: Profound) -> None:
         raw = client.logs.raw.bots(
@@ -53,7 +53,7 @@ class TestRaw:
         )
         assert_matches_type(RawBotsResponse, raw, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_bots(self, client: Profound) -> None:
         response = client.logs.raw.with_raw_response.bots(
@@ -67,7 +67,7 @@ class TestRaw:
         raw = response.parse()
         assert_matches_type(RawBotsResponse, raw, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_bots(self, client: Profound) -> None:
         with client.logs.raw.with_streaming_response.bots(
@@ -83,7 +83,7 @@ class TestRaw:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_logs(self, client: Profound) -> None:
         raw = client.logs.raw.logs(
@@ -93,7 +93,7 @@ class TestRaw:
         )
         assert_matches_type(RawLogsResponse, raw, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_logs_with_all_params(self, client: Profound) -> None:
         raw = client.logs.raw.logs(
@@ -118,7 +118,7 @@ class TestRaw:
         )
         assert_matches_type(RawLogsResponse, raw, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_logs(self, client: Profound) -> None:
         response = client.logs.raw.with_raw_response.logs(
@@ -132,7 +132,7 @@ class TestRaw:
         raw = response.parse()
         assert_matches_type(RawLogsResponse, raw, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_logs(self, client: Profound) -> None:
         with client.logs.raw.with_streaming_response.logs(
@@ -154,7 +154,7 @@ class TestAsyncRaw:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_bots(self, async_client: AsyncProfound) -> None:
         raw = await async_client.logs.raw.bots(
@@ -164,7 +164,7 @@ class TestAsyncRaw:
         )
         assert_matches_type(RawBotsResponse, raw, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_bots_with_all_params(self, async_client: AsyncProfound) -> None:
         raw = await async_client.logs.raw.bots(
@@ -189,7 +189,7 @@ class TestAsyncRaw:
         )
         assert_matches_type(RawBotsResponse, raw, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_bots(self, async_client: AsyncProfound) -> None:
         response = await async_client.logs.raw.with_raw_response.bots(
@@ -203,7 +203,7 @@ class TestAsyncRaw:
         raw = await response.parse()
         assert_matches_type(RawBotsResponse, raw, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_bots(self, async_client: AsyncProfound) -> None:
         async with async_client.logs.raw.with_streaming_response.bots(
@@ -219,7 +219,7 @@ class TestAsyncRaw:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_logs(self, async_client: AsyncProfound) -> None:
         raw = await async_client.logs.raw.logs(
@@ -229,7 +229,7 @@ class TestAsyncRaw:
         )
         assert_matches_type(RawLogsResponse, raw, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_logs_with_all_params(self, async_client: AsyncProfound) -> None:
         raw = await async_client.logs.raw.logs(
@@ -254,7 +254,7 @@ class TestAsyncRaw:
         )
         assert_matches_type(RawLogsResponse, raw, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_logs(self, async_client: AsyncProfound) -> None:
         response = await async_client.logs.raw.with_raw_response.logs(
@@ -268,7 +268,7 @@ class TestAsyncRaw:
         raw = await response.parse()
         assert_matches_type(RawLogsResponse, raw, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_logs(self, async_client: AsyncProfound) -> None:
         async with async_client.logs.raw.with_streaming_response.logs(

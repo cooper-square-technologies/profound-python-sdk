@@ -18,7 +18,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestPrompts:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_answers(self, client: Profound) -> None:
         prompt = client.prompts.answers(
@@ -28,7 +28,7 @@ class TestPrompts:
         )
         assert_matches_type(PromptAnswersResponse, prompt, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_answers_with_all_params(self, client: Profound) -> None:
         prompt = client.prompts.answers(
@@ -62,6 +62,7 @@ class TestPrompts:
                 "tags": True,
                 "themes": True,
                 "topic": True,
+                "topic_id": True,
             },
             pagination={
                 "limit": 1,
@@ -70,7 +71,7 @@ class TestPrompts:
         )
         assert_matches_type(PromptAnswersResponse, prompt, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_answers(self, client: Profound) -> None:
         response = client.prompts.with_raw_response.answers(
@@ -84,7 +85,7 @@ class TestPrompts:
         prompt = response.parse()
         assert_matches_type(PromptAnswersResponse, prompt, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_answers(self, client: Profound) -> None:
         with client.prompts.with_streaming_response.answers(
@@ -106,7 +107,7 @@ class TestAsyncPrompts:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_answers(self, async_client: AsyncProfound) -> None:
         prompt = await async_client.prompts.answers(
@@ -116,7 +117,7 @@ class TestAsyncPrompts:
         )
         assert_matches_type(PromptAnswersResponse, prompt, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_answers_with_all_params(self, async_client: AsyncProfound) -> None:
         prompt = await async_client.prompts.answers(
@@ -150,6 +151,7 @@ class TestAsyncPrompts:
                 "tags": True,
                 "themes": True,
                 "topic": True,
+                "topic_id": True,
             },
             pagination={
                 "limit": 1,
@@ -158,7 +160,7 @@ class TestAsyncPrompts:
         )
         assert_matches_type(PromptAnswersResponse, prompt, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_answers(self, async_client: AsyncProfound) -> None:
         response = await async_client.prompts.with_raw_response.answers(
@@ -172,7 +174,7 @@ class TestAsyncPrompts:
         prompt = await response.parse()
         assert_matches_type(PromptAnswersResponse, prompt, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_answers(self, async_client: AsyncProfound) -> None:
         async with async_client.prompts.with_streaming_response.answers(
