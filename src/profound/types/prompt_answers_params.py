@@ -118,5 +118,3 @@ class Include(TypedDict, total=False):
     """Use 'sentiment_themes' instead"""
 
     topic: bool
-
-    topic_id: bool

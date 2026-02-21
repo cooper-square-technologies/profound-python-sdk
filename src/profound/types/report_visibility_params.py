@@ -6,7 +6,6 @@ from typing import Dict, List, Union, Iterable
 from datetime import datetime
 from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
-from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 from .topic_name_filter_param import TopicNameFilterParam
 from .shared_params.pagination import Pagination
@@ -18,7 +17,7 @@ from .shared_params.region_id_filter import RegionIDFilter
 from .shared_params.asset_name_filter import AssetNameFilter
 from .shared_params.persona_id_filter import PersonaIDFilter
 
-__all__ = ["ReportVisibilityParams", "Filter", "FilterPromptIDFilter"]
+__all__ = ["ReportVisibilityParams", "Filter"]
 
 
 class ReportVisibilityParams(TypedDict, total=False):
@@ -41,21 +40,7 @@ class ReportVisibilityParams(TypedDict, total=False):
     date_interval: Literal["day", "week", "month", "year"]
     """Date interval for the report. (only used with date dimension)"""
 
-    dimensions: List[
-        Literal[
-            "date",
-            "region",
-            "topic",
-            "topic_id",
-            "model",
-            "asset_id",
-            "asset_name",
-            "prompt",
-            "prompt_id",
-            "tag",
-            "persona",
-        ]
-    ]
+    dimensions: List[Literal["date", "region", "topic", "model", "asset_id", "asset_name", "prompt", "tag", "persona"]]
     """Dimensions to group the report by."""
 
     filters: Iterable[Filter]
@@ -78,14 +63,6 @@ class ReportVisibilityParams(TypedDict, total=False):
     """Pagination settings for the report results."""
 
 
-class FilterPromptIDFilter(TypedDict, total=False):
-    field: Required[Literal["prompt_id"]]
-
-    operator: Required[Literal["is", "not_is", "in", "not_in"]]
-
-    value: Required[Union[str, SequenceNotStr[str]]]
-
-
 Filter: TypeAlias = Union[
     RegionIDFilter,
     ModelIDFilter,
@@ -93,7 +70,6 @@ Filter: TypeAlias = Union[
     TopicNameFilterParam,
     AssetNameFilter,
     TagIDFilter,
-    FilterPromptIDFilter,
     PromptFilter,
     PersonaIDFilter,
 ]
