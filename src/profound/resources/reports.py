@@ -425,19 +425,7 @@ class ReportsResource(SyncAPIResource):
         start_date: Union[str, datetime],
         date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
         dimensions: List[
-            Literal[
-                "date",
-                "region",
-                "topic",
-                "topic_id",
-                "model",
-                "asset_id",
-                "asset_name",
-                "prompt",
-                "prompt_id",
-                "tag",
-                "persona",
-            ]
+            Literal["date", "region", "topic", "model", "asset_id", "asset_name", "prompt", "tag", "persona"]
         ]
         | Omit = omit,
         filters: Iterable[report_visibility_params.Filter] | Omit = omit,
@@ -903,19 +891,7 @@ class AsyncReportsResource(AsyncAPIResource):
         start_date: Union[str, datetime],
         date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
         dimensions: List[
-            Literal[
-                "date",
-                "region",
-                "topic",
-                "topic_id",
-                "model",
-                "asset_id",
-                "asset_name",
-                "prompt",
-                "prompt_id",
-                "tag",
-                "persona",
-            ]
+            Literal["date", "region", "topic", "model", "asset_id", "asset_name", "prompt", "tag", "persona"]
         ]
         | Omit = omit,
         filters: Iterable[report_visibility_params.Filter] | Omit = omit,
