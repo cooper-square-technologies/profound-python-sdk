@@ -62,6 +62,7 @@ class TestPrompts:
                 "tags": True,
                 "themes": True,
                 "topic": True,
+                "topic_id": True,
             },
             pagination={
                 "limit": 1,
@@ -150,6 +151,7 @@ class TestAsyncPrompts:
                 "tags": True,
                 "themes": True,
                 "topic": True,
+                "topic_id": True,
             },
             pagination={
                 "limit": 1,
