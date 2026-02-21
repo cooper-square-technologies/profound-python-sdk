@@ -58,8 +58,6 @@ class Data(BaseModel):
 
     topic: Optional[str] = None
 
-    topic_id: Optional[str] = None
-
 
 class Info(BaseModel):
     total_rows: int
