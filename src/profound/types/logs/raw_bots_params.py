@@ -39,7 +39,7 @@ class RawBotsParams(TypedDict, total=False):
     timestamp.
     """
 
-    date_interval: Literal["day", "week", "month", "year"]
+    date_interval: Literal["day", "week", "month", "year", "relative_week"]
     """Date interval for the report. (only used with date dimension)"""
 
     dimensions: List[
