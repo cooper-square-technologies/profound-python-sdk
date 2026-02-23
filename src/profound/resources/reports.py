@@ -60,7 +60,7 @@ class ReportsResource(SyncAPIResource):
         end_date: Union[str, datetime],
         metrics: List[Literal["count", "citation_share", "share_of_voice"]],
         start_date: Union[str, datetime],
-        date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
+        date_interval: Literal["day", "week", "month", "year", "relative_week"] | Omit = omit,
         dimensions: List[
             Literal[
                 "hostname",
@@ -154,7 +154,7 @@ class ReportsResource(SyncAPIResource):
         domain: str,
         metrics: List[Literal["count", "citations", "indexing", "training", "last_visit"]],
         start_date: Union[str, datetime],
-        date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
+        date_interval: Literal["day", "week", "month", "year", "relative_week"] | Omit = omit,
         dimensions: List[Literal["date", "path", "bot_name", "bot_provider"]] | Omit = omit,
         end_date: Union[str, datetime] | Omit = omit,
         filters: Iterable[report_get_bots_report_params.Filter] | Omit = omit,
@@ -245,7 +245,7 @@ class ReportsResource(SyncAPIResource):
         domain: str,
         metrics: List[Literal["visits", "last_visit"]],
         start_date: Union[str, datetime],
-        date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
+        date_interval: Literal["day", "week", "month", "year", "relative_week"] | Omit = omit,
         dimensions: List[Literal["date", "path", "referral_source"]] | Omit = omit,
         end_date: Union[str, datetime] | Omit = omit,
         filters: Iterable[report_get_referrals_report_params.Filter] | Omit = omit,
@@ -329,7 +329,7 @@ class ReportsResource(SyncAPIResource):
         end_date: Union[str, datetime],
         metrics: List[Literal["positive", "negative", "occurrences"]],
         start_date: Union[str, datetime],
-        date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
+        date_interval: Literal["day", "week", "month", "year", "relative_week"] | Omit = omit,
         dimensions: List[
             Literal[
                 "theme",
@@ -423,7 +423,7 @@ class ReportsResource(SyncAPIResource):
         end_date: Union[str, datetime],
         metrics: List[Literal["share_of_voice", "mentions_count", "visibility_score", "executions"]],
         start_date: Union[str, datetime],
-        date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
+        date_interval: Literal["day", "week", "month", "year", "relative_week"] | Omit = omit,
         dimensions: List[
             Literal[
                 "date",
@@ -538,7 +538,7 @@ class AsyncReportsResource(AsyncAPIResource):
         end_date: Union[str, datetime],
         metrics: List[Literal["count", "citation_share", "share_of_voice"]],
         start_date: Union[str, datetime],
-        date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
+        date_interval: Literal["day", "week", "month", "year", "relative_week"] | Omit = omit,
         dimensions: List[
             Literal[
                 "hostname",
@@ -632,7 +632,7 @@ class AsyncReportsResource(AsyncAPIResource):
         domain: str,
         metrics: List[Literal["count", "citations", "indexing", "training", "last_visit"]],
         start_date: Union[str, datetime],
-        date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
+        date_interval: Literal["day", "week", "month", "year", "relative_week"] | Omit = omit,
         dimensions: List[Literal["date", "path", "bot_name", "bot_provider"]] | Omit = omit,
         end_date: Union[str, datetime] | Omit = omit,
         filters: Iterable[report_get_bots_report_params.Filter] | Omit = omit,
@@ -723,7 +723,7 @@ class AsyncReportsResource(AsyncAPIResource):
         domain: str,
         metrics: List[Literal["visits", "last_visit"]],
         start_date: Union[str, datetime],
-        date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
+        date_interval: Literal["day", "week", "month", "year", "relative_week"] | Omit = omit,
         dimensions: List[Literal["date", "path", "referral_source"]] | Omit = omit,
         end_date: Union[str, datetime] | Omit = omit,
         filters: Iterable[report_get_referrals_report_params.Filter] | Omit = omit,
@@ -807,7 +807,7 @@ class AsyncReportsResource(AsyncAPIResource):
         end_date: Union[str, datetime],
         metrics: List[Literal["positive", "negative", "occurrences"]],
         start_date: Union[str, datetime],
-        date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
+        date_interval: Literal["day", "week", "month", "year", "relative_week"] | Omit = omit,
         dimensions: List[
             Literal[
                 "theme",
@@ -901,7 +901,7 @@ class AsyncReportsResource(AsyncAPIResource):
         end_date: Union[str, datetime],
         metrics: List[Literal["share_of_voice", "mentions_count", "visibility_score", "executions"]],
         start_date: Union[str, datetime],
-        date_interval: Literal["day", "week", "month", "year"] | Omit = omit,
+        date_interval: Literal["day", "week", "month", "year", "relative_week"] | Omit = omit,
         dimensions: List[
             Literal[
                 "date",
