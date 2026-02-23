@@ -30,7 +30,9 @@ class ReportVisibilityParams(TypedDict, total=False):
     Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
     """
 
-    metrics: Required[List[Literal["share_of_voice", "mentions_count", "visibility_score", "executions"]]]
+    metrics: Required[
+        List[Literal["share_of_voice", "mentions_count", "visibility_score", "executions", "average_position"]]
+    ]
 
     start_date: Required[Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]]
     """Start date for the report.
