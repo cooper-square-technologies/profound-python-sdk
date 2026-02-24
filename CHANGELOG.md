@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.27.0 (2026-02-24)
+
+Full Changelog: [v0.26.0...v0.27.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.26.0...v0.27.0)
+
+### Features
+
+* **api:** api update ([d22ff5c](https://github.com/cooper-square-technologies/profound-python-sdk/commit/d22ff5c3e5566cec7f8a62d2c030e3058f05988f))
+* **api:** api update ([2362be0](https://github.com/cooper-square-technologies/profound-python-sdk/commit/2362be0d28dc73132ae8e8b45e8d75b4ac09d04f))
+* **api:** api update ([21746ec](https://github.com/cooper-square-technologies/profound-python-sdk/commit/21746ec4021edf42d3f5a65475eaa43bc484623d))
+* **api:** api update ([fbef6b1](https://github.com/cooper-square-technologies/profound-python-sdk/commit/fbef6b10b43a79d1c531d1a3fd6874abc64f5609))
+
+
+### Chores
+
+* **internal:** add request options to SSE classes ([c720dcd](https://github.com/cooper-square-technologies/profound-python-sdk/commit/c720dcdddcc77fbbdec1661dae73399f9aff2f5b))
+* **internal:** make `test_proxy_environment_variables` more resilient ([5cd553b](https://github.com/cooper-square-technologies/profound-python-sdk/commit/5cd553beebe91d6767286501c5d9bd96c355b892))
+
 ## 0.26.0 (2026-02-21)
 
 Full Changelog: [v0.25.0...v0.26.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.25.0...v0.26.0)
