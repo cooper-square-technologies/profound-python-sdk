@@ -11,6 +11,7 @@ from .._utils import PropertyInfo
 from .topic_name_filter_param import TopicNameFilterParam
 from .shared_params.pagination import Pagination
 from .shared_params.path_filter import PathFilter
+from .shared_params.prompt_filter import PromptFilter
 from .shared_params.tag_id_filter import TagIDFilter
 from .shared_params.model_id_filter import ModelIDFilter
 from .shared_params.topic_id_filter import TopicIDFilter
@@ -25,6 +26,7 @@ __all__ = [
     "FilterRootDomainFilter",
     "FilterPromptTypeFilter",
     "FilterCitationCategoryFilter",
+    "FilterPromptIDFilter",
 ]
 
 
@@ -197,6 +199,14 @@ class FilterCitationCategoryFilter(TypedDict, total=False):
     value: Required[Union[str, SequenceNotStr[str]]]
 
 
+class FilterPromptIDFilter(TypedDict, total=False):
+    field: Required[Literal["prompt_id"]]
+
+    operator: Required[Literal["is", "not_is", "in", "not_in"]]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
 Filter: TypeAlias = Union[
     FilterHostnameFilter,
     PathFilter,
@@ -210,4 +220,6 @@ Filter: TypeAlias = Union[
     FilterPromptTypeFilter,
     PersonaIDFilter,
     FilterCitationCategoryFilter,
+    PromptFilter,
+    FilterPromptIDFilter,
 ]
