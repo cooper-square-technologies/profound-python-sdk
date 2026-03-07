@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.29.1 (2026-03-07)
+
+Full Changelog: [v0.29.0...v0.29.1](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.29.0...v0.29.1)
+
+### Chores
+
+* **ci:** skip uploading artifacts on stainless-internal branches ([9dcdb0f](https://github.com/cooper-square-technologies/profound-python-sdk/commit/9dcdb0fff9352d39d866026edae845991972cef9))
+
 ## 0.29.0 (2026-03-04)
 
 Full Changelog: [v0.28.0...v0.29.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.28.0...v0.29.0)
