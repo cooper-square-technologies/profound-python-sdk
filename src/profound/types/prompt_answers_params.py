@@ -17,7 +17,13 @@ from .shared_params.region_id_filter import RegionIDFilter
 from .shared_params.asset_name_filter import AssetNameFilter
 from .shared_params.persona_id_filter import PersonaIDFilter
 
-__all__ = ["PromptAnswersParams", "Filter", "FilterPromptTypeFilter", "FilterAssetIDFilter", "Include"]
+__all__ = [
+    "PromptAnswersParams",
+    "Filter",
+    "FilterProfoundAnswerEngineInsightsFiltersPromptTypeFilter",
+    "FilterAssetIDFilter",
+    "Include",
+]
 
 
 class PromptAnswersParams(TypedDict, total=False):
@@ -36,7 +42,7 @@ class PromptAnswersParams(TypedDict, total=False):
     """Pagination parameters for the results. Default is 10,000 rows with no offset."""
 
 
-class FilterPromptTypeFilter(TypedDict, total=False):
+class FilterProfoundAnswerEngineInsightsFiltersPromptTypeFilter(TypedDict, total=False):
     """Filter by prompt type (visibility or sentiment)"""
 
     field: Required[Literal["prompt_type"]]
@@ -70,7 +76,7 @@ Filter: TypeAlias = Union[
     RegionIDFilter,
     ModelIDFilter,
     TagIDFilter,
-    FilterPromptTypeFilter,
+    FilterProfoundAnswerEngineInsightsFiltersPromptTypeFilter,
     PromptFilter,
     PersonaIDFilter,
     TopicIDFilter,

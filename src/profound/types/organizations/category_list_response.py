@@ -3,8 +3,17 @@
 from typing import List
 from typing_extensions import TypeAlias
 
-from .org_item import OrgItem
+from ..._models import BaseModel
 
-__all__ = ["CategoryListResponse"]
+__all__ = ["CategoryListResponse", "CategoryListResponseItem"]
 
-CategoryListResponse: TypeAlias = List[OrgItem]
+
+class CategoryListResponseItem(BaseModel):
+    """Generic id+name reference used across domain boundaries."""
+
+    id: str
+
+    name: str
+
+
+CategoryListResponse: TypeAlias = List[CategoryListResponseItem]

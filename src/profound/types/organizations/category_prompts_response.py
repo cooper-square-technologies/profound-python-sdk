@@ -3,10 +3,41 @@
 from typing import List, Optional
 from datetime import datetime
 
-from .org_item import OrgItem
 from ..._models import BaseModel
 
-__all__ = ["CategoryPromptsResponse", "Data"]
+__all__ = ["CategoryPromptsResponse", "Data", "DataPlatform", "DataRegion", "DataTopic", "DataTag", "Info"]
+
+
+class DataPlatform(BaseModel):
+    """Generic id+name reference used across domain boundaries."""
+
+    id: str
+
+    name: str
+
+
+class DataRegion(BaseModel):
+    """Generic id+name reference used across domain boundaries."""
+
+    id: str
+
+    name: str
+
+
+class DataTopic(BaseModel):
+    """Generic id+name reference used across domain boundaries."""
+
+    id: str
+
+    name: str
+
+
+class DataTag(BaseModel):
+    """Generic id+name reference used across domain boundaries."""
+
+    id: str
+
+    name: str
 
 
 class Data(BaseModel):
@@ -14,18 +45,29 @@ class Data(BaseModel):
 
     created_at: datetime
 
-    platforms: List[OrgItem]
+    platforms: List[DataPlatform]
 
     prompt: str
 
     prompt_type: str
 
-    regions: List[OrgItem]
+    regions: List[DataRegion]
 
-    topic: OrgItem
+    topic: DataTopic
+    """Generic id+name reference used across domain boundaries."""
 
-    tags: Optional[List[OrgItem]] = None
+    tags: Optional[List[DataTag]] = None
+
+
+class Info(BaseModel):
+    limit: int
+
+    next_cursor: Optional[str] = None
+
+    total_rows: int
 
 
 class CategoryPromptsResponse(BaseModel):
     data: List[Data]
+
+    info: Info

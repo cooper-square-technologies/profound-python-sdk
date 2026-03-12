@@ -2,9 +2,13 @@
 
 from __future__ import annotations
 
+from typing import List, Optional
+from typing_extensions import Literal
+
 import httpx
 
-from ..._types import Body, Query, Headers, NotGiven, not_given
+from ..._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
+from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -14,6 +18,7 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
+from ...types.organizations import category_prompts_params
 from ...types.organizations.category_list_response import CategoryListResponse
 from ...types.organizations.category_tags_response import CategoryTagsResponse
 from ...types.organizations.category_assets_response import CategoryAssetsResponse
@@ -133,6 +138,14 @@ class CategoriesResource(SyncAPIResource):
         self,
         category_id: str,
         *,
+        cursor: Optional[str] | Omit = omit,
+        limit: int | Omit = omit,
+        order_dir: Literal["asc", "desc"] | Omit = omit,
+        platform_id: SequenceNotStr[str] | Omit = omit,
+        prompt_type: List[Literal["visibility", "sentiment"]] | Omit = omit,
+        region_id: SequenceNotStr[str] | Omit = omit,
+        tag_id: SequenceNotStr[str] | Omit = omit,
+        topic_id: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -157,7 +170,23 @@ class CategoriesResource(SyncAPIResource):
         return self._get(
             f"/v1/org/categories/{category_id}/prompts",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "cursor": cursor,
+                        "limit": limit,
+                        "order_dir": order_dir,
+                        "platform_id": platform_id,
+                        "prompt_type": prompt_type,
+                        "region_id": region_id,
+                        "tag_id": tag_id,
+                        "topic_id": topic_id,
+                    },
+                    category_prompts_params.CategoryPromptsParams,
+                ),
             ),
             cast_to=CategoryPromptsResponse,
         )
@@ -338,6 +367,14 @@ class AsyncCategoriesResource(AsyncAPIResource):
         self,
         category_id: str,
         *,
+        cursor: Optional[str] | Omit = omit,
+        limit: int | Omit = omit,
+        order_dir: Literal["asc", "desc"] | Omit = omit,
+        platform_id: SequenceNotStr[str] | Omit = omit,
+        prompt_type: List[Literal["visibility", "sentiment"]] | Omit = omit,
+        region_id: SequenceNotStr[str] | Omit = omit,
+        tag_id: SequenceNotStr[str] | Omit = omit,
+        topic_id: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -362,7 +399,23 @@ class AsyncCategoriesResource(AsyncAPIResource):
         return await self._get(
             f"/v1/org/categories/{category_id}/prompts",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "cursor": cursor,
+                        "limit": limit,
+                        "order_dir": order_dir,
+                        "platform_id": platform_id,
+                        "prompt_type": prompt_type,
+                        "region_id": region_id,
+                        "tag_id": tag_id,
+                        "topic_id": topic_id,
+                    },
+                    category_prompts_params.CategoryPromptsParams,
+                ),
             ),
             cast_to=CategoryPromptsResponse,
         )

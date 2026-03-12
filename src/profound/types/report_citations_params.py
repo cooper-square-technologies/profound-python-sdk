@@ -24,7 +24,7 @@ __all__ = [
     "FilterHostnameFilter",
     "FilterURLFilter",
     "FilterRootDomainFilter",
-    "FilterPromptTypeFilter",
+    "FilterProfoundAnswerEngineInsightsFiltersPromptTypeFilter",
     "FilterCitationCategoryFilter",
     "FilterPromptIDFilter",
 ]
@@ -155,7 +155,7 @@ class FilterRootDomainFilter(TypedDict, total=False):
     value: Required[Union[str, SequenceNotStr[str]]]
 
 
-class FilterPromptTypeFilter(TypedDict, total=False):
+class FilterProfoundAnswerEngineInsightsFiltersPromptTypeFilter(TypedDict, total=False):
     """Filter by prompt type (visibility or sentiment)"""
 
     field: Required[Literal["prompt_type"]]
@@ -217,7 +217,7 @@ Filter: TypeAlias = Union[
     TagIDFilter,
     FilterURLFilter,
     FilterRootDomainFilter,
-    FilterPromptTypeFilter,
+    FilterProfoundAnswerEngineInsightsFiltersPromptTypeFilter,
     PersonaIDFilter,
     FilterCitationCategoryFilter,
     PromptFilter,
