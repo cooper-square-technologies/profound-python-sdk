@@ -5,16 +5,24 @@ from typing import List, Optional
 from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
-from .organizations.org_item import OrgItem
 
 __all__ = [
     "OrganizationGetPersonasResponse",
     "Data",
+    "DataCategory",
     "DataPersona",
     "DataPersonaBehavior",
     "DataPersonaDemographics",
     "DataPersonaEmployment",
 ]
+
+
+class DataCategory(BaseModel):
+    """Generic id+name reference used across domain boundaries."""
+
+    id: str
+
+    name: str
 
 
 class DataPersonaBehavior(BaseModel):
@@ -48,7 +56,8 @@ class DataPersona(BaseModel):
 class Data(BaseModel):
     id: str
 
-    category: OrgItem
+    category: DataCategory
+    """Generic id+name reference used across domain boundaries."""
 
     name: str
 
