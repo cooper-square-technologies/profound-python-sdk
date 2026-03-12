@@ -41,7 +41,7 @@ client = Profound(
     api_key=os.environ.get("PROFOUND_API_KEY"),  # This is the default and can be omitted
 )
 
-org_items = client.organizations.categories.list()
+categories = client.organizations.categories.list()
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -64,7 +64,7 @@ client = AsyncProfound(
 
 
 async def main() -> None:
-    org_items = await client.organizations.categories.list()
+    categories = await client.organizations.categories.list()
 
 
 asyncio.run(main())
@@ -97,7 +97,7 @@ async def main() -> None:
         api_key=os.environ.get("PROFOUND_API_KEY"),  # This is the default and can be omitted
         http_client=DefaultAioHttpClient(),
     ) as client:
-        org_items = await client.organizations.categories.list()
+        categories = await client.organizations.categories.list()
 
 
 asyncio.run(main())
