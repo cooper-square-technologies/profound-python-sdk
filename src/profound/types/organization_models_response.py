@@ -3,17 +3,8 @@
 from typing import List
 from typing_extensions import TypeAlias
 
-from .._models import BaseModel
+from .named_resource import NamedResource
 
-__all__ = ["OrganizationModelsResponse", "OrganizationModelsResponseItem"]
+__all__ = ["OrganizationModelsResponse"]
 
-
-class OrganizationModelsResponseItem(BaseModel):
-    """Generic id+name reference used across domain boundaries."""
-
-    id: str
-
-    name: str
-
-
-OrganizationModelsResponse: TypeAlias = List[OrganizationModelsResponseItem]
+OrganizationModelsResponse: TypeAlias = List[NamedResource]
