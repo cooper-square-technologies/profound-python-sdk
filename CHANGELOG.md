@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.30.0 (2026-03-13)
+
+Full Changelog: [v0.29.1...v0.30.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.29.1...v0.30.0)
+
+### Features
+
+* **api:** api update ([cc3a119](https://github.com/cooper-square-technologies/profound-python-sdk/commit/cc3a119ad4ce39d462c6b8527c9d828a285eb770))
+
 ## 0.29.1 (2026-03-07)
 
 Full Changelog: [v0.29.0...v0.29.1](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.29.0...v0.29.1)
