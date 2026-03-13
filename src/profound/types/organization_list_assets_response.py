@@ -4,22 +4,15 @@ from typing import List, Optional
 from datetime import datetime
 
 from .._models import BaseModel
+from .named_resource import NamedResource
 
-__all__ = ["OrganizationListAssetsResponse", "Data", "DataCategory"]
-
-
-class DataCategory(BaseModel):
-    """Generic id+name reference used across domain boundaries."""
-
-    id: str
-
-    name: str
+__all__ = ["OrganizationListAssetsResponse", "Data"]
 
 
 class Data(BaseModel):
     id: str
 
-    category: DataCategory
+    category: NamedResource
     """Generic id+name reference used across domain boundaries."""
 
     created_at: datetime

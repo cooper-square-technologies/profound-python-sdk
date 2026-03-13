@@ -20,6 +20,11 @@ Types:
 
 ```python
 from profound.types import (
+    NamedResource,
+    PersonaProfile,
+    PersonaProfileBehavior,
+    PersonaProfileDemographics,
+    PersonaProfileEmployment,
     OrganizationDomainsResponse,
     OrganizationGetPersonasResponse,
     OrganizationListAssetsResponse,
