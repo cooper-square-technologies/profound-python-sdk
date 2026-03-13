@@ -15,15 +15,20 @@ from .shared import (
 )
 from .report_info import ReportInfo as ReportInfo
 from .report_result import ReportResult as ReportResult
+from .named_resource import NamedResource as NamedResource
+from .persona_profile import PersonaProfile as PersonaProfile
 from .report_response import ReportResponse as ReportResponse
 from .prompt_answers_params import PromptAnswersParams as PromptAnswersParams
 from .prompt_answers_response import PromptAnswersResponse as PromptAnswersResponse
 from .report_citations_params import ReportCitationsParams as ReportCitationsParams
 from .report_sentiment_params import ReportSentimentParams as ReportSentimentParams
 from .topic_name_filter_param import TopicNameFilterParam as TopicNameFilterParam
+from .persona_profile_behavior import PersonaProfileBehavior as PersonaProfileBehavior
 from .report_visibility_params import ReportVisibilityParams as ReportVisibilityParams
 from .report_citations_response import ReportCitationsResponse as ReportCitationsResponse
+from .persona_profile_employment import PersonaProfileEmployment as PersonaProfileEmployment
 from .organization_models_response import OrganizationModelsResponse as OrganizationModelsResponse
+from .persona_profile_demographics import PersonaProfileDemographics as PersonaProfileDemographics
 from .organization_domains_response import OrganizationDomainsResponse as OrganizationDomainsResponse
 from .organization_regions_response import OrganizationRegionsResponse as OrganizationRegionsResponse
 from .report_get_bots_report_params import ReportGetBotsReportParams as ReportGetBotsReportParams
