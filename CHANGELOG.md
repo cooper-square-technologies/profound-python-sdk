@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.31.1 (2026-03-16)
+
+Full Changelog: [v0.31.0...v0.31.1](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.31.0...v0.31.1)
+
+### Bug Fixes
+
+* **deps:** bump minimum typing-extensions version ([d00b6bd](https://github.com/cooper-square-technologies/profound-python-sdk/commit/d00b6bd536ef7ab3a11a558431b5a5678b64b16d))
+* **pydantic:** do not pass `by_alias` unless set ([e2db24c](https://github.com/cooper-square-technologies/profound-python-sdk/commit/e2db24c4834fb657c0c14950e021f224484e3b9b))
+
+
+### Chores
+
+* **internal:** tweak CI branches ([ccfd79e](https://github.com/cooper-square-technologies/profound-python-sdk/commit/ccfd79e3e84dae8dcc94784662723076d19a0931))
+
 ## 0.31.0 (2026-03-13)
 
 Full Changelog: [v0.30.0...v0.31.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.30.0...v0.31.0)
