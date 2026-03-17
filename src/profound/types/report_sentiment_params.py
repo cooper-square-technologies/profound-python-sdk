@@ -47,11 +47,13 @@ class ReportSentimentParams(TypedDict, total=False):
             "date",
             "region",
             "topic",
+            "topic_id",
             "model",
             "asset_id",
             "asset_name",
             "tag",
             "prompt",
+            "prompt_id",
             "sentiment_type",
             "persona",
         ]
