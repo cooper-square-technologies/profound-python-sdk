@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, List, Union, Iterable
+from typing import Dict, List, Union, Iterable, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -161,6 +161,7 @@ class ReportsResource(SyncAPIResource):
         end_date: Union[str, datetime] | Omit = omit,
         filters: Iterable[report_get_bots_report_params.Filter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
+        organization_id: Optional[str] | Omit = omit,
         pagination: Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -231,6 +232,7 @@ class ReportsResource(SyncAPIResource):
                     "end_date": end_date,
                     "filters": filters,
                     "order_by": order_by,
+                    "organization_id": organization_id,
                     "pagination": pagination,
                 },
                 report_get_bots_report_params.ReportGetBotsReportParams,
@@ -252,6 +254,7 @@ class ReportsResource(SyncAPIResource):
         end_date: Union[str, datetime] | Omit = omit,
         filters: Iterable[report_get_referrals_report_params.Filter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
+        organization_id: Optional[str] | Omit = omit,
         pagination: Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -314,6 +317,7 @@ class ReportsResource(SyncAPIResource):
                     "end_date": end_date,
                     "filters": filters,
                     "order_by": order_by,
+                    "organization_id": organization_id,
                     "pagination": pagination,
                 },
                 report_get_referrals_report_params.ReportGetReferralsReportParams,
@@ -645,6 +649,7 @@ class AsyncReportsResource(AsyncAPIResource):
         end_date: Union[str, datetime] | Omit = omit,
         filters: Iterable[report_get_bots_report_params.Filter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
+        organization_id: Optional[str] | Omit = omit,
         pagination: Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -715,6 +720,7 @@ class AsyncReportsResource(AsyncAPIResource):
                     "end_date": end_date,
                     "filters": filters,
                     "order_by": order_by,
+                    "organization_id": organization_id,
                     "pagination": pagination,
                 },
                 report_get_bots_report_params.ReportGetBotsReportParams,
@@ -736,6 +742,7 @@ class AsyncReportsResource(AsyncAPIResource):
         end_date: Union[str, datetime] | Omit = omit,
         filters: Iterable[report_get_referrals_report_params.Filter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
+        organization_id: Optional[str] | Omit = omit,
         pagination: Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -798,6 +805,7 @@ class AsyncReportsResource(AsyncAPIResource):
                     "end_date": end_date,
                     "filters": filters,
                     "order_by": order_by,
+                    "organization_id": organization_id,
                     "pagination": pagination,
                 },
                 report_get_referrals_report_params.ReportGetReferralsReportParams,

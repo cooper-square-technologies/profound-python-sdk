@@ -46,6 +46,7 @@ class TestRaw:
                 }
             ],
             order_by={"date": "asc"},
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             pagination={
                 "limit": 1,
                 "offset": 0,
@@ -111,6 +112,7 @@ class TestRaw:
                 }
             ],
             order_by={"date": "asc"},
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             pagination={
                 "limit": 1,
                 "offset": 0,
@@ -182,6 +184,7 @@ class TestAsyncRaw:
                 }
             ],
             order_by={"date": "asc"},
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             pagination={
                 "limit": 1,
                 "offset": 0,
@@ -247,6 +250,7 @@ class TestAsyncRaw:
                 }
             ],
             order_by={"date": "asc"},
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             pagination={
                 "limit": 1,
                 "offset": 0,

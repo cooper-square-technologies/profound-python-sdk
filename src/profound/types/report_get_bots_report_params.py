@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, List, Union, Iterable
+from typing import Dict, List, Union, Iterable, Optional
 from datetime import datetime
 from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
@@ -53,6 +53,8 @@ class ReportGetBotsReportParams(TypedDict, total=False):
     When not specified, the default order is the first metric in the query
     descending.
     """
+
+    organization_id: Optional[str]
 
     pagination: Pagination
     """Pagination settings for the report results."""
