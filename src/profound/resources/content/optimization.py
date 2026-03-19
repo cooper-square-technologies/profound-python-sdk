@@ -5,7 +5,7 @@ from __future__ import annotations
 import httpx
 
 from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from ..._utils import maybe_transform, async_maybe_transform
+from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -71,7 +71,7 @@ class OptimizationResource(SyncAPIResource):
         if not content_id:
             raise ValueError(f"Expected a non-empty value for `content_id` but received {content_id!r}")
         return self._get(
-            f"/v1/content/{asset_id}/optimization/{content_id}",
+            path_template("/v1/content/{asset_id}/optimization/{content_id}", asset_id=asset_id, content_id=content_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -110,7 +110,7 @@ class OptimizationResource(SyncAPIResource):
         if not asset_id:
             raise ValueError(f"Expected a non-empty value for `asset_id` but received {asset_id!r}")
         return self._get(
-            f"/v1/content/{asset_id}/optimization",
+            path_template("/v1/content/{asset_id}/optimization", asset_id=asset_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -177,7 +177,7 @@ class AsyncOptimizationResource(AsyncAPIResource):
         if not content_id:
             raise ValueError(f"Expected a non-empty value for `content_id` but received {content_id!r}")
         return await self._get(
-            f"/v1/content/{asset_id}/optimization/{content_id}",
+            path_template("/v1/content/{asset_id}/optimization/{content_id}", asset_id=asset_id, content_id=content_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -216,7 +216,7 @@ class AsyncOptimizationResource(AsyncAPIResource):
         if not asset_id:
             raise ValueError(f"Expected a non-empty value for `asset_id` but received {asset_id!r}")
         return await self._get(
-            f"/v1/content/{asset_id}/optimization",
+            path_template("/v1/content/{asset_id}/optimization", asset_id=asset_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
