@@ -40,7 +40,7 @@ class TestReports:
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             metrics=["count"],
             start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            date_interval="day",
+            date_interval="hour",
             dimensions=["hostname"],
             filters=[
                 {
@@ -106,7 +106,7 @@ class TestReports:
             domain="domain",
             metrics=["count"],
             start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            date_interval="day",
+            date_interval="hour",
             dimensions=["date"],
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             filters=[
@@ -172,7 +172,7 @@ class TestReports:
             domain="domain",
             metrics=["visits"],
             start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            date_interval="day",
+            date_interval="hour",
             dimensions=["date"],
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             filters=[
@@ -240,7 +240,7 @@ class TestReports:
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             metrics=["positive"],
             start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            date_interval="day",
+            date_interval="hour",
             dimensions=["theme"],
             filters=[
                 {
@@ -308,7 +308,7 @@ class TestReports:
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             metrics=["share_of_voice"],
             start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            date_interval="day",
+            date_interval="hour",
             dimensions=["date"],
             filters=[
                 {
@@ -382,7 +382,7 @@ class TestAsyncReports:
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             metrics=["count"],
             start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            date_interval="day",
+            date_interval="hour",
             dimensions=["hostname"],
             filters=[
                 {
@@ -448,7 +448,7 @@ class TestAsyncReports:
             domain="domain",
             metrics=["count"],
             start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            date_interval="day",
+            date_interval="hour",
             dimensions=["date"],
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             filters=[
@@ -514,7 +514,7 @@ class TestAsyncReports:
             domain="domain",
             metrics=["visits"],
             start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            date_interval="day",
+            date_interval="hour",
             dimensions=["date"],
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             filters=[
@@ -582,7 +582,7 @@ class TestAsyncReports:
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             metrics=["positive"],
             start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            date_interval="day",
+            date_interval="hour",
             dimensions=["theme"],
             filters=[
                 {
@@ -650,7 +650,7 @@ class TestAsyncReports:
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             metrics=["share_of_voice"],
             start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            date_interval="day",
+            date_interval="hour",
             dimensions=["date"],
             filters=[
                 {

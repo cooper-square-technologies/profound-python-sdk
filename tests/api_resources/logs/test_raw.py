@@ -35,7 +35,7 @@ class TestRaw:
             domain="domain",
             metrics=["count"],
             start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            date_interval="day",
+            date_interval="hour",
             dimensions=["timestamp"],
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             filters=[
@@ -101,7 +101,7 @@ class TestRaw:
             domain="domain",
             metrics=["count"],
             start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            date_interval="day",
+            date_interval="hour",
             dimensions=["timestamp"],
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             filters=[
@@ -173,7 +173,7 @@ class TestAsyncRaw:
             domain="domain",
             metrics=["count"],
             start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            date_interval="day",
+            date_interval="hour",
             dimensions=["timestamp"],
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             filters=[
@@ -239,7 +239,7 @@ class TestAsyncRaw:
             domain="domain",
             metrics=["count"],
             start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            date_interval="day",
+            date_interval="hour",
             dimensions=["timestamp"],
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             filters=[
