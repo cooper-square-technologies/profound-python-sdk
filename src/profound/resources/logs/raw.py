@@ -53,7 +53,7 @@ class RawResource(SyncAPIResource):
         domain: str,
         metrics: List[Literal["count"]],
         start_date: Union[str, datetime],
-        date_interval: Literal["day", "week", "month", "year", "relative_week"] | Omit = omit,
+        date_interval: Literal["hour", "day", "week", "month", "year", "relative_week"] | Omit = omit,
         dimensions: List[
             Literal[
                 "timestamp",
@@ -156,7 +156,7 @@ class RawResource(SyncAPIResource):
         domain: str,
         metrics: List[Literal["count"]],
         start_date: Union[str, datetime],
-        date_interval: Literal["day", "week", "month", "year", "relative_week"] | Omit = omit,
+        date_interval: Literal["hour", "day", "week", "month", "year", "relative_week"] | Omit = omit,
         dimensions: List[
             Literal[
                 "timestamp",
@@ -277,7 +277,7 @@ class AsyncRawResource(AsyncAPIResource):
         domain: str,
         metrics: List[Literal["count"]],
         start_date: Union[str, datetime],
-        date_interval: Literal["day", "week", "month", "year", "relative_week"] | Omit = omit,
+        date_interval: Literal["hour", "day", "week", "month", "year", "relative_week"] | Omit = omit,
         dimensions: List[
             Literal[
                 "timestamp",
@@ -380,7 +380,7 @@ class AsyncRawResource(AsyncAPIResource):
         domain: str,
         metrics: List[Literal["count"]],
         start_date: Union[str, datetime],
-        date_interval: Literal["day", "week", "month", "year", "relative_week"] | Omit = omit,
+        date_interval: Literal["hour", "day", "week", "month", "year", "relative_week"] | Omit = omit,
         dimensions: List[
             Literal[
                 "timestamp",
