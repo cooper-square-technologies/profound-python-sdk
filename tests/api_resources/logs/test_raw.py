@@ -35,7 +35,7 @@ class TestRaw:
             domain="domain",
             metrics=["count"],
             start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            date_interval="day",
+            date_interval="hour",
             dimensions=["timestamp"],
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             filters=[
@@ -46,6 +46,7 @@ class TestRaw:
                 }
             ],
             order_by={"date": "asc"},
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             pagination={
                 "limit": 1,
                 "offset": 0,
@@ -100,7 +101,7 @@ class TestRaw:
             domain="domain",
             metrics=["count"],
             start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            date_interval="day",
+            date_interval="hour",
             dimensions=["timestamp"],
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             filters=[
@@ -111,6 +112,7 @@ class TestRaw:
                 }
             ],
             order_by={"date": "asc"},
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             pagination={
                 "limit": 1,
                 "offset": 0,
@@ -171,7 +173,7 @@ class TestAsyncRaw:
             domain="domain",
             metrics=["count"],
             start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            date_interval="day",
+            date_interval="hour",
             dimensions=["timestamp"],
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             filters=[
@@ -182,6 +184,7 @@ class TestAsyncRaw:
                 }
             ],
             order_by={"date": "asc"},
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             pagination={
                 "limit": 1,
                 "offset": 0,
@@ -236,7 +239,7 @@ class TestAsyncRaw:
             domain="domain",
             metrics=["count"],
             start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            date_interval="day",
+            date_interval="hour",
             dimensions=["timestamp"],
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             filters=[
@@ -247,6 +250,7 @@ class TestAsyncRaw:
                 }
             ],
             order_by={"date": "asc"},
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             pagination={
                 "limit": 1,
                 "offset": 0,

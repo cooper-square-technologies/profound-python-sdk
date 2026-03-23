@@ -12,21 +12,21 @@ from .topic_name_filter_param import TopicNameFilterParam
 from .shared_params.pagination import Pagination
 from .shared_params.path_filter import PathFilter
 from .shared_params.prompt_filter import PromptFilter
-from .shared_params.tag_id_filter import TagIDFilter
-from .shared_params.model_id_filter import ModelIDFilter
-from .shared_params.topic_id_filter import TopicIDFilter
-from .shared_params.region_id_filter import RegionIDFilter
-from .shared_params.persona_id_filter import PersonaIDFilter
 
 __all__ = [
     "ReportCitationsParams",
     "Filter",
     "FilterHostnameFilter",
+    "FilterProfoundAnswerEngineInsightsFiltersRegionIDFilter",
+    "FilterProfoundAnswerEngineInsightsFiltersTopicIDFilter",
+    "FilterProfoundAnswerEngineInsightsFiltersModelIDFilter",
+    "FilterProfoundAnswerEngineInsightsFiltersTagIDFilter",
     "FilterURLFilter",
     "FilterRootDomainFilter",
     "FilterProfoundAnswerEngineInsightsFiltersPromptTypeFilter",
+    "FilterProfoundAnswerEngineInsightsFiltersPersonaIDFilter",
     "FilterCitationCategoryFilter",
-    "FilterPromptIDFilter",
+    "FilterProfoundAnswerEngineInsightsFiltersPromptIDFilter",
 ]
 
 
@@ -51,7 +51,7 @@ class ReportCitationsParams(TypedDict, total=False):
     Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
     """
 
-    date_interval: Literal["day", "week", "month", "year", "relative_week"]
+    date_interval: Literal["hour", "day", "week", "month", "year", "relative_week"]
     """Date interval for the report. (only used with date dimension)"""
 
     dimensions: List[
@@ -109,6 +109,42 @@ class FilterHostnameFilter(TypedDict, total=False):
             "not_contains_case_insensitive",
         ]
     ]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
+class FilterProfoundAnswerEngineInsightsFiltersRegionIDFilter(TypedDict, total=False):
+    field: Required[Literal["region_id", "region"]]
+    """- `region` - Deprecated"""
+
+    operator: Required[Literal["is", "not_is", "in", "not_in"]]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
+class FilterProfoundAnswerEngineInsightsFiltersTopicIDFilter(TypedDict, total=False):
+    field: Required[Literal["topic_id", "topic"]]
+    """- `topic` - Deprecated"""
+
+    operator: Required[Literal["is", "not_is", "in", "not_in"]]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
+class FilterProfoundAnswerEngineInsightsFiltersModelIDFilter(TypedDict, total=False):
+    field: Required[Literal["model_id", "model"]]
+    """- `model` - Deprecated"""
+
+    operator: Required[Literal["is", "not_is", "in", "not_in"]]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
+class FilterProfoundAnswerEngineInsightsFiltersTagIDFilter(TypedDict, total=False):
+    field: Required[Literal["tag_id", "tag"]]
+    """- `tag` - Deprecated"""
+
+    operator: Required[Literal["is", "not_is", "in", "not_in"]]
 
     value: Required[Union[str, SequenceNotStr[str]]]
 
@@ -179,6 +215,14 @@ class FilterProfoundAnswerEngineInsightsFiltersPromptTypeFilter(TypedDict, total
     value: Required[Union[Literal["visibility", "sentiment"], List[Literal["visibility", "sentiment"]]]]
 
 
+class FilterProfoundAnswerEngineInsightsFiltersPersonaIDFilter(TypedDict, total=False):
+    field: Required[Literal["persona_id"]]
+
+    operator: Required[Literal["is", "not_is", "in", "not_in"]]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
 class FilterCitationCategoryFilter(TypedDict, total=False):
     """Filter by citation category"""
 
@@ -201,7 +245,7 @@ class FilterCitationCategoryFilter(TypedDict, total=False):
     value: Required[Union[str, SequenceNotStr[str]]]
 
 
-class FilterPromptIDFilter(TypedDict, total=False):
+class FilterProfoundAnswerEngineInsightsFiltersPromptIDFilter(TypedDict, total=False):
     field: Required[Literal["prompt_id"]]
 
     operator: Required[Literal["is", "not_is", "in", "not_in"]]
@@ -212,16 +256,16 @@ class FilterPromptIDFilter(TypedDict, total=False):
 Filter: TypeAlias = Union[
     FilterHostnameFilter,
     PathFilter,
-    RegionIDFilter,
-    TopicIDFilter,
+    FilterProfoundAnswerEngineInsightsFiltersRegionIDFilter,
+    FilterProfoundAnswerEngineInsightsFiltersTopicIDFilter,
     TopicNameFilterParam,
-    ModelIDFilter,
-    TagIDFilter,
+    FilterProfoundAnswerEngineInsightsFiltersModelIDFilter,
+    FilterProfoundAnswerEngineInsightsFiltersTagIDFilter,
     FilterURLFilter,
     FilterRootDomainFilter,
     FilterProfoundAnswerEngineInsightsFiltersPromptTypeFilter,
-    PersonaIDFilter,
+    FilterProfoundAnswerEngineInsightsFiltersPersonaIDFilter,
     FilterCitationCategoryFilter,
     PromptFilter,
-    FilterPromptIDFilter,
+    FilterProfoundAnswerEngineInsightsFiltersPromptIDFilter,
 ]

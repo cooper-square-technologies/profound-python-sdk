@@ -1,17 +1,7 @@
 # Shared Types
 
 ```python
-from profound.types import (
-    AssetNameFilter,
-    ModelIDFilter,
-    Pagination,
-    PathFilter,
-    PersonaIDFilter,
-    PromptFilter,
-    RegionIDFilter,
-    TagIDFilter,
-    TopicIDFilter,
-)
+from profound.types import AssetNameFilter, Pagination, PathFilter, PromptFilter
 ```
 
 # Organizations

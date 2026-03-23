@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Any, Dict, List, Union, Iterable, cast
+from typing import Any, Dict, List, Union, Iterable, Optional, cast
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -53,7 +53,7 @@ class RawResource(SyncAPIResource):
         domain: str,
         metrics: List[Literal["count"]],
         start_date: Union[str, datetime],
-        date_interval: Literal["day", "week", "month", "year", "relative_week"] | Omit = omit,
+        date_interval: Literal["hour", "day", "week", "month", "year", "relative_week"] | Omit = omit,
         dimensions: List[
             Literal[
                 "timestamp",
@@ -76,6 +76,7 @@ class RawResource(SyncAPIResource):
         end_date: Union[str, datetime] | Omit = omit,
         filters: Iterable[raw_bots_params.Filter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
+        organization_id: Optional[str] | Omit = omit,
         pagination: Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -137,6 +138,7 @@ class RawResource(SyncAPIResource):
                         "end_date": end_date,
                         "filters": filters,
                         "order_by": order_by,
+                        "organization_id": organization_id,
                         "pagination": pagination,
                     },
                     raw_bots_params.RawBotsParams,
@@ -154,7 +156,7 @@ class RawResource(SyncAPIResource):
         domain: str,
         metrics: List[Literal["count"]],
         start_date: Union[str, datetime],
-        date_interval: Literal["day", "week", "month", "year", "relative_week"] | Omit = omit,
+        date_interval: Literal["hour", "day", "week", "month", "year", "relative_week"] | Omit = omit,
         dimensions: List[
             Literal[
                 "timestamp",
@@ -174,6 +176,7 @@ class RawResource(SyncAPIResource):
         end_date: Union[str, datetime] | Omit = omit,
         filters: Iterable[raw_logs_params.Filter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
+        organization_id: Optional[str] | Omit = omit,
         pagination: Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -235,6 +238,7 @@ class RawResource(SyncAPIResource):
                         "end_date": end_date,
                         "filters": filters,
                         "order_by": order_by,
+                        "organization_id": organization_id,
                         "pagination": pagination,
                     },
                     raw_logs_params.RawLogsParams,
@@ -273,7 +277,7 @@ class AsyncRawResource(AsyncAPIResource):
         domain: str,
         metrics: List[Literal["count"]],
         start_date: Union[str, datetime],
-        date_interval: Literal["day", "week", "month", "year", "relative_week"] | Omit = omit,
+        date_interval: Literal["hour", "day", "week", "month", "year", "relative_week"] | Omit = omit,
         dimensions: List[
             Literal[
                 "timestamp",
@@ -296,6 +300,7 @@ class AsyncRawResource(AsyncAPIResource):
         end_date: Union[str, datetime] | Omit = omit,
         filters: Iterable[raw_bots_params.Filter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
+        organization_id: Optional[str] | Omit = omit,
         pagination: Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -357,6 +362,7 @@ class AsyncRawResource(AsyncAPIResource):
                         "end_date": end_date,
                         "filters": filters,
                         "order_by": order_by,
+                        "organization_id": organization_id,
                         "pagination": pagination,
                     },
                     raw_bots_params.RawBotsParams,
@@ -374,7 +380,7 @@ class AsyncRawResource(AsyncAPIResource):
         domain: str,
         metrics: List[Literal["count"]],
         start_date: Union[str, datetime],
-        date_interval: Literal["day", "week", "month", "year", "relative_week"] | Omit = omit,
+        date_interval: Literal["hour", "day", "week", "month", "year", "relative_week"] | Omit = omit,
         dimensions: List[
             Literal[
                 "timestamp",
@@ -394,6 +400,7 @@ class AsyncRawResource(AsyncAPIResource):
         end_date: Union[str, datetime] | Omit = omit,
         filters: Iterable[raw_logs_params.Filter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
+        organization_id: Optional[str] | Omit = omit,
         pagination: Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -455,6 +462,7 @@ class AsyncRawResource(AsyncAPIResource):
                         "end_date": end_date,
                         "filters": filters,
                         "order_by": order_by,
+                        "organization_id": organization_id,
                         "pagination": pagination,
                     },
                     raw_logs_params.RawLogsParams,
