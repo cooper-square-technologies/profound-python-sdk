@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.33.1 (2026-03-24)
+
+Full Changelog: [v0.33.0...v0.33.1](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.33.0...v0.33.1)
+
+### Chores
+
+* **ci:** skip lint on metadata-only changes ([a20efb9](https://github.com/cooper-square-technologies/profound-python-sdk/commit/a20efb95231f1659ddc1c736b71568bba51a659f))
+
 ## 0.33.0 (2026-03-23)
 
 Full Changelog: [v0.32.0...v0.33.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.32.0...v0.33.0)
