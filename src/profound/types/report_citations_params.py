@@ -8,6 +8,7 @@ from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from .._types import SequenceNotStr
 from .._utils import PropertyInfo
+from .prompt_id_filter_param import PromptIDFilterParam
 from .topic_name_filter_param import TopicNameFilterParam
 from .shared_params.pagination import Pagination
 from .shared_params.path_filter import PathFilter
@@ -17,6 +18,7 @@ from .shared_params.model_id_filter import ModelIDFilter
 from .shared_params.topic_id_filter import TopicIDFilter
 from .shared_params.region_id_filter import RegionIDFilter
 from .shared_params.persona_id_filter import PersonaIDFilter
+from .shared_params.prompt_type_filter import PromptTypeFilter
 
 __all__ = [
     "ReportCitationsParams",
@@ -24,9 +26,7 @@ __all__ = [
     "FilterHostnameFilter",
     "FilterURLFilter",
     "FilterRootDomainFilter",
-    "FilterPromptTypeFilter",
     "FilterCitationCategoryFilter",
-    "FilterPromptIDFilter",
 ]
 
 
@@ -157,28 +157,6 @@ class FilterRootDomainFilter(TypedDict, total=False):
     value: Required[Union[str, SequenceNotStr[str]]]
 
 
-class FilterPromptTypeFilter(TypedDict, total=False):
-    """Filter by prompt type (visibility or sentiment)."""
-
-    field: Required[Literal["prompt_type"]]
-
-    operator: Required[
-        Literal[
-            "is",
-            "not_is",
-            "in",
-            "not_in",
-            "contains",
-            "not_contains",
-            "matches",
-            "contains_case_insensitive",
-            "not_contains_case_insensitive",
-        ]
-    ]
-
-    value: Required[Union[Literal["visibility", "sentiment"], List[Literal["visibility", "sentiment"]]]]
-
-
 class FilterCitationCategoryFilter(TypedDict, total=False):
     """Filter by citation category"""
 
@@ -201,16 +179,6 @@ class FilterCitationCategoryFilter(TypedDict, total=False):
     value: Required[Union[str, SequenceNotStr[str]]]
 
 
-class FilterPromptIDFilter(TypedDict, total=False):
-    """Filter by prompt UUID."""
-
-    field: Required[Literal["prompt_id"]]
-
-    operator: Required[Literal["is", "not_is", "in", "not_in"]]
-
-    value: Required[Union[str, SequenceNotStr[str]]]
-
-
 Filter: TypeAlias = Union[
     FilterHostnameFilter,
     PathFilter,
@@ -221,9 +189,9 @@ Filter: TypeAlias = Union[
     TagIDFilter,
     FilterURLFilter,
     FilterRootDomainFilter,
-    FilterPromptTypeFilter,
+    PromptTypeFilter,
     PersonaIDFilter,
     FilterCitationCategoryFilter,
     PromptFilter,
-    FilterPromptIDFilter,
+    PromptIDFilterParam,
 ]
