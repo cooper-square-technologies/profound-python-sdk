@@ -31,10 +31,11 @@ from ._base_client import (
 )
 
 if TYPE_CHECKING:
-    from .resources import logs, content, prompts, reports, organizations
+    from .resources import logs, content, prompts, reports, organizations, prompt_volumes
     from .resources.prompts import PromptsResource, AsyncPromptsResource
     from .resources.reports import ReportsResource, AsyncReportsResource
     from .resources.logs.logs import LogsResource, AsyncLogsResource
+    from .resources.prompt_volumes import PromptVolumesResource, AsyncPromptVolumesResource
     from .resources.content.content import ContentResource, AsyncContentResource
     from .resources.organizations.organizations import OrganizationsResource, AsyncOrganizationsResource
 
@@ -134,6 +135,12 @@ class Profound(SyncAPIClient):
         from .resources.content import ContentResource
 
         return ContentResource(self)
+
+    @cached_property
+    def prompt_volumes(self) -> PromptVolumesResource:
+        from .resources.prompt_volumes import PromptVolumesResource
+
+        return PromptVolumesResource(self)
 
     @cached_property
     def with_raw_response(self) -> ProfoundWithRawResponse:
@@ -334,6 +341,12 @@ class AsyncProfound(AsyncAPIClient):
         return AsyncContentResource(self)
 
     @cached_property
+    def prompt_volumes(self) -> AsyncPromptVolumesResource:
+        from .resources.prompt_volumes import AsyncPromptVolumesResource
+
+        return AsyncPromptVolumesResource(self)
+
+    @cached_property
     def with_raw_response(self) -> AsyncProfoundWithRawResponse:
         return AsyncProfoundWithRawResponse(self)
 
@@ -482,6 +495,12 @@ class ProfoundWithRawResponse:
 
         return ContentResourceWithRawResponse(self._client.content)
 
+    @cached_property
+    def prompt_volumes(self) -> prompt_volumes.PromptVolumesResourceWithRawResponse:
+        from .resources.prompt_volumes import PromptVolumesResourceWithRawResponse
+
+        return PromptVolumesResourceWithRawResponse(self._client.prompt_volumes)
+
 
 class AsyncProfoundWithRawResponse:
     _client: AsyncProfound
@@ -518,6 +537,12 @@ class AsyncProfoundWithRawResponse:
         from .resources.content import AsyncContentResourceWithRawResponse
 
         return AsyncContentResourceWithRawResponse(self._client.content)
+
+    @cached_property
+    def prompt_volumes(self) -> prompt_volumes.AsyncPromptVolumesResourceWithRawResponse:
+        from .resources.prompt_volumes import AsyncPromptVolumesResourceWithRawResponse
+
+        return AsyncPromptVolumesResourceWithRawResponse(self._client.prompt_volumes)
 
 
 class ProfoundWithStreamedResponse:
@@ -556,6 +581,12 @@ class ProfoundWithStreamedResponse:
 
         return ContentResourceWithStreamingResponse(self._client.content)
 
+    @cached_property
+    def prompt_volumes(self) -> prompt_volumes.PromptVolumesResourceWithStreamingResponse:
+        from .resources.prompt_volumes import PromptVolumesResourceWithStreamingResponse
+
+        return PromptVolumesResourceWithStreamingResponse(self._client.prompt_volumes)
+
 
 class AsyncProfoundWithStreamedResponse:
     _client: AsyncProfound
@@ -592,6 +623,12 @@ class AsyncProfoundWithStreamedResponse:
         from .resources.content import AsyncContentResourceWithStreamingResponse
 
         return AsyncContentResourceWithStreamingResponse(self._client.content)
+
+    @cached_property
+    def prompt_volumes(self) -> prompt_volumes.AsyncPromptVolumesResourceWithStreamingResponse:
+        from .resources.prompt_volumes import AsyncPromptVolumesResourceWithStreamingResponse
+
+        return AsyncPromptVolumesResourceWithStreamingResponse(self._client.prompt_volumes)
 
 
 Client = Profound

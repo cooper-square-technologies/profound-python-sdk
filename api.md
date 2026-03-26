@@ -95,7 +95,10 @@ Methods:
 
 - <code title="post /v1/reports/citations">client.reports.<a href="./src/profound/resources/reports.py">citations</a>(\*\*<a href="src/profound/types/report_citations_params.py">params</a>) -> <a href="./src/profound/types/report_citations_response.py">ReportCitationsResponse</a></code>
 - <code title="post /v1/reports/bots">client.reports.<a href="./src/profound/resources/reports.py">get_bots_report</a>(\*\*<a href="src/profound/types/report_get_bots_report_params.py">params</a>) -> <a href="./src/profound/types/report_response.py">ReportResponse</a></code>
+- <code title="post /v2/reports/bots">client.reports.<a href="./src/profound/resources/reports.py">get_bots_report_v2</a>(\*\*<a href="src/profound/types/report_get_bots_report_v2_params.py">params</a>) -> <a href="./src/profound/types/report_response.py">ReportResponse</a></code>
 - <code title="post /v1/reports/referrals">client.reports.<a href="./src/profound/resources/reports.py">get_referrals_report</a>(\*\*<a href="src/profound/types/report_get_referrals_report_params.py">params</a>) -> <a href="./src/profound/types/report_response.py">ReportResponse</a></code>
+- <code title="post /v2/reports/referrals">client.reports.<a href="./src/profound/resources/reports.py">get_referrals_report_v2</a>(\*\*<a href="src/profound/types/report_get_referrals_report_v2_params.py">params</a>) -> <a href="./src/profound/types/report_response.py">ReportResponse</a></code>
+- <code title="post /v1/reports/query-fanouts">client.reports.<a href="./src/profound/resources/reports.py">query_fanouts</a>(\*\*<a href="src/profound/types/report_query_fanouts_params.py">params</a>) -> <a href="./src/profound/types/report_response.py">ReportResponse</a></code>
 - <code title="post /v1/reports/sentiment">client.reports.<a href="./src/profound/resources/reports.py">sentiment</a>(\*\*<a href="src/profound/types/report_sentiment_params.py">params</a>) -> <a href="./src/profound/types/report_response.py">ReportResponse</a></code>
 - <code title="post /v1/reports/visibility">client.reports.<a href="./src/profound/resources/reports.py">visibility</a>(\*\*<a href="src/profound/types/report_visibility_params.py">params</a>) -> <a href="./src/profound/types/report_response.py">ReportResponse</a></code>
 
@@ -128,3 +131,10 @@ Methods:
 
 - <code title="get /v1/content/{asset_id}/optimization/{content_id}">client.content.optimization.<a href="./src/profound/resources/content/optimization.py">retrieve</a>(content_id, \*, asset_id) -> <a href="./src/profound/types/content/optimization_retrieve_response.py">OptimizationRetrieveResponse</a></code>
 - <code title="get /v1/content/{asset_id}/optimization">client.content.optimization.<a href="./src/profound/resources/content/optimization.py">list</a>(asset_id, \*\*<a href="src/profound/types/content/optimization_list_params.py">params</a>) -> <a href="./src/profound/types/content/optimization_list_response.py">OptimizationListResponse</a></code>
+
+# PromptVolumes
+
+Methods:
+
+- <code title="post /v1/prompt-volumes/volume">client.prompt_volumes.<a href="./src/profound/resources/prompt_volumes.py">create_volume</a>(\*\*<a href="src/profound/types/prompt_volume_create_volume_params.py">params</a>) -> object</code>
+- <code title="get /v1/prompt-volumes/citation-prompts">client.prompt_volumes.<a href="./src/profound/resources/prompt_volumes.py">list_citation_prompts</a>(\*\*<a href="src/profound/types/prompt_volume_list_citation_prompts_params.py">params</a>) -> object</code>
