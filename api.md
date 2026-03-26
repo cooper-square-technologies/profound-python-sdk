@@ -3,11 +3,14 @@
 ```python
 from profound.types import (
     AssetNameFilter,
+    BotNameFilter,
+    BotProviderFilter,
     ModelIDFilter,
     Pagination,
     PathFilter,
     PersonaIDFilter,
     PromptFilter,
+    PromptTypeFilter,
     RegionIDFilter,
     TagIDFilter,
     TopicIDFilter,
@@ -83,6 +86,7 @@ Types:
 
 ```python
 from profound.types import (
+    PromptIDFilter,
     ReportInfo,
     ReportResponse,
     ReportResult,

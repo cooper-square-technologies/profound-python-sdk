@@ -6,16 +6,17 @@ from typing import Dict, List, Union, Iterable
 from datetime import datetime
 from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
-from .._types import SequenceNotStr
 from .._utils import PropertyInfo
+from .prompt_id_filter_param import PromptIDFilterParam
 from .shared_params.pagination import Pagination
 from .shared_params.tag_id_filter import TagIDFilter
 from .shared_params.model_id_filter import ModelIDFilter
 from .shared_params.topic_id_filter import TopicIDFilter
 from .shared_params.region_id_filter import RegionIDFilter
 from .shared_params.persona_id_filter import PersonaIDFilter
+from .shared_params.prompt_type_filter import PromptTypeFilter
 
-__all__ = ["ReportQueryFanoutsParams", "Filter", "FilterPromptIDFilter", "FilterPromptTypeFilter"]
+__all__ = ["ReportQueryFanoutsParams", "Filter"]
 
 
 class ReportQueryFanoutsParams(TypedDict, total=False):
@@ -49,44 +50,6 @@ class ReportQueryFanoutsParams(TypedDict, total=False):
     """Pagination settings for the report results."""
 
 
-class FilterPromptIDFilter(TypedDict, total=False):
-    """Filter by prompt UUID."""
-
-    field: Required[Literal["prompt_id"]]
-
-    operator: Required[Literal["is", "not_is", "in", "not_in"]]
-
-    value: Required[Union[str, SequenceNotStr[str]]]
-
-
-class FilterPromptTypeFilter(TypedDict, total=False):
-    """Filter by prompt type (visibility or sentiment)."""
-
-    field: Required[Literal["prompt_type"]]
-
-    operator: Required[
-        Literal[
-            "is",
-            "not_is",
-            "in",
-            "not_in",
-            "contains",
-            "not_contains",
-            "matches",
-            "contains_case_insensitive",
-            "not_contains_case_insensitive",
-        ]
-    ]
-
-    value: Required[Union[Literal["visibility", "sentiment"], List[Literal["visibility", "sentiment"]]]]
-
-
 Filter: TypeAlias = Union[
-    RegionIDFilter,
-    ModelIDFilter,
-    TopicIDFilter,
-    TagIDFilter,
-    FilterPromptIDFilter,
-    PersonaIDFilter,
-    FilterPromptTypeFilter,
+    RegionIDFilter, ModelIDFilter, TopicIDFilter, TagIDFilter, PromptIDFilterParam, PersonaIDFilter, PromptTypeFilter
 ]

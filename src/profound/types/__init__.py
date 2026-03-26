@@ -7,11 +7,14 @@ from .shared import (
     PathFilter as PathFilter,
     TagIDFilter as TagIDFilter,
     PromptFilter as PromptFilter,
+    BotNameFilter as BotNameFilter,
     ModelIDFilter as ModelIDFilter,
     TopicIDFilter as TopicIDFilter,
     RegionIDFilter as RegionIDFilter,
     AssetNameFilter as AssetNameFilter,
     PersonaIDFilter as PersonaIDFilter,
+    PromptTypeFilter as PromptTypeFilter,
+    BotProviderFilter as BotProviderFilter,
 )
 from .report_info import ReportInfo as ReportInfo
 from .report_result import ReportResult as ReportResult
@@ -19,6 +22,7 @@ from .named_resource import NamedResource as NamedResource
 from .persona_profile import PersonaProfile as PersonaProfile
 from .report_response import ReportResponse as ReportResponse
 from .prompt_answers_params import PromptAnswersParams as PromptAnswersParams
+from .prompt_id_filter_param import PromptIDFilterParam as PromptIDFilterParam
 from .prompt_answers_response import PromptAnswersResponse as PromptAnswersResponse
 from .report_citations_params import ReportCitationsParams as ReportCitationsParams
 from .report_sentiment_params import ReportSentimentParams as ReportSentimentParams
