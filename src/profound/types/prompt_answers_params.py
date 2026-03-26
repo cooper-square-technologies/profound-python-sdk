@@ -10,20 +10,14 @@ from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 from .shared_params.pagination import Pagination
 from .shared_params.prompt_filter import PromptFilter
+from .shared_params.tag_id_filter import TagIDFilter
+from .shared_params.model_id_filter import ModelIDFilter
+from .shared_params.topic_id_filter import TopicIDFilter
+from .shared_params.region_id_filter import RegionIDFilter
 from .shared_params.asset_name_filter import AssetNameFilter
+from .shared_params.persona_id_filter import PersonaIDFilter
 
-__all__ = [
-    "PromptAnswersParams",
-    "Filter",
-    "FilterProfoundAnswerEngineInsightsFiltersRegionIDFilter",
-    "FilterProfoundAnswerEngineInsightsFiltersModelIDFilter",
-    "FilterProfoundAnswerEngineInsightsFiltersTagIDFilter",
-    "FilterProfoundAnswerEngineInsightsFiltersPromptTypeFilter",
-    "FilterProfoundAnswerEngineInsightsFiltersPersonaIDFilter",
-    "FilterProfoundAnswerEngineInsightsFiltersTopicIDFilter",
-    "FilterAssetIDFilter",
-    "Include",
-]
+__all__ = ["PromptAnswersParams", "Filter", "FilterPromptTypeFilter", "FilterAssetIDFilter", "Include"]
 
 
 class PromptAnswersParams(TypedDict, total=False):
@@ -42,35 +36,8 @@ class PromptAnswersParams(TypedDict, total=False):
     """Pagination parameters for the results. Default is 10,000 rows with no offset."""
 
 
-class FilterProfoundAnswerEngineInsightsFiltersRegionIDFilter(TypedDict, total=False):
-    field: Required[Literal["region_id", "region"]]
-    """- `region` - Deprecated"""
-
-    operator: Required[Literal["is", "not_is", "in", "not_in"]]
-
-    value: Required[Union[str, SequenceNotStr[str]]]
-
-
-class FilterProfoundAnswerEngineInsightsFiltersModelIDFilter(TypedDict, total=False):
-    field: Required[Literal["model_id", "model"]]
-    """- `model` - Deprecated"""
-
-    operator: Required[Literal["is", "not_is", "in", "not_in"]]
-
-    value: Required[Union[str, SequenceNotStr[str]]]
-
-
-class FilterProfoundAnswerEngineInsightsFiltersTagIDFilter(TypedDict, total=False):
-    field: Required[Literal["tag_id", "tag"]]
-    """- `tag` - Deprecated"""
-
-    operator: Required[Literal["is", "not_is", "in", "not_in"]]
-
-    value: Required[Union[str, SequenceNotStr[str]]]
-
-
-class FilterProfoundAnswerEngineInsightsFiltersPromptTypeFilter(TypedDict, total=False):
-    """Filter by prompt type (visibility or sentiment)"""
+class FilterPromptTypeFilter(TypedDict, total=False):
+    """Filter by prompt type (visibility or sentiment)."""
 
     field: Required[Literal["prompt_type"]]
 
@@ -91,23 +58,6 @@ class FilterProfoundAnswerEngineInsightsFiltersPromptTypeFilter(TypedDict, total
     value: Required[Union[Literal["visibility", "sentiment"], List[Literal["visibility", "sentiment"]]]]
 
 
-class FilterProfoundAnswerEngineInsightsFiltersPersonaIDFilter(TypedDict, total=False):
-    field: Required[Literal["persona_id"]]
-
-    operator: Required[Literal["is", "not_is", "in", "not_in"]]
-
-    value: Required[Union[str, SequenceNotStr[str]]]
-
-
-class FilterProfoundAnswerEngineInsightsFiltersTopicIDFilter(TypedDict, total=False):
-    field: Required[Literal["topic_id", "topic"]]
-    """- `topic` - Deprecated"""
-
-    operator: Required[Literal["is", "not_is", "in", "not_in"]]
-
-    value: Required[Union[str, SequenceNotStr[str]]]
-
-
 class FilterAssetIDFilter(TypedDict, total=False):
     field: Required[Literal["asset_id"]]
 
@@ -117,13 +67,13 @@ class FilterAssetIDFilter(TypedDict, total=False):
 
 
 Filter: TypeAlias = Union[
-    FilterProfoundAnswerEngineInsightsFiltersRegionIDFilter,
-    FilterProfoundAnswerEngineInsightsFiltersModelIDFilter,
-    FilterProfoundAnswerEngineInsightsFiltersTagIDFilter,
-    FilterProfoundAnswerEngineInsightsFiltersPromptTypeFilter,
+    RegionIDFilter,
+    ModelIDFilter,
+    TagIDFilter,
+    FilterPromptTypeFilter,
     PromptFilter,
-    FilterProfoundAnswerEngineInsightsFiltersPersonaIDFilter,
-    FilterProfoundAnswerEngineInsightsFiltersTopicIDFilter,
+    PersonaIDFilter,
+    TopicIDFilter,
     FilterAssetIDFilter,
     AssetNameFilter,
 ]
