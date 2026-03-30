@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.34.0 (2026-03-30)
+
+Full Changelog: [v0.33.1...v0.34.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.33.1...v0.34.0)
+
+### Features
+
+* **api:** api update ([badf1e9](https://github.com/cooper-square-technologies/profound-python-sdk/commit/badf1e917bdaa20d30d1a000be9679cc4c1aa5dc))
+* **api:** bots and referrals reports v2 ([1d15808](https://github.com/cooper-square-technologies/profound-python-sdk/commit/1d15808a66e6118df4d08566b672cf58457fed43))
+* **api:** shared models ([4d69a87](https://github.com/cooper-square-technologies/profound-python-sdk/commit/4d69a8775c631db5262361c907c59f38bba2afa5))
+* **internal:** implement indices array format for query and form serialization ([f2830b4](https://github.com/cooper-square-technologies/profound-python-sdk/commit/f2830b440cdedacf4e8127a9f6be5f1498156705))
+
 ## 0.33.1 (2026-03-24)
 
 Full Changelog: [v0.33.0...v0.33.1](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.33.0...v0.33.1)

@@ -10,12 +10,12 @@ from ..._types import SequenceNotStr
 from ..._utils import PropertyInfo
 from ..shared_params.pagination import Pagination
 from ..shared_params.path_filter import PathFilter
+from ..shared_params.bot_name_filter import BotNameFilter
+from ..shared_params.bot_provider_filter import BotProviderFilter
 
 __all__ = [
     "RawBotsParams",
     "Filter",
-    "FilterBotNameFilter",
-    "FilterBotProviderFilter",
     "FilterBotTypesFilter",
     "FilterMethodFilter",
     "FilterStatusCodeFilter",
@@ -88,158 +88,6 @@ class RawBotsParams(TypedDict, total=False):
 
     pagination: Pagination
     """Pagination settings for the report results."""
-
-
-class FilterBotNameFilter(TypedDict, total=False):
-    """Filter by bot name (user agent)"""
-
-    field: Required[Literal["bot_name"]]
-
-    operator: Required[
-        Literal[
-            "is",
-            "not_is",
-            "in",
-            "not_in",
-            "contains",
-            "not_contains",
-            "matches",
-            "contains_case_insensitive",
-            "not_contains_case_insensitive",
-        ]
-    ]
-
-    value: Required[
-        Union[
-            Literal[
-                "Amazonbot",
-                "ClaudeBot",
-                "Claude-User",
-                "Claude-SearchBot",
-                "Applebot",
-                "Applebot-Extended",
-                "Bytespider",
-                "DeepSeek",
-                "DuckAssistBot",
-                "DuckDuckBot",
-                "Googlebot",
-                "Googlebot-News",
-                "Googlebot-Video",
-                "Googlebot-Image",
-                "Google-Extended",
-                "Storebot-Google",
-                "Google-CloudVertexBot",
-                "meta-externalfetcher",
-                "meta-externalagent",
-                "bingbot",
-                "MicrosoftPreview",
-                "ChatGPT-User",
-                "GPTBot",
-                "OAI-SearchBot",
-                "OAI-Operator",
-                "PerplexityBot",
-                "Perplexity-User",
-                "Grok-PageBrowser",
-                "YouBot",
-            ],
-            List[
-                Literal[
-                    "Amazonbot",
-                    "ClaudeBot",
-                    "Claude-User",
-                    "Claude-SearchBot",
-                    "Applebot",
-                    "Applebot-Extended",
-                    "Bytespider",
-                    "DeepSeek",
-                    "DuckAssistBot",
-                    "DuckDuckBot",
-                    "Googlebot",
-                    "Googlebot-News",
-                    "Googlebot-Video",
-                    "Googlebot-Image",
-                    "Google-Extended",
-                    "Storebot-Google",
-                    "Google-CloudVertexBot",
-                    "meta-externalfetcher",
-                    "meta-externalagent",
-                    "bingbot",
-                    "MicrosoftPreview",
-                    "ChatGPT-User",
-                    "GPTBot",
-                    "OAI-SearchBot",
-                    "OAI-Operator",
-                    "PerplexityBot",
-                    "Perplexity-User",
-                    "Grok-PageBrowser",
-                    "YouBot",
-                ]
-            ],
-        ]
-    ]
-
-
-class FilterBotProviderFilter(TypedDict, total=False):
-    """Filter by bot provider"""
-
-    field: Required[Literal["bot_provider"]]
-
-    operator: Required[
-        Literal[
-            "is",
-            "not_is",
-            "in",
-            "not_in",
-            "contains",
-            "not_contains",
-            "matches",
-            "contains_case_insensitive",
-            "not_contains_case_insensitive",
-        ]
-    ]
-
-    value: Required[
-        Union[
-            Literal[
-                "openai",
-                "anthropic",
-                "chatgpt",
-                "deepseek",
-                "google",
-                "microsoft",
-                "perplexity",
-                "apple",
-                "bytedance",
-                "amazon",
-                "meta",
-                "duckduckgo",
-                "you",
-                "xai",
-                "grok",
-                "gemini",
-            ],
-            List[
-                Literal[
-                    "openai",
-                    "anthropic",
-                    "chatgpt",
-                    "deepseek",
-                    "google",
-                    "microsoft",
-                    "perplexity",
-                    "apple",
-                    "bytedance",
-                    "amazon",
-                    "meta",
-                    "duckduckgo",
-                    "you",
-                    "xai",
-                    "grok",
-                    "gemini",
-                ]
-            ],
-        ]
-    ]
 
 
 class FilterBotTypesFilter(TypedDict, total=False):
@@ -387,8 +235,8 @@ class FilterQueryParamsFilter(TypedDict, total=False):
 
 
 Filter: TypeAlias = Union[
-    FilterBotNameFilter,
-    FilterBotProviderFilter,
+    BotNameFilter,
+    BotProviderFilter,
     FilterBotTypesFilter,
     FilterMethodFilter,
     PathFilter,

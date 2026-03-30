@@ -11,19 +11,14 @@ from .._utils import PropertyInfo
 from .topic_name_filter_param import TopicNameFilterParam
 from .shared_params.pagination import Pagination
 from .shared_params.prompt_filter import PromptFilter
+from .shared_params.tag_id_filter import TagIDFilter
+from .shared_params.model_id_filter import ModelIDFilter
+from .shared_params.topic_id_filter import TopicIDFilter
+from .shared_params.region_id_filter import RegionIDFilter
 from .shared_params.asset_name_filter import AssetNameFilter
+from .shared_params.persona_id_filter import PersonaIDFilter
 
-__all__ = [
-    "ReportSentimentParams",
-    "Filter",
-    "FilterAssetIDFilter",
-    "FilterThemeFilter",
-    "FilterProfoundAnswerEngineInsightsFiltersRegionIDFilter",
-    "FilterProfoundAnswerEngineInsightsFiltersTopicIDFilter",
-    "FilterProfoundAnswerEngineInsightsFiltersModelIDFilter",
-    "FilterProfoundAnswerEngineInsightsFiltersTagIDFilter",
-    "FilterProfoundAnswerEngineInsightsFiltersPersonaIDFilter",
-]
+__all__ = ["ReportSentimentParams", "Filter", "FilterAssetIDFilter", "FilterThemeFilter"]
 
 
 class ReportSentimentParams(TypedDict, total=False):
@@ -115,59 +110,15 @@ class FilterThemeFilter(TypedDict, total=False):
     value: Required[Union[str, SequenceNotStr[str]]]
 
 
-class FilterProfoundAnswerEngineInsightsFiltersRegionIDFilter(TypedDict, total=False):
-    field: Required[Literal["region_id", "region"]]
-    """- `region` - Deprecated"""
-
-    operator: Required[Literal["is", "not_is", "in", "not_in"]]
-
-    value: Required[Union[str, SequenceNotStr[str]]]
-
-
-class FilterProfoundAnswerEngineInsightsFiltersTopicIDFilter(TypedDict, total=False):
-    field: Required[Literal["topic_id", "topic"]]
-    """- `topic` - Deprecated"""
-
-    operator: Required[Literal["is", "not_is", "in", "not_in"]]
-
-    value: Required[Union[str, SequenceNotStr[str]]]
-
-
-class FilterProfoundAnswerEngineInsightsFiltersModelIDFilter(TypedDict, total=False):
-    field: Required[Literal["model_id", "model"]]
-    """- `model` - Deprecated"""
-
-    operator: Required[Literal["is", "not_is", "in", "not_in"]]
-
-    value: Required[Union[str, SequenceNotStr[str]]]
-
-
-class FilterProfoundAnswerEngineInsightsFiltersTagIDFilter(TypedDict, total=False):
-    field: Required[Literal["tag_id", "tag"]]
-    """- `tag` - Deprecated"""
-
-    operator: Required[Literal["is", "not_is", "in", "not_in"]]
-
-    value: Required[Union[str, SequenceNotStr[str]]]
-
-
-class FilterProfoundAnswerEngineInsightsFiltersPersonaIDFilter(TypedDict, total=False):
-    field: Required[Literal["persona_id"]]
-
-    operator: Required[Literal["is", "not_is", "in", "not_in"]]
-
-    value: Required[Union[str, SequenceNotStr[str]]]
-
-
 Filter: TypeAlias = Union[
     FilterAssetIDFilter,
     AssetNameFilter,
     FilterThemeFilter,
-    FilterProfoundAnswerEngineInsightsFiltersRegionIDFilter,
-    FilterProfoundAnswerEngineInsightsFiltersTopicIDFilter,
+    RegionIDFilter,
+    TopicIDFilter,
     TopicNameFilterParam,
-    FilterProfoundAnswerEngineInsightsFiltersModelIDFilter,
-    FilterProfoundAnswerEngineInsightsFiltersTagIDFilter,
+    ModelIDFilter,
+    TagIDFilter,
     PromptFilter,
-    FilterProfoundAnswerEngineInsightsFiltersPersonaIDFilter,
+    PersonaIDFilter,
 ]

@@ -40,6 +40,14 @@ from .organizations import (
     OrganizationsResourceWithStreamingResponse,
     AsyncOrganizationsResourceWithStreamingResponse,
 )
+from .prompt_volumes import (
+    PromptVolumesResource,
+    AsyncPromptVolumesResource,
+    PromptVolumesResourceWithRawResponse,
+    AsyncPromptVolumesResourceWithRawResponse,
+    PromptVolumesResourceWithStreamingResponse,
+    AsyncPromptVolumesResourceWithStreamingResponse,
+)
 
 __all__ = [
     "OrganizationsResource",
@@ -72,4 +80,10 @@ __all__ = [
     "AsyncContentResourceWithRawResponse",
     "ContentResourceWithStreamingResponse",
     "AsyncContentResourceWithStreamingResponse",
+    "PromptVolumesResource",
+    "AsyncPromptVolumesResource",
+    "PromptVolumesResourceWithRawResponse",
+    "AsyncPromptVolumesResourceWithRawResponse",
+    "PromptVolumesResourceWithStreamingResponse",
+    "AsyncPromptVolumesResourceWithStreamingResponse",
 ]

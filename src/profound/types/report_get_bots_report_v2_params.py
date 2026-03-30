@@ -12,10 +12,10 @@ from .shared_params.path_filter import PathFilter
 from .shared_params.bot_name_filter import BotNameFilter
 from .shared_params.bot_provider_filter import BotProviderFilter
 
-__all__ = ["ReportGetBotsReportParams", "Filter"]
+__all__ = ["ReportGetBotsReportV2Params", "Filter", "FilterBotTypeFilter"]
 
 
-class ReportGetBotsReportParams(TypedDict, total=False):
+class ReportGetBotsReportV2Params(TypedDict, total=False):
     domain: Required[str]
     """Domain to query logs for."""
 
@@ -31,13 +31,13 @@ class ReportGetBotsReportParams(TypedDict, total=False):
     date_interval: Literal["hour", "day", "week", "month", "year", "relative_week"]
     """Date interval for the report. (only used with date dimension)"""
 
-    dimensions: List[Literal["date", "path", "bot_name", "bot_provider"]]
+    dimensions: List[Literal["date", "hour", "path", "bot_name", "bot_provider", "bot_type"]]
     """Dimensions to group the report by."""
 
     end_date: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
-    """End date for logs.
+    """End date in UTC.
 
-    Accepts same formats as start_date. Defaults to now if omitted.
+    Accepts same formats as start_date. Defaults to now UTC if omitted.
     """
 
     filters: Iterable[Filter]
@@ -62,4 +62,31 @@ class ReportGetBotsReportParams(TypedDict, total=False):
     """Pagination settings for the report results."""
 
 
-Filter: TypeAlias = Union[PathFilter, BotNameFilter, BotProviderFilter]
+class FilterBotTypeFilter(TypedDict, total=False):
+    """Filter by bot_type column (v2 hourly table only)"""
+
+    field: Required[Literal["bot_type"]]
+
+    operator: Required[
+        Literal[
+            "is",
+            "not_is",
+            "in",
+            "not_in",
+            "contains",
+            "not_contains",
+            "matches",
+            "contains_case_insensitive",
+            "not_contains_case_insensitive",
+        ]
+    ]
+
+    value: Required[
+        Union[
+            Literal["ai_assistant", "ai_training", "index", "ai_agent"],
+            List[Literal["ai_assistant", "ai_training", "index", "ai_agent"]],
+        ]
+    ]
+
+
+Filter: TypeAlias = Union[PathFilter, BotNameFilter, BotProviderFilter, FilterBotTypeFilter]

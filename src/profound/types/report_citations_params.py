@@ -8,25 +8,25 @@ from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from .._types import SequenceNotStr
 from .._utils import PropertyInfo
+from .prompt_id_filter_param import PromptIDFilterParam
 from .topic_name_filter_param import TopicNameFilterParam
 from .shared_params.pagination import Pagination
 from .shared_params.path_filter import PathFilter
 from .shared_params.prompt_filter import PromptFilter
+from .shared_params.tag_id_filter import TagIDFilter
+from .shared_params.model_id_filter import ModelIDFilter
+from .shared_params.topic_id_filter import TopicIDFilter
+from .shared_params.region_id_filter import RegionIDFilter
+from .shared_params.persona_id_filter import PersonaIDFilter
+from .shared_params.prompt_type_filter import PromptTypeFilter
 
 __all__ = [
     "ReportCitationsParams",
     "Filter",
     "FilterHostnameFilter",
-    "FilterProfoundAnswerEngineInsightsFiltersRegionIDFilter",
-    "FilterProfoundAnswerEngineInsightsFiltersTopicIDFilter",
-    "FilterProfoundAnswerEngineInsightsFiltersModelIDFilter",
-    "FilterProfoundAnswerEngineInsightsFiltersTagIDFilter",
     "FilterURLFilter",
     "FilterRootDomainFilter",
-    "FilterProfoundAnswerEngineInsightsFiltersPromptTypeFilter",
-    "FilterProfoundAnswerEngineInsightsFiltersPersonaIDFilter",
     "FilterCitationCategoryFilter",
-    "FilterProfoundAnswerEngineInsightsFiltersPromptIDFilter",
 ]
 
 
@@ -113,42 +113,6 @@ class FilterHostnameFilter(TypedDict, total=False):
     value: Required[Union[str, SequenceNotStr[str]]]
 
 
-class FilterProfoundAnswerEngineInsightsFiltersRegionIDFilter(TypedDict, total=False):
-    field: Required[Literal["region_id", "region"]]
-    """- `region` - Deprecated"""
-
-    operator: Required[Literal["is", "not_is", "in", "not_in"]]
-
-    value: Required[Union[str, SequenceNotStr[str]]]
-
-
-class FilterProfoundAnswerEngineInsightsFiltersTopicIDFilter(TypedDict, total=False):
-    field: Required[Literal["topic_id", "topic"]]
-    """- `topic` - Deprecated"""
-
-    operator: Required[Literal["is", "not_is", "in", "not_in"]]
-
-    value: Required[Union[str, SequenceNotStr[str]]]
-
-
-class FilterProfoundAnswerEngineInsightsFiltersModelIDFilter(TypedDict, total=False):
-    field: Required[Literal["model_id", "model"]]
-    """- `model` - Deprecated"""
-
-    operator: Required[Literal["is", "not_is", "in", "not_in"]]
-
-    value: Required[Union[str, SequenceNotStr[str]]]
-
-
-class FilterProfoundAnswerEngineInsightsFiltersTagIDFilter(TypedDict, total=False):
-    field: Required[Literal["tag_id", "tag"]]
-    """- `tag` - Deprecated"""
-
-    operator: Required[Literal["is", "not_is", "in", "not_in"]]
-
-    value: Required[Union[str, SequenceNotStr[str]]]
-
-
 class FilterURLFilter(TypedDict, total=False):
     """Filter by URL"""
 
@@ -193,36 +157,6 @@ class FilterRootDomainFilter(TypedDict, total=False):
     value: Required[Union[str, SequenceNotStr[str]]]
 
 
-class FilterProfoundAnswerEngineInsightsFiltersPromptTypeFilter(TypedDict, total=False):
-    """Filter by prompt type (visibility or sentiment)"""
-
-    field: Required[Literal["prompt_type"]]
-
-    operator: Required[
-        Literal[
-            "is",
-            "not_is",
-            "in",
-            "not_in",
-            "contains",
-            "not_contains",
-            "matches",
-            "contains_case_insensitive",
-            "not_contains_case_insensitive",
-        ]
-    ]
-
-    value: Required[Union[Literal["visibility", "sentiment"], List[Literal["visibility", "sentiment"]]]]
-
-
-class FilterProfoundAnswerEngineInsightsFiltersPersonaIDFilter(TypedDict, total=False):
-    field: Required[Literal["persona_id"]]
-
-    operator: Required[Literal["is", "not_is", "in", "not_in"]]
-
-    value: Required[Union[str, SequenceNotStr[str]]]
-
-
 class FilterCitationCategoryFilter(TypedDict, total=False):
     """Filter by citation category"""
 
@@ -245,27 +179,19 @@ class FilterCitationCategoryFilter(TypedDict, total=False):
     value: Required[Union[str, SequenceNotStr[str]]]
 
 
-class FilterProfoundAnswerEngineInsightsFiltersPromptIDFilter(TypedDict, total=False):
-    field: Required[Literal["prompt_id"]]
-
-    operator: Required[Literal["is", "not_is", "in", "not_in"]]
-
-    value: Required[Union[str, SequenceNotStr[str]]]
-
-
 Filter: TypeAlias = Union[
     FilterHostnameFilter,
     PathFilter,
-    FilterProfoundAnswerEngineInsightsFiltersRegionIDFilter,
-    FilterProfoundAnswerEngineInsightsFiltersTopicIDFilter,
+    RegionIDFilter,
+    TopicIDFilter,
     TopicNameFilterParam,
-    FilterProfoundAnswerEngineInsightsFiltersModelIDFilter,
-    FilterProfoundAnswerEngineInsightsFiltersTagIDFilter,
+    ModelIDFilter,
+    TagIDFilter,
     FilterURLFilter,
     FilterRootDomainFilter,
-    FilterProfoundAnswerEngineInsightsFiltersPromptTypeFilter,
-    FilterProfoundAnswerEngineInsightsFiltersPersonaIDFilter,
+    PromptTypeFilter,
+    PersonaIDFilter,
     FilterCitationCategoryFilter,
     PromptFilter,
-    FilterProfoundAnswerEngineInsightsFiltersPromptIDFilter,
+    PromptIDFilterParam,
 ]
