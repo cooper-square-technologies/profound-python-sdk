@@ -17,6 +17,8 @@ class CategoryPromptsParams(TypedDict, total=False):
 
     order_dir: Literal["asc", "desc"]
 
+    persona_id: SequenceNotStr[str]
+
     platform_id: SequenceNotStr[str]
 
     prompt_type: List[Literal["visibility", "sentiment"]]
