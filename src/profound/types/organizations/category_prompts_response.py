@@ -14,6 +14,8 @@ class Data(BaseModel):
 
     created_at: datetime
 
+    language: str
+
     platforms: List[NamedResource]
 
     prompt: str
@@ -24,6 +26,8 @@ class Data(BaseModel):
 
     topic: NamedResource
     """Generic id+name reference used across domain boundaries."""
+
+    personas: Optional[List[NamedResource]] = None
 
     tags: Optional[List[NamedResource]] = None
 
