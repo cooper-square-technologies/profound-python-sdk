@@ -24,6 +24,7 @@ __all__ = [
     "ReportCitationsParams",
     "Filter",
     "FilterHostnameFilter",
+    "FilterTagNameFilter",
     "FilterURLFilter",
     "FilterRootDomainFilter",
     "FilterCitationCategoryFilter",
@@ -95,6 +96,28 @@ class FilterHostnameFilter(TypedDict, total=False):
     """Filter by hostname"""
 
     field: Required[Literal["hostname"]]
+
+    operator: Required[
+        Literal[
+            "is",
+            "not_is",
+            "in",
+            "not_in",
+            "contains",
+            "not_contains",
+            "matches",
+            "contains_case_insensitive",
+            "not_contains_case_insensitive",
+        ]
+    ]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
+class FilterTagNameFilter(TypedDict, total=False):
+    """Filter by tag name."""
+
+    field: Required[Literal["tag_name"]]
 
     operator: Required[
         Literal[
@@ -187,6 +210,7 @@ Filter: TypeAlias = Union[
     TopicNameFilterParam,
     ModelIDFilter,
     TagIDFilter,
+    FilterTagNameFilter,
     FilterURLFilter,
     FilterRootDomainFilter,
     PromptTypeFilter,
