@@ -6,6 +6,7 @@ from typing import Dict, List, Union, Iterable
 from datetime import datetime
 from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
+from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 from .prompt_id_filter_param import PromptIDFilterParam
 from .topic_name_filter_param import TopicNameFilterParam
@@ -18,7 +19,7 @@ from .shared_params.region_id_filter import RegionIDFilter
 from .shared_params.asset_name_filter import AssetNameFilter
 from .shared_params.persona_id_filter import PersonaIDFilter
 
-__all__ = ["ReportVisibilityParams", "Filter"]
+__all__ = ["ReportVisibilityParams", "Filter", "FilterTagNameFilter"]
 
 
 class ReportVisibilityParams(TypedDict, total=False):
@@ -80,6 +81,28 @@ class ReportVisibilityParams(TypedDict, total=False):
     """Pagination settings for the report results."""
 
 
+class FilterTagNameFilter(TypedDict, total=False):
+    """Filter by tag name."""
+
+    field: Required[Literal["tag_name"]]
+
+    operator: Required[
+        Literal[
+            "is",
+            "not_is",
+            "in",
+            "not_in",
+            "contains",
+            "not_contains",
+            "matches",
+            "contains_case_insensitive",
+            "not_contains_case_insensitive",
+        ]
+    ]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
 Filter: TypeAlias = Union[
     RegionIDFilter,
     ModelIDFilter,
@@ -87,6 +110,7 @@ Filter: TypeAlias = Union[
     TopicNameFilterParam,
     AssetNameFilter,
     TagIDFilter,
+    FilterTagNameFilter,
     PromptIDFilterParam,
     PromptFilter,
     PersonaIDFilter,
