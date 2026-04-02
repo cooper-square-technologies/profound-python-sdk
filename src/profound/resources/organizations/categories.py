@@ -155,9 +155,28 @@ class CategoriesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CategoryPromptsResponse:
         """
-        Get Category Prompts
+        Retrieve prompts in a category with optional filtering by type, topic, tag,
+        region, platform, or persona. Supports cursor-based pagination.
 
         Args:
+          cursor: Pagination cursor from a previous response.
+
+          limit: Maximum number of prompts to return.
+
+          order_dir: Sort direction by creation date.
+
+          persona_id: Filter by persona IDs.
+
+          platform_id: Filter by platform IDs.
+
+          prompt_type: Filter by prompt type.
+
+          region_id: Filter by region IDs.
+
+          tag_id: Filter by tag IDs.
+
+          topic_id: Filter by topic IDs.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -386,9 +405,28 @@ class AsyncCategoriesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CategoryPromptsResponse:
         """
-        Get Category Prompts
+        Retrieve prompts in a category with optional filtering by type, topic, tag,
+        region, platform, or persona. Supports cursor-based pagination.
 
         Args:
+          cursor: Pagination cursor from a previous response.
+
+          limit: Maximum number of prompts to return.
+
+          order_dir: Sort direction by creation date.
+
+          persona_id: Filter by persona IDs.
+
+          platform_id: Filter by platform IDs.
+
+          prompt_type: Filter by prompt type.
+
+          region_id: Filter by region IDs.
+
+          tag_id: Filter by tag IDs.
+
+          topic_id: Filter by topic IDs.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
