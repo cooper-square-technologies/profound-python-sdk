@@ -224,7 +224,7 @@ class CategoriesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CategoryTagsResponse:
         """
-        Get the organization tags for a specific category.
+        Get the tags for a specific category.
 
         Args:
           extra_headers: Send extra headers
@@ -257,7 +257,7 @@ class CategoriesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CategoryTopicsResponse:
         """
-        Get the organization categories.
+        Get the topics for a specific category.
 
         Args:
           extra_headers: Send extra headers
@@ -474,7 +474,7 @@ class AsyncCategoriesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CategoryTagsResponse:
         """
-        Get the organization tags for a specific category.
+        Get the tags for a specific category.
 
         Args:
           extra_headers: Send extra headers
@@ -507,7 +507,7 @@ class AsyncCategoriesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CategoryTopicsResponse:
         """
-        Get the organization categories.
+        Get the topics for a specific category.
 
         Args:
           extra_headers: Send extra headers
