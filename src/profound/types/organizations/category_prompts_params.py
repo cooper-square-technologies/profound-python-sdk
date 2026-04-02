@@ -32,6 +32,9 @@ class CategoryPromptsParams(TypedDict, total=False):
     region_id: SequenceNotStr[str]
     """Filter by region IDs."""
 
+    status: List[Literal["active", "disabled"]]
+    """Filter by prompt status."""
+
     tag_id: SequenceNotStr[str]
     """Filter by tag IDs."""
 
