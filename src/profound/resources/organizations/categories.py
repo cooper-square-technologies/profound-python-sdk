@@ -145,6 +145,7 @@ class CategoriesResource(SyncAPIResource):
         platform_id: SequenceNotStr[str] | Omit = omit,
         prompt_type: List[Literal["visibility", "sentiment"]] | Omit = omit,
         region_id: SequenceNotStr[str] | Omit = omit,
+        status: List[Literal["active", "disabled"]] | Omit = omit,
         tag_id: SequenceNotStr[str] | Omit = omit,
         topic_id: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -172,6 +173,8 @@ class CategoriesResource(SyncAPIResource):
           prompt_type: Filter by prompt type.
 
           region_id: Filter by region IDs.
+
+          status: Filter by prompt status.
 
           tag_id: Filter by tag IDs.
 
@@ -203,6 +206,7 @@ class CategoriesResource(SyncAPIResource):
                         "platform_id": platform_id,
                         "prompt_type": prompt_type,
                         "region_id": region_id,
+                        "status": status,
                         "tag_id": tag_id,
                         "topic_id": topic_id,
                     },
@@ -395,6 +399,7 @@ class AsyncCategoriesResource(AsyncAPIResource):
         platform_id: SequenceNotStr[str] | Omit = omit,
         prompt_type: List[Literal["visibility", "sentiment"]] | Omit = omit,
         region_id: SequenceNotStr[str] | Omit = omit,
+        status: List[Literal["active", "disabled"]] | Omit = omit,
         tag_id: SequenceNotStr[str] | Omit = omit,
         topic_id: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -422,6 +427,8 @@ class AsyncCategoriesResource(AsyncAPIResource):
           prompt_type: Filter by prompt type.
 
           region_id: Filter by region IDs.
+
+          status: Filter by prompt status.
 
           tag_id: Filter by tag IDs.
 
@@ -453,6 +460,7 @@ class AsyncCategoriesResource(AsyncAPIResource):
                         "platform_id": platform_id,
                         "prompt_type": prompt_type,
                         "region_id": region_id,
+                        "status": status,
                         "tag_id": tag_id,
                         "topic_id": topic_id,
                     },
