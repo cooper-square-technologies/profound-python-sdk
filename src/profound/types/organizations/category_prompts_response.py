@@ -2,6 +2,7 @@
 
 from typing import List, Optional
 from datetime import datetime
+from typing_extensions import Literal
 
 from ..._models import BaseModel
 from ..named_resource import NamedResource
@@ -14,6 +15,8 @@ class Data(BaseModel):
 
     created_at: datetime
 
+    language: str
+
     platforms: List[NamedResource]
 
     prompt: str
@@ -22,8 +25,12 @@ class Data(BaseModel):
 
     regions: List[NamedResource]
 
+    status: Literal["active", "disabled"]
+
     topic: NamedResource
     """Generic id+name reference used across domain boundaries."""
+
+    personas: Optional[List[NamedResource]] = None
 
     tags: Optional[List[NamedResource]] = None
 

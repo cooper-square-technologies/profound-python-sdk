@@ -141,9 +141,11 @@ class CategoriesResource(SyncAPIResource):
         cursor: Optional[str] | Omit = omit,
         limit: int | Omit = omit,
         order_dir: Literal["asc", "desc"] | Omit = omit,
+        persona_id: SequenceNotStr[str] | Omit = omit,
         platform_id: SequenceNotStr[str] | Omit = omit,
         prompt_type: List[Literal["visibility", "sentiment"]] | Omit = omit,
         region_id: SequenceNotStr[str] | Omit = omit,
+        status: List[Literal["active", "disabled"]] | Omit = omit,
         tag_id: SequenceNotStr[str] | Omit = omit,
         topic_id: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -154,9 +156,30 @@ class CategoriesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CategoryPromptsResponse:
         """
-        Get Category Prompts
+        Retrieve prompts in a category with optional filtering by type, topic, tag,
+        region, platform, or persona. Supports cursor-based pagination.
 
         Args:
+          cursor: Pagination cursor from a previous response.
+
+          limit: Maximum number of prompts to return.
+
+          order_dir: Sort direction by creation date.
+
+          persona_id: Filter by persona IDs.
+
+          platform_id: Filter by platform IDs.
+
+          prompt_type: Filter by prompt type.
+
+          region_id: Filter by region IDs.
+
+          status: Filter by prompt status.
+
+          tag_id: Filter by tag IDs.
+
+          topic_id: Filter by topic IDs.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -179,9 +202,11 @@ class CategoriesResource(SyncAPIResource):
                         "cursor": cursor,
                         "limit": limit,
                         "order_dir": order_dir,
+                        "persona_id": persona_id,
                         "platform_id": platform_id,
                         "prompt_type": prompt_type,
                         "region_id": region_id,
+                        "status": status,
                         "tag_id": tag_id,
                         "topic_id": topic_id,
                     },
@@ -203,7 +228,7 @@ class CategoriesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CategoryTagsResponse:
         """
-        Get the organization tags for a specific category.
+        Get the tags for a specific category.
 
         Args:
           extra_headers: Send extra headers
@@ -236,7 +261,7 @@ class CategoriesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CategoryTopicsResponse:
         """
-        Get the organization categories.
+        Get the topics for a specific category.
 
         Args:
           extra_headers: Send extra headers
@@ -370,9 +395,11 @@ class AsyncCategoriesResource(AsyncAPIResource):
         cursor: Optional[str] | Omit = omit,
         limit: int | Omit = omit,
         order_dir: Literal["asc", "desc"] | Omit = omit,
+        persona_id: SequenceNotStr[str] | Omit = omit,
         platform_id: SequenceNotStr[str] | Omit = omit,
         prompt_type: List[Literal["visibility", "sentiment"]] | Omit = omit,
         region_id: SequenceNotStr[str] | Omit = omit,
+        status: List[Literal["active", "disabled"]] | Omit = omit,
         tag_id: SequenceNotStr[str] | Omit = omit,
         topic_id: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -383,9 +410,30 @@ class AsyncCategoriesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CategoryPromptsResponse:
         """
-        Get Category Prompts
+        Retrieve prompts in a category with optional filtering by type, topic, tag,
+        region, platform, or persona. Supports cursor-based pagination.
 
         Args:
+          cursor: Pagination cursor from a previous response.
+
+          limit: Maximum number of prompts to return.
+
+          order_dir: Sort direction by creation date.
+
+          persona_id: Filter by persona IDs.
+
+          platform_id: Filter by platform IDs.
+
+          prompt_type: Filter by prompt type.
+
+          region_id: Filter by region IDs.
+
+          status: Filter by prompt status.
+
+          tag_id: Filter by tag IDs.
+
+          topic_id: Filter by topic IDs.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -408,9 +456,11 @@ class AsyncCategoriesResource(AsyncAPIResource):
                         "cursor": cursor,
                         "limit": limit,
                         "order_dir": order_dir,
+                        "persona_id": persona_id,
                         "platform_id": platform_id,
                         "prompt_type": prompt_type,
                         "region_id": region_id,
+                        "status": status,
                         "tag_id": tag_id,
                         "topic_id": topic_id,
                     },
@@ -432,7 +482,7 @@ class AsyncCategoriesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CategoryTagsResponse:
         """
-        Get the organization tags for a specific category.
+        Get the tags for a specific category.
 
         Args:
           extra_headers: Send extra headers
@@ -465,7 +515,7 @@ class AsyncCategoriesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CategoryTopicsResponse:
         """
-        Get the organization categories.
+        Get the topics for a specific category.
 
         Args:
           extra_headers: Send extra headers
