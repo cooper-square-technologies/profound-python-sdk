@@ -90,6 +90,7 @@ from profound.types import (
     ReportInfo,
     ReportResponse,
     ReportResult,
+    TagNameFilter,
     TopicNameFilter,
     ReportCitationsResponse,
 )

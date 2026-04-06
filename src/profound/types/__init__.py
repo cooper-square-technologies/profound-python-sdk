@@ -22,6 +22,7 @@ from .named_resource import NamedResource as NamedResource
 from .persona_profile import PersonaProfile as PersonaProfile
 from .report_response import ReportResponse as ReportResponse
 from .prompt_answers_params import PromptAnswersParams as PromptAnswersParams
+from .tag_name_filter_param import TagNameFilterParam as TagNameFilterParam
 from .prompt_id_filter_param import PromptIDFilterParam as PromptIDFilterParam
 from .prompt_answers_response import PromptAnswersResponse as PromptAnswersResponse
 from .report_citations_params import ReportCitationsParams as ReportCitationsParams
