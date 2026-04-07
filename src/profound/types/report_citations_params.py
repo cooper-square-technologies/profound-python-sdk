@@ -25,6 +25,7 @@ __all__ = [
     "ReportCitationsParams",
     "Filter",
     "FilterHostnameFilter",
+    "FilterRegionNameFilter",
     "FilterURLFilter",
     "FilterRootDomainFilter",
     "FilterCitationCategoryFilter",
@@ -114,6 +115,28 @@ class FilterHostnameFilter(TypedDict, total=False):
     value: Required[Union[str, SequenceNotStr[str]]]
 
 
+class FilterRegionNameFilter(TypedDict, total=False):
+    """Filter by region name."""
+
+    field: Required[Literal["region_name"]]
+
+    operator: Required[
+        Literal[
+            "is",
+            "not_is",
+            "in",
+            "not_in",
+            "contains",
+            "not_contains",
+            "matches",
+            "contains_case_insensitive",
+            "not_contains_case_insensitive",
+        ]
+    ]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
 class FilterURLFilter(TypedDict, total=False):
     """Filter by URL"""
 
@@ -184,6 +207,7 @@ Filter: TypeAlias = Union[
     FilterHostnameFilter,
     PathFilter,
     RegionIDFilter,
+    FilterRegionNameFilter,
     TopicIDFilter,
     TopicNameFilterParam,
     ModelIDFilter,
