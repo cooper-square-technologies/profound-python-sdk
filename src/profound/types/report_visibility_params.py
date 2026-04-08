@@ -8,6 +8,7 @@ from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from .._types import SequenceNotStr
 from .._utils import PropertyInfo
+from .tag_name_filter_param import TagNameFilterParam
 from .prompt_id_filter_param import PromptIDFilterParam
 from .topic_name_filter_param import TopicNameFilterParam
 from .shared_params.pagination import Pagination
@@ -19,7 +20,7 @@ from .shared_params.region_id_filter import RegionIDFilter
 from .shared_params.asset_name_filter import AssetNameFilter
 from .shared_params.persona_id_filter import PersonaIDFilter
 
-__all__ = ["ReportVisibilityParams", "Filter", "FilterTagNameFilter"]
+__all__ = ["ReportVisibilityParams", "Filter", "FilterRegionNameFilter"]
 
 
 class ReportVisibilityParams(TypedDict, total=False):
@@ -81,10 +82,10 @@ class ReportVisibilityParams(TypedDict, total=False):
     """Pagination settings for the report results."""
 
 
-class FilterTagNameFilter(TypedDict, total=False):
-    """Filter by tag name."""
+class FilterRegionNameFilter(TypedDict, total=False):
+    """Filter by region name."""
 
-    field: Required[Literal["tag_name"]]
+    field: Required[Literal["region_name"]]
 
     operator: Required[
         Literal[
@@ -105,12 +106,13 @@ class FilterTagNameFilter(TypedDict, total=False):
 
 Filter: TypeAlias = Union[
     RegionIDFilter,
+    FilterRegionNameFilter,
     ModelIDFilter,
     TopicIDFilter,
     TopicNameFilterParam,
     AssetNameFilter,
     TagIDFilter,
-    FilterTagNameFilter,
+    TagNameFilterParam,
     PromptIDFilterParam,
     PromptFilter,
     PersonaIDFilter,

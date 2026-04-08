@@ -8,6 +8,7 @@ from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from .._types import SequenceNotStr
 from .._utils import PropertyInfo
+from .tag_name_filter_param import TagNameFilterParam
 from .prompt_id_filter_param import PromptIDFilterParam
 from .topic_name_filter_param import TopicNameFilterParam
 from .shared_params.pagination import Pagination
@@ -24,7 +25,7 @@ __all__ = [
     "ReportCitationsParams",
     "Filter",
     "FilterHostnameFilter",
-    "FilterTagNameFilter",
+    "FilterRegionNameFilter",
     "FilterURLFilter",
     "FilterRootDomainFilter",
     "FilterCitationCategoryFilter",
@@ -114,10 +115,10 @@ class FilterHostnameFilter(TypedDict, total=False):
     value: Required[Union[str, SequenceNotStr[str]]]
 
 
-class FilterTagNameFilter(TypedDict, total=False):
-    """Filter by tag name."""
+class FilterRegionNameFilter(TypedDict, total=False):
+    """Filter by region name."""
 
-    field: Required[Literal["tag_name"]]
+    field: Required[Literal["region_name"]]
 
     operator: Required[
         Literal[
@@ -206,11 +207,12 @@ Filter: TypeAlias = Union[
     FilterHostnameFilter,
     PathFilter,
     RegionIDFilter,
+    FilterRegionNameFilter,
     TopicIDFilter,
     TopicNameFilterParam,
     ModelIDFilter,
     TagIDFilter,
-    FilterTagNameFilter,
+    TagNameFilterParam,
     FilterURLFilter,
     FilterRootDomainFilter,
     PromptTypeFilter,

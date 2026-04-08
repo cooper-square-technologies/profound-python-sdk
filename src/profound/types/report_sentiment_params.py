@@ -8,6 +8,7 @@ from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from .._types import SequenceNotStr
 from .._utils import PropertyInfo
+from .tag_name_filter_param import TagNameFilterParam
 from .topic_name_filter_param import TopicNameFilterParam
 from .shared_params.pagination import Pagination
 from .shared_params.prompt_filter import PromptFilter
@@ -18,7 +19,7 @@ from .shared_params.region_id_filter import RegionIDFilter
 from .shared_params.asset_name_filter import AssetNameFilter
 from .shared_params.persona_id_filter import PersonaIDFilter
 
-__all__ = ["ReportSentimentParams", "Filter", "FilterAssetIDFilter", "FilterThemeFilter", "FilterTagNameFilter"]
+__all__ = ["ReportSentimentParams", "Filter", "FilterAssetIDFilter", "FilterThemeFilter", "FilterRegionNameFilter"]
 
 
 class ReportSentimentParams(TypedDict, total=False):
@@ -110,10 +111,10 @@ class FilterThemeFilter(TypedDict, total=False):
     value: Required[Union[str, SequenceNotStr[str]]]
 
 
-class FilterTagNameFilter(TypedDict, total=False):
-    """Filter by tag name."""
+class FilterRegionNameFilter(TypedDict, total=False):
+    """Filter by region name."""
 
-    field: Required[Literal["tag_name"]]
+    field: Required[Literal["region_name"]]
 
     operator: Required[
         Literal[
@@ -137,11 +138,12 @@ Filter: TypeAlias = Union[
     AssetNameFilter,
     FilterThemeFilter,
     RegionIDFilter,
+    FilterRegionNameFilter,
     TopicIDFilter,
     TopicNameFilterParam,
     ModelIDFilter,
     TagIDFilter,
-    FilterTagNameFilter,
+    TagNameFilterParam,
     PromptFilter,
     PersonaIDFilter,
 ]

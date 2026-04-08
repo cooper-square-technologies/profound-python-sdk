@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.36.0 (2026-04-07)
+
+Full Changelog: [v0.35.0...v0.36.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.35.0...v0.36.0)
+
+### Features
+
+* **api:** api update ([1e41006](https://github.com/cooper-square-technologies/profound-python-sdk/commit/1e410063928bcdf5a41cadd54994b8541629e04e))
+* **api:** shared `TagNameFilter` ([b972179](https://github.com/cooper-square-technologies/profound-python-sdk/commit/b972179ee42d014c66cc839027442d5940860acb))
+
+
+### Bug Fixes
+
+* **client:** preserve hardcoded query params when merging with user params ([71de827](https://github.com/cooper-square-technologies/profound-python-sdk/commit/71de827f6321bc7d10c30a392ff3889ca4abd6db))
+
 ## 0.35.0 (2026-04-03)
 
 Full Changelog: [v0.34.0...v0.35.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.34.0...v0.35.0)
