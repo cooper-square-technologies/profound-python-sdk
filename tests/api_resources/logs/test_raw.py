@@ -12,6 +12,8 @@ from tests.utils import assert_matches_type
 from profound._utils import parse_datetime
 from profound.types.logs import RawBotsResponse, RawLogsResponse
 
+# pyright: reportDeprecated=false
+
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
 
@@ -21,47 +23,52 @@ class TestRaw:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_bots(self, client: Profound) -> None:
-        raw = client.logs.raw.bots(
-            domain="domain",
-            metrics=["count"],
-            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-        )
+        with pytest.warns(DeprecationWarning):
+            raw = client.logs.raw.bots(
+                domain="domain",
+                metrics=["count"],
+                start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            )
+
         assert_matches_type(RawBotsResponse, raw, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_bots_with_all_params(self, client: Profound) -> None:
-        raw = client.logs.raw.bots(
-            domain="domain",
-            metrics=["count"],
-            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            date_interval="hour",
-            dimensions=["timestamp"],
-            end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            filters=[
-                {
-                    "field": "bot_name",
-                    "operator": "is",
-                    "value": "Amazonbot",
-                }
-            ],
-            order_by={"date": "asc"},
-            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            pagination={
-                "limit": 1,
-                "offset": 0,
-            },
-        )
+        with pytest.warns(DeprecationWarning):
+            raw = client.logs.raw.bots(
+                domain="domain",
+                metrics=["count"],
+                start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+                date_interval="hour",
+                dimensions=["timestamp"],
+                end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+                filters=[
+                    {
+                        "field": "bot_name",
+                        "operator": "is",
+                        "value": "Amazonbot",
+                    }
+                ],
+                order_by={"date": "asc"},
+                organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                pagination={
+                    "limit": 1,
+                    "offset": 0,
+                },
+            )
+
         assert_matches_type(RawBotsResponse, raw, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_bots(self, client: Profound) -> None:
-        response = client.logs.raw.with_raw_response.bots(
-            domain="domain",
-            metrics=["count"],
-            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-        )
+        with pytest.warns(DeprecationWarning):
+            response = client.logs.raw.with_raw_response.bots(
+                domain="domain",
+                metrics=["count"],
+                start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -71,63 +78,69 @@ class TestRaw:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_bots(self, client: Profound) -> None:
-        with client.logs.raw.with_streaming_response.bots(
-            domain="domain",
-            metrics=["count"],
-            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        with pytest.warns(DeprecationWarning):
+            with client.logs.raw.with_streaming_response.bots(
+                domain="domain",
+                metrics=["count"],
+                start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            ) as response:
+                assert not response.is_closed
+                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            raw = response.parse()
-            assert_matches_type(RawBotsResponse, raw, path=["response"])
+                raw = response.parse()
+                assert_matches_type(RawBotsResponse, raw, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_logs(self, client: Profound) -> None:
-        raw = client.logs.raw.logs(
-            domain="domain",
-            metrics=["count"],
-            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-        )
+        with pytest.warns(DeprecationWarning):
+            raw = client.logs.raw.logs(
+                domain="domain",
+                metrics=["count"],
+                start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            )
+
         assert_matches_type(RawLogsResponse, raw, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_logs_with_all_params(self, client: Profound) -> None:
-        raw = client.logs.raw.logs(
-            domain="domain",
-            metrics=["count"],
-            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            date_interval="hour",
-            dimensions=["timestamp"],
-            end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            filters=[
-                {
-                    "field": "method",
-                    "operator": "is",
-                    "value": "string",
-                }
-            ],
-            order_by={"date": "asc"},
-            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            pagination={
-                "limit": 1,
-                "offset": 0,
-            },
-        )
+        with pytest.warns(DeprecationWarning):
+            raw = client.logs.raw.logs(
+                domain="domain",
+                metrics=["count"],
+                start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+                date_interval="hour",
+                dimensions=["timestamp"],
+                end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+                filters=[
+                    {
+                        "field": "method",
+                        "operator": "is",
+                        "value": "string",
+                    }
+                ],
+                order_by={"date": "asc"},
+                organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                pagination={
+                    "limit": 1,
+                    "offset": 0,
+                },
+            )
+
         assert_matches_type(RawLogsResponse, raw, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_logs(self, client: Profound) -> None:
-        response = client.logs.raw.with_raw_response.logs(
-            domain="domain",
-            metrics=["count"],
-            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-        )
+        with pytest.warns(DeprecationWarning):
+            response = client.logs.raw.with_raw_response.logs(
+                domain="domain",
+                metrics=["count"],
+                start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -137,16 +150,17 @@ class TestRaw:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_logs(self, client: Profound) -> None:
-        with client.logs.raw.with_streaming_response.logs(
-            domain="domain",
-            metrics=["count"],
-            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        with pytest.warns(DeprecationWarning):
+            with client.logs.raw.with_streaming_response.logs(
+                domain="domain",
+                metrics=["count"],
+                start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            ) as response:
+                assert not response.is_closed
+                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            raw = response.parse()
-            assert_matches_type(RawLogsResponse, raw, path=["response"])
+                raw = response.parse()
+                assert_matches_type(RawLogsResponse, raw, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -159,47 +173,52 @@ class TestAsyncRaw:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_bots(self, async_client: AsyncProfound) -> None:
-        raw = await async_client.logs.raw.bots(
-            domain="domain",
-            metrics=["count"],
-            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-        )
+        with pytest.warns(DeprecationWarning):
+            raw = await async_client.logs.raw.bots(
+                domain="domain",
+                metrics=["count"],
+                start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            )
+
         assert_matches_type(RawBotsResponse, raw, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_bots_with_all_params(self, async_client: AsyncProfound) -> None:
-        raw = await async_client.logs.raw.bots(
-            domain="domain",
-            metrics=["count"],
-            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            date_interval="hour",
-            dimensions=["timestamp"],
-            end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            filters=[
-                {
-                    "field": "bot_name",
-                    "operator": "is",
-                    "value": "Amazonbot",
-                }
-            ],
-            order_by={"date": "asc"},
-            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            pagination={
-                "limit": 1,
-                "offset": 0,
-            },
-        )
+        with pytest.warns(DeprecationWarning):
+            raw = await async_client.logs.raw.bots(
+                domain="domain",
+                metrics=["count"],
+                start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+                date_interval="hour",
+                dimensions=["timestamp"],
+                end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+                filters=[
+                    {
+                        "field": "bot_name",
+                        "operator": "is",
+                        "value": "Amazonbot",
+                    }
+                ],
+                order_by={"date": "asc"},
+                organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                pagination={
+                    "limit": 1,
+                    "offset": 0,
+                },
+            )
+
         assert_matches_type(RawBotsResponse, raw, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_bots(self, async_client: AsyncProfound) -> None:
-        response = await async_client.logs.raw.with_raw_response.bots(
-            domain="domain",
-            metrics=["count"],
-            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-        )
+        with pytest.warns(DeprecationWarning):
+            response = await async_client.logs.raw.with_raw_response.bots(
+                domain="domain",
+                metrics=["count"],
+                start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -209,63 +228,69 @@ class TestAsyncRaw:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_bots(self, async_client: AsyncProfound) -> None:
-        async with async_client.logs.raw.with_streaming_response.bots(
-            domain="domain",
-            metrics=["count"],
-            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        with pytest.warns(DeprecationWarning):
+            async with async_client.logs.raw.with_streaming_response.bots(
+                domain="domain",
+                metrics=["count"],
+                start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            ) as response:
+                assert not response.is_closed
+                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            raw = await response.parse()
-            assert_matches_type(RawBotsResponse, raw, path=["response"])
+                raw = await response.parse()
+                assert_matches_type(RawBotsResponse, raw, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_logs(self, async_client: AsyncProfound) -> None:
-        raw = await async_client.logs.raw.logs(
-            domain="domain",
-            metrics=["count"],
-            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-        )
+        with pytest.warns(DeprecationWarning):
+            raw = await async_client.logs.raw.logs(
+                domain="domain",
+                metrics=["count"],
+                start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            )
+
         assert_matches_type(RawLogsResponse, raw, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_logs_with_all_params(self, async_client: AsyncProfound) -> None:
-        raw = await async_client.logs.raw.logs(
-            domain="domain",
-            metrics=["count"],
-            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            date_interval="hour",
-            dimensions=["timestamp"],
-            end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            filters=[
-                {
-                    "field": "method",
-                    "operator": "is",
-                    "value": "string",
-                }
-            ],
-            order_by={"date": "asc"},
-            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            pagination={
-                "limit": 1,
-                "offset": 0,
-            },
-        )
+        with pytest.warns(DeprecationWarning):
+            raw = await async_client.logs.raw.logs(
+                domain="domain",
+                metrics=["count"],
+                start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+                date_interval="hour",
+                dimensions=["timestamp"],
+                end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+                filters=[
+                    {
+                        "field": "method",
+                        "operator": "is",
+                        "value": "string",
+                    }
+                ],
+                order_by={"date": "asc"},
+                organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                pagination={
+                    "limit": 1,
+                    "offset": 0,
+                },
+            )
+
         assert_matches_type(RawLogsResponse, raw, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_logs(self, async_client: AsyncProfound) -> None:
-        response = await async_client.logs.raw.with_raw_response.logs(
-            domain="domain",
-            metrics=["count"],
-            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-        )
+        with pytest.warns(DeprecationWarning):
+            response = await async_client.logs.raw.with_raw_response.logs(
+                domain="domain",
+                metrics=["count"],
+                start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -275,15 +300,16 @@ class TestAsyncRaw:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_logs(self, async_client: AsyncProfound) -> None:
-        async with async_client.logs.raw.with_streaming_response.logs(
-            domain="domain",
-            metrics=["count"],
-            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        with pytest.warns(DeprecationWarning):
+            async with async_client.logs.raw.with_streaming_response.logs(
+                domain="domain",
+                metrics=["count"],
+                start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            ) as response:
+                assert not response.is_closed
+                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            raw = await response.parse()
-            assert_matches_type(RawLogsResponse, raw, path=["response"])
+                raw = await response.parse()
+                assert_matches_type(RawLogsResponse, raw, path=["response"])
 
         assert cast(Any, response.is_closed) is True
