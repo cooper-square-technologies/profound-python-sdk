@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.37.0 (2026-04-10)
+
+Full Changelog: [v0.36.0...v0.37.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.36.0...v0.37.0)
+
+### Features
+
+* **prompt-volumes:** remove ([25a3cee](https://github.com/cooper-square-technologies/profound-python-sdk/commit/25a3cee295a38842aa96abb2acb9896197fd3455))
+
+
+### Bug Fixes
+
+* ensure file data are only sent as 1 parameter ([1c51c16](https://github.com/cooper-square-technologies/profound-python-sdk/commit/1c51c169d2ddd3beef72be18e55f3cfdd4e456bf))
+
 ## 0.36.0 (2026-04-07)
 
 Full Changelog: [v0.35.0...v0.36.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.35.0...v0.36.0)
