@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import typing_extensions
 from typing import Any, Dict, List, Union, Iterable, Optional, cast
 from datetime import datetime
 from typing_extensions import Literal
@@ -47,6 +48,7 @@ class RawResource(SyncAPIResource):
         """
         return RawResourceWithStreamingResponse(self)
 
+    @typing_extensions.deprecated("deprecated")
     def bots(
         self,
         *,
@@ -150,6 +152,7 @@ class RawResource(SyncAPIResource):
             ),
         )
 
+    @typing_extensions.deprecated("deprecated")
     def logs(
         self,
         *,
@@ -271,6 +274,7 @@ class AsyncRawResource(AsyncAPIResource):
         """
         return AsyncRawResourceWithStreamingResponse(self)
 
+    @typing_extensions.deprecated("deprecated")
     async def bots(
         self,
         *,
@@ -374,6 +378,7 @@ class AsyncRawResource(AsyncAPIResource):
             ),
         )
 
+    @typing_extensions.deprecated("deprecated")
     async def logs(
         self,
         *,
@@ -479,11 +484,15 @@ class RawResourceWithRawResponse:
     def __init__(self, raw: RawResource) -> None:
         self._raw = raw
 
-        self.bots = to_raw_response_wrapper(
-            raw.bots,
+        self.bots = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                raw.bots,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.logs = to_raw_response_wrapper(
-            raw.logs,
+        self.logs = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                raw.logs,  # pyright: ignore[reportDeprecated],
+            )
         )
 
 
@@ -491,11 +500,15 @@ class AsyncRawResourceWithRawResponse:
     def __init__(self, raw: AsyncRawResource) -> None:
         self._raw = raw
 
-        self.bots = async_to_raw_response_wrapper(
-            raw.bots,
+        self.bots = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                raw.bots,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.logs = async_to_raw_response_wrapper(
-            raw.logs,
+        self.logs = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                raw.logs,  # pyright: ignore[reportDeprecated],
+            )
         )
 
 
@@ -503,11 +516,15 @@ class RawResourceWithStreamingResponse:
     def __init__(self, raw: RawResource) -> None:
         self._raw = raw
 
-        self.bots = to_streamed_response_wrapper(
-            raw.bots,
+        self.bots = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                raw.bots,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.logs = to_streamed_response_wrapper(
-            raw.logs,
+        self.logs = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                raw.logs,  # pyright: ignore[reportDeprecated],
+            )
         )
 
 
@@ -515,9 +532,13 @@ class AsyncRawResourceWithStreamingResponse:
     def __init__(self, raw: AsyncRawResource) -> None:
         self._raw = raw
 
-        self.bots = async_to_streamed_response_wrapper(
-            raw.bots,
+        self.bots = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                raw.bots,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.logs = async_to_streamed_response_wrapper(
-            raw.logs,
+        self.logs = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                raw.logs,  # pyright: ignore[reportDeprecated],
+            )
         )
