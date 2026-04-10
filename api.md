@@ -136,10 +136,3 @@ Methods:
 
 - <code title="get /v1/content/{asset_id}/optimization/{content_id}">client.content.optimization.<a href="./src/profound/resources/content/optimization.py">retrieve</a>(content_id, \*, asset_id) -> <a href="./src/profound/types/content/optimization_retrieve_response.py">OptimizationRetrieveResponse</a></code>
 - <code title="get /v1/content/{asset_id}/optimization">client.content.optimization.<a href="./src/profound/resources/content/optimization.py">list</a>(asset_id, \*\*<a href="src/profound/types/content/optimization_list_params.py">params</a>) -> <a href="./src/profound/types/content/optimization_list_response.py">OptimizationListResponse</a></code>
-
-# PromptVolumes
-
-Methods:
-
-- <code title="post /v1/prompt-volumes/volume">client.prompt_volumes.<a href="./src/profound/resources/prompt_volumes.py">create_volume</a>(\*\*<a href="src/profound/types/prompt_volume_create_volume_params.py">params</a>) -> object</code>
-- <code title="get /v1/prompt-volumes/citation-prompts">client.prompt_volumes.<a href="./src/profound/resources/prompt_volumes.py">list_citation_prompts</a>(\*\*<a href="src/profound/types/prompt_volume_list_citation_prompts_params.py">params</a>) -> object</code>
