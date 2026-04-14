@@ -28,7 +28,7 @@ class ReportGetBotsReportV2Params(TypedDict, total=False):
     timestamp.
     """
 
-    date_interval: Literal["hour", "day", "week", "month", "year", "relative_week"]
+    date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"]
     """Date interval for the report. (only used with date dimension)"""
 
     dimensions: List[Literal["date", "hour", "path", "bot_name", "bot_provider", "bot_type"]]
