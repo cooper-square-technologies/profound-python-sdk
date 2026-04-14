@@ -63,7 +63,7 @@ class ReportsResource(SyncAPIResource):
         end_date: Union[str, datetime],
         metrics: List[Literal["count", "citation_share", "share_of_voice"]],
         start_date: Union[str, datetime],
-        date_interval: Literal["hour", "day", "week", "month", "year", "relative_week"] | Omit = omit,
+        date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
         dimensions: List[
             Literal[
                 "hostname",
@@ -252,7 +252,7 @@ class ReportsResource(SyncAPIResource):
         domain: str,
         metrics: List[Literal["count", "citations", "indexing", "training", "last_visit"]],
         start_date: Union[str, datetime],
-        date_interval: Literal["hour", "day", "week", "month", "year", "relative_week"] | Omit = omit,
+        date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
         dimensions: List[Literal["date", "hour", "path", "bot_name", "bot_provider", "bot_type"]] | Omit = omit,
         end_date: Union[str, datetime] | Omit = omit,
         filters: Iterable[report_get_bots_report_v2_params.Filter] | Omit = omit,
@@ -269,8 +269,8 @@ class ReportsResource(SyncAPIResource):
         """
         Get bot traffic report from the hourly aggregated materialized view (UTC-based).
 
-        Supports date_interval="day" (default, UTC daily buckets) or "hour" (UTC hourly
-        buckets).
+        Supports date_interval="hour", calendar intervals through "year", "quarter", and
+        "relative_week".
 
         Metrics:
 
@@ -434,7 +434,7 @@ class ReportsResource(SyncAPIResource):
         domain: str,
         metrics: List[Literal["visits", "last_visit"]],
         start_date: Union[str, datetime],
-        date_interval: Literal["hour", "day", "week", "month", "year", "relative_week"] | Omit = omit,
+        date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
         dimensions: List[Literal["date", "hour", "path", "referral_source", "referral_type"]] | Omit = omit,
         end_date: Union[str, datetime] | Omit = omit,
         filters: Iterable[report_get_referrals_report_v2_params.Filter] | Omit = omit,
@@ -452,8 +452,8 @@ class ReportsResource(SyncAPIResource):
         Get referral traffic report from the hourly aggregated materialized view
         (UTC-based).
 
-        Supports date_interval="day" (default, UTC daily buckets) or "hour" (UTC hourly
-        buckets).
+        Supports date_interval="hour", calendar intervals through "year", "quarter", and
+        "relative_week".
 
         Args:
           domain: Domain to query logs for.
@@ -521,7 +521,7 @@ class ReportsResource(SyncAPIResource):
         end_date: Union[str, datetime],
         metrics: List[Literal["fanouts_per_execution", "total_fanouts", "share"]],
         start_date: Union[str, datetime],
-        date_interval: Literal["hour", "day", "week", "month", "year", "relative_week"] | Omit = omit,
+        date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
         dimensions: List[Literal["prompt", "query", "model", "region", "date"]] | Omit = omit,
         filters: Iterable[report_query_fanouts_params.Filter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
@@ -590,7 +590,7 @@ class ReportsResource(SyncAPIResource):
         end_date: Union[str, datetime],
         metrics: List[Literal["positive", "negative", "occurrences"]],
         start_date: Union[str, datetime],
-        date_interval: Literal["hour", "day", "week", "month", "year", "relative_week"] | Omit = omit,
+        date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
         dimensions: List[
             Literal[
                 "theme",
@@ -688,7 +688,7 @@ class ReportsResource(SyncAPIResource):
             Literal["share_of_voice", "mentions_count", "visibility_score", "executions", "average_position"]
         ],
         start_date: Union[str, datetime],
-        date_interval: Literal["hour", "day", "week", "month", "year", "relative_week"] | Omit = omit,
+        date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
         dimensions: List[
             Literal[
                 "date",
@@ -803,7 +803,7 @@ class AsyncReportsResource(AsyncAPIResource):
         end_date: Union[str, datetime],
         metrics: List[Literal["count", "citation_share", "share_of_voice"]],
         start_date: Union[str, datetime],
-        date_interval: Literal["hour", "day", "week", "month", "year", "relative_week"] | Omit = omit,
+        date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
         dimensions: List[
             Literal[
                 "hostname",
@@ -992,7 +992,7 @@ class AsyncReportsResource(AsyncAPIResource):
         domain: str,
         metrics: List[Literal["count", "citations", "indexing", "training", "last_visit"]],
         start_date: Union[str, datetime],
-        date_interval: Literal["hour", "day", "week", "month", "year", "relative_week"] | Omit = omit,
+        date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
         dimensions: List[Literal["date", "hour", "path", "bot_name", "bot_provider", "bot_type"]] | Omit = omit,
         end_date: Union[str, datetime] | Omit = omit,
         filters: Iterable[report_get_bots_report_v2_params.Filter] | Omit = omit,
@@ -1009,8 +1009,8 @@ class AsyncReportsResource(AsyncAPIResource):
         """
         Get bot traffic report from the hourly aggregated materialized view (UTC-based).
 
-        Supports date_interval="day" (default, UTC daily buckets) or "hour" (UTC hourly
-        buckets).
+        Supports date_interval="hour", calendar intervals through "year", "quarter", and
+        "relative_week".
 
         Metrics:
 
@@ -1174,7 +1174,7 @@ class AsyncReportsResource(AsyncAPIResource):
         domain: str,
         metrics: List[Literal["visits", "last_visit"]],
         start_date: Union[str, datetime],
-        date_interval: Literal["hour", "day", "week", "month", "year", "relative_week"] | Omit = omit,
+        date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
         dimensions: List[Literal["date", "hour", "path", "referral_source", "referral_type"]] | Omit = omit,
         end_date: Union[str, datetime] | Omit = omit,
         filters: Iterable[report_get_referrals_report_v2_params.Filter] | Omit = omit,
@@ -1192,8 +1192,8 @@ class AsyncReportsResource(AsyncAPIResource):
         Get referral traffic report from the hourly aggregated materialized view
         (UTC-based).
 
-        Supports date_interval="day" (default, UTC daily buckets) or "hour" (UTC hourly
-        buckets).
+        Supports date_interval="hour", calendar intervals through "year", "quarter", and
+        "relative_week".
 
         Args:
           domain: Domain to query logs for.
@@ -1261,7 +1261,7 @@ class AsyncReportsResource(AsyncAPIResource):
         end_date: Union[str, datetime],
         metrics: List[Literal["fanouts_per_execution", "total_fanouts", "share"]],
         start_date: Union[str, datetime],
-        date_interval: Literal["hour", "day", "week", "month", "year", "relative_week"] | Omit = omit,
+        date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
         dimensions: List[Literal["prompt", "query", "model", "region", "date"]] | Omit = omit,
         filters: Iterable[report_query_fanouts_params.Filter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
@@ -1330,7 +1330,7 @@ class AsyncReportsResource(AsyncAPIResource):
         end_date: Union[str, datetime],
         metrics: List[Literal["positive", "negative", "occurrences"]],
         start_date: Union[str, datetime],
-        date_interval: Literal["hour", "day", "week", "month", "year", "relative_week"] | Omit = omit,
+        date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
         dimensions: List[
             Literal[
                 "theme",
@@ -1428,7 +1428,7 @@ class AsyncReportsResource(AsyncAPIResource):
             Literal["share_of_voice", "mentions_count", "visibility_score", "executions", "average_position"]
         ],
         start_date: Union[str, datetime],
-        date_interval: Literal["hour", "day", "week", "month", "year", "relative_week"] | Omit = omit,
+        date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
         dimensions: List[
             Literal[
                 "date",

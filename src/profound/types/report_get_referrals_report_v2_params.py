@@ -26,7 +26,7 @@ class ReportGetReferralsReportV2Params(TypedDict, total=False):
     timestamp.
     """
 
-    date_interval: Literal["hour", "day", "week", "month", "year", "relative_week"]
+    date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"]
     """Date interval for the report. (only used with date dimension)"""
 
     dimensions: List[Literal["date", "hour", "path", "referral_source", "referral_type"]]
