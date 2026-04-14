@@ -31,7 +31,7 @@ class ReportQueryFanoutsParams(TypedDict, total=False):
     start_date: Required[Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]]
     """Start date. Accepts YYYY-MM-DD, YYYY-MM-DD HH:MM, or ISO timestamp."""
 
-    date_interval: Literal["hour", "day", "week", "month", "year", "relative_week"]
+    date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"]
     """Date interval for the report. (only used with date dimension)"""
 
     dimensions: List[Literal["prompt", "query", "model", "region", "date"]]
