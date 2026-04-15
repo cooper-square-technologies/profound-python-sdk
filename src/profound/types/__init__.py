@@ -21,9 +21,13 @@ from .report_result import ReportResult as ReportResult
 from .named_resource import NamedResource as NamedResource
 from .persona_profile import PersonaProfile as PersonaProfile
 from .report_response import ReportResponse as ReportResponse
+from .agent_list_params import AgentListParams as AgentListParams
+from .agent_list_response import AgentListResponse as AgentListResponse
+from .agent_retrieve_params import AgentRetrieveParams as AgentRetrieveParams
 from .prompt_answers_params import PromptAnswersParams as PromptAnswersParams
 from .tag_name_filter_param import TagNameFilterParam as TagNameFilterParam
 from .prompt_id_filter_param import PromptIDFilterParam as PromptIDFilterParam
+from .agent_retrieve_response import AgentRetrieveResponse as AgentRetrieveResponse
 from .prompt_answers_response import PromptAnswersResponse as PromptAnswersResponse
 from .report_citations_params import ReportCitationsParams as ReportCitationsParams
 from .report_sentiment_params import ReportSentimentParams as ReportSentimentParams
