@@ -6,10 +6,10 @@ from typing_extensions import Literal
 
 from ..._models import BaseModel
 
-__all__ = ["RunStartResponse"]
+__all__ = ["RunRunResponse"]
 
 
-class RunStartResponse(BaseModel):
+class RunRunResponse(BaseModel):
     """Run details returned after a run request is accepted."""
 
     id: str

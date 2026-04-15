@@ -155,10 +155,10 @@ Methods:
 Types:
 
 ```python
-from profound.types.agents import RunRetrieveResponse, RunStartResponse
+from profound.types.agents import RunRetrieveResponse, RunRunResponse
 ```
 
 Methods:
 
 - <code title="get /v1/agents/{agent_id}/runs/{run_id}">client.agents.runs.<a href="./src/profound/resources/agents/runs.py">retrieve</a>(run_id, \*, agent_id) -> <a href="./src/profound/types/agents/run_retrieve_response.py">RunRetrieveResponse</a></code>
-- <code title="post /v1/agents/{agent_id}/runs">client.agents.runs.<a href="./src/profound/resources/agents/runs.py">start</a>(agent_id, \*\*<a href="src/profound/types/agents/run_start_params.py">params</a>) -> <a href="./src/profound/types/agents/run_start_response.py">RunStartResponse</a></code>
+- <code title="post /v1/agents/{agent_id}/runs">client.agents.runs.<a href="./src/profound/resources/agents/runs.py">run</a>(agent_id, \*\*<a href="src/profound/types/agents/run_run_params.py">params</a>) -> <a href="./src/profound/types/agents/run_run_response.py">RunRunResponse</a></code>
