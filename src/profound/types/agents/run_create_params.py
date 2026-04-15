@@ -5,10 +5,10 @@ from __future__ import annotations
 from typing import Dict
 from typing_extensions import TypedDict
 
-__all__ = ["RunRunParams"]
+__all__ = ["RunCreateParams"]
 
 
-class RunRunParams(TypedDict, total=False):
+class RunCreateParams(TypedDict, total=False):
     inputs: Dict[str, object]
     """Input values for the run.
 

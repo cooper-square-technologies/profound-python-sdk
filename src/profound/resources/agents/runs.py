@@ -17,8 +17,8 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.agents import run_run_params
-from ...types.agents.run_run_response import RunRunResponse
+from ...types.agents import run_create_params
+from ...types.agents.run_create_response import RunCreateResponse
 from ...types.agents.run_retrieve_response import RunRetrieveResponse
 
 __all__ = ["RunsResource", "AsyncRunsResource"]
@@ -43,6 +43,46 @@ class RunsResource(SyncAPIResource):
         For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#with_streaming_response
         """
         return RunsResourceWithStreamingResponse(self)
+
+    def create(
+        self,
+        agent_id: str,
+        *,
+        inputs: Dict[str, object] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> RunCreateResponse:
+        """
+        Start a new run for an agent.
+
+        Args:
+          agent_id: The ID of the agent to run.
+
+          inputs: Input values for the run. Keys should match the property names defined in
+              `schema.input`.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not agent_id:
+            raise ValueError(f"Expected a non-empty value for `agent_id` but received {agent_id!r}")
+        return self._post(
+            path_template("/v1/agents/{agent_id}/runs", agent_id=agent_id),
+            body=maybe_transform({"inputs": inputs}, run_create_params.RunCreateParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=RunCreateResponse,
+        )
 
     def retrieve(
         self,
@@ -84,46 +124,6 @@ class RunsResource(SyncAPIResource):
             cast_to=RunRetrieveResponse,
         )
 
-    def run(
-        self,
-        agent_id: str,
-        *,
-        inputs: Dict[str, object] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> RunRunResponse:
-        """
-        Start a new run for an agent.
-
-        Args:
-          agent_id: The ID of the agent to run.
-
-          inputs: Input values for the run. Keys should match the property names defined in
-              `schema.input`.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not agent_id:
-            raise ValueError(f"Expected a non-empty value for `agent_id` but received {agent_id!r}")
-        return self._post(
-            path_template("/v1/agents/{agent_id}/runs", agent_id=agent_id),
-            body=maybe_transform({"inputs": inputs}, run_run_params.RunRunParams),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=RunRunResponse,
-        )
-
 
 class AsyncRunsResource(AsyncAPIResource):
     @cached_property
@@ -144,6 +144,46 @@ class AsyncRunsResource(AsyncAPIResource):
         For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#with_streaming_response
         """
         return AsyncRunsResourceWithStreamingResponse(self)
+
+    async def create(
+        self,
+        agent_id: str,
+        *,
+        inputs: Dict[str, object] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> RunCreateResponse:
+        """
+        Start a new run for an agent.
+
+        Args:
+          agent_id: The ID of the agent to run.
+
+          inputs: Input values for the run. Keys should match the property names defined in
+              `schema.input`.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not agent_id:
+            raise ValueError(f"Expected a non-empty value for `agent_id` but received {agent_id!r}")
+        return await self._post(
+            path_template("/v1/agents/{agent_id}/runs", agent_id=agent_id),
+            body=await async_maybe_transform({"inputs": inputs}, run_create_params.RunCreateParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=RunCreateResponse,
+        )
 
     async def retrieve(
         self,
@@ -185,56 +225,16 @@ class AsyncRunsResource(AsyncAPIResource):
             cast_to=RunRetrieveResponse,
         )
 
-    async def run(
-        self,
-        agent_id: str,
-        *,
-        inputs: Dict[str, object] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> RunRunResponse:
-        """
-        Start a new run for an agent.
-
-        Args:
-          agent_id: The ID of the agent to run.
-
-          inputs: Input values for the run. Keys should match the property names defined in
-              `schema.input`.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not agent_id:
-            raise ValueError(f"Expected a non-empty value for `agent_id` but received {agent_id!r}")
-        return await self._post(
-            path_template("/v1/agents/{agent_id}/runs", agent_id=agent_id),
-            body=await async_maybe_transform({"inputs": inputs}, run_run_params.RunRunParams),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=RunRunResponse,
-        )
-
 
 class RunsResourceWithRawResponse:
     def __init__(self, runs: RunsResource) -> None:
         self._runs = runs
 
+        self.create = to_raw_response_wrapper(
+            runs.create,
+        )
         self.retrieve = to_raw_response_wrapper(
             runs.retrieve,
-        )
-        self.run = to_raw_response_wrapper(
-            runs.run,
         )
 
 
@@ -242,11 +242,11 @@ class AsyncRunsResourceWithRawResponse:
     def __init__(self, runs: AsyncRunsResource) -> None:
         self._runs = runs
 
+        self.create = async_to_raw_response_wrapper(
+            runs.create,
+        )
         self.retrieve = async_to_raw_response_wrapper(
             runs.retrieve,
-        )
-        self.run = async_to_raw_response_wrapper(
-            runs.run,
         )
 
 
@@ -254,11 +254,11 @@ class RunsResourceWithStreamingResponse:
     def __init__(self, runs: RunsResource) -> None:
         self._runs = runs
 
+        self.create = to_streamed_response_wrapper(
+            runs.create,
+        )
         self.retrieve = to_streamed_response_wrapper(
             runs.retrieve,
-        )
-        self.run = to_streamed_response_wrapper(
-            runs.run,
         )
 
 
@@ -266,9 +266,9 @@ class AsyncRunsResourceWithStreamingResponse:
     def __init__(self, runs: AsyncRunsResource) -> None:
         self._runs = runs
 
+        self.create = async_to_streamed_response_wrapper(
+            runs.create,
+        )
         self.retrieve = async_to_streamed_response_wrapper(
             runs.retrieve,
-        )
-        self.run = async_to_streamed_response_wrapper(
-            runs.run,
         )
