@@ -17,8 +17,8 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.agents import run_start_params
-from ...types.agents.run_start_response import RunStartResponse
+from ...types.agents import run_run_params
+from ...types.agents.run_run_response import RunRunResponse
 from ...types.agents.run_retrieve_response import RunRetrieveResponse
 
 __all__ = ["RunsResource", "AsyncRunsResource"]
@@ -84,7 +84,7 @@ class RunsResource(SyncAPIResource):
             cast_to=RunRetrieveResponse,
         )
 
-    def start(
+    def run(
         self,
         agent_id: str,
         *,
@@ -95,7 +95,7 @@ class RunsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> RunStartResponse:
+    ) -> RunRunResponse:
         """
         Start a new run for an agent.
 
@@ -117,11 +117,11 @@ class RunsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `agent_id` but received {agent_id!r}")
         return self._post(
             path_template("/v1/agents/{agent_id}/runs", agent_id=agent_id),
-            body=maybe_transform({"inputs": inputs}, run_start_params.RunStartParams),
+            body=maybe_transform({"inputs": inputs}, run_run_params.RunRunParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=RunStartResponse,
+            cast_to=RunRunResponse,
         )
 
 
@@ -185,7 +185,7 @@ class AsyncRunsResource(AsyncAPIResource):
             cast_to=RunRetrieveResponse,
         )
 
-    async def start(
+    async def run(
         self,
         agent_id: str,
         *,
@@ -196,7 +196,7 @@ class AsyncRunsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> RunStartResponse:
+    ) -> RunRunResponse:
         """
         Start a new run for an agent.
 
@@ -218,11 +218,11 @@ class AsyncRunsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `agent_id` but received {agent_id!r}")
         return await self._post(
             path_template("/v1/agents/{agent_id}/runs", agent_id=agent_id),
-            body=await async_maybe_transform({"inputs": inputs}, run_start_params.RunStartParams),
+            body=await async_maybe_transform({"inputs": inputs}, run_run_params.RunRunParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=RunStartResponse,
+            cast_to=RunRunResponse,
         )
 
 
@@ -233,8 +233,8 @@ class RunsResourceWithRawResponse:
         self.retrieve = to_raw_response_wrapper(
             runs.retrieve,
         )
-        self.start = to_raw_response_wrapper(
-            runs.start,
+        self.run = to_raw_response_wrapper(
+            runs.run,
         )
 
 
@@ -245,8 +245,8 @@ class AsyncRunsResourceWithRawResponse:
         self.retrieve = async_to_raw_response_wrapper(
             runs.retrieve,
         )
-        self.start = async_to_raw_response_wrapper(
-            runs.start,
+        self.run = async_to_raw_response_wrapper(
+            runs.run,
         )
 
 
@@ -257,8 +257,8 @@ class RunsResourceWithStreamingResponse:
         self.retrieve = to_streamed_response_wrapper(
             runs.retrieve,
         )
-        self.start = to_streamed_response_wrapper(
-            runs.start,
+        self.run = to_streamed_response_wrapper(
+            runs.run,
         )
 
 
@@ -269,6 +269,6 @@ class AsyncRunsResourceWithStreamingResponse:
         self.retrieve = async_to_streamed_response_wrapper(
             runs.retrieve,
         )
-        self.start = async_to_streamed_response_wrapper(
-            runs.start,
+        self.run = async_to_streamed_response_wrapper(
+            runs.run,
         )
