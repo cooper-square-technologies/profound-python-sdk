@@ -31,10 +31,11 @@ from ._base_client import (
 )
 
 if TYPE_CHECKING:
-    from .resources import logs, content, prompts, reports, organizations
+    from .resources import logs, agents, content, prompts, reports, organizations
     from .resources.prompts import PromptsResource, AsyncPromptsResource
     from .resources.reports import ReportsResource, AsyncReportsResource
     from .resources.logs.logs import LogsResource, AsyncLogsResource
+    from .resources.agents.agents import AgentsResource, AsyncAgentsResource
     from .resources.content.content import ContentResource, AsyncContentResource
     from .resources.organizations.organizations import OrganizationsResource, AsyncOrganizationsResource
 
@@ -134,6 +135,12 @@ class Profound(SyncAPIClient):
         from .resources.content import ContentResource
 
         return ContentResource(self)
+
+    @cached_property
+    def agents(self) -> AgentsResource:
+        from .resources.agents import AgentsResource
+
+        return AgentsResource(self)
 
     @cached_property
     def with_raw_response(self) -> ProfoundWithRawResponse:
@@ -334,6 +341,12 @@ class AsyncProfound(AsyncAPIClient):
         return AsyncContentResource(self)
 
     @cached_property
+    def agents(self) -> AsyncAgentsResource:
+        from .resources.agents import AsyncAgentsResource
+
+        return AsyncAgentsResource(self)
+
+    @cached_property
     def with_raw_response(self) -> AsyncProfoundWithRawResponse:
         return AsyncProfoundWithRawResponse(self)
 
@@ -482,6 +495,12 @@ class ProfoundWithRawResponse:
 
         return ContentResourceWithRawResponse(self._client.content)
 
+    @cached_property
+    def agents(self) -> agents.AgentsResourceWithRawResponse:
+        from .resources.agents import AgentsResourceWithRawResponse
+
+        return AgentsResourceWithRawResponse(self._client.agents)
+
 
 class AsyncProfoundWithRawResponse:
     _client: AsyncProfound
@@ -518,6 +537,12 @@ class AsyncProfoundWithRawResponse:
         from .resources.content import AsyncContentResourceWithRawResponse
 
         return AsyncContentResourceWithRawResponse(self._client.content)
+
+    @cached_property
+    def agents(self) -> agents.AsyncAgentsResourceWithRawResponse:
+        from .resources.agents import AsyncAgentsResourceWithRawResponse
+
+        return AsyncAgentsResourceWithRawResponse(self._client.agents)
 
 
 class ProfoundWithStreamedResponse:
@@ -556,6 +581,12 @@ class ProfoundWithStreamedResponse:
 
         return ContentResourceWithStreamingResponse(self._client.content)
 
+    @cached_property
+    def agents(self) -> agents.AgentsResourceWithStreamingResponse:
+        from .resources.agents import AgentsResourceWithStreamingResponse
+
+        return AgentsResourceWithStreamingResponse(self._client.agents)
+
 
 class AsyncProfoundWithStreamedResponse:
     _client: AsyncProfound
@@ -592,6 +623,12 @@ class AsyncProfoundWithStreamedResponse:
         from .resources.content import AsyncContentResourceWithStreamingResponse
 
         return AsyncContentResourceWithStreamingResponse(self._client.content)
+
+    @cached_property
+    def agents(self) -> agents.AsyncAgentsResourceWithStreamingResponse:
+        from .resources.agents import AsyncAgentsResourceWithStreamingResponse
+
+        return AsyncAgentsResourceWithStreamingResponse(self._client.agents)
 
 
 Client = Profound

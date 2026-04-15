@@ -8,7 +8,7 @@ __all__ = ["Pagination"]
 
 
 class Pagination(TypedDict, total=False):
-    """Report pagination model."""
+    """Offset-based pagination parameters."""
 
     limit: int
     """Maximum number of results to return. Default is 10,000, maximum is 50,000."""

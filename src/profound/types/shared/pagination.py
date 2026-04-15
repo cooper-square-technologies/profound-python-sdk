@@ -8,7 +8,7 @@ __all__ = ["Pagination"]
 
 
 class Pagination(BaseModel):
-    """Report pagination model."""
+    """Offset-based pagination parameters."""
 
     limit: Optional[int] = None
     """Maximum number of results to return. Default is 10,000, maximum is 50,000."""

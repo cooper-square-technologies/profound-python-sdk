@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.39.0 (2026-04-15)
+
+Full Changelog: [v0.38.0...v0.39.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.38.0...v0.39.0)
+
+### Features
+
+* **api:** add agent api methods ([e2985cf](https://github.com/cooper-square-technologies/profound-python-sdk/commit/e2985cf74b1e3741e0daa2fa42549f1ccafc2d88))
+* **api:** api update ([55addea](https://github.com/cooper-square-technologies/profound-python-sdk/commit/55addea4c4070131a26069f85570ac4f8c25a928))
+* **api:** change start_run to just agents.runs.run(...) ([a715007](https://github.com/cooper-square-technologies/profound-python-sdk/commit/a715007ca2cd86482f11a33049565d82fd8208ad))
+* **api:** switch agents.runs.run to .create ([0fea93b](https://github.com/cooper-square-technologies/profound-python-sdk/commit/0fea93b11da7f3dd8471c79f04206583a993bf8e))
+
 ## 0.38.0 (2026-04-14)
 
 Full Changelog: [v0.37.0...v0.38.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.37.0...v0.38.0)
