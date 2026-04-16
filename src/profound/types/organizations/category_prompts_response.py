@@ -30,6 +30,8 @@ class Data(BaseModel):
     topic: NamedResource
     """Generic id+name reference used across domain boundaries."""
 
+    updated_at: datetime
+
     personas: Optional[List[NamedResource]] = None
 
     tags: Optional[List[NamedResource]] = None
