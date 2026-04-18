@@ -11,4 +11,5 @@ from .region_id_filter import RegionIDFilter as RegionIDFilter
 from .asset_name_filter import AssetNameFilter as AssetNameFilter
 from .persona_id_filter import PersonaIDFilter as PersonaIDFilter
 from .prompt_type_filter import PromptTypeFilter as PromptTypeFilter
+from .region_name_filter import RegionNameFilter as RegionNameFilter
 from .bot_provider_filter import BotProviderFilter as BotProviderFilter

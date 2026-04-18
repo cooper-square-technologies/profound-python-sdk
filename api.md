@@ -12,6 +12,7 @@ from profound.types import (
     PromptFilter,
     PromptTypeFilter,
     RegionIDFilter,
+    RegionNameFilter,
     TagIDFilter,
     TopicIDFilter,
 )

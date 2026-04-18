@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.40.0 (2026-04-18)
+
+Full Changelog: [v0.39.0...v0.40.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.39.0...v0.40.0)
+
+### Features
+
+* **api:** api update ([50ceb52](https://github.com/cooper-square-technologies/profound-python-sdk/commit/50ceb521d8e1a1a4e9cbac6ffd4c328ff0133273))
+* **filter:** add region name ([a1f8941](https://github.com/cooper-square-technologies/profound-python-sdk/commit/a1f894101e67315b79cb2cbeecc1596b441321cd))
+
+
+### Performance Improvements
+
+* **client:** optimize file structure copying in multipart requests ([4ef7c2d](https://github.com/cooper-square-technologies/profound-python-sdk/commit/4ef7c2d70d75b8c1e10656904a21bcb5d297a66b))
+
 ## 0.39.0 (2026-04-15)
 
 Full Changelog: [v0.38.0...v0.39.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.38.0...v0.39.0)
