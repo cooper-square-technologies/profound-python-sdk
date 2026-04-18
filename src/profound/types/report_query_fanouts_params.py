@@ -6,7 +6,6 @@ from typing import Dict, List, Union, Iterable
 from datetime import datetime
 from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
-from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 from .prompt_id_filter_param import PromptIDFilterParam
 from .shared_params.pagination import Pagination
@@ -16,8 +15,9 @@ from .shared_params.topic_id_filter import TopicIDFilter
 from .shared_params.region_id_filter import RegionIDFilter
 from .shared_params.persona_id_filter import PersonaIDFilter
 from .shared_params.prompt_type_filter import PromptTypeFilter
+from .shared_params.region_name_filter import RegionNameFilter
 
-__all__ = ["ReportQueryFanoutsParams", "Filter", "FilterRegionNameFilter"]
+__all__ = ["ReportQueryFanoutsParams", "Filter"]
 
 
 class ReportQueryFanoutsParams(TypedDict, total=False):
@@ -51,31 +51,9 @@ class ReportQueryFanoutsParams(TypedDict, total=False):
     """Pagination settings for the report results."""
 
 
-class FilterRegionNameFilter(TypedDict, total=False):
-    """Filter by region name."""
-
-    field: Required[Literal["region_name"]]
-
-    operator: Required[
-        Literal[
-            "is",
-            "not_is",
-            "in",
-            "not_in",
-            "contains",
-            "not_contains",
-            "matches",
-            "contains_case_insensitive",
-            "not_contains_case_insensitive",
-        ]
-    ]
-
-    value: Required[Union[str, SequenceNotStr[str]]]
-
-
 Filter: TypeAlias = Union[
     RegionIDFilter,
-    FilterRegionNameFilter,
+    RegionNameFilter,
     ModelIDFilter,
     TopicIDFilter,
     TagIDFilter,
