@@ -20,12 +20,12 @@ from .shared_params.topic_id_filter import TopicIDFilter
 from .shared_params.region_id_filter import RegionIDFilter
 from .shared_params.persona_id_filter import PersonaIDFilter
 from .shared_params.prompt_type_filter import PromptTypeFilter
+from .shared_params.region_name_filter import RegionNameFilter
 
 __all__ = [
     "ReportCitationsParams",
     "Filter",
     "FilterHostnameFilter",
-    "FilterRegionNameFilter",
     "FilterURLFilter",
     "FilterRootDomainFilter",
     "FilterCitationCategoryFilter",
@@ -115,28 +115,6 @@ class FilterHostnameFilter(TypedDict, total=False):
     value: Required[Union[str, SequenceNotStr[str]]]
 
 
-class FilterRegionNameFilter(TypedDict, total=False):
-    """Filter by region name."""
-
-    field: Required[Literal["region_name"]]
-
-    operator: Required[
-        Literal[
-            "is",
-            "not_is",
-            "in",
-            "not_in",
-            "contains",
-            "not_contains",
-            "matches",
-            "contains_case_insensitive",
-            "not_contains_case_insensitive",
-        ]
-    ]
-
-    value: Required[Union[str, SequenceNotStr[str]]]
-
-
 class FilterURLFilter(TypedDict, total=False):
     """Filter by URL"""
 
@@ -207,7 +185,7 @@ Filter: TypeAlias = Union[
     FilterHostnameFilter,
     PathFilter,
     RegionIDFilter,
-    FilterRegionNameFilter,
+    RegionNameFilter,
     TopicIDFilter,
     TopicNameFilterParam,
     ModelIDFilter,

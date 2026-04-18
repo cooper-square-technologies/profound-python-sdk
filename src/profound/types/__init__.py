@@ -14,6 +14,7 @@ from .shared import (
     AssetNameFilter as AssetNameFilter,
     PersonaIDFilter as PersonaIDFilter,
     PromptTypeFilter as PromptTypeFilter,
+    RegionNameFilter as RegionNameFilter,
     BotProviderFilter as BotProviderFilter,
 )
 from .report_info import ReportInfo as ReportInfo
