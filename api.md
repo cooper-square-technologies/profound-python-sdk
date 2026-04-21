@@ -39,11 +39,11 @@ from profound.types import (
 
 Methods:
 
-- <code title="get /v1/org/domains">client.organizations.<a href="./src/profound/resources/organizations/organizations.py">domains</a>() -> <a href="./src/profound/types/organization_domains_response.py">OrganizationDomainsResponse</a></code>
-- <code title="get /v1/org/personas">client.organizations.<a href="./src/profound/resources/organizations/organizations.py">get_personas</a>() -> <a href="./src/profound/types/organization_get_personas_response.py">OrganizationGetPersonasResponse</a></code>
-- <code title="get /v1/org/assets">client.organizations.<a href="./src/profound/resources/organizations/organizations.py">list_assets</a>() -> <a href="./src/profound/types/organization_list_assets_response.py">OrganizationListAssetsResponse</a></code>
+- <code title="get /v1/org/domains">client.organizations.<a href="./src/profound/resources/organizations/organizations.py">domains</a>(\*\*<a href="src/profound/types/organization_domains_params.py">params</a>) -> <a href="./src/profound/types/organization_domains_response.py">OrganizationDomainsResponse</a></code>
+- <code title="get /v1/org/personas">client.organizations.<a href="./src/profound/resources/organizations/organizations.py">get_personas</a>(\*\*<a href="src/profound/types/organization_get_personas_params.py">params</a>) -> <a href="./src/profound/types/organization_get_personas_response.py">OrganizationGetPersonasResponse</a></code>
+- <code title="get /v1/org/assets">client.organizations.<a href="./src/profound/resources/organizations/organizations.py">list_assets</a>(\*\*<a href="src/profound/types/organization_list_assets_params.py">params</a>) -> <a href="./src/profound/types/organization_list_assets_response.py">OrganizationListAssetsResponse</a></code>
 - <code title="get /v1/org/models">client.organizations.<a href="./src/profound/resources/organizations/organizations.py">models</a>() -> <a href="./src/profound/types/organization_models_response.py">OrganizationModelsResponse</a></code>
-- <code title="get /v1/org/regions">client.organizations.<a href="./src/profound/resources/organizations/organizations.py">regions</a>() -> <a href="./src/profound/types/organization_regions_response.py">OrganizationRegionsResponse</a></code>
+- <code title="get /v1/org/regions">client.organizations.<a href="./src/profound/resources/organizations/organizations.py">regions</a>(\*\*<a href="src/profound/types/organization_regions_params.py">params</a>) -> <a href="./src/profound/types/organization_regions_response.py">OrganizationRegionsResponse</a></code>
 
 ## Categories
 
@@ -62,7 +62,7 @@ from profound.types.organizations import (
 
 Methods:
 
-- <code title="get /v1/org/categories">client.organizations.categories.<a href="./src/profound/resources/organizations/categories.py">list</a>() -> <a href="./src/profound/types/organizations/category_list_response.py">CategoryListResponse</a></code>
+- <code title="get /v1/org/categories">client.organizations.categories.<a href="./src/profound/resources/organizations/categories.py">list</a>(\*\*<a href="src/profound/types/organizations/category_list_params.py">params</a>) -> <a href="./src/profound/types/organizations/category_list_response.py">CategoryListResponse</a></code>
 - <code title="get /v1/org/categories/{category_id}/assets">client.organizations.categories.<a href="./src/profound/resources/organizations/categories.py">assets</a>(category_id) -> <a href="./src/profound/types/organizations/category_assets_response.py">CategoryAssetsResponse</a></code>
 - <code title="get /v1/org/categories/{category_id}/personas">client.organizations.categories.<a href="./src/profound/resources/organizations/categories.py">get_category_personas</a>(category_id) -> <a href="./src/profound/types/organizations/category_get_category_personas_response.py">CategoryGetCategoryPersonasResponse</a></code>
 - <code title="get /v1/org/categories/{category_id}/prompts">client.organizations.categories.<a href="./src/profound/resources/organizations/categories.py">prompts</a>(category_id, \*\*<a href="src/profound/types/organizations/category_prompts_params.py">params</a>) -> <a href="./src/profound/types/organizations/category_prompts_response.py">CategoryPromptsResponse</a></code>

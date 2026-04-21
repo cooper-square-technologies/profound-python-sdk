@@ -32,6 +32,14 @@ class TestCategories:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
+    def test_method_list_with_all_params(self, client: Profound) -> None:
+        category = client.organizations.categories.list(
+            organization_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+        )
+        assert_matches_type(CategoryListResponse, category, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
     def test_raw_response_list(self, client: Profound) -> None:
         response = client.organizations.categories.with_raw_response.list()
 
@@ -290,6 +298,14 @@ class TestAsyncCategories:
     @parametrize
     async def test_method_list(self, async_client: AsyncProfound) -> None:
         category = await async_client.organizations.categories.list()
+        assert_matches_type(CategoryListResponse, category, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_list_with_all_params(self, async_client: AsyncProfound) -> None:
+        category = await async_client.organizations.categories.list(
+            organization_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+        )
         assert_matches_type(CategoryListResponse, category, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")

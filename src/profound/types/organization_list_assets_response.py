@@ -4,16 +4,26 @@ from typing import List, Optional
 from datetime import datetime
 
 from .._models import BaseModel
-from .named_resource import NamedResource
 
-__all__ = ["OrganizationListAssetsResponse", "Data"]
+__all__ = ["OrganizationListAssetsResponse", "Data", "DataCategory", "DataOrganization"]
+
+
+class DataCategory(BaseModel):
+    id: str
+
+    name: str
+
+
+class DataOrganization(BaseModel):
+    id: str
+
+    name: Optional[str] = None
 
 
 class Data(BaseModel):
     id: str
 
-    category: NamedResource
-    """Generic id+name reference used across domain boundaries."""
+    category: DataCategory
 
     created_at: datetime
 
@@ -22,6 +32,8 @@ class Data(BaseModel):
     logo_url: str
 
     name: str
+
+    organization: DataOrganization
 
     website: str
 
