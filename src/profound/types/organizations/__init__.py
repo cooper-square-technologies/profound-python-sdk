@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from .category_list_params import CategoryListParams as CategoryListParams
 from .category_list_response import CategoryListResponse as CategoryListResponse
 from .category_tags_response import CategoryTagsResponse as CategoryTagsResponse
 from .category_prompts_params import CategoryPromptsParams as CategoryPromptsParams

@@ -2,9 +2,18 @@
 
 from __future__ import annotations
 
+from typing import Optional
+
 import httpx
 
-from ..._types import Body, Query, Headers, NotGiven, not_given
+from ...types import (
+    organization_domains_params,
+    organization_regions_params,
+    organization_list_assets_params,
+    organization_get_personas_params,
+)
+from ..._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
+from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from .categories import (
     CategoriesResource,
@@ -58,6 +67,7 @@ class OrganizationsResource(SyncAPIResource):
     def domains(
         self,
         *,
+        organization_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -65,11 +75,33 @@ class OrganizationsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OrganizationDomainsResponse:
-        """Get the organization domains."""
+        """
+        Get the organization domains.
+
+        Args:
+          organization_ids: Restrict results to one or more organizations the caller belongs to. Repeat the
+              parameter to target multiple orgs (e.g.
+              `?organization_ids=<id1>&organization_ids=<id2>`). Omit to return data from
+              every organization the caller has access to.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
         return self._get(
             "/v1/org/domains",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {"organization_ids": organization_ids}, organization_domains_params.OrganizationDomainsParams
+                ),
             ),
             cast_to=OrganizationDomainsResponse,
         )
@@ -77,6 +109,7 @@ class OrganizationsResource(SyncAPIResource):
     def get_personas(
         self,
         *,
+        organization_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -84,11 +117,38 @@ class OrganizationsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OrganizationGetPersonasResponse:
-        """Get Personas"""
+        """
+        Get the organization personas, one row per (persona, organization) pair.
+
+        Same (item, org) fan-out as `get_assets`: a persona's category can be owned by
+        multiple orgs, and each owning org gets its own row so no association is
+        silently dropped.
+
+        Args:
+          organization_ids: Restrict results to one or more organizations the caller belongs to. Repeat the
+              parameter to target multiple orgs (e.g.
+              `?organization_ids=<id1>&organization_ids=<id2>`). Omit to return data from
+              every organization the caller has access to.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
         return self._get(
             "/v1/org/personas",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {"organization_ids": organization_ids},
+                    organization_get_personas_params.OrganizationGetPersonasParams,
+                ),
             ),
             cast_to=OrganizationGetPersonasResponse,
         )
@@ -96,6 +156,7 @@ class OrganizationsResource(SyncAPIResource):
     def list_assets(
         self,
         *,
+        organization_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -103,11 +164,36 @@ class OrganizationsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OrganizationListAssetsResponse:
-        """Get Assets"""
+        """
+        Get the organization assets, one row per (asset, organization) pair.
+
+        An asset's category can belong to multiple organizations; one asset row is
+        emitted per owning org so no association is silently dropped.
+
+        Args:
+          organization_ids: Restrict results to one or more organizations the caller belongs to. Repeat the
+              parameter to target multiple orgs (e.g.
+              `?organization_ids=<id1>&organization_ids=<id2>`). Omit to return data from
+              every organization the caller has access to.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
         return self._get(
             "/v1/org/assets",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {"organization_ids": organization_ids}, organization_list_assets_params.OrganizationListAssetsParams
+                ),
             ),
             cast_to=OrganizationListAssetsResponse,
         )
@@ -134,6 +220,7 @@ class OrganizationsResource(SyncAPIResource):
     def regions(
         self,
         *,
+        organization_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -141,11 +228,33 @@ class OrganizationsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OrganizationRegionsResponse:
-        """Get the organization regions."""
+        """
+        Get the organization regions.
+
+        Args:
+          organization_ids: Restrict results to one or more organizations the caller belongs to. Repeat the
+              parameter to target multiple orgs (e.g.
+              `?organization_ids=<id1>&organization_ids=<id2>`). Omit to return data from
+              every organization the caller has access to.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
         return self._get(
             "/v1/org/regions",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {"organization_ids": organization_ids}, organization_regions_params.OrganizationRegionsParams
+                ),
             ),
             cast_to=OrganizationRegionsResponse,
         )
@@ -178,6 +287,7 @@ class AsyncOrganizationsResource(AsyncAPIResource):
     async def domains(
         self,
         *,
+        organization_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -185,11 +295,33 @@ class AsyncOrganizationsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OrganizationDomainsResponse:
-        """Get the organization domains."""
+        """
+        Get the organization domains.
+
+        Args:
+          organization_ids: Restrict results to one or more organizations the caller belongs to. Repeat the
+              parameter to target multiple orgs (e.g.
+              `?organization_ids=<id1>&organization_ids=<id2>`). Omit to return data from
+              every organization the caller has access to.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
         return await self._get(
             "/v1/org/domains",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {"organization_ids": organization_ids}, organization_domains_params.OrganizationDomainsParams
+                ),
             ),
             cast_to=OrganizationDomainsResponse,
         )
@@ -197,6 +329,7 @@ class AsyncOrganizationsResource(AsyncAPIResource):
     async def get_personas(
         self,
         *,
+        organization_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -204,11 +337,38 @@ class AsyncOrganizationsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OrganizationGetPersonasResponse:
-        """Get Personas"""
+        """
+        Get the organization personas, one row per (persona, organization) pair.
+
+        Same (item, org) fan-out as `get_assets`: a persona's category can be owned by
+        multiple orgs, and each owning org gets its own row so no association is
+        silently dropped.
+
+        Args:
+          organization_ids: Restrict results to one or more organizations the caller belongs to. Repeat the
+              parameter to target multiple orgs (e.g.
+              `?organization_ids=<id1>&organization_ids=<id2>`). Omit to return data from
+              every organization the caller has access to.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
         return await self._get(
             "/v1/org/personas",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {"organization_ids": organization_ids},
+                    organization_get_personas_params.OrganizationGetPersonasParams,
+                ),
             ),
             cast_to=OrganizationGetPersonasResponse,
         )
@@ -216,6 +376,7 @@ class AsyncOrganizationsResource(AsyncAPIResource):
     async def list_assets(
         self,
         *,
+        organization_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -223,11 +384,36 @@ class AsyncOrganizationsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OrganizationListAssetsResponse:
-        """Get Assets"""
+        """
+        Get the organization assets, one row per (asset, organization) pair.
+
+        An asset's category can belong to multiple organizations; one asset row is
+        emitted per owning org so no association is silently dropped.
+
+        Args:
+          organization_ids: Restrict results to one or more organizations the caller belongs to. Repeat the
+              parameter to target multiple orgs (e.g.
+              `?organization_ids=<id1>&organization_ids=<id2>`). Omit to return data from
+              every organization the caller has access to.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
         return await self._get(
             "/v1/org/assets",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {"organization_ids": organization_ids}, organization_list_assets_params.OrganizationListAssetsParams
+                ),
             ),
             cast_to=OrganizationListAssetsResponse,
         )
@@ -254,6 +440,7 @@ class AsyncOrganizationsResource(AsyncAPIResource):
     async def regions(
         self,
         *,
+        organization_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -261,11 +448,33 @@ class AsyncOrganizationsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OrganizationRegionsResponse:
-        """Get the organization regions."""
+        """
+        Get the organization regions.
+
+        Args:
+          organization_ids: Restrict results to one or more organizations the caller belongs to. Repeat the
+              parameter to target multiple orgs (e.g.
+              `?organization_ids=<id1>&organization_ids=<id2>`). Omit to return data from
+              every organization the caller has access to.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
         return await self._get(
             "/v1/org/regions",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {"organization_ids": organization_ids}, organization_regions_params.OrganizationRegionsParams
+                ),
             ),
             cast_to=OrganizationRegionsResponse,
         )
