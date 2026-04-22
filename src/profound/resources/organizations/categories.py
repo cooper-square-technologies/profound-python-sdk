@@ -195,7 +195,7 @@ class CategoriesResource(SyncAPIResource):
 
           region_id: Filter by region IDs.
 
-          status: Filter by prompt status.
+          status: Filter by prompt status. Defaults to `active` only.
 
           tag_id: Filter by tag IDs.
 
@@ -472,7 +472,7 @@ class AsyncCategoriesResource(AsyncAPIResource):
 
           region_id: Filter by region IDs.
 
-          status: Filter by prompt status.
+          status: Filter by prompt status. Defaults to `active` only.
 
           tag_id: Filter by tag IDs.
 
