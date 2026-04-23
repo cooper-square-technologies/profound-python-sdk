@@ -1,33 +1,23 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import List
 
 from .._models import BaseModel
+from .category import Category
+from .organization import Organization
 from .persona_profile import PersonaProfile
 
-__all__ = ["OrganizationGetPersonasResponse", "Data", "DataCategory", "DataOrganization"]
-
-
-class DataCategory(BaseModel):
-    id: str
-
-    name: str
-
-
-class DataOrganization(BaseModel):
-    id: str
-
-    name: Optional[str] = None
+__all__ = ["OrganizationGetPersonasResponse", "Data"]
 
 
 class Data(BaseModel):
     id: str
 
-    category: DataCategory
+    category: Category
 
     name: str
 
-    organization: DataOrganization
+    organization: Organization
 
     persona: PersonaProfile
 

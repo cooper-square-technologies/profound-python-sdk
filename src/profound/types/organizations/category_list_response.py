@@ -1,17 +1,12 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import List
 from typing_extensions import TypeAlias
 
 from ..._models import BaseModel
+from ..organization import Organization
 
-__all__ = ["CategoryListResponse", "CategoryListResponseItem", "CategoryListResponseItemOrganization"]
-
-
-class CategoryListResponseItemOrganization(BaseModel):
-    id: str
-
-    name: Optional[str] = None
+__all__ = ["CategoryListResponse", "CategoryListResponseItem"]
 
 
 class CategoryListResponseItem(BaseModel):
@@ -21,7 +16,7 @@ class CategoryListResponseItem(BaseModel):
 
     name: str
 
-    organization: CategoryListResponseItemOrganization
+    organization: Organization
 
 
 CategoryListResponse: TypeAlias = List[CategoryListResponseItem]

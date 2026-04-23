@@ -31,6 +31,7 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
+from ...types.organization_list_response import OrganizationListResponse
 from ...types.organization_models_response import OrganizationModelsResponse
 from ...types.organization_domains_response import OrganizationDomainsResponse
 from ...types.organization_regions_response import OrganizationRegionsResponse
@@ -63,6 +64,30 @@ class OrganizationsResource(SyncAPIResource):
         For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#with_streaming_response
         """
         return OrganizationsResourceWithStreamingResponse(self)
+
+    def list(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> OrganizationListResponse:
+        """Return every organization the caller's API key grants access to.
+
+        Use this to
+        discover organization IDs before calling endpoints that accept an
+        `organization_id` filter.
+        """
+        return self._get(
+            "/v1/org",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=OrganizationListResponse,
+        )
 
     def domains(
         self,
@@ -284,6 +309,30 @@ class AsyncOrganizationsResource(AsyncAPIResource):
         """
         return AsyncOrganizationsResourceWithStreamingResponse(self)
 
+    async def list(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> OrganizationListResponse:
+        """Return every organization the caller's API key grants access to.
+
+        Use this to
+        discover organization IDs before calling endpoints that accept an
+        `organization_id` filter.
+        """
+        return await self._get(
+            "/v1/org",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=OrganizationListResponse,
+        )
+
     async def domains(
         self,
         *,
@@ -484,6 +533,9 @@ class OrganizationsResourceWithRawResponse:
     def __init__(self, organizations: OrganizationsResource) -> None:
         self._organizations = organizations
 
+        self.list = to_raw_response_wrapper(
+            organizations.list,
+        )
         self.domains = to_raw_response_wrapper(
             organizations.domains,
         )
@@ -509,6 +561,9 @@ class AsyncOrganizationsResourceWithRawResponse:
     def __init__(self, organizations: AsyncOrganizationsResource) -> None:
         self._organizations = organizations
 
+        self.list = async_to_raw_response_wrapper(
+            organizations.list,
+        )
         self.domains = async_to_raw_response_wrapper(
             organizations.domains,
         )
@@ -534,6 +589,9 @@ class OrganizationsResourceWithStreamingResponse:
     def __init__(self, organizations: OrganizationsResource) -> None:
         self._organizations = organizations
 
+        self.list = to_streamed_response_wrapper(
+            organizations.list,
+        )
         self.domains = to_streamed_response_wrapper(
             organizations.domains,
         )
@@ -559,6 +617,9 @@ class AsyncOrganizationsResourceWithStreamingResponse:
     def __init__(self, organizations: AsyncOrganizationsResource) -> None:
         self._organizations = organizations
 
+        self.list = async_to_streamed_response_wrapper(
+            organizations.list,
+        )
         self.domains = async_to_streamed_response_wrapper(
             organizations.domains,
         )
