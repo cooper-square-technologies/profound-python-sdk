@@ -17,7 +17,9 @@ from .shared import (
     RegionNameFilter as RegionNameFilter,
     BotProviderFilter as BotProviderFilter,
 )
+from .category import Category as Category
 from .report_info import ReportInfo as ReportInfo
+from .organization import Organization as Organization
 from .report_result import ReportResult as ReportResult
 from .named_resource import NamedResource as NamedResource
 from .persona_profile import PersonaProfile as PersonaProfile
@@ -36,6 +38,7 @@ from .topic_name_filter_param import TopicNameFilterParam as TopicNameFilterPara
 from .persona_profile_behavior import PersonaProfileBehavior as PersonaProfileBehavior
 from .report_visibility_params import ReportVisibilityParams as ReportVisibilityParams
 from .report_citations_response import ReportCitationsResponse as ReportCitationsResponse
+from .organization_list_response import OrganizationListResponse as OrganizationListResponse
 from .persona_profile_employment import PersonaProfileEmployment as PersonaProfileEmployment
 from .organization_domains_params import OrganizationDomainsParams as OrganizationDomainsParams
 from .organization_regions_params import OrganizationRegionsParams as OrganizationRegionsParams

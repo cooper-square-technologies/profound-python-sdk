@@ -4,26 +4,16 @@ from typing import List, Optional
 from datetime import datetime
 
 from .._models import BaseModel
+from .category import Category
+from .organization import Organization
 
-__all__ = ["OrganizationListAssetsResponse", "Data", "DataCategory", "DataOrganization"]
-
-
-class DataCategory(BaseModel):
-    id: str
-
-    name: str
-
-
-class DataOrganization(BaseModel):
-    id: str
-
-    name: Optional[str] = None
+__all__ = ["OrganizationListAssetsResponse", "Data"]
 
 
 class Data(BaseModel):
     id: str
 
-    category: DataCategory
+    category: Category
 
     created_at: datetime
 
@@ -33,7 +23,7 @@ class Data(BaseModel):
 
     name: str
 
-    organization: DataOrganization
+    organization: Organization
 
     website: str
 
