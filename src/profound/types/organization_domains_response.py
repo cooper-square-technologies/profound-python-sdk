@@ -5,16 +5,21 @@ from datetime import datetime
 from typing_extensions import TypeAlias
 
 from .._models import BaseModel
+from .organization import Organization
 
 __all__ = ["OrganizationDomainsResponse", "OrganizationDomainsResponseItem"]
 
 
 class OrganizationDomainsResponseItem(BaseModel):
+    """A domain paired with the organization edge it belongs to."""
+
     id: str
 
     created_at: datetime
 
     name: str
+
+    organization: Organization
 
 
 OrganizationDomainsResponse: TypeAlias = List[OrganizationDomainsResponseItem]

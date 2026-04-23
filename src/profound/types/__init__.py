@@ -17,7 +17,9 @@ from .shared import (
     RegionNameFilter as RegionNameFilter,
     BotProviderFilter as BotProviderFilter,
 )
+from .category import Category as Category
 from .report_info import ReportInfo as ReportInfo
+from .organization import Organization as Organization
 from .report_result import ReportResult as ReportResult
 from .named_resource import NamedResource as NamedResource
 from .persona_profile import PersonaProfile as PersonaProfile
@@ -36,13 +38,18 @@ from .topic_name_filter_param import TopicNameFilterParam as TopicNameFilterPara
 from .persona_profile_behavior import PersonaProfileBehavior as PersonaProfileBehavior
 from .report_visibility_params import ReportVisibilityParams as ReportVisibilityParams
 from .report_citations_response import ReportCitationsResponse as ReportCitationsResponse
+from .organization_list_response import OrganizationListResponse as OrganizationListResponse
 from .persona_profile_employment import PersonaProfileEmployment as PersonaProfileEmployment
+from .organization_domains_params import OrganizationDomainsParams as OrganizationDomainsParams
+from .organization_regions_params import OrganizationRegionsParams as OrganizationRegionsParams
 from .report_query_fanouts_params import ReportQueryFanoutsParams as ReportQueryFanoutsParams
 from .organization_models_response import OrganizationModelsResponse as OrganizationModelsResponse
 from .persona_profile_demographics import PersonaProfileDemographics as PersonaProfileDemographics
 from .organization_domains_response import OrganizationDomainsResponse as OrganizationDomainsResponse
 from .organization_regions_response import OrganizationRegionsResponse as OrganizationRegionsResponse
 from .report_get_bots_report_params import ReportGetBotsReportParams as ReportGetBotsReportParams
+from .organization_list_assets_params import OrganizationListAssetsParams as OrganizationListAssetsParams
+from .organization_get_personas_params import OrganizationGetPersonasParams as OrganizationGetPersonasParams
 from .report_get_bots_report_v2_params import ReportGetBotsReportV2Params as ReportGetBotsReportV2Params
 from .organization_list_assets_response import OrganizationListAssetsResponse as OrganizationListAssetsResponse
 from .organization_get_personas_response import OrganizationGetPersonasResponse as OrganizationGetPersonasResponse

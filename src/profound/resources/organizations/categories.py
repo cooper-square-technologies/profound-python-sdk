@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List, Optional
+from typing import List, Iterable, Optional
 from typing_extensions import Literal
 
 import httpx
@@ -18,12 +18,21 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.organizations import category_prompts_params
+from ...types.organizations import (
+    category_list_params,
+    category_prompts_params,
+    category_create_prompts_params,
+    category_update_prompts_params,
+    category_update_prompt_status_params,
+)
 from ...types.organizations.category_list_response import CategoryListResponse
 from ...types.organizations.category_tags_response import CategoryTagsResponse
 from ...types.organizations.category_assets_response import CategoryAssetsResponse
 from ...types.organizations.category_topics_response import CategoryTopicsResponse
 from ...types.organizations.category_prompts_response import CategoryPromptsResponse
+from ...types.organizations.category_create_prompts_response import CategoryCreatePromptsResponse
+from ...types.organizations.category_update_prompts_response import CategoryUpdatePromptsResponse
+from ...types.organizations.category_update_prompt_status_response import CategoryUpdatePromptStatusResponse
 from ...types.organizations.category_get_category_personas_response import CategoryGetCategoryPersonasResponse
 
 __all__ = ["CategoriesResource", "AsyncCategoriesResource"]
@@ -52,6 +61,7 @@ class CategoriesResource(SyncAPIResource):
     def list(
         self,
         *,
+        organization_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -59,11 +69,31 @@ class CategoriesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CategoryListResponse:
-        """Get the organization categories."""
+        """
+        Get the organization categories, one row per (category, organization) pair.
+
+        Args:
+          organization_ids: Restrict results to one or more organizations the caller belongs to. Repeat the
+              parameter to target multiple orgs (e.g.
+              `?organization_ids=<id1>&organization_ids=<id2>`). Omit to return data from
+              every organization the caller has access to.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
         return self._get(
             "/v1/org/categories",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform({"organization_ids": organization_ids}, category_list_params.CategoryListParams),
             ),
             cast_to=CategoryListResponse,
         )
@@ -99,6 +129,55 @@ class CategoriesResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=CategoryAssetsResponse,
+        )
+
+    def create_prompts(
+        self,
+        category_id: str,
+        *,
+        prompts: Iterable[category_create_prompts_params.Prompt],
+        dry_run: bool | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> CategoryCreatePromptsResponse:
+        """Create one or more prompts in a category.
+
+        Topics and tags are auto-created if
+        referenced by name and not yet existing. Use dry_run to preview without
+        persisting.
+
+        Args:
+          prompts: List of prompts to create.
+
+          dry_run: When true, validate and preview changes without persisting them.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not category_id:
+            raise ValueError(f"Expected a non-empty value for `category_id` but received {category_id!r}")
+        return self._post(
+            path_template("/v1/org/categories/{category_id}/prompts", category_id=category_id),
+            body=maybe_transform(
+                {
+                    "prompts": prompts,
+                    "dry_run": dry_run,
+                },
+                category_create_prompts_params.CategoryCreatePromptsParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=CategoryCreatePromptsResponse,
         )
 
     def get_category_personas(
@@ -174,7 +253,7 @@ class CategoriesResource(SyncAPIResource):
 
           region_id: Filter by region IDs.
 
-          status: Filter by prompt status.
+          status: Filter by prompt status. Defaults to `active` only.
 
           tag_id: Filter by tag IDs.
 
@@ -282,6 +361,115 @@ class CategoriesResource(SyncAPIResource):
             cast_to=CategoryTopicsResponse,
         )
 
+    def update_prompt_status(
+        self,
+        category_id: str,
+        *,
+        prompt_ids: SequenceNotStr[str],
+        status: Literal["active", "disabled", "deleted"],
+        dry_run: bool | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> CategoryUpdatePromptStatusResponse:
+        """Bulk-update the status of one or more prompts.
+
+        Prompts already in the target
+        status are skipped. Use dry_run to preview without persisting.
+
+        Status options:
+
+        - 'active': Prompts will run daily.
+        - 'disabled': Prompts will not run moving forward, but historical data is
+          preserved.
+        - 'deleted': Prompts are deleted along with historical data
+
+        Args:
+          prompt_ids: IDs of the prompts to update.
+
+          status: Target status: 'active', 'disabled', or 'deleted'.
+
+          dry_run: When true, validate and preview changes without persisting them.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not category_id:
+            raise ValueError(f"Expected a non-empty value for `category_id` but received {category_id!r}")
+        return self._patch(
+            path_template("/v1/org/categories/{category_id}/prompts/status", category_id=category_id),
+            body=maybe_transform(
+                {
+                    "prompt_ids": prompt_ids,
+                    "status": status,
+                    "dry_run": dry_run,
+                },
+                category_update_prompt_status_params.CategoryUpdatePromptStatusParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=CategoryUpdatePromptStatusResponse,
+        )
+
+    def update_prompts(
+        self,
+        category_id: str,
+        *,
+        prompts: Iterable[category_update_prompts_params.Prompt],
+        dry_run: bool | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> CategoryUpdatePromptsResponse:
+        """Update one or more existing prompts.
+
+        Only provided fields are changed. Dimension
+        fields (regions, platforms, personas, tags) replace the full set when provided.
+        Use dry_run to preview without persisting.
+
+        Args:
+          prompts: List of prompt updates. Each entry must include an `id` and at least one field
+              to change.
+
+          dry_run: When true, validate and preview changes without persisting them.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not category_id:
+            raise ValueError(f"Expected a non-empty value for `category_id` but received {category_id!r}")
+        return self._patch(
+            path_template("/v1/org/categories/{category_id}/prompts", category_id=category_id),
+            body=maybe_transform(
+                {
+                    "prompts": prompts,
+                    "dry_run": dry_run,
+                },
+                category_update_prompts_params.CategoryUpdatePromptsParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=CategoryUpdatePromptsResponse,
+        )
+
 
 class AsyncCategoriesResource(AsyncAPIResource):
     @cached_property
@@ -306,6 +494,7 @@ class AsyncCategoriesResource(AsyncAPIResource):
     async def list(
         self,
         *,
+        organization_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -313,11 +502,33 @@ class AsyncCategoriesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CategoryListResponse:
-        """Get the organization categories."""
+        """
+        Get the organization categories, one row per (category, organization) pair.
+
+        Args:
+          organization_ids: Restrict results to one or more organizations the caller belongs to. Repeat the
+              parameter to target multiple orgs (e.g.
+              `?organization_ids=<id1>&organization_ids=<id2>`). Omit to return data from
+              every organization the caller has access to.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
         return await self._get(
             "/v1/org/categories",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {"organization_ids": organization_ids}, category_list_params.CategoryListParams
+                ),
             ),
             cast_to=CategoryListResponse,
         )
@@ -353,6 +564,55 @@ class AsyncCategoriesResource(AsyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=CategoryAssetsResponse,
+        )
+
+    async def create_prompts(
+        self,
+        category_id: str,
+        *,
+        prompts: Iterable[category_create_prompts_params.Prompt],
+        dry_run: bool | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> CategoryCreatePromptsResponse:
+        """Create one or more prompts in a category.
+
+        Topics and tags are auto-created if
+        referenced by name and not yet existing. Use dry_run to preview without
+        persisting.
+
+        Args:
+          prompts: List of prompts to create.
+
+          dry_run: When true, validate and preview changes without persisting them.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not category_id:
+            raise ValueError(f"Expected a non-empty value for `category_id` but received {category_id!r}")
+        return await self._post(
+            path_template("/v1/org/categories/{category_id}/prompts", category_id=category_id),
+            body=await async_maybe_transform(
+                {
+                    "prompts": prompts,
+                    "dry_run": dry_run,
+                },
+                category_create_prompts_params.CategoryCreatePromptsParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=CategoryCreatePromptsResponse,
         )
 
     async def get_category_personas(
@@ -428,7 +688,7 @@ class AsyncCategoriesResource(AsyncAPIResource):
 
           region_id: Filter by region IDs.
 
-          status: Filter by prompt status.
+          status: Filter by prompt status. Defaults to `active` only.
 
           tag_id: Filter by tag IDs.
 
@@ -536,6 +796,115 @@ class AsyncCategoriesResource(AsyncAPIResource):
             cast_to=CategoryTopicsResponse,
         )
 
+    async def update_prompt_status(
+        self,
+        category_id: str,
+        *,
+        prompt_ids: SequenceNotStr[str],
+        status: Literal["active", "disabled", "deleted"],
+        dry_run: bool | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> CategoryUpdatePromptStatusResponse:
+        """Bulk-update the status of one or more prompts.
+
+        Prompts already in the target
+        status are skipped. Use dry_run to preview without persisting.
+
+        Status options:
+
+        - 'active': Prompts will run daily.
+        - 'disabled': Prompts will not run moving forward, but historical data is
+          preserved.
+        - 'deleted': Prompts are deleted along with historical data
+
+        Args:
+          prompt_ids: IDs of the prompts to update.
+
+          status: Target status: 'active', 'disabled', or 'deleted'.
+
+          dry_run: When true, validate and preview changes without persisting them.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not category_id:
+            raise ValueError(f"Expected a non-empty value for `category_id` but received {category_id!r}")
+        return await self._patch(
+            path_template("/v1/org/categories/{category_id}/prompts/status", category_id=category_id),
+            body=await async_maybe_transform(
+                {
+                    "prompt_ids": prompt_ids,
+                    "status": status,
+                    "dry_run": dry_run,
+                },
+                category_update_prompt_status_params.CategoryUpdatePromptStatusParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=CategoryUpdatePromptStatusResponse,
+        )
+
+    async def update_prompts(
+        self,
+        category_id: str,
+        *,
+        prompts: Iterable[category_update_prompts_params.Prompt],
+        dry_run: bool | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> CategoryUpdatePromptsResponse:
+        """Update one or more existing prompts.
+
+        Only provided fields are changed. Dimension
+        fields (regions, platforms, personas, tags) replace the full set when provided.
+        Use dry_run to preview without persisting.
+
+        Args:
+          prompts: List of prompt updates. Each entry must include an `id` and at least one field
+              to change.
+
+          dry_run: When true, validate and preview changes without persisting them.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not category_id:
+            raise ValueError(f"Expected a non-empty value for `category_id` but received {category_id!r}")
+        return await self._patch(
+            path_template("/v1/org/categories/{category_id}/prompts", category_id=category_id),
+            body=await async_maybe_transform(
+                {
+                    "prompts": prompts,
+                    "dry_run": dry_run,
+                },
+                category_update_prompts_params.CategoryUpdatePromptsParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=CategoryUpdatePromptsResponse,
+        )
+
 
 class CategoriesResourceWithRawResponse:
     def __init__(self, categories: CategoriesResource) -> None:
@@ -546,6 +915,9 @@ class CategoriesResourceWithRawResponse:
         )
         self.assets = to_raw_response_wrapper(
             categories.assets,
+        )
+        self.create_prompts = to_raw_response_wrapper(
+            categories.create_prompts,
         )
         self.get_category_personas = to_raw_response_wrapper(
             categories.get_category_personas,
@@ -559,6 +931,12 @@ class CategoriesResourceWithRawResponse:
         self.topics = to_raw_response_wrapper(
             categories.topics,
         )
+        self.update_prompt_status = to_raw_response_wrapper(
+            categories.update_prompt_status,
+        )
+        self.update_prompts = to_raw_response_wrapper(
+            categories.update_prompts,
+        )
 
 
 class AsyncCategoriesResourceWithRawResponse:
@@ -570,6 +948,9 @@ class AsyncCategoriesResourceWithRawResponse:
         )
         self.assets = async_to_raw_response_wrapper(
             categories.assets,
+        )
+        self.create_prompts = async_to_raw_response_wrapper(
+            categories.create_prompts,
         )
         self.get_category_personas = async_to_raw_response_wrapper(
             categories.get_category_personas,
@@ -583,6 +964,12 @@ class AsyncCategoriesResourceWithRawResponse:
         self.topics = async_to_raw_response_wrapper(
             categories.topics,
         )
+        self.update_prompt_status = async_to_raw_response_wrapper(
+            categories.update_prompt_status,
+        )
+        self.update_prompts = async_to_raw_response_wrapper(
+            categories.update_prompts,
+        )
 
 
 class CategoriesResourceWithStreamingResponse:
@@ -594,6 +981,9 @@ class CategoriesResourceWithStreamingResponse:
         )
         self.assets = to_streamed_response_wrapper(
             categories.assets,
+        )
+        self.create_prompts = to_streamed_response_wrapper(
+            categories.create_prompts,
         )
         self.get_category_personas = to_streamed_response_wrapper(
             categories.get_category_personas,
@@ -607,6 +997,12 @@ class CategoriesResourceWithStreamingResponse:
         self.topics = to_streamed_response_wrapper(
             categories.topics,
         )
+        self.update_prompt_status = to_streamed_response_wrapper(
+            categories.update_prompt_status,
+        )
+        self.update_prompts = to_streamed_response_wrapper(
+            categories.update_prompts,
+        )
 
 
 class AsyncCategoriesResourceWithStreamingResponse:
@@ -619,6 +1015,9 @@ class AsyncCategoriesResourceWithStreamingResponse:
         self.assets = async_to_streamed_response_wrapper(
             categories.assets,
         )
+        self.create_prompts = async_to_streamed_response_wrapper(
+            categories.create_prompts,
+        )
         self.get_category_personas = async_to_streamed_response_wrapper(
             categories.get_category_personas,
         )
@@ -630,4 +1029,10 @@ class AsyncCategoriesResourceWithStreamingResponse:
         )
         self.topics = async_to_streamed_response_wrapper(
             categories.topics,
+        )
+        self.update_prompt_status = async_to_streamed_response_wrapper(
+            categories.update_prompt_status,
+        )
+        self.update_prompts = async_to_streamed_response_wrapper(
+            categories.update_prompts,
         )

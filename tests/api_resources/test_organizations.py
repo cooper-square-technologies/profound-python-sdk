@@ -10,6 +10,7 @@ import pytest
 from profound import Profound, AsyncProfound
 from tests.utils import assert_matches_type
 from profound.types import (
+    OrganizationListResponse,
     OrganizationModelsResponse,
     OrganizationDomainsResponse,
     OrganizationRegionsResponse,
@@ -25,8 +26,44 @@ class TestOrganizations:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
+    def test_method_list(self, client: Profound) -> None:
+        organization = client.organizations.list()
+        assert_matches_type(OrganizationListResponse, organization, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_list(self, client: Profound) -> None:
+        response = client.organizations.with_raw_response.list()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        organization = response.parse()
+        assert_matches_type(OrganizationListResponse, organization, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_list(self, client: Profound) -> None:
+        with client.organizations.with_streaming_response.list() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            organization = response.parse()
+            assert_matches_type(OrganizationListResponse, organization, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
     def test_method_domains(self, client: Profound) -> None:
         organization = client.organizations.domains()
+        assert_matches_type(OrganizationDomainsResponse, organization, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_domains_with_all_params(self, client: Profound) -> None:
+        organization = client.organizations.domains(
+            organization_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+        )
         assert_matches_type(OrganizationDomainsResponse, organization, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -59,6 +96,14 @@ class TestOrganizations:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
+    def test_method_get_personas_with_all_params(self, client: Profound) -> None:
+        organization = client.organizations.get_personas(
+            organization_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+        )
+        assert_matches_type(OrganizationGetPersonasResponse, organization, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
     def test_raw_response_get_personas(self, client: Profound) -> None:
         response = client.organizations.with_raw_response.get_personas()
 
@@ -83,6 +128,14 @@ class TestOrganizations:
     @parametrize
     def test_method_list_assets(self, client: Profound) -> None:
         organization = client.organizations.list_assets()
+        assert_matches_type(OrganizationListAssetsResponse, organization, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_list_assets_with_all_params(self, client: Profound) -> None:
+        organization = client.organizations.list_assets(
+            organization_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+        )
         assert_matches_type(OrganizationListAssetsResponse, organization, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -143,6 +196,14 @@ class TestOrganizations:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
+    def test_method_regions_with_all_params(self, client: Profound) -> None:
+        organization = client.organizations.regions(
+            organization_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+        )
+        assert_matches_type(OrganizationRegionsResponse, organization, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
     def test_raw_response_regions(self, client: Profound) -> None:
         response = client.organizations.with_raw_response.regions()
 
@@ -171,8 +232,44 @@ class TestAsyncOrganizations:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
+    async def test_method_list(self, async_client: AsyncProfound) -> None:
+        organization = await async_client.organizations.list()
+        assert_matches_type(OrganizationListResponse, organization, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_list(self, async_client: AsyncProfound) -> None:
+        response = await async_client.organizations.with_raw_response.list()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        organization = await response.parse()
+        assert_matches_type(OrganizationListResponse, organization, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_list(self, async_client: AsyncProfound) -> None:
+        async with async_client.organizations.with_streaming_response.list() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            organization = await response.parse()
+            assert_matches_type(OrganizationListResponse, organization, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
     async def test_method_domains(self, async_client: AsyncProfound) -> None:
         organization = await async_client.organizations.domains()
+        assert_matches_type(OrganizationDomainsResponse, organization, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_domains_with_all_params(self, async_client: AsyncProfound) -> None:
+        organization = await async_client.organizations.domains(
+            organization_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+        )
         assert_matches_type(OrganizationDomainsResponse, organization, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -205,6 +302,14 @@ class TestAsyncOrganizations:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
+    async def test_method_get_personas_with_all_params(self, async_client: AsyncProfound) -> None:
+        organization = await async_client.organizations.get_personas(
+            organization_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+        )
+        assert_matches_type(OrganizationGetPersonasResponse, organization, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
     async def test_raw_response_get_personas(self, async_client: AsyncProfound) -> None:
         response = await async_client.organizations.with_raw_response.get_personas()
 
@@ -229,6 +334,14 @@ class TestAsyncOrganizations:
     @parametrize
     async def test_method_list_assets(self, async_client: AsyncProfound) -> None:
         organization = await async_client.organizations.list_assets()
+        assert_matches_type(OrganizationListAssetsResponse, organization, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_list_assets_with_all_params(self, async_client: AsyncProfound) -> None:
+        organization = await async_client.organizations.list_assets(
+            organization_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+        )
         assert_matches_type(OrganizationListAssetsResponse, organization, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -285,6 +398,14 @@ class TestAsyncOrganizations:
     @parametrize
     async def test_method_regions(self, async_client: AsyncProfound) -> None:
         organization = await async_client.organizations.regions()
+        assert_matches_type(OrganizationRegionsResponse, organization, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_regions_with_all_params(self, async_client: AsyncProfound) -> None:
+        organization = await async_client.organizations.regions(
+            organization_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+        )
         assert_matches_type(OrganizationRegionsResponse, organization, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")

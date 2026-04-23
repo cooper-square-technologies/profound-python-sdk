@@ -4,7 +4,8 @@ from typing import List, Optional
 from datetime import datetime
 
 from .._models import BaseModel
-from .named_resource import NamedResource
+from .category import Category
+from .organization import Organization
 
 __all__ = ["OrganizationListAssetsResponse", "Data"]
 
@@ -12,8 +13,7 @@ __all__ = ["OrganizationListAssetsResponse", "Data"]
 class Data(BaseModel):
     id: str
 
-    category: NamedResource
-    """Generic id+name reference used across domain boundaries."""
+    category: Category
 
     created_at: datetime
 
@@ -22,6 +22,8 @@ class Data(BaseModel):
     logo_url: str
 
     name: str
+
+    organization: Organization
 
     website: str
 

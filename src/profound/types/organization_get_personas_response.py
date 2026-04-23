@@ -3,7 +3,8 @@
 from typing import List
 
 from .._models import BaseModel
-from .named_resource import NamedResource
+from .category import Category
+from .organization import Organization
 from .persona_profile import PersonaProfile
 
 __all__ = ["OrganizationGetPersonasResponse", "Data"]
@@ -12,10 +13,11 @@ __all__ = ["OrganizationGetPersonasResponse", "Data"]
 class Data(BaseModel):
     id: str
 
-    category: NamedResource
-    """Generic id+name reference used across domain boundaries."""
+    category: Category
 
     name: str
+
+    organization: Organization
 
     persona: PersonaProfile
 

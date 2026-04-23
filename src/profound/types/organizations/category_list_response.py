@@ -3,8 +3,20 @@
 from typing import List
 from typing_extensions import TypeAlias
 
-from ..named_resource import NamedResource
+from ..._models import BaseModel
+from ..organization import Organization
 
-__all__ = ["CategoryListResponse"]
+__all__ = ["CategoryListResponse", "CategoryListResponseItem"]
 
-CategoryListResponse: TypeAlias = List[NamedResource]
+
+class CategoryListResponseItem(BaseModel):
+    """A category annotated with the organization that owns it."""
+
+    id: str
+
+    name: str
+
+    organization: Organization
+
+
+CategoryListResponse: TypeAlias = List[CategoryListResponseItem]

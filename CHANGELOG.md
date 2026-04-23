@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.41.0 (2026-04-23)
+
+Full Changelog: [v0.40.0...v0.41.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.40.0...v0.41.0)
+
+### Features
+
+* **api:** add organizations and prompts methods ([0f587a0](https://github.com/cooper-square-technologies/profound-python-sdk/commit/0f587a00e38a0cd63cbf4aaa1c2b7b93f545b31d))
+* **api:** api update ([a72834c](https://github.com/cooper-square-technologies/profound-python-sdk/commit/a72834c4540a2a46cf776abf970b4f8bf7807920))
+* **api:** api update ([1ad9478](https://github.com/cooper-square-technologies/profound-python-sdk/commit/1ad947811f8047d63983f241d3ab8b084d66ebca))
+
+
+### Chores
+
+* **internal:** more robust bootstrap script ([b301556](https://github.com/cooper-square-technologies/profound-python-sdk/commit/b3015566359b2b106f2c8a5a90a1455cf9734a82))
+
 ## 0.40.0 (2026-04-18)
 
 Full Changelog: [v0.39.0...v0.40.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.39.0...v0.40.0)

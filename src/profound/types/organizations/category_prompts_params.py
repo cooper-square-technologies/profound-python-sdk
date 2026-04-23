@@ -33,7 +33,7 @@ class CategoryPromptsParams(TypedDict, total=False):
     """Filter by region IDs."""
 
     status: List[Literal["active", "disabled"]]
-    """Filter by prompt status."""
+    """Filter by prompt status. Defaults to `active` only."""
 
     tag_id: SequenceNotStr[str]
     """Filter by tag IDs."""
