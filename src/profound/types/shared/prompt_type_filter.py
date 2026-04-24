@@ -9,7 +9,12 @@ __all__ = ["PromptTypeFilter"]
 
 
 class PromptTypeFilter(BaseModel):
-    """Filter by prompt type (visibility or sentiment)."""
+    """Filter by prompt type (visibility or sentiment).
+
+    .. deprecated::
+        Use :class:`AnalysisTypeFilter` instead. ``prompt_type`` is normalised
+        to ``analysis_type`` at parse time.
+    """
 
     field: Literal["prompt_type"]
 

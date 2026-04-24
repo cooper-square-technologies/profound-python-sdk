@@ -18,6 +18,9 @@ class Prompt(BaseModel):
     id: str
     """ID of the updated prompt."""
 
+    analysis_types: Optional[FieldDiff] = None
+    """Shows the old and new value for a changed field."""
+
     asset: Optional[FieldDiff] = None
     """Shows the old and new value for a changed field."""
 
@@ -31,9 +34,6 @@ class Prompt(BaseModel):
     """Shows which resources were added or removed."""
 
     prompt: Optional[FieldDiff] = None
-    """Shows the old and new value for a changed field."""
-
-    prompt_type: Optional[FieldDiff] = None
     """Shows the old and new value for a changed field."""
 
     regions: Optional[NamedResourceDiffList] = None

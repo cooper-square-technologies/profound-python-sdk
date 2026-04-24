@@ -1,6 +1,7 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import List, Optional
+from typing_extensions import Literal
 
 from ..._models import BaseModel
 from ..named_resource import NamedResource
@@ -20,11 +21,11 @@ class Prompt(BaseModel):
     prompt: str
     """The prompt text."""
 
-    prompt_type: str
-    """The internal prompt type ('open-ended' or 'brand-direct')."""
-
     topic: NamedResource
     """Resolved topic."""
+
+    analysis_types: Optional[List[Literal["visibility", "sentiment", "accuracy"]]] = None
+    """Analysis types assigned to this prompt."""
 
     asset: Optional[NamedResource] = None
     """Generic id+name reference used across domain boundaries."""

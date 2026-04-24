@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from typing import Iterable, Optional
-from typing_extensions import Required, TypedDict
+from typing import List, Iterable, Optional
+from typing_extensions import Literal, Required, TypedDict
 
 from .id_or_name_param import IDOrNameParam
 
@@ -30,6 +30,9 @@ class Prompt(TypedDict, total=False):
     id: Required[str]
     """ID of the prompt to update."""
 
+    analysis_types: Optional[List[Literal["visibility", "sentiment", "accuracy"]]]
+    """New analysis types. Replaces all existing analysis types on the prompt."""
+
     asset: Optional[IDOrNameParam]
     """Reference by id, name, or both.
 
@@ -50,7 +53,7 @@ class Prompt(TypedDict, total=False):
     """New prompt text."""
 
     prompt_type: Optional[str]
-    """'Visibility' or 'Sentiment'."""
+    """Deprecated. Use analysis_types instead."""
 
     regions: Optional[Iterable[IDOrNameParam]]
     """New region set. Replaces all existing regions."""

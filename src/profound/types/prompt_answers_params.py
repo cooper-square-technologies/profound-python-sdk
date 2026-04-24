@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union, Iterable
+from typing import List, Union, Iterable
 from datetime import datetime
 from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
@@ -19,7 +19,7 @@ from .shared_params.persona_id_filter import PersonaIDFilter
 from .shared_params.prompt_type_filter import PromptTypeFilter
 from .shared_params.region_name_filter import RegionNameFilter
 
-__all__ = ["PromptAnswersParams", "Filter", "FilterAssetIDFilter", "Include"]
+__all__ = ["PromptAnswersParams", "Filter", "FilterAnalysisTypeFilter", "FilterAssetIDFilter", "Include"]
 
 
 class PromptAnswersParams(TypedDict, total=False):
@@ -38,6 +38,30 @@ class PromptAnswersParams(TypedDict, total=False):
     """Pagination parameters for the results. Default is 10,000 rows with no offset."""
 
 
+class FilterAnalysisTypeFilter(TypedDict, total=False):
+    """Filter by analysis type (visibility, sentiment, or accuracy)."""
+
+    field: Required[Literal["analysis_type"]]
+
+    operator: Required[
+        Literal[
+            "is",
+            "not_is",
+            "in",
+            "not_in",
+            "contains",
+            "not_contains",
+            "matches",
+            "contains_case_insensitive",
+            "not_contains_case_insensitive",
+        ]
+    ]
+
+    value: Required[
+        Union[Literal["visibility", "sentiment", "accuracy"], List[Literal["visibility", "sentiment", "accuracy"]]]
+    ]
+
+
 class FilterAssetIDFilter(TypedDict, total=False):
     field: Required[Literal["asset_id"]]
 
@@ -51,6 +75,7 @@ Filter: TypeAlias = Union[
     RegionNameFilter,
     ModelIDFilter,
     TagIDFilter,
+    FilterAnalysisTypeFilter,
     PromptTypeFilter,
     PromptFilter,
     PersonaIDFilter,
@@ -61,6 +86,8 @@ Filter: TypeAlias = Union[
 
 
 class Include(TypedDict, total=False):
+    analysis_types: bool
+
     asset: bool
 
     asset_id: bool

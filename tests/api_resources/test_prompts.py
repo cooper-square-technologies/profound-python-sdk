@@ -43,6 +43,7 @@ class TestPrompts:
                 }
             ],
             include={
+                "analysis_types": True,
                 "asset": True,
                 "asset_id": True,
                 "citations": True,
@@ -132,6 +133,7 @@ class TestAsyncPrompts:
                 }
             ],
             include={
+                "analysis_types": True,
                 "asset": True,
                 "asset_id": True,
                 "citations": True,

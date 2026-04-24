@@ -17,7 +17,7 @@ from .shared_params.persona_id_filter import PersonaIDFilter
 from .shared_params.prompt_type_filter import PromptTypeFilter
 from .shared_params.region_name_filter import RegionNameFilter
 
-__all__ = ["ReportQueryFanoutsParams", "Filter"]
+__all__ = ["ReportQueryFanoutsParams", "Filter", "FilterAnalysisTypeFilter"]
 
 
 class ReportQueryFanoutsParams(TypedDict, total=False):
@@ -51,6 +51,30 @@ class ReportQueryFanoutsParams(TypedDict, total=False):
     """Pagination settings for the report results."""
 
 
+class FilterAnalysisTypeFilter(TypedDict, total=False):
+    """Filter by analysis type (visibility, sentiment, or accuracy)."""
+
+    field: Required[Literal["analysis_type"]]
+
+    operator: Required[
+        Literal[
+            "is",
+            "not_is",
+            "in",
+            "not_in",
+            "contains",
+            "not_contains",
+            "matches",
+            "contains_case_insensitive",
+            "not_contains_case_insensitive",
+        ]
+    ]
+
+    value: Required[
+        Union[Literal["visibility", "sentiment", "accuracy"], List[Literal["visibility", "sentiment", "accuracy"]]]
+    ]
+
+
 Filter: TypeAlias = Union[
     RegionIDFilter,
     RegionNameFilter,
@@ -59,5 +83,6 @@ Filter: TypeAlias = Union[
     TagIDFilter,
     PromptIDFilterParam,
     PersonaIDFilter,
+    FilterAnalysisTypeFilter,
     PromptTypeFilter,
 ]

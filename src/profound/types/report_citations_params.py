@@ -28,6 +28,7 @@ __all__ = [
     "FilterHostnameFilter",
     "FilterURLFilter",
     "FilterRootDomainFilter",
+    "FilterAnalysisTypeFilter",
     "FilterCitationCategoryFilter",
 ]
 
@@ -159,6 +160,30 @@ class FilterRootDomainFilter(TypedDict, total=False):
     value: Required[Union[str, SequenceNotStr[str]]]
 
 
+class FilterAnalysisTypeFilter(TypedDict, total=False):
+    """Filter by analysis type (visibility, sentiment, or accuracy)."""
+
+    field: Required[Literal["analysis_type"]]
+
+    operator: Required[
+        Literal[
+            "is",
+            "not_is",
+            "in",
+            "not_in",
+            "contains",
+            "not_contains",
+            "matches",
+            "contains_case_insensitive",
+            "not_contains_case_insensitive",
+        ]
+    ]
+
+    value: Required[
+        Union[Literal["visibility", "sentiment", "accuracy"], List[Literal["visibility", "sentiment", "accuracy"]]]
+    ]
+
+
 class FilterCitationCategoryFilter(TypedDict, total=False):
     """Filter by citation category"""
 
@@ -193,6 +218,7 @@ Filter: TypeAlias = Union[
     TagNameFilterParam,
     FilterURLFilter,
     FilterRootDomainFilter,
+    FilterAnalysisTypeFilter,
     PromptTypeFilter,
     PersonaIDFilter,
     FilterCitationCategoryFilter,
