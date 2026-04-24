@@ -217,6 +217,7 @@ class CategoriesResource(SyncAPIResource):
         self,
         category_id: str,
         *,
+        analysis_type: List[Literal["visibility", "sentiment", "accuracy"]] | Omit = omit,
         cursor: Optional[str] | Omit = omit,
         limit: int | Omit = omit,
         order_dir: Literal["asc", "desc"] | Omit = omit,
@@ -239,6 +240,8 @@ class CategoriesResource(SyncAPIResource):
         region, platform, or persona. Supports cursor-based pagination.
 
         Args:
+          analysis_type: Filter by analysis type (visibility, sentiment, accuracy).
+
           cursor: Pagination cursor from a previous response.
 
           limit: Maximum number of prompts to return.
@@ -249,7 +252,7 @@ class CategoriesResource(SyncAPIResource):
 
           platform_id: Filter by platform IDs.
 
-          prompt_type: Filter by prompt type.
+          prompt_type: Deprecated. Use analysis_type instead.
 
           region_id: Filter by region IDs.
 
@@ -278,6 +281,7 @@ class CategoriesResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
+                        "analysis_type": analysis_type,
                         "cursor": cursor,
                         "limit": limit,
                         "order_dir": order_dir,
@@ -652,6 +656,7 @@ class AsyncCategoriesResource(AsyncAPIResource):
         self,
         category_id: str,
         *,
+        analysis_type: List[Literal["visibility", "sentiment", "accuracy"]] | Omit = omit,
         cursor: Optional[str] | Omit = omit,
         limit: int | Omit = omit,
         order_dir: Literal["asc", "desc"] | Omit = omit,
@@ -674,6 +679,8 @@ class AsyncCategoriesResource(AsyncAPIResource):
         region, platform, or persona. Supports cursor-based pagination.
 
         Args:
+          analysis_type: Filter by analysis type (visibility, sentiment, accuracy).
+
           cursor: Pagination cursor from a previous response.
 
           limit: Maximum number of prompts to return.
@@ -684,7 +691,7 @@ class AsyncCategoriesResource(AsyncAPIResource):
 
           platform_id: Filter by platform IDs.
 
-          prompt_type: Filter by prompt type.
+          prompt_type: Deprecated. Use analysis_type instead.
 
           region_id: Filter by region IDs.
 
@@ -713,6 +720,7 @@ class AsyncCategoriesResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
+                        "analysis_type": analysis_type,
                         "cursor": cursor,
                         "limit": limit,
                         "order_dir": order_dir,

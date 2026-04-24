@@ -147,6 +147,7 @@ class TestCategories:
                         "id": "id",
                         "name": "name",
                     },
+                    "analysis_types": ["visibility"],
                     "asset": {
                         "id": "id",
                         "name": "name",
@@ -286,6 +287,7 @@ class TestCategories:
     def test_method_prompts_with_all_params(self, client: Profound) -> None:
         category = client.organizations.categories.prompts(
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            analysis_type=["visibility"],
             cursor="cursor",
             limit=1,
             order_dir="asc",
@@ -495,6 +497,7 @@ class TestCategories:
             prompts=[
                 {
                     "id": "id",
+                    "analysis_types": ["visibility"],
                     "asset": {
                         "id": "id",
                         "name": "name",
@@ -699,6 +702,7 @@ class TestAsyncCategories:
                         "id": "id",
                         "name": "name",
                     },
+                    "analysis_types": ["visibility"],
                     "asset": {
                         "id": "id",
                         "name": "name",
@@ -838,6 +842,7 @@ class TestAsyncCategories:
     async def test_method_prompts_with_all_params(self, async_client: AsyncProfound) -> None:
         category = await async_client.organizations.categories.prompts(
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            analysis_type=["visibility"],
             cursor="cursor",
             limit=1,
             order_dir="asc",
@@ -1047,6 +1052,7 @@ class TestAsyncCategories:
             prompts=[
                 {
                     "id": "id",
+                    "analysis_types": ["visibility"],
                     "asset": {
                         "id": "id",
                         "name": "name",

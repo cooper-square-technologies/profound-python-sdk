@@ -11,6 +11,9 @@ __all__ = ["CategoryPromptsParams"]
 
 
 class CategoryPromptsParams(TypedDict, total=False):
+    analysis_type: List[Literal["visibility", "sentiment", "accuracy"]]
+    """Filter by analysis type (visibility, sentiment, accuracy)."""
+
     cursor: Optional[str]
     """Pagination cursor from a previous response."""
 
@@ -27,7 +30,7 @@ class CategoryPromptsParams(TypedDict, total=False):
     """Filter by platform IDs."""
 
     prompt_type: List[Literal["visibility", "sentiment"]]
-    """Filter by prompt type."""
+    """Deprecated. Use analysis_type instead."""
 
     region_id: SequenceNotStr[str]
     """Filter by region IDs."""
