@@ -16,6 +16,7 @@ from .shared import (
     PromptTypeFilter as PromptTypeFilter,
     RegionNameFilter as RegionNameFilter,
     BotProviderFilter as BotProviderFilter,
+    AnalysisTypeFilter as AnalysisTypeFilter,
 )
 from .category import Category as Category
 from .report_info import ReportInfo as ReportInfo
