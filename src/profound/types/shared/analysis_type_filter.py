@@ -1,0 +1,28 @@
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+from typing import List, Union
+from typing_extensions import Literal
+
+from ..._models import BaseModel
+
+__all__ = ["AnalysisTypeFilter"]
+
+
+class AnalysisTypeFilter(BaseModel):
+    """Filter by analysis type (visibility, sentiment, or accuracy)."""
+
+    field: Literal["analysis_type"]
+
+    operator: Literal[
+        "is",
+        "not_is",
+        "in",
+        "not_in",
+        "contains",
+        "not_contains",
+        "matches",
+        "contains_case_insensitive",
+        "not_contains_case_insensitive",
+    ]
+
+    value: Union[Literal["visibility", "sentiment", "accuracy"], List[Literal["visibility", "sentiment", "accuracy"]]]

@@ -2,6 +2,7 @@
 
 ```python
 from profound.types import (
+    AnalysisTypeFilter,
     AssetNameFilter,
     BotNameFilter,
     BotProviderFilter,
