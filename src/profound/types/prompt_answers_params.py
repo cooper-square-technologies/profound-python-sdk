@@ -95,6 +95,8 @@ class Include(TypedDict, total=False):
 
     search_queries: bool
 
+    search_triggered: bool
+
     sentiment_themes: bool
 
     tags: bool

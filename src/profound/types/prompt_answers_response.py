@@ -52,6 +52,8 @@ class Data(BaseModel):
 
     search_queries: Optional[List[str]] = None
 
+    search_triggered: Optional[bool] = None
+
     sentiment_themes: Optional[List[DataSentimentTheme]] = None
 
     tags: Optional[List[str]] = None
