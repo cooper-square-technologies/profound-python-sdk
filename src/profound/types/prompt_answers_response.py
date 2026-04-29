@@ -20,6 +20,8 @@ class DataSentimentTheme(BaseModel):
 class Data(BaseModel):
     """Raw data for the answers endpoint."""
 
+    analysis_types: Optional[List[str]] = None
+
     asset: Optional[str] = None
 
     asset_id: Optional[str] = None
@@ -49,6 +51,8 @@ class Data(BaseModel):
     run_id: Optional[str] = None
 
     search_queries: Optional[List[str]] = None
+
+    search_triggered: Optional[bool] = None
 
     sentiment_themes: Optional[List[DataSentimentTheme]] = None
 

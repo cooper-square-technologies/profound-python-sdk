@@ -16,6 +16,7 @@ from .shared_params.region_id_filter import RegionIDFilter
 from .shared_params.persona_id_filter import PersonaIDFilter
 from .shared_params.prompt_type_filter import PromptTypeFilter
 from .shared_params.region_name_filter import RegionNameFilter
+from .shared_params.analysis_type_filter import AnalysisTypeFilter
 
 __all__ = ["ReportQueryFanoutsParams", "Filter"]
 
@@ -59,5 +60,6 @@ Filter: TypeAlias = Union[
     TagIDFilter,
     PromptIDFilterParam,
     PersonaIDFilter,
+    AnalysisTypeFilter,
     PromptTypeFilter,
 ]

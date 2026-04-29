@@ -13,3 +13,4 @@ from .persona_id_filter import PersonaIDFilter as PersonaIDFilter
 from .prompt_type_filter import PromptTypeFilter as PromptTypeFilter
 from .region_name_filter import RegionNameFilter as RegionNameFilter
 from .bot_provider_filter import BotProviderFilter as BotProviderFilter
+from .analysis_type_filter import AnalysisTypeFilter as AnalysisTypeFilter

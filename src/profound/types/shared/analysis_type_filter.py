@@ -5,18 +5,13 @@ from typing_extensions import Literal
 
 from ..._models import BaseModel
 
-__all__ = ["PromptTypeFilter"]
+__all__ = ["AnalysisTypeFilter"]
 
 
-class PromptTypeFilter(BaseModel):
-    """Filter by prompt type (visibility or sentiment).
+class AnalysisTypeFilter(BaseModel):
+    """Filter by analysis type (visibility, sentiment, or accuracy)."""
 
-    .. deprecated::
-        Use :class:`AnalysisTypeFilter` instead. ``prompt_type`` is normalised
-        to ``analysis_type`` at parse time.
-    """
-
-    field: Literal["prompt_type"]
+    field: Literal["analysis_type"]
 
     operator: Literal[
         "is",
@@ -30,4 +25,4 @@ class PromptTypeFilter(BaseModel):
         "not_contains_case_insensitive",
     ]
 
-    value: Union[Literal["visibility", "sentiment"], List[Literal["visibility", "sentiment"]]]
+    value: Union[Literal["visibility", "sentiment", "accuracy"], List[Literal["visibility", "sentiment", "accuracy"]]]

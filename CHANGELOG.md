@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.42.0 (2026-04-29)
+
+Full Changelog: [v0.41.0...v0.42.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.41.0...v0.42.0)
+
+### Features
+
+* **api:** add pypi trusted publishing ([167fbd6](https://github.com/cooper-square-technologies/profound-python-sdk/commit/167fbd61ccffb3282a37b6264e57b1b094c2dcd7))
+* **api:** api update ([48601c7](https://github.com/cooper-square-technologies/profound-python-sdk/commit/48601c7d3d926653d2ab0423ce687d7beb7b8e7c))
+* **api:** api update ([25c1b2b](https://github.com/cooper-square-technologies/profound-python-sdk/commit/25c1b2b46771517c27036140200776b2cceeba47))
+* **api:** api update ([cebdf41](https://github.com/cooper-square-technologies/profound-python-sdk/commit/cebdf41f46c74ea52cb1d1331c951a2248017e8b))
+* **api:** package rename, enable trusted publishing ([c0378f1](https://github.com/cooper-square-technologies/profound-python-sdk/commit/c0378f1b2c078ccb3d8130fe34f02e1544e3b74f))
+* **api:** shared `AnalysisTypeFilter` ([b2c1074](https://github.com/cooper-square-technologies/profound-python-sdk/commit/b2c1074ae5dd800e97d558093f012d1b0ef3d860))
+* support setting headers via env ([b502f05](https://github.com/cooper-square-technologies/profound-python-sdk/commit/b502f05449bcfbe6c2d4b6a782347cd5acfb7116))
+
+
+### Bug Fixes
+
+* use correct field name format for multipart file arrays ([7315948](https://github.com/cooper-square-technologies/profound-python-sdk/commit/731594853aa3f7145e31bbe0fc5f9812ad4b95ba))
+
+
+### Chores
+
+* revert version patch ([6608f4b](https://github.com/cooper-square-technologies/profound-python-sdk/commit/6608f4b3a1a370372e8a850c7aed4ed0bfbc47e3))
+
 ## 0.41.0 (2026-04-23)
 
 Full Changelog: [v0.40.0...v0.41.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.40.0...v0.41.0)

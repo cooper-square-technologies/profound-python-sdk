@@ -21,6 +21,7 @@ from .shared_params.region_id_filter import RegionIDFilter
 from .shared_params.persona_id_filter import PersonaIDFilter
 from .shared_params.prompt_type_filter import PromptTypeFilter
 from .shared_params.region_name_filter import RegionNameFilter
+from .shared_params.analysis_type_filter import AnalysisTypeFilter
 
 __all__ = [
     "ReportCitationsParams",
@@ -83,7 +84,7 @@ class ReportCitationsParams(TypedDict, total=False):
     """Custom ordering of the report results.
 
         The order is a record of key-value pairs where:
-        - `key` is the field to order by, which can be a metric and/or `date`, `hostname`, `path` dimensions
+        - `key` is the field to order by, which can be a metric or dimension
         - `value` is the direction of the order, either `asc` for ascending or `desc` for descending.
 
         When not specified, the default order is the first metric in the query descending.
@@ -193,6 +194,7 @@ Filter: TypeAlias = Union[
     TagNameFilterParam,
     FilterURLFilter,
     FilterRootDomainFilter,
+    AnalysisTypeFilter,
     PromptTypeFilter,
     PersonaIDFilter,
     FilterCitationCategoryFilter,

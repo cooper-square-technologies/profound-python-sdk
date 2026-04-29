@@ -5,18 +5,13 @@ from __future__ import annotations
 from typing import List, Union
 from typing_extensions import Literal, Required, TypedDict
 
-__all__ = ["PromptTypeFilter"]
+__all__ = ["AnalysisTypeFilter"]
 
 
-class PromptTypeFilter(TypedDict, total=False):
-    """Filter by prompt type (visibility or sentiment).
+class AnalysisTypeFilter(TypedDict, total=False):
+    """Filter by analysis type (visibility, sentiment, or accuracy)."""
 
-    .. deprecated::
-        Use :class:`AnalysisTypeFilter` instead. ``prompt_type`` is normalised
-        to ``analysis_type`` at parse time.
-    """
-
-    field: Required[Literal["prompt_type"]]
+    field: Required[Literal["analysis_type"]]
 
     operator: Required[
         Literal[
@@ -32,4 +27,6 @@ class PromptTypeFilter(TypedDict, total=False):
         ]
     ]
 
-    value: Required[Union[Literal["visibility", "sentiment"], List[Literal["visibility", "sentiment"]]]]
+    value: Required[
+        Union[Literal["visibility", "sentiment", "accuracy"], List[Literal["visibility", "sentiment", "accuracy"]]]
+    ]

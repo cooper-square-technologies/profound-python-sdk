@@ -43,6 +43,7 @@ class TestPrompts:
                 }
             ],
             include={
+                "analysis_types": True,
                 "asset": True,
                 "asset_id": True,
                 "citations": True,
@@ -58,6 +59,7 @@ class TestPrompts:
                 "response": True,
                 "run_id": True,
                 "search_queries": True,
+                "search_triggered": True,
                 "sentiment_themes": True,
                 "tags": True,
                 "themes": True,
@@ -132,6 +134,7 @@ class TestAsyncPrompts:
                 }
             ],
             include={
+                "analysis_types": True,
                 "asset": True,
                 "asset_id": True,
                 "citations": True,
@@ -147,6 +150,7 @@ class TestAsyncPrompts:
                 "response": True,
                 "run_id": True,
                 "search_queries": True,
+                "search_triggered": True,
                 "sentiment_themes": True,
                 "tags": True,
                 "themes": True,

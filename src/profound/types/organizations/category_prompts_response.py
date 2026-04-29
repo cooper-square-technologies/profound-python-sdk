@@ -21,8 +21,6 @@ class Data(BaseModel):
 
     prompt: str
 
-    prompt_type: str
-
     regions: List[NamedResource]
 
     status: Literal["active", "disabled"]
@@ -32,7 +30,11 @@ class Data(BaseModel):
 
     updated_at: datetime
 
+    analysis_types: Optional[List[Literal["visibility", "sentiment", "accuracy"]]] = None
+
     personas: Optional[List[NamedResource]] = None
+
+    prompt_type: Optional[str] = None
 
     tags: Optional[List[NamedResource]] = None
 

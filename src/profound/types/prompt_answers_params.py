@@ -18,6 +18,7 @@ from .shared_params.asset_name_filter import AssetNameFilter
 from .shared_params.persona_id_filter import PersonaIDFilter
 from .shared_params.prompt_type_filter import PromptTypeFilter
 from .shared_params.region_name_filter import RegionNameFilter
+from .shared_params.analysis_type_filter import AnalysisTypeFilter
 
 __all__ = ["PromptAnswersParams", "Filter", "FilterAssetIDFilter", "Include"]
 
@@ -51,6 +52,7 @@ Filter: TypeAlias = Union[
     RegionNameFilter,
     ModelIDFilter,
     TagIDFilter,
+    AnalysisTypeFilter,
     PromptTypeFilter,
     PromptFilter,
     PersonaIDFilter,
@@ -61,6 +63,8 @@ Filter: TypeAlias = Union[
 
 
 class Include(TypedDict, total=False):
+    analysis_types: bool
+
     asset: bool
 
     asset_id: bool
@@ -90,6 +94,8 @@ class Include(TypedDict, total=False):
     run_id: bool
 
     search_queries: bool
+
+    search_triggered: bool
 
     sentiment_themes: bool
 

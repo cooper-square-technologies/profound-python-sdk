@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from typing import Iterable, Optional
-from typing_extensions import Required, TypedDict
+from typing import List, Iterable, Optional
+from typing_extensions import Literal, Required, TypedDict
 
 from .id_or_name_param import IDOrNameParam
 
@@ -36,6 +36,12 @@ class Prompt(TypedDict, total=False):
     topic: Required[IDOrNameParam]
     """Topic to assign. A new topic is created if the name doesn't exist."""
 
+    analysis_types: Optional[List[Literal["visibility", "sentiment", "accuracy"]]]
+    """Analysis types: 'visibility', 'sentiment', 'accuracy'.
+
+    Defaults to ['visibility'].
+    """
+
     asset: Optional[IDOrNameParam]
     """Reference by id, name, or both.
 
@@ -47,10 +53,7 @@ class Prompt(TypedDict, total=False):
     """Personas to use when collecting. Omit for default (no persona)."""
 
     prompt_type: Optional[str]
-    """'Visibility' (open-ended) or 'Sentiment' (brand-direct).
-
-    Defaults to Visibility.
-    """
+    """Deprecated. Use analysis_types instead. 'Visibility' or 'Sentiment'."""
 
     tags: Iterable[IDOrNameParam]
     """Tags to assign. New tags are created if names don't exist."""
