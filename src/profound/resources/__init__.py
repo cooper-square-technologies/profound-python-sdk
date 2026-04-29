@@ -48,6 +48,14 @@ from .organizations import (
     OrganizationsResourceWithStreamingResponse,
     AsyncOrganizationsResourceWithStreamingResponse,
 )
+from .knowledge_bases import (
+    KnowledgeBasesResource,
+    AsyncKnowledgeBasesResource,
+    KnowledgeBasesResourceWithRawResponse,
+    AsyncKnowledgeBasesResourceWithRawResponse,
+    KnowledgeBasesResourceWithStreamingResponse,
+    AsyncKnowledgeBasesResourceWithStreamingResponse,
+)
 
 __all__ = [
     "OrganizationsResource",
@@ -86,4 +94,10 @@ __all__ = [
     "AsyncAgentsResourceWithRawResponse",
     "AgentsResourceWithStreamingResponse",
     "AsyncAgentsResourceWithStreamingResponse",
+    "KnowledgeBasesResource",
+    "AsyncKnowledgeBasesResource",
+    "KnowledgeBasesResourceWithRawResponse",
+    "AsyncKnowledgeBasesResourceWithRawResponse",
+    "KnowledgeBasesResourceWithStreamingResponse",
+    "AsyncKnowledgeBasesResourceWithStreamingResponse",
 ]

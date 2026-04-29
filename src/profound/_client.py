@@ -35,13 +35,14 @@ from ._base_client import (
 )
 
 if TYPE_CHECKING:
-    from .resources import logs, agents, content, prompts, reports, organizations
+    from .resources import logs, agents, content, prompts, reports, organizations, knowledge_bases
     from .resources.prompts import PromptsResource, AsyncPromptsResource
     from .resources.reports import ReportsResource, AsyncReportsResource
     from .resources.logs.logs import LogsResource, AsyncLogsResource
     from .resources.agents.agents import AgentsResource, AsyncAgentsResource
     from .resources.content.content import ContentResource, AsyncContentResource
     from .resources.organizations.organizations import OrganizationsResource, AsyncOrganizationsResource
+    from .resources.knowledge_bases.knowledge_bases import KnowledgeBasesResource, AsyncKnowledgeBasesResource
 
 __all__ = [
     "Timeout",
@@ -154,6 +155,12 @@ class Profound(SyncAPIClient):
         from .resources.agents import AgentsResource
 
         return AgentsResource(self)
+
+    @cached_property
+    def knowledge_bases(self) -> KnowledgeBasesResource:
+        from .resources.knowledge_bases import KnowledgeBasesResource
+
+        return KnowledgeBasesResource(self)
 
     @cached_property
     def with_raw_response(self) -> ProfoundWithRawResponse:
@@ -369,6 +376,12 @@ class AsyncProfound(AsyncAPIClient):
         return AsyncAgentsResource(self)
 
     @cached_property
+    def knowledge_bases(self) -> AsyncKnowledgeBasesResource:
+        from .resources.knowledge_bases import AsyncKnowledgeBasesResource
+
+        return AsyncKnowledgeBasesResource(self)
+
+    @cached_property
     def with_raw_response(self) -> AsyncProfoundWithRawResponse:
         return AsyncProfoundWithRawResponse(self)
 
@@ -523,6 +536,12 @@ class ProfoundWithRawResponse:
 
         return AgentsResourceWithRawResponse(self._client.agents)
 
+    @cached_property
+    def knowledge_bases(self) -> knowledge_bases.KnowledgeBasesResourceWithRawResponse:
+        from .resources.knowledge_bases import KnowledgeBasesResourceWithRawResponse
+
+        return KnowledgeBasesResourceWithRawResponse(self._client.knowledge_bases)
+
 
 class AsyncProfoundWithRawResponse:
     _client: AsyncProfound
@@ -565,6 +584,12 @@ class AsyncProfoundWithRawResponse:
         from .resources.agents import AsyncAgentsResourceWithRawResponse
 
         return AsyncAgentsResourceWithRawResponse(self._client.agents)
+
+    @cached_property
+    def knowledge_bases(self) -> knowledge_bases.AsyncKnowledgeBasesResourceWithRawResponse:
+        from .resources.knowledge_bases import AsyncKnowledgeBasesResourceWithRawResponse
+
+        return AsyncKnowledgeBasesResourceWithRawResponse(self._client.knowledge_bases)
 
 
 class ProfoundWithStreamedResponse:
@@ -609,6 +634,12 @@ class ProfoundWithStreamedResponse:
 
         return AgentsResourceWithStreamingResponse(self._client.agents)
 
+    @cached_property
+    def knowledge_bases(self) -> knowledge_bases.KnowledgeBasesResourceWithStreamingResponse:
+        from .resources.knowledge_bases import KnowledgeBasesResourceWithStreamingResponse
+
+        return KnowledgeBasesResourceWithStreamingResponse(self._client.knowledge_bases)
+
 
 class AsyncProfoundWithStreamedResponse:
     _client: AsyncProfound
@@ -651,6 +682,12 @@ class AsyncProfoundWithStreamedResponse:
         from .resources.agents import AsyncAgentsResourceWithStreamingResponse
 
         return AsyncAgentsResourceWithStreamingResponse(self._client.agents)
+
+    @cached_property
+    def knowledge_bases(self) -> knowledge_bases.AsyncKnowledgeBasesResourceWithStreamingResponse:
+        from .resources.knowledge_bases import AsyncKnowledgeBasesResourceWithStreamingResponse
+
+        return AsyncKnowledgeBasesResourceWithStreamingResponse(self._client.knowledge_bases)
 
 
 Client = Profound

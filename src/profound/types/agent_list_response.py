@@ -5,8 +5,9 @@ from datetime import datetime
 from typing_extensions import Literal
 
 from .._models import BaseModel
+from .shared.cursor_pagination import CursorPagination
 
-__all__ = ["AgentListResponse", "Data", "Pagination"]
+__all__ = ["AgentListResponse", "Data"]
 
 
 class Data(BaseModel):
@@ -31,21 +32,11 @@ class Data(BaseModel):
     """Short description of the agent, if provided."""
 
 
-class Pagination(BaseModel):
-    """Cursor pagination details for this response."""
-
-    limit: Optional[int] = None
-    """Maximum number of results to return. Default is 10,000, maximum is 50,000."""
-
-    next_cursor: Optional[str] = None
-    """Token for the next page, if more results are available."""
-
-
 class AgentListResponse(BaseModel):
     """Paginated list of agents."""
 
     data: List[Data]
     """Agents returned for this page."""
 
-    pagination: Optional[Pagination] = None
+    pagination: Optional[CursorPagination] = None
     """Cursor pagination details for this response."""

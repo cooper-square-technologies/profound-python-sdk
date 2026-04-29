@@ -3,9 +3,11 @@
 ```python
 from profound.types import (
     AnalysisTypeFilter,
+    AssetIDFilter,
     AssetNameFilter,
     BotNameFilter,
     BotProviderFilter,
+    CursorPagination,
     ModelIDFilter,
     Pagination,
     PathFilter,
@@ -108,6 +110,9 @@ from profound.types import (
     TagNameFilter,
     TopicNameFilter,
     ReportCitationsResponse,
+    ReportStreamCitationsResponse,
+    ReportStreamSentimentResponse,
+    ReportStreamVisibilityResponse,
 )
 ```
 
@@ -120,6 +125,9 @@ Methods:
 - <code title="post /v2/reports/referrals">client.reports.<a href="./src/profound/resources/reports.py">get_referrals_report_v2</a>(\*\*<a href="src/profound/types/report_get_referrals_report_v2_params.py">params</a>) -> <a href="./src/profound/types/report_response.py">ReportResponse</a></code>
 - <code title="post /v1/reports/query-fanouts">client.reports.<a href="./src/profound/resources/reports.py">query_fanouts</a>(\*\*<a href="src/profound/types/report_query_fanouts_params.py">params</a>) -> <a href="./src/profound/types/report_response.py">ReportResponse</a></code>
 - <code title="post /v1/reports/sentiment">client.reports.<a href="./src/profound/resources/reports.py">sentiment</a>(\*\*<a href="src/profound/types/report_sentiment_params.py">params</a>) -> <a href="./src/profound/types/report_response.py">ReportResponse</a></code>
+- <code title="post /v1/reports/citations/stream">client.reports.<a href="./src/profound/resources/reports.py">stream_citations</a>(\*\*<a href="src/profound/types/report_stream_citations_params.py">params</a>) -> <a href="./src/profound/types/report_stream_citations_response.py">ReportStreamCitationsResponse</a></code>
+- <code title="post /v1/reports/sentiment/stream">client.reports.<a href="./src/profound/resources/reports.py">stream_sentiment</a>(\*\*<a href="src/profound/types/report_stream_sentiment_params.py">params</a>) -> <a href="./src/profound/types/report_stream_sentiment_response.py">ReportStreamSentimentResponse</a></code>
+- <code title="post /v1/reports/visibility/stream">client.reports.<a href="./src/profound/resources/reports.py">stream_visibility</a>(\*\*<a href="src/profound/types/report_stream_visibility_params.py">params</a>) -> <a href="./src/profound/types/report_stream_visibility_response.py">ReportStreamVisibilityResponse</a></code>
 - <code title="post /v1/reports/visibility">client.reports.<a href="./src/profound/resources/reports.py">visibility</a>(\*\*<a href="src/profound/types/report_visibility_params.py">params</a>) -> <a href="./src/profound/types/report_response.py">ReportResponse</a></code>
 
 # Logs
@@ -177,3 +185,47 @@ Methods:
 
 - <code title="post /v1/agents/{agent_id}/runs">client.agents.runs.<a href="./src/profound/resources/agents/runs.py">create</a>(agent_id, \*\*<a href="src/profound/types/agents/run_create_params.py">params</a>) -> <a href="./src/profound/types/agents/run_create_response.py">RunCreateResponse</a></code>
 - <code title="get /v1/agents/{agent_id}/runs/{run_id}">client.agents.runs.<a href="./src/profound/resources/agents/runs.py">retrieve</a>(run_id, \*, agent_id) -> <a href="./src/profound/types/agents/run_retrieve_response.py">RunRetrieveResponse</a></code>
+
+# KnowledgeBases
+
+Types:
+
+```python
+from profound.types import KnowledgeBaseListResponse, KnowledgeBaseSearchResponse
+```
+
+Methods:
+
+- <code title="get /v1/knowledge-bases">client.knowledge_bases.<a href="./src/profound/resources/knowledge_bases/knowledge_bases.py">list</a>(\*\*<a href="src/profound/types/knowledge_base_list_params.py">params</a>) -> <a href="./src/profound/types/knowledge_base_list_response.py">KnowledgeBaseListResponse</a></code>
+- <code title="post /v1/knowledge-bases/{knowledge_base_id}/search">client.knowledge_bases.<a href="./src/profound/resources/knowledge_bases/knowledge_bases.py">search</a>(knowledge_base_id, \*\*<a href="src/profound/types/knowledge_base_search_params.py">params</a>) -> <a href="./src/profound/types/knowledge_base_search_response.py">KnowledgeBaseSearchResponse</a></code>
+
+## Documents
+
+Types:
+
+```python
+from profound.types.knowledge_bases import (
+    DocumentCreateResponse,
+    DocumentUpdateResponse,
+    DocumentDeleteResponse,
+)
+```
+
+Methods:
+
+- <code title="post /v1/knowledge-bases/{knowledge_base_id}/documents">client.knowledge_bases.documents.<a href="./src/profound/resources/knowledge_bases/documents.py">create</a>(knowledge_base_id, \*\*<a href="src/profound/types/knowledge_bases/document_create_params.py">params</a>) -> <a href="./src/profound/types/knowledge_bases/document_create_response.py">DocumentCreateResponse</a></code>
+- <code title="put /v1/knowledge-bases/{knowledge_base_id}/documents">client.knowledge_bases.documents.<a href="./src/profound/resources/knowledge_bases/documents.py">update</a>(knowledge_base_id, \*\*<a href="src/profound/types/knowledge_bases/document_update_params.py">params</a>) -> <a href="./src/profound/types/knowledge_bases/document_update_response.py">DocumentUpdateResponse</a></code>
+- <code title="delete /v1/knowledge-bases/{knowledge_base_id}/documents">client.knowledge_bases.documents.<a href="./src/profound/resources/knowledge_bases/documents.py">delete</a>(knowledge_base_id, \*\*<a href="src/profound/types/knowledge_bases/document_delete_params.py">params</a>) -> <a href="./src/profound/types/knowledge_bases/document_delete_response.py">DocumentDeleteResponse</a></code>
+
+## Folders
+
+Types:
+
+```python
+from profound.types.knowledge_bases import FolderCreateResponse, FolderDeleteResponse
+```
+
+Methods:
+
+- <code title="post /v1/knowledge-bases/{knowledge_base_id}/folders">client.knowledge_bases.folders.<a href="./src/profound/resources/knowledge_bases/folders.py">create</a>(knowledge_base_id, \*\*<a href="src/profound/types/knowledge_bases/folder_create_params.py">params</a>) -> <a href="./src/profound/types/knowledge_bases/folder_create_response.py">FolderCreateResponse</a></code>
+- <code title="delete /v1/knowledge-bases/{knowledge_base_id}/folders">client.knowledge_bases.folders.<a href="./src/profound/resources/knowledge_bases/folders.py">delete</a>(knowledge_base_id, \*\*<a href="src/profound/types/knowledge_bases/folder_delete_params.py">params</a>) -> <a href="./src/profound/types/knowledge_bases/folder_delete_response.py">FolderDeleteResponse</a></code>

@@ -7,12 +7,14 @@ from .shared import (
     PathFilter as PathFilter,
     TagIDFilter as TagIDFilter,
     PromptFilter as PromptFilter,
+    AssetIDFilter as AssetIDFilter,
     BotNameFilter as BotNameFilter,
     ModelIDFilter as ModelIDFilter,
     TopicIDFilter as TopicIDFilter,
     RegionIDFilter as RegionIDFilter,
     AssetNameFilter as AssetNameFilter,
     PersonaIDFilter as PersonaIDFilter,
+    CursorPagination as CursorPagination,
     PromptTypeFilter as PromptTypeFilter,
     RegionNameFilter as RegionNameFilter,
     BotProviderFilter as BotProviderFilter,
@@ -39,20 +41,30 @@ from .topic_name_filter_param import TopicNameFilterParam as TopicNameFilterPara
 from .persona_profile_behavior import PersonaProfileBehavior as PersonaProfileBehavior
 from .report_visibility_params import ReportVisibilityParams as ReportVisibilityParams
 from .report_citations_response import ReportCitationsResponse as ReportCitationsResponse
+from .knowledge_base_list_params import KnowledgeBaseListParams as KnowledgeBaseListParams
 from .organization_list_response import OrganizationListResponse as OrganizationListResponse
 from .persona_profile_employment import PersonaProfileEmployment as PersonaProfileEmployment
 from .organization_domains_params import OrganizationDomainsParams as OrganizationDomainsParams
 from .organization_regions_params import OrganizationRegionsParams as OrganizationRegionsParams
 from .report_query_fanouts_params import ReportQueryFanoutsParams as ReportQueryFanoutsParams
+from .knowledge_base_list_response import KnowledgeBaseListResponse as KnowledgeBaseListResponse
+from .knowledge_base_search_params import KnowledgeBaseSearchParams as KnowledgeBaseSearchParams
 from .organization_models_response import OrganizationModelsResponse as OrganizationModelsResponse
 from .persona_profile_demographics import PersonaProfileDemographics as PersonaProfileDemographics
 from .organization_domains_response import OrganizationDomainsResponse as OrganizationDomainsResponse
 from .organization_regions_response import OrganizationRegionsResponse as OrganizationRegionsResponse
 from .report_get_bots_report_params import ReportGetBotsReportParams as ReportGetBotsReportParams
+from .knowledge_base_search_response import KnowledgeBaseSearchResponse as KnowledgeBaseSearchResponse
+from .report_stream_citations_params import ReportStreamCitationsParams as ReportStreamCitationsParams
+from .report_stream_sentiment_params import ReportStreamSentimentParams as ReportStreamSentimentParams
 from .organization_list_assets_params import OrganizationListAssetsParams as OrganizationListAssetsParams
+from .report_stream_visibility_params import ReportStreamVisibilityParams as ReportStreamVisibilityParams
 from .organization_get_personas_params import OrganizationGetPersonasParams as OrganizationGetPersonasParams
 from .report_get_bots_report_v2_params import ReportGetBotsReportV2Params as ReportGetBotsReportV2Params
+from .report_stream_citations_response import ReportStreamCitationsResponse as ReportStreamCitationsResponse
+from .report_stream_sentiment_response import ReportStreamSentimentResponse as ReportStreamSentimentResponse
 from .organization_list_assets_response import OrganizationListAssetsResponse as OrganizationListAssetsResponse
+from .report_stream_visibility_response import ReportStreamVisibilityResponse as ReportStreamVisibilityResponse
 from .organization_get_personas_response import OrganizationGetPersonasResponse as OrganizationGetPersonasResponse
 from .report_get_referrals_report_params import ReportGetReferralsReportParams as ReportGetReferralsReportParams
 from .report_get_referrals_report_v2_params import ReportGetReferralsReportV2Params as ReportGetReferralsReportV2Params
