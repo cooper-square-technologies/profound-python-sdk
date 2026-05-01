@@ -43,6 +43,13 @@ class BotProviderFilter(BaseModel):
             "xai",
             "grok",
             "gemini",
+            "mistral",
+            "huawei",
+            "yandex",
+            "baidu",
+            "yahoo",
+            "commoncrawl",
+            "openclaw",
         ],
         List[
             Literal[
@@ -62,6 +69,13 @@ class BotProviderFilter(BaseModel):
                 "xai",
                 "grok",
                 "gemini",
+                "mistral",
+                "huawei",
+                "yandex",
+                "baidu",
+                "yahoo",
+                "commoncrawl",
+                "openclaw",
             ]
         ],
     ]
