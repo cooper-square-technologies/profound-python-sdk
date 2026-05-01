@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.43.0 (2026-05-01)
+
+Full Changelog: [v0.42.0...v0.43.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.42.0...v0.43.0)
+
+### Features
+
+* **api:** add streaming and knowledge base ([aace9b9](https://github.com/cooper-square-technologies/profound-python-sdk/commit/aace9b9a66595560b88f354ace185fda1ae2e4ad))
+
+
+### Chores
+
+* drop uv.lock custom patch ([a1c47cf](https://github.com/cooper-square-technologies/profound-python-sdk/commit/a1c47cf2e3f8e3937523dc39cdac20bcf505168d))
+* **internal:** reformat pyproject.toml ([17009cd](https://github.com/cooper-square-technologies/profound-python-sdk/commit/17009cd59bb47bf11e09b485632c214303898a45))
+
 ## 0.42.0 (2026-04-29)
 
 Full Changelog: [v0.41.0...v0.42.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.41.0...v0.42.0)

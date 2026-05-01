@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, List, Union, Iterable
+from typing import Dict, List, Union, Iterable, Optional
 from datetime import datetime
 from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
@@ -21,10 +21,10 @@ from .shared_params.asset_name_filter import AssetNameFilter
 from .shared_params.persona_id_filter import PersonaIDFilter
 from .shared_params.region_name_filter import RegionNameFilter
 
-__all__ = ["ReportSentimentParams", "Filter", "FilterThemeFilter"]
+__all__ = ["ReportStreamSentimentParams", "Filter", "FilterThemeFilter"]
 
 
-class ReportSentimentParams(TypedDict, total=False):
+class ReportStreamSentimentParams(TypedDict, total=False):
     category_id: Required[str]
 
     end_date: Required[Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]]
@@ -79,8 +79,8 @@ class ReportSentimentParams(TypedDict, total=False):
     descending.
     """
 
-    pagination: Pagination
-    """Pagination settings for the report results."""
+    pagination: Optional[Pagination]
+    """Offset-based pagination parameters."""
 
 
 class FilterThemeFilter(TypedDict, total=False):

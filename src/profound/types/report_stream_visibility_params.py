@@ -2,18 +2,17 @@
 
 from __future__ import annotations
 
-from typing import Dict, List, Union, Iterable
+from typing import Dict, List, Union, Iterable, Optional
 from datetime import datetime
 from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
-from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 from .tag_name_filter_param import TagNameFilterParam
+from .prompt_id_filter_param import PromptIDFilterParam
 from .topic_name_filter_param import TopicNameFilterParam
 from .shared_params.pagination import Pagination
 from .shared_params.prompt_filter import PromptFilter
 from .shared_params.tag_id_filter import TagIDFilter
-from .shared_params.asset_id_filter import AssetIDFilter
 from .shared_params.model_id_filter import ModelIDFilter
 from .shared_params.topic_id_filter import TopicIDFilter
 from .shared_params.region_id_filter import RegionIDFilter
@@ -21,10 +20,10 @@ from .shared_params.asset_name_filter import AssetNameFilter
 from .shared_params.persona_id_filter import PersonaIDFilter
 from .shared_params.region_name_filter import RegionNameFilter
 
-__all__ = ["ReportSentimentParams", "Filter", "FilterThemeFilter"]
+__all__ = ["ReportStreamVisibilityParams", "Filter"]
 
 
-class ReportSentimentParams(TypedDict, total=False):
+class ReportStreamVisibilityParams(TypedDict, total=False):
     category_id: Required[str]
 
     end_date: Required[Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]]
@@ -33,7 +32,9 @@ class ReportSentimentParams(TypedDict, total=False):
     Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
     """
 
-    metrics: Required[List[Literal["positive", "negative", "occurrences"]]]
+    metrics: Required[
+        List[Literal["share_of_voice", "mentions_count", "visibility_score", "executions", "average_position"]]
+    ]
 
     start_date: Required[Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]]
     """Start date for the report.
@@ -46,7 +47,6 @@ class ReportSentimentParams(TypedDict, total=False):
 
     dimensions: List[
         Literal[
-            "theme",
             "date",
             "region",
             "topic",
@@ -54,17 +54,16 @@ class ReportSentimentParams(TypedDict, total=False):
             "model",
             "asset_id",
             "asset_name",
-            "tag",
             "prompt",
             "prompt_id",
-            "sentiment_type",
+            "tag",
             "persona",
         ]
     ]
     """Dimensions to group the report by."""
 
     filters: Iterable[Filter]
-    """List of filters to apply to the sentiment report."""
+    """List of filters to apply to the visibility report."""
 
     order_by: Dict[str, Literal["asc", "desc"]]
     """Custom ordering of the report results.
@@ -79,43 +78,20 @@ class ReportSentimentParams(TypedDict, total=False):
     descending.
     """
 
-    pagination: Pagination
-    """Pagination settings for the report results."""
-
-
-class FilterThemeFilter(TypedDict, total=False):
-    """Filter by theme"""
-
-    field: Required[Literal["theme"]]
-
-    operator: Required[
-        Literal[
-            "is",
-            "not_is",
-            "in",
-            "not_in",
-            "contains",
-            "not_contains",
-            "matches",
-            "contains_case_insensitive",
-            "not_contains_case_insensitive",
-        ]
-    ]
-
-    value: Required[Union[str, SequenceNotStr[str]]]
+    pagination: Optional[Pagination]
+    """Offset-based pagination parameters."""
 
 
 Filter: TypeAlias = Union[
-    AssetIDFilter,
-    AssetNameFilter,
-    FilterThemeFilter,
     RegionIDFilter,
     RegionNameFilter,
+    ModelIDFilter,
     TopicIDFilter,
     TopicNameFilterParam,
-    ModelIDFilter,
+    AssetNameFilter,
     TagIDFilter,
     TagNameFilterParam,
+    PromptIDFilterParam,
     PromptFilter,
     PersonaIDFilter,
 ]

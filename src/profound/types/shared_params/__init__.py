@@ -4,6 +4,7 @@ from .pagination import Pagination as Pagination
 from .path_filter import PathFilter as PathFilter
 from .prompt_filter import PromptFilter as PromptFilter
 from .tag_id_filter import TagIDFilter as TagIDFilter
+from .asset_id_filter import AssetIDFilter as AssetIDFilter
 from .bot_name_filter import BotNameFilter as BotNameFilter
 from .model_id_filter import ModelIDFilter as ModelIDFilter
 from .topic_id_filter import TopicIDFilter as TopicIDFilter
