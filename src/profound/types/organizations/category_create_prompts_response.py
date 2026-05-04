@@ -24,7 +24,7 @@ class Prompt(BaseModel):
     topic: NamedResource
     """Resolved topic."""
 
-    analysis_types: Optional[List[Literal["visibility", "sentiment", "sentiment_v2", "accuracy"]]] = None
+    analysis_types: Optional[List[Literal["visibility", "sentiment", "accuracy"]]] = None
     """Analysis types assigned to this prompt."""
 
     asset: Optional[NamedResource] = None

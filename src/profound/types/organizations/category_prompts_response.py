@@ -30,7 +30,7 @@ class Data(BaseModel):
 
     updated_at: datetime
 
-    analysis_types: Optional[List[Literal["visibility", "sentiment", "sentiment_v2", "accuracy"]]] = None
+    analysis_types: Optional[List[Literal["visibility", "sentiment", "accuracy"]]] = None
 
     personas: Optional[List[NamedResource]] = None
 
