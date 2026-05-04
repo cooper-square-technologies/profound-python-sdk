@@ -80,7 +80,7 @@ class TestAgents:
         agent = client.agents.list(
             limit=1,
             next_cursor="next_cursor",
-            statuses=["published"],
+            statuses=["published", "draft"],
         )
         assert_matches_type(AgentListResponse, agent, path=["response"])
 
@@ -175,7 +175,7 @@ class TestAsyncAgents:
         agent = await async_client.agents.list(
             limit=1,
             next_cursor="next_cursor",
-            statuses=["published"],
+            statuses=["published", "draft"],
         )
         assert_matches_type(AgentListResponse, agent, path=["response"])
 
