@@ -11,7 +11,7 @@ __all__ = ["CategoryPromptsParams"]
 
 
 class CategoryPromptsParams(TypedDict, total=False):
-    analysis_type: List[Literal["visibility", "sentiment", "accuracy"]]
+    analysis_type: List[Literal["visibility", "sentiment", "sentiment_v2", "accuracy"]]
     """Filter by analysis type (visibility, sentiment, accuracy)."""
 
     cursor: Optional[str]

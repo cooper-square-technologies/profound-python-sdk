@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.44.0 (2026-05-04)
+
+Full Changelog: [v0.43.0...v0.44.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.43.0...v0.44.0)
+
+### Features
+
+* **api:** api update ([70d45e3](https://github.com/cooper-square-technologies/profound-python-sdk/commit/70d45e37d2f49272ef71664ec2511a5de4a5612f))
+* **api:** api update ([1bf69d1](https://github.com/cooper-square-technologies/profound-python-sdk/commit/1bf69d1792cdd1963fd2baeb07ae5723767b9c77))
+* **api:** api update ([efcf127](https://github.com/cooper-square-technologies/profound-python-sdk/commit/efcf1277e29af8839fb53497a9a81bec409a06d6))
+* **api:** api update ([878aedf](https://github.com/cooper-square-technologies/profound-python-sdk/commit/878aedff119fe1068f2f7c1c8ff0230680b855e1))
+* **api:** configure `array_format` ([6d31755](https://github.com/cooper-square-technologies/profound-python-sdk/commit/6d3175599773bc6b99a220aa5caa8bb414644e48))
+* **api:** dual auth yml ([b9fbf14](https://github.com/cooper-square-technologies/profound-python-sdk/commit/b9fbf1498c2829ef5c7bf00d7c13b8aa20511c85))
+* **api:** update package name mcp - rollback package manager to yarn ([27b50ba](https://github.com/cooper-square-technologies/profound-python-sdk/commit/27b50ba580dba6b8d8ed86a0f7c96efe308d37ea))
+
 ## 0.43.0 (2026-05-01)
 
 Full Changelog: [v0.42.0...v0.43.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.42.0...v0.43.0)

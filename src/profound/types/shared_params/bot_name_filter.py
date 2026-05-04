@@ -59,6 +59,16 @@ class BotNameFilter(TypedDict, total=False):
                 "Perplexity-User",
                 "Grok-PageBrowser",
                 "YouBot",
+                "OpenClaw",
+                "baiduspider",
+                "CCBot",
+                "ERNIEBot",
+                "Gemini-Fetch",
+                "YandexBot",
+                "PetalBot",
+                "MistralAI-User",
+                "Slurp",
+                "Gemini-Deep-Research",
             ],
             List[
                 Literal[
@@ -91,6 +101,16 @@ class BotNameFilter(TypedDict, total=False):
                     "Perplexity-User",
                     "Grok-PageBrowser",
                     "YouBot",
+                    "OpenClaw",
+                    "baiduspider",
+                    "CCBot",
+                    "ERNIEBot",
+                    "Gemini-Fetch",
+                    "YandexBot",
+                    "PetalBot",
+                    "MistralAI-User",
+                    "Slurp",
+                    "Gemini-Deep-Research",
                 ]
             ],
         ]

@@ -36,7 +36,7 @@ class Prompt(TypedDict, total=False):
     topic: Required[IDOrNameParam]
     """Topic to assign. A new topic is created if the name doesn't exist."""
 
-    analysis_types: Optional[List[Literal["visibility", "sentiment", "accuracy"]]]
+    analysis_types: Optional[List[Literal["visibility", "sentiment", "sentiment_v2", "accuracy"]]]
     """Analysis types: 'visibility', 'sentiment', 'accuracy'.
 
     Defaults to ['visibility'].

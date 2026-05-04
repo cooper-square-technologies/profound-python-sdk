@@ -30,7 +30,7 @@ class Prompt(TypedDict, total=False):
     id: Required[str]
     """ID of the prompt to update."""
 
-    analysis_types: Optional[List[Literal["visibility", "sentiment", "accuracy"]]]
+    analysis_types: Optional[List[Literal["visibility", "sentiment", "sentiment_v2", "accuracy"]]]
     """New analysis types. Replaces all existing analysis types on the prompt."""
 
     asset: Optional[IDOrNameParam]

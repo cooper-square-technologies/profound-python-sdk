@@ -37,7 +37,7 @@ class TestCategories:
     @parametrize
     def test_method_list_with_all_params(self, client: Profound) -> None:
         category = client.organizations.categories.list(
-            organization_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            organization_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
         )
         assert_matches_type(CategoryListResponse, category, path=["response"])
 
@@ -592,7 +592,7 @@ class TestAsyncCategories:
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncProfound) -> None:
         category = await async_client.organizations.categories.list(
-            organization_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            organization_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
         )
         assert_matches_type(CategoryListResponse, category, path=["response"])
 
