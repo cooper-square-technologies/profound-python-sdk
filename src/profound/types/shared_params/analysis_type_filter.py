@@ -28,5 +28,8 @@ class AnalysisTypeFilter(TypedDict, total=False):
     ]
 
     value: Required[
-        Union[Literal["visibility", "sentiment", "accuracy"], List[Literal["visibility", "sentiment", "accuracy"]]]
+        Union[
+            Literal["visibility", "sentiment", "sentiment_v2", "accuracy"],
+            List[Literal["visibility", "sentiment", "sentiment_v2", "accuracy"]],
+        ]
     ]
