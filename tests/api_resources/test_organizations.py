@@ -62,7 +62,7 @@ class TestOrganizations:
     @parametrize
     def test_method_domains_with_all_params(self, client: Profound) -> None:
         organization = client.organizations.domains(
-            organization_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            organization_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
         )
         assert_matches_type(OrganizationDomainsResponse, organization, path=["response"])
 
@@ -98,7 +98,7 @@ class TestOrganizations:
     @parametrize
     def test_method_get_personas_with_all_params(self, client: Profound) -> None:
         organization = client.organizations.get_personas(
-            organization_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            organization_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
         )
         assert_matches_type(OrganizationGetPersonasResponse, organization, path=["response"])
 
@@ -134,7 +134,7 @@ class TestOrganizations:
     @parametrize
     def test_method_list_assets_with_all_params(self, client: Profound) -> None:
         organization = client.organizations.list_assets(
-            organization_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            organization_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
         )
         assert_matches_type(OrganizationListAssetsResponse, organization, path=["response"])
 
@@ -198,7 +198,7 @@ class TestOrganizations:
     @parametrize
     def test_method_regions_with_all_params(self, client: Profound) -> None:
         organization = client.organizations.regions(
-            organization_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            organization_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
         )
         assert_matches_type(OrganizationRegionsResponse, organization, path=["response"])
 
@@ -268,7 +268,7 @@ class TestAsyncOrganizations:
     @parametrize
     async def test_method_domains_with_all_params(self, async_client: AsyncProfound) -> None:
         organization = await async_client.organizations.domains(
-            organization_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            organization_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
         )
         assert_matches_type(OrganizationDomainsResponse, organization, path=["response"])
 
@@ -304,7 +304,7 @@ class TestAsyncOrganizations:
     @parametrize
     async def test_method_get_personas_with_all_params(self, async_client: AsyncProfound) -> None:
         organization = await async_client.organizations.get_personas(
-            organization_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            organization_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
         )
         assert_matches_type(OrganizationGetPersonasResponse, organization, path=["response"])
 
@@ -340,7 +340,7 @@ class TestAsyncOrganizations:
     @parametrize
     async def test_method_list_assets_with_all_params(self, async_client: AsyncProfound) -> None:
         organization = await async_client.organizations.list_assets(
-            organization_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            organization_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
         )
         assert_matches_type(OrganizationListAssetsResponse, organization, path=["response"])
 
@@ -404,7 +404,7 @@ class TestAsyncOrganizations:
     @parametrize
     async def test_method_regions_with_all_params(self, async_client: AsyncProfound) -> None:
         organization = await async_client.organizations.regions(
-            organization_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            organization_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e", "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
         )
         assert_matches_type(OrganizationRegionsResponse, organization, path=["response"])
 
