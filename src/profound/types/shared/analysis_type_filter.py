@@ -25,7 +25,4 @@ class AnalysisTypeFilter(BaseModel):
         "not_contains_case_insensitive",
     ]
 
-    value: Union[
-        Literal["visibility", "sentiment", "sentiment_v2", "accuracy"],
-        List[Literal["visibility", "sentiment", "sentiment_v2", "accuracy"]],
-    ]
+    value: Union[Literal["visibility", "sentiment", "accuracy"], List[Literal["visibility", "sentiment", "accuracy"]]]
