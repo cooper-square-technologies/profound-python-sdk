@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.45.0 (2026-05-12)
+
+Full Changelog: [v0.44.0...v0.45.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.44.0...v0.45.0)
+
+### Features
+
+* **api:** add dev enviroment ([da122b0](https://github.com/cooper-square-technologies/profound-python-sdk/commit/da122b0cb2af9a516313405b7c7dde4a583d5449))
+* **internal/types:** support eagerly validating pydantic iterators ([459fe48](https://github.com/cooper-square-technologies/profound-python-sdk/commit/459fe4866f68c676f499d4372383242ca3a39e45))
+
+
+### Bug Fixes
+
+* **client:** add missing f-string prefix in file type error message ([b9c060b](https://github.com/cooper-square-technologies/profound-python-sdk/commit/b9c060bd5fa543fc8b21aa9611c59622b819c4d0))
+
 ## 0.44.0 (2026-05-04)
 
 Full Changelog: [v0.43.0...v0.44.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.43.0...v0.44.0)
