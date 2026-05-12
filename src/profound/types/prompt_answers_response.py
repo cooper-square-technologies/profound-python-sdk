@@ -8,7 +8,38 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-__all__ = ["PromptAnswersResponse", "Data", "DataSentimentTheme", "Info"]
+__all__ = [
+    "PromptAnswersResponse",
+    "Data",
+    "DataCitationDetail",
+    "DataCitationDetailGroup",
+    "DataSentimentTheme",
+    "Info",
+]
+
+
+class DataCitationDetailGroup(BaseModel):
+    group_id: int
+
+    group_position: int
+
+
+class DataCitationDetail(BaseModel):
+    clean_url: str
+
+    hostname: str
+
+    path: str
+
+    title: str
+
+    url: str
+
+    groups: Optional[List[DataCitationDetailGroup]] = None
+
+    positions: Optional[List[int]] = None
+
+    text: Optional[str] = None
 
 
 class DataSentimentTheme(BaseModel):
@@ -25,6 +56,8 @@ class Data(BaseModel):
     asset: Optional[str] = None
 
     asset_id: Optional[str] = None
+
+    citation_details: Optional[List[DataCitationDetail]] = None
 
     citations: Optional[List[str]] = None
 
@@ -63,6 +96,8 @@ class Data(BaseModel):
     topic: Optional[str] = None
 
     topic_id: Optional[str] = None
+
+    web_search_results: Optional[List[str]] = None
 
 
 class Info(BaseModel):
