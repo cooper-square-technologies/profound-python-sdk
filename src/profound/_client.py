@@ -3,8 +3,8 @@
 from __future__ import annotations
 
 import os
-from typing import TYPE_CHECKING, Any, Mapping
-from typing_extensions import Self, override
+from typing import TYPE_CHECKING, Any, Dict, Mapping, cast
+from typing_extensions import Self, Literal, override
 
 import httpx
 
@@ -46,6 +46,7 @@ if TYPE_CHECKING:
     from .resources.knowledge_bases.knowledge_bases import KnowledgeBasesResource, AsyncKnowledgeBasesResource
 
 __all__ = [
+    "ENVIRONMENTS",
     "Timeout",
     "Transport",
     "ProxiesTypes",
@@ -56,18 +57,26 @@ __all__ = [
     "AsyncClient",
 ]
 
+ENVIRONMENTS: Dict[str, str] = {
+    "production": "https://api.tryprofound.com",
+    "development": "https://dev.api.tryprofound.com",
+}
+
 
 class Profound(SyncAPIClient):
     # client options
     access_token: str | None
     api_key: str | None
 
+    _environment: Literal["production", "development"] | NotGiven
+
     def __init__(
         self,
         *,
         access_token: str | None = None,
         api_key: str | None = None,
-        base_url: str | httpx.URL | None = None,
+        environment: Literal["production", "development"] | NotGiven = not_given,
+        base_url: str | httpx.URL | None | NotGiven = not_given,
         timeout: float | Timeout | None | NotGiven = not_given,
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
@@ -100,10 +109,31 @@ class Profound(SyncAPIClient):
             api_key = os.environ.get("PROFOUND_API_KEY")
         self.api_key = api_key
 
-        if base_url is None:
-            base_url = os.environ.get("PROFOUND_BASE_URL")
-        if base_url is None:
-            base_url = f"https://api.tryprofound.com"
+        self._environment = environment
+
+        base_url_env = os.environ.get("PROFOUND_BASE_URL")
+        if is_given(base_url) and base_url is not None:
+            # cast required because mypy doesn't understand the type narrowing
+            base_url = cast("str | httpx.URL", base_url)  # pyright: ignore[reportUnnecessaryCast]
+        elif is_given(environment):
+            if base_url_env and base_url is not None:
+                raise ValueError(
+                    "Ambiguous URL; The `PROFOUND_BASE_URL` env var and the `environment` argument are given. If you want to use the environment, you must pass base_url=None",
+                )
+
+            try:
+                base_url = ENVIRONMENTS[environment]
+            except KeyError as exc:
+                raise ValueError(f"Unknown environment: {environment}") from exc
+        elif base_url_env is not None:
+            base_url = base_url_env
+        else:
+            self._environment = environment = "production"
+
+            try:
+                base_url = ENVIRONMENTS[environment]
+            except KeyError as exc:
+                raise ValueError(f"Unknown environment: {environment}") from exc
 
         custom_headers_env = os.environ.get("PROFOUND_CUSTOM_HEADERS")
         if custom_headers_env is not None:
@@ -225,6 +255,7 @@ class Profound(SyncAPIClient):
         *,
         access_token: str | None = None,
         api_key: str | None = None,
+        environment: Literal["production", "development"] | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.Client | None = None,
@@ -261,6 +292,7 @@ class Profound(SyncAPIClient):
             access_token=access_token or self.access_token,
             api_key=api_key or self.api_key,
             base_url=base_url or self.base_url,
+            environment=environment or self._environment,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
             max_retries=max_retries if is_given(max_retries) else self.max_retries,
@@ -312,12 +344,15 @@ class AsyncProfound(AsyncAPIClient):
     access_token: str | None
     api_key: str | None
 
+    _environment: Literal["production", "development"] | NotGiven
+
     def __init__(
         self,
         *,
         access_token: str | None = None,
         api_key: str | None = None,
-        base_url: str | httpx.URL | None = None,
+        environment: Literal["production", "development"] | NotGiven = not_given,
+        base_url: str | httpx.URL | None | NotGiven = not_given,
         timeout: float | Timeout | None | NotGiven = not_given,
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
@@ -350,10 +385,31 @@ class AsyncProfound(AsyncAPIClient):
             api_key = os.environ.get("PROFOUND_API_KEY")
         self.api_key = api_key
 
-        if base_url is None:
-            base_url = os.environ.get("PROFOUND_BASE_URL")
-        if base_url is None:
-            base_url = f"https://api.tryprofound.com"
+        self._environment = environment
+
+        base_url_env = os.environ.get("PROFOUND_BASE_URL")
+        if is_given(base_url) and base_url is not None:
+            # cast required because mypy doesn't understand the type narrowing
+            base_url = cast("str | httpx.URL", base_url)  # pyright: ignore[reportUnnecessaryCast]
+        elif is_given(environment):
+            if base_url_env and base_url is not None:
+                raise ValueError(
+                    "Ambiguous URL; The `PROFOUND_BASE_URL` env var and the `environment` argument are given. If you want to use the environment, you must pass base_url=None",
+                )
+
+            try:
+                base_url = ENVIRONMENTS[environment]
+            except KeyError as exc:
+                raise ValueError(f"Unknown environment: {environment}") from exc
+        elif base_url_env is not None:
+            base_url = base_url_env
+        else:
+            self._environment = environment = "production"
+
+            try:
+                base_url = ENVIRONMENTS[environment]
+            except KeyError as exc:
+                raise ValueError(f"Unknown environment: {environment}") from exc
 
         custom_headers_env = os.environ.get("PROFOUND_CUSTOM_HEADERS")
         if custom_headers_env is not None:
@@ -475,6 +531,7 @@ class AsyncProfound(AsyncAPIClient):
         *,
         access_token: str | None = None,
         api_key: str | None = None,
+        environment: Literal["production", "development"] | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.AsyncClient | None = None,
@@ -511,6 +568,7 @@ class AsyncProfound(AsyncAPIClient):
             access_token=access_token or self.access_token,
             api_key=api_key or self.api_key,
             base_url=base_url or self.base_url,
+            environment=environment or self._environment,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
             max_retries=max_retries if is_given(max_retries) else self.max_retries,

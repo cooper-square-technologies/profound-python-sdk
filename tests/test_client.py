@@ -722,6 +722,18 @@ class TestProfound:
             client = Profound(api_key=api_key, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
 
+        # explicit environment arg requires explicitness
+        with update_env(PROFOUND_BASE_URL="http://localhost:5000/from/env"):
+            with pytest.raises(ValueError, match=r"you must pass base_url=None"):
+                Profound(api_key=api_key, _strict_response_validation=True, environment="production")
+
+            client = Profound(
+                base_url=None, api_key=api_key, _strict_response_validation=True, environment="production"
+            )
+            assert str(client.base_url).startswith("https://api.tryprofound.com")
+
+            client.close()
+
     @pytest.mark.parametrize(
         "client",
         [
@@ -1653,6 +1665,18 @@ class TestAsyncProfound:
         with update_env(PROFOUND_BASE_URL="http://localhost:5000/from/env"):
             client = AsyncProfound(api_key=api_key, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
+
+        # explicit environment arg requires explicitness
+        with update_env(PROFOUND_BASE_URL="http://localhost:5000/from/env"):
+            with pytest.raises(ValueError, match=r"you must pass base_url=None"):
+                AsyncProfound(api_key=api_key, _strict_response_validation=True, environment="production")
+
+            client = AsyncProfound(
+                base_url=None, api_key=api_key, _strict_response_validation=True, environment="production"
+            )
+            assert str(client.base_url).startswith("https://api.tryprofound.com")
+
+            await client.close()
 
     @pytest.mark.parametrize(
         "client",
