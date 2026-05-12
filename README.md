@@ -37,6 +37,8 @@ from profound import Profound
 
 client = Profound(
     api_key=os.environ.get("PROFOUND_API_KEY"),  # This is the default and can be omitted
+    # defaults to "production".
+    environment="development",
 )
 
 categories = client.organizations.categories.list()
@@ -58,6 +60,8 @@ from profound import AsyncProfound
 
 client = AsyncProfound(
     api_key=os.environ.get("PROFOUND_API_KEY"),  # This is the default and can be omitted
+    # defaults to "production".
+    environment="development",
 )
 
 
