@@ -46,6 +46,7 @@ class TestPrompts:
                 "analysis_types": True,
                 "asset": True,
                 "asset_id": True,
+                "citation_details": True,
                 "citations": True,
                 "created_at": True,
                 "mentions": True,
@@ -65,6 +66,7 @@ class TestPrompts:
                 "themes": True,
                 "topic": True,
                 "topic_id": True,
+                "web_search_results": True,
             },
             pagination={
                 "limit": 1,
@@ -137,6 +139,7 @@ class TestAsyncPrompts:
                 "analysis_types": True,
                 "asset": True,
                 "asset_id": True,
+                "citation_details": True,
                 "citations": True,
                 "created_at": True,
                 "mentions": True,
@@ -156,6 +159,7 @@ class TestAsyncPrompts:
                 "themes": True,
                 "topic": True,
                 "topic_id": True,
+                "web_search_results": True,
             },
             pagination={
                 "limit": 1,

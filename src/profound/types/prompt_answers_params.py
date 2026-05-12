@@ -61,6 +61,8 @@ class Include(TypedDict, total=False):
 
     asset_id: bool
 
+    citation_details: bool
+
     citations: bool
 
     created_at: bool
@@ -99,3 +101,5 @@ class Include(TypedDict, total=False):
     topic: bool
 
     topic_id: bool
+
+    web_search_results: bool
