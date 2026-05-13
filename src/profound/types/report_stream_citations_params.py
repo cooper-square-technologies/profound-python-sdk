@@ -8,9 +8,12 @@ from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from .._types import SequenceNotStr
 from .._utils import PropertyInfo
+from .url_filter_param import URLFilterParam
+from .hostname_filter_param import HostnameFilterParam
 from .tag_name_filter_param import TagNameFilterParam
 from .prompt_id_filter_param import PromptIDFilterParam
 from .topic_name_filter_param import TopicNameFilterParam
+from .root_domain_filter_param import RootDomainFilterParam
 from .shared_params.pagination import Pagination
 from .shared_params.path_filter import PathFilter
 from .shared_params.prompt_filter import PromptFilter
@@ -23,14 +26,7 @@ from .shared_params.prompt_type_filter import PromptTypeFilter
 from .shared_params.region_name_filter import RegionNameFilter
 from .shared_params.analysis_type_filter import AnalysisTypeFilter
 
-__all__ = [
-    "ReportStreamCitationsParams",
-    "Filter",
-    "FilterHostnameFilter",
-    "FilterURLFilter",
-    "FilterRootDomainFilter",
-    "FilterCitationCategoryFilter",
-]
+__all__ = ["ReportStreamCitationsParams", "Filter", "FilterCitationCategoryFilter"]
 
 
 class ReportStreamCitationsParams(TypedDict, total=False):
@@ -94,72 +90,6 @@ class ReportStreamCitationsParams(TypedDict, total=False):
     """Offset-based pagination parameters."""
 
 
-class FilterHostnameFilter(TypedDict, total=False):
-    """Filter by hostname"""
-
-    field: Required[Literal["hostname"]]
-
-    operator: Required[
-        Literal[
-            "is",
-            "not_is",
-            "in",
-            "not_in",
-            "contains",
-            "not_contains",
-            "matches",
-            "contains_case_insensitive",
-            "not_contains_case_insensitive",
-        ]
-    ]
-
-    value: Required[Union[str, SequenceNotStr[str]]]
-
-
-class FilterURLFilter(TypedDict, total=False):
-    """Filter by URL"""
-
-    field: Required[Literal["url"]]
-
-    operator: Required[
-        Literal[
-            "is",
-            "not_is",
-            "in",
-            "not_in",
-            "contains",
-            "not_contains",
-            "matches",
-            "contains_case_insensitive",
-            "not_contains_case_insensitive",
-        ]
-    ]
-
-    value: Required[Union[str, SequenceNotStr[str]]]
-
-
-class FilterRootDomainFilter(TypedDict, total=False):
-    """Filter by root domain"""
-
-    field: Required[Literal["root_domain"]]
-
-    operator: Required[
-        Literal[
-            "is",
-            "not_is",
-            "in",
-            "not_in",
-            "contains",
-            "not_contains",
-            "matches",
-            "contains_case_insensitive",
-            "not_contains_case_insensitive",
-        ]
-    ]
-
-    value: Required[Union[str, SequenceNotStr[str]]]
-
-
 class FilterCitationCategoryFilter(TypedDict, total=False):
     """Filter by citation category"""
 
@@ -183,7 +113,7 @@ class FilterCitationCategoryFilter(TypedDict, total=False):
 
 
 Filter: TypeAlias = Union[
-    FilterHostnameFilter,
+    HostnameFilterParam,
     PathFilter,
     RegionIDFilter,
     RegionNameFilter,
@@ -192,8 +122,8 @@ Filter: TypeAlias = Union[
     ModelIDFilter,
     TagIDFilter,
     TagNameFilterParam,
-    FilterURLFilter,
-    FilterRootDomainFilter,
+    URLFilterParam,
+    RootDomainFilterParam,
     AnalysisTypeFilter,
     PromptTypeFilter,
     PersonaIDFilter,

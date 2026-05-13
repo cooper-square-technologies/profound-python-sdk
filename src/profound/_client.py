@@ -38,10 +38,10 @@ from ._base_client import (
 if TYPE_CHECKING:
     from .resources import logs, agents, content, prompts, reports, organizations, knowledge_bases
     from .resources.prompts import PromptsResource, AsyncPromptsResource
-    from .resources.reports import ReportsResource, AsyncReportsResource
     from .resources.logs.logs import LogsResource, AsyncLogsResource
     from .resources.agents.agents import AgentsResource, AsyncAgentsResource
     from .resources.content.content import ContentResource, AsyncContentResource
+    from .resources.reports.reports import ReportsResource, AsyncReportsResource
     from .resources.organizations.organizations import OrganizationsResource, AsyncOrganizationsResource
     from .resources.knowledge_bases.knowledge_bases import KnowledgeBasesResource, AsyncKnowledgeBasesResource
 
