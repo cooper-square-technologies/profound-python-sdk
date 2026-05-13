@@ -27,9 +27,11 @@ from .report_result import ReportResult as ReportResult
 from .named_resource import NamedResource as NamedResource
 from .persona_profile import PersonaProfile as PersonaProfile
 from .report_response import ReportResponse as ReportResponse
+from .url_filter_param import URLFilterParam as URLFilterParam
 from .agent_list_params import AgentListParams as AgentListParams
 from .agent_list_response import AgentListResponse as AgentListResponse
 from .agent_retrieve_params import AgentRetrieveParams as AgentRetrieveParams
+from .hostname_filter_param import HostnameFilterParam as HostnameFilterParam
 from .prompt_answers_params import PromptAnswersParams as PromptAnswersParams
 from .tag_name_filter_param import TagNameFilterParam as TagNameFilterParam
 from .prompt_id_filter_param import PromptIDFilterParam as PromptIDFilterParam
@@ -40,6 +42,7 @@ from .report_sentiment_params import ReportSentimentParams as ReportSentimentPar
 from .topic_name_filter_param import TopicNameFilterParam as TopicNameFilterParam
 from .persona_profile_behavior import PersonaProfileBehavior as PersonaProfileBehavior
 from .report_visibility_params import ReportVisibilityParams as ReportVisibilityParams
+from .root_domain_filter_param import RootDomainFilterParam as RootDomainFilterParam
 from .report_citations_response import ReportCitationsResponse as ReportCitationsResponse
 from .knowledge_base_list_params import KnowledgeBaseListParams as KnowledgeBaseListParams
 from .organization_list_response import OrganizationListResponse as OrganizationListResponse

@@ -8,7 +8,7 @@ from typing_extensions import Literal
 
 import httpx
 
-from ..types import (
+from ...types import (
     report_citations_params,
     report_sentiment_params,
     report_visibility_params,
@@ -21,29 +21,41 @@ from ..types import (
     report_get_referrals_report_params,
     report_get_referrals_report_v2_params,
 )
-from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from .._utils import maybe_transform, async_maybe_transform
-from .._compat import cached_property
-from .._resource import SyncAPIResource, AsyncAPIResource
-from .._response import (
+from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
+from ..._utils import maybe_transform, async_maybe_transform
+from ..._compat import cached_property
+from ..._resource import SyncAPIResource, AsyncAPIResource
+from ..._response import (
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from .._streaming import Stream, AsyncStream
-from .._base_client import make_request_options
-from ..types.report_response import ReportResponse
-from ..types.shared_params.pagination import Pagination
-from ..types.report_citations_response import ReportCitationsResponse
-from ..types.report_stream_citations_response import ReportStreamCitationsResponse
-from ..types.report_stream_sentiment_response import ReportStreamSentimentResponse
-from ..types.report_stream_visibility_response import ReportStreamVisibilityResponse
+from ..._streaming import Stream, AsyncStream
+from ..._base_client import make_request_options
+from .web_search_results import (
+    WebSearchResultsResource,
+    AsyncWebSearchResultsResource,
+    WebSearchResultsResourceWithRawResponse,
+    AsyncWebSearchResultsResourceWithRawResponse,
+    WebSearchResultsResourceWithStreamingResponse,
+    AsyncWebSearchResultsResourceWithStreamingResponse,
+)
+from ...types.report_response import ReportResponse
+from ...types.shared_params.pagination import Pagination
+from ...types.report_citations_response import ReportCitationsResponse
+from ...types.report_stream_citations_response import ReportStreamCitationsResponse
+from ...types.report_stream_sentiment_response import ReportStreamSentimentResponse
+from ...types.report_stream_visibility_response import ReportStreamVisibilityResponse
 
 __all__ = ["ReportsResource", "AsyncReportsResource"]
 
 
 class ReportsResource(SyncAPIResource):
+    @cached_property
+    def web_search_results(self) -> WebSearchResultsResource:
+        return WebSearchResultsResource(self._client)
+
     @cached_property
     def with_raw_response(self) -> ReportsResourceWithRawResponse:
         """
@@ -1088,6 +1100,10 @@ class ReportsResource(SyncAPIResource):
 
 
 class AsyncReportsResource(AsyncAPIResource):
+    @cached_property
+    def web_search_results(self) -> AsyncWebSearchResultsResource:
+        return AsyncWebSearchResultsResource(self._client)
+
     @cached_property
     def with_raw_response(self) -> AsyncReportsResourceWithRawResponse:
         """
@@ -2169,6 +2185,10 @@ class ReportsResourceWithRawResponse:
             reports.visibility,
         )
 
+    @cached_property
+    def web_search_results(self) -> WebSearchResultsResourceWithRawResponse:
+        return WebSearchResultsResourceWithRawResponse(self._reports.web_search_results)
+
 
 class AsyncReportsResourceWithRawResponse:
     def __init__(self, reports: AsyncReportsResource) -> None:
@@ -2207,6 +2227,10 @@ class AsyncReportsResourceWithRawResponse:
         self.visibility = async_to_raw_response_wrapper(
             reports.visibility,
         )
+
+    @cached_property
+    def web_search_results(self) -> AsyncWebSearchResultsResourceWithRawResponse:
+        return AsyncWebSearchResultsResourceWithRawResponse(self._reports.web_search_results)
 
 
 class ReportsResourceWithStreamingResponse:
@@ -2247,6 +2271,10 @@ class ReportsResourceWithStreamingResponse:
             reports.visibility,
         )
 
+    @cached_property
+    def web_search_results(self) -> WebSearchResultsResourceWithStreamingResponse:
+        return WebSearchResultsResourceWithStreamingResponse(self._reports.web_search_results)
+
 
 class AsyncReportsResourceWithStreamingResponse:
     def __init__(self, reports: AsyncReportsResource) -> None:
@@ -2285,3 +2313,7 @@ class AsyncReportsResourceWithStreamingResponse:
         self.visibility = async_to_streamed_response_wrapper(
             reports.visibility,
         )
+
+    @cached_property
+    def web_search_results(self) -> AsyncWebSearchResultsResourceWithStreamingResponse:
+        return AsyncWebSearchResultsResourceWithStreamingResponse(self._reports.web_search_results)

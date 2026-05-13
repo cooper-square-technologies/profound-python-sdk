@@ -1,0 +1,8 @@
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+from __future__ import annotations
+
+from .web_search_result_query_params import WebSearchResultQueryParams as WebSearchResultQueryParams
+from .web_search_result_stream_params import WebSearchResultStreamParams as WebSearchResultStreamParams
+from .web_search_result_query_response import WebSearchResultQueryResponse as WebSearchResultQueryResponse
+from .web_search_result_stream_response import WebSearchResultStreamResponse as WebSearchResultStreamResponse
