@@ -2,34 +2,29 @@
 
 from __future__ import annotations
 
-from typing import Dict, List, Union, Iterable
+from typing import Dict, List, Union, Iterable, Optional
 from datetime import datetime
 from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
-from .._types import SequenceNotStr
-from .._utils import PropertyInfo
-from .url_filter_param import URLFilterParam
-from .hostname_filter_param import HostnameFilterParam
-from .tag_name_filter_param import TagNameFilterParam
-from .prompt_id_filter_param import PromptIDFilterParam
-from .topic_name_filter_param import TopicNameFilterParam
-from .root_domain_filter_param import RootDomainFilterParam
-from .shared_params.pagination import Pagination
-from .shared_params.path_filter import PathFilter
-from .shared_params.prompt_filter import PromptFilter
-from .shared_params.tag_id_filter import TagIDFilter
-from .shared_params.model_id_filter import ModelIDFilter
-from .shared_params.topic_id_filter import TopicIDFilter
-from .shared_params.region_id_filter import RegionIDFilter
-from .shared_params.persona_id_filter import PersonaIDFilter
-from .shared_params.prompt_type_filter import PromptTypeFilter
-from .shared_params.region_name_filter import RegionNameFilter
-from .shared_params.analysis_type_filter import AnalysisTypeFilter
+from ..._types import SequenceNotStr
+from ..._utils import PropertyInfo
+from ..url_filter_param import URLFilterParam
+from ..hostname_filter_param import HostnameFilterParam
+from ..prompt_id_filter_param import PromptIDFilterParam
+from ..root_domain_filter_param import RootDomainFilterParam
+from ..shared_params.pagination import Pagination
+from ..shared_params.path_filter import PathFilter
+from ..shared_params.prompt_filter import PromptFilter
+from ..shared_params.tag_id_filter import TagIDFilter
+from ..shared_params.model_id_filter import ModelIDFilter
+from ..shared_params.topic_id_filter import TopicIDFilter
+from ..shared_params.region_id_filter import RegionIDFilter
+from ..shared_params.persona_id_filter import PersonaIDFilter
 
-__all__ = ["ReportCitationsParams", "Filter", "FilterCitationCategoryFilter"]
+__all__ = ["WebSearchResultStreamParams", "Filter", "FilterSearchQueryFilter"]
 
 
-class ReportCitationsParams(TypedDict, total=False):
+class WebSearchResultStreamParams(TypedDict, total=False):
     category_id: Required[str]
 
     end_date: Required[Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]]
@@ -38,11 +33,8 @@ class ReportCitationsParams(TypedDict, total=False):
     Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
     """
 
-    metrics: Required[List[Literal["count", "citation_share", "share_of_voice"]]]
-    """Metrics to include.
-
-    `share_of_voice` is deprecated, use `citation_share` instead.
-    """
+    metrics: Required[List[Literal["count", "search_share"]]]
+    """Metrics to include. `search_share` is the per-prompt occurrence rate."""
 
     start_date: Required[Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]]
     """Start date for the report.
@@ -57,6 +49,8 @@ class ReportCitationsParams(TypedDict, total=False):
         Literal[
             "hostname",
             "path",
+            "url",
+            "root_domain",
             "date",
             "region",
             "topic",
@@ -65,16 +59,14 @@ class ReportCitationsParams(TypedDict, total=False):
             "tag",
             "prompt",
             "prompt_id",
-            "url",
-            "root_domain",
             "persona",
-            "citation_category",
+            "search_query",
         ]
     ]
     """Dimensions to group the report by."""
 
     filters: Iterable[Filter]
-    """List of filters to apply to the citations report."""
+    """List of filters to apply to the web search results report."""
 
     order_by: Dict[str, Literal["asc", "desc"]]
     """Custom ordering of the report results.
@@ -86,14 +78,14 @@ class ReportCitationsParams(TypedDict, total=False):
         When not specified, the default order is the first metric in the query descending.
     """
 
-    pagination: Pagination
-    """Pagination settings for the report results."""
+    pagination: Optional[Pagination]
+    """Offset-based pagination parameters."""
 
 
-class FilterCitationCategoryFilter(TypedDict, total=False):
-    """Filter by citation category"""
+class FilterSearchQueryFilter(TypedDict, total=False):
+    """Filter by web-search query string."""
 
-    field: Required[Literal["citation_category"]]
+    field: Required[Literal["search_query"]]
 
     operator: Required[
         Literal[
@@ -116,18 +108,13 @@ Filter: TypeAlias = Union[
     HostnameFilterParam,
     PathFilter,
     RegionIDFilter,
-    RegionNameFilter,
     TopicIDFilter,
-    TopicNameFilterParam,
     ModelIDFilter,
     TagIDFilter,
-    TagNameFilterParam,
     URLFilterParam,
     RootDomainFilterParam,
-    AnalysisTypeFilter,
-    PromptTypeFilter,
     PersonaIDFilter,
-    FilterCitationCategoryFilter,
     PromptFilter,
     PromptIDFilterParam,
+    FilterSearchQueryFilter,
 ]
