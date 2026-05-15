@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.46.0 (2026-05-15)
+
+Full Changelog: [v0.45.0...v0.46.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.45.0...v0.46.0)
+
+### Features
+
+* **api:** added filters and web search results ([a051830](https://github.com/cooper-square-technologies/profound-python-sdk/commit/a051830bf93f0e8602a2a88d9a963d6d177f3bd2))
+* **api:** api update ([4380770](https://github.com/cooper-square-technologies/profound-python-sdk/commit/43807702e18b8159fc041dd7e6e0c0e5d48fba9f))
+
 ## 0.45.0 (2026-05-12)
 
 Full Changelog: [v0.44.0...v0.45.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.44.0...v0.45.0)
