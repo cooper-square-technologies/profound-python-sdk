@@ -62,7 +62,7 @@ class PromptsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PromptAnswersResponse:
         """
-        Get the answers for the prompts.
+        Get Answers
 
         Args:
           filters: List of filters to apply to the answers report.
@@ -134,7 +134,7 @@ class AsyncPromptsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PromptAnswersResponse:
         """
-        Get the answers for the prompts.
+        Get Answers
 
         Args:
           filters: List of filters to apply to the answers report.
