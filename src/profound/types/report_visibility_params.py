@@ -6,6 +6,7 @@ from typing import Dict, List, Union, Iterable
 from datetime import datetime
 from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
+from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 from .tag_name_filter_param import TagNameFilterParam
 from .prompt_id_filter_param import PromptIDFilterParam
@@ -16,11 +17,10 @@ from .shared_params.tag_id_filter import TagIDFilter
 from .shared_params.model_id_filter import ModelIDFilter
 from .shared_params.topic_id_filter import TopicIDFilter
 from .shared_params.region_id_filter import RegionIDFilter
-from .shared_params.asset_name_filter import AssetNameFilter
 from .shared_params.persona_id_filter import PersonaIDFilter
 from .shared_params.region_name_filter import RegionNameFilter
 
-__all__ = ["ReportVisibilityParams", "Filter"]
+__all__ = ["ReportVisibilityParams", "Filter", "FilterProfoundAnswerEngineInsightsFiltersAssetNameFilter"]
 
 
 class ReportVisibilityParams(TypedDict, total=False):
@@ -82,13 +82,35 @@ class ReportVisibilityParams(TypedDict, total=False):
     """Pagination settings for the report results."""
 
 
+class FilterProfoundAnswerEngineInsightsFiltersAssetNameFilter(TypedDict, total=False):
+    """Filter by asset name"""
+
+    field: Required[Literal["asset_name"]]
+
+    operator: Required[
+        Literal[
+            "is",
+            "not_is",
+            "in",
+            "not_in",
+            "contains",
+            "not_contains",
+            "matches",
+            "contains_case_insensitive",
+            "not_contains_case_insensitive",
+        ]
+    ]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
 Filter: TypeAlias = Union[
     RegionIDFilter,
     RegionNameFilter,
     ModelIDFilter,
     TopicIDFilter,
     TopicNameFilterParam,
-    AssetNameFilter,
+    FilterProfoundAnswerEngineInsightsFiltersAssetNameFilter,
     TagIDFilter,
     TagNameFilterParam,
     PromptIDFilterParam,

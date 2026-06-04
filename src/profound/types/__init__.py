@@ -12,7 +12,6 @@ from .shared import (
     ModelIDFilter as ModelIDFilter,
     TopicIDFilter as TopicIDFilter,
     RegionIDFilter as RegionIDFilter,
-    AssetNameFilter as AssetNameFilter,
     PersonaIDFilter as PersonaIDFilter,
     CursorPagination as CursorPagination,
     PromptTypeFilter as PromptTypeFilter,

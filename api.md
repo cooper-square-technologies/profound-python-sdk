@@ -4,7 +4,6 @@
 from profound.types import (
     AnalysisTypeFilter,
     AssetIDFilter,
-    AssetNameFilter,
     BotNameFilter,
     BotProviderFilter,
     CursorPagination,
