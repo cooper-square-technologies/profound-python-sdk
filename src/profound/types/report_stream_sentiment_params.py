@@ -17,11 +17,15 @@ from .shared_params.asset_id_filter import AssetIDFilter
 from .shared_params.model_id_filter import ModelIDFilter
 from .shared_params.topic_id_filter import TopicIDFilter
 from .shared_params.region_id_filter import RegionIDFilter
-from .shared_params.asset_name_filter import AssetNameFilter
 from .shared_params.persona_id_filter import PersonaIDFilter
 from .shared_params.region_name_filter import RegionNameFilter
 
-__all__ = ["ReportStreamSentimentParams", "Filter", "FilterThemeFilter"]
+__all__ = [
+    "ReportStreamSentimentParams",
+    "Filter",
+    "FilterProfoundAnswerEngineInsightsFiltersAssetNameFilter",
+    "FilterThemeFilter",
+]
 
 
 class ReportStreamSentimentParams(TypedDict, total=False):
@@ -83,6 +87,28 @@ class ReportStreamSentimentParams(TypedDict, total=False):
     """Offset-based pagination parameters."""
 
 
+class FilterProfoundAnswerEngineInsightsFiltersAssetNameFilter(TypedDict, total=False):
+    """Filter by asset name"""
+
+    field: Required[Literal["asset_name"]]
+
+    operator: Required[
+        Literal[
+            "is",
+            "not_is",
+            "in",
+            "not_in",
+            "contains",
+            "not_contains",
+            "matches",
+            "contains_case_insensitive",
+            "not_contains_case_insensitive",
+        ]
+    ]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
 class FilterThemeFilter(TypedDict, total=False):
     """Filter by theme"""
 
@@ -107,7 +133,7 @@ class FilterThemeFilter(TypedDict, total=False):
 
 Filter: TypeAlias = Union[
     AssetIDFilter,
-    AssetNameFilter,
+    FilterProfoundAnswerEngineInsightsFiltersAssetNameFilter,
     FilterThemeFilter,
     RegionIDFilter,
     RegionNameFilter,

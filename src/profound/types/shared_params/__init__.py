@@ -9,7 +9,6 @@ from .bot_name_filter import BotNameFilter as BotNameFilter
 from .model_id_filter import ModelIDFilter as ModelIDFilter
 from .topic_id_filter import TopicIDFilter as TopicIDFilter
 from .region_id_filter import RegionIDFilter as RegionIDFilter
-from .asset_name_filter import AssetNameFilter as AssetNameFilter
 from .persona_id_filter import PersonaIDFilter as PersonaIDFilter
 from .prompt_type_filter import PromptTypeFilter as PromptTypeFilter
 from .region_name_filter import RegionNameFilter as RegionNameFilter
