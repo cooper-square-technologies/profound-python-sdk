@@ -4,8 +4,9 @@ from __future__ import annotations
 
 from typing import Union, Iterable
 from datetime import datetime
-from typing_extensions import Required, Annotated, TypeAlias, TypedDict
+from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
+from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 from .shared_params.pagination import Pagination
 from .shared_params.prompt_filter import PromptFilter
@@ -14,13 +15,12 @@ from .shared_params.asset_id_filter import AssetIDFilter
 from .shared_params.model_id_filter import ModelIDFilter
 from .shared_params.topic_id_filter import TopicIDFilter
 from .shared_params.region_id_filter import RegionIDFilter
-from .shared_params.asset_name_filter import AssetNameFilter
 from .shared_params.persona_id_filter import PersonaIDFilter
 from .shared_params.prompt_type_filter import PromptTypeFilter
 from .shared_params.region_name_filter import RegionNameFilter
 from .shared_params.analysis_type_filter import AnalysisTypeFilter
 
-__all__ = ["PromptAnswersParams", "Filter", "Include"]
+__all__ = ["PromptAnswersParams", "Filter", "FilterProfoundAnswerEngineInsightsFiltersAssetNameFilter", "Include"]
 
 
 class PromptAnswersParams(TypedDict, total=False):
@@ -39,6 +39,28 @@ class PromptAnswersParams(TypedDict, total=False):
     """Pagination parameters for the results. Default is 10,000 rows with no offset."""
 
 
+class FilterProfoundAnswerEngineInsightsFiltersAssetNameFilter(TypedDict, total=False):
+    """Filter by asset name"""
+
+    field: Required[Literal["asset_name"]]
+
+    operator: Required[
+        Literal[
+            "is",
+            "not_is",
+            "in",
+            "not_in",
+            "contains",
+            "not_contains",
+            "matches",
+            "contains_case_insensitive",
+            "not_contains_case_insensitive",
+        ]
+    ]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
 Filter: TypeAlias = Union[
     RegionIDFilter,
     RegionNameFilter,
@@ -50,7 +72,7 @@ Filter: TypeAlias = Union[
     PersonaIDFilter,
     TopicIDFilter,
     AssetIDFilter,
-    AssetNameFilter,
+    FilterProfoundAnswerEngineInsightsFiltersAssetNameFilter,
 ]
 
 
