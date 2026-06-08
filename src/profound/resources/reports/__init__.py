@@ -8,6 +8,14 @@ from .reports import (
     ReportsResourceWithStreamingResponse,
     AsyncReportsResourceWithStreamingResponse,
 )
+from .shopping import (
+    ShoppingResource,
+    AsyncShoppingResource,
+    ShoppingResourceWithRawResponse,
+    AsyncShoppingResourceWithRawResponse,
+    ShoppingResourceWithStreamingResponse,
+    AsyncShoppingResourceWithStreamingResponse,
+)
 from .web_search_results import (
     WebSearchResultsResource,
     AsyncWebSearchResultsResource,
@@ -24,6 +32,12 @@ __all__ = [
     "AsyncWebSearchResultsResourceWithRawResponse",
     "WebSearchResultsResourceWithStreamingResponse",
     "AsyncWebSearchResultsResourceWithStreamingResponse",
+    "ShoppingResource",
+    "AsyncShoppingResource",
+    "ShoppingResourceWithRawResponse",
+    "AsyncShoppingResourceWithRawResponse",
+    "ShoppingResourceWithStreamingResponse",
+    "AsyncShoppingResourceWithStreamingResponse",
     "ReportsResource",
     "AsyncReportsResource",
     "ReportsResourceWithRawResponse",
