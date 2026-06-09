@@ -12,5 +12,6 @@ class RunCreateParams(TypedDict, total=False):
     inputs: Dict[str, object]
     """Input values for the run.
 
-    Keys should match the property names defined in `schema.input`.
+    Keys should match the property names defined in `schema.input`. Omit the request
+    body when the agent does not require inputs.
     """
