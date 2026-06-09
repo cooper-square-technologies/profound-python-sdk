@@ -12,7 +12,7 @@ from .shared_params.path_filter import PathFilter
 from .shared_params.bot_name_filter import BotNameFilter
 from .shared_params.bot_provider_filter import BotProviderFilter
 
-__all__ = ["ReportGetBotsReportV2Params", "Filter", "FilterBotTypeFilter"]
+__all__ = ["ReportGetBotsReportV2Params", "Filter", "FilterBotTypeFilter", "MetricFilter"]
 
 
 class ReportGetBotsReportV2Params(TypedDict, total=False):
@@ -42,6 +42,9 @@ class ReportGetBotsReportV2Params(TypedDict, total=False):
 
     filters: Iterable[Filter]
     """Filters for bots report."""
+
+    metric_filters: Iterable[MetricFilter]
+    """Numeric filters applied after report metrics are calculated."""
 
     order_by: Dict[str, Literal["asc", "desc"]]
     """Custom ordering of the report results.
@@ -90,3 +93,11 @@ class FilterBotTypeFilter(TypedDict, total=False):
 
 
 Filter: TypeAlias = Union[PathFilter, BotNameFilter, BotProviderFilter, FilterBotTypeFilter]
+
+
+class MetricFilter(TypedDict, total=False):
+    field: Required[str]
+
+    operator: Required[Literal[">", ">=", "<", "<=", "=", "==", "!="]]
+
+    value: Required[float]
