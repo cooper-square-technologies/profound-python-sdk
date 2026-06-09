@@ -63,7 +63,7 @@ class RunsResource(SyncAPIResource):
           agent_id: The ID of the agent to run.
 
           inputs: Input values for the run. Keys should match the property names defined in
-              `schema.input`.
+              `schema.input`. Omit the request body when the agent does not require inputs.
 
           extra_headers: Send extra headers
 
@@ -164,7 +164,7 @@ class AsyncRunsResource(AsyncAPIResource):
           agent_id: The ID of the agent to run.
 
           inputs: Input values for the run. Keys should match the property names defined in
-              `schema.input`.
+              `schema.input`. Omit the request body when the agent does not require inputs.
 
           extra_headers: Send extra headers
 
