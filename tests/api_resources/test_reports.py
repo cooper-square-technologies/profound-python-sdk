@@ -116,6 +116,13 @@ class TestReports:
                     "value": "string",
                 }
             ],
+            metric_filters=[
+                {
+                    "field": "field",
+                    "operator": ">",
+                    "value": 0,
+                }
+            ],
             order_by={"date": "asc"},
             organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             pagination={
@@ -180,6 +187,13 @@ class TestReports:
                     "field": "path",
                     "operator": "is",
                     "value": "string",
+                }
+            ],
+            metric_filters=[
+                {
+                    "field": "field",
+                    "operator": ">",
+                    "value": 0,
                 }
             ],
             order_by={"date": "asc"},
@@ -248,6 +262,13 @@ class TestReports:
                     "value": "string",
                 }
             ],
+            metric_filters=[
+                {
+                    "field": "field",
+                    "operator": ">",
+                    "value": 0,
+                }
+            ],
             order_by={"date": "asc"},
             organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             pagination={
@@ -312,6 +333,13 @@ class TestReports:
                     "field": "path",
                     "operator": "is",
                     "value": "string",
+                }
+            ],
+            metric_filters=[
+                {
+                    "field": "field",
+                    "operator": ">",
+                    "value": 0,
                 }
             ],
             order_by={"date": "asc"},
@@ -859,6 +887,13 @@ class TestAsyncReports:
                     "value": "string",
                 }
             ],
+            metric_filters=[
+                {
+                    "field": "field",
+                    "operator": ">",
+                    "value": 0,
+                }
+            ],
             order_by={"date": "asc"},
             organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             pagination={
@@ -923,6 +958,13 @@ class TestAsyncReports:
                     "field": "path",
                     "operator": "is",
                     "value": "string",
+                }
+            ],
+            metric_filters=[
+                {
+                    "field": "field",
+                    "operator": ">",
+                    "value": 0,
                 }
             ],
             order_by={"date": "asc"},
@@ -991,6 +1033,13 @@ class TestAsyncReports:
                     "value": "string",
                 }
             ],
+            metric_filters=[
+                {
+                    "field": "field",
+                    "operator": ">",
+                    "value": 0,
+                }
+            ],
             order_by={"date": "asc"},
             organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             pagination={
@@ -1055,6 +1104,13 @@ class TestAsyncReports:
                     "field": "path",
                     "operator": "is",
                     "value": "string",
+                }
+            ],
+            metric_filters=[
+                {
+                    "field": "field",
+                    "operator": ">",
+                    "value": 0,
                 }
             ],
             order_by={"date": "asc"},
