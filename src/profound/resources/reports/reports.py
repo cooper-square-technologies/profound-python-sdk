@@ -194,7 +194,6 @@ class ReportsResource(SyncAPIResource):
         dimensions: List[Literal["date", "path", "bot_name", "bot_provider"]] | Omit = omit,
         end_date: Union[str, datetime] | Omit = omit,
         filters: Iterable[report_get_bots_report_params.Filter] | Omit = omit,
-        metric_filters: Iterable[report_get_bots_report_params.MetricFilter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
         organization_id: Optional[str] | Omit = omit,
         pagination: Pagination | Omit = omit,
@@ -234,8 +233,6 @@ class ReportsResource(SyncAPIResource):
 
           filters: Filters for bots report.
 
-          metric_filters: Numeric filters applied after report metrics are calculated.
-
           order_by: Custom ordering of the report results.
 
               The order is a record of key-value pairs where:
@@ -268,7 +265,6 @@ class ReportsResource(SyncAPIResource):
                     "dimensions": dimensions,
                     "end_date": end_date,
                     "filters": filters,
-                    "metric_filters": metric_filters,
                     "order_by": order_by,
                     "organization_id": organization_id,
                     "pagination": pagination,
@@ -291,7 +287,6 @@ class ReportsResource(SyncAPIResource):
         dimensions: List[Literal["date", "hour", "path", "bot_name", "bot_provider", "bot_type"]] | Omit = omit,
         end_date: Union[str, datetime] | Omit = omit,
         filters: Iterable[report_get_bots_report_v2_params.Filter] | Omit = omit,
-        metric_filters: Iterable[report_get_bots_report_v2_params.MetricFilter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
         organization_id: Optional[str] | Omit = omit,
         pagination: Pagination | Omit = omit,
@@ -335,8 +330,6 @@ class ReportsResource(SyncAPIResource):
 
           filters: Filters for bots report.
 
-          metric_filters: Numeric filters applied after report metrics are calculated.
-
           order_by: Custom ordering of the report results.
 
               The order is a record of key-value pairs where:
@@ -369,7 +362,6 @@ class ReportsResource(SyncAPIResource):
                     "dimensions": dimensions,
                     "end_date": end_date,
                     "filters": filters,
-                    "metric_filters": metric_filters,
                     "order_by": order_by,
                     "organization_id": organization_id,
                     "pagination": pagination,
@@ -392,7 +384,6 @@ class ReportsResource(SyncAPIResource):
         dimensions: List[Literal["date", "path", "referral_source"]] | Omit = omit,
         end_date: Union[str, datetime] | Omit = omit,
         filters: Iterable[report_get_referrals_report_params.Filter] | Omit = omit,
-        metric_filters: Iterable[report_get_referrals_report_params.MetricFilter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
         organization_id: Optional[str] | Omit = omit,
         pagination: Pagination | Omit = omit,
@@ -423,8 +414,6 @@ class ReportsResource(SyncAPIResource):
               omitted.
 
           filters: Filters for referrals report.
-
-          metric_filters: Numeric filters applied after report metrics are calculated.
 
           order_by: Custom ordering of the report results.
 
@@ -458,7 +447,6 @@ class ReportsResource(SyncAPIResource):
                     "dimensions": dimensions,
                     "end_date": end_date,
                     "filters": filters,
-                    "metric_filters": metric_filters,
                     "order_by": order_by,
                     "organization_id": organization_id,
                     "pagination": pagination,
@@ -481,7 +469,6 @@ class ReportsResource(SyncAPIResource):
         dimensions: List[Literal["date", "hour", "path", "referral_source", "referral_type"]] | Omit = omit,
         end_date: Union[str, datetime] | Omit = omit,
         filters: Iterable[report_get_referrals_report_v2_params.Filter] | Omit = omit,
-        metric_filters: Iterable[report_get_referrals_report_v2_params.MetricFilter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
         organization_id: Optional[str] | Omit = omit,
         pagination: Pagination | Omit = omit,
@@ -513,8 +500,6 @@ class ReportsResource(SyncAPIResource):
               omitted.
 
           filters: Filters for referrals report.
-
-          metric_filters: Numeric filters applied after report metrics are calculated.
 
           order_by: Custom ordering of the report results.
 
@@ -548,7 +533,6 @@ class ReportsResource(SyncAPIResource):
                     "dimensions": dimensions,
                     "end_date": end_date,
                     "filters": filters,
-                    "metric_filters": metric_filters,
                     "order_by": order_by,
                     "organization_id": organization_id,
                     "pagination": pagination,
@@ -1262,7 +1246,6 @@ class AsyncReportsResource(AsyncAPIResource):
         dimensions: List[Literal["date", "path", "bot_name", "bot_provider"]] | Omit = omit,
         end_date: Union[str, datetime] | Omit = omit,
         filters: Iterable[report_get_bots_report_params.Filter] | Omit = omit,
-        metric_filters: Iterable[report_get_bots_report_params.MetricFilter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
         organization_id: Optional[str] | Omit = omit,
         pagination: Pagination | Omit = omit,
@@ -1302,8 +1285,6 @@ class AsyncReportsResource(AsyncAPIResource):
 
           filters: Filters for bots report.
 
-          metric_filters: Numeric filters applied after report metrics are calculated.
-
           order_by: Custom ordering of the report results.
 
               The order is a record of key-value pairs where:
@@ -1336,7 +1317,6 @@ class AsyncReportsResource(AsyncAPIResource):
                     "dimensions": dimensions,
                     "end_date": end_date,
                     "filters": filters,
-                    "metric_filters": metric_filters,
                     "order_by": order_by,
                     "organization_id": organization_id,
                     "pagination": pagination,
@@ -1359,7 +1339,6 @@ class AsyncReportsResource(AsyncAPIResource):
         dimensions: List[Literal["date", "hour", "path", "bot_name", "bot_provider", "bot_type"]] | Omit = omit,
         end_date: Union[str, datetime] | Omit = omit,
         filters: Iterable[report_get_bots_report_v2_params.Filter] | Omit = omit,
-        metric_filters: Iterable[report_get_bots_report_v2_params.MetricFilter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
         organization_id: Optional[str] | Omit = omit,
         pagination: Pagination | Omit = omit,
@@ -1403,8 +1382,6 @@ class AsyncReportsResource(AsyncAPIResource):
 
           filters: Filters for bots report.
 
-          metric_filters: Numeric filters applied after report metrics are calculated.
-
           order_by: Custom ordering of the report results.
 
               The order is a record of key-value pairs where:
@@ -1437,7 +1414,6 @@ class AsyncReportsResource(AsyncAPIResource):
                     "dimensions": dimensions,
                     "end_date": end_date,
                     "filters": filters,
-                    "metric_filters": metric_filters,
                     "order_by": order_by,
                     "organization_id": organization_id,
                     "pagination": pagination,
@@ -1460,7 +1436,6 @@ class AsyncReportsResource(AsyncAPIResource):
         dimensions: List[Literal["date", "path", "referral_source"]] | Omit = omit,
         end_date: Union[str, datetime] | Omit = omit,
         filters: Iterable[report_get_referrals_report_params.Filter] | Omit = omit,
-        metric_filters: Iterable[report_get_referrals_report_params.MetricFilter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
         organization_id: Optional[str] | Omit = omit,
         pagination: Pagination | Omit = omit,
@@ -1491,8 +1466,6 @@ class AsyncReportsResource(AsyncAPIResource):
               omitted.
 
           filters: Filters for referrals report.
-
-          metric_filters: Numeric filters applied after report metrics are calculated.
 
           order_by: Custom ordering of the report results.
 
@@ -1526,7 +1499,6 @@ class AsyncReportsResource(AsyncAPIResource):
                     "dimensions": dimensions,
                     "end_date": end_date,
                     "filters": filters,
-                    "metric_filters": metric_filters,
                     "order_by": order_by,
                     "organization_id": organization_id,
                     "pagination": pagination,
@@ -1549,7 +1521,6 @@ class AsyncReportsResource(AsyncAPIResource):
         dimensions: List[Literal["date", "hour", "path", "referral_source", "referral_type"]] | Omit = omit,
         end_date: Union[str, datetime] | Omit = omit,
         filters: Iterable[report_get_referrals_report_v2_params.Filter] | Omit = omit,
-        metric_filters: Iterable[report_get_referrals_report_v2_params.MetricFilter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
         organization_id: Optional[str] | Omit = omit,
         pagination: Pagination | Omit = omit,
@@ -1581,8 +1552,6 @@ class AsyncReportsResource(AsyncAPIResource):
               omitted.
 
           filters: Filters for referrals report.
-
-          metric_filters: Numeric filters applied after report metrics are calculated.
 
           order_by: Custom ordering of the report results.
 
@@ -1616,7 +1585,6 @@ class AsyncReportsResource(AsyncAPIResource):
                     "dimensions": dimensions,
                     "end_date": end_date,
                     "filters": filters,
-                    "metric_filters": metric_filters,
                     "order_by": order_by,
                     "organization_id": organization_id,
                     "pagination": pagination,

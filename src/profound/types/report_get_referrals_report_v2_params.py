@@ -10,13 +10,7 @@ from .._utils import PropertyInfo
 from .shared_params.pagination import Pagination
 from .shared_params.path_filter import PathFilter
 
-__all__ = [
-    "ReportGetReferralsReportV2Params",
-    "Filter",
-    "FilterReferralSourceFilter",
-    "FilterReferralTypeFilter",
-    "MetricFilter",
-]
+__all__ = ["ReportGetReferralsReportV2Params", "Filter", "FilterReferralSourceFilter", "FilterReferralTypeFilter"]
 
 
 class ReportGetReferralsReportV2Params(TypedDict, total=False):
@@ -46,9 +40,6 @@ class ReportGetReferralsReportV2Params(TypedDict, total=False):
 
     filters: Iterable[Filter]
     """Filters for referrals report."""
-
-    metric_filters: Iterable[MetricFilter]
-    """Numeric filters applied after report metrics are calculated."""
 
     order_by: Dict[str, Literal["asc", "desc"]]
     """Custom ordering of the report results.
@@ -147,11 +138,3 @@ class FilterReferralTypeFilter(TypedDict, total=False):
 
 
 Filter: TypeAlias = Union[PathFilter, FilterReferralSourceFilter, FilterReferralTypeFilter]
-
-
-class MetricFilter(TypedDict, total=False):
-    field: Required[str]
-
-    operator: Required[Literal[">", ">=", "<", "<=", "=", "==", "!="]]
-
-    value: Required[float]
