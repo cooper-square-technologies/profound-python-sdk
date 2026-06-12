@@ -3,8 +3,15 @@
 from typing import List
 from typing_extensions import TypeAlias
 
-from ..named_resource import NamedResource
+from ..._models import BaseModel
 
-__all__ = ["CategoryTagsResponse"]
+__all__ = ["CategoryTagsResponse", "CategoryTagsResponseItem"]
 
-CategoryTagsResponse: TypeAlias = List[NamedResource]
+
+class CategoryTagsResponseItem(BaseModel):
+    id: str
+
+    name: str
+
+
+CategoryTagsResponse: TypeAlias = List[CategoryTagsResponseItem]
