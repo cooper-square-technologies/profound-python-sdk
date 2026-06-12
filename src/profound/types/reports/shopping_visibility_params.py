@@ -49,6 +49,8 @@ class ShoppingVisibilityParams(TypedDict, total=False):
 
     include_asset_only: bool
 
+    include_assets_only: SequenceNotStr[str]
+
     include_count: bool
 
     include_no_tag: bool
