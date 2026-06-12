@@ -65,6 +65,7 @@ from profound.types.organizations import (
     CategoryCreatePromptsResponse,
     CategoryGetCategoryPersonasResponse,
     CategoryPromptsResponse,
+    CategoryRetrieveRegionsResponse,
     CategoryTagsResponse,
     CategoryTopicsResponse,
     CategoryUpdatePromptStatusResponse,
@@ -79,6 +80,7 @@ Methods:
 - <code title="post /v1/org/categories/{category_id}/prompts">client.organizations.categories.<a href="./src/profound/resources/organizations/categories.py">create_prompts</a>(category_id, \*\*<a href="src/profound/types/organizations/category_create_prompts_params.py">params</a>) -> <a href="./src/profound/types/organizations/category_create_prompts_response.py">CategoryCreatePromptsResponse</a></code>
 - <code title="get /v1/org/categories/{category_id}/personas">client.organizations.categories.<a href="./src/profound/resources/organizations/categories.py">get_category_personas</a>(category_id) -> <a href="./src/profound/types/organizations/category_get_category_personas_response.py">CategoryGetCategoryPersonasResponse</a></code>
 - <code title="get /v1/org/categories/{category_id}/prompts">client.organizations.categories.<a href="./src/profound/resources/organizations/categories.py">prompts</a>(category_id, \*\*<a href="src/profound/types/organizations/category_prompts_params.py">params</a>) -> <a href="./src/profound/types/organizations/category_prompts_response.py">CategoryPromptsResponse</a></code>
+- <code title="get /v1/org/categories/{category_id}/regions">client.organizations.categories.<a href="./src/profound/resources/organizations/categories.py">retrieve_regions</a>(category_id) -> <a href="./src/profound/types/organizations/category_retrieve_regions_response.py">CategoryRetrieveRegionsResponse</a></code>
 - <code title="get /v1/org/categories/{category_id}/tags">client.organizations.categories.<a href="./src/profound/resources/organizations/categories.py">tags</a>(category_id) -> <a href="./src/profound/types/organizations/category_tags_response.py">CategoryTagsResponse</a></code>
 - <code title="get /v1/org/categories/{category_id}/topics">client.organizations.categories.<a href="./src/profound/resources/organizations/categories.py">topics</a>(category_id) -> <a href="./src/profound/types/organizations/category_topics_response.py">CategoryTopicsResponse</a></code>
 - <code title="patch /v1/org/categories/{category_id}/prompts/status">client.organizations.categories.<a href="./src/profound/resources/organizations/categories.py">update_prompt_status</a>(category_id, \*\*<a href="src/profound/types/organizations/category_update_prompt_status_params.py">params</a>) -> <a href="./src/profound/types/organizations/category_update_prompt_status_response.py">CategoryUpdatePromptStatusResponse</a></code>
@@ -215,13 +217,20 @@ Methods:
 Types:
 
 ```python
-from profound.types import AgentRetrieveResponse, AgentListResponse
+from profound.types import (
+    AgentCreateResponse,
+    AgentRetrieveResponse,
+    AgentListResponse,
+    AgentPublishResponse,
+)
 ```
 
 Methods:
 
+- <code title="post /v1/agents">client.agents.<a href="./src/profound/resources/agents/agents.py">create</a>(\*\*<a href="src/profound/types/agent_create_params.py">params</a>) -> <a href="./src/profound/types/agent_create_response.py">AgentCreateResponse</a></code>
 - <code title="get /v1/agents/{agent_id}">client.agents.<a href="./src/profound/resources/agents/agents.py">retrieve</a>(agent_id, \*\*<a href="src/profound/types/agent_retrieve_params.py">params</a>) -> <a href="./src/profound/types/agent_retrieve_response.py">AgentRetrieveResponse</a></code>
 - <code title="get /v1/agents">client.agents.<a href="./src/profound/resources/agents/agents.py">list</a>(\*\*<a href="src/profound/types/agent_list_params.py">params</a>) -> <a href="./src/profound/types/agent_list_response.py">AgentListResponse</a></code>
+- <code title="post /v1/agents/{agent_id}/publish">client.agents.<a href="./src/profound/resources/agents/agents.py">publish</a>(agent_id) -> <a href="./src/profound/types/agent_publish_response.py">AgentPublishResponse</a></code>
 
 ## Runs
 
@@ -235,6 +244,19 @@ Methods:
 
 - <code title="post /v1/agents/{agent_id}/runs">client.agents.runs.<a href="./src/profound/resources/agents/runs.py">create</a>(agent_id, \*\*<a href="src/profound/types/agents/run_create_params.py">params</a>) -> <a href="./src/profound/types/agents/run_create_response.py">RunCreateResponse</a></code>
 - <code title="get /v1/agents/{agent_id}/runs/{run_id}">client.agents.runs.<a href="./src/profound/resources/agents/runs.py">retrieve</a>(run_id, \*, agent_id) -> <a href="./src/profound/types/agents/run_retrieve_response.py">RunRetrieveResponse</a></code>
+
+## NodeTypes
+
+Types:
+
+```python
+from profound.types.agents import NodeTypeListResponse, NodeTypeRetrieveSchemaResponse
+```
+
+Methods:
+
+- <code title="get /v1/agents/node-types">client.agents.node_types.<a href="./src/profound/resources/agents/node_types.py">list</a>() -> <a href="./src/profound/types/agents/node_type_list_response.py">NodeTypeListResponse</a></code>
+- <code title="get /v1/agents/node-types/{node_type}/schema">client.agents.node_types.<a href="./src/profound/resources/agents/node_types.py">retrieve_schema</a>(node_type) -> <a href="./src/profound/types/agents/node_type_retrieve_schema_response.py">NodeTypeRetrieveSchemaResponse</a></code>
 
 # KnowledgeBases
 

@@ -32,6 +32,7 @@ from ...types.organizations.category_topics_response import CategoryTopicsRespon
 from ...types.organizations.category_prompts_response import CategoryPromptsResponse
 from ...types.organizations.category_create_prompts_response import CategoryCreatePromptsResponse
 from ...types.organizations.category_update_prompts_response import CategoryUpdatePromptsResponse
+from ...types.organizations.category_retrieve_regions_response import CategoryRetrieveRegionsResponse
 from ...types.organizations.category_update_prompt_status_response import CategoryUpdatePromptStatusResponse
 from ...types.organizations.category_get_category_personas_response import CategoryGetCategoryPersonasResponse
 
@@ -297,6 +298,39 @@ class CategoriesResource(SyncAPIResource):
                 ),
             ),
             cast_to=CategoryPromptsResponse,
+        )
+
+    def retrieve_regions(
+        self,
+        category_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> CategoryRetrieveRegionsResponse:
+        """
+        Get the regions for a specific category.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not category_id:
+            raise ValueError(f"Expected a non-empty value for `category_id` but received {category_id!r}")
+        return self._get(
+            path_template("/v1/org/categories/{category_id}/regions", category_id=category_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=CategoryRetrieveRegionsResponse,
         )
 
     def tags(
@@ -738,6 +772,39 @@ class AsyncCategoriesResource(AsyncAPIResource):
             cast_to=CategoryPromptsResponse,
         )
 
+    async def retrieve_regions(
+        self,
+        category_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> CategoryRetrieveRegionsResponse:
+        """
+        Get the regions for a specific category.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not category_id:
+            raise ValueError(f"Expected a non-empty value for `category_id` but received {category_id!r}")
+        return await self._get(
+            path_template("/v1/org/categories/{category_id}/regions", category_id=category_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=CategoryRetrieveRegionsResponse,
+        )
+
     async def tags(
         self,
         category_id: str,
@@ -933,6 +1000,9 @@ class CategoriesResourceWithRawResponse:
         self.prompts = to_raw_response_wrapper(
             categories.prompts,
         )
+        self.retrieve_regions = to_raw_response_wrapper(
+            categories.retrieve_regions,
+        )
         self.tags = to_raw_response_wrapper(
             categories.tags,
         )
@@ -965,6 +1035,9 @@ class AsyncCategoriesResourceWithRawResponse:
         )
         self.prompts = async_to_raw_response_wrapper(
             categories.prompts,
+        )
+        self.retrieve_regions = async_to_raw_response_wrapper(
+            categories.retrieve_regions,
         )
         self.tags = async_to_raw_response_wrapper(
             categories.tags,
@@ -999,6 +1072,9 @@ class CategoriesResourceWithStreamingResponse:
         self.prompts = to_streamed_response_wrapper(
             categories.prompts,
         )
+        self.retrieve_regions = to_streamed_response_wrapper(
+            categories.retrieve_regions,
+        )
         self.tags = to_streamed_response_wrapper(
             categories.tags,
         )
@@ -1031,6 +1107,9 @@ class AsyncCategoriesResourceWithStreamingResponse:
         )
         self.prompts = async_to_streamed_response_wrapper(
             categories.prompts,
+        )
+        self.retrieve_regions = async_to_streamed_response_wrapper(
+            categories.retrieve_regions,
         )
         self.tags = async_to_streamed_response_wrapper(
             categories.tags,

@@ -17,6 +17,7 @@ from profound.types.organizations import (
     CategoryPromptsResponse,
     CategoryCreatePromptsResponse,
     CategoryUpdatePromptsResponse,
+    CategoryRetrieveRegionsResponse,
     CategoryUpdatePromptStatusResponse,
     CategoryGetCategoryPersonasResponse,
 )
@@ -333,6 +334,48 @@ class TestCategories:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `category_id` but received ''"):
             client.organizations.categories.with_raw_response.prompts(
                 category_id="",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_retrieve_regions(self, client: Profound) -> None:
+        category = client.organizations.categories.retrieve_regions(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(CategoryRetrieveRegionsResponse, category, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_retrieve_regions(self, client: Profound) -> None:
+        response = client.organizations.categories.with_raw_response.retrieve_regions(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        category = response.parse()
+        assert_matches_type(CategoryRetrieveRegionsResponse, category, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_retrieve_regions(self, client: Profound) -> None:
+        with client.organizations.categories.with_streaming_response.retrieve_regions(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            category = response.parse()
+            assert_matches_type(CategoryRetrieveRegionsResponse, category, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_path_params_retrieve_regions(self, client: Profound) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `category_id` but received ''"):
+            client.organizations.categories.with_raw_response.retrieve_regions(
+                "",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -888,6 +931,48 @@ class TestAsyncCategories:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `category_id` but received ''"):
             await async_client.organizations.categories.with_raw_response.prompts(
                 category_id="",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_retrieve_regions(self, async_client: AsyncProfound) -> None:
+        category = await async_client.organizations.categories.retrieve_regions(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(CategoryRetrieveRegionsResponse, category, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_retrieve_regions(self, async_client: AsyncProfound) -> None:
+        response = await async_client.organizations.categories.with_raw_response.retrieve_regions(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        category = await response.parse()
+        assert_matches_type(CategoryRetrieveRegionsResponse, category, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_retrieve_regions(self, async_client: AsyncProfound) -> None:
+        async with async_client.organizations.categories.with_streaming_response.retrieve_regions(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            category = await response.parse()
+            assert_matches_type(CategoryRetrieveRegionsResponse, category, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_path_params_retrieve_regions(self, async_client: AsyncProfound) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `category_id` but received ''"):
+            await async_client.organizations.categories.with_raw_response.retrieve_regions(
+                "",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
