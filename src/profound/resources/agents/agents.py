@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List, Optional
+from typing import Dict, List, Optional
 from typing_extensions import Literal
 
 import httpx
@@ -15,10 +15,18 @@ from .runs import (
     RunsResourceWithStreamingResponse,
     AsyncRunsResourceWithStreamingResponse,
 )
-from ...types import agent_list_params, agent_retrieve_params
+from ...types import agent_list_params, agent_create_params, agent_retrieve_params
 from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
+from .node_types import (
+    NodeTypesResource,
+    AsyncNodeTypesResource,
+    NodeTypesResourceWithRawResponse,
+    AsyncNodeTypesResourceWithRawResponse,
+    NodeTypesResourceWithStreamingResponse,
+    AsyncNodeTypesResourceWithStreamingResponse,
+)
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
     to_raw_response_wrapper,
@@ -28,6 +36,8 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.agent_list_response import AgentListResponse
+from ...types.agent_create_response import AgentCreateResponse
+from ...types.agent_publish_response import AgentPublishResponse
 from ...types.agent_retrieve_response import AgentRetrieveResponse
 
 __all__ = ["AgentsResource", "AsyncAgentsResource"]
@@ -37,6 +47,10 @@ class AgentsResource(SyncAPIResource):
     @cached_property
     def runs(self) -> RunsResource:
         return RunsResource(self._client)
+
+    @cached_property
+    def node_types(self) -> NodeTypesResource:
+        return NodeTypesResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AgentsResourceWithRawResponse:
@@ -56,6 +70,64 @@ class AgentsResource(SyncAPIResource):
         For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#with_streaming_response
         """
         return AgentsResourceWithStreamingResponse(self)
+
+    def create(
+        self,
+        *,
+        name: str,
+        organization_id: str,
+        description: Optional[str] | Omit = omit,
+        graph: Optional[Dict[str, object]] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AgentCreateResponse:
+        """
+        Create a new draft agent owned by the given organization.
+
+        `organization_id` is required and you must be a member of it. The agent is
+        created as a `draft`; publish it with `POST /v1/agents/{agent_id}/publish` once
+        its graph is ready.
+
+        Args:
+          name: Display name for the agent. Must be non-empty.
+
+          organization_id: ID of the organization that will own the agent. Required — Profound API keys are
+              user-scoped, so the owning organization must be chosen explicitly. The caller
+              must be a member of this organization.
+
+          description: Short description of the agent.
+
+          graph: Initial workflow graph for the agent's draft version. Optional — an agent can be
+              created empty and have its graph filled in later.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/v1/agents",
+            body=maybe_transform(
+                {
+                    "name": name,
+                    "organization_id": organization_id,
+                    "description": description,
+                    "graph": graph,
+                },
+                agent_create_params.AgentCreateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AgentCreateResponse,
+        )
 
     def retrieve(
         self,
@@ -157,11 +229,54 @@ class AgentsResource(SyncAPIResource):
             cast_to=AgentListResponse,
         )
 
+    def publish(
+        self,
+        agent_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AgentPublishResponse:
+        """
+        Publish an agent's latest draft as its live published version.
+
+        You must be a member of the agent's organization. Publishing promotes the
+        current draft graph to a new published version. A draft that cannot produce its
+        declared input/output contract is rejected with `422` and is not published.
+
+        Args:
+          agent_id: The ID of the agent to publish.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not agent_id:
+            raise ValueError(f"Expected a non-empty value for `agent_id` but received {agent_id!r}")
+        return self._post(
+            path_template("/v1/agents/{agent_id}/publish", agent_id=agent_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AgentPublishResponse,
+        )
+
 
 class AsyncAgentsResource(AsyncAPIResource):
     @cached_property
     def runs(self) -> AsyncRunsResource:
         return AsyncRunsResource(self._client)
+
+    @cached_property
+    def node_types(self) -> AsyncNodeTypesResource:
+        return AsyncNodeTypesResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncAgentsResourceWithRawResponse:
@@ -181,6 +296,64 @@ class AsyncAgentsResource(AsyncAPIResource):
         For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#with_streaming_response
         """
         return AsyncAgentsResourceWithStreamingResponse(self)
+
+    async def create(
+        self,
+        *,
+        name: str,
+        organization_id: str,
+        description: Optional[str] | Omit = omit,
+        graph: Optional[Dict[str, object]] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AgentCreateResponse:
+        """
+        Create a new draft agent owned by the given organization.
+
+        `organization_id` is required and you must be a member of it. The agent is
+        created as a `draft`; publish it with `POST /v1/agents/{agent_id}/publish` once
+        its graph is ready.
+
+        Args:
+          name: Display name for the agent. Must be non-empty.
+
+          organization_id: ID of the organization that will own the agent. Required — Profound API keys are
+              user-scoped, so the owning organization must be chosen explicitly. The caller
+              must be a member of this organization.
+
+          description: Short description of the agent.
+
+          graph: Initial workflow graph for the agent's draft version. Optional — an agent can be
+              created empty and have its graph filled in later.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/v1/agents",
+            body=await async_maybe_transform(
+                {
+                    "name": name,
+                    "organization_id": organization_id,
+                    "description": description,
+                    "graph": graph,
+                },
+                agent_create_params.AgentCreateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AgentCreateResponse,
+        )
 
     async def retrieve(
         self,
@@ -282,66 +455,145 @@ class AsyncAgentsResource(AsyncAPIResource):
             cast_to=AgentListResponse,
         )
 
+    async def publish(
+        self,
+        agent_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AgentPublishResponse:
+        """
+        Publish an agent's latest draft as its live published version.
+
+        You must be a member of the agent's organization. Publishing promotes the
+        current draft graph to a new published version. A draft that cannot produce its
+        declared input/output contract is rejected with `422` and is not published.
+
+        Args:
+          agent_id: The ID of the agent to publish.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not agent_id:
+            raise ValueError(f"Expected a non-empty value for `agent_id` but received {agent_id!r}")
+        return await self._post(
+            path_template("/v1/agents/{agent_id}/publish", agent_id=agent_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AgentPublishResponse,
+        )
+
 
 class AgentsResourceWithRawResponse:
     def __init__(self, agents: AgentsResource) -> None:
         self._agents = agents
 
+        self.create = to_raw_response_wrapper(
+            agents.create,
+        )
         self.retrieve = to_raw_response_wrapper(
             agents.retrieve,
         )
         self.list = to_raw_response_wrapper(
             agents.list,
         )
+        self.publish = to_raw_response_wrapper(
+            agents.publish,
+        )
 
     @cached_property
     def runs(self) -> RunsResourceWithRawResponse:
         return RunsResourceWithRawResponse(self._agents.runs)
+
+    @cached_property
+    def node_types(self) -> NodeTypesResourceWithRawResponse:
+        return NodeTypesResourceWithRawResponse(self._agents.node_types)
 
 
 class AsyncAgentsResourceWithRawResponse:
     def __init__(self, agents: AsyncAgentsResource) -> None:
         self._agents = agents
 
+        self.create = async_to_raw_response_wrapper(
+            agents.create,
+        )
         self.retrieve = async_to_raw_response_wrapper(
             agents.retrieve,
         )
         self.list = async_to_raw_response_wrapper(
             agents.list,
         )
+        self.publish = async_to_raw_response_wrapper(
+            agents.publish,
+        )
 
     @cached_property
     def runs(self) -> AsyncRunsResourceWithRawResponse:
         return AsyncRunsResourceWithRawResponse(self._agents.runs)
+
+    @cached_property
+    def node_types(self) -> AsyncNodeTypesResourceWithRawResponse:
+        return AsyncNodeTypesResourceWithRawResponse(self._agents.node_types)
 
 
 class AgentsResourceWithStreamingResponse:
     def __init__(self, agents: AgentsResource) -> None:
         self._agents = agents
 
+        self.create = to_streamed_response_wrapper(
+            agents.create,
+        )
         self.retrieve = to_streamed_response_wrapper(
             agents.retrieve,
         )
         self.list = to_streamed_response_wrapper(
             agents.list,
         )
+        self.publish = to_streamed_response_wrapper(
+            agents.publish,
+        )
 
     @cached_property
     def runs(self) -> RunsResourceWithStreamingResponse:
         return RunsResourceWithStreamingResponse(self._agents.runs)
+
+    @cached_property
+    def node_types(self) -> NodeTypesResourceWithStreamingResponse:
+        return NodeTypesResourceWithStreamingResponse(self._agents.node_types)
 
 
 class AsyncAgentsResourceWithStreamingResponse:
     def __init__(self, agents: AsyncAgentsResource) -> None:
         self._agents = agents
 
+        self.create = async_to_streamed_response_wrapper(
+            agents.create,
+        )
         self.retrieve = async_to_streamed_response_wrapper(
             agents.retrieve,
         )
         self.list = async_to_streamed_response_wrapper(
             agents.list,
         )
+        self.publish = async_to_streamed_response_wrapper(
+            agents.publish,
+        )
 
     @cached_property
     def runs(self) -> AsyncRunsResourceWithStreamingResponse:
         return AsyncRunsResourceWithStreamingResponse(self._agents.runs)
+
+    @cached_property
+    def node_types(self) -> AsyncNodeTypesResourceWithStreamingResponse:
+        return AsyncNodeTypesResourceWithStreamingResponse(self._agents.node_types)
