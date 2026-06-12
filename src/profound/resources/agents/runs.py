@@ -59,6 +59,10 @@ class RunsResource(SyncAPIResource):
         """
         Start a new run for an agent.
 
+        Runs always execute the agent's live published version, so the agent must be
+        published first with `POST /v1/agents/{agent_id}/publish`. Unpublished drafts
+        cannot be run.
+
         Args:
           agent_id: The ID of the agent to run.
 
@@ -159,6 +163,10 @@ class AsyncRunsResource(AsyncAPIResource):
     ) -> RunCreateResponse:
         """
         Start a new run for an agent.
+
+        Runs always execute the agent's live published version, so the agent must be
+        published first with `POST /v1/agents/{agent_id}/publish`. Unpublished drafts
+        cannot be run.
 
         Args:
           agent_id: The ID of the agent to run.
