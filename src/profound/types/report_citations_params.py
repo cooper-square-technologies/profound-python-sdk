@@ -38,7 +38,7 @@ class ReportCitationsParams(TypedDict, total=False):
     Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
     """
 
-    metrics: Required[List[Literal["count", "citation_share", "share_of_voice"]]]
+    metrics: Required[List[Literal["count", "citation_share", "share_of_voice", "first_cited_at"]]]
     """Metrics to include.
 
     `share_of_voice` is deprecated, use `citation_share` instead.
