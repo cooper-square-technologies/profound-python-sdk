@@ -37,6 +37,8 @@ class DataCitationDetail(BaseModel):
 
     citation_category: Optional[str] = None
 
+    first_cited_at: Optional[str] = None
+
     groups: Optional[List[DataCitationDetailGroup]] = None
 
     positions: Optional[List[int]] = None
