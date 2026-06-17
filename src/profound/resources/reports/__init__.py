@@ -8,6 +8,14 @@ from .reports import (
     ReportsResourceWithStreamingResponse,
     AsyncReportsResourceWithStreamingResponse,
 )
+from .accuracy import (
+    AccuracyResource,
+    AsyncAccuracyResource,
+    AccuracyResourceWithRawResponse,
+    AsyncAccuracyResourceWithRawResponse,
+    AccuracyResourceWithStreamingResponse,
+    AsyncAccuracyResourceWithStreamingResponse,
+)
 from .shopping import (
     ShoppingResource,
     AsyncShoppingResource,
@@ -38,6 +46,12 @@ __all__ = [
     "AsyncShoppingResourceWithRawResponse",
     "ShoppingResourceWithStreamingResponse",
     "AsyncShoppingResourceWithStreamingResponse",
+    "AccuracyResource",
+    "AsyncAccuracyResource",
+    "AccuracyResourceWithRawResponse",
+    "AsyncAccuracyResourceWithRawResponse",
+    "AccuracyResourceWithStreamingResponse",
+    "AsyncAccuracyResourceWithStreamingResponse",
     "ReportsResource",
     "AsyncReportsResource",
     "ReportsResourceWithRawResponse",
