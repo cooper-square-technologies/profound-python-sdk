@@ -182,6 +182,44 @@ Methods:
 - <code title="post /v1/reports/shopping/trigger-rate">client.reports.shopping.<a href="./src/profound/resources/reports/shopping.py">trigger_rate</a>(\*\*<a href="src/profound/types/reports/shopping_trigger_rate_params.py">params</a>) -> <a href="./src/profound/types/reports/shopping_trigger_rate_response.py">ShoppingTriggerRateResponse</a></code>
 - <code title="post /v1/reports/shopping/visibility">client.reports.shopping.<a href="./src/profound/resources/reports/shopping.py">visibility</a>(\*\*<a href="src/profound/types/reports/shopping_visibility_params.py">params</a>) -> <a href="./src/profound/types/reports/shopping_visibility_response.py">ShoppingVisibilityResponse</a></code>
 
+## Accuracy
+
+Types:
+
+```python
+from profound.types.reports import (
+    AccuracyCreateBreakdownResponse,
+    AccuracyCreateCitationAnalysisResponse,
+    AccuracyCreateClaimBreakdownResponse,
+    AccuracyCreateClaimCitationsResponse,
+    AccuracyCreateClusterExampleRunsResponse,
+    AccuracyCreateClusterVerificationPairsResponse,
+    AccuracyCreateFactcheckSetupStatusResponse,
+    AccuracyCreateInaccuracyDriversResponse,
+    AccuracyCreateInaccurateClustersResponse,
+    AccuracyCreateInaccurateThemesResponse,
+    AccuracyCreateOverviewResponse,
+    AccuracyCreateTopInaccurateClaimsResponse,
+    AccuracyCreateTopicIDsResponse,
+)
+```
+
+Methods:
+
+- <code title="post /v1/reports/accuracy/breakdown">client.reports.accuracy.<a href="./src/profound/resources/reports/accuracy.py">create_breakdown</a>(\*\*<a href="src/profound/types/reports/accuracy_create_breakdown_params.py">params</a>) -> <a href="./src/profound/types/reports/accuracy_create_breakdown_response.py">AccuracyCreateBreakdownResponse</a></code>
+- <code title="post /v1/reports/accuracy/citation-analysis">client.reports.accuracy.<a href="./src/profound/resources/reports/accuracy.py">create_citation_analysis</a>(\*\*<a href="src/profound/types/reports/accuracy_create_citation_analysis_params.py">params</a>) -> <a href="./src/profound/types/reports/accuracy_create_citation_analysis_response.py">AccuracyCreateCitationAnalysisResponse</a></code>
+- <code title="post /v1/reports/accuracy/claim-breakdown">client.reports.accuracy.<a href="./src/profound/resources/reports/accuracy.py">create_claim_breakdown</a>(\*\*<a href="src/profound/types/reports/accuracy_create_claim_breakdown_params.py">params</a>) -> <a href="./src/profound/types/reports/accuracy_create_claim_breakdown_response.py">AccuracyCreateClaimBreakdownResponse</a></code>
+- <code title="post /v1/reports/accuracy/claim-citations">client.reports.accuracy.<a href="./src/profound/resources/reports/accuracy.py">create_claim_citations</a>(\*\*<a href="src/profound/types/reports/accuracy_create_claim_citations_params.py">params</a>) -> <a href="./src/profound/types/reports/accuracy_create_claim_citations_response.py">AccuracyCreateClaimCitationsResponse</a></code>
+- <code title="post /v1/reports/accuracy/cluster-example-runs">client.reports.accuracy.<a href="./src/profound/resources/reports/accuracy.py">create_cluster_example_runs</a>(\*\*<a href="src/profound/types/reports/accuracy_create_cluster_example_runs_params.py">params</a>) -> <a href="./src/profound/types/reports/accuracy_create_cluster_example_runs_response.py">AccuracyCreateClusterExampleRunsResponse</a></code>
+- <code title="post /v1/reports/accuracy/cluster-verification-pairs">client.reports.accuracy.<a href="./src/profound/resources/reports/accuracy.py">create_cluster_verification_pairs</a>(\*\*<a href="src/profound/types/reports/accuracy_create_cluster_verification_pairs_params.py">params</a>) -> <a href="./src/profound/types/reports/accuracy_create_cluster_verification_pairs_response.py">AccuracyCreateClusterVerificationPairsResponse</a></code>
+- <code title="post /v1/reports/accuracy/factcheck-setup-status">client.reports.accuracy.<a href="./src/profound/resources/reports/accuracy.py">create_factcheck_setup_status</a>(\*\*<a href="src/profound/types/reports/accuracy_create_factcheck_setup_status_params.py">params</a>) -> <a href="./src/profound/types/reports/accuracy_create_factcheck_setup_status_response.py">AccuracyCreateFactcheckSetupStatusResponse</a></code>
+- <code title="post /v1/reports/accuracy/inaccuracy-drivers">client.reports.accuracy.<a href="./src/profound/resources/reports/accuracy.py">create_inaccuracy_drivers</a>(\*\*<a href="src/profound/types/reports/accuracy_create_inaccuracy_drivers_params.py">params</a>) -> <a href="./src/profound/types/reports/accuracy_create_inaccuracy_drivers_response.py">AccuracyCreateInaccuracyDriversResponse</a></code>
+- <code title="post /v1/reports/accuracy/inaccurate-clusters">client.reports.accuracy.<a href="./src/profound/resources/reports/accuracy.py">create_inaccurate_clusters</a>(\*\*<a href="src/profound/types/reports/accuracy_create_inaccurate_clusters_params.py">params</a>) -> <a href="./src/profound/types/reports/accuracy_create_inaccurate_clusters_response.py">AccuracyCreateInaccurateClustersResponse</a></code>
+- <code title="post /v1/reports/accuracy/inaccurate-themes">client.reports.accuracy.<a href="./src/profound/resources/reports/accuracy.py">create_inaccurate_themes</a>(\*\*<a href="src/profound/types/reports/accuracy_create_inaccurate_themes_params.py">params</a>) -> <a href="./src/profound/types/reports/accuracy_create_inaccurate_themes_response.py">AccuracyCreateInaccurateThemesResponse</a></code>
+- <code title="post /v1/reports/accuracy/overview">client.reports.accuracy.<a href="./src/profound/resources/reports/accuracy.py">create_overview</a>(\*\*<a href="src/profound/types/reports/accuracy_create_overview_params.py">params</a>) -> <a href="./src/profound/types/reports/accuracy_create_overview_response.py">AccuracyCreateOverviewResponse</a></code>
+- <code title="post /v1/reports/accuracy/top-inaccurate-claims">client.reports.accuracy.<a href="./src/profound/resources/reports/accuracy.py">create_top_inaccurate_claims</a>(\*\*<a href="src/profound/types/reports/accuracy_create_top_inaccurate_claims_params.py">params</a>) -> <a href="./src/profound/types/reports/accuracy_create_top_inaccurate_claims_response.py">AccuracyCreateTopInaccurateClaimsResponse</a></code>
+- <code title="post /v1/reports/accuracy/topic-ids">client.reports.accuracy.<a href="./src/profound/resources/reports/accuracy.py">create_topic_ids</a>(\*\*<a href="src/profound/types/reports/accuracy_create_topic_ids_params.py">params</a>) -> <a href="./src/profound/types/reports/accuracy_create_topic_ids_response.py">AccuracyCreateTopicIDsResponse</a></code>
+
 # Logs
 
 ## Raw
@@ -220,6 +258,7 @@ Types:
 from profound.types import (
     AgentCreateResponse,
     AgentRetrieveResponse,
+    AgentUpdateResponse,
     AgentListResponse,
     AgentPublishResponse,
 )
@@ -229,6 +268,7 @@ Methods:
 
 - <code title="post /v1/agents">client.agents.<a href="./src/profound/resources/agents/agents.py">create</a>(\*\*<a href="src/profound/types/agent_create_params.py">params</a>) -> <a href="./src/profound/types/agent_create_response.py">AgentCreateResponse</a></code>
 - <code title="get /v1/agents/{agent_id}">client.agents.<a href="./src/profound/resources/agents/agents.py">retrieve</a>(agent_id, \*\*<a href="src/profound/types/agent_retrieve_params.py">params</a>) -> <a href="./src/profound/types/agent_retrieve_response.py">AgentRetrieveResponse</a></code>
+- <code title="patch /v1/agents/{agent_id}">client.agents.<a href="./src/profound/resources/agents/agents.py">update</a>(agent_id, \*\*<a href="src/profound/types/agent_update_params.py">params</a>) -> <a href="./src/profound/types/agent_update_response.py">AgentUpdateResponse</a></code>
 - <code title="get /v1/agents">client.agents.<a href="./src/profound/resources/agents/agents.py">list</a>(\*\*<a href="src/profound/types/agent_list_params.py">params</a>) -> <a href="./src/profound/types/agent_list_response.py">AgentListResponse</a></code>
 - <code title="post /v1/agents/{agent_id}/publish">client.agents.<a href="./src/profound/resources/agents/agents.py">publish</a>(agent_id) -> <a href="./src/profound/types/agent_publish_response.py">AgentPublishResponse</a></code>
 
