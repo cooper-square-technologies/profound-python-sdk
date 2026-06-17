@@ -1,0 +1,21 @@
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+from __future__ import annotations
+
+from typing_extensions import Required, TypedDict
+
+__all__ = ["AccuracyCreateClusterExampleRunsParams"]
+
+
+class AccuracyCreateClusterExampleRunsParams(TypedDict, total=False):
+    category_id: Required[str]
+
+    cluster_id: Required[str]
+
+    end_date: Required[str]
+
+    start_date: Required[str]
+
+    limit: int
+
+    offset: int

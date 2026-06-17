@@ -15,7 +15,7 @@ from .runs import (
     RunsResourceWithStreamingResponse,
     AsyncRunsResourceWithStreamingResponse,
 )
-from ...types import agent_list_params, agent_create_params, agent_retrieve_params
+from ...types import agent_list_params, agent_create_params, agent_update_params, agent_retrieve_params
 from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
@@ -37,6 +37,7 @@ from ..._response import (
 from ..._base_client import make_request_options
 from ...types.agent_list_response import AgentListResponse
 from ...types.agent_create_response import AgentCreateResponse
+from ...types.agent_update_response import AgentUpdateResponse
 from ...types.agent_publish_response import AgentPublishResponse
 from ...types.agent_retrieve_response import AgentRetrieveResponse
 
@@ -175,6 +176,54 @@ class AgentsResource(SyncAPIResource):
                 query=maybe_transform({"version": version}, agent_retrieve_params.AgentRetrieveParams),
             ),
             cast_to=AgentRetrieveResponse,
+        )
+
+    def update(
+        self,
+        agent_id: str,
+        *,
+        graph: Dict[str, object],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AgentUpdateResponse:
+        """
+        Update an agent's draft graph in place.
+
+        You must be a member of the agent's organization. The agent's draft is replaced
+        with the supplied graph and re-validated, so you can iterate one draft — create,
+        then update per fix — instead of creating a new agent on every change. The
+        response carries the updated `validation`; publish with
+        `POST /v1/agents/{agent_id}/publish` once `validation.valid`.
+
+        Args:
+          agent_id: The ID of the agent to update.
+
+          graph: New workflow graph for the agent's draft version. Replaces the current draft
+              graph; the agent is iterated in place rather than re-created, so its ID is
+              stable. Required — Magi rejects a null graph, so an empty update is a 422 here
+              rather than a relayed upstream error.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not agent_id:
+            raise ValueError(f"Expected a non-empty value for `agent_id` but received {agent_id!r}")
+        return self._patch(
+            path_template("/v1/agents/{agent_id}", agent_id=agent_id),
+            body=maybe_transform({"graph": graph}, agent_update_params.AgentUpdateParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AgentUpdateResponse,
         )
 
     def list(
@@ -403,6 +452,54 @@ class AsyncAgentsResource(AsyncAPIResource):
             cast_to=AgentRetrieveResponse,
         )
 
+    async def update(
+        self,
+        agent_id: str,
+        *,
+        graph: Dict[str, object],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AgentUpdateResponse:
+        """
+        Update an agent's draft graph in place.
+
+        You must be a member of the agent's organization. The agent's draft is replaced
+        with the supplied graph and re-validated, so you can iterate one draft — create,
+        then update per fix — instead of creating a new agent on every change. The
+        response carries the updated `validation`; publish with
+        `POST /v1/agents/{agent_id}/publish` once `validation.valid`.
+
+        Args:
+          agent_id: The ID of the agent to update.
+
+          graph: New workflow graph for the agent's draft version. Replaces the current draft
+              graph; the agent is iterated in place rather than re-created, so its ID is
+              stable. Required — Magi rejects a null graph, so an empty update is a 422 here
+              rather than a relayed upstream error.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not agent_id:
+            raise ValueError(f"Expected a non-empty value for `agent_id` but received {agent_id!r}")
+        return await self._patch(
+            path_template("/v1/agents/{agent_id}", agent_id=agent_id),
+            body=await async_maybe_transform({"graph": graph}, agent_update_params.AgentUpdateParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AgentUpdateResponse,
+        )
+
     async def list(
         self,
         *,
@@ -505,6 +602,9 @@ class AgentsResourceWithRawResponse:
         self.retrieve = to_raw_response_wrapper(
             agents.retrieve,
         )
+        self.update = to_raw_response_wrapper(
+            agents.update,
+        )
         self.list = to_raw_response_wrapper(
             agents.list,
         )
@@ -530,6 +630,9 @@ class AsyncAgentsResourceWithRawResponse:
         )
         self.retrieve = async_to_raw_response_wrapper(
             agents.retrieve,
+        )
+        self.update = async_to_raw_response_wrapper(
+            agents.update,
         )
         self.list = async_to_raw_response_wrapper(
             agents.list,
@@ -557,6 +660,9 @@ class AgentsResourceWithStreamingResponse:
         self.retrieve = to_streamed_response_wrapper(
             agents.retrieve,
         )
+        self.update = to_streamed_response_wrapper(
+            agents.update,
+        )
         self.list = to_streamed_response_wrapper(
             agents.list,
         )
@@ -582,6 +688,9 @@ class AsyncAgentsResourceWithStreamingResponse:
         )
         self.retrieve = async_to_streamed_response_wrapper(
             agents.retrieve,
+        )
+        self.update = async_to_streamed_response_wrapper(
+            agents.update,
         )
         self.list = async_to_streamed_response_wrapper(
             agents.list,

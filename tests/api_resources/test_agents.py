@@ -12,6 +12,7 @@ from tests.utils import assert_matches_type
 from profound.types import (
     AgentListResponse,
     AgentCreateResponse,
+    AgentUpdateResponse,
     AgentPublishResponse,
     AgentRetrieveResponse,
 )
@@ -119,6 +120,52 @@ class TestAgents:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `agent_id` but received ''"):
             client.agents.with_raw_response.retrieve(
                 agent_id="",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_update(self, client: Profound) -> None:
+        agent = client.agents.update(
+            agent_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            graph={"foo": "bar"},
+        )
+        assert_matches_type(AgentUpdateResponse, agent, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_update(self, client: Profound) -> None:
+        response = client.agents.with_raw_response.update(
+            agent_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            graph={"foo": "bar"},
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        agent = response.parse()
+        assert_matches_type(AgentUpdateResponse, agent, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_update(self, client: Profound) -> None:
+        with client.agents.with_streaming_response.update(
+            agent_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            graph={"foo": "bar"},
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            agent = response.parse()
+            assert_matches_type(AgentUpdateResponse, agent, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_path_params_update(self, client: Profound) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `agent_id` but received ''"):
+            client.agents.with_raw_response.update(
+                agent_id="",
+                graph={"foo": "bar"},
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -304,6 +351,52 @@ class TestAsyncAgents:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `agent_id` but received ''"):
             await async_client.agents.with_raw_response.retrieve(
                 agent_id="",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_update(self, async_client: AsyncProfound) -> None:
+        agent = await async_client.agents.update(
+            agent_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            graph={"foo": "bar"},
+        )
+        assert_matches_type(AgentUpdateResponse, agent, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_update(self, async_client: AsyncProfound) -> None:
+        response = await async_client.agents.with_raw_response.update(
+            agent_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            graph={"foo": "bar"},
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        agent = await response.parse()
+        assert_matches_type(AgentUpdateResponse, agent, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_update(self, async_client: AsyncProfound) -> None:
+        async with async_client.agents.with_streaming_response.update(
+            agent_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            graph={"foo": "bar"},
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            agent = await response.parse()
+            assert_matches_type(AgentUpdateResponse, agent, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_path_params_update(self, async_client: AsyncProfound) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `agent_id` but received ''"):
+            await async_client.agents.with_raw_response.update(
+                agent_id="",
+                graph={"foo": "bar"},
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")

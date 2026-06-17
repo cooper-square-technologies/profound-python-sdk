@@ -23,6 +23,14 @@ from ...types import (
 )
 from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
+from .accuracy import (
+    AccuracyResource,
+    AsyncAccuracyResource,
+    AccuracyResourceWithRawResponse,
+    AsyncAccuracyResourceWithRawResponse,
+    AccuracyResourceWithStreamingResponse,
+    AsyncAccuracyResourceWithStreamingResponse,
+)
 from .shopping import (
     ShoppingResource,
     AsyncShoppingResource,
@@ -67,6 +75,10 @@ class ReportsResource(SyncAPIResource):
     @cached_property
     def shopping(self) -> ShoppingResource:
         return ShoppingResource(self._client)
+
+    @cached_property
+    def accuracy(self) -> AccuracyResource:
+        return AccuracyResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> ReportsResourceWithRawResponse:
@@ -1135,6 +1147,10 @@ class AsyncReportsResource(AsyncAPIResource):
     @cached_property
     def shopping(self) -> AsyncShoppingResource:
         return AsyncShoppingResource(self._client)
+
+    @cached_property
+    def accuracy(self) -> AsyncAccuracyResource:
+        return AsyncAccuracyResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncReportsResourceWithRawResponse:
@@ -2241,6 +2257,10 @@ class ReportsResourceWithRawResponse:
     def shopping(self) -> ShoppingResourceWithRawResponse:
         return ShoppingResourceWithRawResponse(self._reports.shopping)
 
+    @cached_property
+    def accuracy(self) -> AccuracyResourceWithRawResponse:
+        return AccuracyResourceWithRawResponse(self._reports.accuracy)
+
 
 class AsyncReportsResourceWithRawResponse:
     def __init__(self, reports: AsyncReportsResource) -> None:
@@ -2287,6 +2307,10 @@ class AsyncReportsResourceWithRawResponse:
     @cached_property
     def shopping(self) -> AsyncShoppingResourceWithRawResponse:
         return AsyncShoppingResourceWithRawResponse(self._reports.shopping)
+
+    @cached_property
+    def accuracy(self) -> AsyncAccuracyResourceWithRawResponse:
+        return AsyncAccuracyResourceWithRawResponse(self._reports.accuracy)
 
 
 class ReportsResourceWithStreamingResponse:
@@ -2335,6 +2359,10 @@ class ReportsResourceWithStreamingResponse:
     def shopping(self) -> ShoppingResourceWithStreamingResponse:
         return ShoppingResourceWithStreamingResponse(self._reports.shopping)
 
+    @cached_property
+    def accuracy(self) -> AccuracyResourceWithStreamingResponse:
+        return AccuracyResourceWithStreamingResponse(self._reports.accuracy)
+
 
 class AsyncReportsResourceWithStreamingResponse:
     def __init__(self, reports: AsyncReportsResource) -> None:
@@ -2381,3 +2409,7 @@ class AsyncReportsResourceWithStreamingResponse:
     @cached_property
     def shopping(self) -> AsyncShoppingResourceWithStreamingResponse:
         return AsyncShoppingResourceWithStreamingResponse(self._reports.shopping)
+
+    @cached_property
+    def accuracy(self) -> AsyncAccuracyResourceWithStreamingResponse:
+        return AsyncAccuracyResourceWithStreamingResponse(self._reports.accuracy)
