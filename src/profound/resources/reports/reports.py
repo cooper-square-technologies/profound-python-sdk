@@ -22,7 +22,7 @@ from ...types import (
     report_get_referrals_report_params,
     report_get_referrals_report_v2_params,
 )
-from ..._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
+from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from .accuracy import (
     AccuracyResource,
@@ -649,38 +649,21 @@ class ReportsResource(SyncAPIResource):
         *,
         asset_name: str,
         category_id: str,
-        end_date: str,
-        start_date: str,
-        claim_filters: Optional[report_query_sentiment_v2_params.ClaimFilters] | Omit = omit,
-        comparison_end_date: Optional[str] | Omit = omit,
-        comparison_start_date: Optional[str] | Omit = omit,
-        date_bucket: Optional[Literal["daily", "weekly", "monthly"]] | Omit = omit,
-        exclude_topic_ids: bool | Omit = omit,
-        group_by: Optional[
-            List[
-                Literal[
-                    "topic", "region", "platform", "prompt", "persona", "tag", "theme", "claim", "run", "competitor"
-                ]
+        end_date: Union[str, datetime],
+        metrics: List[Literal["sentiment", "occurrence"]],
+        start_date: Union[str, datetime],
+        comparison_end_date: Union[str, datetime, None] | Omit = omit,
+        comparison_start_date: Union[str, datetime, None] | Omit = omit,
+        date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
+        dimensions: List[
+            Literal[
+                "date", "topic", "region", "model", "prompt", "persona", "tag", "theme", "claim", "run", "asset_name"
             ]
         ]
         | Omit = omit,
-        include_no_persona: bool | Omit = omit,
-        include_no_tag: bool | Omit = omit,
-        limit: Optional[int] | Omit = omit,
-        metrics: Optional[List[Literal["sentiment", "occurrence"]]] | Omit = omit,
-        offset: int | Omit = omit,
-        owned_asset_names_to_exclude: SequenceNotStr[str] | Omit = omit,
-        persona_ids: Optional[SequenceNotStr[str]] | Omit = omit,
-        platform_ids: Optional[SequenceNotStr[str]] | Omit = omit,
-        prompt_ids: Optional[SequenceNotStr[str]] | Omit = omit,
-        region_ids: Optional[SequenceNotStr[str]] | Omit = omit,
-        run_ids: Optional[SequenceNotStr[str]] | Omit = omit,
-        sort_by: Optional[Literal["occurrence", "assessment_count", "positive_sentiment", "negative_sentiment"]]
-        | Omit = omit,
-        sort_direction: Literal["asc", "desc"] | Omit = omit,
-        tag_filter_type: Literal["all", "any"] | Omit = omit,
-        tag_ids: Optional[SequenceNotStr[str]] | Omit = omit,
-        topic_ids: Optional[SequenceNotStr[str]] | Omit = omit,
+        filters: Iterable[report_query_sentiment_v2_params.Filter] | Omit = omit,
+        order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
+        pagination: Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -688,10 +671,32 @@ class ReportsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ReportQuerySentimentV2Response:
-        """
-        Query Sentiment V2
+        """Query Sentiment V2
 
         Args:
+          end_date: End date for the report.
+
+        Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full
+              ISO timestamp.
+
+          start_date: Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or
+              full ISO timestamp.
+
+          comparison_end_date: End of the previous period for delta computation.
+
+          comparison_start_date: Start of the previous period for delta computation.
+
+          date_interval: Date interval for the report. Only used when dimensions includes date.
+
+          dimensions: Dimensions to group the report by.
+
+          filters: List of filters to apply to the sentiment-v2 report.
+
+          order_by: Custom ordering of report results. Dimension keys must also be present in
+              dimensions. The sentiment metric orders by positive_sentiment.
+
+          pagination: Pagination settings for the report results.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -707,29 +712,15 @@ class ReportsResource(SyncAPIResource):
                     "asset_name": asset_name,
                     "category_id": category_id,
                     "end_date": end_date,
+                    "metrics": metrics,
                     "start_date": start_date,
-                    "claim_filters": claim_filters,
                     "comparison_end_date": comparison_end_date,
                     "comparison_start_date": comparison_start_date,
-                    "date_bucket": date_bucket,
-                    "exclude_topic_ids": exclude_topic_ids,
-                    "group_by": group_by,
-                    "include_no_persona": include_no_persona,
-                    "include_no_tag": include_no_tag,
-                    "limit": limit,
-                    "metrics": metrics,
-                    "offset": offset,
-                    "owned_asset_names_to_exclude": owned_asset_names_to_exclude,
-                    "persona_ids": persona_ids,
-                    "platform_ids": platform_ids,
-                    "prompt_ids": prompt_ids,
-                    "region_ids": region_ids,
-                    "run_ids": run_ids,
-                    "sort_by": sort_by,
-                    "sort_direction": sort_direction,
-                    "tag_filter_type": tag_filter_type,
-                    "tag_ids": tag_ids,
-                    "topic_ids": topic_ids,
+                    "date_interval": date_interval,
+                    "dimensions": dimensions,
+                    "filters": filters,
+                    "order_by": order_by,
+                    "pagination": pagination,
                 },
                 report_query_sentiment_v2_params.ReportQuerySentimentV2Params,
             ),
@@ -1816,38 +1807,21 @@ class AsyncReportsResource(AsyncAPIResource):
         *,
         asset_name: str,
         category_id: str,
-        end_date: str,
-        start_date: str,
-        claim_filters: Optional[report_query_sentiment_v2_params.ClaimFilters] | Omit = omit,
-        comparison_end_date: Optional[str] | Omit = omit,
-        comparison_start_date: Optional[str] | Omit = omit,
-        date_bucket: Optional[Literal["daily", "weekly", "monthly"]] | Omit = omit,
-        exclude_topic_ids: bool | Omit = omit,
-        group_by: Optional[
-            List[
-                Literal[
-                    "topic", "region", "platform", "prompt", "persona", "tag", "theme", "claim", "run", "competitor"
-                ]
+        end_date: Union[str, datetime],
+        metrics: List[Literal["sentiment", "occurrence"]],
+        start_date: Union[str, datetime],
+        comparison_end_date: Union[str, datetime, None] | Omit = omit,
+        comparison_start_date: Union[str, datetime, None] | Omit = omit,
+        date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
+        dimensions: List[
+            Literal[
+                "date", "topic", "region", "model", "prompt", "persona", "tag", "theme", "claim", "run", "asset_name"
             ]
         ]
         | Omit = omit,
-        include_no_persona: bool | Omit = omit,
-        include_no_tag: bool | Omit = omit,
-        limit: Optional[int] | Omit = omit,
-        metrics: Optional[List[Literal["sentiment", "occurrence"]]] | Omit = omit,
-        offset: int | Omit = omit,
-        owned_asset_names_to_exclude: SequenceNotStr[str] | Omit = omit,
-        persona_ids: Optional[SequenceNotStr[str]] | Omit = omit,
-        platform_ids: Optional[SequenceNotStr[str]] | Omit = omit,
-        prompt_ids: Optional[SequenceNotStr[str]] | Omit = omit,
-        region_ids: Optional[SequenceNotStr[str]] | Omit = omit,
-        run_ids: Optional[SequenceNotStr[str]] | Omit = omit,
-        sort_by: Optional[Literal["occurrence", "assessment_count", "positive_sentiment", "negative_sentiment"]]
-        | Omit = omit,
-        sort_direction: Literal["asc", "desc"] | Omit = omit,
-        tag_filter_type: Literal["all", "any"] | Omit = omit,
-        tag_ids: Optional[SequenceNotStr[str]] | Omit = omit,
-        topic_ids: Optional[SequenceNotStr[str]] | Omit = omit,
+        filters: Iterable[report_query_sentiment_v2_params.Filter] | Omit = omit,
+        order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
+        pagination: Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1855,10 +1829,32 @@ class AsyncReportsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ReportQuerySentimentV2Response:
-        """
-        Query Sentiment V2
+        """Query Sentiment V2
 
         Args:
+          end_date: End date for the report.
+
+        Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full
+              ISO timestamp.
+
+          start_date: Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or
+              full ISO timestamp.
+
+          comparison_end_date: End of the previous period for delta computation.
+
+          comparison_start_date: Start of the previous period for delta computation.
+
+          date_interval: Date interval for the report. Only used when dimensions includes date.
+
+          dimensions: Dimensions to group the report by.
+
+          filters: List of filters to apply to the sentiment-v2 report.
+
+          order_by: Custom ordering of report results. Dimension keys must also be present in
+              dimensions. The sentiment metric orders by positive_sentiment.
+
+          pagination: Pagination settings for the report results.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -1874,29 +1870,15 @@ class AsyncReportsResource(AsyncAPIResource):
                     "asset_name": asset_name,
                     "category_id": category_id,
                     "end_date": end_date,
+                    "metrics": metrics,
                     "start_date": start_date,
-                    "claim_filters": claim_filters,
                     "comparison_end_date": comparison_end_date,
                     "comparison_start_date": comparison_start_date,
-                    "date_bucket": date_bucket,
-                    "exclude_topic_ids": exclude_topic_ids,
-                    "group_by": group_by,
-                    "include_no_persona": include_no_persona,
-                    "include_no_tag": include_no_tag,
-                    "limit": limit,
-                    "metrics": metrics,
-                    "offset": offset,
-                    "owned_asset_names_to_exclude": owned_asset_names_to_exclude,
-                    "persona_ids": persona_ids,
-                    "platform_ids": platform_ids,
-                    "prompt_ids": prompt_ids,
-                    "region_ids": region_ids,
-                    "run_ids": run_ids,
-                    "sort_by": sort_by,
-                    "sort_direction": sort_direction,
-                    "tag_filter_type": tag_filter_type,
-                    "tag_ids": tag_ids,
-                    "topic_ids": topic_ids,
+                    "date_interval": date_interval,
+                    "dimensions": dimensions,
+                    "filters": filters,
+                    "order_by": order_by,
+                    "pagination": pagination,
                 },
                 report_query_sentiment_v2_params.ReportQuerySentimentV2Params,
             ),

@@ -456,8 +456,9 @@ class TestReports:
         report = client.reports.query_sentiment_v2(
             asset_name="asset_name",
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            end_date="end_date",
-            start_date="start_date",
+            end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            metrics=["sentiment"],
+            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
         )
         assert_matches_type(ReportQuerySentimentV2Response, report, path=["response"])
 
@@ -467,35 +468,25 @@ class TestReports:
         report = client.reports.query_sentiment_v2(
             asset_name="asset_name",
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            end_date="end_date",
-            start_date="start_date",
-            claim_filters={
-                "claim": "claim",
-                "claim_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                "sentiment": "positive",
-                "theme_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            },
-            comparison_end_date="comparison_end_date",
-            comparison_start_date="comparison_start_date",
-            date_bucket="daily",
-            exclude_topic_ids=True,
-            group_by=["topic"],
-            include_no_persona=True,
-            include_no_tag=True,
-            limit=1,
+            end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             metrics=["sentiment"],
-            offset=0,
-            owned_asset_names_to_exclude=["string"],
-            persona_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-            platform_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-            prompt_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-            region_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-            run_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-            sort_by="occurrence",
-            sort_direction="asc",
-            tag_filter_type="all",
-            tag_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-            topic_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            comparison_end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            comparison_start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            date_interval="hour",
+            dimensions=["date"],
+            filters=[
+                {
+                    "field": "model_id",
+                    "operator": "is",
+                    "value": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                }
+            ],
+            order_by={"occurrence": "desc"},
+            pagination={
+                "limit": 1,
+                "offset": 0,
+            },
         )
         assert_matches_type(ReportQuerySentimentV2Response, report, path=["response"])
 
@@ -505,8 +496,9 @@ class TestReports:
         response = client.reports.with_raw_response.query_sentiment_v2(
             asset_name="asset_name",
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            end_date="end_date",
-            start_date="start_date",
+            end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            metrics=["sentiment"],
+            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
         )
 
         assert response.is_closed is True
@@ -520,8 +512,9 @@ class TestReports:
         with client.reports.with_streaming_response.query_sentiment_v2(
             asset_name="asset_name",
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            end_date="end_date",
-            start_date="start_date",
+            end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            metrics=["sentiment"],
+            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -1308,8 +1301,9 @@ class TestAsyncReports:
         report = await async_client.reports.query_sentiment_v2(
             asset_name="asset_name",
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            end_date="end_date",
-            start_date="start_date",
+            end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            metrics=["sentiment"],
+            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
         )
         assert_matches_type(ReportQuerySentimentV2Response, report, path=["response"])
 
@@ -1319,35 +1313,25 @@ class TestAsyncReports:
         report = await async_client.reports.query_sentiment_v2(
             asset_name="asset_name",
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            end_date="end_date",
-            start_date="start_date",
-            claim_filters={
-                "claim": "claim",
-                "claim_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                "sentiment": "positive",
-                "theme_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            },
-            comparison_end_date="comparison_end_date",
-            comparison_start_date="comparison_start_date",
-            date_bucket="daily",
-            exclude_topic_ids=True,
-            group_by=["topic"],
-            include_no_persona=True,
-            include_no_tag=True,
-            limit=1,
+            end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             metrics=["sentiment"],
-            offset=0,
-            owned_asset_names_to_exclude=["string"],
-            persona_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-            platform_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-            prompt_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-            region_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-            run_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-            sort_by="occurrence",
-            sort_direction="asc",
-            tag_filter_type="all",
-            tag_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-            topic_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            comparison_end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            comparison_start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            date_interval="hour",
+            dimensions=["date"],
+            filters=[
+                {
+                    "field": "model_id",
+                    "operator": "is",
+                    "value": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                }
+            ],
+            order_by={"occurrence": "desc"},
+            pagination={
+                "limit": 1,
+                "offset": 0,
+            },
         )
         assert_matches_type(ReportQuerySentimentV2Response, report, path=["response"])
 
@@ -1357,8 +1341,9 @@ class TestAsyncReports:
         response = await async_client.reports.with_raw_response.query_sentiment_v2(
             asset_name="asset_name",
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            end_date="end_date",
-            start_date="start_date",
+            end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            metrics=["sentiment"],
+            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
         )
 
         assert response.is_closed is True
@@ -1372,8 +1357,9 @@ class TestAsyncReports:
         async with async_client.reports.with_streaming_response.query_sentiment_v2(
             asset_name="asset_name",
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            end_date="end_date",
-            start_date="start_date",
+            end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            metrics=["sentiment"],
+            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
