@@ -18,10 +18,11 @@ from ...types import (
     report_stream_sentiment_params,
     report_stream_visibility_params,
     report_get_bots_report_v2_params,
+    report_query_sentiment_v2_params,
     report_get_referrals_report_params,
     report_get_referrals_report_v2_params,
 )
-from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
+from ..._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from .accuracy import (
     AccuracyResource,
@@ -63,6 +64,7 @@ from ...types.report_citations_response import ReportCitationsResponse
 from ...types.report_stream_citations_response import ReportStreamCitationsResponse
 from ...types.report_stream_sentiment_response import ReportStreamSentimentResponse
 from ...types.report_stream_visibility_response import ReportStreamVisibilityResponse
+from ...types.report_query_sentiment_v2_response import ReportQuerySentimentV2Response
 
 __all__ = ["ReportsResource", "AsyncReportsResource"]
 
@@ -640,6 +642,101 @@ class ReportsResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=ReportResponse,
+        )
+
+    def query_sentiment_v2(
+        self,
+        *,
+        asset_name: str,
+        category_id: str,
+        end_date: str,
+        start_date: str,
+        claim_filters: Optional[report_query_sentiment_v2_params.ClaimFilters] | Omit = omit,
+        comparison_end_date: Optional[str] | Omit = omit,
+        comparison_start_date: Optional[str] | Omit = omit,
+        date_bucket: Optional[Literal["daily", "weekly", "monthly"]] | Omit = omit,
+        exclude_topic_ids: bool | Omit = omit,
+        group_by: Optional[
+            List[
+                Literal[
+                    "topic", "region", "platform", "prompt", "persona", "tag", "theme", "claim", "run", "competitor"
+                ]
+            ]
+        ]
+        | Omit = omit,
+        include_no_persona: bool | Omit = omit,
+        include_no_tag: bool | Omit = omit,
+        limit: Optional[int] | Omit = omit,
+        metrics: Optional[List[Literal["sentiment", "occurrence"]]] | Omit = omit,
+        offset: int | Omit = omit,
+        owned_asset_names_to_exclude: SequenceNotStr[str] | Omit = omit,
+        persona_ids: Optional[SequenceNotStr[str]] | Omit = omit,
+        platform_ids: Optional[SequenceNotStr[str]] | Omit = omit,
+        prompt_ids: Optional[SequenceNotStr[str]] | Omit = omit,
+        region_ids: Optional[SequenceNotStr[str]] | Omit = omit,
+        run_ids: Optional[SequenceNotStr[str]] | Omit = omit,
+        sort_by: Optional[Literal["occurrence", "assessment_count", "positive_sentiment", "negative_sentiment"]]
+        | Omit = omit,
+        sort_direction: Literal["asc", "desc"] | Omit = omit,
+        tag_filter_type: Literal["all", "any"] | Omit = omit,
+        tag_ids: Optional[SequenceNotStr[str]] | Omit = omit,
+        topic_ids: Optional[SequenceNotStr[str]] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ReportQuerySentimentV2Response:
+        """
+        Query Sentiment V2
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/v1/reports/sentiment-v2",
+            body=maybe_transform(
+                {
+                    "asset_name": asset_name,
+                    "category_id": category_id,
+                    "end_date": end_date,
+                    "start_date": start_date,
+                    "claim_filters": claim_filters,
+                    "comparison_end_date": comparison_end_date,
+                    "comparison_start_date": comparison_start_date,
+                    "date_bucket": date_bucket,
+                    "exclude_topic_ids": exclude_topic_ids,
+                    "group_by": group_by,
+                    "include_no_persona": include_no_persona,
+                    "include_no_tag": include_no_tag,
+                    "limit": limit,
+                    "metrics": metrics,
+                    "offset": offset,
+                    "owned_asset_names_to_exclude": owned_asset_names_to_exclude,
+                    "persona_ids": persona_ids,
+                    "platform_ids": platform_ids,
+                    "prompt_ids": prompt_ids,
+                    "region_ids": region_ids,
+                    "run_ids": run_ids,
+                    "sort_by": sort_by,
+                    "sort_direction": sort_direction,
+                    "tag_filter_type": tag_filter_type,
+                    "tag_ids": tag_ids,
+                    "topic_ids": topic_ids,
+                },
+                report_query_sentiment_v2_params.ReportQuerySentimentV2Params,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ReportQuerySentimentV2Response,
         )
 
     def sentiment(
@@ -1714,6 +1811,101 @@ class AsyncReportsResource(AsyncAPIResource):
             cast_to=ReportResponse,
         )
 
+    async def query_sentiment_v2(
+        self,
+        *,
+        asset_name: str,
+        category_id: str,
+        end_date: str,
+        start_date: str,
+        claim_filters: Optional[report_query_sentiment_v2_params.ClaimFilters] | Omit = omit,
+        comparison_end_date: Optional[str] | Omit = omit,
+        comparison_start_date: Optional[str] | Omit = omit,
+        date_bucket: Optional[Literal["daily", "weekly", "monthly"]] | Omit = omit,
+        exclude_topic_ids: bool | Omit = omit,
+        group_by: Optional[
+            List[
+                Literal[
+                    "topic", "region", "platform", "prompt", "persona", "tag", "theme", "claim", "run", "competitor"
+                ]
+            ]
+        ]
+        | Omit = omit,
+        include_no_persona: bool | Omit = omit,
+        include_no_tag: bool | Omit = omit,
+        limit: Optional[int] | Omit = omit,
+        metrics: Optional[List[Literal["sentiment", "occurrence"]]] | Omit = omit,
+        offset: int | Omit = omit,
+        owned_asset_names_to_exclude: SequenceNotStr[str] | Omit = omit,
+        persona_ids: Optional[SequenceNotStr[str]] | Omit = omit,
+        platform_ids: Optional[SequenceNotStr[str]] | Omit = omit,
+        prompt_ids: Optional[SequenceNotStr[str]] | Omit = omit,
+        region_ids: Optional[SequenceNotStr[str]] | Omit = omit,
+        run_ids: Optional[SequenceNotStr[str]] | Omit = omit,
+        sort_by: Optional[Literal["occurrence", "assessment_count", "positive_sentiment", "negative_sentiment"]]
+        | Omit = omit,
+        sort_direction: Literal["asc", "desc"] | Omit = omit,
+        tag_filter_type: Literal["all", "any"] | Omit = omit,
+        tag_ids: Optional[SequenceNotStr[str]] | Omit = omit,
+        topic_ids: Optional[SequenceNotStr[str]] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ReportQuerySentimentV2Response:
+        """
+        Query Sentiment V2
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/v1/reports/sentiment-v2",
+            body=await async_maybe_transform(
+                {
+                    "asset_name": asset_name,
+                    "category_id": category_id,
+                    "end_date": end_date,
+                    "start_date": start_date,
+                    "claim_filters": claim_filters,
+                    "comparison_end_date": comparison_end_date,
+                    "comparison_start_date": comparison_start_date,
+                    "date_bucket": date_bucket,
+                    "exclude_topic_ids": exclude_topic_ids,
+                    "group_by": group_by,
+                    "include_no_persona": include_no_persona,
+                    "include_no_tag": include_no_tag,
+                    "limit": limit,
+                    "metrics": metrics,
+                    "offset": offset,
+                    "owned_asset_names_to_exclude": owned_asset_names_to_exclude,
+                    "persona_ids": persona_ids,
+                    "platform_ids": platform_ids,
+                    "prompt_ids": prompt_ids,
+                    "region_ids": region_ids,
+                    "run_ids": run_ids,
+                    "sort_by": sort_by,
+                    "sort_direction": sort_direction,
+                    "tag_filter_type": tag_filter_type,
+                    "tag_ids": tag_ids,
+                    "topic_ids": topic_ids,
+                },
+                report_query_sentiment_v2_params.ReportQuerySentimentV2Params,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ReportQuerySentimentV2Response,
+        )
+
     async def sentiment(
         self,
         *,
@@ -2233,6 +2425,9 @@ class ReportsResourceWithRawResponse:
         self.query_fanouts = to_raw_response_wrapper(
             reports.query_fanouts,
         )
+        self.query_sentiment_v2 = to_raw_response_wrapper(
+            reports.query_sentiment_v2,
+        )
         self.sentiment = to_raw_response_wrapper(
             reports.sentiment,
         )
@@ -2283,6 +2478,9 @@ class AsyncReportsResourceWithRawResponse:
         )
         self.query_fanouts = async_to_raw_response_wrapper(
             reports.query_fanouts,
+        )
+        self.query_sentiment_v2 = async_to_raw_response_wrapper(
+            reports.query_sentiment_v2,
         )
         self.sentiment = async_to_raw_response_wrapper(
             reports.sentiment,
@@ -2335,6 +2533,9 @@ class ReportsResourceWithStreamingResponse:
         self.query_fanouts = to_streamed_response_wrapper(
             reports.query_fanouts,
         )
+        self.query_sentiment_v2 = to_streamed_response_wrapper(
+            reports.query_sentiment_v2,
+        )
         self.sentiment = to_streamed_response_wrapper(
             reports.sentiment,
         )
@@ -2385,6 +2586,9 @@ class AsyncReportsResourceWithStreamingResponse:
         )
         self.query_fanouts = async_to_streamed_response_wrapper(
             reports.query_fanouts,
+        )
+        self.query_sentiment_v2 = async_to_streamed_response_wrapper(
+            reports.query_sentiment_v2,
         )
         self.sentiment = async_to_streamed_response_wrapper(
             reports.sentiment,

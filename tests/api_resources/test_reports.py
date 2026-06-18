@@ -12,6 +12,7 @@ from tests.utils import assert_matches_type
 from profound.types import (
     ReportResponse,
     ReportCitationsResponse,
+    ReportQuerySentimentV2Response,
 )
 from profound._utils import parse_datetime
 
@@ -446,6 +447,87 @@ class TestReports:
 
             report = response.parse()
             assert_matches_type(ReportResponse, report, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_query_sentiment_v2(self, client: Profound) -> None:
+        report = client.reports.query_sentiment_v2(
+            asset_name="asset_name",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            end_date="end_date",
+            start_date="start_date",
+        )
+        assert_matches_type(ReportQuerySentimentV2Response, report, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_query_sentiment_v2_with_all_params(self, client: Profound) -> None:
+        report = client.reports.query_sentiment_v2(
+            asset_name="asset_name",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            end_date="end_date",
+            start_date="start_date",
+            claim_filters={
+                "claim": "claim",
+                "claim_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "sentiment": "positive",
+                "theme_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            },
+            comparison_end_date="comparison_end_date",
+            comparison_start_date="comparison_start_date",
+            date_bucket="daily",
+            exclude_topic_ids=True,
+            group_by=["topic"],
+            include_no_persona=True,
+            include_no_tag=True,
+            limit=1,
+            metrics=["sentiment"],
+            offset=0,
+            owned_asset_names_to_exclude=["string"],
+            persona_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            platform_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            prompt_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            region_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            run_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            sort_by="occurrence",
+            sort_direction="asc",
+            tag_filter_type="all",
+            tag_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            topic_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+        )
+        assert_matches_type(ReportQuerySentimentV2Response, report, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_query_sentiment_v2(self, client: Profound) -> None:
+        response = client.reports.with_raw_response.query_sentiment_v2(
+            asset_name="asset_name",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            end_date="end_date",
+            start_date="start_date",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        report = response.parse()
+        assert_matches_type(ReportQuerySentimentV2Response, report, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_query_sentiment_v2(self, client: Profound) -> None:
+        with client.reports.with_streaming_response.query_sentiment_v2(
+            asset_name="asset_name",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            end_date="end_date",
+            start_date="start_date",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            report = response.parse()
+            assert_matches_type(ReportQuerySentimentV2Response, report, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -1217,6 +1299,87 @@ class TestAsyncReports:
 
             report = await response.parse()
             assert_matches_type(ReportResponse, report, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_query_sentiment_v2(self, async_client: AsyncProfound) -> None:
+        report = await async_client.reports.query_sentiment_v2(
+            asset_name="asset_name",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            end_date="end_date",
+            start_date="start_date",
+        )
+        assert_matches_type(ReportQuerySentimentV2Response, report, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_query_sentiment_v2_with_all_params(self, async_client: AsyncProfound) -> None:
+        report = await async_client.reports.query_sentiment_v2(
+            asset_name="asset_name",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            end_date="end_date",
+            start_date="start_date",
+            claim_filters={
+                "claim": "claim",
+                "claim_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "sentiment": "positive",
+                "theme_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            },
+            comparison_end_date="comparison_end_date",
+            comparison_start_date="comparison_start_date",
+            date_bucket="daily",
+            exclude_topic_ids=True,
+            group_by=["topic"],
+            include_no_persona=True,
+            include_no_tag=True,
+            limit=1,
+            metrics=["sentiment"],
+            offset=0,
+            owned_asset_names_to_exclude=["string"],
+            persona_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            platform_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            prompt_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            region_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            run_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            sort_by="occurrence",
+            sort_direction="asc",
+            tag_filter_type="all",
+            tag_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            topic_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+        )
+        assert_matches_type(ReportQuerySentimentV2Response, report, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_query_sentiment_v2(self, async_client: AsyncProfound) -> None:
+        response = await async_client.reports.with_raw_response.query_sentiment_v2(
+            asset_name="asset_name",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            end_date="end_date",
+            start_date="start_date",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        report = await response.parse()
+        assert_matches_type(ReportQuerySentimentV2Response, report, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_query_sentiment_v2(self, async_client: AsyncProfound) -> None:
+        async with async_client.reports.with_streaming_response.query_sentiment_v2(
+            asset_name="asset_name",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            end_date="end_date",
+            start_date="start_date",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            report = await response.parse()
+            assert_matches_type(ReportQuerySentimentV2Response, report, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
