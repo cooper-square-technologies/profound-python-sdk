@@ -114,6 +114,7 @@ from profound.types import (
     TopicNameFilter,
     URLFilter,
     ReportCitationsResponse,
+    ReportQuerySentimentV2Response,
     ReportStreamCitationsResponse,
     ReportStreamSentimentResponse,
     ReportStreamVisibilityResponse,
@@ -128,6 +129,7 @@ Methods:
 - <code title="post /v1/reports/referrals">client.reports.<a href="./src/profound/resources/reports/reports.py">get_referrals_report</a>(\*\*<a href="src/profound/types/report_get_referrals_report_params.py">params</a>) -> <a href="./src/profound/types/report_response.py">ReportResponse</a></code>
 - <code title="post /v2/reports/referrals">client.reports.<a href="./src/profound/resources/reports/reports.py">get_referrals_report_v2</a>(\*\*<a href="src/profound/types/report_get_referrals_report_v2_params.py">params</a>) -> <a href="./src/profound/types/report_response.py">ReportResponse</a></code>
 - <code title="post /v1/reports/query-fanouts">client.reports.<a href="./src/profound/resources/reports/reports.py">query_fanouts</a>(\*\*<a href="src/profound/types/report_query_fanouts_params.py">params</a>) -> <a href="./src/profound/types/report_response.py">ReportResponse</a></code>
+- <code title="post /v1/reports/sentiment-v2">client.reports.<a href="./src/profound/resources/reports/reports.py">query_sentiment_v2</a>(\*\*<a href="src/profound/types/report_query_sentiment_v2_params.py">params</a>) -> <a href="./src/profound/types/report_query_sentiment_v2_response.py">ReportQuerySentimentV2Response</a></code>
 - <code title="post /v1/reports/sentiment">client.reports.<a href="./src/profound/resources/reports/reports.py">sentiment</a>(\*\*<a href="src/profound/types/report_sentiment_params.py">params</a>) -> <a href="./src/profound/types/report_response.py">ReportResponse</a></code>
 - <code title="post /v1/reports/citations/stream">client.reports.<a href="./src/profound/resources/reports/reports.py">stream_citations</a>(\*\*<a href="src/profound/types/report_stream_citations_params.py">params</a>) -> <a href="./src/profound/types/report_stream_citations_response.py">ReportStreamCitationsResponse</a></code>
 - <code title="post /v1/reports/sentiment/stream">client.reports.<a href="./src/profound/resources/reports/reports.py">stream_sentiment</a>(\*\*<a href="src/profound/types/report_stream_sentiment_params.py">params</a>) -> <a href="./src/profound/types/report_stream_sentiment_response.py">ReportStreamSentimentResponse</a></code>
