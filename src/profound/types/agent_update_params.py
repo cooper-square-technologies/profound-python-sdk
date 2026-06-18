@@ -13,6 +13,6 @@ class AgentUpdateParams(TypedDict, total=False):
     """New workflow graph for the agent's draft version.
 
     Replaces the current draft graph; the agent is iterated in place rather than
-    re-created, so its ID is stable. Required — Magi rejects a null graph, so an
-    empty update is a 422 here rather than a relayed upstream error.
+    re-created, so its ID is stable. Required — a null graph is rejected as a 422
+    here rather than as a relayed upstream error.
     """
