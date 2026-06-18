@@ -263,6 +263,7 @@ from profound.types import (
     AgentUpdateResponse,
     AgentListResponse,
     AgentPublishResponse,
+    AgentRetrieveGraphResponse,
 )
 ```
 
@@ -273,6 +274,7 @@ Methods:
 - <code title="patch /v1/agents/{agent_id}">client.agents.<a href="./src/profound/resources/agents/agents.py">update</a>(agent_id, \*\*<a href="src/profound/types/agent_update_params.py">params</a>) -> <a href="./src/profound/types/agent_update_response.py">AgentUpdateResponse</a></code>
 - <code title="get /v1/agents">client.agents.<a href="./src/profound/resources/agents/agents.py">list</a>(\*\*<a href="src/profound/types/agent_list_params.py">params</a>) -> <a href="./src/profound/types/agent_list_response.py">AgentListResponse</a></code>
 - <code title="post /v1/agents/{agent_id}/publish">client.agents.<a href="./src/profound/resources/agents/agents.py">publish</a>(agent_id) -> <a href="./src/profound/types/agent_publish_response.py">AgentPublishResponse</a></code>
+- <code title="get /v1/agents/{agent_id}/graph">client.agents.<a href="./src/profound/resources/agents/agents.py">retrieve_graph</a>(agent_id, \*\*<a href="src/profound/types/agent_retrieve_graph_params.py">params</a>) -> <a href="./src/profound/types/agent_retrieve_graph_response.py">AgentRetrieveGraphResponse</a></code>
 
 ## Runs
 
