@@ -32,5 +32,31 @@ class NodeTypeRetrieveSchemaResponse(BaseModel):
     description: Optional[str] = None
     """Short description of what the node type does, if provided."""
 
+    docs_version: Optional[str] = None
+    """
+    Opaque version string for `documentation`/`examples`, independent of
+    `schema_version`. Bumps when the authoring guidance changes even if the
+    underlying machine `schema` did not. When it trails the live `schema_version`,
+    treat `documentation`/`examples` as guidance that may be stale and validate
+    against the live `schema`.
+    """
+
+    documentation: Optional[Dict[str, object]] = None
+    """
+    Opaque, human-oriented authoring guidance for the node type — purpose,
+    constraints, enum values, and variable-flow notes that the machine `schema` does
+    not always express (e.g. a conditional's else-branch rule, or an iteration's
+    sub-graph shape). Treat as an arbitrary object; use `docs_version` as its cache
+    key.
+    """
+
     examples: Optional[List[Dict[str, object]]] = None
-    """Worked example configurations for the node type that conform to `schema`."""
+    """Worked example configurations for the node type, in the canonical graph dialect.
+
+    These are curated guidance maintained by external-api, versioned by
+    `docs_version` (NOT `schema_version`): they illustrate a valid shape at curation
+    time but are a starting point, not the contract — they may lag the validator.
+    The authoritative contract is `schema`, and the only authoritative check that a
+    graph is valid is publishing it (or the agent-validation endpoint). Do not parse
+    `examples` as the schema.
+    """
