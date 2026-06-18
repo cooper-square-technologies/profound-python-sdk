@@ -15,7 +15,13 @@ from .runs import (
     RunsResourceWithStreamingResponse,
     AsyncRunsResourceWithStreamingResponse,
 )
-from ...types import agent_list_params, agent_create_params, agent_update_params, agent_retrieve_params
+from ...types import (
+    agent_list_params,
+    agent_create_params,
+    agent_update_params,
+    agent_retrieve_params,
+    agent_retrieve_graph_params,
+)
 from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
@@ -40,6 +46,7 @@ from ...types.agent_create_response import AgentCreateResponse
 from ...types.agent_update_response import AgentUpdateResponse
 from ...types.agent_publish_response import AgentPublishResponse
 from ...types.agent_retrieve_response import AgentRetrieveResponse
+from ...types.agent_retrieve_graph_response import AgentRetrieveGraphResponse
 
 __all__ = ["AgentsResource", "AsyncAgentsResource"]
 
@@ -317,6 +324,55 @@ class AgentsResource(SyncAPIResource):
             cast_to=AgentPublishResponse,
         )
 
+    def retrieve_graph(
+        self,
+        agent_id: str,
+        *,
+        version: Literal["published", "draft"] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AgentRetrieveGraphResponse:
+        """
+        Retrieve an agent's full workflow graph (`{nodes, edges}`).
+
+        The graph is returned verbatim in the canonical dialect — the same shape
+        `POST /v1/agents` and `PATCH /v1/agents/{agent_id}` accept — so a known-good
+        agent can be read back, copied, and edited. Tool-backed nodes appear in their
+        lowered `tool` form rather than the friendly v1 node types. A `draft` is visible
+        only to its creator; the `published` version is visible across its organization.
+
+        Args:
+          agent_id: The ID of the agent whose graph to retrieve.
+
+          version: Version of the agent whose graph to retrieve. Use `published` for the live
+              version, or `draft` for the latest unpublished changes. Defaults to `published`.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not agent_id:
+            raise ValueError(f"Expected a non-empty value for `agent_id` but received {agent_id!r}")
+        return self._get(
+            path_template("/v1/agents/{agent_id}/graph", agent_id=agent_id),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform({"version": version}, agent_retrieve_graph_params.AgentRetrieveGraphParams),
+            ),
+            cast_to=AgentRetrieveGraphResponse,
+        )
+
 
 class AsyncAgentsResource(AsyncAPIResource):
     @cached_property
@@ -591,6 +647,57 @@ class AsyncAgentsResource(AsyncAPIResource):
             cast_to=AgentPublishResponse,
         )
 
+    async def retrieve_graph(
+        self,
+        agent_id: str,
+        *,
+        version: Literal["published", "draft"] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AgentRetrieveGraphResponse:
+        """
+        Retrieve an agent's full workflow graph (`{nodes, edges}`).
+
+        The graph is returned verbatim in the canonical dialect — the same shape
+        `POST /v1/agents` and `PATCH /v1/agents/{agent_id}` accept — so a known-good
+        agent can be read back, copied, and edited. Tool-backed nodes appear in their
+        lowered `tool` form rather than the friendly v1 node types. A `draft` is visible
+        only to its creator; the `published` version is visible across its organization.
+
+        Args:
+          agent_id: The ID of the agent whose graph to retrieve.
+
+          version: Version of the agent whose graph to retrieve. Use `published` for the live
+              version, or `draft` for the latest unpublished changes. Defaults to `published`.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not agent_id:
+            raise ValueError(f"Expected a non-empty value for `agent_id` but received {agent_id!r}")
+        return await self._get(
+            path_template("/v1/agents/{agent_id}/graph", agent_id=agent_id),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {"version": version}, agent_retrieve_graph_params.AgentRetrieveGraphParams
+                ),
+            ),
+            cast_to=AgentRetrieveGraphResponse,
+        )
+
 
 class AgentsResourceWithRawResponse:
     def __init__(self, agents: AgentsResource) -> None:
@@ -610,6 +717,9 @@ class AgentsResourceWithRawResponse:
         )
         self.publish = to_raw_response_wrapper(
             agents.publish,
+        )
+        self.retrieve_graph = to_raw_response_wrapper(
+            agents.retrieve_graph,
         )
 
     @cached_property
@@ -640,6 +750,9 @@ class AsyncAgentsResourceWithRawResponse:
         self.publish = async_to_raw_response_wrapper(
             agents.publish,
         )
+        self.retrieve_graph = async_to_raw_response_wrapper(
+            agents.retrieve_graph,
+        )
 
     @cached_property
     def runs(self) -> AsyncRunsResourceWithRawResponse:
@@ -669,6 +782,9 @@ class AgentsResourceWithStreamingResponse:
         self.publish = to_streamed_response_wrapper(
             agents.publish,
         )
+        self.retrieve_graph = to_streamed_response_wrapper(
+            agents.retrieve_graph,
+        )
 
     @cached_property
     def runs(self) -> RunsResourceWithStreamingResponse:
@@ -697,6 +813,9 @@ class AsyncAgentsResourceWithStreamingResponse:
         )
         self.publish = async_to_streamed_response_wrapper(
             agents.publish,
+        )
+        self.retrieve_graph = async_to_streamed_response_wrapper(
+            agents.retrieve_graph,
         )
 
     @cached_property
