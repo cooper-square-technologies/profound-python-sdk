@@ -27,6 +27,8 @@ class AccuracyCreateOverviewParams(TypedDict, total=False):
 
     exclude_topic_ids: bool
 
+    group_by: Literal["period", "theme"]
+
     include_no_persona: bool
 
     include_no_tag: bool
