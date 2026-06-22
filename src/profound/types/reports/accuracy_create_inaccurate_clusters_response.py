@@ -18,8 +18,6 @@ class Data(BaseModel):
 
     cluster_id: str = FieldInfo(alias="clusterId")
 
-    description: str
-
     kb_path: str = FieldInfo(alias="kbPath")
 
     kb_snippet: str = FieldInfo(alias="kbSnippet")
@@ -31,6 +29,8 @@ class Data(BaseModel):
     response_share: float = FieldInfo(alias="responseShare")
 
     total_response_count: int = FieldInfo(alias="totalResponseCount")
+
+    description: Optional[str] = None
 
     response_share_delta: Optional[float] = FieldInfo(alias="responseShareDelta", default=None)
 
