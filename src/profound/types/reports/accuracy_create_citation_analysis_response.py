@@ -31,6 +31,10 @@ class Claim(BaseModel):
 
     snippet: str
 
+    kb_path: Optional[str] = FieldInfo(alias="kbPath", default=None)
+
+    kb_snippet: Optional[str] = FieldInfo(alias="kbSnippet", default=None)
+
     polarity: Optional[Literal["positive", "negative"]] = None
 
 

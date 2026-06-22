@@ -10,8 +10,6 @@ __all__ = ["AccuracyCreateInaccurateThemesResponse", "Data"]
 
 
 class Data(BaseModel):
-    description: str
-
     inaccurate_claim_count: int = FieldInfo(alias="inaccurateClaimCount")
 
     inaccurate_cluster_count: int = FieldInfo(alias="inaccurateClusterCount")
@@ -29,6 +27,8 @@ class Data(BaseModel):
     total_cluster_count: int = FieldInfo(alias="totalClusterCount")
 
     total_response_count: int = FieldInfo(alias="totalResponseCount")
+
+    description: Optional[str] = None
 
     response_share_delta: Optional[float] = FieldInfo(alias="responseShareDelta", default=None)
 
