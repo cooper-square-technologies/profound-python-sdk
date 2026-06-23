@@ -25,3 +25,5 @@ class Data(BaseModel):
 
 class AccuracyCreateClusterVerificationPairsResponse(BaseModel):
     data: List[Data]
+
+    cluster_reasoning: Optional[str] = FieldInfo(alias="clusterReasoning", default=None)
