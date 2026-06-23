@@ -16,6 +16,8 @@ class Data(BaseModel):
 
     citation_share: float = FieldInfo(alias="citationShare")
 
+    domain_category: str = FieldInfo(alias="domainCategory")
+
     hostname: str
 
     href: str
