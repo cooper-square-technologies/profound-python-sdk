@@ -7,7 +7,15 @@ from pydantic import Field as FieldInfo
 
 from ..._models import BaseModel
 
-__all__ = ["AccuracyCreateCitationAnalysisResponse", "Claim"]
+__all__ = ["AccuracyCreateCitationAnalysisResponse", "Claim", "ClaimEvidence"]
+
+
+class ClaimEvidence(BaseModel):
+    """A single knowledge-base ground-truth snippet that refutes a claim's cluster."""
+
+    kb_path: Optional[str] = FieldInfo(alias="kbPath", default=None)
+
+    kb_snippet: Optional[str] = FieldInfo(alias="kbSnippet", default=None)
 
 
 class Claim(BaseModel):
@@ -15,6 +23,11 @@ class Claim(BaseModel):
 
     ``attribute`` carries the cluster's canonical claim so the drawer can group
     claims the same way it groups sentiment attributes.
+
+    ``reasoning`` and ``evidence`` mirror the cluster's FactCheck verdict: the
+    "why it's inaccurate" explanation plus the refuting knowledge-base snippets
+    surfaced in the Claim Analysis drawer. ``kb_path``/``kb_snippet`` are retained
+    as the cluster's single representative snippet for backward compatibility.
     """
 
     attribute: str
@@ -31,11 +44,15 @@ class Claim(BaseModel):
 
     snippet: str
 
+    evidence: Optional[List[ClaimEvidence]] = None
+
     kb_path: Optional[str] = FieldInfo(alias="kbPath", default=None)
 
     kb_snippet: Optional[str] = FieldInfo(alias="kbSnippet", default=None)
 
     polarity: Optional[Literal["positive", "negative"]] = None
+
+    reasoning: Optional[str] = None
 
 
 class AccuracyCreateCitationAnalysisResponse(BaseModel):
