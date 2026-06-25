@@ -61,6 +61,12 @@ class DataScores(BaseModel):
 class DataGroupMetadata(BaseModel):
     asset_name: Optional[str] = None
 
+    child_count_matching: Optional[int] = None
+
+    child_count_total: Optional[int] = None
+
+    child_matches_search: Optional[bool] = None
+
     claim: Optional[str] = None
 
     claim_id: Optional[str] = None
@@ -68,6 +74,8 @@ class DataGroupMetadata(BaseModel):
     created_at: Optional[str] = None
 
     api_model_id: Optional[str] = FieldInfo(alias="model_id", default=None)
+
+    parent_matches_search: Optional[bool] = None
 
     persona_id: Optional[str] = None
 
