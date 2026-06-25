@@ -114,6 +114,7 @@ class Include(TypedDict, total=False):
     search_triggered: bool
 
     sentiment_themes: bool
+    """Uses legacy sentiment data."""
 
     tags: bool
 

@@ -92,6 +92,7 @@ class Data(BaseModel):
     search_triggered: Optional[bool] = None
 
     sentiment_themes: Optional[List[DataSentimentTheme]] = None
+    """Uses legacy sentiment data."""
 
     tags: Optional[List[str]] = None
 
