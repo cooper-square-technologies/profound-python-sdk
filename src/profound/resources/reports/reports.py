@@ -14,15 +14,23 @@ from ...types import (
     report_visibility_params,
     report_query_fanouts_params,
     report_get_bots_report_params,
+    report_query_citations_params,
+    report_query_sentiment_params,
+    report_query_fanouts_v2_params,
+    report_query_visibility_params,
     report_stream_citations_params,
     report_stream_sentiment_params,
     report_stream_visibility_params,
     report_get_bots_report_v2_params,
     report_query_sentiment_v2_params,
+    report_stream_citations_v2_params,
+    report_stream_sentiment_v2_params,
     report_get_referrals_report_params,
+    report_stream_query_fanouts_params,
+    report_stream_visibility_v2_params,
     report_get_referrals_report_v2_params,
 )
-from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
+from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from .accuracy import (
     AccuracyResource,
@@ -61,6 +69,10 @@ from .web_search_results import (
 from ...types.report_response import ReportResponse
 from ...types.shared_params.pagination import Pagination
 from ...types.report_citations_response import ReportCitationsResponse
+from ...types.report_query_citations_response import ReportQueryCitationsResponse
+from ...types.report_query_sentiment_response import ReportQuerySentimentResponse
+from ...types.report_query_fanouts_v2_response import ReportQueryFanoutsV2Response
+from ...types.report_query_visibility_response import ReportQueryVisibilityResponse
 from ...types.report_stream_citations_response import ReportStreamCitationsResponse
 from ...types.report_stream_sentiment_response import ReportStreamSentimentResponse
 from ...types.report_stream_visibility_response import ReportStreamVisibilityResponse
@@ -575,6 +587,76 @@ class ReportsResource(SyncAPIResource):
             cast_to=ReportResponse,
         )
 
+    def query_citations(
+        self,
+        *,
+        category_id: str,
+        end_date: str,
+        start_date: str,
+        cursor: Optional[str] | Omit = omit,
+        filter: Optional[report_query_citations_params.Filter] | Omit = omit,
+        group_by: List[Literal["page", "date", "model", "topic", "region", "persona", "prompt"]] | Omit = omit,
+        interval: Literal["day", "week", "month"] | Omit = omit,
+        limit: Optional[int] | Omit = omit,
+        max_results: Optional[int] | Omit = omit,
+        metrics: Optional[List[Literal["count", "citation_share", "rank", "first_cited_at"]]] | Omit = omit,
+        scope: Literal["all", "owned"] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ReportQueryCitationsResponse:
+        """
+        Query Citations V2
+
+        Args:
+          end_date: YYYY-MM-DD, ET, inclusive
+
+          start_date: YYYY-MM-DD, ET, inclusive
+
+          filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
+
+          limit: Page size; default 10, max 50.
+
+          max_results: Stream endpoint only: cap the number of streamed rows (default: all).
+
+          scope: `all` (every cited domain) or `owned` (only your owned domains, for easy
+              client-side totals).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/v2/reports/citations",
+            body=maybe_transform(
+                {
+                    "category_id": category_id,
+                    "end_date": end_date,
+                    "start_date": start_date,
+                    "cursor": cursor,
+                    "filter": filter,
+                    "group_by": group_by,
+                    "interval": interval,
+                    "limit": limit,
+                    "max_results": max_results,
+                    "metrics": metrics,
+                    "scope": scope,
+                },
+                report_query_citations_params.ReportQueryCitationsParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ReportQueryCitationsResponse,
+        )
+
     def query_fanouts(
         self,
         *,
@@ -642,6 +724,162 @@ class ReportsResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=ReportResponse,
+        )
+
+    def query_fanouts_v2(
+        self,
+        *,
+        category_id: str,
+        end_date: str,
+        start_date: str,
+        cursor: Optional[str] | Omit = omit,
+        filter: Optional[report_query_fanouts_v2_params.Filter] | Omit = omit,
+        group_by: List[Literal["date", "model", "region", "prompt", "query"]] | Omit = omit,
+        interval: Literal["day", "week", "month"] | Omit = omit,
+        limit: Optional[int] | Omit = omit,
+        max_results: Optional[int] | Omit = omit,
+        metrics: Optional[List[Literal["fanouts_per_execution", "total_fanouts", "share", "query_variations"]]]
+        | Omit = omit,
+        sort: Optional[report_query_fanouts_v2_params.Sort] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ReportQueryFanoutsV2Response:
+        """
+        Query Fanouts V2
+
+        Args:
+          end_date: YYYY-MM-DD, ET, inclusive
+
+          start_date: YYYY-MM-DD, ET, inclusive
+
+          filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
+
+          limit: Page size; default 10, max 50.
+
+          max_results: Stream endpoint only: cap the number of streamed rows (default: all).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/v2/reports/query-fanouts",
+            body=maybe_transform(
+                {
+                    "category_id": category_id,
+                    "end_date": end_date,
+                    "start_date": start_date,
+                    "cursor": cursor,
+                    "filter": filter,
+                    "group_by": group_by,
+                    "interval": interval,
+                    "limit": limit,
+                    "max_results": max_results,
+                    "metrics": metrics,
+                    "sort": sort,
+                },
+                report_query_fanouts_v2_params.ReportQueryFanoutsV2Params,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ReportQueryFanoutsV2Response,
+        )
+
+    def query_sentiment(
+        self,
+        *,
+        asset: str,
+        category_id: str,
+        end_date: str,
+        start_date: str,
+        comparison_end_date: Optional[str] | Omit = omit,
+        comparison_start_date: Optional[str] | Omit = omit,
+        cursor: Optional[str] | Omit = omit,
+        filter: Optional[report_query_sentiment_params.Filter] | Omit = omit,
+        group_by: List[
+            Literal[
+                "date", "model", "topic", "region", "prompt", "persona", "tag", "theme", "claim", "run", "competitor"
+            ]
+        ]
+        | Omit = omit,
+        include_cited_websites: bool | Omit = omit,
+        interval: Literal["day", "week", "month"] | Omit = omit,
+        limit: Optional[int] | Omit = omit,
+        max_results: Optional[int] | Omit = omit,
+        metrics: Optional[List[Literal["positive_sentiment", "negative_sentiment", "occurrence"]]] | Omit = omit,
+        sort: report_query_sentiment_params.Sort | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ReportQuerySentimentResponse:
+        """
+        Query Sentiment V2
+
+        Args:
+          asset: The brand name to analyze (sentiment is extracted on name, not id).
+
+          end_date: YYYY-MM-DD, ET, inclusive
+
+          start_date: YYYY-MM-DD, ET, inclusive
+
+          comparison_end_date: YYYY-MM-DD, ET, inclusive (with start).
+
+          comparison_start_date: YYYY-MM-DD, ET, inclusive (with end).
+
+          filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
+
+          include_cited_websites: Return cited websites per row (only when grouping by `theme`/`claim`).
+
+          limit: Page size; default 10, max 50.
+
+          max_results: Stream endpoint only: cap the number of streamed rows (default: all).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/v2/reports/sentiment",
+            body=maybe_transform(
+                {
+                    "asset": asset,
+                    "category_id": category_id,
+                    "end_date": end_date,
+                    "start_date": start_date,
+                    "comparison_end_date": comparison_end_date,
+                    "comparison_start_date": comparison_start_date,
+                    "cursor": cursor,
+                    "filter": filter,
+                    "group_by": group_by,
+                    "include_cited_websites": include_cited_websites,
+                    "interval": interval,
+                    "limit": limit,
+                    "max_results": max_results,
+                    "metrics": metrics,
+                    "sort": sort,
+                },
+                report_query_sentiment_params.ReportQuerySentimentParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ReportQuerySentimentResponse,
         )
 
     def query_sentiment_v2(
@@ -728,6 +966,79 @@ class ReportsResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=ReportQuerySentimentV2Response,
+        )
+
+    def query_visibility(
+        self,
+        *,
+        category_id: str,
+        end_date: str,
+        start_date: str,
+        assets: Optional[report_query_visibility_params.Assets] | Omit = omit,
+        cursor: Optional[str] | Omit = omit,
+        filter: Optional[report_query_visibility_params.Filter] | Omit = omit,
+        group_by: List[Literal["date", "model", "topic", "region", "prompt", "persona", "tag"]] | Omit = omit,
+        interval: Literal["day", "week", "month"] | Omit = omit,
+        limit: Optional[int] | Omit = omit,
+        max_results: Optional[int] | Omit = omit,
+        metrics: Optional[List[Literal["visibility_score", "share_of_voice", "average_position"]]] | Omit = omit,
+        scope: Literal["owned", "all"] | Omit = omit,
+        sort: report_query_visibility_params.Sort | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ReportQueryVisibilityResponse:
+        """
+        Query Visibility V2
+
+        Args:
+          end_date: YYYY-MM-DD, ET, inclusive
+
+          start_date: YYYY-MM-DD, ET, inclusive
+
+          assets: A name (`is`), a list (`in`), or {op,value} with op `is`/`in`/`not_in`.
+
+          filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
+
+          limit: Page size; default 10, max 50.
+
+          max_results: Stream endpoint only: cap the number of streamed rows (default: all).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/v2/reports/visibility",
+            body=maybe_transform(
+                {
+                    "category_id": category_id,
+                    "end_date": end_date,
+                    "start_date": start_date,
+                    "assets": assets,
+                    "cursor": cursor,
+                    "filter": filter,
+                    "group_by": group_by,
+                    "interval": interval,
+                    "limit": limit,
+                    "max_results": max_results,
+                    "metrics": metrics,
+                    "scope": scope,
+                    "sort": sort,
+                },
+                report_query_visibility_params.ReportQueryVisibilityParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ReportQueryVisibilityResponse,
         )
 
     def sentiment(
@@ -928,6 +1239,146 @@ class ReportsResource(SyncAPIResource):
             stream_cls=Stream[ReportStreamCitationsResponse],
         )
 
+    def stream_citations_v2(
+        self,
+        *,
+        category_id: str,
+        end_date: str,
+        start_date: str,
+        cursor: Optional[str] | Omit = omit,
+        filter: Optional[report_stream_citations_v2_params.Filter] | Omit = omit,
+        group_by: List[Literal["page", "date", "model", "topic", "region", "persona", "prompt"]] | Omit = omit,
+        interval: Literal["day", "week", "month"] | Omit = omit,
+        limit: Optional[int] | Omit = omit,
+        max_results: Optional[int] | Omit = omit,
+        metrics: Optional[List[Literal["count", "citation_share", "rank", "first_cited_at"]]] | Omit = omit,
+        scope: Literal["all", "owned"] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> None:
+        """
+        Stream Citations V2
+
+        Args:
+          end_date: YYYY-MM-DD, ET, inclusive
+
+          start_date: YYYY-MM-DD, ET, inclusive
+
+          filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
+
+          limit: Page size; default 10, max 50.
+
+          max_results: Stream endpoint only: cap the number of streamed rows (default: all).
+
+          scope: `all` (every cited domain) or `owned` (only your owned domains, for easy
+              client-side totals).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return self._post(
+            "/v2/reports/citations/stream",
+            body=maybe_transform(
+                {
+                    "category_id": category_id,
+                    "end_date": end_date,
+                    "start_date": start_date,
+                    "cursor": cursor,
+                    "filter": filter,
+                    "group_by": group_by,
+                    "interval": interval,
+                    "limit": limit,
+                    "max_results": max_results,
+                    "metrics": metrics,
+                    "scope": scope,
+                },
+                report_stream_citations_v2_params.ReportStreamCitationsV2Params,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
+    def stream_query_fanouts(
+        self,
+        *,
+        category_id: str,
+        end_date: str,
+        start_date: str,
+        cursor: Optional[str] | Omit = omit,
+        filter: Optional[report_stream_query_fanouts_params.Filter] | Omit = omit,
+        group_by: List[Literal["date", "model", "region", "prompt", "query"]] | Omit = omit,
+        interval: Literal["day", "week", "month"] | Omit = omit,
+        limit: Optional[int] | Omit = omit,
+        max_results: Optional[int] | Omit = omit,
+        metrics: Optional[List[Literal["fanouts_per_execution", "total_fanouts", "share", "query_variations"]]]
+        | Omit = omit,
+        sort: Optional[report_stream_query_fanouts_params.Sort] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> None:
+        """
+        Stream Query Fanouts V2
+
+        Args:
+          end_date: YYYY-MM-DD, ET, inclusive
+
+          start_date: YYYY-MM-DD, ET, inclusive
+
+          filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
+
+          limit: Page size; default 10, max 50.
+
+          max_results: Stream endpoint only: cap the number of streamed rows (default: all).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return self._post(
+            "/v2/reports/query-fanouts/stream",
+            body=maybe_transform(
+                {
+                    "category_id": category_id,
+                    "end_date": end_date,
+                    "start_date": start_date,
+                    "cursor": cursor,
+                    "filter": filter,
+                    "group_by": group_by,
+                    "interval": interval,
+                    "limit": limit,
+                    "max_results": max_results,
+                    "metrics": metrics,
+                    "sort": sort,
+                },
+                report_stream_query_fanouts_params.ReportStreamQueryFanoutsParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
     def stream_sentiment(
         self,
         *,
@@ -1029,6 +1480,95 @@ class ReportsResource(SyncAPIResource):
             stream_cls=Stream[ReportStreamSentimentResponse],
         )
 
+    def stream_sentiment_v2(
+        self,
+        *,
+        asset: str,
+        category_id: str,
+        end_date: str,
+        start_date: str,
+        comparison_end_date: Optional[str] | Omit = omit,
+        comparison_start_date: Optional[str] | Omit = omit,
+        cursor: Optional[str] | Omit = omit,
+        filter: Optional[report_stream_sentiment_v2_params.Filter] | Omit = omit,
+        group_by: List[
+            Literal[
+                "date", "model", "topic", "region", "prompt", "persona", "tag", "theme", "claim", "run", "competitor"
+            ]
+        ]
+        | Omit = omit,
+        include_cited_websites: bool | Omit = omit,
+        interval: Literal["day", "week", "month"] | Omit = omit,
+        limit: Optional[int] | Omit = omit,
+        max_results: Optional[int] | Omit = omit,
+        metrics: Optional[List[Literal["positive_sentiment", "negative_sentiment", "occurrence"]]] | Omit = omit,
+        sort: report_stream_sentiment_v2_params.Sort | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> None:
+        """
+        Stream Sentiment V2
+
+        Args:
+          asset: The brand name to analyze (sentiment is extracted on name, not id).
+
+          end_date: YYYY-MM-DD, ET, inclusive
+
+          start_date: YYYY-MM-DD, ET, inclusive
+
+          comparison_end_date: YYYY-MM-DD, ET, inclusive (with start).
+
+          comparison_start_date: YYYY-MM-DD, ET, inclusive (with end).
+
+          filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
+
+          include_cited_websites: Return cited websites per row (only when grouping by `theme`/`claim`).
+
+          limit: Page size; default 10, max 50.
+
+          max_results: Stream endpoint only: cap the number of streamed rows (default: all).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return self._post(
+            "/v2/reports/sentiment/stream",
+            body=maybe_transform(
+                {
+                    "asset": asset,
+                    "category_id": category_id,
+                    "end_date": end_date,
+                    "start_date": start_date,
+                    "comparison_end_date": comparison_end_date,
+                    "comparison_start_date": comparison_start_date,
+                    "cursor": cursor,
+                    "filter": filter,
+                    "group_by": group_by,
+                    "include_cited_websites": include_cited_websites,
+                    "interval": interval,
+                    "limit": limit,
+                    "max_results": max_results,
+                    "metrics": metrics,
+                    "sort": sort,
+                },
+                report_stream_sentiment_v2_params.ReportStreamSentimentV2Params,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
     def stream_visibility(
         self,
         *,
@@ -1128,6 +1668,80 @@ class ReportsResource(SyncAPIResource):
             ),  # Union types cannot be passed in as arguments in the type system
             stream=True,
             stream_cls=Stream[ReportStreamVisibilityResponse],
+        )
+
+    def stream_visibility_v2(
+        self,
+        *,
+        category_id: str,
+        end_date: str,
+        start_date: str,
+        assets: Optional[report_stream_visibility_v2_params.Assets] | Omit = omit,
+        cursor: Optional[str] | Omit = omit,
+        filter: Optional[report_stream_visibility_v2_params.Filter] | Omit = omit,
+        group_by: List[Literal["date", "model", "topic", "region", "prompt", "persona", "tag"]] | Omit = omit,
+        interval: Literal["day", "week", "month"] | Omit = omit,
+        limit: Optional[int] | Omit = omit,
+        max_results: Optional[int] | Omit = omit,
+        metrics: Optional[List[Literal["visibility_score", "share_of_voice", "average_position"]]] | Omit = omit,
+        scope: Literal["owned", "all"] | Omit = omit,
+        sort: report_stream_visibility_v2_params.Sort | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> None:
+        """
+        Stream Visibility V2
+
+        Args:
+          end_date: YYYY-MM-DD, ET, inclusive
+
+          start_date: YYYY-MM-DD, ET, inclusive
+
+          assets: A name (`is`), a list (`in`), or {op,value} with op `is`/`in`/`not_in`.
+
+          filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
+
+          limit: Page size; default 10, max 50.
+
+          max_results: Stream endpoint only: cap the number of streamed rows (default: all).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return self._post(
+            "/v2/reports/visibility/stream",
+            body=maybe_transform(
+                {
+                    "category_id": category_id,
+                    "end_date": end_date,
+                    "start_date": start_date,
+                    "assets": assets,
+                    "cursor": cursor,
+                    "filter": filter,
+                    "group_by": group_by,
+                    "interval": interval,
+                    "limit": limit,
+                    "max_results": max_results,
+                    "metrics": metrics,
+                    "scope": scope,
+                    "sort": sort,
+                },
+                report_stream_visibility_v2_params.ReportStreamVisibilityV2Params,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
         )
 
     def visibility(
@@ -1733,6 +2347,76 @@ class AsyncReportsResource(AsyncAPIResource):
             cast_to=ReportResponse,
         )
 
+    async def query_citations(
+        self,
+        *,
+        category_id: str,
+        end_date: str,
+        start_date: str,
+        cursor: Optional[str] | Omit = omit,
+        filter: Optional[report_query_citations_params.Filter] | Omit = omit,
+        group_by: List[Literal["page", "date", "model", "topic", "region", "persona", "prompt"]] | Omit = omit,
+        interval: Literal["day", "week", "month"] | Omit = omit,
+        limit: Optional[int] | Omit = omit,
+        max_results: Optional[int] | Omit = omit,
+        metrics: Optional[List[Literal["count", "citation_share", "rank", "first_cited_at"]]] | Omit = omit,
+        scope: Literal["all", "owned"] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ReportQueryCitationsResponse:
+        """
+        Query Citations V2
+
+        Args:
+          end_date: YYYY-MM-DD, ET, inclusive
+
+          start_date: YYYY-MM-DD, ET, inclusive
+
+          filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
+
+          limit: Page size; default 10, max 50.
+
+          max_results: Stream endpoint only: cap the number of streamed rows (default: all).
+
+          scope: `all` (every cited domain) or `owned` (only your owned domains, for easy
+              client-side totals).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/v2/reports/citations",
+            body=await async_maybe_transform(
+                {
+                    "category_id": category_id,
+                    "end_date": end_date,
+                    "start_date": start_date,
+                    "cursor": cursor,
+                    "filter": filter,
+                    "group_by": group_by,
+                    "interval": interval,
+                    "limit": limit,
+                    "max_results": max_results,
+                    "metrics": metrics,
+                    "scope": scope,
+                },
+                report_query_citations_params.ReportQueryCitationsParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ReportQueryCitationsResponse,
+        )
+
     async def query_fanouts(
         self,
         *,
@@ -1800,6 +2484,162 @@ class AsyncReportsResource(AsyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=ReportResponse,
+        )
+
+    async def query_fanouts_v2(
+        self,
+        *,
+        category_id: str,
+        end_date: str,
+        start_date: str,
+        cursor: Optional[str] | Omit = omit,
+        filter: Optional[report_query_fanouts_v2_params.Filter] | Omit = omit,
+        group_by: List[Literal["date", "model", "region", "prompt", "query"]] | Omit = omit,
+        interval: Literal["day", "week", "month"] | Omit = omit,
+        limit: Optional[int] | Omit = omit,
+        max_results: Optional[int] | Omit = omit,
+        metrics: Optional[List[Literal["fanouts_per_execution", "total_fanouts", "share", "query_variations"]]]
+        | Omit = omit,
+        sort: Optional[report_query_fanouts_v2_params.Sort] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ReportQueryFanoutsV2Response:
+        """
+        Query Fanouts V2
+
+        Args:
+          end_date: YYYY-MM-DD, ET, inclusive
+
+          start_date: YYYY-MM-DD, ET, inclusive
+
+          filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
+
+          limit: Page size; default 10, max 50.
+
+          max_results: Stream endpoint only: cap the number of streamed rows (default: all).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/v2/reports/query-fanouts",
+            body=await async_maybe_transform(
+                {
+                    "category_id": category_id,
+                    "end_date": end_date,
+                    "start_date": start_date,
+                    "cursor": cursor,
+                    "filter": filter,
+                    "group_by": group_by,
+                    "interval": interval,
+                    "limit": limit,
+                    "max_results": max_results,
+                    "metrics": metrics,
+                    "sort": sort,
+                },
+                report_query_fanouts_v2_params.ReportQueryFanoutsV2Params,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ReportQueryFanoutsV2Response,
+        )
+
+    async def query_sentiment(
+        self,
+        *,
+        asset: str,
+        category_id: str,
+        end_date: str,
+        start_date: str,
+        comparison_end_date: Optional[str] | Omit = omit,
+        comparison_start_date: Optional[str] | Omit = omit,
+        cursor: Optional[str] | Omit = omit,
+        filter: Optional[report_query_sentiment_params.Filter] | Omit = omit,
+        group_by: List[
+            Literal[
+                "date", "model", "topic", "region", "prompt", "persona", "tag", "theme", "claim", "run", "competitor"
+            ]
+        ]
+        | Omit = omit,
+        include_cited_websites: bool | Omit = omit,
+        interval: Literal["day", "week", "month"] | Omit = omit,
+        limit: Optional[int] | Omit = omit,
+        max_results: Optional[int] | Omit = omit,
+        metrics: Optional[List[Literal["positive_sentiment", "negative_sentiment", "occurrence"]]] | Omit = omit,
+        sort: report_query_sentiment_params.Sort | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ReportQuerySentimentResponse:
+        """
+        Query Sentiment V2
+
+        Args:
+          asset: The brand name to analyze (sentiment is extracted on name, not id).
+
+          end_date: YYYY-MM-DD, ET, inclusive
+
+          start_date: YYYY-MM-DD, ET, inclusive
+
+          comparison_end_date: YYYY-MM-DD, ET, inclusive (with start).
+
+          comparison_start_date: YYYY-MM-DD, ET, inclusive (with end).
+
+          filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
+
+          include_cited_websites: Return cited websites per row (only when grouping by `theme`/`claim`).
+
+          limit: Page size; default 10, max 50.
+
+          max_results: Stream endpoint only: cap the number of streamed rows (default: all).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/v2/reports/sentiment",
+            body=await async_maybe_transform(
+                {
+                    "asset": asset,
+                    "category_id": category_id,
+                    "end_date": end_date,
+                    "start_date": start_date,
+                    "comparison_end_date": comparison_end_date,
+                    "comparison_start_date": comparison_start_date,
+                    "cursor": cursor,
+                    "filter": filter,
+                    "group_by": group_by,
+                    "include_cited_websites": include_cited_websites,
+                    "interval": interval,
+                    "limit": limit,
+                    "max_results": max_results,
+                    "metrics": metrics,
+                    "sort": sort,
+                },
+                report_query_sentiment_params.ReportQuerySentimentParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ReportQuerySentimentResponse,
         )
 
     async def query_sentiment_v2(
@@ -1886,6 +2726,79 @@ class AsyncReportsResource(AsyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=ReportQuerySentimentV2Response,
+        )
+
+    async def query_visibility(
+        self,
+        *,
+        category_id: str,
+        end_date: str,
+        start_date: str,
+        assets: Optional[report_query_visibility_params.Assets] | Omit = omit,
+        cursor: Optional[str] | Omit = omit,
+        filter: Optional[report_query_visibility_params.Filter] | Omit = omit,
+        group_by: List[Literal["date", "model", "topic", "region", "prompt", "persona", "tag"]] | Omit = omit,
+        interval: Literal["day", "week", "month"] | Omit = omit,
+        limit: Optional[int] | Omit = omit,
+        max_results: Optional[int] | Omit = omit,
+        metrics: Optional[List[Literal["visibility_score", "share_of_voice", "average_position"]]] | Omit = omit,
+        scope: Literal["owned", "all"] | Omit = omit,
+        sort: report_query_visibility_params.Sort | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ReportQueryVisibilityResponse:
+        """
+        Query Visibility V2
+
+        Args:
+          end_date: YYYY-MM-DD, ET, inclusive
+
+          start_date: YYYY-MM-DD, ET, inclusive
+
+          assets: A name (`is`), a list (`in`), or {op,value} with op `is`/`in`/`not_in`.
+
+          filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
+
+          limit: Page size; default 10, max 50.
+
+          max_results: Stream endpoint only: cap the number of streamed rows (default: all).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/v2/reports/visibility",
+            body=await async_maybe_transform(
+                {
+                    "category_id": category_id,
+                    "end_date": end_date,
+                    "start_date": start_date,
+                    "assets": assets,
+                    "cursor": cursor,
+                    "filter": filter,
+                    "group_by": group_by,
+                    "interval": interval,
+                    "limit": limit,
+                    "max_results": max_results,
+                    "metrics": metrics,
+                    "scope": scope,
+                    "sort": sort,
+                },
+                report_query_visibility_params.ReportQueryVisibilityParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ReportQueryVisibilityResponse,
         )
 
     async def sentiment(
@@ -2086,6 +2999,146 @@ class AsyncReportsResource(AsyncAPIResource):
             stream_cls=AsyncStream[ReportStreamCitationsResponse],
         )
 
+    async def stream_citations_v2(
+        self,
+        *,
+        category_id: str,
+        end_date: str,
+        start_date: str,
+        cursor: Optional[str] | Omit = omit,
+        filter: Optional[report_stream_citations_v2_params.Filter] | Omit = omit,
+        group_by: List[Literal["page", "date", "model", "topic", "region", "persona", "prompt"]] | Omit = omit,
+        interval: Literal["day", "week", "month"] | Omit = omit,
+        limit: Optional[int] | Omit = omit,
+        max_results: Optional[int] | Omit = omit,
+        metrics: Optional[List[Literal["count", "citation_share", "rank", "first_cited_at"]]] | Omit = omit,
+        scope: Literal["all", "owned"] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> None:
+        """
+        Stream Citations V2
+
+        Args:
+          end_date: YYYY-MM-DD, ET, inclusive
+
+          start_date: YYYY-MM-DD, ET, inclusive
+
+          filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
+
+          limit: Page size; default 10, max 50.
+
+          max_results: Stream endpoint only: cap the number of streamed rows (default: all).
+
+          scope: `all` (every cited domain) or `owned` (only your owned domains, for easy
+              client-side totals).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return await self._post(
+            "/v2/reports/citations/stream",
+            body=await async_maybe_transform(
+                {
+                    "category_id": category_id,
+                    "end_date": end_date,
+                    "start_date": start_date,
+                    "cursor": cursor,
+                    "filter": filter,
+                    "group_by": group_by,
+                    "interval": interval,
+                    "limit": limit,
+                    "max_results": max_results,
+                    "metrics": metrics,
+                    "scope": scope,
+                },
+                report_stream_citations_v2_params.ReportStreamCitationsV2Params,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
+    async def stream_query_fanouts(
+        self,
+        *,
+        category_id: str,
+        end_date: str,
+        start_date: str,
+        cursor: Optional[str] | Omit = omit,
+        filter: Optional[report_stream_query_fanouts_params.Filter] | Omit = omit,
+        group_by: List[Literal["date", "model", "region", "prompt", "query"]] | Omit = omit,
+        interval: Literal["day", "week", "month"] | Omit = omit,
+        limit: Optional[int] | Omit = omit,
+        max_results: Optional[int] | Omit = omit,
+        metrics: Optional[List[Literal["fanouts_per_execution", "total_fanouts", "share", "query_variations"]]]
+        | Omit = omit,
+        sort: Optional[report_stream_query_fanouts_params.Sort] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> None:
+        """
+        Stream Query Fanouts V2
+
+        Args:
+          end_date: YYYY-MM-DD, ET, inclusive
+
+          start_date: YYYY-MM-DD, ET, inclusive
+
+          filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
+
+          limit: Page size; default 10, max 50.
+
+          max_results: Stream endpoint only: cap the number of streamed rows (default: all).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return await self._post(
+            "/v2/reports/query-fanouts/stream",
+            body=await async_maybe_transform(
+                {
+                    "category_id": category_id,
+                    "end_date": end_date,
+                    "start_date": start_date,
+                    "cursor": cursor,
+                    "filter": filter,
+                    "group_by": group_by,
+                    "interval": interval,
+                    "limit": limit,
+                    "max_results": max_results,
+                    "metrics": metrics,
+                    "sort": sort,
+                },
+                report_stream_query_fanouts_params.ReportStreamQueryFanoutsParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
     async def stream_sentiment(
         self,
         *,
@@ -2187,6 +3240,95 @@ class AsyncReportsResource(AsyncAPIResource):
             stream_cls=AsyncStream[ReportStreamSentimentResponse],
         )
 
+    async def stream_sentiment_v2(
+        self,
+        *,
+        asset: str,
+        category_id: str,
+        end_date: str,
+        start_date: str,
+        comparison_end_date: Optional[str] | Omit = omit,
+        comparison_start_date: Optional[str] | Omit = omit,
+        cursor: Optional[str] | Omit = omit,
+        filter: Optional[report_stream_sentiment_v2_params.Filter] | Omit = omit,
+        group_by: List[
+            Literal[
+                "date", "model", "topic", "region", "prompt", "persona", "tag", "theme", "claim", "run", "competitor"
+            ]
+        ]
+        | Omit = omit,
+        include_cited_websites: bool | Omit = omit,
+        interval: Literal["day", "week", "month"] | Omit = omit,
+        limit: Optional[int] | Omit = omit,
+        max_results: Optional[int] | Omit = omit,
+        metrics: Optional[List[Literal["positive_sentiment", "negative_sentiment", "occurrence"]]] | Omit = omit,
+        sort: report_stream_sentiment_v2_params.Sort | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> None:
+        """
+        Stream Sentiment V2
+
+        Args:
+          asset: The brand name to analyze (sentiment is extracted on name, not id).
+
+          end_date: YYYY-MM-DD, ET, inclusive
+
+          start_date: YYYY-MM-DD, ET, inclusive
+
+          comparison_end_date: YYYY-MM-DD, ET, inclusive (with start).
+
+          comparison_start_date: YYYY-MM-DD, ET, inclusive (with end).
+
+          filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
+
+          include_cited_websites: Return cited websites per row (only when grouping by `theme`/`claim`).
+
+          limit: Page size; default 10, max 50.
+
+          max_results: Stream endpoint only: cap the number of streamed rows (default: all).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return await self._post(
+            "/v2/reports/sentiment/stream",
+            body=await async_maybe_transform(
+                {
+                    "asset": asset,
+                    "category_id": category_id,
+                    "end_date": end_date,
+                    "start_date": start_date,
+                    "comparison_end_date": comparison_end_date,
+                    "comparison_start_date": comparison_start_date,
+                    "cursor": cursor,
+                    "filter": filter,
+                    "group_by": group_by,
+                    "include_cited_websites": include_cited_websites,
+                    "interval": interval,
+                    "limit": limit,
+                    "max_results": max_results,
+                    "metrics": metrics,
+                    "sort": sort,
+                },
+                report_stream_sentiment_v2_params.ReportStreamSentimentV2Params,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
     async def stream_visibility(
         self,
         *,
@@ -2286,6 +3428,80 @@ class AsyncReportsResource(AsyncAPIResource):
             ),  # Union types cannot be passed in as arguments in the type system
             stream=True,
             stream_cls=AsyncStream[ReportStreamVisibilityResponse],
+        )
+
+    async def stream_visibility_v2(
+        self,
+        *,
+        category_id: str,
+        end_date: str,
+        start_date: str,
+        assets: Optional[report_stream_visibility_v2_params.Assets] | Omit = omit,
+        cursor: Optional[str] | Omit = omit,
+        filter: Optional[report_stream_visibility_v2_params.Filter] | Omit = omit,
+        group_by: List[Literal["date", "model", "topic", "region", "prompt", "persona", "tag"]] | Omit = omit,
+        interval: Literal["day", "week", "month"] | Omit = omit,
+        limit: Optional[int] | Omit = omit,
+        max_results: Optional[int] | Omit = omit,
+        metrics: Optional[List[Literal["visibility_score", "share_of_voice", "average_position"]]] | Omit = omit,
+        scope: Literal["owned", "all"] | Omit = omit,
+        sort: report_stream_visibility_v2_params.Sort | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> None:
+        """
+        Stream Visibility V2
+
+        Args:
+          end_date: YYYY-MM-DD, ET, inclusive
+
+          start_date: YYYY-MM-DD, ET, inclusive
+
+          assets: A name (`is`), a list (`in`), or {op,value} with op `is`/`in`/`not_in`.
+
+          filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
+
+          limit: Page size; default 10, max 50.
+
+          max_results: Stream endpoint only: cap the number of streamed rows (default: all).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return await self._post(
+            "/v2/reports/visibility/stream",
+            body=await async_maybe_transform(
+                {
+                    "category_id": category_id,
+                    "end_date": end_date,
+                    "start_date": start_date,
+                    "assets": assets,
+                    "cursor": cursor,
+                    "filter": filter,
+                    "group_by": group_by,
+                    "interval": interval,
+                    "limit": limit,
+                    "max_results": max_results,
+                    "metrics": metrics,
+                    "scope": scope,
+                    "sort": sort,
+                },
+                report_stream_visibility_v2_params.ReportStreamVisibilityV2Params,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
         )
 
     async def visibility(
@@ -2404,11 +3620,23 @@ class ReportsResourceWithRawResponse:
         self.get_referrals_report_v2 = to_raw_response_wrapper(
             reports.get_referrals_report_v2,
         )
+        self.query_citations = to_raw_response_wrapper(
+            reports.query_citations,
+        )
         self.query_fanouts = to_raw_response_wrapper(
             reports.query_fanouts,
         )
+        self.query_fanouts_v2 = to_raw_response_wrapper(
+            reports.query_fanouts_v2,
+        )
+        self.query_sentiment = to_raw_response_wrapper(
+            reports.query_sentiment,
+        )
         self.query_sentiment_v2 = to_raw_response_wrapper(
             reports.query_sentiment_v2,
+        )
+        self.query_visibility = to_raw_response_wrapper(
+            reports.query_visibility,
         )
         self.sentiment = to_raw_response_wrapper(
             reports.sentiment,
@@ -2416,11 +3644,23 @@ class ReportsResourceWithRawResponse:
         self.stream_citations = to_raw_response_wrapper(
             reports.stream_citations,
         )
+        self.stream_citations_v2 = to_raw_response_wrapper(
+            reports.stream_citations_v2,
+        )
+        self.stream_query_fanouts = to_raw_response_wrapper(
+            reports.stream_query_fanouts,
+        )
         self.stream_sentiment = to_raw_response_wrapper(
             reports.stream_sentiment,
         )
+        self.stream_sentiment_v2 = to_raw_response_wrapper(
+            reports.stream_sentiment_v2,
+        )
         self.stream_visibility = to_raw_response_wrapper(
             reports.stream_visibility,
+        )
+        self.stream_visibility_v2 = to_raw_response_wrapper(
+            reports.stream_visibility_v2,
         )
         self.visibility = to_raw_response_wrapper(
             reports.visibility,
@@ -2458,11 +3698,23 @@ class AsyncReportsResourceWithRawResponse:
         self.get_referrals_report_v2 = async_to_raw_response_wrapper(
             reports.get_referrals_report_v2,
         )
+        self.query_citations = async_to_raw_response_wrapper(
+            reports.query_citations,
+        )
         self.query_fanouts = async_to_raw_response_wrapper(
             reports.query_fanouts,
         )
+        self.query_fanouts_v2 = async_to_raw_response_wrapper(
+            reports.query_fanouts_v2,
+        )
+        self.query_sentiment = async_to_raw_response_wrapper(
+            reports.query_sentiment,
+        )
         self.query_sentiment_v2 = async_to_raw_response_wrapper(
             reports.query_sentiment_v2,
+        )
+        self.query_visibility = async_to_raw_response_wrapper(
+            reports.query_visibility,
         )
         self.sentiment = async_to_raw_response_wrapper(
             reports.sentiment,
@@ -2470,11 +3722,23 @@ class AsyncReportsResourceWithRawResponse:
         self.stream_citations = async_to_raw_response_wrapper(
             reports.stream_citations,
         )
+        self.stream_citations_v2 = async_to_raw_response_wrapper(
+            reports.stream_citations_v2,
+        )
+        self.stream_query_fanouts = async_to_raw_response_wrapper(
+            reports.stream_query_fanouts,
+        )
         self.stream_sentiment = async_to_raw_response_wrapper(
             reports.stream_sentiment,
         )
+        self.stream_sentiment_v2 = async_to_raw_response_wrapper(
+            reports.stream_sentiment_v2,
+        )
         self.stream_visibility = async_to_raw_response_wrapper(
             reports.stream_visibility,
+        )
+        self.stream_visibility_v2 = async_to_raw_response_wrapper(
+            reports.stream_visibility_v2,
         )
         self.visibility = async_to_raw_response_wrapper(
             reports.visibility,
@@ -2512,11 +3776,23 @@ class ReportsResourceWithStreamingResponse:
         self.get_referrals_report_v2 = to_streamed_response_wrapper(
             reports.get_referrals_report_v2,
         )
+        self.query_citations = to_streamed_response_wrapper(
+            reports.query_citations,
+        )
         self.query_fanouts = to_streamed_response_wrapper(
             reports.query_fanouts,
         )
+        self.query_fanouts_v2 = to_streamed_response_wrapper(
+            reports.query_fanouts_v2,
+        )
+        self.query_sentiment = to_streamed_response_wrapper(
+            reports.query_sentiment,
+        )
         self.query_sentiment_v2 = to_streamed_response_wrapper(
             reports.query_sentiment_v2,
+        )
+        self.query_visibility = to_streamed_response_wrapper(
+            reports.query_visibility,
         )
         self.sentiment = to_streamed_response_wrapper(
             reports.sentiment,
@@ -2524,11 +3800,23 @@ class ReportsResourceWithStreamingResponse:
         self.stream_citations = to_streamed_response_wrapper(
             reports.stream_citations,
         )
+        self.stream_citations_v2 = to_streamed_response_wrapper(
+            reports.stream_citations_v2,
+        )
+        self.stream_query_fanouts = to_streamed_response_wrapper(
+            reports.stream_query_fanouts,
+        )
         self.stream_sentiment = to_streamed_response_wrapper(
             reports.stream_sentiment,
         )
+        self.stream_sentiment_v2 = to_streamed_response_wrapper(
+            reports.stream_sentiment_v2,
+        )
         self.stream_visibility = to_streamed_response_wrapper(
             reports.stream_visibility,
+        )
+        self.stream_visibility_v2 = to_streamed_response_wrapper(
+            reports.stream_visibility_v2,
         )
         self.visibility = to_streamed_response_wrapper(
             reports.visibility,
@@ -2566,11 +3854,23 @@ class AsyncReportsResourceWithStreamingResponse:
         self.get_referrals_report_v2 = async_to_streamed_response_wrapper(
             reports.get_referrals_report_v2,
         )
+        self.query_citations = async_to_streamed_response_wrapper(
+            reports.query_citations,
+        )
         self.query_fanouts = async_to_streamed_response_wrapper(
             reports.query_fanouts,
         )
+        self.query_fanouts_v2 = async_to_streamed_response_wrapper(
+            reports.query_fanouts_v2,
+        )
+        self.query_sentiment = async_to_streamed_response_wrapper(
+            reports.query_sentiment,
+        )
         self.query_sentiment_v2 = async_to_streamed_response_wrapper(
             reports.query_sentiment_v2,
+        )
+        self.query_visibility = async_to_streamed_response_wrapper(
+            reports.query_visibility,
         )
         self.sentiment = async_to_streamed_response_wrapper(
             reports.sentiment,
@@ -2578,11 +3878,23 @@ class AsyncReportsResourceWithStreamingResponse:
         self.stream_citations = async_to_streamed_response_wrapper(
             reports.stream_citations,
         )
+        self.stream_citations_v2 = async_to_streamed_response_wrapper(
+            reports.stream_citations_v2,
+        )
+        self.stream_query_fanouts = async_to_streamed_response_wrapper(
+            reports.stream_query_fanouts,
+        )
         self.stream_sentiment = async_to_streamed_response_wrapper(
             reports.stream_sentiment,
         )
+        self.stream_sentiment_v2 = async_to_streamed_response_wrapper(
+            reports.stream_sentiment_v2,
+        )
         self.stream_visibility = async_to_streamed_response_wrapper(
             reports.stream_visibility,
+        )
+        self.stream_visibility_v2 = async_to_streamed_response_wrapper(
+            reports.stream_visibility_v2,
         )
         self.visibility = async_to_streamed_response_wrapper(
             reports.visibility,

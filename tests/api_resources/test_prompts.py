@@ -9,7 +9,10 @@ import pytest
 
 from profound import Profound, AsyncProfound
 from tests.utils import assert_matches_type
-from profound.types import PromptAnswersResponse
+from profound.types import (
+    PromptAnswersResponse,
+    PromptAnswersV2Response,
+)
 from profound._utils import parse_datetime
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -105,6 +108,128 @@ class TestPrompts:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_answers_v2(self, client: Profound) -> None:
+        prompt = client.prompts.answers_v2(
+            category_id="category_id",
+            end_date="end_date",
+            start_date="start_date",
+        )
+        assert_matches_type(PromptAnswersV2Response, prompt, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_answers_v2_with_all_params(self, client: Profound) -> None:
+        prompt = client.prompts.answers_v2(
+            category_id="category_id",
+            end_date="end_date",
+            start_date="start_date",
+            cursor="cursor",
+            filter={
+                "and": [],
+                "field": "field",
+                "op": "op",
+                "or": [],
+                "value": {},
+            },
+            include=["run_id"],
+            limit=1,
+            max_results=1,
+        )
+        assert_matches_type(PromptAnswersV2Response, prompt, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_answers_v2(self, client: Profound) -> None:
+        response = client.prompts.with_raw_response.answers_v2(
+            category_id="category_id",
+            end_date="end_date",
+            start_date="start_date",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        prompt = response.parse()
+        assert_matches_type(PromptAnswersV2Response, prompt, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_answers_v2(self, client: Profound) -> None:
+        with client.prompts.with_streaming_response.answers_v2(
+            category_id="category_id",
+            end_date="end_date",
+            start_date="start_date",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            prompt = response.parse()
+            assert_matches_type(PromptAnswersV2Response, prompt, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_stream_answers_v2(self, client: Profound) -> None:
+        prompt = client.prompts.stream_answers_v2(
+            category_id="category_id",
+            end_date="end_date",
+            start_date="start_date",
+        )
+        assert prompt is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_stream_answers_v2_with_all_params(self, client: Profound) -> None:
+        prompt = client.prompts.stream_answers_v2(
+            category_id="category_id",
+            end_date="end_date",
+            start_date="start_date",
+            cursor="cursor",
+            filter={
+                "and": [],
+                "field": "field",
+                "op": "op",
+                "or": [],
+                "value": {},
+            },
+            include=["run_id"],
+            limit=1,
+            max_results=1,
+        )
+        assert prompt is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_stream_answers_v2(self, client: Profound) -> None:
+        response = client.prompts.with_raw_response.stream_answers_v2(
+            category_id="category_id",
+            end_date="end_date",
+            start_date="start_date",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        prompt = response.parse()
+        assert prompt is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_stream_answers_v2(self, client: Profound) -> None:
+        with client.prompts.with_streaming_response.stream_answers_v2(
+            category_id="category_id",
+            end_date="end_date",
+            start_date="start_date",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            prompt = response.parse()
+            assert prompt is None
+
+        assert cast(Any, response.is_closed) is True
+
 
 class TestAsyncPrompts:
     parametrize = pytest.mark.parametrize(
@@ -195,5 +320,127 @@ class TestAsyncPrompts:
 
             prompt = await response.parse()
             assert_matches_type(PromptAnswersResponse, prompt, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_answers_v2(self, async_client: AsyncProfound) -> None:
+        prompt = await async_client.prompts.answers_v2(
+            category_id="category_id",
+            end_date="end_date",
+            start_date="start_date",
+        )
+        assert_matches_type(PromptAnswersV2Response, prompt, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_answers_v2_with_all_params(self, async_client: AsyncProfound) -> None:
+        prompt = await async_client.prompts.answers_v2(
+            category_id="category_id",
+            end_date="end_date",
+            start_date="start_date",
+            cursor="cursor",
+            filter={
+                "and": [],
+                "field": "field",
+                "op": "op",
+                "or": [],
+                "value": {},
+            },
+            include=["run_id"],
+            limit=1,
+            max_results=1,
+        )
+        assert_matches_type(PromptAnswersV2Response, prompt, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_answers_v2(self, async_client: AsyncProfound) -> None:
+        response = await async_client.prompts.with_raw_response.answers_v2(
+            category_id="category_id",
+            end_date="end_date",
+            start_date="start_date",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        prompt = await response.parse()
+        assert_matches_type(PromptAnswersV2Response, prompt, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_answers_v2(self, async_client: AsyncProfound) -> None:
+        async with async_client.prompts.with_streaming_response.answers_v2(
+            category_id="category_id",
+            end_date="end_date",
+            start_date="start_date",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            prompt = await response.parse()
+            assert_matches_type(PromptAnswersV2Response, prompt, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_stream_answers_v2(self, async_client: AsyncProfound) -> None:
+        prompt = await async_client.prompts.stream_answers_v2(
+            category_id="category_id",
+            end_date="end_date",
+            start_date="start_date",
+        )
+        assert prompt is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_stream_answers_v2_with_all_params(self, async_client: AsyncProfound) -> None:
+        prompt = await async_client.prompts.stream_answers_v2(
+            category_id="category_id",
+            end_date="end_date",
+            start_date="start_date",
+            cursor="cursor",
+            filter={
+                "and": [],
+                "field": "field",
+                "op": "op",
+                "or": [],
+                "value": {},
+            },
+            include=["run_id"],
+            limit=1,
+            max_results=1,
+        )
+        assert prompt is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_stream_answers_v2(self, async_client: AsyncProfound) -> None:
+        response = await async_client.prompts.with_raw_response.stream_answers_v2(
+            category_id="category_id",
+            end_date="end_date",
+            start_date="start_date",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        prompt = await response.parse()
+        assert prompt is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_stream_answers_v2(self, async_client: AsyncProfound) -> None:
+        async with async_client.prompts.with_streaming_response.stream_answers_v2(
+            category_id="category_id",
+            end_date="end_date",
+            start_date="start_date",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            prompt = await response.parse()
+            assert prompt is None
 
         assert cast(Any, response.is_closed) is True
