@@ -27,7 +27,7 @@ class ReportQueryVisibilityParams(TypedDict, total=False):
     filter: Optional[Filter]
     """A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group."""
 
-    group_by: List[Literal["date", "model", "topic", "region", "prompt", "persona", "tag"]]
+    group_by: List[Literal["date", "model", "topic", "region", "prompt", "persona"]]
 
     interval: Literal["day", "week", "month"]
 
