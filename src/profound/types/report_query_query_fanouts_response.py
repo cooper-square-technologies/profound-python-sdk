@@ -3,6 +3,6 @@
 from typing import Dict
 from typing_extensions import TypeAlias
 
-__all__ = ["ReportQueryFanoutsV2Response"]
+__all__ = ["ReportQueryQueryFanoutsResponse"]
 
-ReportQueryFanoutsV2Response: TypeAlias = Dict[str, object]
+ReportQueryQueryFanoutsResponse: TypeAlias = Dict[str, object]

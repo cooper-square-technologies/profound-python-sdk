@@ -8,7 +8,7 @@ from pydantic import Field as FieldInfo
 from .._models import BaseModel
 
 __all__ = [
-    "ReportQuerySentimentV2Response",
+    "ReportSentimentV2Response",
     "Info",
     "Data",
     "DataScores",
@@ -114,7 +114,7 @@ class Data(BaseModel):
     total_count: Optional[int] = None
 
 
-class ReportQuerySentimentV2Response(BaseModel):
+class ReportSentimentV2Response(BaseModel):
     info: Info
 
     data: Optional[List[Data]] = None

@@ -117,10 +117,10 @@ from profound.types import (
     URLFilter,
     ReportCitationsResponse,
     ReportQueryCitationsResponse,
-    ReportQueryFanoutsV2Response,
+    ReportQueryQueryFanoutsResponse,
     ReportQuerySentimentResponse,
-    ReportQuerySentimentV2Response,
     ReportQueryVisibilityResponse,
+    ReportSentimentV2Response,
     ReportStreamCitationsResponse,
     ReportStreamSentimentResponse,
     ReportStreamVisibilityResponse,
@@ -136,11 +136,11 @@ Methods:
 - <code title="post /v2/reports/referrals">client.reports.<a href="./src/profound/resources/reports/reports.py">get_referrals_report_v2</a>(\*\*<a href="src/profound/types/report_get_referrals_report_v2_params.py">params</a>) -> <a href="./src/profound/types/report_response.py">ReportResponse</a></code>
 - <code title="post /v2/reports/citations">client.reports.<a href="./src/profound/resources/reports/reports.py">query_citations</a>(\*\*<a href="src/profound/types/report_query_citations_params.py">params</a>) -> <a href="./src/profound/types/report_query_citations_response.py">ReportQueryCitationsResponse</a></code>
 - <code title="post /v1/reports/query-fanouts">client.reports.<a href="./src/profound/resources/reports/reports.py">query_fanouts</a>(\*\*<a href="src/profound/types/report_query_fanouts_params.py">params</a>) -> <a href="./src/profound/types/report_response.py">ReportResponse</a></code>
-- <code title="post /v2/reports/query-fanouts">client.reports.<a href="./src/profound/resources/reports/reports.py">query_fanouts_v2</a>(\*\*<a href="src/profound/types/report_query_fanouts_v2_params.py">params</a>) -> <a href="./src/profound/types/report_query_fanouts_v2_response.py">ReportQueryFanoutsV2Response</a></code>
+- <code title="post /v2/reports/query-fanouts">client.reports.<a href="./src/profound/resources/reports/reports.py">query_query_fanouts</a>(\*\*<a href="src/profound/types/report_query_query_fanouts_params.py">params</a>) -> <a href="./src/profound/types/report_query_query_fanouts_response.py">ReportQueryQueryFanoutsResponse</a></code>
 - <code title="post /v2/reports/sentiment">client.reports.<a href="./src/profound/resources/reports/reports.py">query_sentiment</a>(\*\*<a href="src/profound/types/report_query_sentiment_params.py">params</a>) -> <a href="./src/profound/types/report_query_sentiment_response.py">ReportQuerySentimentResponse</a></code>
-- <code title="post /v1/reports/sentiment-v2">client.reports.<a href="./src/profound/resources/reports/reports.py">query_sentiment_v2</a>(\*\*<a href="src/profound/types/report_query_sentiment_v2_params.py">params</a>) -> <a href="./src/profound/types/report_query_sentiment_v2_response.py">ReportQuerySentimentV2Response</a></code>
 - <code title="post /v2/reports/visibility">client.reports.<a href="./src/profound/resources/reports/reports.py">query_visibility</a>(\*\*<a href="src/profound/types/report_query_visibility_params.py">params</a>) -> <a href="./src/profound/types/report_query_visibility_response.py">ReportQueryVisibilityResponse</a></code>
 - <code title="post /v1/reports/sentiment">client.reports.<a href="./src/profound/resources/reports/reports.py">sentiment</a>(\*\*<a href="src/profound/types/report_sentiment_params.py">params</a>) -> <a href="./src/profound/types/report_response.py">ReportResponse</a></code>
+- <code title="post /v1/reports/sentiment-v2">client.reports.<a href="./src/profound/resources/reports/reports.py">sentiment_v2</a>(\*\*<a href="src/profound/types/report_sentiment_v2_params.py">params</a>) -> <a href="./src/profound/types/report_sentiment_v2_response.py">ReportSentimentV2Response</a></code>
 - <code title="post /v1/reports/citations/stream">client.reports.<a href="./src/profound/resources/reports/reports.py">stream_citations</a>(\*\*<a href="src/profound/types/report_stream_citations_params.py">params</a>) -> <a href="./src/profound/types/report_stream_citations_response.py">ReportStreamCitationsResponse</a></code>
 - <code title="post /v2/reports/citations/stream">client.reports.<a href="./src/profound/resources/reports/reports.py">stream_citations_v2</a>(\*\*<a href="src/profound/types/report_stream_citations_v2_params.py">params</a>) -> None</code>
 - <code title="post /v2/reports/query-fanouts/stream">client.reports.<a href="./src/profound/resources/reports/reports.py">stream_query_fanouts</a>(\*\*<a href="src/profound/types/report_stream_query_fanouts_params.py">params</a>) -> None</code>

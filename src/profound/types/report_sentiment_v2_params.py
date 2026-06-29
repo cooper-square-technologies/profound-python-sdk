@@ -11,7 +11,7 @@ from .._utils import PropertyInfo
 from .shared_params.pagination import Pagination
 
 __all__ = [
-    "ReportQuerySentimentV2Params",
+    "ReportSentimentV2Params",
     "Filter",
     "FilterSentimentV2ModelIDFilter",
     "FilterSentimentV2RegionIDFilter",
@@ -28,7 +28,7 @@ __all__ = [
 ]
 
 
-class ReportQuerySentimentV2Params(TypedDict, total=False):
+class ReportSentimentV2Params(TypedDict, total=False):
     asset_name: Required[str]
 
     category_id: Required[str]

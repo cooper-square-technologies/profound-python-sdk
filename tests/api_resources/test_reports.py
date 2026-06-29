@@ -12,11 +12,11 @@ from tests.utils import assert_matches_type
 from profound.types import (
     ReportResponse,
     ReportCitationsResponse,
+    ReportSentimentV2Response,
     ReportQueryCitationsResponse,
-    ReportQueryFanoutsV2Response,
     ReportQuerySentimentResponse,
     ReportQueryVisibilityResponse,
-    ReportQuerySentimentV2Response,
+    ReportQueryQueryFanoutsResponse,
 )
 from profound._utils import parse_datetime
 
@@ -520,18 +520,18 @@ class TestReports:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_query_fanouts_v2(self, client: Profound) -> None:
-        report = client.reports.query_fanouts_v2(
+    def test_method_query_query_fanouts(self, client: Profound) -> None:
+        report = client.reports.query_query_fanouts(
             category_id="category_id",
             end_date="end_date",
             start_date="start_date",
         )
-        assert_matches_type(ReportQueryFanoutsV2Response, report, path=["response"])
+        assert_matches_type(ReportQueryQueryFanoutsResponse, report, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_query_fanouts_v2_with_all_params(self, client: Profound) -> None:
-        report = client.reports.query_fanouts_v2(
+    def test_method_query_query_fanouts_with_all_params(self, client: Profound) -> None:
+        report = client.reports.query_query_fanouts(
             category_id="category_id",
             end_date="end_date",
             start_date="start_date",
@@ -553,12 +553,12 @@ class TestReports:
                 "dir": "asc",
             },
         )
-        assert_matches_type(ReportQueryFanoutsV2Response, report, path=["response"])
+        assert_matches_type(ReportQueryQueryFanoutsResponse, report, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_query_fanouts_v2(self, client: Profound) -> None:
-        response = client.reports.with_raw_response.query_fanouts_v2(
+    def test_raw_response_query_query_fanouts(self, client: Profound) -> None:
+        response = client.reports.with_raw_response.query_query_fanouts(
             category_id="category_id",
             end_date="end_date",
             start_date="start_date",
@@ -567,12 +567,12 @@ class TestReports:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         report = response.parse()
-        assert_matches_type(ReportQueryFanoutsV2Response, report, path=["response"])
+        assert_matches_type(ReportQueryQueryFanoutsResponse, report, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_query_fanouts_v2(self, client: Profound) -> None:
-        with client.reports.with_streaming_response.query_fanouts_v2(
+    def test_streaming_response_query_query_fanouts(self, client: Profound) -> None:
+        with client.reports.with_streaming_response.query_query_fanouts(
             category_id="category_id",
             end_date="end_date",
             start_date="start_date",
@@ -581,7 +581,7 @@ class TestReports:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             report = response.parse()
-            assert_matches_type(ReportQueryFanoutsV2Response, report, path=["response"])
+            assert_matches_type(ReportQueryQueryFanoutsResponse, report, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -656,80 +656,6 @@ class TestReports:
 
             report = response.parse()
             assert_matches_type(ReportQuerySentimentResponse, report, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_method_query_sentiment_v2(self, client: Profound) -> None:
-        report = client.reports.query_sentiment_v2(
-            asset_name="asset_name",
-            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            metrics=["sentiment"],
-            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-        )
-        assert_matches_type(ReportQuerySentimentV2Response, report, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_method_query_sentiment_v2_with_all_params(self, client: Profound) -> None:
-        report = client.reports.query_sentiment_v2(
-            asset_name="asset_name",
-            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            metrics=["sentiment"],
-            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            comparison_end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            comparison_start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            date_interval="hour",
-            dimensions=["date"],
-            filters=[
-                {
-                    "field": "model_id",
-                    "operator": "is",
-                    "value": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                }
-            ],
-            order_by={"occurrence": "desc"},
-            pagination={
-                "limit": 1,
-                "offset": 0,
-            },
-        )
-        assert_matches_type(ReportQuerySentimentV2Response, report, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_raw_response_query_sentiment_v2(self, client: Profound) -> None:
-        response = client.reports.with_raw_response.query_sentiment_v2(
-            asset_name="asset_name",
-            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            metrics=["sentiment"],
-            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        report = response.parse()
-        assert_matches_type(ReportQuerySentimentV2Response, report, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_streaming_response_query_sentiment_v2(self, client: Profound) -> None:
-        with client.reports.with_streaming_response.query_sentiment_v2(
-            asset_name="asset_name",
-            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            metrics=["sentiment"],
-            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            report = response.parse()
-            assert_matches_type(ReportQuerySentimentV2Response, report, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -864,6 +790,80 @@ class TestReports:
 
             report = response.parse()
             assert_matches_type(ReportResponse, report, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_sentiment_v2(self, client: Profound) -> None:
+        report = client.reports.sentiment_v2(
+            asset_name="asset_name",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            metrics=["sentiment"],
+            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+        )
+        assert_matches_type(ReportSentimentV2Response, report, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_sentiment_v2_with_all_params(self, client: Profound) -> None:
+        report = client.reports.sentiment_v2(
+            asset_name="asset_name",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            metrics=["sentiment"],
+            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            comparison_end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            comparison_start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            date_interval="hour",
+            dimensions=["date"],
+            filters=[
+                {
+                    "field": "model_id",
+                    "operator": "is",
+                    "value": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                }
+            ],
+            order_by={"occurrence": "desc"},
+            pagination={
+                "limit": 1,
+                "offset": 0,
+            },
+        )
+        assert_matches_type(ReportSentimentV2Response, report, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_sentiment_v2(self, client: Profound) -> None:
+        response = client.reports.with_raw_response.sentiment_v2(
+            asset_name="asset_name",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            metrics=["sentiment"],
+            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        report = response.parse()
+        assert_matches_type(ReportSentimentV2Response, report, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_sentiment_v2(self, client: Profound) -> None:
+        with client.reports.with_streaming_response.sentiment_v2(
+            asset_name="asset_name",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            metrics=["sentiment"],
+            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            report = response.parse()
+            assert_matches_type(ReportSentimentV2Response, report, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -1907,18 +1907,18 @@ class TestAsyncReports:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_query_fanouts_v2(self, async_client: AsyncProfound) -> None:
-        report = await async_client.reports.query_fanouts_v2(
+    async def test_method_query_query_fanouts(self, async_client: AsyncProfound) -> None:
+        report = await async_client.reports.query_query_fanouts(
             category_id="category_id",
             end_date="end_date",
             start_date="start_date",
         )
-        assert_matches_type(ReportQueryFanoutsV2Response, report, path=["response"])
+        assert_matches_type(ReportQueryQueryFanoutsResponse, report, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_query_fanouts_v2_with_all_params(self, async_client: AsyncProfound) -> None:
-        report = await async_client.reports.query_fanouts_v2(
+    async def test_method_query_query_fanouts_with_all_params(self, async_client: AsyncProfound) -> None:
+        report = await async_client.reports.query_query_fanouts(
             category_id="category_id",
             end_date="end_date",
             start_date="start_date",
@@ -1940,12 +1940,12 @@ class TestAsyncReports:
                 "dir": "asc",
             },
         )
-        assert_matches_type(ReportQueryFanoutsV2Response, report, path=["response"])
+        assert_matches_type(ReportQueryQueryFanoutsResponse, report, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_query_fanouts_v2(self, async_client: AsyncProfound) -> None:
-        response = await async_client.reports.with_raw_response.query_fanouts_v2(
+    async def test_raw_response_query_query_fanouts(self, async_client: AsyncProfound) -> None:
+        response = await async_client.reports.with_raw_response.query_query_fanouts(
             category_id="category_id",
             end_date="end_date",
             start_date="start_date",
@@ -1954,12 +1954,12 @@ class TestAsyncReports:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         report = await response.parse()
-        assert_matches_type(ReportQueryFanoutsV2Response, report, path=["response"])
+        assert_matches_type(ReportQueryQueryFanoutsResponse, report, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_query_fanouts_v2(self, async_client: AsyncProfound) -> None:
-        async with async_client.reports.with_streaming_response.query_fanouts_v2(
+    async def test_streaming_response_query_query_fanouts(self, async_client: AsyncProfound) -> None:
+        async with async_client.reports.with_streaming_response.query_query_fanouts(
             category_id="category_id",
             end_date="end_date",
             start_date="start_date",
@@ -1968,7 +1968,7 @@ class TestAsyncReports:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             report = await response.parse()
-            assert_matches_type(ReportQueryFanoutsV2Response, report, path=["response"])
+            assert_matches_type(ReportQueryQueryFanoutsResponse, report, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -2043,80 +2043,6 @@ class TestAsyncReports:
 
             report = await response.parse()
             assert_matches_type(ReportQuerySentimentResponse, report, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_method_query_sentiment_v2(self, async_client: AsyncProfound) -> None:
-        report = await async_client.reports.query_sentiment_v2(
-            asset_name="asset_name",
-            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            metrics=["sentiment"],
-            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-        )
-        assert_matches_type(ReportQuerySentimentV2Response, report, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_method_query_sentiment_v2_with_all_params(self, async_client: AsyncProfound) -> None:
-        report = await async_client.reports.query_sentiment_v2(
-            asset_name="asset_name",
-            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            metrics=["sentiment"],
-            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            comparison_end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            comparison_start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            date_interval="hour",
-            dimensions=["date"],
-            filters=[
-                {
-                    "field": "model_id",
-                    "operator": "is",
-                    "value": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                }
-            ],
-            order_by={"occurrence": "desc"},
-            pagination={
-                "limit": 1,
-                "offset": 0,
-            },
-        )
-        assert_matches_type(ReportQuerySentimentV2Response, report, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_raw_response_query_sentiment_v2(self, async_client: AsyncProfound) -> None:
-        response = await async_client.reports.with_raw_response.query_sentiment_v2(
-            asset_name="asset_name",
-            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            metrics=["sentiment"],
-            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        report = await response.parse()
-        assert_matches_type(ReportQuerySentimentV2Response, report, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_streaming_response_query_sentiment_v2(self, async_client: AsyncProfound) -> None:
-        async with async_client.reports.with_streaming_response.query_sentiment_v2(
-            asset_name="asset_name",
-            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            metrics=["sentiment"],
-            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            report = await response.parse()
-            assert_matches_type(ReportQuerySentimentV2Response, report, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -2251,6 +2177,80 @@ class TestAsyncReports:
 
             report = await response.parse()
             assert_matches_type(ReportResponse, report, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_sentiment_v2(self, async_client: AsyncProfound) -> None:
+        report = await async_client.reports.sentiment_v2(
+            asset_name="asset_name",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            metrics=["sentiment"],
+            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+        )
+        assert_matches_type(ReportSentimentV2Response, report, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_sentiment_v2_with_all_params(self, async_client: AsyncProfound) -> None:
+        report = await async_client.reports.sentiment_v2(
+            asset_name="asset_name",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            metrics=["sentiment"],
+            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            comparison_end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            comparison_start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            date_interval="hour",
+            dimensions=["date"],
+            filters=[
+                {
+                    "field": "model_id",
+                    "operator": "is",
+                    "value": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                }
+            ],
+            order_by={"occurrence": "desc"},
+            pagination={
+                "limit": 1,
+                "offset": 0,
+            },
+        )
+        assert_matches_type(ReportSentimentV2Response, report, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_sentiment_v2(self, async_client: AsyncProfound) -> None:
+        response = await async_client.reports.with_raw_response.sentiment_v2(
+            asset_name="asset_name",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            metrics=["sentiment"],
+            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        report = await response.parse()
+        assert_matches_type(ReportSentimentV2Response, report, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_sentiment_v2(self, async_client: AsyncProfound) -> None:
+        async with async_client.reports.with_streaming_response.sentiment_v2(
+            asset_name="asset_name",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            metrics=["sentiment"],
+            start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            report = await response.parse()
+            assert_matches_type(ReportSentimentV2Response, report, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
