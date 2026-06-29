@@ -12,17 +12,17 @@ from ...types import (
     report_citations_params,
     report_sentiment_params,
     report_visibility_params,
+    report_sentiment_v2_params,
     report_query_fanouts_params,
     report_get_bots_report_params,
     report_query_citations_params,
     report_query_sentiment_params,
-    report_query_fanouts_v2_params,
     report_query_visibility_params,
     report_stream_citations_params,
     report_stream_sentiment_params,
     report_stream_visibility_params,
     report_get_bots_report_v2_params,
-    report_query_sentiment_v2_params,
+    report_query_query_fanouts_params,
     report_stream_citations_v2_params,
     report_stream_sentiment_v2_params,
     report_get_referrals_report_params,
@@ -69,14 +69,14 @@ from .web_search_results import (
 from ...types.report_response import ReportResponse
 from ...types.shared_params.pagination import Pagination
 from ...types.report_citations_response import ReportCitationsResponse
+from ...types.report_sentiment_v2_response import ReportSentimentV2Response
 from ...types.report_query_citations_response import ReportQueryCitationsResponse
 from ...types.report_query_sentiment_response import ReportQuerySentimentResponse
-from ...types.report_query_fanouts_v2_response import ReportQueryFanoutsV2Response
 from ...types.report_query_visibility_response import ReportQueryVisibilityResponse
 from ...types.report_stream_citations_response import ReportStreamCitationsResponse
 from ...types.report_stream_sentiment_response import ReportStreamSentimentResponse
 from ...types.report_stream_visibility_response import ReportStreamVisibilityResponse
-from ...types.report_query_sentiment_v2_response import ReportQuerySentimentV2Response
+from ...types.report_query_query_fanouts_response import ReportQueryQueryFanoutsResponse
 
 __all__ = ["ReportsResource", "AsyncReportsResource"]
 
@@ -726,28 +726,28 @@ class ReportsResource(SyncAPIResource):
             cast_to=ReportResponse,
         )
 
-    def query_fanouts_v2(
+    def query_query_fanouts(
         self,
         *,
         category_id: str,
         end_date: str,
         start_date: str,
         cursor: Optional[str] | Omit = omit,
-        filter: Optional[report_query_fanouts_v2_params.Filter] | Omit = omit,
+        filter: Optional[report_query_query_fanouts_params.Filter] | Omit = omit,
         group_by: List[Literal["date", "model", "region", "prompt", "query"]] | Omit = omit,
         interval: Literal["day", "week", "month"] | Omit = omit,
         limit: Optional[int] | Omit = omit,
         max_results: Optional[int] | Omit = omit,
         metrics: Optional[List[Literal["fanouts_per_execution", "total_fanouts", "share", "query_variations"]]]
         | Omit = omit,
-        sort: Optional[report_query_fanouts_v2_params.Sort] | Omit = omit,
+        sort: Optional[report_query_query_fanouts_params.Sort] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ReportQueryFanoutsV2Response:
+    ) -> ReportQueryQueryFanoutsResponse:
         """
         Query Fanouts V2
 
@@ -786,12 +786,12 @@ class ReportsResource(SyncAPIResource):
                     "metrics": metrics,
                     "sort": sort,
                 },
-                report_query_fanouts_v2_params.ReportQueryFanoutsV2Params,
+                report_query_query_fanouts_params.ReportQueryQueryFanoutsParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ReportQueryFanoutsV2Response,
+            cast_to=ReportQueryQueryFanoutsResponse,
         )
 
     def query_sentiment(
@@ -880,92 +880,6 @@ class ReportsResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=ReportQuerySentimentResponse,
-        )
-
-    def query_sentiment_v2(
-        self,
-        *,
-        asset_name: str,
-        category_id: str,
-        end_date: Union[str, datetime],
-        metrics: List[Literal["sentiment", "occurrence"]],
-        start_date: Union[str, datetime],
-        comparison_end_date: Union[str, datetime, None] | Omit = omit,
-        comparison_start_date: Union[str, datetime, None] | Omit = omit,
-        date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
-        dimensions: List[
-            Literal[
-                "date", "topic", "region", "model", "prompt", "persona", "tag", "theme", "claim", "run", "asset_name"
-            ]
-        ]
-        | Omit = omit,
-        filters: Iterable[report_query_sentiment_v2_params.Filter] | Omit = omit,
-        order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
-        pagination: Pagination | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ReportQuerySentimentV2Response:
-        """Query Sentiment V2
-
-        Args:
-          end_date: End date for the report.
-
-        Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full
-              ISO timestamp.
-
-          start_date: Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or
-              full ISO timestamp.
-
-          comparison_end_date: End of the previous period for delta computation.
-
-          comparison_start_date: Start of the previous period for delta computation.
-
-          date_interval: Date interval for the report. Only used when dimensions includes date.
-
-          dimensions: Dimensions to group the report by.
-
-          filters: List of filters to apply to the sentiment-v2 report.
-
-          order_by: Custom ordering of report results. Dimension keys must also be present in
-              dimensions. The sentiment metric orders by positive_sentiment.
-
-          pagination: Pagination settings for the report results.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._post(
-            "/v1/reports/sentiment-v2",
-            body=maybe_transform(
-                {
-                    "asset_name": asset_name,
-                    "category_id": category_id,
-                    "end_date": end_date,
-                    "metrics": metrics,
-                    "start_date": start_date,
-                    "comparison_end_date": comparison_end_date,
-                    "comparison_start_date": comparison_start_date,
-                    "date_interval": date_interval,
-                    "dimensions": dimensions,
-                    "filters": filters,
-                    "order_by": order_by,
-                    "pagination": pagination,
-                },
-                report_query_sentiment_v2_params.ReportQuerySentimentV2Params,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ReportQuerySentimentV2Response,
         )
 
     def query_visibility(
@@ -1135,6 +1049,92 @@ class ReportsResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=ReportResponse,
+        )
+
+    def sentiment_v2(
+        self,
+        *,
+        asset_name: str,
+        category_id: str,
+        end_date: Union[str, datetime],
+        metrics: List[Literal["sentiment", "occurrence"]],
+        start_date: Union[str, datetime],
+        comparison_end_date: Union[str, datetime, None] | Omit = omit,
+        comparison_start_date: Union[str, datetime, None] | Omit = omit,
+        date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
+        dimensions: List[
+            Literal[
+                "date", "topic", "region", "model", "prompt", "persona", "tag", "theme", "claim", "run", "asset_name"
+            ]
+        ]
+        | Omit = omit,
+        filters: Iterable[report_sentiment_v2_params.Filter] | Omit = omit,
+        order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
+        pagination: Pagination | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ReportSentimentV2Response:
+        """Query Sentiment V2
+
+        Args:
+          end_date: End date for the report.
+
+        Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full
+              ISO timestamp.
+
+          start_date: Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or
+              full ISO timestamp.
+
+          comparison_end_date: End of the previous period for delta computation.
+
+          comparison_start_date: Start of the previous period for delta computation.
+
+          date_interval: Date interval for the report. Only used when dimensions includes date.
+
+          dimensions: Dimensions to group the report by.
+
+          filters: List of filters to apply to the sentiment-v2 report.
+
+          order_by: Custom ordering of report results. Dimension keys must also be present in
+              dimensions. The sentiment metric orders by positive_sentiment.
+
+          pagination: Pagination settings for the report results.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/v1/reports/sentiment-v2",
+            body=maybe_transform(
+                {
+                    "asset_name": asset_name,
+                    "category_id": category_id,
+                    "end_date": end_date,
+                    "metrics": metrics,
+                    "start_date": start_date,
+                    "comparison_end_date": comparison_end_date,
+                    "comparison_start_date": comparison_start_date,
+                    "date_interval": date_interval,
+                    "dimensions": dimensions,
+                    "filters": filters,
+                    "order_by": order_by,
+                    "pagination": pagination,
+                },
+                report_sentiment_v2_params.ReportSentimentV2Params,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ReportSentimentV2Response,
         )
 
     def stream_citations(
@@ -2486,28 +2486,28 @@ class AsyncReportsResource(AsyncAPIResource):
             cast_to=ReportResponse,
         )
 
-    async def query_fanouts_v2(
+    async def query_query_fanouts(
         self,
         *,
         category_id: str,
         end_date: str,
         start_date: str,
         cursor: Optional[str] | Omit = omit,
-        filter: Optional[report_query_fanouts_v2_params.Filter] | Omit = omit,
+        filter: Optional[report_query_query_fanouts_params.Filter] | Omit = omit,
         group_by: List[Literal["date", "model", "region", "prompt", "query"]] | Omit = omit,
         interval: Literal["day", "week", "month"] | Omit = omit,
         limit: Optional[int] | Omit = omit,
         max_results: Optional[int] | Omit = omit,
         metrics: Optional[List[Literal["fanouts_per_execution", "total_fanouts", "share", "query_variations"]]]
         | Omit = omit,
-        sort: Optional[report_query_fanouts_v2_params.Sort] | Omit = omit,
+        sort: Optional[report_query_query_fanouts_params.Sort] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ReportQueryFanoutsV2Response:
+    ) -> ReportQueryQueryFanoutsResponse:
         """
         Query Fanouts V2
 
@@ -2546,12 +2546,12 @@ class AsyncReportsResource(AsyncAPIResource):
                     "metrics": metrics,
                     "sort": sort,
                 },
-                report_query_fanouts_v2_params.ReportQueryFanoutsV2Params,
+                report_query_query_fanouts_params.ReportQueryQueryFanoutsParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ReportQueryFanoutsV2Response,
+            cast_to=ReportQueryQueryFanoutsResponse,
         )
 
     async def query_sentiment(
@@ -2640,92 +2640,6 @@ class AsyncReportsResource(AsyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=ReportQuerySentimentResponse,
-        )
-
-    async def query_sentiment_v2(
-        self,
-        *,
-        asset_name: str,
-        category_id: str,
-        end_date: Union[str, datetime],
-        metrics: List[Literal["sentiment", "occurrence"]],
-        start_date: Union[str, datetime],
-        comparison_end_date: Union[str, datetime, None] | Omit = omit,
-        comparison_start_date: Union[str, datetime, None] | Omit = omit,
-        date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
-        dimensions: List[
-            Literal[
-                "date", "topic", "region", "model", "prompt", "persona", "tag", "theme", "claim", "run", "asset_name"
-            ]
-        ]
-        | Omit = omit,
-        filters: Iterable[report_query_sentiment_v2_params.Filter] | Omit = omit,
-        order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
-        pagination: Pagination | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ReportQuerySentimentV2Response:
-        """Query Sentiment V2
-
-        Args:
-          end_date: End date for the report.
-
-        Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full
-              ISO timestamp.
-
-          start_date: Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or
-              full ISO timestamp.
-
-          comparison_end_date: End of the previous period for delta computation.
-
-          comparison_start_date: Start of the previous period for delta computation.
-
-          date_interval: Date interval for the report. Only used when dimensions includes date.
-
-          dimensions: Dimensions to group the report by.
-
-          filters: List of filters to apply to the sentiment-v2 report.
-
-          order_by: Custom ordering of report results. Dimension keys must also be present in
-              dimensions. The sentiment metric orders by positive_sentiment.
-
-          pagination: Pagination settings for the report results.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return await self._post(
-            "/v1/reports/sentiment-v2",
-            body=await async_maybe_transform(
-                {
-                    "asset_name": asset_name,
-                    "category_id": category_id,
-                    "end_date": end_date,
-                    "metrics": metrics,
-                    "start_date": start_date,
-                    "comparison_end_date": comparison_end_date,
-                    "comparison_start_date": comparison_start_date,
-                    "date_interval": date_interval,
-                    "dimensions": dimensions,
-                    "filters": filters,
-                    "order_by": order_by,
-                    "pagination": pagination,
-                },
-                report_query_sentiment_v2_params.ReportQuerySentimentV2Params,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ReportQuerySentimentV2Response,
         )
 
     async def query_visibility(
@@ -2895,6 +2809,92 @@ class AsyncReportsResource(AsyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=ReportResponse,
+        )
+
+    async def sentiment_v2(
+        self,
+        *,
+        asset_name: str,
+        category_id: str,
+        end_date: Union[str, datetime],
+        metrics: List[Literal["sentiment", "occurrence"]],
+        start_date: Union[str, datetime],
+        comparison_end_date: Union[str, datetime, None] | Omit = omit,
+        comparison_start_date: Union[str, datetime, None] | Omit = omit,
+        date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
+        dimensions: List[
+            Literal[
+                "date", "topic", "region", "model", "prompt", "persona", "tag", "theme", "claim", "run", "asset_name"
+            ]
+        ]
+        | Omit = omit,
+        filters: Iterable[report_sentiment_v2_params.Filter] | Omit = omit,
+        order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
+        pagination: Pagination | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ReportSentimentV2Response:
+        """Query Sentiment V2
+
+        Args:
+          end_date: End date for the report.
+
+        Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full
+              ISO timestamp.
+
+          start_date: Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or
+              full ISO timestamp.
+
+          comparison_end_date: End of the previous period for delta computation.
+
+          comparison_start_date: Start of the previous period for delta computation.
+
+          date_interval: Date interval for the report. Only used when dimensions includes date.
+
+          dimensions: Dimensions to group the report by.
+
+          filters: List of filters to apply to the sentiment-v2 report.
+
+          order_by: Custom ordering of report results. Dimension keys must also be present in
+              dimensions. The sentiment metric orders by positive_sentiment.
+
+          pagination: Pagination settings for the report results.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/v1/reports/sentiment-v2",
+            body=await async_maybe_transform(
+                {
+                    "asset_name": asset_name,
+                    "category_id": category_id,
+                    "end_date": end_date,
+                    "metrics": metrics,
+                    "start_date": start_date,
+                    "comparison_end_date": comparison_end_date,
+                    "comparison_start_date": comparison_start_date,
+                    "date_interval": date_interval,
+                    "dimensions": dimensions,
+                    "filters": filters,
+                    "order_by": order_by,
+                    "pagination": pagination,
+                },
+                report_sentiment_v2_params.ReportSentimentV2Params,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ReportSentimentV2Response,
         )
 
     async def stream_citations(
@@ -3626,20 +3626,20 @@ class ReportsResourceWithRawResponse:
         self.query_fanouts = to_raw_response_wrapper(
             reports.query_fanouts,
         )
-        self.query_fanouts_v2 = to_raw_response_wrapper(
-            reports.query_fanouts_v2,
+        self.query_query_fanouts = to_raw_response_wrapper(
+            reports.query_query_fanouts,
         )
         self.query_sentiment = to_raw_response_wrapper(
             reports.query_sentiment,
-        )
-        self.query_sentiment_v2 = to_raw_response_wrapper(
-            reports.query_sentiment_v2,
         )
         self.query_visibility = to_raw_response_wrapper(
             reports.query_visibility,
         )
         self.sentiment = to_raw_response_wrapper(
             reports.sentiment,
+        )
+        self.sentiment_v2 = to_raw_response_wrapper(
+            reports.sentiment_v2,
         )
         self.stream_citations = to_raw_response_wrapper(
             reports.stream_citations,
@@ -3704,20 +3704,20 @@ class AsyncReportsResourceWithRawResponse:
         self.query_fanouts = async_to_raw_response_wrapper(
             reports.query_fanouts,
         )
-        self.query_fanouts_v2 = async_to_raw_response_wrapper(
-            reports.query_fanouts_v2,
+        self.query_query_fanouts = async_to_raw_response_wrapper(
+            reports.query_query_fanouts,
         )
         self.query_sentiment = async_to_raw_response_wrapper(
             reports.query_sentiment,
-        )
-        self.query_sentiment_v2 = async_to_raw_response_wrapper(
-            reports.query_sentiment_v2,
         )
         self.query_visibility = async_to_raw_response_wrapper(
             reports.query_visibility,
         )
         self.sentiment = async_to_raw_response_wrapper(
             reports.sentiment,
+        )
+        self.sentiment_v2 = async_to_raw_response_wrapper(
+            reports.sentiment_v2,
         )
         self.stream_citations = async_to_raw_response_wrapper(
             reports.stream_citations,
@@ -3782,20 +3782,20 @@ class ReportsResourceWithStreamingResponse:
         self.query_fanouts = to_streamed_response_wrapper(
             reports.query_fanouts,
         )
-        self.query_fanouts_v2 = to_streamed_response_wrapper(
-            reports.query_fanouts_v2,
+        self.query_query_fanouts = to_streamed_response_wrapper(
+            reports.query_query_fanouts,
         )
         self.query_sentiment = to_streamed_response_wrapper(
             reports.query_sentiment,
-        )
-        self.query_sentiment_v2 = to_streamed_response_wrapper(
-            reports.query_sentiment_v2,
         )
         self.query_visibility = to_streamed_response_wrapper(
             reports.query_visibility,
         )
         self.sentiment = to_streamed_response_wrapper(
             reports.sentiment,
+        )
+        self.sentiment_v2 = to_streamed_response_wrapper(
+            reports.sentiment_v2,
         )
         self.stream_citations = to_streamed_response_wrapper(
             reports.stream_citations,
@@ -3860,20 +3860,20 @@ class AsyncReportsResourceWithStreamingResponse:
         self.query_fanouts = async_to_streamed_response_wrapper(
             reports.query_fanouts,
         )
-        self.query_fanouts_v2 = async_to_streamed_response_wrapper(
-            reports.query_fanouts_v2,
+        self.query_query_fanouts = async_to_streamed_response_wrapper(
+            reports.query_query_fanouts,
         )
         self.query_sentiment = async_to_streamed_response_wrapper(
             reports.query_sentiment,
-        )
-        self.query_sentiment_v2 = async_to_streamed_response_wrapper(
-            reports.query_sentiment_v2,
         )
         self.query_visibility = async_to_streamed_response_wrapper(
             reports.query_visibility,
         )
         self.sentiment = async_to_streamed_response_wrapper(
             reports.sentiment,
+        )
+        self.sentiment_v2 = async_to_streamed_response_wrapper(
+            reports.sentiment_v2,
         )
         self.stream_citations = async_to_streamed_response_wrapper(
             reports.stream_citations,
