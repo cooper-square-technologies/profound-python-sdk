@@ -5,10 +5,10 @@ from __future__ import annotations
 from typing import List, Iterable, Optional
 from typing_extensions import Literal, Required, TypedDict
 
-__all__ = ["ReportQueryFanoutsV2Params", "Filter", "Sort"]
+__all__ = ["ReportQueryQueryFanoutsParams", "Filter", "Sort"]
 
 
-class ReportQueryFanoutsV2Params(TypedDict, total=False):
+class ReportQueryQueryFanoutsParams(TypedDict, total=False):
     category_id: Required[str]
 
     end_date: Required[str]
