@@ -40,14 +40,15 @@ class PromptAnswersV2Params(TypedDict, total=False):
                 "citations",
                 "search_queries",
                 "analysis_types",
+                "sentiment_claims",
             ]
         ]
     ]
     """
     Which row fields to return: `run_id`, `date`, `model`, `topic`, `topic_id`,
     `region`, `persona`, `tags`, `prompt`, `prompt_id`, `response`, `mentions`,
-    `citations`, `search_queries`, `analysis_types`. Omit for all of them.
-    (Sentiment is not exposed on this endpoint yet.)
+    `citations`, `search_queries`, `analysis_types`, `sentiment_claims`. Omit for
+    all of them.
     """
 
     limit: Optional[int]
