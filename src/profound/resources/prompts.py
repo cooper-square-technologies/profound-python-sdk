@@ -124,6 +124,7 @@ class PromptsResource(SyncAPIResource):
                     "citations",
                     "search_queries",
                     "analysis_types",
+                    "sentiment_claims",
                 ]
             ]
         ]
@@ -149,8 +150,8 @@ class PromptsResource(SyncAPIResource):
 
           include: Which row fields to return: `run_id`, `date`, `model`, `topic`, `topic_id`,
               `region`, `persona`, `tags`, `prompt`, `prompt_id`, `response`, `mentions`,
-              `citations`, `search_queries`, `analysis_types`. Omit for all of them.
-              (Sentiment is not exposed on this endpoint yet.)
+              `citations`, `search_queries`, `analysis_types`, `sentiment_claims`. Omit for
+              all of them.
 
           limit: Page size; default 10, max 50.
 
@@ -211,6 +212,7 @@ class PromptsResource(SyncAPIResource):
                     "citations",
                     "search_queries",
                     "analysis_types",
+                    "sentiment_claims",
                 ]
             ]
         ]
@@ -236,8 +238,8 @@ class PromptsResource(SyncAPIResource):
 
           include: Which row fields to return: `run_id`, `date`, `model`, `topic`, `topic_id`,
               `region`, `persona`, `tags`, `prompt`, `prompt_id`, `response`, `mentions`,
-              `citations`, `search_queries`, `analysis_types`. Omit for all of them.
-              (Sentiment is not exposed on this endpoint yet.)
+              `citations`, `search_queries`, `analysis_types`, `sentiment_claims`. Omit for
+              all of them.
 
           limit: Page size; default 10, max 50.
 
@@ -371,6 +373,7 @@ class AsyncPromptsResource(AsyncAPIResource):
                     "citations",
                     "search_queries",
                     "analysis_types",
+                    "sentiment_claims",
                 ]
             ]
         ]
@@ -396,8 +399,8 @@ class AsyncPromptsResource(AsyncAPIResource):
 
           include: Which row fields to return: `run_id`, `date`, `model`, `topic`, `topic_id`,
               `region`, `persona`, `tags`, `prompt`, `prompt_id`, `response`, `mentions`,
-              `citations`, `search_queries`, `analysis_types`. Omit for all of them.
-              (Sentiment is not exposed on this endpoint yet.)
+              `citations`, `search_queries`, `analysis_types`, `sentiment_claims`. Omit for
+              all of them.
 
           limit: Page size; default 10, max 50.
 
@@ -458,6 +461,7 @@ class AsyncPromptsResource(AsyncAPIResource):
                     "citations",
                     "search_queries",
                     "analysis_types",
+                    "sentiment_claims",
                 ]
             ]
         ]
@@ -483,8 +487,8 @@ class AsyncPromptsResource(AsyncAPIResource):
 
           include: Which row fields to return: `run_id`, `date`, `model`, `topic`, `topic_id`,
               `region`, `persona`, `tags`, `prompt`, `prompt_id`, `response`, `mentions`,
-              `citations`, `search_queries`, `analysis_types`. Omit for all of them.
-              (Sentiment is not exposed on this endpoint yet.)
+              `citations`, `search_queries`, `analysis_types`, `sentiment_claims`. Omit for
+              all of them.
 
           limit: Page size; default 10, max 50.
 
