@@ -36,9 +36,8 @@ from ._base_client import (
 )
 
 if TYPE_CHECKING:
-    from .resources import logs, agents, content, prompts, reports, organizations, knowledge_bases
+    from .resources import agents, content, prompts, reports, organizations, knowledge_bases
     from .resources.prompts import PromptsResource, AsyncPromptsResource
-    from .resources.logs.logs import LogsResource, AsyncLogsResource
     from .resources.agents.agents import AgentsResource, AsyncAgentsResource
     from .resources.content.content import ContentResource, AsyncContentResource
     from .resources.reports.reports import ReportsResource, AsyncReportsResource
@@ -172,12 +171,6 @@ class Profound(SyncAPIClient):
         from .resources.reports import ReportsResource
 
         return ReportsResource(self)
-
-    @cached_property
-    def logs(self) -> LogsResource:
-        from .resources.logs import LogsResource
-
-        return LogsResource(self)
 
     @cached_property
     def content(self) -> ContentResource:
@@ -450,12 +443,6 @@ class AsyncProfound(AsyncAPIClient):
         return AsyncReportsResource(self)
 
     @cached_property
-    def logs(self) -> AsyncLogsResource:
-        from .resources.logs import AsyncLogsResource
-
-        return AsyncLogsResource(self)
-
-    @cached_property
     def content(self) -> AsyncContentResource:
         from .resources.content import AsyncContentResource
 
@@ -640,12 +627,6 @@ class ProfoundWithRawResponse:
         return ReportsResourceWithRawResponse(self._client.reports)
 
     @cached_property
-    def logs(self) -> logs.LogsResourceWithRawResponse:
-        from .resources.logs import LogsResourceWithRawResponse
-
-        return LogsResourceWithRawResponse(self._client.logs)
-
-    @cached_property
     def content(self) -> content.ContentResourceWithRawResponse:
         from .resources.content import ContentResourceWithRawResponse
 
@@ -687,12 +668,6 @@ class AsyncProfoundWithRawResponse:
         from .resources.reports import AsyncReportsResourceWithRawResponse
 
         return AsyncReportsResourceWithRawResponse(self._client.reports)
-
-    @cached_property
-    def logs(self) -> logs.AsyncLogsResourceWithRawResponse:
-        from .resources.logs import AsyncLogsResourceWithRawResponse
-
-        return AsyncLogsResourceWithRawResponse(self._client.logs)
 
     @cached_property
     def content(self) -> content.AsyncContentResourceWithRawResponse:
@@ -738,12 +713,6 @@ class ProfoundWithStreamedResponse:
         return ReportsResourceWithStreamingResponse(self._client.reports)
 
     @cached_property
-    def logs(self) -> logs.LogsResourceWithStreamingResponse:
-        from .resources.logs import LogsResourceWithStreamingResponse
-
-        return LogsResourceWithStreamingResponse(self._client.logs)
-
-    @cached_property
     def content(self) -> content.ContentResourceWithStreamingResponse:
         from .resources.content import ContentResourceWithStreamingResponse
 
@@ -785,12 +754,6 @@ class AsyncProfoundWithStreamedResponse:
         from .resources.reports import AsyncReportsResourceWithStreamingResponse
 
         return AsyncReportsResourceWithStreamingResponse(self._client.reports)
-
-    @cached_property
-    def logs(self) -> logs.AsyncLogsResourceWithStreamingResponse:
-        from .resources.logs import AsyncLogsResourceWithStreamingResponse
-
-        return AsyncLogsResourceWithStreamingResponse(self._client.logs)
 
     @cached_property
     def content(self) -> content.AsyncContentResourceWithStreamingResponse:
