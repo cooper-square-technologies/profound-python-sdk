@@ -236,21 +236,6 @@ Methods:
 - <code title="post /v1/reports/accuracy/top-inaccurate-claims">client.reports.accuracy.<a href="./src/profound/resources/reports/accuracy.py">create_top_inaccurate_claims</a>(\*\*<a href="src/profound/types/reports/accuracy_create_top_inaccurate_claims_params.py">params</a>) -> <a href="./src/profound/types/reports/accuracy_create_top_inaccurate_claims_response.py">AccuracyCreateTopInaccurateClaimsResponse</a></code>
 - <code title="post /v1/reports/accuracy/topic-ids">client.reports.accuracy.<a href="./src/profound/resources/reports/accuracy.py">create_topic_ids</a>(\*\*<a href="src/profound/types/reports/accuracy_create_topic_ids_params.py">params</a>) -> <a href="./src/profound/types/reports/accuracy_create_topic_ids_response.py">AccuracyCreateTopicIDsResponse</a></code>
 
-# Logs
-
-## Raw
-
-Types:
-
-```python
-from profound.types.logs import RawBotsResponse, RawLogsResponse
-```
-
-Methods:
-
-- <code title="post /v1/logs/raw/bots">client.logs.raw.<a href="./src/profound/resources/logs/raw.py">bots</a>(\*\*<a href="src/profound/types/logs/raw_bots_params.py">params</a>) -> <a href="./src/profound/types/logs/raw_bots_response.py">RawBotsResponse</a></code>
-- <code title="post /v1/logs/raw">client.logs.raw.<a href="./src/profound/resources/logs/raw.py">logs</a>(\*\*<a href="src/profound/types/logs/raw_logs_params.py">params</a>) -> <a href="./src/profound/types/logs/raw_logs_response.py">RawLogsResponse</a></code>
-
 # Content
 
 ## Optimization
