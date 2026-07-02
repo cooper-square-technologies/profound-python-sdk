@@ -17,8 +17,6 @@ class AccuracyCreateInaccurateClustersParams(TypedDict, total=False):
 
     start_date: Required[str]
 
-    theme_id: Required[str]
-
     citation_categories: Optional[SequenceNotStr[str]]
 
     comparison_end_date: Optional[str]
@@ -26,6 +24,8 @@ class AccuracyCreateInaccurateClustersParams(TypedDict, total=False):
     comparison_start_date: Optional[str]
 
     exclude_topic_ids: bool
+
+    include_models: bool
 
     include_no_persona: bool
 
@@ -48,5 +48,7 @@ class AccuracyCreateInaccurateClustersParams(TypedDict, total=False):
     tag_filter_type: Literal["all", "any"]
 
     tag_ids: Optional[SequenceNotStr[str]]
+
+    theme_id: Optional[str]
 
     topic_ids: Optional[SequenceNotStr[str]]

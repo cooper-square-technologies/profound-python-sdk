@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Optional
+from typing import List, Optional
 from typing_extensions import Literal
 
 import httpx
@@ -78,11 +78,15 @@ class AccuracyResource(SyncAPIResource):
         category_id: str,
         end_date: str,
         start_date: str,
-        breakdown_by: Literal["citation", "platform", "topic", "prompt", "tag", "region", "persona"] | Omit = omit,
+        breakdown_by: Literal["citation", "platform", "topic", "prompt", "tag", "region", "persona", "theme"]
+        | Omit = omit,
         citation_categories: Optional[SequenceNotStr[str]] | Omit = omit,
         comparison_end_date: Optional[str] | Omit = omit,
         comparison_start_date: Optional[str] | Omit = omit,
+        date_bucket: Optional[str] | Omit = omit,
         exclude_topic_ids: bool | Omit = omit,
+        group_by: Optional[List[Literal["platform", "topic", "prompt", "tag", "region", "persona", "theme", "date"]]]
+        | Omit = omit,
         include_no_persona: bool | Omit = omit,
         include_no_tag: bool | Omit = omit,
         limit: int | Omit = omit,
@@ -127,7 +131,9 @@ class AccuracyResource(SyncAPIResource):
                     "citation_categories": citation_categories,
                     "comparison_end_date": comparison_end_date,
                     "comparison_start_date": comparison_start_date,
+                    "date_bucket": date_bucket,
                     "exclude_topic_ids": exclude_topic_ids,
+                    "group_by": group_by,
                     "include_no_persona": include_no_persona,
                     "include_no_tag": include_no_tag,
                     "limit": limit,
@@ -536,11 +542,11 @@ class AccuracyResource(SyncAPIResource):
         category_id: str,
         end_date: str,
         start_date: str,
-        theme_id: str,
         citation_categories: Optional[SequenceNotStr[str]] | Omit = omit,
         comparison_end_date: Optional[str] | Omit = omit,
         comparison_start_date: Optional[str] | Omit = omit,
         exclude_topic_ids: bool | Omit = omit,
+        include_models: bool | Omit = omit,
         include_no_persona: bool | Omit = omit,
         include_no_tag: bool | Omit = omit,
         limit: int | Omit = omit,
@@ -552,6 +558,7 @@ class AccuracyResource(SyncAPIResource):
         search_query: Optional[str] | Omit = omit,
         tag_filter_type: Literal["all", "any"] | Omit = omit,
         tag_ids: Optional[SequenceNotStr[str]] | Omit = omit,
+        theme_id: Optional[str] | Omit = omit,
         topic_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -579,11 +586,11 @@ class AccuracyResource(SyncAPIResource):
                     "category_id": category_id,
                     "end_date": end_date,
                     "start_date": start_date,
-                    "theme_id": theme_id,
                     "citation_categories": citation_categories,
                     "comparison_end_date": comparison_end_date,
                     "comparison_start_date": comparison_start_date,
                     "exclude_topic_ids": exclude_topic_ids,
+                    "include_models": include_models,
                     "include_no_persona": include_no_persona,
                     "include_no_tag": include_no_tag,
                     "limit": limit,
@@ -595,6 +602,7 @@ class AccuracyResource(SyncAPIResource):
                     "search_query": search_query,
                     "tag_filter_type": tag_filter_type,
                     "tag_ids": tag_ids,
+                    "theme_id": theme_id,
                     "topic_ids": topic_ids,
                 },
                 accuracy_create_inaccurate_clusters_params.AccuracyCreateInaccurateClustersParams,
@@ -890,11 +898,15 @@ class AsyncAccuracyResource(AsyncAPIResource):
         category_id: str,
         end_date: str,
         start_date: str,
-        breakdown_by: Literal["citation", "platform", "topic", "prompt", "tag", "region", "persona"] | Omit = omit,
+        breakdown_by: Literal["citation", "platform", "topic", "prompt", "tag", "region", "persona", "theme"]
+        | Omit = omit,
         citation_categories: Optional[SequenceNotStr[str]] | Omit = omit,
         comparison_end_date: Optional[str] | Omit = omit,
         comparison_start_date: Optional[str] | Omit = omit,
+        date_bucket: Optional[str] | Omit = omit,
         exclude_topic_ids: bool | Omit = omit,
+        group_by: Optional[List[Literal["platform", "topic", "prompt", "tag", "region", "persona", "theme", "date"]]]
+        | Omit = omit,
         include_no_persona: bool | Omit = omit,
         include_no_tag: bool | Omit = omit,
         limit: int | Omit = omit,
@@ -939,7 +951,9 @@ class AsyncAccuracyResource(AsyncAPIResource):
                     "citation_categories": citation_categories,
                     "comparison_end_date": comparison_end_date,
                     "comparison_start_date": comparison_start_date,
+                    "date_bucket": date_bucket,
                     "exclude_topic_ids": exclude_topic_ids,
+                    "group_by": group_by,
                     "include_no_persona": include_no_persona,
                     "include_no_tag": include_no_tag,
                     "limit": limit,
@@ -1348,11 +1362,11 @@ class AsyncAccuracyResource(AsyncAPIResource):
         category_id: str,
         end_date: str,
         start_date: str,
-        theme_id: str,
         citation_categories: Optional[SequenceNotStr[str]] | Omit = omit,
         comparison_end_date: Optional[str] | Omit = omit,
         comparison_start_date: Optional[str] | Omit = omit,
         exclude_topic_ids: bool | Omit = omit,
+        include_models: bool | Omit = omit,
         include_no_persona: bool | Omit = omit,
         include_no_tag: bool | Omit = omit,
         limit: int | Omit = omit,
@@ -1364,6 +1378,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
         search_query: Optional[str] | Omit = omit,
         tag_filter_type: Literal["all", "any"] | Omit = omit,
         tag_ids: Optional[SequenceNotStr[str]] | Omit = omit,
+        theme_id: Optional[str] | Omit = omit,
         topic_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1391,11 +1406,11 @@ class AsyncAccuracyResource(AsyncAPIResource):
                     "category_id": category_id,
                     "end_date": end_date,
                     "start_date": start_date,
-                    "theme_id": theme_id,
                     "citation_categories": citation_categories,
                     "comparison_end_date": comparison_end_date,
                     "comparison_start_date": comparison_start_date,
                     "exclude_topic_ids": exclude_topic_ids,
+                    "include_models": include_models,
                     "include_no_persona": include_no_persona,
                     "include_no_tag": include_no_tag,
                     "limit": limit,
@@ -1407,6 +1422,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
                     "search_query": search_query,
                     "tag_filter_type": tag_filter_type,
                     "tag_ids": tag_ids,
+                    "theme_id": theme_id,
                     "topic_ids": topic_ids,
                 },
                 accuracy_create_inaccurate_clusters_params.AccuracyCreateInaccurateClustersParams,
