@@ -23,9 +23,9 @@ class FactcheckQueryScoresParams(TypedDict, total=False):
     """A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group."""
 
     group_by: List[Literal["date", "model", "region", "persona", "prompt", "topic", "tag", "citation", "theme"]]
-    """1-2 of date/model/region/persona/prompt/topic/tag/theme (or one `citation`).
+    """Up to two dimensions to slice by; empty returns the headline score.
 
-    Empty → headline.
+    `citation` must be alone.
     """
 
     limit: Optional[int]

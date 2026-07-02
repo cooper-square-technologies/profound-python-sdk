@@ -20,10 +20,10 @@ __all__ = [
     "FilterSentimentV2PersonaIDFilter",
     "FilterSentimentV2TagIDFilter",
     "FilterSentimentV2RunIDFilter",
-    "FilterSentimentV2ThemeIDFilter",
     "FilterSentimentV2ThemeFilter",
-    "FilterSentimentV2ClaimIDFilter",
     "FilterSentimentV2ClaimFilter",
+    "FilterSentimentV2ThemeIDFilter",
+    "FilterSentimentV2ClaimIDFilter",
     "FilterSentimentV2SentimentFilter",
 ]
 
@@ -53,8 +53,8 @@ class ReportSentimentV2Params(TypedDict, total=False):
     comparison_start_date: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
     """Start of the previous period for delta computation."""
 
-    date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"]
-    """Date interval for the report. Only used when dimensions includes date."""
+    date_bucket: Literal["day", "week", "month"]
+    """Date bucket for the report. Only used when dimensions includes date."""
 
     dimensions: List[
         Literal["date", "topic", "region", "model", "prompt", "persona", "tag", "theme", "claim", "run", "asset_name"]
@@ -131,14 +131,6 @@ class FilterSentimentV2RunIDFilter(TypedDict, total=False):
     value: Required[Union[str, SequenceNotStr[str]]]
 
 
-class FilterSentimentV2ThemeIDFilter(TypedDict, total=False):
-    field: Required[Literal["theme_id"]]
-
-    operator: Required[Literal["is", "not_is", "in", "not_in"]]
-
-    value: Required[Union[str, SequenceNotStr[str]]]
-
-
 class FilterSentimentV2ThemeFilter(TypedDict, total=False):
     field: Required[Literal["theme"]]
 
@@ -155,14 +147,6 @@ class FilterSentimentV2ThemeFilter(TypedDict, total=False):
             "not_contains_case_insensitive",
         ]
     ]
-
-    value: Required[Union[str, SequenceNotStr[str]]]
-
-
-class FilterSentimentV2ClaimIDFilter(TypedDict, total=False):
-    field: Required[Literal["claim_id"]]
-
-    operator: Required[Literal["is", "not_is", "in", "not_in"]]
 
     value: Required[Union[str, SequenceNotStr[str]]]
 
@@ -187,6 +171,22 @@ class FilterSentimentV2ClaimFilter(TypedDict, total=False):
     value: Required[Union[str, SequenceNotStr[str]]]
 
 
+class FilterSentimentV2ThemeIDFilter(TypedDict, total=False):
+    field: Required[Literal["theme_id"]]
+
+    operator: Required[Literal["is", "not_is", "in", "not_in"]]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
+class FilterSentimentV2ClaimIDFilter(TypedDict, total=False):
+    field: Required[Literal["claim_id"]]
+
+    operator: Required[Literal["is", "not_is", "in", "not_in"]]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
 class FilterSentimentV2SentimentFilter(TypedDict, total=False):
     field: Required[Literal["sentiment"]]
 
@@ -203,9 +203,9 @@ Filter: TypeAlias = Union[
     FilterSentimentV2PersonaIDFilter,
     FilterSentimentV2TagIDFilter,
     FilterSentimentV2RunIDFilter,
-    FilterSentimentV2ThemeIDFilter,
     FilterSentimentV2ThemeFilter,
-    FilterSentimentV2ClaimIDFilter,
     FilterSentimentV2ClaimFilter,
+    FilterSentimentV2ThemeIDFilter,
+    FilterSentimentV2ClaimIDFilter,
     FilterSentimentV2SentimentFilter,
 ]

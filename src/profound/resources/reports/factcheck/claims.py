@@ -76,7 +76,7 @@ class ClaimsResource(SyncAPIResource):
           group_by: Optional single dim to section the claims (e.g. per model). Empty → one flat
               claim list.
 
-          include: Claim detail: theme, reasoning, models, evidence, citation_sources.
+          include: Optional per-claim detail fields to add to each claim (see options).
 
           limit: Claims (or sections) per page; default 25.
 
@@ -144,7 +144,7 @@ class ClaimsResource(SyncAPIResource):
           group_by: Optional single dim to section the claims (e.g. per model). Empty → one flat
               claim list.
 
-          include: Claim detail: theme, reasoning, models, evidence, citation_sources.
+          include: Optional per-claim detail fields to add to each claim (see options).
 
           limit: Claims (or sections) per page; default 25.
 
@@ -234,7 +234,7 @@ class AsyncClaimsResource(AsyncAPIResource):
           group_by: Optional single dim to section the claims (e.g. per model). Empty → one flat
               claim list.
 
-          include: Claim detail: theme, reasoning, models, evidence, citation_sources.
+          include: Optional per-claim detail fields to add to each claim (see options).
 
           limit: Claims (or sections) per page; default 25.
 
@@ -302,7 +302,7 @@ class AsyncClaimsResource(AsyncAPIResource):
           group_by: Optional single dim to section the claims (e.g. per model). Empty → one flat
               claim list.
 
-          include: Claim detail: theme, reasoning, models, evidence, citation_sources.
+          include: Optional per-claim detail fields to add to each claim (see options).
 
           limit: Claims (or sections) per page; default 25.
 

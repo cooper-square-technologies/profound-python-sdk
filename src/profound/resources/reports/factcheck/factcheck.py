@@ -85,8 +85,8 @@ class FactcheckResource(SyncAPIResource):
 
           filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
 
-          group_by: 1-2 of date/model/region/persona/prompt/topic/tag/theme (or one `citation`).
-              Empty → headline.
+          group_by: Up to two dimensions to slice by; empty returns the headline score. `citation`
+              must be alone.
 
           limit: Rows per page; default 100.
 
@@ -150,8 +150,8 @@ class FactcheckResource(SyncAPIResource):
 
           filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
 
-          group_by: 1-2 of date/model/region/persona/prompt/topic/tag/theme (or one `citation`).
-              Empty → headline.
+          group_by: Up to two dimensions to slice by; empty returns the headline score. `citation`
+              must be alone.
 
           limit: Rows per page; default 100.
 
@@ -241,8 +241,8 @@ class AsyncFactcheckResource(AsyncAPIResource):
 
           filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
 
-          group_by: 1-2 of date/model/region/persona/prompt/topic/tag/theme (or one `citation`).
-              Empty → headline.
+          group_by: Up to two dimensions to slice by; empty returns the headline score. `citation`
+              must be alone.
 
           limit: Rows per page; default 100.
 
@@ -306,8 +306,8 @@ class AsyncFactcheckResource(AsyncAPIResource):
 
           filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
 
-          group_by: 1-2 of date/model/region/persona/prompt/topic/tag/theme (or one `citation`).
-              Empty → headline.
+          group_by: Up to two dimensions to slice by; empty returns the headline score. `citation`
+              must be alone.
 
           limit: Rows per page; default 100.
 
