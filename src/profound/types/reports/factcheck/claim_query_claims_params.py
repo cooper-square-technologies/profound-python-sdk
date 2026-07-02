@@ -29,7 +29,7 @@ class ClaimQueryClaimsParams(TypedDict, total=False):
     """
 
     include: Optional[List[Literal["theme", "reasoning", "models", "evidence", "citation_sources"]]]
-    """Claim detail: theme, reasoning, models, evidence, citation_sources."""
+    """Optional per-claim detail fields to add to each claim (see options)."""
 
     limit: Optional[int]
     """Claims (or sections) per page; default 25."""

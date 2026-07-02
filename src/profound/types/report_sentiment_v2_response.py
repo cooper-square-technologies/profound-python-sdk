@@ -69,8 +69,6 @@ class DataGroupMetadata(BaseModel):
 
     claim: Optional[str] = None
 
-    claim_id: Optional[str] = None
-
     created_at: Optional[str] = None
 
     api_model_id: Optional[str] = FieldInfo(alias="model_id", default=None)
@@ -90,8 +88,6 @@ class DataGroupMetadata(BaseModel):
     sentiment: Optional[Literal["positive", "negative"]] = None
 
     theme: Optional[str] = None
-
-    theme_id: Optional[str] = None
 
     topic_id: Optional[str] = None
 
