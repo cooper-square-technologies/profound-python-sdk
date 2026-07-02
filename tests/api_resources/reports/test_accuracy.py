@@ -52,7 +52,9 @@ class TestAccuracy:
             citation_categories=["string"],
             comparison_end_date="comparison_end_date",
             comparison_start_date="comparison_start_date",
+            date_bucket="date_bucket",
             exclude_topic_ids=True,
+            group_by=["platform"],
             include_no_persona=True,
             include_no_tag=True,
             limit=1,
@@ -479,7 +481,6 @@ class TestAccuracy:
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
-            theme_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(AccuracyCreateInaccurateClustersResponse, accuracy, path=["response"])
 
@@ -490,11 +491,11 @@ class TestAccuracy:
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
-            theme_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             citation_categories=["string"],
             comparison_end_date="comparison_end_date",
             comparison_start_date="comparison_start_date",
             exclude_topic_ids=True,
+            include_models=True,
             include_no_persona=True,
             include_no_tag=True,
             limit=1,
@@ -506,6 +507,7 @@ class TestAccuracy:
             search_query="search_query",
             tag_filter_type="all",
             tag_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            theme_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             topic_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
         )
         assert_matches_type(AccuracyCreateInaccurateClustersResponse, accuracy, path=["response"])
@@ -517,7 +519,6 @@ class TestAccuracy:
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
-            theme_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -532,7 +533,6 @@ class TestAccuracy:
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
-            theme_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -806,7 +806,9 @@ class TestAsyncAccuracy:
             citation_categories=["string"],
             comparison_end_date="comparison_end_date",
             comparison_start_date="comparison_start_date",
+            date_bucket="date_bucket",
             exclude_topic_ids=True,
+            group_by=["platform"],
             include_no_persona=True,
             include_no_tag=True,
             limit=1,
@@ -1233,7 +1235,6 @@ class TestAsyncAccuracy:
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
-            theme_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(AccuracyCreateInaccurateClustersResponse, accuracy, path=["response"])
 
@@ -1244,11 +1245,11 @@ class TestAsyncAccuracy:
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
-            theme_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             citation_categories=["string"],
             comparison_end_date="comparison_end_date",
             comparison_start_date="comparison_start_date",
             exclude_topic_ids=True,
+            include_models=True,
             include_no_persona=True,
             include_no_tag=True,
             limit=1,
@@ -1260,6 +1261,7 @@ class TestAsyncAccuracy:
             search_query="search_query",
             tag_filter_type="all",
             tag_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            theme_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             topic_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
         )
         assert_matches_type(AccuracyCreateInaccurateClustersResponse, accuracy, path=["response"])
@@ -1271,7 +1273,6 @@ class TestAsyncAccuracy:
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
-            theme_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -1286,7 +1287,6 @@ class TestAsyncAccuracy:
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
-            theme_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

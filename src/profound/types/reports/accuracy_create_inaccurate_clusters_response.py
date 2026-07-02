@@ -6,7 +6,13 @@ from pydantic import Field as FieldInfo
 
 from ..._models import BaseModel
 
-__all__ = ["AccuracyCreateInaccurateClustersResponse", "Data"]
+__all__ = ["AccuracyCreateInaccurateClustersResponse", "Data", "DataModel"]
+
+
+class DataModel(BaseModel):
+    api_model_id: str = FieldInfo(alias="modelId")
+
+    occurrence: float
 
 
 class Data(BaseModel):
@@ -31,6 +37,10 @@ class Data(BaseModel):
     total_response_count: int = FieldInfo(alias="totalResponseCount")
 
     description: Optional[str] = None
+
+    models: Optional[List[DataModel]] = None
+
+    neutral_theme: Optional[str] = FieldInfo(alias="neutralTheme", default=None)
 
     response_share_delta: Optional[float] = FieldInfo(alias="responseShareDelta", default=None)
 
