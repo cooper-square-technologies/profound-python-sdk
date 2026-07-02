@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import Dict, List, Optional
 
 from pydantic import Field as FieldInfo
 
@@ -22,7 +22,13 @@ class Data(BaseModel):
 
     accuracy_change: Optional[float] = FieldInfo(alias="accuracyChange", default=None)
 
+    accurate_count: Optional[int] = FieldInfo(alias="accurateCount", default=None)
+
     citation_category: Optional[str] = FieldInfo(alias="citationCategory", default=None)
+
+    group_ids: Optional[Dict[str, str]] = FieldInfo(alias="groupIds", default=None)
+
+    group_names: Optional[Dict[str, str]] = FieldInfo(alias="groupNames", default=None)
 
     inaccurate_count_change: Optional[int] = FieldInfo(alias="inaccurateCountChange", default=None)
 

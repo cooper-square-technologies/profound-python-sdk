@@ -39,6 +39,8 @@ class TrendByPeriod(BaseModel):
 
     prev_period_data: Optional[object] = FieldInfo(alias="prevPeriodData", default=None)
 
+    verified: Optional[int] = None
+
 
 class AvailableSeries(BaseModel):
     id: str

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Optional
+from typing import List, Optional
 from typing_extensions import Literal, Required, TypedDict
 
 from ..._types import SequenceNotStr
@@ -17,7 +17,7 @@ class AccuracyCreateBreakdownParams(TypedDict, total=False):
 
     start_date: Required[str]
 
-    breakdown_by: Literal["citation", "platform", "topic", "prompt", "tag", "region", "persona"]
+    breakdown_by: Literal["citation", "platform", "topic", "prompt", "tag", "region", "persona", "theme"]
 
     citation_categories: Optional[SequenceNotStr[str]]
 
@@ -25,7 +25,11 @@ class AccuracyCreateBreakdownParams(TypedDict, total=False):
 
     comparison_start_date: Optional[str]
 
+    date_bucket: Optional[str]
+
     exclude_topic_ids: bool
+
+    group_by: Optional[List[Literal["platform", "topic", "prompt", "tag", "region", "persona", "theme", "date"]]]
 
     include_no_persona: bool
 
