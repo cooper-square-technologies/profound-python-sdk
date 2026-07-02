@@ -1073,7 +1073,7 @@ class ReportsResource(SyncAPIResource):
         start_date: Union[str, datetime],
         comparison_end_date: Union[str, datetime, None] | Omit = omit,
         comparison_start_date: Union[str, datetime, None] | Omit = omit,
-        date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
+        date_bucket: Literal["day", "week", "month"] | Omit = omit,
         dimensions: List[
             Literal[
                 "date", "topic", "region", "model", "prompt", "persona", "tag", "theme", "claim", "run", "asset_name"
@@ -1105,7 +1105,7 @@ class ReportsResource(SyncAPIResource):
 
           comparison_start_date: Start of the previous period for delta computation.
 
-          date_interval: Date interval for the report. Only used when dimensions includes date.
+          date_bucket: Date bucket for the report. Only used when dimensions includes date.
 
           dimensions: Dimensions to group the report by.
 
@@ -1135,7 +1135,7 @@ class ReportsResource(SyncAPIResource):
                     "start_date": start_date,
                     "comparison_end_date": comparison_end_date,
                     "comparison_start_date": comparison_start_date,
-                    "date_interval": date_interval,
+                    "date_bucket": date_bucket,
                     "dimensions": dimensions,
                     "filters": filters,
                     "order_by": order_by,
@@ -2837,7 +2837,7 @@ class AsyncReportsResource(AsyncAPIResource):
         start_date: Union[str, datetime],
         comparison_end_date: Union[str, datetime, None] | Omit = omit,
         comparison_start_date: Union[str, datetime, None] | Omit = omit,
-        date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
+        date_bucket: Literal["day", "week", "month"] | Omit = omit,
         dimensions: List[
             Literal[
                 "date", "topic", "region", "model", "prompt", "persona", "tag", "theme", "claim", "run", "asset_name"
@@ -2869,7 +2869,7 @@ class AsyncReportsResource(AsyncAPIResource):
 
           comparison_start_date: Start of the previous period for delta computation.
 
-          date_interval: Date interval for the report. Only used when dimensions includes date.
+          date_bucket: Date bucket for the report. Only used when dimensions includes date.
 
           dimensions: Dimensions to group the report by.
 
@@ -2899,7 +2899,7 @@ class AsyncReportsResource(AsyncAPIResource):
                     "start_date": start_date,
                     "comparison_end_date": comparison_end_date,
                     "comparison_start_date": comparison_start_date,
-                    "date_interval": date_interval,
+                    "date_bucket": date_bucket,
                     "dimensions": dimensions,
                     "filters": filters,
                     "order_by": order_by,

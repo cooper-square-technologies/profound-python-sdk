@@ -590,7 +590,7 @@ class TestReports:
     def test_method_query_sentiment(self, client: Profound) -> None:
         report = client.reports.query_sentiment(
             asset="asset",
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         )
@@ -601,7 +601,7 @@ class TestReports:
     def test_method_query_sentiment_with_all_params(self, client: Profound) -> None:
         report = client.reports.query_sentiment(
             asset="asset",
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
             comparison_end_date="comparison_end_date",
@@ -632,7 +632,7 @@ class TestReports:
     def test_raw_response_query_sentiment(self, client: Profound) -> None:
         response = client.reports.with_raw_response.query_sentiment(
             asset="asset",
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         )
@@ -647,7 +647,7 @@ class TestReports:
     def test_streaming_response_query_sentiment(self, client: Profound) -> None:
         with client.reports.with_streaming_response.query_sentiment(
             asset="asset",
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         ) as response:
@@ -816,7 +816,7 @@ class TestReports:
             start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             comparison_end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             comparison_start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            date_interval="hour",
+            date_bucket="day",
             dimensions=["date"],
             filters=[
                 {
@@ -1137,7 +1137,7 @@ class TestReports:
     def test_method_stream_sentiment_v2(self, client: Profound) -> None:
         report = client.reports.stream_sentiment_v2(
             asset="asset",
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         )
@@ -1148,7 +1148,7 @@ class TestReports:
     def test_method_stream_sentiment_v2_with_all_params(self, client: Profound) -> None:
         report = client.reports.stream_sentiment_v2(
             asset="asset",
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
             comparison_end_date="comparison_end_date",
@@ -1179,7 +1179,7 @@ class TestReports:
     def test_raw_response_stream_sentiment_v2(self, client: Profound) -> None:
         response = client.reports.with_raw_response.stream_sentiment_v2(
             asset="asset",
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         )
@@ -1194,7 +1194,7 @@ class TestReports:
     def test_streaming_response_stream_sentiment_v2(self, client: Profound) -> None:
         with client.reports.with_streaming_response.stream_sentiment_v2(
             asset="asset",
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         ) as response:
@@ -1977,7 +1977,7 @@ class TestAsyncReports:
     async def test_method_query_sentiment(self, async_client: AsyncProfound) -> None:
         report = await async_client.reports.query_sentiment(
             asset="asset",
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         )
@@ -1988,7 +1988,7 @@ class TestAsyncReports:
     async def test_method_query_sentiment_with_all_params(self, async_client: AsyncProfound) -> None:
         report = await async_client.reports.query_sentiment(
             asset="asset",
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
             comparison_end_date="comparison_end_date",
@@ -2019,7 +2019,7 @@ class TestAsyncReports:
     async def test_raw_response_query_sentiment(self, async_client: AsyncProfound) -> None:
         response = await async_client.reports.with_raw_response.query_sentiment(
             asset="asset",
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         )
@@ -2034,7 +2034,7 @@ class TestAsyncReports:
     async def test_streaming_response_query_sentiment(self, async_client: AsyncProfound) -> None:
         async with async_client.reports.with_streaming_response.query_sentiment(
             asset="asset",
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         ) as response:
@@ -2203,7 +2203,7 @@ class TestAsyncReports:
             start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             comparison_end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             comparison_start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            date_interval="hour",
+            date_bucket="day",
             dimensions=["date"],
             filters=[
                 {
@@ -2524,7 +2524,7 @@ class TestAsyncReports:
     async def test_method_stream_sentiment_v2(self, async_client: AsyncProfound) -> None:
         report = await async_client.reports.stream_sentiment_v2(
             asset="asset",
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         )
@@ -2535,7 +2535,7 @@ class TestAsyncReports:
     async def test_method_stream_sentiment_v2_with_all_params(self, async_client: AsyncProfound) -> None:
         report = await async_client.reports.stream_sentiment_v2(
             asset="asset",
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
             comparison_end_date="comparison_end_date",
@@ -2566,7 +2566,7 @@ class TestAsyncReports:
     async def test_raw_response_stream_sentiment_v2(self, async_client: AsyncProfound) -> None:
         response = await async_client.reports.with_raw_response.stream_sentiment_v2(
             asset="asset",
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         )
@@ -2581,7 +2581,7 @@ class TestAsyncReports:
     async def test_streaming_response_stream_sentiment_v2(self, async_client: AsyncProfound) -> None:
         async with async_client.reports.with_streaming_response.stream_sentiment_v2(
             asset="asset",
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         ) as response:
