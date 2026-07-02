@@ -24,6 +24,14 @@ from .shopping import (
     ShoppingResourceWithStreamingResponse,
     AsyncShoppingResourceWithStreamingResponse,
 )
+from .factcheck import (
+    FactcheckResource,
+    AsyncFactcheckResource,
+    FactcheckResourceWithRawResponse,
+    AsyncFactcheckResourceWithRawResponse,
+    FactcheckResourceWithStreamingResponse,
+    AsyncFactcheckResourceWithStreamingResponse,
+)
 from .web_search_results import (
     WebSearchResultsResource,
     AsyncWebSearchResultsResource,
@@ -52,6 +60,12 @@ __all__ = [
     "AsyncAccuracyResourceWithRawResponse",
     "AccuracyResourceWithStreamingResponse",
     "AsyncAccuracyResourceWithStreamingResponse",
+    "FactcheckResource",
+    "AsyncFactcheckResource",
+    "FactcheckResourceWithRawResponse",
+    "AsyncFactcheckResourceWithRawResponse",
+    "FactcheckResourceWithStreamingResponse",
+    "AsyncFactcheckResourceWithStreamingResponse",
     "ReportsResource",
     "AsyncReportsResource",
     "ReportsResourceWithRawResponse",
