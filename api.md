@@ -236,6 +236,32 @@ Methods:
 - <code title="post /v1/reports/accuracy/top-inaccurate-claims">client.reports.accuracy.<a href="./src/profound/resources/reports/accuracy.py">create_top_inaccurate_claims</a>(\*\*<a href="src/profound/types/reports/accuracy_create_top_inaccurate_claims_params.py">params</a>) -> <a href="./src/profound/types/reports/accuracy_create_top_inaccurate_claims_response.py">AccuracyCreateTopInaccurateClaimsResponse</a></code>
 - <code title="post /v1/reports/accuracy/topic-ids">client.reports.accuracy.<a href="./src/profound/resources/reports/accuracy.py">create_topic_ids</a>(\*\*<a href="src/profound/types/reports/accuracy_create_topic_ids_params.py">params</a>) -> <a href="./src/profound/types/reports/accuracy_create_topic_ids_response.py">AccuracyCreateTopicIDsResponse</a></code>
 
+## Factcheck
+
+Types:
+
+```python
+from profound.types.reports import FactcheckQueryScoresResponse
+```
+
+Methods:
+
+- <code title="post /v2/reports/factcheck">client.reports.factcheck.<a href="./src/profound/resources/reports/factcheck/factcheck.py">query_scores</a>(\*\*<a href="src/profound/types/reports/factcheck_query_scores_params.py">params</a>) -> <a href="./src/profound/types/reports/factcheck_query_scores_response.py">FactcheckQueryScoresResponse</a></code>
+- <code title="post /v2/reports/factcheck/stream">client.reports.factcheck.<a href="./src/profound/resources/reports/factcheck/factcheck.py">stream_scores</a>(\*\*<a href="src/profound/types/reports/factcheck_stream_scores_params.py">params</a>) -> None</code>
+
+### Claims
+
+Types:
+
+```python
+from profound.types.reports.factcheck import ClaimQueryClaimsResponse
+```
+
+Methods:
+
+- <code title="post /v2/reports/factcheck/claims">client.reports.factcheck.claims.<a href="./src/profound/resources/reports/factcheck/claims.py">query_claims</a>(\*\*<a href="src/profound/types/reports/factcheck/claim_query_claims_params.py">params</a>) -> <a href="./src/profound/types/reports/factcheck/claim_query_claims_response.py">ClaimQueryClaimsResponse</a></code>
+- <code title="post /v2/reports/factcheck/claims/stream">client.reports.factcheck.claims.<a href="./src/profound/resources/reports/factcheck/claims.py">stream_claims</a>(\*\*<a href="src/profound/types/reports/factcheck/claim_stream_claims_params.py">params</a>) -> None</code>
+
 # Content
 
 ## Optimization

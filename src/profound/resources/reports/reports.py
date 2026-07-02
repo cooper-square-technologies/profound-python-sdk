@@ -66,6 +66,14 @@ from .web_search_results import (
     WebSearchResultsResourceWithStreamingResponse,
     AsyncWebSearchResultsResourceWithStreamingResponse,
 )
+from .factcheck.factcheck import (
+    FactcheckResource,
+    AsyncFactcheckResource,
+    FactcheckResourceWithRawResponse,
+    AsyncFactcheckResourceWithRawResponse,
+    FactcheckResourceWithStreamingResponse,
+    AsyncFactcheckResourceWithStreamingResponse,
+)
 from ...types.report_response import ReportResponse
 from ...types.shared_params.pagination import Pagination
 from ...types.report_citations_response import ReportCitationsResponse
@@ -93,6 +101,10 @@ class ReportsResource(SyncAPIResource):
     @cached_property
     def accuracy(self) -> AccuracyResource:
         return AccuracyResource(self._client)
+
+    @cached_property
+    def factcheck(self) -> FactcheckResource:
+        return FactcheckResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> ReportsResourceWithRawResponse:
@@ -1853,6 +1865,10 @@ class AsyncReportsResource(AsyncAPIResource):
     @cached_property
     def accuracy(self) -> AsyncAccuracyResource:
         return AsyncAccuracyResource(self._client)
+
+    @cached_property
+    def factcheck(self) -> AsyncFactcheckResource:
+        return AsyncFactcheckResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncReportsResourceWithRawResponse:
@@ -3678,6 +3694,10 @@ class ReportsResourceWithRawResponse:
     def accuracy(self) -> AccuracyResourceWithRawResponse:
         return AccuracyResourceWithRawResponse(self._reports.accuracy)
 
+    @cached_property
+    def factcheck(self) -> FactcheckResourceWithRawResponse:
+        return FactcheckResourceWithRawResponse(self._reports.factcheck)
+
 
 class AsyncReportsResourceWithRawResponse:
     def __init__(self, reports: AsyncReportsResource) -> None:
@@ -3755,6 +3775,10 @@ class AsyncReportsResourceWithRawResponse:
     @cached_property
     def accuracy(self) -> AsyncAccuracyResourceWithRawResponse:
         return AsyncAccuracyResourceWithRawResponse(self._reports.accuracy)
+
+    @cached_property
+    def factcheck(self) -> AsyncFactcheckResourceWithRawResponse:
+        return AsyncFactcheckResourceWithRawResponse(self._reports.factcheck)
 
 
 class ReportsResourceWithStreamingResponse:
@@ -3834,6 +3858,10 @@ class ReportsResourceWithStreamingResponse:
     def accuracy(self) -> AccuracyResourceWithStreamingResponse:
         return AccuracyResourceWithStreamingResponse(self._reports.accuracy)
 
+    @cached_property
+    def factcheck(self) -> FactcheckResourceWithStreamingResponse:
+        return FactcheckResourceWithStreamingResponse(self._reports.factcheck)
+
 
 class AsyncReportsResourceWithStreamingResponse:
     def __init__(self, reports: AsyncReportsResource) -> None:
@@ -3911,3 +3939,7 @@ class AsyncReportsResourceWithStreamingResponse:
     @cached_property
     def accuracy(self) -> AsyncAccuracyResourceWithStreamingResponse:
         return AsyncAccuracyResourceWithStreamingResponse(self._reports.accuracy)
+
+    @cached_property
+    def factcheck(self) -> AsyncFactcheckResourceWithStreamingResponse:
+        return AsyncFactcheckResourceWithStreamingResponse(self._reports.factcheck)
