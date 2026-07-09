@@ -2,7 +2,10 @@
 
 from __future__ import annotations
 
-from typing_extensions import Required, TypedDict
+from typing import Optional
+from typing_extensions import Literal, Required, TypedDict
+
+from ..._types import SequenceNotStr
 
 __all__ = ["AccuracyCreateClusterExampleRunsParams"]
 
@@ -16,6 +19,32 @@ class AccuracyCreateClusterExampleRunsParams(TypedDict, total=False):
 
     start_date: Required[str]
 
+    citation_categories: Optional[SequenceNotStr[str]]
+
+    comparison_end_date: Optional[str]
+
+    comparison_start_date: Optional[str]
+
+    exclude_topic_ids: bool
+
+    include_no_persona: bool
+
+    include_no_tag: bool
+
     limit: int
 
     offset: int
+
+    persona_ids: Optional[SequenceNotStr[str]]
+
+    platform_ids: Optional[SequenceNotStr[str]]
+
+    prompt_ids: Optional[SequenceNotStr[str]]
+
+    region_ids: Optional[SequenceNotStr[str]]
+
+    tag_filter_type: Literal["all", "any"]
+
+    tag_ids: Optional[SequenceNotStr[str]]
+
+    topic_ids: Optional[SequenceNotStr[str]]
