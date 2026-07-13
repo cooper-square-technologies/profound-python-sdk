@@ -370,3 +370,64 @@ Methods:
 
 - <code title="post /v1/knowledge-bases/{knowledge_base_id}/folders">client.knowledge_bases.folders.<a href="./src/profound/resources/knowledge_bases/folders.py">create</a>(knowledge_base_id, \*\*<a href="src/profound/types/knowledge_bases/folder_create_params.py">params</a>) -> <a href="./src/profound/types/knowledge_bases/folder_create_response.py">FolderCreateResponse</a></code>
 - <code title="delete /v1/knowledge-bases/{knowledge_base_id}/folders">client.knowledge_bases.folders.<a href="./src/profound/resources/knowledge_bases/folders.py">delete</a>(knowledge_base_id, \*\*<a href="src/profound/types/knowledge_bases/folder_delete_params.py">params</a>) -> <a href="./src/profound/types/knowledge_bases/folder_delete_response.py">FolderDeleteResponse</a></code>
+
+# Projects
+
+Types:
+
+```python
+from profound.types import (
+    ProjectCreateResponse,
+    ProjectRetrieveResponse,
+    ProjectListResponse,
+    ProjectArchiveResponse,
+    ProjectGetStatusResponse,
+    ProjectUnarchiveResponse,
+)
+```
+
+Methods:
+
+- <code title="post /v1/projects">client.projects.<a href="./src/profound/resources/projects/projects.py">create</a>(\*\*<a href="src/profound/types/project_create_params.py">params</a>) -> <a href="./src/profound/types/project_create_response.py">ProjectCreateResponse</a></code>
+- <code title="get /v1/projects/{project_id}">client.projects.<a href="./src/profound/resources/projects/projects.py">retrieve</a>(project_id, \*\*<a href="src/profound/types/project_retrieve_params.py">params</a>) -> <a href="./src/profound/types/project_retrieve_response.py">ProjectRetrieveResponse</a></code>
+- <code title="get /v1/projects">client.projects.<a href="./src/profound/resources/projects/projects.py">list</a>(\*\*<a href="src/profound/types/project_list_params.py">params</a>) -> <a href="./src/profound/types/project_list_response.py">ProjectListResponse</a></code>
+- <code title="delete /v1/projects/{project_id}">client.projects.<a href="./src/profound/resources/projects/projects.py">delete</a>(project_id, \*\*<a href="src/profound/types/project_delete_params.py">params</a>) -> None</code>
+- <code title="post /v1/projects/{project_id}/archive">client.projects.<a href="./src/profound/resources/projects/projects.py">archive</a>(project_id, \*\*<a href="src/profound/types/project_archive_params.py">params</a>) -> <a href="./src/profound/types/project_archive_response.py">ProjectArchiveResponse</a></code>
+- <code title="get /v1/projects/{project_id}/status">client.projects.<a href="./src/profound/resources/projects/projects.py">get_status</a>(project_id, \*\*<a href="src/profound/types/project_get_status_params.py">params</a>) -> <a href="./src/profound/types/project_get_status_response.py">ProjectGetStatusResponse</a></code>
+- <code title="post /v1/projects/{project_id}/unarchive">client.projects.<a href="./src/profound/resources/projects/projects.py">unarchive</a>(project_id, \*\*<a href="src/profound/types/project_unarchive_params.py">params</a>) -> <a href="./src/profound/types/project_unarchive_response.py">ProjectUnarchiveResponse</a></code>
+
+## Generations
+
+Types:
+
+```python
+from profound.types.projects import GenerationRetrieveResponse, GenerationListResponse
+```
+
+Methods:
+
+- <code title="get /v1/projects/generations/{run_id}">client.projects.generations.<a href="./src/profound/resources/projects/generations.py">retrieve</a>(run_id, \*\*<a href="src/profound/types/projects/generation_retrieve_params.py">params</a>) -> <a href="./src/profound/types/projects/generation_retrieve_response.py">GenerationRetrieveResponse</a></code>
+- <code title="get /v1/projects/generations">client.projects.generations.<a href="./src/profound/resources/projects/generations.py">list</a>(\*\*<a href="src/profound/types/projects/generation_list_params.py">params</a>) -> <a href="./src/profound/types/projects/generation_list_response.py">GenerationListResponse</a></code>
+
+## Tasks
+
+Types:
+
+```python
+from profound.types.projects import (
+    TaskCreateResponse,
+    TaskRetrieveResponse,
+    TaskUpdateResponse,
+    TaskListResponse,
+    TaskUpdateStatusResponse,
+)
+```
+
+Methods:
+
+- <code title="post /v1/projects/{project_id}/tasks">client.projects.tasks.<a href="./src/profound/resources/projects/tasks.py">create</a>(project_id, \*\*<a href="src/profound/types/projects/task_create_params.py">params</a>) -> <a href="./src/profound/types/projects/task_create_response.py">TaskCreateResponse</a></code>
+- <code title="get /v1/projects/{project_id}/tasks/{task_id}">client.projects.tasks.<a href="./src/profound/resources/projects/tasks.py">retrieve</a>(task_id, \*, project_id, \*\*<a href="src/profound/types/projects/task_retrieve_params.py">params</a>) -> <a href="./src/profound/types/projects/task_retrieve_response.py">TaskRetrieveResponse</a></code>
+- <code title="patch /v1/projects/{project_id}/tasks/{task_id}">client.projects.tasks.<a href="./src/profound/resources/projects/tasks.py">update</a>(task_id, \*, project_id, \*\*<a href="src/profound/types/projects/task_update_params.py">params</a>) -> <a href="./src/profound/types/projects/task_update_response.py">TaskUpdateResponse</a></code>
+- <code title="get /v1/projects/{project_id}/tasks">client.projects.tasks.<a href="./src/profound/resources/projects/tasks.py">list</a>(project_id, \*\*<a href="src/profound/types/projects/task_list_params.py">params</a>) -> <a href="./src/profound/types/projects/task_list_response.py">TaskListResponse</a></code>
+- <code title="delete /v1/projects/{project_id}/tasks/{task_id}">client.projects.tasks.<a href="./src/profound/resources/projects/tasks.py">delete</a>(task_id, \*, project_id, \*\*<a href="src/profound/types/projects/task_delete_params.py">params</a>) -> None</code>
+- <code title="post /v1/projects/{project_id}/tasks/{task_id}/status">client.projects.tasks.<a href="./src/profound/resources/projects/tasks.py">update_status</a>(task_id, \*, project_id, \*\*<a href="src/profound/types/projects/task_update_status_params.py">params</a>) -> <a href="./src/profound/types/projects/task_update_status_response.py">TaskUpdateStatusResponse</a></code>

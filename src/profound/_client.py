@@ -36,11 +36,12 @@ from ._base_client import (
 )
 
 if TYPE_CHECKING:
-    from .resources import agents, content, prompts, reports, organizations, knowledge_bases
+    from .resources import agents, content, prompts, reports, projects, organizations, knowledge_bases
     from .resources.prompts import PromptsResource, AsyncPromptsResource
     from .resources.agents.agents import AgentsResource, AsyncAgentsResource
     from .resources.content.content import ContentResource, AsyncContentResource
     from .resources.reports.reports import ReportsResource, AsyncReportsResource
+    from .resources.projects.projects import ProjectsResource, AsyncProjectsResource
     from .resources.organizations.organizations import OrganizationsResource, AsyncOrganizationsResource
     from .resources.knowledge_bases.knowledge_bases import KnowledgeBasesResource, AsyncKnowledgeBasesResource
 
@@ -189,6 +190,12 @@ class Profound(SyncAPIClient):
         from .resources.knowledge_bases import KnowledgeBasesResource
 
         return KnowledgeBasesResource(self)
+
+    @cached_property
+    def projects(self) -> ProjectsResource:
+        from .resources.projects import ProjectsResource
+
+        return ProjectsResource(self)
 
     @cached_property
     def with_raw_response(self) -> ProfoundWithRawResponse:
@@ -461,6 +468,12 @@ class AsyncProfound(AsyncAPIClient):
         return AsyncKnowledgeBasesResource(self)
 
     @cached_property
+    def projects(self) -> AsyncProjectsResource:
+        from .resources.projects import AsyncProjectsResource
+
+        return AsyncProjectsResource(self)
+
+    @cached_property
     def with_raw_response(self) -> AsyncProfoundWithRawResponse:
         return AsyncProfoundWithRawResponse(self)
 
@@ -644,6 +657,12 @@ class ProfoundWithRawResponse:
 
         return KnowledgeBasesResourceWithRawResponse(self._client.knowledge_bases)
 
+    @cached_property
+    def projects(self) -> projects.ProjectsResourceWithRawResponse:
+        from .resources.projects import ProjectsResourceWithRawResponse
+
+        return ProjectsResourceWithRawResponse(self._client.projects)
+
 
 class AsyncProfoundWithRawResponse:
     _client: AsyncProfound
@@ -686,6 +705,12 @@ class AsyncProfoundWithRawResponse:
         from .resources.knowledge_bases import AsyncKnowledgeBasesResourceWithRawResponse
 
         return AsyncKnowledgeBasesResourceWithRawResponse(self._client.knowledge_bases)
+
+    @cached_property
+    def projects(self) -> projects.AsyncProjectsResourceWithRawResponse:
+        from .resources.projects import AsyncProjectsResourceWithRawResponse
+
+        return AsyncProjectsResourceWithRawResponse(self._client.projects)
 
 
 class ProfoundWithStreamedResponse:
@@ -730,6 +755,12 @@ class ProfoundWithStreamedResponse:
 
         return KnowledgeBasesResourceWithStreamingResponse(self._client.knowledge_bases)
 
+    @cached_property
+    def projects(self) -> projects.ProjectsResourceWithStreamingResponse:
+        from .resources.projects import ProjectsResourceWithStreamingResponse
+
+        return ProjectsResourceWithStreamingResponse(self._client.projects)
+
 
 class AsyncProfoundWithStreamedResponse:
     _client: AsyncProfound
@@ -772,6 +803,12 @@ class AsyncProfoundWithStreamedResponse:
         from .resources.knowledge_bases import AsyncKnowledgeBasesResourceWithStreamingResponse
 
         return AsyncKnowledgeBasesResourceWithStreamingResponse(self._client.knowledge_bases)
+
+    @cached_property
+    def projects(self) -> projects.AsyncProjectsResourceWithStreamingResponse:
+        from .resources.projects import AsyncProjectsResourceWithStreamingResponse
+
+        return AsyncProjectsResourceWithStreamingResponse(self._client.projects)
 
 
 Client = Profound
