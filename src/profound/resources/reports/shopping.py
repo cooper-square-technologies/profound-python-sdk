@@ -260,6 +260,7 @@ class ShoppingResource(SyncAPIResource):
         dimensions: List[
             Literal[
                 "period",
+                "product_key",
                 "product_name",
                 "brand_name",
                 "date",
@@ -1129,6 +1130,7 @@ class AsyncShoppingResource(AsyncAPIResource):
         dimensions: List[
             Literal[
                 "period",
+                "product_key",
                 "product_name",
                 "brand_name",
                 "date",
