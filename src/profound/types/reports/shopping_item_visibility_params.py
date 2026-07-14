@@ -42,6 +42,7 @@ class ShoppingItemVisibilityParams(TypedDict, total=False):
     dimensions: List[
         Literal[
             "period",
+            "product_key",
             "product_name",
             "brand_name",
             "date",
