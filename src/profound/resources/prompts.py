@@ -153,7 +153,7 @@ class PromptsResource(SyncAPIResource):
               `citations`, `search_queries`, `analysis_types`, `sentiment_claims`. Omit for
               all of them.
 
-          limit: Page size; default 10, max 50.
+          limit: Page size; default 10, max 200.
 
           max_results: Stream endpoint only: cap the number of streamed rows (default: all).
 
@@ -241,7 +241,7 @@ class PromptsResource(SyncAPIResource):
               `citations`, `search_queries`, `analysis_types`, `sentiment_claims`. Omit for
               all of them.
 
-          limit: Page size; default 10, max 50.
+          limit: Page size; default 10, max 200.
 
           max_results: Stream endpoint only: cap the number of streamed rows (default: all).
 
@@ -402,7 +402,7 @@ class AsyncPromptsResource(AsyncAPIResource):
               `citations`, `search_queries`, `analysis_types`, `sentiment_claims`. Omit for
               all of them.
 
-          limit: Page size; default 10, max 50.
+          limit: Page size; default 10, max 200.
 
           max_results: Stream endpoint only: cap the number of streamed rows (default: all).
 
@@ -490,7 +490,7 @@ class AsyncPromptsResource(AsyncAPIResource):
               `citations`, `search_queries`, `analysis_types`, `sentiment_claims`. Omit for
               all of them.
 
-          limit: Page size; default 10, max 50.
+          limit: Page size; default 10, max 200.
 
           max_results: Stream endpoint only: cap the number of streamed rows (default: all).
 
