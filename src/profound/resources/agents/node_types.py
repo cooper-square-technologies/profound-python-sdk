@@ -78,7 +78,7 @@ class NodeTypesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NodeTypeRetrieveSchemaResponse:
         """
-        Retrieve the JSON schema and worked examples for a single node type.
+        Retrieve the JSON schema for a single node type.
 
         The `schema` field is an opaque JSON Schema for the node's configuration. Use
         `schema_version` as a cache key — it bumps whenever the schema changes.
@@ -162,7 +162,7 @@ class AsyncNodeTypesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NodeTypeRetrieveSchemaResponse:
         """
-        Retrieve the JSON schema and worked examples for a single node type.
+        Retrieve the JSON schema for a single node type.
 
         The `schema` field is an opaque JSON Schema for the node's configuration. Use
         `schema_version` as a cache key — it bumps whenever the schema changes.
