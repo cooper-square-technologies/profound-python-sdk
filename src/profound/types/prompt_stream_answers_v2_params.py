@@ -52,7 +52,7 @@ class PromptStreamAnswersV2Params(TypedDict, total=False):
     """
 
     limit: Optional[int]
-    """Page size; default 10, max 50."""
+    """Page size; default 10, max 200."""
 
     max_results: Optional[int]
     """Stream endpoint only: cap the number of streamed rows (default: all)."""

@@ -10,7 +10,7 @@ __all__ = ["NodeTypeRetrieveSchemaResponse"]
 
 
 class NodeTypeRetrieveSchemaResponse(BaseModel):
-    """JSON schema and worked examples for a single node type."""
+    """JSON schema for a single node type."""
 
     node_type: str
     """Stable identifier for the node type, e.g. `llm`."""
@@ -53,10 +53,9 @@ class NodeTypeRetrieveSchemaResponse(BaseModel):
     examples: Optional[List[Dict[str, object]]] = None
     """Worked example configurations for the node type, in the canonical graph dialect.
 
-    These are curated guidance maintained by external-api, versioned by
-    `docs_version` (NOT `schema_version`): they illustrate a valid shape at curation
-    time but are a starting point, not the contract — they may lag the validator.
-    The authoritative contract is `schema`, and the only authoritative check that a
-    graph is valid is publishing it (or the agent-validation endpoint). Do not parse
-    `examples` as the schema.
+    Curated authoring guidance, versioned by `docs_version` (NOT `schema_version`):
+    they illustrate a valid shape at curation time but are a starting point, not the
+    contract — they may lag the validator. The authoritative contract is `schema`,
+    and the only authoritative check that a graph is valid is publishing it (or the
+    agent-validation endpoint). Do not parse `examples` as the schema.
     """
