@@ -663,7 +663,7 @@ class TestReports:
     @parametrize
     def test_method_query_visibility(self, client: Profound) -> None:
         report = client.reports.query_visibility(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         )
@@ -673,7 +673,7 @@ class TestReports:
     @parametrize
     def test_method_query_visibility_with_all_params(self, client: Profound) -> None:
         report = client.reports.query_visibility(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
             assets="string",
@@ -699,7 +699,7 @@ class TestReports:
     @parametrize
     def test_raw_response_query_visibility(self, client: Profound) -> None:
         response = client.reports.with_raw_response.query_visibility(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         )
@@ -713,7 +713,7 @@ class TestReports:
     @parametrize
     def test_streaming_response_query_visibility(self, client: Profound) -> None:
         with client.reports.with_streaming_response.query_visibility(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         ) as response:
@@ -1277,7 +1277,7 @@ class TestReports:
     @parametrize
     def test_method_stream_visibility_v2(self, client: Profound) -> None:
         report = client.reports.stream_visibility_v2(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         )
@@ -1287,7 +1287,7 @@ class TestReports:
     @parametrize
     def test_method_stream_visibility_v2_with_all_params(self, client: Profound) -> None:
         report = client.reports.stream_visibility_v2(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
             assets="string",
@@ -1313,7 +1313,7 @@ class TestReports:
     @parametrize
     def test_raw_response_stream_visibility_v2(self, client: Profound) -> None:
         response = client.reports.with_raw_response.stream_visibility_v2(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         )
@@ -1327,7 +1327,7 @@ class TestReports:
     @parametrize
     def test_streaming_response_stream_visibility_v2(self, client: Profound) -> None:
         with client.reports.with_streaming_response.stream_visibility_v2(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         ) as response:
@@ -2050,7 +2050,7 @@ class TestAsyncReports:
     @parametrize
     async def test_method_query_visibility(self, async_client: AsyncProfound) -> None:
         report = await async_client.reports.query_visibility(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         )
@@ -2060,7 +2060,7 @@ class TestAsyncReports:
     @parametrize
     async def test_method_query_visibility_with_all_params(self, async_client: AsyncProfound) -> None:
         report = await async_client.reports.query_visibility(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
             assets="string",
@@ -2086,7 +2086,7 @@ class TestAsyncReports:
     @parametrize
     async def test_raw_response_query_visibility(self, async_client: AsyncProfound) -> None:
         response = await async_client.reports.with_raw_response.query_visibility(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         )
@@ -2100,7 +2100,7 @@ class TestAsyncReports:
     @parametrize
     async def test_streaming_response_query_visibility(self, async_client: AsyncProfound) -> None:
         async with async_client.reports.with_streaming_response.query_visibility(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         ) as response:
@@ -2664,7 +2664,7 @@ class TestAsyncReports:
     @parametrize
     async def test_method_stream_visibility_v2(self, async_client: AsyncProfound) -> None:
         report = await async_client.reports.stream_visibility_v2(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         )
@@ -2674,7 +2674,7 @@ class TestAsyncReports:
     @parametrize
     async def test_method_stream_visibility_v2_with_all_params(self, async_client: AsyncProfound) -> None:
         report = await async_client.reports.stream_visibility_v2(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
             assets="string",
@@ -2700,7 +2700,7 @@ class TestAsyncReports:
     @parametrize
     async def test_raw_response_stream_visibility_v2(self, async_client: AsyncProfound) -> None:
         response = await async_client.reports.with_raw_response.stream_visibility_v2(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         )
@@ -2714,7 +2714,7 @@ class TestAsyncReports:
     @parametrize
     async def test_streaming_response_stream_visibility_v2(self, async_client: AsyncProfound) -> None:
         async with async_client.reports.with_streaming_response.stream_visibility_v2(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         ) as response:
