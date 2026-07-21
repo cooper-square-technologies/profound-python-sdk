@@ -30,7 +30,7 @@ from ...types import (
     report_stream_visibility_v2_params,
     report_get_referrals_report_v2_params,
 )
-from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
+from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, SequenceNotStr, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from .accuracy import (
     AccuracyResource,
@@ -323,16 +323,18 @@ class ReportsResource(SyncAPIResource):
         self,
         *,
         domain: str,
-        metrics: List[Literal["count", "citations", "indexing", "training", "last_visit"]],
+        metrics: List[Literal["count", "citations", "indexing", "training", "last_visit", "agents"]],
         start_date: Union[str, datetime],
         date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
         dimensions: List[Literal["date", "hour", "path", "bot_name", "bot_provider", "bot_type"]] | Omit = omit,
+        domain_id: Optional[str] | Omit = omit,
         end_date: Union[str, datetime] | Omit = omit,
         filters: Iterable[report_get_bots_report_v2_params.Filter] | Omit = omit,
         metric_filters: Iterable[report_get_bots_report_v2_params.MetricFilter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
         organization_id: Optional[str] | Omit = omit,
         pagination: Pagination | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -367,6 +369,8 @@ class ReportsResource(SyncAPIResource):
           date_interval: Date interval for the report. (only used with date dimension)
 
           dimensions: Dimensions to group the report by.
+
+          domain_id: Domain UUID used for tag lookups.
 
           end_date: End date in UTC. Accepts same formats as start_date. Defaults to now UTC if
               omitted.
@@ -405,12 +409,14 @@ class ReportsResource(SyncAPIResource):
                     "start_date": start_date,
                     "date_interval": date_interval,
                     "dimensions": dimensions,
+                    "domain_id": domain_id,
                     "end_date": end_date,
                     "filters": filters,
                     "metric_filters": metric_filters,
                     "order_by": order_by,
                     "organization_id": organization_id,
                     "pagination": pagination,
+                    "tags": tags,
                 },
                 report_get_bots_report_v2_params.ReportGetBotsReportV2Params,
             ),
@@ -2087,16 +2093,18 @@ class AsyncReportsResource(AsyncAPIResource):
         self,
         *,
         domain: str,
-        metrics: List[Literal["count", "citations", "indexing", "training", "last_visit"]],
+        metrics: List[Literal["count", "citations", "indexing", "training", "last_visit", "agents"]],
         start_date: Union[str, datetime],
         date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
         dimensions: List[Literal["date", "hour", "path", "bot_name", "bot_provider", "bot_type"]] | Omit = omit,
+        domain_id: Optional[str] | Omit = omit,
         end_date: Union[str, datetime] | Omit = omit,
         filters: Iterable[report_get_bots_report_v2_params.Filter] | Omit = omit,
         metric_filters: Iterable[report_get_bots_report_v2_params.MetricFilter] | Omit = omit,
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
         organization_id: Optional[str] | Omit = omit,
         pagination: Pagination | Omit = omit,
+        tags: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -2131,6 +2139,8 @@ class AsyncReportsResource(AsyncAPIResource):
           date_interval: Date interval for the report. (only used with date dimension)
 
           dimensions: Dimensions to group the report by.
+
+          domain_id: Domain UUID used for tag lookups.
 
           end_date: End date in UTC. Accepts same formats as start_date. Defaults to now UTC if
               omitted.
@@ -2169,12 +2179,14 @@ class AsyncReportsResource(AsyncAPIResource):
                     "start_date": start_date,
                     "date_interval": date_interval,
                     "dimensions": dimensions,
+                    "domain_id": domain_id,
                     "end_date": end_date,
                     "filters": filters,
                     "metric_filters": metric_filters,
                     "order_by": order_by,
                     "organization_id": organization_id,
                     "pagination": pagination,
+                    "tags": tags,
                 },
                 report_get_bots_report_v2_params.ReportGetBotsReportV2Params,
             ),
