@@ -30,7 +30,7 @@ from ...types import (
     report_stream_visibility_v2_params,
     report_get_referrals_report_v2_params,
 )
-from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, SequenceNotStr, omit, not_given
+from ..._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from .accuracy import (
     AccuracyResource,
@@ -85,6 +85,10 @@ from ...types.report_stream_citations_response import ReportStreamCitationsRespo
 from ...types.report_stream_sentiment_response import ReportStreamSentimentResponse
 from ...types.report_stream_visibility_response import ReportStreamVisibilityResponse
 from ...types.report_query_query_fanouts_response import ReportQueryQueryFanoutsResponse
+from ...types.report_stream_citations_v2_response import ReportStreamCitationsV2Response
+from ...types.report_stream_sentiment_v2_response import ReportStreamSentimentV2Response
+from ...types.report_stream_query_fanouts_response import ReportStreamQueryFanoutsResponse
+from ...types.report_stream_visibility_v2_response import ReportStreamVisibilityV2Response
 
 __all__ = ["ReportsResource", "AsyncReportsResource"]
 
@@ -1286,7 +1290,7 @@ class ReportsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
+    ) -> Stream[ReportStreamCitationsV2Response]:
         """
         Stream Citations V2
 
@@ -1318,7 +1322,7 @@ class ReportsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        extra_headers = {"Accept": "text/event-stream", **(extra_headers or {})}
         return self._post(
             "/v2/reports/citations/stream",
             body=maybe_transform(
@@ -1341,7 +1345,11 @@ class ReportsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NoneType,
+            cast_to=cast(
+                Any, ReportStreamCitationsV2Response
+            ),  # Union types cannot be passed in as arguments in the type system
+            stream=True,
+            stream_cls=Stream[ReportStreamCitationsV2Response],
         )
 
     def stream_query_fanouts(
@@ -1365,7 +1373,7 @@ class ReportsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
+    ) -> Stream[ReportStreamQueryFanoutsResponse]:
         """
         Stream Query Fanouts V2
 
@@ -1388,7 +1396,7 @@ class ReportsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        extra_headers = {"Accept": "text/event-stream", **(extra_headers or {})}
         return self._post(
             "/v2/reports/query-fanouts/stream",
             body=maybe_transform(
@@ -1410,7 +1418,11 @@ class ReportsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NoneType,
+            cast_to=cast(
+                Any, ReportStreamQueryFanoutsResponse
+            ),  # Union types cannot be passed in as arguments in the type system
+            stream=True,
+            stream_cls=Stream[ReportStreamQueryFanoutsResponse],
         )
 
     def stream_sentiment(
@@ -1543,7 +1555,7 @@ class ReportsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
+    ) -> Stream[ReportStreamSentimentV2Response]:
         """
         Stream Sentiment V2
 
@@ -1574,7 +1586,7 @@ class ReportsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        extra_headers = {"Accept": "text/event-stream", **(extra_headers or {})}
         return self._post(
             "/v2/reports/sentiment/stream",
             body=maybe_transform(
@@ -1600,7 +1612,11 @@ class ReportsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NoneType,
+            cast_to=cast(
+                Any, ReportStreamSentimentV2Response
+            ),  # Union types cannot be passed in as arguments in the type system
+            stream=True,
+            stream_cls=Stream[ReportStreamSentimentV2Response],
         )
 
     def stream_visibility(
@@ -1726,7 +1742,7 @@ class ReportsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
+    ) -> Stream[ReportStreamVisibilityV2Response]:
         """
         Stream Visibility V2
 
@@ -1751,7 +1767,7 @@ class ReportsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        extra_headers = {"Accept": "text/event-stream", **(extra_headers or {})}
         return self._post(
             "/v2/reports/visibility/stream",
             body=maybe_transform(
@@ -1775,7 +1791,11 @@ class ReportsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NoneType,
+            cast_to=cast(
+                Any, ReportStreamVisibilityV2Response
+            ),  # Union types cannot be passed in as arguments in the type system
+            stream=True,
+            stream_cls=Stream[ReportStreamVisibilityV2Response],
         )
 
     def visibility(
@@ -3072,7 +3092,7 @@ class AsyncReportsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
+    ) -> AsyncStream[ReportStreamCitationsV2Response]:
         """
         Stream Citations V2
 
@@ -3104,7 +3124,7 @@ class AsyncReportsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        extra_headers = {"Accept": "text/event-stream", **(extra_headers or {})}
         return await self._post(
             "/v2/reports/citations/stream",
             body=await async_maybe_transform(
@@ -3127,7 +3147,11 @@ class AsyncReportsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NoneType,
+            cast_to=cast(
+                Any, ReportStreamCitationsV2Response
+            ),  # Union types cannot be passed in as arguments in the type system
+            stream=True,
+            stream_cls=AsyncStream[ReportStreamCitationsV2Response],
         )
 
     async def stream_query_fanouts(
@@ -3151,7 +3175,7 @@ class AsyncReportsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
+    ) -> AsyncStream[ReportStreamQueryFanoutsResponse]:
         """
         Stream Query Fanouts V2
 
@@ -3174,7 +3198,7 @@ class AsyncReportsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        extra_headers = {"Accept": "text/event-stream", **(extra_headers or {})}
         return await self._post(
             "/v2/reports/query-fanouts/stream",
             body=await async_maybe_transform(
@@ -3196,7 +3220,11 @@ class AsyncReportsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NoneType,
+            cast_to=cast(
+                Any, ReportStreamQueryFanoutsResponse
+            ),  # Union types cannot be passed in as arguments in the type system
+            stream=True,
+            stream_cls=AsyncStream[ReportStreamQueryFanoutsResponse],
         )
 
     async def stream_sentiment(
@@ -3329,7 +3357,7 @@ class AsyncReportsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
+    ) -> AsyncStream[ReportStreamSentimentV2Response]:
         """
         Stream Sentiment V2
 
@@ -3360,7 +3388,7 @@ class AsyncReportsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        extra_headers = {"Accept": "text/event-stream", **(extra_headers or {})}
         return await self._post(
             "/v2/reports/sentiment/stream",
             body=await async_maybe_transform(
@@ -3386,7 +3414,11 @@ class AsyncReportsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NoneType,
+            cast_to=cast(
+                Any, ReportStreamSentimentV2Response
+            ),  # Union types cannot be passed in as arguments in the type system
+            stream=True,
+            stream_cls=AsyncStream[ReportStreamSentimentV2Response],
         )
 
     async def stream_visibility(
@@ -3512,7 +3544,7 @@ class AsyncReportsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
+    ) -> AsyncStream[ReportStreamVisibilityV2Response]:
         """
         Stream Visibility V2
 
@@ -3537,7 +3569,7 @@ class AsyncReportsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        extra_headers = {"Accept": "text/event-stream", **(extra_headers or {})}
         return await self._post(
             "/v2/reports/visibility/stream",
             body=await async_maybe_transform(
@@ -3561,7 +3593,11 @@ class AsyncReportsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NoneType,
+            cast_to=cast(
+                Any, ReportStreamVisibilityV2Response
+            ),  # Union types cannot be passed in as arguments in the type system
+            stream=True,
+            stream_cls=AsyncStream[ReportStreamVisibilityV2Response],
         )
 
     async def visibility(

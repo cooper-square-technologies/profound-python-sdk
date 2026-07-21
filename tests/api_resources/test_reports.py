@@ -392,7 +392,7 @@ class TestReports:
     @parametrize
     def test_method_query_citations(self, client: Profound) -> None:
         report = client.reports.query_citations(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         )
@@ -402,7 +402,7 @@ class TestReports:
     @parametrize
     def test_method_query_citations_with_all_params(self, client: Profound) -> None:
         report = client.reports.query_citations(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
             cursor="cursor",
@@ -427,7 +427,7 @@ class TestReports:
     @parametrize
     def test_raw_response_query_citations(self, client: Profound) -> None:
         response = client.reports.with_raw_response.query_citations(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         )
@@ -441,7 +441,7 @@ class TestReports:
     @parametrize
     def test_streaming_response_query_citations(self, client: Profound) -> None:
         with client.reports.with_streaming_response.query_citations(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         ) as response:
@@ -525,7 +525,7 @@ class TestReports:
     @parametrize
     def test_method_query_query_fanouts(self, client: Profound) -> None:
         report = client.reports.query_query_fanouts(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         )
@@ -535,7 +535,7 @@ class TestReports:
     @parametrize
     def test_method_query_query_fanouts_with_all_params(self, client: Profound) -> None:
         report = client.reports.query_query_fanouts(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
             cursor="cursor",
@@ -562,7 +562,7 @@ class TestReports:
     @parametrize
     def test_raw_response_query_query_fanouts(self, client: Profound) -> None:
         response = client.reports.with_raw_response.query_query_fanouts(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         )
@@ -576,7 +576,7 @@ class TestReports:
     @parametrize
     def test_streaming_response_query_query_fanouts(self, client: Profound) -> None:
         with client.reports.with_streaming_response.query_query_fanouts(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         ) as response:
@@ -940,18 +940,18 @@ class TestReports:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_stream_citations_v2(self, client: Profound) -> None:
-        report = client.reports.stream_citations_v2(
-            category_id="category_id",
+        report_stream = client.reports.stream_citations_v2(
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         )
-        assert report is None
+        report_stream.response.close()
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_stream_citations_v2_with_all_params(self, client: Profound) -> None:
-        report = client.reports.stream_citations_v2(
-            category_id="category_id",
+        report_stream = client.reports.stream_citations_v2(
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
             cursor="cursor",
@@ -970,53 +970,52 @@ class TestReports:
             metrics=["count"],
             scope="all",
         )
-        assert report is None
+        report_stream.response.close()
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_stream_citations_v2(self, client: Profound) -> None:
         response = client.reports.with_raw_response.stream_citations_v2(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         )
 
-        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        report = response.parse()
-        assert report is None
+        stream = response.parse()
+        stream.close()
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_stream_citations_v2(self, client: Profound) -> None:
         with client.reports.with_streaming_response.stream_citations_v2(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            report = response.parse()
-            assert report is None
+            stream = response.parse()
+            stream.close()
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_stream_query_fanouts(self, client: Profound) -> None:
-        report = client.reports.stream_query_fanouts(
-            category_id="category_id",
+        report_stream = client.reports.stream_query_fanouts(
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         )
-        assert report is None
+        report_stream.response.close()
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_stream_query_fanouts_with_all_params(self, client: Profound) -> None:
-        report = client.reports.stream_query_fanouts(
-            category_id="category_id",
+        report_stream = client.reports.stream_query_fanouts(
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
             cursor="cursor",
@@ -1037,35 +1036,34 @@ class TestReports:
                 "dir": "asc",
             },
         )
-        assert report is None
+        report_stream.response.close()
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_stream_query_fanouts(self, client: Profound) -> None:
         response = client.reports.with_raw_response.stream_query_fanouts(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         )
 
-        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        report = response.parse()
-        assert report is None
+        stream = response.parse()
+        stream.close()
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_stream_query_fanouts(self, client: Profound) -> None:
         with client.reports.with_streaming_response.stream_query_fanouts(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            report = response.parse()
-            assert report is None
+            stream = response.parse()
+            stream.close()
 
         assert cast(Any, response.is_closed) is True
 
@@ -1139,18 +1137,18 @@ class TestReports:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_stream_sentiment_v2(self, client: Profound) -> None:
-        report = client.reports.stream_sentiment_v2(
+        report_stream = client.reports.stream_sentiment_v2(
             asset="asset",
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         )
-        assert report is None
+        report_stream.response.close()
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_stream_sentiment_v2_with_all_params(self, client: Profound) -> None:
-        report = client.reports.stream_sentiment_v2(
+        report_stream = client.reports.stream_sentiment_v2(
             asset="asset",
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
@@ -1176,7 +1174,7 @@ class TestReports:
                 "field": "occurrence",
             },
         )
-        assert report is None
+        report_stream.response.close()
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -1188,10 +1186,9 @@ class TestReports:
             start_date="start_date",
         )
 
-        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        report = response.parse()
-        assert report is None
+        stream = response.parse()
+        stream.close()
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -1205,8 +1202,8 @@ class TestReports:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            report = response.parse()
-            assert report is None
+            stream = response.parse()
+            stream.close()
 
         assert cast(Any, response.is_closed) is True
 
@@ -1280,17 +1277,17 @@ class TestReports:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_stream_visibility_v2(self, client: Profound) -> None:
-        report = client.reports.stream_visibility_v2(
+        report_stream = client.reports.stream_visibility_v2(
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         )
-        assert report is None
+        report_stream.response.close()
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_stream_visibility_v2_with_all_params(self, client: Profound) -> None:
-        report = client.reports.stream_visibility_v2(
+        report_stream = client.reports.stream_visibility_v2(
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
@@ -1311,7 +1308,7 @@ class TestReports:
             scope="owned",
             sort={"field": "visibility_score"},
         )
-        assert report is None
+        report_stream.response.close()
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -1322,10 +1319,9 @@ class TestReports:
             start_date="start_date",
         )
 
-        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        report = response.parse()
-        assert report is None
+        stream = response.parse()
+        stream.close()
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -1338,8 +1334,8 @@ class TestReports:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            report = response.parse()
-            assert report is None
+            stream = response.parse()
+            stream.close()
 
         assert cast(Any, response.is_closed) is True
 
@@ -1783,7 +1779,7 @@ class TestAsyncReports:
     @parametrize
     async def test_method_query_citations(self, async_client: AsyncProfound) -> None:
         report = await async_client.reports.query_citations(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         )
@@ -1793,7 +1789,7 @@ class TestAsyncReports:
     @parametrize
     async def test_method_query_citations_with_all_params(self, async_client: AsyncProfound) -> None:
         report = await async_client.reports.query_citations(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
             cursor="cursor",
@@ -1818,7 +1814,7 @@ class TestAsyncReports:
     @parametrize
     async def test_raw_response_query_citations(self, async_client: AsyncProfound) -> None:
         response = await async_client.reports.with_raw_response.query_citations(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         )
@@ -1832,7 +1828,7 @@ class TestAsyncReports:
     @parametrize
     async def test_streaming_response_query_citations(self, async_client: AsyncProfound) -> None:
         async with async_client.reports.with_streaming_response.query_citations(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         ) as response:
@@ -1916,7 +1912,7 @@ class TestAsyncReports:
     @parametrize
     async def test_method_query_query_fanouts(self, async_client: AsyncProfound) -> None:
         report = await async_client.reports.query_query_fanouts(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         )
@@ -1926,7 +1922,7 @@ class TestAsyncReports:
     @parametrize
     async def test_method_query_query_fanouts_with_all_params(self, async_client: AsyncProfound) -> None:
         report = await async_client.reports.query_query_fanouts(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
             cursor="cursor",
@@ -1953,7 +1949,7 @@ class TestAsyncReports:
     @parametrize
     async def test_raw_response_query_query_fanouts(self, async_client: AsyncProfound) -> None:
         response = await async_client.reports.with_raw_response.query_query_fanouts(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         )
@@ -1967,7 +1963,7 @@ class TestAsyncReports:
     @parametrize
     async def test_streaming_response_query_query_fanouts(self, async_client: AsyncProfound) -> None:
         async with async_client.reports.with_streaming_response.query_query_fanouts(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         ) as response:
@@ -2331,18 +2327,18 @@ class TestAsyncReports:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_stream_citations_v2(self, async_client: AsyncProfound) -> None:
-        report = await async_client.reports.stream_citations_v2(
-            category_id="category_id",
+        report_stream = await async_client.reports.stream_citations_v2(
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         )
-        assert report is None
+        await report_stream.response.aclose()
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_stream_citations_v2_with_all_params(self, async_client: AsyncProfound) -> None:
-        report = await async_client.reports.stream_citations_v2(
-            category_id="category_id",
+        report_stream = await async_client.reports.stream_citations_v2(
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
             cursor="cursor",
@@ -2361,53 +2357,52 @@ class TestAsyncReports:
             metrics=["count"],
             scope="all",
         )
-        assert report is None
+        await report_stream.response.aclose()
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_stream_citations_v2(self, async_client: AsyncProfound) -> None:
         response = await async_client.reports.with_raw_response.stream_citations_v2(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         )
 
-        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        report = await response.parse()
-        assert report is None
+        stream = await response.parse()
+        await stream.close()
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_stream_citations_v2(self, async_client: AsyncProfound) -> None:
         async with async_client.reports.with_streaming_response.stream_citations_v2(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            report = await response.parse()
-            assert report is None
+            stream = await response.parse()
+            await stream.close()
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_stream_query_fanouts(self, async_client: AsyncProfound) -> None:
-        report = await async_client.reports.stream_query_fanouts(
-            category_id="category_id",
+        report_stream = await async_client.reports.stream_query_fanouts(
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         )
-        assert report is None
+        await report_stream.response.aclose()
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_stream_query_fanouts_with_all_params(self, async_client: AsyncProfound) -> None:
-        report = await async_client.reports.stream_query_fanouts(
-            category_id="category_id",
+        report_stream = await async_client.reports.stream_query_fanouts(
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
             cursor="cursor",
@@ -2428,35 +2423,34 @@ class TestAsyncReports:
                 "dir": "asc",
             },
         )
-        assert report is None
+        await report_stream.response.aclose()
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_stream_query_fanouts(self, async_client: AsyncProfound) -> None:
         response = await async_client.reports.with_raw_response.stream_query_fanouts(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         )
 
-        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        report = await response.parse()
-        assert report is None
+        stream = await response.parse()
+        await stream.close()
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_stream_query_fanouts(self, async_client: AsyncProfound) -> None:
         async with async_client.reports.with_streaming_response.stream_query_fanouts(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            report = await response.parse()
-            assert report is None
+            stream = await response.parse()
+            await stream.close()
 
         assert cast(Any, response.is_closed) is True
 
@@ -2530,18 +2524,18 @@ class TestAsyncReports:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_stream_sentiment_v2(self, async_client: AsyncProfound) -> None:
-        report = await async_client.reports.stream_sentiment_v2(
+        report_stream = await async_client.reports.stream_sentiment_v2(
             asset="asset",
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         )
-        assert report is None
+        await report_stream.response.aclose()
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_stream_sentiment_v2_with_all_params(self, async_client: AsyncProfound) -> None:
-        report = await async_client.reports.stream_sentiment_v2(
+        report_stream = await async_client.reports.stream_sentiment_v2(
             asset="asset",
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
@@ -2567,7 +2561,7 @@ class TestAsyncReports:
                 "field": "occurrence",
             },
         )
-        assert report is None
+        await report_stream.response.aclose()
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -2579,10 +2573,9 @@ class TestAsyncReports:
             start_date="start_date",
         )
 
-        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        report = await response.parse()
-        assert report is None
+        stream = await response.parse()
+        await stream.close()
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -2596,8 +2589,8 @@ class TestAsyncReports:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            report = await response.parse()
-            assert report is None
+            stream = await response.parse()
+            await stream.close()
 
         assert cast(Any, response.is_closed) is True
 
@@ -2671,17 +2664,17 @@ class TestAsyncReports:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_stream_visibility_v2(self, async_client: AsyncProfound) -> None:
-        report = await async_client.reports.stream_visibility_v2(
+        report_stream = await async_client.reports.stream_visibility_v2(
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         )
-        assert report is None
+        await report_stream.response.aclose()
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_stream_visibility_v2_with_all_params(self, async_client: AsyncProfound) -> None:
-        report = await async_client.reports.stream_visibility_v2(
+        report_stream = await async_client.reports.stream_visibility_v2(
             category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
@@ -2702,7 +2695,7 @@ class TestAsyncReports:
             scope="owned",
             sort={"field": "visibility_score"},
         )
-        assert report is None
+        await report_stream.response.aclose()
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -2713,10 +2706,9 @@ class TestAsyncReports:
             start_date="start_date",
         )
 
-        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        report = await response.parse()
-        assert report is None
+        stream = await response.parse()
+        await stream.close()
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -2729,8 +2721,8 @@ class TestAsyncReports:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            report = await response.parse()
-            assert report is None
+            stream = await response.parse()
+            await stream.close()
 
         assert cast(Any, response.is_closed) is True
 

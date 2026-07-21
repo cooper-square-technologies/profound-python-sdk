@@ -1,173 +1,30 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import TYPE_CHECKING, Dict, List, Optional
+from typing import TYPE_CHECKING, Dict, List, Union, Optional
+from typing_extensions import TypeAlias
 
 from pydantic import Field as FieldInfo
 
 from ..._models import BaseModel
 
 __all__ = [
-    "FactcheckQueryScoresResponse",
-    "Data",
-    "DataCitation",
-    "DataModel",
-    "DataPersona",
-    "DataPrompt",
-    "DataRegion",
-    "DataTag",
-    "DataTheme",
-    "DataTopic",
-    "Info",
+    "FactcheckStreamScoresResponse",
+    "FactcheckScoresInfo",
+    "FactcheckScoreRow",
+    "FactcheckScoreRowCitation",
+    "FactcheckScoreRowModel",
+    "FactcheckScoreRowPersona",
+    "FactcheckScoreRowPrompt",
+    "FactcheckScoreRowRegion",
+    "FactcheckScoreRowTag",
+    "FactcheckScoreRowTheme",
+    "FactcheckScoreRowTopic",
 ]
 
 
-class DataCitation(BaseModel):
-    citation_category: Optional[str] = None
+class FactcheckScoresInfo(BaseModel):
+    """`summary` event payload (the report `info` block)."""
 
-    url: Optional[str] = None
-
-
-class DataModel(BaseModel):
-    """
-    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
-    """
-
-    id: Optional[str] = None
-
-    name: Optional[str] = None
-
-
-class DataPersona(BaseModel):
-    """
-    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
-    """
-
-    id: Optional[str] = None
-
-    name: Optional[str] = None
-
-
-class DataPrompt(BaseModel):
-    """
-    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
-    """
-
-    id: Optional[str] = None
-
-    name: Optional[str] = None
-
-
-class DataRegion(BaseModel):
-    """
-    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
-    """
-
-    id: Optional[str] = None
-
-    name: Optional[str] = None
-
-
-class DataTag(BaseModel):
-    """
-    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
-    """
-
-    id: Optional[str] = None
-
-    name: Optional[str] = None
-
-
-class DataTheme(BaseModel):
-    """
-    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
-    """
-
-    id: Optional[str] = None
-
-    name: Optional[str] = None
-
-
-class DataTopic(BaseModel):
-    """
-    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
-    """
-
-    id: Optional[str] = None
-
-    name: Optional[str] = None
-
-
-class Data(BaseModel):
-    """
-    An accuracy score row: the headline (no dims), a daily point, or a per-dimension breakdown.
-    """
-
-    accuracy: Optional[float] = None
-
-    accurate: Optional[int] = None
-
-    citation: Optional[DataCitation] = None
-
-    date: Optional[str] = None
-
-    inaccurate: Optional[int] = None
-
-    model: Optional[DataModel] = None
-    """
-    An `{id, name}` reference for a grouped dimension value (model, topic, region,
-    …).
-    """
-
-    persona: Optional[DataPersona] = None
-    """
-    An `{id, name}` reference for a grouped dimension value (model, topic, region,
-    …).
-    """
-
-    prompt: Optional[DataPrompt] = None
-    """
-    An `{id, name}` reference for a grouped dimension value (model, topic, region,
-    …).
-    """
-
-    region: Optional[DataRegion] = None
-    """
-    An `{id, name}` reference for a grouped dimension value (model, topic, region,
-    …).
-    """
-
-    tag: Optional[DataTag] = None
-    """
-    An `{id, name}` reference for a grouped dimension value (model, topic, region,
-    …).
-    """
-
-    theme: Optional[DataTheme] = None
-    """
-    An `{id, name}` reference for a grouped dimension value (model, topic, region,
-    …).
-    """
-
-    topic: Optional[DataTopic] = None
-    """
-    An `{id, name}` reference for a grouped dimension value (model, topic, region,
-    …).
-    """
-
-    if TYPE_CHECKING:
-        # Some versions of Pydantic <2.8.0 have a bug and don’t allow assigning a
-        # value to this field, so for compatibility we avoid doing it at runtime.
-        __pydantic_extra__: Dict[str, object] = FieldInfo(init=False)  # pyright: ignore[reportIncompatibleVariableOverride]
-
-        # Stub to indicate that arbitrary properties are accepted.
-        # To access properties that are not valid identifiers you can use `getattr`, e.g.
-        # `getattr(obj, '$type')`
-        def __getattr__(self, attr: str) -> object: ...
-    else:
-        __pydantic_extra__: Dict[str, object]
-
-
-class Info(BaseModel):
     count: int
     """Number of rows returned in `data` for this page."""
 
@@ -205,7 +62,148 @@ class Info(BaseModel):
         __pydantic_extra__: Dict[str, object]
 
 
-class FactcheckQueryScoresResponse(BaseModel):
-    data: List[Data]
+class FactcheckScoreRowCitation(BaseModel):
+    citation_category: Optional[str] = None
 
-    info: Info
+    url: Optional[str] = None
+
+
+class FactcheckScoreRowModel(BaseModel):
+    """
+    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
+    """
+
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class FactcheckScoreRowPersona(BaseModel):
+    """
+    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
+    """
+
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class FactcheckScoreRowPrompt(BaseModel):
+    """
+    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
+    """
+
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class FactcheckScoreRowRegion(BaseModel):
+    """
+    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
+    """
+
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class FactcheckScoreRowTag(BaseModel):
+    """
+    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
+    """
+
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class FactcheckScoreRowTheme(BaseModel):
+    """
+    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
+    """
+
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class FactcheckScoreRowTopic(BaseModel):
+    """
+    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
+    """
+
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class FactcheckScoreRow(BaseModel):
+    """`result` event payload — one accuracy score row."""
+
+    accuracy: Optional[float] = None
+
+    accurate: Optional[int] = None
+
+    citation: Optional[FactcheckScoreRowCitation] = None
+
+    date: Optional[str] = None
+
+    inaccurate: Optional[int] = None
+
+    model: Optional[FactcheckScoreRowModel] = None
+    """
+    An `{id, name}` reference for a grouped dimension value (model, topic, region,
+    …).
+    """
+
+    persona: Optional[FactcheckScoreRowPersona] = None
+    """
+    An `{id, name}` reference for a grouped dimension value (model, topic, region,
+    …).
+    """
+
+    prompt: Optional[FactcheckScoreRowPrompt] = None
+    """
+    An `{id, name}` reference for a grouped dimension value (model, topic, region,
+    …).
+    """
+
+    region: Optional[FactcheckScoreRowRegion] = None
+    """
+    An `{id, name}` reference for a grouped dimension value (model, topic, region,
+    …).
+    """
+
+    tag: Optional[FactcheckScoreRowTag] = None
+    """
+    An `{id, name}` reference for a grouped dimension value (model, topic, region,
+    …).
+    """
+
+    theme: Optional[FactcheckScoreRowTheme] = None
+    """
+    An `{id, name}` reference for a grouped dimension value (model, topic, region,
+    …).
+    """
+
+    topic: Optional[FactcheckScoreRowTopic] = None
+    """
+    An `{id, name}` reference for a grouped dimension value (model, topic, region,
+    …).
+    """
+
+    if TYPE_CHECKING:
+        # Some versions of Pydantic <2.8.0 have a bug and don’t allow assigning a
+        # value to this field, so for compatibility we avoid doing it at runtime.
+        __pydantic_extra__: Dict[str, object] = FieldInfo(init=False)  # pyright: ignore[reportIncompatibleVariableOverride]
+
+        # Stub to indicate that arbitrary properties are accepted.
+        # To access properties that are not valid identifiers you can use `getattr`, e.g.
+        # `getattr(obj, '$type')`
+        def __getattr__(self, attr: str) -> object: ...
+    else:
+        __pydantic_extra__: Dict[str, object]
+
+
+FactcheckStreamScoresResponse: TypeAlias = Union[FactcheckScoresInfo, FactcheckScoreRow]
