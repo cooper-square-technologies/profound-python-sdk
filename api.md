@@ -312,7 +312,7 @@ from profound.types.agents import RunCreateResponse, RunRetrieveResponse
 Methods:
 
 - <code title="post /v1/agents/{agent_id}/runs">client.agents.runs.<a href="./src/profound/resources/agents/runs.py">create</a>(agent_id, \*\*<a href="src/profound/types/agents/run_create_params.py">params</a>) -> <a href="./src/profound/types/agents/run_create_response.py">RunCreateResponse</a></code>
-- <code title="get /v1/agents/{agent_id}/runs/{run_id}">client.agents.runs.<a href="./src/profound/resources/agents/runs.py">retrieve</a>(run_id, \*, agent_id) -> <a href="./src/profound/types/agents/run_retrieve_response.py">RunRetrieveResponse</a></code>
+- <code title="get /v1/agents/{agent_id}/runs/{run_id}">client.agents.runs.<a href="./src/profound/resources/agents/runs.py">retrieve</a>(run_id, \*, agent_id, \*\*<a href="src/profound/types/agents/run_retrieve_params.py">params</a>) -> <a href="./src/profound/types/agents/run_retrieve_response.py">RunRetrieveResponse</a></code>
 
 ## NodeTypes
 

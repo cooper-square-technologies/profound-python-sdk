@@ -17,7 +17,7 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.agents import run_create_params
+from ...types.agents import run_create_params, run_retrieve_params
 from ...types.agents.run_create_response import RunCreateResponse
 from ...types.agents.run_retrieve_response import RunRetrieveResponse
 
@@ -93,6 +93,7 @@ class RunsResource(SyncAPIResource):
         run_id: str,
         *,
         agent_id: str,
+        verbose: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -107,6 +108,8 @@ class RunsResource(SyncAPIResource):
           agent_id: The ID of the agent that owns the run.
 
           run_id: The ID of the run to retrieve.
+
+          verbose: Include each step's raw `outputs` payload in the execution trace.
 
           extra_headers: Send extra headers
 
@@ -123,7 +126,11 @@ class RunsResource(SyncAPIResource):
         return self._get(
             path_template("/v1/agents/{agent_id}/runs/{run_id}", agent_id=agent_id, run_id=run_id),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform({"verbose": verbose}, run_retrieve_params.RunRetrieveParams),
             ),
             cast_to=RunRetrieveResponse,
         )
@@ -198,6 +205,7 @@ class AsyncRunsResource(AsyncAPIResource):
         run_id: str,
         *,
         agent_id: str,
+        verbose: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -212,6 +220,8 @@ class AsyncRunsResource(AsyncAPIResource):
           agent_id: The ID of the agent that owns the run.
 
           run_id: The ID of the run to retrieve.
+
+          verbose: Include each step's raw `outputs` payload in the execution trace.
 
           extra_headers: Send extra headers
 
@@ -228,7 +238,11 @@ class AsyncRunsResource(AsyncAPIResource):
         return await self._get(
             path_template("/v1/agents/{agent_id}/runs/{run_id}", agent_id=agent_id, run_id=run_id),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform({"verbose": verbose}, run_retrieve_params.RunRetrieveParams),
             ),
             cast_to=RunRetrieveResponse,
         )
