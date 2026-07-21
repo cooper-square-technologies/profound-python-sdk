@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List, Optional
+from typing import Any, List, Optional, cast
 from typing_extensions import Literal
 
 import httpx
@@ -15,7 +15,7 @@ from .claims import (
     ClaimsResourceWithStreamingResponse,
     AsyncClaimsResourceWithStreamingResponse,
 )
-from ...._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
+from ...._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ...._utils import maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
@@ -25,9 +25,11 @@ from ...._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
+from ...._streaming import Stream, AsyncStream
 from ...._base_client import make_request_options
 from ....types.reports import factcheck_query_scores_params, factcheck_stream_scores_params
 from ....types.reports.factcheck_query_scores_response import FactcheckQueryScoresResponse
+from ....types.reports.factcheck_stream_scores_response import FactcheckStreamScoresResponse
 
 __all__ = ["FactcheckResource", "AsyncFactcheckResource"]
 
@@ -139,7 +141,7 @@ class FactcheckResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
+    ) -> Stream[FactcheckStreamScoresResponse]:
         """
         Stream Scores
 
@@ -165,7 +167,7 @@ class FactcheckResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        extra_headers = {"Accept": "text/event-stream", **(extra_headers or {})}
         return self._post(
             "/v2/reports/factcheck/stream",
             body=maybe_transform(
@@ -184,7 +186,11 @@ class FactcheckResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NoneType,
+            cast_to=cast(
+                Any, FactcheckStreamScoresResponse
+            ),  # Union types cannot be passed in as arguments in the type system
+            stream=True,
+            stream_cls=Stream[FactcheckStreamScoresResponse],
         )
 
 
@@ -295,7 +301,7 @@ class AsyncFactcheckResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
+    ) -> AsyncStream[FactcheckStreamScoresResponse]:
         """
         Stream Scores
 
@@ -321,7 +327,7 @@ class AsyncFactcheckResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        extra_headers = {"Accept": "text/event-stream", **(extra_headers or {})}
         return await self._post(
             "/v2/reports/factcheck/stream",
             body=await async_maybe_transform(
@@ -340,7 +346,11 @@ class AsyncFactcheckResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NoneType,
+            cast_to=cast(
+                Any, FactcheckStreamScoresResponse
+            ),  # Union types cannot be passed in as arguments in the type system
+            stream=True,
+            stream_cls=AsyncStream[FactcheckStreamScoresResponse],
         )
 
 

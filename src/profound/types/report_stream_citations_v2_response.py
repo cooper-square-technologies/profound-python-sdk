@@ -1,138 +1,27 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import TYPE_CHECKING, Dict, List, Optional
+from typing import TYPE_CHECKING, Dict, List, Union, Optional
+from typing_extensions import TypeAlias
 
 from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
 __all__ = [
-    "ReportQueryCitationsResponse",
-    "Data",
-    "DataModel",
-    "DataPersona",
-    "DataPrompt",
-    "DataRegion",
-    "DataTopic",
-    "Info",
+    "ReportStreamCitationsV2Response",
+    "CitationsV2Info",
+    "CitationRow",
+    "CitationRowModel",
+    "CitationRowPersona",
+    "CitationRowPrompt",
+    "CitationRowRegion",
+    "CitationRowTopic",
 ]
 
 
-class DataModel(BaseModel):
-    """
-    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
-    """
+class CitationsV2Info(BaseModel):
+    """`summary` event payload (the report `info` block)."""
 
-    id: Optional[str] = None
-
-    name: Optional[str] = None
-
-
-class DataPersona(BaseModel):
-    """
-    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
-    """
-
-    id: Optional[str] = None
-
-    name: Optional[str] = None
-
-
-class DataPrompt(BaseModel):
-    """
-    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
-    """
-
-    id: Optional[str] = None
-
-    name: Optional[str] = None
-
-
-class DataRegion(BaseModel):
-    """
-    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
-    """
-
-    id: Optional[str] = None
-
-    name: Optional[str] = None
-
-
-class DataTopic(BaseModel):
-    """
-    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
-    """
-
-    id: Optional[str] = None
-
-    name: Optional[str] = None
-
-
-class Data(BaseModel):
-    """One (source x group) row.
-
-    Each row carries `domain` or `page`; group dims/metrics vary.
-    """
-
-    citation_share: Optional[float] = None
-
-    count: Optional[int] = None
-
-    date: Optional[str] = None
-
-    domain: Optional[str] = None
-
-    first_cited_at: Optional[str] = None
-    """Pages only."""
-
-    model: Optional[DataModel] = None
-    """
-    An `{id, name}` reference for a grouped dimension value (model, topic, region,
-    …).
-    """
-
-    page: Optional[str] = None
-
-    persona: Optional[DataPersona] = None
-    """
-    An `{id, name}` reference for a grouped dimension value (model, topic, region,
-    …).
-    """
-
-    prompt: Optional[DataPrompt] = None
-    """
-    An `{id, name}` reference for a grouped dimension value (model, topic, region,
-    …).
-    """
-
-    rank: Optional[int] = None
-
-    region: Optional[DataRegion] = None
-    """
-    An `{id, name}` reference for a grouped dimension value (model, topic, region,
-    …).
-    """
-
-    topic: Optional[DataTopic] = None
-    """
-    An `{id, name}` reference for a grouped dimension value (model, topic, region,
-    …).
-    """
-
-    if TYPE_CHECKING:
-        # Some versions of Pydantic <2.8.0 have a bug and don’t allow assigning a
-        # value to this field, so for compatibility we avoid doing it at runtime.
-        __pydantic_extra__: Dict[str, object] = FieldInfo(init=False)  # pyright: ignore[reportIncompatibleVariableOverride]
-
-        # Stub to indicate that arbitrary properties are accepted.
-        # To access properties that are not valid identifiers you can use `getattr`, e.g.
-        # `getattr(obj, '$type')`
-        def __getattr__(self, attr: str) -> object: ...
-    else:
-        __pydantic_extra__: Dict[str, object]
-
-
-class Info(BaseModel):
     analysis_types: List[str]
     """Analysis types the citations were drawn from."""
 
@@ -176,7 +65,115 @@ class Info(BaseModel):
         __pydantic_extra__: Dict[str, object]
 
 
-class ReportQueryCitationsResponse(BaseModel):
-    data: List[Data]
+class CitationRowModel(BaseModel):
+    """
+    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
+    """
 
-    info: Info
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class CitationRowPersona(BaseModel):
+    """
+    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
+    """
+
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class CitationRowPrompt(BaseModel):
+    """
+    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
+    """
+
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class CitationRowRegion(BaseModel):
+    """
+    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
+    """
+
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class CitationRowTopic(BaseModel):
+    """
+    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
+    """
+
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class CitationRow(BaseModel):
+    """`result` event payload — one citation row."""
+
+    citation_share: Optional[float] = None
+
+    count: Optional[int] = None
+
+    date: Optional[str] = None
+
+    domain: Optional[str] = None
+
+    first_cited_at: Optional[str] = None
+    """Pages only."""
+
+    model: Optional[CitationRowModel] = None
+    """
+    An `{id, name}` reference for a grouped dimension value (model, topic, region,
+    …).
+    """
+
+    page: Optional[str] = None
+
+    persona: Optional[CitationRowPersona] = None
+    """
+    An `{id, name}` reference for a grouped dimension value (model, topic, region,
+    …).
+    """
+
+    prompt: Optional[CitationRowPrompt] = None
+    """
+    An `{id, name}` reference for a grouped dimension value (model, topic, region,
+    …).
+    """
+
+    rank: Optional[int] = None
+
+    region: Optional[CitationRowRegion] = None
+    """
+    An `{id, name}` reference for a grouped dimension value (model, topic, region,
+    …).
+    """
+
+    topic: Optional[CitationRowTopic] = None
+    """
+    An `{id, name}` reference for a grouped dimension value (model, topic, region,
+    …).
+    """
+
+    if TYPE_CHECKING:
+        # Some versions of Pydantic <2.8.0 have a bug and don’t allow assigning a
+        # value to this field, so for compatibility we avoid doing it at runtime.
+        __pydantic_extra__: Dict[str, object] = FieldInfo(init=False)  # pyright: ignore[reportIncompatibleVariableOverride]
+
+        # Stub to indicate that arbitrary properties are accepted.
+        # To access properties that are not valid identifiers you can use `getattr`, e.g.
+        # `getattr(obj, '$type')`
+        def __getattr__(self, attr: str) -> object: ...
+    else:
+        __pydantic_extra__: Dict[str, object]
+
+
+ReportStreamCitationsV2Response: TypeAlias = Union[CitationsV2Info, CitationRow]

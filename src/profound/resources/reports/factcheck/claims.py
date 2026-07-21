@@ -2,12 +2,12 @@
 
 from __future__ import annotations
 
-from typing import List, Optional
+from typing import Any, List, Optional, cast
 from typing_extensions import Literal
 
 import httpx
 
-from ...._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
+from ...._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ...._utils import maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
@@ -17,9 +17,11 @@ from ...._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
+from ...._streaming import Stream, AsyncStream
 from ...._base_client import make_request_options
 from ....types.reports.factcheck import claim_query_claims_params, claim_stream_claims_params
 from ....types.reports.factcheck.claim_query_claims_response import ClaimQueryClaimsResponse
+from ....types.reports.factcheck.claim_stream_claims_response import ClaimStreamClaimsResponse
 
 __all__ = ["ClaimsResource", "AsyncClaimsResource"]
 
@@ -130,7 +132,7 @@ class ClaimsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
+    ) -> Stream[ClaimStreamClaimsResponse]:
         """
         Stream Claims
 
@@ -158,7 +160,7 @@ class ClaimsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        extra_headers = {"Accept": "text/event-stream", **(extra_headers or {})}
         return self._post(
             "/v2/reports/factcheck/claims/stream",
             body=maybe_transform(
@@ -178,7 +180,11 @@ class ClaimsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NoneType,
+            cast_to=cast(
+                Any, ClaimStreamClaimsResponse
+            ),  # Union types cannot be passed in as arguments in the type system
+            stream=True,
+            stream_cls=Stream[ClaimStreamClaimsResponse],
         )
 
 
@@ -288,7 +294,7 @@ class AsyncClaimsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
+    ) -> AsyncStream[ClaimStreamClaimsResponse]:
         """
         Stream Claims
 
@@ -316,7 +322,7 @@ class AsyncClaimsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        extra_headers = {"Accept": "text/event-stream", **(extra_headers or {})}
         return await self._post(
             "/v2/reports/factcheck/claims/stream",
             body=await async_maybe_transform(
@@ -336,7 +342,11 @@ class AsyncClaimsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NoneType,
+            cast_to=cast(
+                Any, ClaimStreamClaimsResponse
+            ),  # Union types cannot be passed in as arguments in the type system
+            stream=True,
+            stream_cls=AsyncStream[ClaimStreamClaimsResponse],
         )
 
 
