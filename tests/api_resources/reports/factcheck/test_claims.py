@@ -23,7 +23,7 @@ class TestClaims:
     @parametrize
     def test_method_query_claims(self, client: Profound) -> None:
         claim = client.reports.factcheck.claims.query_claims(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         )
@@ -33,7 +33,7 @@ class TestClaims:
     @parametrize
     def test_method_query_claims_with_all_params(self, client: Profound) -> None:
         claim = client.reports.factcheck.claims.query_claims(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
             cursor="cursor",
@@ -55,7 +55,7 @@ class TestClaims:
     @parametrize
     def test_raw_response_query_claims(self, client: Profound) -> None:
         response = client.reports.factcheck.claims.with_raw_response.query_claims(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         )
@@ -69,7 +69,7 @@ class TestClaims:
     @parametrize
     def test_streaming_response_query_claims(self, client: Profound) -> None:
         with client.reports.factcheck.claims.with_streaming_response.query_claims(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         ) as response:
@@ -84,18 +84,18 @@ class TestClaims:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_stream_claims(self, client: Profound) -> None:
-        claim = client.reports.factcheck.claims.stream_claims(
-            category_id="category_id",
+        claim_stream = client.reports.factcheck.claims.stream_claims(
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         )
-        assert claim is None
+        claim_stream.response.close()
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_stream_claims_with_all_params(self, client: Profound) -> None:
-        claim = client.reports.factcheck.claims.stream_claims(
-            category_id="category_id",
+        claim_stream = client.reports.factcheck.claims.stream_claims(
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
             cursor="cursor",
@@ -111,35 +111,34 @@ class TestClaims:
             limit=1,
             max_results=1,
         )
-        assert claim is None
+        claim_stream.response.close()
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_stream_claims(self, client: Profound) -> None:
         response = client.reports.factcheck.claims.with_raw_response.stream_claims(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         )
 
-        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        claim = response.parse()
-        assert claim is None
+        stream = response.parse()
+        stream.close()
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_stream_claims(self, client: Profound) -> None:
         with client.reports.factcheck.claims.with_streaming_response.stream_claims(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            claim = response.parse()
-            assert claim is None
+            stream = response.parse()
+            stream.close()
 
         assert cast(Any, response.is_closed) is True
 
@@ -153,7 +152,7 @@ class TestAsyncClaims:
     @parametrize
     async def test_method_query_claims(self, async_client: AsyncProfound) -> None:
         claim = await async_client.reports.factcheck.claims.query_claims(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         )
@@ -163,7 +162,7 @@ class TestAsyncClaims:
     @parametrize
     async def test_method_query_claims_with_all_params(self, async_client: AsyncProfound) -> None:
         claim = await async_client.reports.factcheck.claims.query_claims(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
             cursor="cursor",
@@ -185,7 +184,7 @@ class TestAsyncClaims:
     @parametrize
     async def test_raw_response_query_claims(self, async_client: AsyncProfound) -> None:
         response = await async_client.reports.factcheck.claims.with_raw_response.query_claims(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         )
@@ -199,7 +198,7 @@ class TestAsyncClaims:
     @parametrize
     async def test_streaming_response_query_claims(self, async_client: AsyncProfound) -> None:
         async with async_client.reports.factcheck.claims.with_streaming_response.query_claims(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         ) as response:
@@ -214,18 +213,18 @@ class TestAsyncClaims:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_stream_claims(self, async_client: AsyncProfound) -> None:
-        claim = await async_client.reports.factcheck.claims.stream_claims(
-            category_id="category_id",
+        claim_stream = await async_client.reports.factcheck.claims.stream_claims(
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         )
-        assert claim is None
+        await claim_stream.response.aclose()
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_stream_claims_with_all_params(self, async_client: AsyncProfound) -> None:
-        claim = await async_client.reports.factcheck.claims.stream_claims(
-            category_id="category_id",
+        claim_stream = await async_client.reports.factcheck.claims.stream_claims(
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
             cursor="cursor",
@@ -241,34 +240,33 @@ class TestAsyncClaims:
             limit=1,
             max_results=1,
         )
-        assert claim is None
+        await claim_stream.response.aclose()
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_stream_claims(self, async_client: AsyncProfound) -> None:
         response = await async_client.reports.factcheck.claims.with_raw_response.stream_claims(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         )
 
-        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        claim = await response.parse()
-        assert claim is None
+        stream = await response.parse()
+        await stream.close()
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_stream_claims(self, async_client: AsyncProfound) -> None:
         async with async_client.reports.factcheck.claims.with_streaming_response.stream_claims(
-            category_id="category_id",
+            category_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date="end_date",
             start_date="start_date",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            claim = await response.parse()
-            assert claim is None
+            stream = await response.parse()
+            await stream.close()
 
         assert cast(Any, response.is_closed) is True
