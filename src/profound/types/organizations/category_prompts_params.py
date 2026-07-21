@@ -20,8 +20,11 @@ class CategoryPromptsParams(TypedDict, total=False):
     limit: int
     """Maximum number of prompts to return."""
 
+    order_by: Literal["created_at", "prompt"]
+    """Field used to order prompts."""
+
     order_dir: Literal["asc", "desc"]
-    """Sort direction by creation date."""
+    """Sort direction for the selected order field."""
 
     persona_id: SequenceNotStr[str]
     """Filter by persona IDs."""

@@ -111,7 +111,7 @@ class CategoriesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CategoryAssetsResponse:
         """
-        Assets
+        Get Assets
 
         Args:
           extra_headers: Send extra headers
@@ -193,7 +193,7 @@ class CategoriesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CategoryGetCategoryPersonasResponse:
         """
-        Personas
+        Get Personas
 
         Args:
           extra_headers: Send extra headers
@@ -221,6 +221,7 @@ class CategoriesResource(SyncAPIResource):
         analysis_type: List[Literal["visibility", "sentiment", "sentiment_v2", "accuracy"]] | Omit = omit,
         cursor: Optional[str] | Omit = omit,
         limit: int | Omit = omit,
+        order_by: Literal["created_at", "prompt"] | Omit = omit,
         order_dir: Literal["asc", "desc"] | Omit = omit,
         persona_id: SequenceNotStr[str] | Omit = omit,
         platform_id: SequenceNotStr[str] | Omit = omit,
@@ -247,7 +248,9 @@ class CategoriesResource(SyncAPIResource):
 
           limit: Maximum number of prompts to return.
 
-          order_dir: Sort direction by creation date.
+          order_by: Field used to order prompts.
+
+          order_dir: Sort direction for the selected order field.
 
           persona_id: Filter by persona IDs.
 
@@ -285,6 +288,7 @@ class CategoriesResource(SyncAPIResource):
                         "analysis_type": analysis_type,
                         "cursor": cursor,
                         "limit": limit,
+                        "order_by": order_by,
                         "order_dir": order_dir,
                         "persona_id": persona_id,
                         "platform_id": platform_id,
@@ -583,7 +587,7 @@ class AsyncCategoriesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CategoryAssetsResponse:
         """
-        Assets
+        Get Assets
 
         Args:
           extra_headers: Send extra headers
@@ -665,7 +669,7 @@ class AsyncCategoriesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CategoryGetCategoryPersonasResponse:
         """
-        Personas
+        Get Personas
 
         Args:
           extra_headers: Send extra headers
@@ -693,6 +697,7 @@ class AsyncCategoriesResource(AsyncAPIResource):
         analysis_type: List[Literal["visibility", "sentiment", "sentiment_v2", "accuracy"]] | Omit = omit,
         cursor: Optional[str] | Omit = omit,
         limit: int | Omit = omit,
+        order_by: Literal["created_at", "prompt"] | Omit = omit,
         order_dir: Literal["asc", "desc"] | Omit = omit,
         persona_id: SequenceNotStr[str] | Omit = omit,
         platform_id: SequenceNotStr[str] | Omit = omit,
@@ -719,7 +724,9 @@ class AsyncCategoriesResource(AsyncAPIResource):
 
           limit: Maximum number of prompts to return.
 
-          order_dir: Sort direction by creation date.
+          order_by: Field used to order prompts.
+
+          order_dir: Sort direction for the selected order field.
 
           persona_id: Filter by persona IDs.
 
@@ -757,6 +764,7 @@ class AsyncCategoriesResource(AsyncAPIResource):
                         "analysis_type": analysis_type,
                         "cursor": cursor,
                         "limit": limit,
+                        "order_by": order_by,
                         "order_dir": order_dir,
                         "persona_id": persona_id,
                         "platform_id": platform_id,
