@@ -406,6 +406,7 @@ class TestReports:
             end_date="end_date",
             start_date="start_date",
             cursor="cursor",
+            entity="domain",
             filter={
                 "and": [],
                 "field": "field",
@@ -954,6 +955,7 @@ class TestReports:
             end_date="end_date",
             start_date="start_date",
             cursor="cursor",
+            entity="domain",
             filter={
                 "and": [],
                 "field": "field",
@@ -1795,6 +1797,7 @@ class TestAsyncReports:
             end_date="end_date",
             start_date="start_date",
             cursor="cursor",
+            entity="domain",
             filter={
                 "and": [],
                 "field": "field",
@@ -2343,6 +2346,7 @@ class TestAsyncReports:
             end_date="end_date",
             start_date="start_date",
             cursor="cursor",
+            entity="domain",
             filter={
                 "and": [],
                 "field": "field",

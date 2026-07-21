@@ -612,6 +612,7 @@ class ReportsResource(SyncAPIResource):
         end_date: str,
         start_date: str,
         cursor: Optional[str] | Omit = omit,
+        entity: Literal["domain", "page", "citation_category"] | Omit = omit,
         filter: Optional[report_query_citations_params.Filter] | Omit = omit,
         group_by: List[Literal["page", "date", "model", "topic", "region", "persona", "prompt"]] | Omit = omit,
         interval: Literal["day", "week", "month"] | Omit = omit,
@@ -634,14 +635,20 @@ class ReportsResource(SyncAPIResource):
 
           start_date: YYYY-MM-DD, ET, inclusive
 
+          entity: What each row represents: `domain` (default), `page`, or `citation_category`.
+              Legacy: `group_by: ["page"]` (with `entity` omitted) is still accepted and is
+              equivalent to `entity: "page"`. `citation_category` uses the dashboard split
+              view: a citation counts under both its page-level and domain-level category, so
+              category shares can sum to more than 100%.
+
           filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
 
           limit: Page size; default 10, max 50.
 
           max_results: Stream endpoint only: cap the number of streamed rows (default: all).
 
-          scope: `all` (every cited domain) or `owned` (only your owned domains, for easy
-              client-side totals).
+          scope: `all` (every cited domain) or `owned` (only your owned domains). Applies to
+              `entity=domain`.
 
           extra_headers: Send extra headers
 
@@ -659,6 +666,7 @@ class ReportsResource(SyncAPIResource):
                     "end_date": end_date,
                     "start_date": start_date,
                     "cursor": cursor,
+                    "entity": entity,
                     "filter": filter,
                     "group_by": group_by,
                     "interval": interval,
@@ -1264,6 +1272,7 @@ class ReportsResource(SyncAPIResource):
         end_date: str,
         start_date: str,
         cursor: Optional[str] | Omit = omit,
+        entity: Literal["domain", "page", "citation_category"] | Omit = omit,
         filter: Optional[report_stream_citations_v2_params.Filter] | Omit = omit,
         group_by: List[Literal["page", "date", "model", "topic", "region", "persona", "prompt"]] | Omit = omit,
         interval: Literal["day", "week", "month"] | Omit = omit,
@@ -1286,14 +1295,20 @@ class ReportsResource(SyncAPIResource):
 
           start_date: YYYY-MM-DD, ET, inclusive
 
+          entity: What each row represents: `domain` (default), `page`, or `citation_category`.
+              Legacy: `group_by: ["page"]` (with `entity` omitted) is still accepted and is
+              equivalent to `entity: "page"`. `citation_category` uses the dashboard split
+              view: a citation counts under both its page-level and domain-level category, so
+              category shares can sum to more than 100%.
+
           filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
 
           limit: Page size; default 10, max 50.
 
           max_results: Stream endpoint only: cap the number of streamed rows (default: all).
 
-          scope: `all` (every cited domain) or `owned` (only your owned domains, for easy
-              client-side totals).
+          scope: `all` (every cited domain) or `owned` (only your owned domains). Applies to
+              `entity=domain`.
 
           extra_headers: Send extra headers
 
@@ -1312,6 +1327,7 @@ class ReportsResource(SyncAPIResource):
                     "end_date": end_date,
                     "start_date": start_date,
                     "cursor": cursor,
+                    "entity": entity,
                     "filter": filter,
                     "group_by": group_by,
                     "interval": interval,
@@ -2382,6 +2398,7 @@ class AsyncReportsResource(AsyncAPIResource):
         end_date: str,
         start_date: str,
         cursor: Optional[str] | Omit = omit,
+        entity: Literal["domain", "page", "citation_category"] | Omit = omit,
         filter: Optional[report_query_citations_params.Filter] | Omit = omit,
         group_by: List[Literal["page", "date", "model", "topic", "region", "persona", "prompt"]] | Omit = omit,
         interval: Literal["day", "week", "month"] | Omit = omit,
@@ -2404,14 +2421,20 @@ class AsyncReportsResource(AsyncAPIResource):
 
           start_date: YYYY-MM-DD, ET, inclusive
 
+          entity: What each row represents: `domain` (default), `page`, or `citation_category`.
+              Legacy: `group_by: ["page"]` (with `entity` omitted) is still accepted and is
+              equivalent to `entity: "page"`. `citation_category` uses the dashboard split
+              view: a citation counts under both its page-level and domain-level category, so
+              category shares can sum to more than 100%.
+
           filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
 
           limit: Page size; default 10, max 50.
 
           max_results: Stream endpoint only: cap the number of streamed rows (default: all).
 
-          scope: `all` (every cited domain) or `owned` (only your owned domains, for easy
-              client-side totals).
+          scope: `all` (every cited domain) or `owned` (only your owned domains). Applies to
+              `entity=domain`.
 
           extra_headers: Send extra headers
 
@@ -2429,6 +2452,7 @@ class AsyncReportsResource(AsyncAPIResource):
                     "end_date": end_date,
                     "start_date": start_date,
                     "cursor": cursor,
+                    "entity": entity,
                     "filter": filter,
                     "group_by": group_by,
                     "interval": interval,
@@ -3034,6 +3058,7 @@ class AsyncReportsResource(AsyncAPIResource):
         end_date: str,
         start_date: str,
         cursor: Optional[str] | Omit = omit,
+        entity: Literal["domain", "page", "citation_category"] | Omit = omit,
         filter: Optional[report_stream_citations_v2_params.Filter] | Omit = omit,
         group_by: List[Literal["page", "date", "model", "topic", "region", "persona", "prompt"]] | Omit = omit,
         interval: Literal["day", "week", "month"] | Omit = omit,
@@ -3056,14 +3081,20 @@ class AsyncReportsResource(AsyncAPIResource):
 
           start_date: YYYY-MM-DD, ET, inclusive
 
+          entity: What each row represents: `domain` (default), `page`, or `citation_category`.
+              Legacy: `group_by: ["page"]` (with `entity` omitted) is still accepted and is
+              equivalent to `entity: "page"`. `citation_category` uses the dashboard split
+              view: a citation counts under both its page-level and domain-level category, so
+              category shares can sum to more than 100%.
+
           filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
 
           limit: Page size; default 10, max 50.
 
           max_results: Stream endpoint only: cap the number of streamed rows (default: all).
 
-          scope: `all` (every cited domain) or `owned` (only your owned domains, for easy
-              client-side totals).
+          scope: `all` (every cited domain) or `owned` (only your owned domains). Applies to
+              `entity=domain`.
 
           extra_headers: Send extra headers
 
@@ -3082,6 +3113,7 @@ class AsyncReportsResource(AsyncAPIResource):
                     "end_date": end_date,
                     "start_date": start_date,
                     "cursor": cursor,
+                    "entity": entity,
                     "filter": filter,
                     "group_by": group_by,
                     "interval": interval,

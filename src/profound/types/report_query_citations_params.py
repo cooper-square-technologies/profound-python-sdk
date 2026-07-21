@@ -19,6 +19,15 @@ class ReportQueryCitationsParams(TypedDict, total=False):
 
     cursor: Optional[str]
 
+    entity: Literal["domain", "page", "citation_category"]
+    """What each row represents: `domain` (default), `page`, or `citation_category`.
+
+    Legacy: `group_by: ["page"]` (with `entity` omitted) is still accepted and is
+    equivalent to `entity: "page"`. `citation_category` uses the dashboard split
+    view: a citation counts under both its page-level and domain-level category, so
+    category shares can sum to more than 100%.
+    """
+
     filter: Optional[Filter]
     """A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group."""
 
@@ -35,9 +44,9 @@ class ReportQueryCitationsParams(TypedDict, total=False):
     metrics: Optional[List[Literal["count", "citation_share", "rank", "first_cited_at"]]]
 
     scope: Literal["all", "owned"]
-    """
-    `all` (every cited domain) or `owned` (only your owned domains, for easy
-    client-side totals).
+    """`all` (every cited domain) or `owned` (only your owned domains).
+
+    Applies to `entity=domain`.
     """
 
 
