@@ -79,6 +79,16 @@ class TestRuns:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
+    def test_method_retrieve_with_all_params(self, client: Profound) -> None:
+        run = client.agents.runs.retrieve(
+            run_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            agent_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            verbose=True,
+        )
+        assert_matches_type(RunRetrieveResponse, run, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
     def test_raw_response_retrieve(self, client: Profound) -> None:
         response = client.agents.runs.with_raw_response.retrieve(
             run_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -183,6 +193,16 @@ class TestAsyncRuns:
         run = await async_client.agents.runs.retrieve(
             run_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             agent_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(RunRetrieveResponse, run, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_retrieve_with_all_params(self, async_client: AsyncProfound) -> None:
+        run = await async_client.agents.runs.retrieve(
+            run_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            agent_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            verbose=True,
         )
         assert_matches_type(RunRetrieveResponse, run, path=["response"])
 
