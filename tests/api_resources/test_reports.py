@@ -186,6 +186,7 @@ class TestReports:
             start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             date_interval="hour",
             dimensions=["date"],
+            domain_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             filters=[
                 {
@@ -207,6 +208,7 @@ class TestReports:
                 "limit": 1,
                 "offset": 0,
             },
+            tags=["string"],
         )
         assert_matches_type(ReportResponse, report, path=["response"])
 
@@ -1573,6 +1575,7 @@ class TestAsyncReports:
             start_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             date_interval="hour",
             dimensions=["date"],
+            domain_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             end_date=parse_datetime("2019-12-27T18:11:19.117Z"),
             filters=[
                 {
@@ -1594,6 +1597,7 @@ class TestAsyncReports:
                 "limit": 1,
                 "offset": 0,
             },
+            tags=["string"],
         )
         assert_matches_type(ReportResponse, report, path=["response"])
 

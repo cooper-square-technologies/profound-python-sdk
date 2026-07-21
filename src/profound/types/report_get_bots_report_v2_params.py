@@ -6,6 +6,7 @@ from typing import Dict, List, Union, Iterable, Optional
 from datetime import datetime
 from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
+from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 from .shared_params.pagination import Pagination
 from .shared_params.path_filter import PathFilter
@@ -19,7 +20,7 @@ class ReportGetBotsReportV2Params(TypedDict, total=False):
     domain: Required[str]
     """Domain to query logs for."""
 
-    metrics: Required[List[Literal["count", "citations", "indexing", "training", "last_visit"]]]
+    metrics: Required[List[Literal["count", "citations", "indexing", "training", "last_visit", "agents"]]]
 
     start_date: Required[Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]]
     """Start date for logs.
@@ -33,6 +34,9 @@ class ReportGetBotsReportV2Params(TypedDict, total=False):
 
     dimensions: List[Literal["date", "hour", "path", "bot_name", "bot_provider", "bot_type"]]
     """Dimensions to group the report by."""
+
+    domain_id: Optional[str]
+    """Domain UUID used for tag lookups."""
 
     end_date: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
     """End date in UTC.
@@ -63,6 +67,8 @@ class ReportGetBotsReportV2Params(TypedDict, total=False):
 
     pagination: Pagination
     """Pagination settings for the report results."""
+
+    tags: SequenceNotStr[str]
 
 
 class FilterBotTypeFilter(TypedDict, total=False):
