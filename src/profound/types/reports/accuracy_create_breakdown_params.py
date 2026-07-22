@@ -7,7 +7,7 @@ from typing_extensions import Literal, Required, TypedDict
 
 from ..._types import SequenceNotStr
 
-__all__ = ["AccuracyCreateBreakdownParams"]
+__all__ = ["AccuracyCreateBreakdownParams", "Pagination"]
 
 
 class AccuracyCreateBreakdownParams(TypedDict, total=False):
@@ -31,6 +31,8 @@ class AccuracyCreateBreakdownParams(TypedDict, total=False):
 
     group_by: Optional[List[Literal["platform", "topic", "prompt", "tag", "region", "persona", "theme", "date"]]]
 
+    include_groups_without_scores: bool
+
     include_no_persona: bool
 
     include_no_tag: bool
@@ -38,6 +40,9 @@ class AccuracyCreateBreakdownParams(TypedDict, total=False):
     limit: int
 
     offset: int
+
+    pagination: Optional[Pagination]
+    """Canonical grouped pagination plan for Accuracy Breakdown rows."""
 
     persona_ids: Optional[SequenceNotStr[str]]
 
@@ -58,3 +63,15 @@ class AccuracyCreateBreakdownParams(TypedDict, total=False):
     tag_ids: Optional[SequenceNotStr[str]]
 
     topic_ids: Optional[SequenceNotStr[str]]
+
+
+class Pagination(TypedDict, total=False):
+    """Canonical grouped pagination plan for Accuracy Breakdown rows."""
+
+    dimension: Literal["group"]
+
+    direction: Optional[Literal["asc", "desc"]]
+
+    metric: Literal["accuracy", "inaccurate_claims"]
+
+    mode: Literal["current", "delta"]
