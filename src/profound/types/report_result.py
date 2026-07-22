@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List
+from typing import List, Union
 
 from .._models import BaseModel
 
@@ -12,4 +12,4 @@ class ReportResult(BaseModel):
 
     dimensions: List[str]
 
-    metrics: List[float]
+    metrics: List[Union[float, str]]

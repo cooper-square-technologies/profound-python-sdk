@@ -339,6 +339,7 @@ class ReportsResource(SyncAPIResource):
         organization_id: Optional[str] | Omit = omit,
         pagination: Pagination | Omit = omit,
         tags: SequenceNotStr[str] | Omit = omit,
+        timezone: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -396,6 +397,8 @@ class ReportsResource(SyncAPIResource):
 
           pagination: Pagination settings for the report results.
 
+          timezone: IANA timezone name for date bucketing and filter boundaries.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -421,6 +424,7 @@ class ReportsResource(SyncAPIResource):
                     "organization_id": organization_id,
                     "pagination": pagination,
                     "tags": tags,
+                    "timezone": timezone,
                 },
                 report_get_bots_report_v2_params.ReportGetBotsReportV2Params,
             ),
@@ -533,6 +537,7 @@ class ReportsResource(SyncAPIResource):
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
         organization_id: Optional[str] | Omit = omit,
         pagination: Pagination | Omit = omit,
+        timezone: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -577,6 +582,8 @@ class ReportsResource(SyncAPIResource):
 
           pagination: Pagination settings for the report results.
 
+          timezone: IANA timezone name for date bucketing and filter boundaries.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -600,6 +607,7 @@ class ReportsResource(SyncAPIResource):
                     "order_by": order_by,
                     "organization_id": organization_id,
                     "pagination": pagination,
+                    "timezone": timezone,
                 },
                 report_get_referrals_report_v2_params.ReportGetReferralsReportV2Params,
             ),
@@ -2141,6 +2149,7 @@ class AsyncReportsResource(AsyncAPIResource):
         organization_id: Optional[str] | Omit = omit,
         pagination: Pagination | Omit = omit,
         tags: SequenceNotStr[str] | Omit = omit,
+        timezone: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -2198,6 +2207,8 @@ class AsyncReportsResource(AsyncAPIResource):
 
           pagination: Pagination settings for the report results.
 
+          timezone: IANA timezone name for date bucketing and filter boundaries.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -2223,6 +2234,7 @@ class AsyncReportsResource(AsyncAPIResource):
                     "organization_id": organization_id,
                     "pagination": pagination,
                     "tags": tags,
+                    "timezone": timezone,
                 },
                 report_get_bots_report_v2_params.ReportGetBotsReportV2Params,
             ),
@@ -2335,6 +2347,7 @@ class AsyncReportsResource(AsyncAPIResource):
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
         organization_id: Optional[str] | Omit = omit,
         pagination: Pagination | Omit = omit,
+        timezone: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -2379,6 +2392,8 @@ class AsyncReportsResource(AsyncAPIResource):
 
           pagination: Pagination settings for the report results.
 
+          timezone: IANA timezone name for date bucketing and filter boundaries.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -2402,6 +2417,7 @@ class AsyncReportsResource(AsyncAPIResource):
                     "order_by": order_by,
                     "organization_id": organization_id,
                     "pagination": pagination,
+                    "timezone": timezone,
                 },
                 report_get_referrals_report_v2_params.ReportGetReferralsReportV2Params,
             ),
