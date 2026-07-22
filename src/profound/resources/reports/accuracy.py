@@ -87,10 +87,12 @@ class AccuracyResource(SyncAPIResource):
         exclude_topic_ids: bool | Omit = omit,
         group_by: Optional[List[Literal["platform", "topic", "prompt", "tag", "region", "persona", "theme", "date"]]]
         | Omit = omit,
+        include_groups_without_scores: bool | Omit = omit,
         include_no_persona: bool | Omit = omit,
         include_no_tag: bool | Omit = omit,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
+        pagination: Optional[accuracy_create_breakdown_params.Pagination] | Omit = omit,
         persona_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         platform_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         prompt_ids: Optional[SequenceNotStr[str]] | Omit = omit,
@@ -112,6 +114,8 @@ class AccuracyResource(SyncAPIResource):
         Accuracy Breakdown
 
         Args:
+          pagination: Canonical grouped pagination plan for Accuracy Breakdown rows.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -134,10 +138,12 @@ class AccuracyResource(SyncAPIResource):
                     "date_bucket": date_bucket,
                     "exclude_topic_ids": exclude_topic_ids,
                     "group_by": group_by,
+                    "include_groups_without_scores": include_groups_without_scores,
                     "include_no_persona": include_no_persona,
                     "include_no_tag": include_no_tag,
                     "limit": limit,
                     "offset": offset,
+                    "pagination": pagination,
                     "persona_ids": persona_ids,
                     "platform_ids": platform_ids,
                     "prompt_ids": prompt_ids,
@@ -933,10 +939,12 @@ class AsyncAccuracyResource(AsyncAPIResource):
         exclude_topic_ids: bool | Omit = omit,
         group_by: Optional[List[Literal["platform", "topic", "prompt", "tag", "region", "persona", "theme", "date"]]]
         | Omit = omit,
+        include_groups_without_scores: bool | Omit = omit,
         include_no_persona: bool | Omit = omit,
         include_no_tag: bool | Omit = omit,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
+        pagination: Optional[accuracy_create_breakdown_params.Pagination] | Omit = omit,
         persona_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         platform_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         prompt_ids: Optional[SequenceNotStr[str]] | Omit = omit,
@@ -958,6 +966,8 @@ class AsyncAccuracyResource(AsyncAPIResource):
         Accuracy Breakdown
 
         Args:
+          pagination: Canonical grouped pagination plan for Accuracy Breakdown rows.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -980,10 +990,12 @@ class AsyncAccuracyResource(AsyncAPIResource):
                     "date_bucket": date_bucket,
                     "exclude_topic_ids": exclude_topic_ids,
                     "group_by": group_by,
+                    "include_groups_without_scores": include_groups_without_scores,
                     "include_no_persona": include_no_persona,
                     "include_no_tag": include_no_tag,
                     "limit": limit,
                     "offset": offset,
+                    "pagination": pagination,
                     "persona_ids": persona_ids,
                     "platform_ids": platform_ids,
                     "prompt_ids": prompt_ids,
