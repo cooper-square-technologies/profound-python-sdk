@@ -30,6 +30,8 @@ class Data(BaseModel):
 
     group_names: Optional[Dict[str, str]] = FieldInfo(alias="groupNames", default=None)
 
+    has_score: Optional[bool] = FieldInfo(alias="hasScore", default=None)
+
     inaccurate_count_change: Optional[int] = FieldInfo(alias="inaccurateCountChange", default=None)
 
     prompt_count: Optional[int] = FieldInfo(alias="promptCount", default=None)
