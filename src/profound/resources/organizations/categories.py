@@ -111,7 +111,7 @@ class CategoriesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CategoryAssetsResponse:
         """
-        Get Assets
+        Get Category Assets
 
         Args:
           extra_headers: Send extra headers
@@ -193,7 +193,7 @@ class CategoriesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CategoryGetCategoryPersonasResponse:
         """
-        Get Personas
+        Get Category Personas
 
         Args:
           extra_headers: Send extra headers
@@ -587,7 +587,7 @@ class AsyncCategoriesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CategoryAssetsResponse:
         """
-        Get Assets
+        Get Category Assets
 
         Args:
           extra_headers: Send extra headers
@@ -669,7 +669,7 @@ class AsyncCategoriesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CategoryGetCategoryPersonasResponse:
         """
-        Get Personas
+        Get Category Personas
 
         Args:
           extra_headers: Send extra headers
