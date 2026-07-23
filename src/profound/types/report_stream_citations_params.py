@@ -26,7 +26,7 @@ from .shared_params.prompt_type_filter import PromptTypeFilter
 from .shared_params.region_name_filter import RegionNameFilter
 from .shared_params.analysis_type_filter import AnalysisTypeFilter
 
-__all__ = ["ReportStreamCitationsParams", "Filter", "FilterCitationCategoryFilter"]
+__all__ = ["ReportStreamCitationsParams", "Filter", "FilterCitationCategoryFilter", "FilterMentionedFilter"]
 
 
 class ReportStreamCitationsParams(TypedDict, total=False):
@@ -112,6 +112,16 @@ class FilterCitationCategoryFilter(TypedDict, total=False):
     value: Required[Union[str, SequenceNotStr[str]]]
 
 
+class FilterMentionedFilter(TypedDict, total=False):
+    """Filter citation pages by whether they mention an owned category asset."""
+
+    field: Required[Literal["mentioned"]]
+
+    operator: Required[Literal["is"]]
+
+    value: Required[Union[bool, Iterable[bool]]]
+
+
 Filter: TypeAlias = Union[
     HostnameFilterParam,
     PathFilter,
@@ -130,4 +140,5 @@ Filter: TypeAlias = Union[
     FilterCitationCategoryFilter,
     PromptFilter,
     PromptIDFilterParam,
+    FilterMentionedFilter,
 ]
