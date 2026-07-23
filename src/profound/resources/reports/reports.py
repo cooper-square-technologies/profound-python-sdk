@@ -166,12 +166,16 @@ class ReportsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ReportCitationsResponse:
-        """Get citations for a given category.
+        """
+        Get citations for a given category.
+
+        The `mentioned` filter supports `is true` and `is false`. It uses the latest
+        page analysis available at or before `end_date`; pages without an analysis by
+        then are excluded from both values. `citation_share` keeps all otherwise
+        eligible citations in its denominator when this filter is used.
 
         Args:
-          end_date: End date for the report.
-
-        Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full
+          end_date: End date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full
               ISO timestamp.
 
           metrics: Metrics to include. `share_of_voice` is deprecated, use `citation_share`
@@ -1212,12 +1216,11 @@ class ReportsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Stream[ReportStreamCitationsResponse]:
-        """Stream Citations
+        """
+        Stream citations with the same filter semantics as the non-streaming route.
 
         Args:
-          end_date: End date for the report.
-
-        Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full
+          end_date: End date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full
               ISO timestamp.
 
           metrics: Metrics to include. `share_of_voice` is deprecated, use `citation_share`
@@ -1976,12 +1979,16 @@ class AsyncReportsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ReportCitationsResponse:
-        """Get citations for a given category.
+        """
+        Get citations for a given category.
+
+        The `mentioned` filter supports `is true` and `is false`. It uses the latest
+        page analysis available at or before `end_date`; pages without an analysis by
+        then are excluded from both values. `citation_share` keeps all otherwise
+        eligible citations in its denominator when this filter is used.
 
         Args:
-          end_date: End date for the report.
-
-        Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full
+          end_date: End date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full
               ISO timestamp.
 
           metrics: Metrics to include. `share_of_voice` is deprecated, use `citation_share`
@@ -3022,12 +3029,11 @@ class AsyncReportsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncStream[ReportStreamCitationsResponse]:
-        """Stream Citations
+        """
+        Stream citations with the same filter semantics as the non-streaming route.
 
         Args:
-          end_date: End date for the report.
-
-        Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full
+          end_date: End date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full
               ISO timestamp.
 
           metrics: Metrics to include. `share_of_voice` is deprecated, use `citation_share`
