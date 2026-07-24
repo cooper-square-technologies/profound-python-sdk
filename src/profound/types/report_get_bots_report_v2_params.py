@@ -70,6 +70,9 @@ class ReportGetBotsReportV2Params(TypedDict, total=False):
 
     tags: SequenceNotStr[str]
 
+    timezone: str
+    """IANA timezone name for date bucketing and filter boundaries."""
+
 
 class FilterBotTypeFilter(TypedDict, total=False):
     """Filter by bot_type column (v2 hourly table only)"""

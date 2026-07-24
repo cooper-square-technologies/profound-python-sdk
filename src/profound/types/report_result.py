@@ -12,4 +12,4 @@ class ReportResult(BaseModel):
 
     dimensions: List[str]
 
-    metrics: List[Union[float, int]]
+    metrics: List[Union[float, int, str]]

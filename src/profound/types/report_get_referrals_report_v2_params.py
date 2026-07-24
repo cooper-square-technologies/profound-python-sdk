@@ -68,6 +68,9 @@ class ReportGetReferralsReportV2Params(TypedDict, total=False):
     pagination: Pagination
     """Pagination settings for the report results."""
 
+    timezone: str
+    """IANA timezone name for date bucketing and filter boundaries."""
+
 
 class FilterReferralSourceFilter(TypedDict, total=False):
     """Filter by referral source"""
