@@ -2,14 +2,20 @@
 
 from __future__ import annotations
 
-from typing import List, Union
+from typing import Union
 from typing_extensions import Literal, Required, TypedDict
+
+from ..._types import SequenceNotStr
 
 __all__ = ["BotNameFilter"]
 
 
 class BotNameFilter(TypedDict, total=False):
-    """Filter by bot name (user agent)"""
+    """Filter by bot name (user agent).
+
+    Values come from analytics data and should
+    not be enum-constrained because web-v2 may send newly cataloged user-agent names.
+    """
 
     field: Required[Literal["bot_name"]]
 
@@ -27,91 +33,4 @@ class BotNameFilter(TypedDict, total=False):
         ]
     ]
 
-    value: Required[
-        Union[
-            Literal[
-                "Amazonbot",
-                "ClaudeBot",
-                "Claude-User",
-                "Claude-SearchBot",
-                "Applebot",
-                "Applebot-Extended",
-                "Bytespider",
-                "DeepSeek",
-                "DuckAssistBot",
-                "DuckDuckBot",
-                "Googlebot",
-                "Googlebot-News",
-                "Googlebot-Video",
-                "Googlebot-Image",
-                "Google-Extended",
-                "Storebot-Google",
-                "Google-CloudVertexBot",
-                "meta-externalfetcher",
-                "meta-externalagent",
-                "bingbot",
-                "MicrosoftPreview",
-                "ChatGPT-User",
-                "GPTBot",
-                "OAI-SearchBot",
-                "OAI-Operator",
-                "PerplexityBot",
-                "Perplexity-User",
-                "Grok-PageBrowser",
-                "YouBot",
-                "OpenClaw",
-                "baiduspider",
-                "CCBot",
-                "ERNIEBot",
-                "Gemini-Fetch",
-                "YandexBot",
-                "PetalBot",
-                "MistralAI-User",
-                "Slurp",
-                "Gemini-Deep-Research",
-            ],
-            List[
-                Literal[
-                    "Amazonbot",
-                    "ClaudeBot",
-                    "Claude-User",
-                    "Claude-SearchBot",
-                    "Applebot",
-                    "Applebot-Extended",
-                    "Bytespider",
-                    "DeepSeek",
-                    "DuckAssistBot",
-                    "DuckDuckBot",
-                    "Googlebot",
-                    "Googlebot-News",
-                    "Googlebot-Video",
-                    "Googlebot-Image",
-                    "Google-Extended",
-                    "Storebot-Google",
-                    "Google-CloudVertexBot",
-                    "meta-externalfetcher",
-                    "meta-externalagent",
-                    "bingbot",
-                    "MicrosoftPreview",
-                    "ChatGPT-User",
-                    "GPTBot",
-                    "OAI-SearchBot",
-                    "OAI-Operator",
-                    "PerplexityBot",
-                    "Perplexity-User",
-                    "Grok-PageBrowser",
-                    "YouBot",
-                    "OpenClaw",
-                    "baiduspider",
-                    "CCBot",
-                    "ERNIEBot",
-                    "Gemini-Fetch",
-                    "YandexBot",
-                    "PetalBot",
-                    "MistralAI-User",
-                    "Slurp",
-                    "Gemini-Deep-Research",
-                ]
-            ],
-        ]
-    ]
+    value: Required[Union[str, SequenceNotStr[str]]]
