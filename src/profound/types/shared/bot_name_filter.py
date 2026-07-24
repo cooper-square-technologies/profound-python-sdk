@@ -9,7 +9,11 @@ __all__ = ["BotNameFilter"]
 
 
 class BotNameFilter(BaseModel):
-    """Filter by bot name (user agent)"""
+    """Filter by bot name (user agent).
+
+    Values come from analytics data and should
+    not be enum-constrained because web-v2 may send newly cataloged user-agent names.
+    """
 
     field: Literal["bot_name"]
 
@@ -25,89 +29,4 @@ class BotNameFilter(BaseModel):
         "not_contains_case_insensitive",
     ]
 
-    value: Union[
-        Literal[
-            "Amazonbot",
-            "ClaudeBot",
-            "Claude-User",
-            "Claude-SearchBot",
-            "Applebot",
-            "Applebot-Extended",
-            "Bytespider",
-            "DeepSeek",
-            "DuckAssistBot",
-            "DuckDuckBot",
-            "Googlebot",
-            "Googlebot-News",
-            "Googlebot-Video",
-            "Googlebot-Image",
-            "Google-Extended",
-            "Storebot-Google",
-            "Google-CloudVertexBot",
-            "meta-externalfetcher",
-            "meta-externalagent",
-            "bingbot",
-            "MicrosoftPreview",
-            "ChatGPT-User",
-            "GPTBot",
-            "OAI-SearchBot",
-            "OAI-Operator",
-            "PerplexityBot",
-            "Perplexity-User",
-            "Grok-PageBrowser",
-            "YouBot",
-            "OpenClaw",
-            "baiduspider",
-            "CCBot",
-            "ERNIEBot",
-            "Gemini-Fetch",
-            "YandexBot",
-            "PetalBot",
-            "MistralAI-User",
-            "Slurp",
-            "Gemini-Deep-Research",
-        ],
-        List[
-            Literal[
-                "Amazonbot",
-                "ClaudeBot",
-                "Claude-User",
-                "Claude-SearchBot",
-                "Applebot",
-                "Applebot-Extended",
-                "Bytespider",
-                "DeepSeek",
-                "DuckAssistBot",
-                "DuckDuckBot",
-                "Googlebot",
-                "Googlebot-News",
-                "Googlebot-Video",
-                "Googlebot-Image",
-                "Google-Extended",
-                "Storebot-Google",
-                "Google-CloudVertexBot",
-                "meta-externalfetcher",
-                "meta-externalagent",
-                "bingbot",
-                "MicrosoftPreview",
-                "ChatGPT-User",
-                "GPTBot",
-                "OAI-SearchBot",
-                "OAI-Operator",
-                "PerplexityBot",
-                "Perplexity-User",
-                "Grok-PageBrowser",
-                "YouBot",
-                "OpenClaw",
-                "baiduspider",
-                "CCBot",
-                "ERNIEBot",
-                "Gemini-Fetch",
-                "YandexBot",
-                "PetalBot",
-                "MistralAI-User",
-                "Slurp",
-                "Gemini-Deep-Research",
-            ]
-        ],
-    ]
+    value: Union[str, List[str]]
