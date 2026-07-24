@@ -6,6 +6,7 @@ from typing import Dict, List, Union, Iterable, Optional
 from datetime import datetime
 from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
+from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 from .shared_params.pagination import Pagination
 from .shared_params.path_filter import PathFilter
@@ -64,7 +65,11 @@ class ReportGetReferralsReportParams(TypedDict, total=False):
 
 
 class FilterReferralSourceFilter(TypedDict, total=False):
-    """Filter by referral source"""
+    """Filter by referral source.
+
+    Values are not enum-constrained so the platform's shared
+    provider filter can pass through IDs that have bot data but no referral data.
+    """
 
     field: Required[Literal["referral_source"]]
 
@@ -82,38 +87,7 @@ class FilterReferralSourceFilter(TypedDict, total=False):
         ]
     ]
 
-    value: Required[
-        Union[
-            Literal[
-                "openai",
-                "none",
-                "anthropic",
-                "deepseek",
-                "perplexity",
-                "you",
-                "grok",
-                "microsoft",
-                "gemini",
-                "internal",
-                "other",
-            ],
-            List[
-                Literal[
-                    "openai",
-                    "none",
-                    "anthropic",
-                    "deepseek",
-                    "perplexity",
-                    "you",
-                    "grok",
-                    "microsoft",
-                    "gemini",
-                    "internal",
-                    "other",
-                ]
-            ],
-        ]
-    ]
+    value: Required[Union[str, SequenceNotStr[str]]]
 
 
 Filter: TypeAlias = Union[PathFilter, FilterReferralSourceFilter]
