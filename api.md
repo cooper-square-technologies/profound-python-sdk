@@ -439,3 +439,15 @@ Methods:
 - <code title="get /v1/projects/{project_id}/tasks">client.projects.tasks.<a href="./src/profound/resources/projects/tasks.py">list</a>(project_id, \*\*<a href="src/profound/types/projects/task_list_params.py">params</a>) -> <a href="./src/profound/types/projects/task_list_response.py">TaskListResponse</a></code>
 - <code title="delete /v1/projects/{project_id}/tasks/{task_id}">client.projects.tasks.<a href="./src/profound/resources/projects/tasks.py">delete</a>(task_id, \*, project_id, \*\*<a href="src/profound/types/projects/task_delete_params.py">params</a>) -> None</code>
 - <code title="post /v1/projects/{project_id}/tasks/{task_id}/status">client.projects.tasks.<a href="./src/profound/resources/projects/tasks.py">update_status</a>(task_id, \*, project_id, \*\*<a href="src/profound/types/projects/task_update_status_params.py">params</a>) -> <a href="./src/profound/types/projects/task_update_status_response.py">TaskUpdateStatusResponse</a></code>
+
+# Integrations
+
+Types:
+
+```python
+from profound.types import IntegrationListResponse
+```
+
+Methods:
+
+- <code title="get /v1/integrations">client.integrations.<a href="./src/profound/resources/integrations.py">list</a>(\*\*<a href="src/profound/types/integration_list_params.py">params</a>) -> <a href="./src/profound/types/integration_list_response.py">IntegrationListResponse</a></code>
