@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import List, Union, Optional
 
 from ..._models import BaseModel
 from ..report_info import ReportInfo
@@ -11,7 +11,7 @@ __all__ = ["WebSearchResultQueryResponse", "Data"]
 class Data(BaseModel):
     dimensions: List[Optional[str]]
 
-    metrics: List[float]
+    metrics: List[Union[float, str]]
 
 
 class WebSearchResultQueryResponse(BaseModel):

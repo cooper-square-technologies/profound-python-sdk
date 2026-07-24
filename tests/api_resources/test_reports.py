@@ -209,6 +209,7 @@ class TestReports:
                 "offset": 0,
             },
             tags=["string"],
+            timezone="timezone",
         )
         assert_matches_type(ReportResponse, report, path=["response"])
 
@@ -355,6 +356,7 @@ class TestReports:
                 "limit": 1,
                 "offset": 0,
             },
+            timezone="timezone",
         )
         assert_matches_type(ReportResponse, report, path=["response"])
 
@@ -1596,6 +1598,7 @@ class TestAsyncReports:
                 "offset": 0,
             },
             tags=["string"],
+            timezone="timezone",
         )
         assert_matches_type(ReportResponse, report, path=["response"])
 
@@ -1742,6 +1745,7 @@ class TestAsyncReports:
                 "limit": 1,
                 "offset": 0,
             },
+            timezone="timezone",
         )
         assert_matches_type(ReportResponse, report, path=["response"])
 
