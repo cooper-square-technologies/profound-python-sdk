@@ -45,6 +45,7 @@ from .agent_publish_response import AgentPublishResponse as AgentPublishResponse
 from .project_archive_params import ProjectArchiveParams as ProjectArchiveParams
 from .prompt_id_filter_param import PromptIDFilterParam as PromptIDFilterParam
 from .agent_retrieve_response import AgentRetrieveResponse as AgentRetrieveResponse
+from .integration_list_params import IntegrationListParams as IntegrationListParams
 from .project_create_response import ProjectCreateResponse as ProjectCreateResponse
 from .project_retrieve_params import ProjectRetrieveParams as ProjectRetrieveParams
 from .prompt_answers_response import PromptAnswersResponse as PromptAnswersResponse
@@ -57,6 +58,7 @@ from .project_unarchive_params import ProjectUnarchiveParams as ProjectUnarchive
 from .prompt_answers_v2_params import PromptAnswersV2Params as PromptAnswersV2Params
 from .report_visibility_params import ReportVisibilityParams as ReportVisibilityParams
 from .root_domain_filter_param import RootDomainFilterParam as RootDomainFilterParam
+from .integration_list_response import IntegrationListResponse as IntegrationListResponse
 from .project_get_status_params import ProjectGetStatusParams as ProjectGetStatusParams
 from .project_retrieve_response import ProjectRetrieveResponse as ProjectRetrieveResponse
 from .report_citations_response import ReportCitationsResponse as ReportCitationsResponse

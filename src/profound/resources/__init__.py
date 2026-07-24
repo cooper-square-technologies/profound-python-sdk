@@ -40,6 +40,14 @@ from .projects import (
     ProjectsResourceWithStreamingResponse,
     AsyncProjectsResourceWithStreamingResponse,
 )
+from .integrations import (
+    IntegrationsResource,
+    AsyncIntegrationsResource,
+    IntegrationsResourceWithRawResponse,
+    AsyncIntegrationsResourceWithRawResponse,
+    IntegrationsResourceWithStreamingResponse,
+    AsyncIntegrationsResourceWithStreamingResponse,
+)
 from .organizations import (
     OrganizationsResource,
     AsyncOrganizationsResource,
@@ -100,4 +108,10 @@ __all__ = [
     "AsyncProjectsResourceWithRawResponse",
     "ProjectsResourceWithStreamingResponse",
     "AsyncProjectsResourceWithStreamingResponse",
+    "IntegrationsResource",
+    "AsyncIntegrationsResource",
+    "IntegrationsResourceWithRawResponse",
+    "AsyncIntegrationsResourceWithRawResponse",
+    "IntegrationsResourceWithStreamingResponse",
+    "AsyncIntegrationsResourceWithStreamingResponse",
 ]
