@@ -124,6 +124,7 @@ class PromptsResource(SyncAPIResource):
                     "response",
                     "mentions",
                     "citations",
+                    "citation_details",
                     "search_queries",
                     "analysis_types",
                     "sentiment_claims",
@@ -152,8 +153,9 @@ class PromptsResource(SyncAPIResource):
 
           include: Which row fields to return: `run_id`, `date`, `model`, `topic`, `topic_id`,
               `region`, `persona`, `tags`, `prompt`, `prompt_id`, `response`, `mentions`,
-              `citations`, `search_queries`, `analysis_types`, `sentiment_claims`. Omit for
-              all of them.
+              `citations`, `citation_details`, `search_queries`, `analysis_types`,
+              `sentiment_claims`. Omit for all fields except `citation_details`, which must be
+              requested explicitly because it is expensive.
 
           limit: Page size; default 10, max 200.
 
@@ -212,6 +214,7 @@ class PromptsResource(SyncAPIResource):
                     "response",
                     "mentions",
                     "citations",
+                    "citation_details",
                     "search_queries",
                     "analysis_types",
                     "sentiment_claims",
@@ -240,8 +243,9 @@ class PromptsResource(SyncAPIResource):
 
           include: Which row fields to return: `run_id`, `date`, `model`, `topic`, `topic_id`,
               `region`, `persona`, `tags`, `prompt`, `prompt_id`, `response`, `mentions`,
-              `citations`, `search_queries`, `analysis_types`, `sentiment_claims`. Omit for
-              all of them.
+              `citations`, `citation_details`, `search_queries`, `analysis_types`,
+              `sentiment_claims`. Omit for all fields except `citation_details`, which must be
+              requested explicitly because it is expensive.
 
           limit: Page size; default 10, max 200.
 
@@ -377,6 +381,7 @@ class AsyncPromptsResource(AsyncAPIResource):
                     "response",
                     "mentions",
                     "citations",
+                    "citation_details",
                     "search_queries",
                     "analysis_types",
                     "sentiment_claims",
@@ -405,8 +410,9 @@ class AsyncPromptsResource(AsyncAPIResource):
 
           include: Which row fields to return: `run_id`, `date`, `model`, `topic`, `topic_id`,
               `region`, `persona`, `tags`, `prompt`, `prompt_id`, `response`, `mentions`,
-              `citations`, `search_queries`, `analysis_types`, `sentiment_claims`. Omit for
-              all of them.
+              `citations`, `citation_details`, `search_queries`, `analysis_types`,
+              `sentiment_claims`. Omit for all fields except `citation_details`, which must be
+              requested explicitly because it is expensive.
 
           limit: Page size; default 10, max 200.
 
@@ -465,6 +471,7 @@ class AsyncPromptsResource(AsyncAPIResource):
                     "response",
                     "mentions",
                     "citations",
+                    "citation_details",
                     "search_queries",
                     "analysis_types",
                     "sentiment_claims",
@@ -493,8 +500,9 @@ class AsyncPromptsResource(AsyncAPIResource):
 
           include: Which row fields to return: `run_id`, `date`, `model`, `topic`, `topic_id`,
               `region`, `persona`, `tags`, `prompt`, `prompt_id`, `response`, `mentions`,
-              `citations`, `search_queries`, `analysis_types`, `sentiment_claims`. Omit for
-              all of them.
+              `citations`, `citation_details`, `search_queries`, `analysis_types`,
+              `sentiment_claims`. Omit for all fields except `citation_details`, which must be
+              requested explicitly because it is expensive.
 
           limit: Page size; default 10, max 200.
 

@@ -38,6 +38,7 @@ class PromptStreamAnswersV2Params(TypedDict, total=False):
                 "response",
                 "mentions",
                 "citations",
+                "citation_details",
                 "search_queries",
                 "analysis_types",
                 "sentiment_claims",
@@ -47,8 +48,9 @@ class PromptStreamAnswersV2Params(TypedDict, total=False):
     """
     Which row fields to return: `run_id`, `date`, `model`, `topic`, `topic_id`,
     `region`, `persona`, `tags`, `prompt`, `prompt_id`, `response`, `mentions`,
-    `citations`, `search_queries`, `analysis_types`, `sentiment_claims`. Omit for
-    all of them.
+    `citations`, `citation_details`, `search_queries`, `analysis_types`,
+    `sentiment_claims`. Omit for all fields except `citation_details`, which must be
+    requested explicitly because it is expensive.
     """
 
     limit: Optional[int]
