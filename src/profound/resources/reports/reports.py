@@ -725,6 +725,8 @@ class ReportsResource(SyncAPIResource):
 
         Accepts YYYY-MM-DD, YYYY-MM-DD HH:MM, or ISO timestamp.
 
+          metrics: Metrics to return for each row.
+
           start_date: Start date. Accepts YYYY-MM-DD, YYYY-MM-DD HH:MM, or ISO timestamp.
 
           date_interval: Date interval for the report. (only used with date dimension)
@@ -2537,6 +2539,8 @@ class AsyncReportsResource(AsyncAPIResource):
           end_date: End date.
 
         Accepts YYYY-MM-DD, YYYY-MM-DD HH:MM, or ISO timestamp.
+
+          metrics: Metrics to return for each row.
 
           start_date: Start date. Accepts YYYY-MM-DD, YYYY-MM-DD HH:MM, or ISO timestamp.
 

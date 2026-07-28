@@ -28,6 +28,7 @@ class ReportQueryFanoutsParams(TypedDict, total=False):
     """End date. Accepts YYYY-MM-DD, YYYY-MM-DD HH:MM, or ISO timestamp."""
 
     metrics: Required[List[Literal["fanouts_per_execution", "total_fanouts", "share", "query_variations"]]]
+    """Metrics to return for each row."""
 
     start_date: Required[Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]]
     """Start date. Accepts YYYY-MM-DD, YYYY-MM-DD HH:MM, or ISO timestamp."""
