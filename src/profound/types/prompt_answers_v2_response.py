@@ -6,7 +6,25 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-__all__ = ["PromptAnswersV2Response", "Data", "DataModel", "Info"]
+__all__ = ["PromptAnswersV2Response", "Data", "DataCitationDetail", "DataModel", "Info"]
+
+
+class DataCitationDetail(BaseModel):
+    clean_url: str
+
+    hostname: str
+
+    path: str
+
+    title: str
+
+    url: str
+
+    citation_category: Optional[str] = None
+
+    first_cited_at: Optional[str] = None
+
+    text: Optional[str] = None
 
 
 class DataModel(BaseModel):
@@ -26,6 +44,8 @@ class Data(BaseModel):
     """
 
     analysis_types: Optional[List[str]] = None
+
+    citation_details: Optional[List[DataCitationDetail]] = None
 
     citations: Optional[List[str]] = None
 
