@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List
+from typing import List, Optional
 from typing_extensions import Literal
 
 from .._models import BaseModel
@@ -13,6 +13,14 @@ class Data(BaseModel):
 
     id: str
     """Installation id to bind to a hub-backed node's `integration_id`."""
+
+    account: Optional[str] = None
+    """Connected account identity as the provider reports it, e.g.
+
+    the Google account email or the WordPress site URL. This is what tells two
+    connections of the same provider apart; `label` often repeats across them. Null
+    when the provider reports no identity.
+    """
 
     label: str
     """Human-readable account label for the connection."""
