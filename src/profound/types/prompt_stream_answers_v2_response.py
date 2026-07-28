@@ -7,7 +7,7 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-__all__ = ["PromptStreamAnswersV2Response", "AnswersV2Info", "AnswerRow", "AnswerRowModel"]
+__all__ = ["PromptStreamAnswersV2Response", "AnswersV2Info", "AnswerRow", "AnswerRowCitationDetail", "AnswerRowModel"]
 
 
 class AnswersV2Info(BaseModel):
@@ -50,6 +50,24 @@ class AnswersV2Info(BaseModel):
         __pydantic_extra__: Dict[str, object]
 
 
+class AnswerRowCitationDetail(BaseModel):
+    clean_url: str
+
+    hostname: str
+
+    path: str
+
+    title: str
+
+    url: str
+
+    citation_category: Optional[str] = None
+
+    first_cited_at: Optional[str] = None
+
+    text: Optional[str] = None
+
+
 class AnswerRowModel(BaseModel):
     """
     An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
@@ -64,6 +82,8 @@ class AnswerRow(BaseModel):
     """`result` event payload — one answer row."""
 
     analysis_types: Optional[List[str]] = None
+
+    citation_details: Optional[List[AnswerRowCitationDetail]] = None
 
     citations: Optional[List[str]] = None
 
