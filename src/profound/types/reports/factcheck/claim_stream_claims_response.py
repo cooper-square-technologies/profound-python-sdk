@@ -163,9 +163,7 @@ class FactcheckClaimsRowEvidence(BaseModel):
 
 
 class FactcheckClaimsRowModel(BaseModel):
-    """
-    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
-    """
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     id: Optional[str] = None
 
@@ -173,9 +171,7 @@ class FactcheckClaimsRowModel(BaseModel):
 
 
 class FactcheckClaimsRowPersona(BaseModel):
-    """
-    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
-    """
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     id: Optional[str] = None
 
@@ -183,9 +179,7 @@ class FactcheckClaimsRowPersona(BaseModel):
 
 
 class FactcheckClaimsRowPrompt(BaseModel):
-    """
-    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
-    """
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     id: Optional[str] = None
 
@@ -193,9 +187,7 @@ class FactcheckClaimsRowPrompt(BaseModel):
 
 
 class FactcheckClaimsRowRegion(BaseModel):
-    """
-    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
-    """
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     id: Optional[str] = None
 
@@ -203,9 +195,7 @@ class FactcheckClaimsRowRegion(BaseModel):
 
 
 class FactcheckClaimsRowTag(BaseModel):
-    """
-    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
-    """
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     id: Optional[str] = None
 
@@ -213,9 +203,7 @@ class FactcheckClaimsRowTag(BaseModel):
 
 
 class FactcheckClaimsRowThemeDimensionRef(BaseModel):
-    """
-    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
-    """
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     id: Optional[str] = None
 
@@ -226,9 +214,7 @@ FactcheckClaimsRowTheme: TypeAlias = Union[str, FactcheckClaimsRowThemeDimension
 
 
 class FactcheckClaimsRowTopic(BaseModel):
-    """
-    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
-    """
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     id: Optional[str] = None
 
@@ -255,49 +241,31 @@ class FactcheckClaimsRow(BaseModel):
     inaccurate: Optional[int] = None
 
     model: Optional[FactcheckClaimsRowModel] = None
-    """
-    An `{id, name}` reference for a grouped dimension value (model, topic, region,
-    …).
-    """
+    """An `{id, name}` reference for a grouped dimension value."""
 
     models: Optional[List[FactcheckClaimsRowModel]] = None
 
     occurrence: Optional[float] = None
 
     persona: Optional[FactcheckClaimsRowPersona] = None
-    """
-    An `{id, name}` reference for a grouped dimension value (model, topic, region,
-    …).
-    """
+    """An `{id, name}` reference for a grouped dimension value."""
 
     prompt: Optional[FactcheckClaimsRowPrompt] = None
-    """
-    An `{id, name}` reference for a grouped dimension value (model, topic, region,
-    …).
-    """
+    """An `{id, name}` reference for a grouped dimension value."""
 
     reasoning: Optional[str] = None
 
     region: Optional[FactcheckClaimsRowRegion] = None
-    """
-    An `{id, name}` reference for a grouped dimension value (model, topic, region,
-    …).
-    """
+    """An `{id, name}` reference for a grouped dimension value."""
 
     tag: Optional[FactcheckClaimsRowTag] = None
-    """
-    An `{id, name}` reference for a grouped dimension value (model, topic, region,
-    …).
-    """
+    """An `{id, name}` reference for a grouped dimension value."""
 
     theme: Optional[FactcheckClaimsRowTheme] = None
     """Claim theme (string), or an `{id, name}` ref when sectioning by `theme`."""
 
     topic: Optional[FactcheckClaimsRowTopic] = None
-    """
-    An `{id, name}` reference for a grouped dimension value (model, topic, region,
-    …).
-    """
+    """An `{id, name}` reference for a grouped dimension value."""
 
     total_claims: Optional[int] = None
 

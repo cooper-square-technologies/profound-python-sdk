@@ -19,9 +19,7 @@ __all__ = [
 
 
 class DataModel(BaseModel):
-    """
-    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
-    """
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     id: Optional[str] = None
 
@@ -29,9 +27,7 @@ class DataModel(BaseModel):
 
 
 class DataPersona(BaseModel):
-    """
-    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
-    """
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     id: Optional[str] = None
 
@@ -39,9 +35,7 @@ class DataPersona(BaseModel):
 
 
 class DataPrompt(BaseModel):
-    """
-    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
-    """
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     id: Optional[str] = None
 
@@ -49,9 +43,7 @@ class DataPrompt(BaseModel):
 
 
 class DataRegion(BaseModel):
-    """
-    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
-    """
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     id: Optional[str] = None
 
@@ -59,9 +51,7 @@ class DataRegion(BaseModel):
 
 
 class DataTopic(BaseModel):
-    """
-    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
-    """
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     id: Optional[str] = None
 
@@ -86,38 +76,23 @@ class Data(BaseModel):
     """Pages only."""
 
     model: Optional[DataModel] = None
-    """
-    An `{id, name}` reference for a grouped dimension value (model, topic, region,
-    …).
-    """
+    """An `{id, name}` reference for a grouped dimension value."""
 
     page: Optional[str] = None
 
     persona: Optional[DataPersona] = None
-    """
-    An `{id, name}` reference for a grouped dimension value (model, topic, region,
-    …).
-    """
+    """An `{id, name}` reference for a grouped dimension value."""
 
     prompt: Optional[DataPrompt] = None
-    """
-    An `{id, name}` reference for a grouped dimension value (model, topic, region,
-    …).
-    """
+    """An `{id, name}` reference for a grouped dimension value."""
 
     rank: Optional[int] = None
 
     region: Optional[DataRegion] = None
-    """
-    An `{id, name}` reference for a grouped dimension value (model, topic, region,
-    …).
-    """
+    """An `{id, name}` reference for a grouped dimension value."""
 
     topic: Optional[DataTopic] = None
-    """
-    An `{id, name}` reference for a grouped dimension value (model, topic, region,
-    …).
-    """
+    """An `{id, name}` reference for a grouped dimension value."""
 
     if TYPE_CHECKING:
         # Some versions of Pydantic <2.8.0 have a bug and don’t allow assigning a
