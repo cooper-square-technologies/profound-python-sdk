@@ -66,9 +66,7 @@ class CitationsV2Info(BaseModel):
 
 
 class CitationRowModel(BaseModel):
-    """
-    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
-    """
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     id: Optional[str] = None
 
@@ -76,9 +74,7 @@ class CitationRowModel(BaseModel):
 
 
 class CitationRowPersona(BaseModel):
-    """
-    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
-    """
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     id: Optional[str] = None
 
@@ -86,9 +82,7 @@ class CitationRowPersona(BaseModel):
 
 
 class CitationRowPrompt(BaseModel):
-    """
-    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
-    """
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     id: Optional[str] = None
 
@@ -96,9 +90,7 @@ class CitationRowPrompt(BaseModel):
 
 
 class CitationRowRegion(BaseModel):
-    """
-    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
-    """
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     id: Optional[str] = None
 
@@ -106,9 +98,7 @@ class CitationRowRegion(BaseModel):
 
 
 class CitationRowTopic(BaseModel):
-    """
-    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
-    """
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     id: Optional[str] = None
 
@@ -130,38 +120,23 @@ class CitationRow(BaseModel):
     """Pages only."""
 
     model: Optional[CitationRowModel] = None
-    """
-    An `{id, name}` reference for a grouped dimension value (model, topic, region,
-    …).
-    """
+    """An `{id, name}` reference for a grouped dimension value."""
 
     page: Optional[str] = None
 
     persona: Optional[CitationRowPersona] = None
-    """
-    An `{id, name}` reference for a grouped dimension value (model, topic, region,
-    …).
-    """
+    """An `{id, name}` reference for a grouped dimension value."""
 
     prompt: Optional[CitationRowPrompt] = None
-    """
-    An `{id, name}` reference for a grouped dimension value (model, topic, region,
-    …).
-    """
+    """An `{id, name}` reference for a grouped dimension value."""
 
     rank: Optional[int] = None
 
     region: Optional[CitationRowRegion] = None
-    """
-    An `{id, name}` reference for a grouped dimension value (model, topic, region,
-    …).
-    """
+    """An `{id, name}` reference for a grouped dimension value."""
 
     topic: Optional[CitationRowTopic] = None
-    """
-    An `{id, name}` reference for a grouped dimension value (model, topic, region,
-    …).
-    """
+    """An `{id, name}` reference for a grouped dimension value."""
 
     if TYPE_CHECKING:
         # Some versions of Pydantic <2.8.0 have a bug and don’t allow assigning a

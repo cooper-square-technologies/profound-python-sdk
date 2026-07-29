@@ -120,9 +120,7 @@ class DataEvidence(BaseModel):
 
 
 class DataModel(BaseModel):
-    """
-    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
-    """
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     id: Optional[str] = None
 
@@ -130,9 +128,7 @@ class DataModel(BaseModel):
 
 
 class DataPersona(BaseModel):
-    """
-    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
-    """
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     id: Optional[str] = None
 
@@ -140,9 +136,7 @@ class DataPersona(BaseModel):
 
 
 class DataPrompt(BaseModel):
-    """
-    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
-    """
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     id: Optional[str] = None
 
@@ -150,9 +144,7 @@ class DataPrompt(BaseModel):
 
 
 class DataRegion(BaseModel):
-    """
-    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
-    """
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     id: Optional[str] = None
 
@@ -160,9 +152,7 @@ class DataRegion(BaseModel):
 
 
 class DataTag(BaseModel):
-    """
-    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
-    """
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     id: Optional[str] = None
 
@@ -170,9 +160,7 @@ class DataTag(BaseModel):
 
 
 class DataThemeDimensionRef(BaseModel):
-    """
-    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
-    """
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     id: Optional[str] = None
 
@@ -183,9 +171,7 @@ DataTheme: TypeAlias = Union[str, DataThemeDimensionRef, None]
 
 
 class DataTopic(BaseModel):
-    """
-    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
-    """
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     id: Optional[str] = None
 
@@ -216,49 +202,31 @@ class Data(BaseModel):
     inaccurate: Optional[int] = None
 
     model: Optional[DataModel] = None
-    """
-    An `{id, name}` reference for a grouped dimension value (model, topic, region,
-    …).
-    """
+    """An `{id, name}` reference for a grouped dimension value."""
 
     models: Optional[List[DataModel]] = None
 
     occurrence: Optional[float] = None
 
     persona: Optional[DataPersona] = None
-    """
-    An `{id, name}` reference for a grouped dimension value (model, topic, region,
-    …).
-    """
+    """An `{id, name}` reference for a grouped dimension value."""
 
     prompt: Optional[DataPrompt] = None
-    """
-    An `{id, name}` reference for a grouped dimension value (model, topic, region,
-    …).
-    """
+    """An `{id, name}` reference for a grouped dimension value."""
 
     reasoning: Optional[str] = None
 
     region: Optional[DataRegion] = None
-    """
-    An `{id, name}` reference for a grouped dimension value (model, topic, region,
-    …).
-    """
+    """An `{id, name}` reference for a grouped dimension value."""
 
     tag: Optional[DataTag] = None
-    """
-    An `{id, name}` reference for a grouped dimension value (model, topic, region,
-    …).
-    """
+    """An `{id, name}` reference for a grouped dimension value."""
 
     theme: Optional[DataTheme] = None
     """Claim theme (string), or an `{id, name}` ref when sectioning by `theme`."""
 
     topic: Optional[DataTopic] = None
-    """
-    An `{id, name}` reference for a grouped dimension value (model, topic, region,
-    …).
-    """
+    """An `{id, name}` reference for a grouped dimension value."""
 
     total_claims: Optional[int] = None
 

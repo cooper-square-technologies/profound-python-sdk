@@ -75,9 +75,7 @@ class SentimentV2Info(BaseModel):
 
 
 class SentimentRowClaim(BaseModel):
-    """
-    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
-    """
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     id: Optional[str] = None
 
@@ -85,9 +83,7 @@ class SentimentRowClaim(BaseModel):
 
 
 class SentimentRowCompetitor(BaseModel):
-    """
-    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
-    """
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     id: Optional[str] = None
 
@@ -95,9 +91,7 @@ class SentimentRowCompetitor(BaseModel):
 
 
 class SentimentRowModel(BaseModel):
-    """
-    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
-    """
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     id: Optional[str] = None
 
@@ -105,9 +99,7 @@ class SentimentRowModel(BaseModel):
 
 
 class SentimentRowPersona(BaseModel):
-    """
-    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
-    """
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     id: Optional[str] = None
 
@@ -137,9 +129,7 @@ class SentimentRowPrevious(BaseModel):
 
 
 class SentimentRowPrompt(BaseModel):
-    """
-    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
-    """
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     id: Optional[str] = None
 
@@ -147,9 +137,7 @@ class SentimentRowPrompt(BaseModel):
 
 
 class SentimentRowRegion(BaseModel):
-    """
-    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
-    """
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     id: Optional[str] = None
 
@@ -157,9 +145,7 @@ class SentimentRowRegion(BaseModel):
 
 
 class SentimentRowRun(BaseModel):
-    """
-    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
-    """
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     id: Optional[str] = None
 
@@ -167,9 +153,7 @@ class SentimentRowRun(BaseModel):
 
 
 class SentimentRowTag(BaseModel):
-    """
-    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
-    """
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     id: Optional[str] = None
 
@@ -177,9 +161,7 @@ class SentimentRowTag(BaseModel):
 
 
 class SentimentRowTheme(BaseModel):
-    """
-    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
-    """
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     id: Optional[str] = None
 
@@ -187,9 +169,7 @@ class SentimentRowTheme(BaseModel):
 
 
 class SentimentRowTopic(BaseModel):
-    """
-    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
-    """
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     id: Optional[str] = None
 
@@ -202,34 +182,22 @@ class SentimentRow(BaseModel):
     cited_websites: Optional[List[str]] = None
 
     claim: Optional[SentimentRowClaim] = None
-    """
-    An `{id, name}` reference for a grouped dimension value (model, topic, region,
-    …).
-    """
+    """An `{id, name}` reference for a grouped dimension value."""
 
     competitor: Optional[SentimentRowCompetitor] = None
-    """
-    An `{id, name}` reference for a grouped dimension value (model, topic, region,
-    …).
-    """
+    """An `{id, name}` reference for a grouped dimension value."""
 
     date: Optional[str] = None
 
     model: Optional[SentimentRowModel] = None
-    """
-    An `{id, name}` reference for a grouped dimension value (model, topic, region,
-    …).
-    """
+    """An `{id, name}` reference for a grouped dimension value."""
 
     negative_sentiment: Optional[float] = None
 
     occurrence: Optional[float] = None
 
     persona: Optional[SentimentRowPersona] = None
-    """
-    An `{id, name}` reference for a grouped dimension value (model, topic, region,
-    …).
-    """
+    """An `{id, name}` reference for a grouped dimension value."""
 
     positive_sentiment: Optional[float] = None
 
@@ -239,42 +207,24 @@ class SentimentRow(BaseModel):
     """Comparison-window metrics (when requested)."""
 
     prompt: Optional[SentimentRowPrompt] = None
-    """
-    An `{id, name}` reference for a grouped dimension value (model, topic, region,
-    …).
-    """
+    """An `{id, name}` reference for a grouped dimension value."""
 
     rank: Optional[int] = None
 
     region: Optional[SentimentRowRegion] = None
-    """
-    An `{id, name}` reference for a grouped dimension value (model, topic, region,
-    …).
-    """
+    """An `{id, name}` reference for a grouped dimension value."""
 
     run: Optional[SentimentRowRun] = None
-    """
-    An `{id, name}` reference for a grouped dimension value (model, topic, region,
-    …).
-    """
+    """An `{id, name}` reference for a grouped dimension value."""
 
     tag: Optional[SentimentRowTag] = None
-    """
-    An `{id, name}` reference for a grouped dimension value (model, topic, region,
-    …).
-    """
+    """An `{id, name}` reference for a grouped dimension value."""
 
     theme: Optional[SentimentRowTheme] = None
-    """
-    An `{id, name}` reference for a grouped dimension value (model, topic, region,
-    …).
-    """
+    """An `{id, name}` reference for a grouped dimension value."""
 
     topic: Optional[SentimentRowTopic] = None
-    """
-    An `{id, name}` reference for a grouped dimension value (model, topic, region,
-    …).
-    """
+    """An `{id, name}` reference for a grouped dimension value."""
 
     if TYPE_CHECKING:
         # Some versions of Pydantic <2.8.0 have a bug and don’t allow assigning a
