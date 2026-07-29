@@ -69,9 +69,7 @@ class AnswerRowCitationDetail(BaseModel):
 
 
 class AnswerRowModel(BaseModel):
-    """
-    An ``{id, name}`` reference for a grouped dimension value (model, topic, region, …).
-    """
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     id: Optional[str] = None
 
@@ -92,10 +90,7 @@ class AnswerRow(BaseModel):
     mentions: Optional[List[str]] = None
 
     model: Optional[AnswerRowModel] = None
-    """
-    An `{id, name}` reference for a grouped dimension value (model, topic, region,
-    …).
-    """
+    """An `{id, name}` reference for a grouped dimension value."""
 
     persona: Optional[str] = None
 
