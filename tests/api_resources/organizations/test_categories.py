@@ -148,6 +148,7 @@ class TestCategories:
                         "id": "id",
                         "name": "name",
                     },
+                    "id": "id",
                     "analysis_types": ["visibility"],
                     "asset": {
                         "id": "id",
@@ -746,6 +747,7 @@ class TestAsyncCategories:
                         "id": "id",
                         "name": "name",
                     },
+                    "id": "id",
                     "analysis_types": ["visibility"],
                     "asset": {
                         "id": "id",
