@@ -20,6 +20,7 @@ from profound.types.organizations import (
     CategoryRetrieveRegionsResponse,
     CategoryUpdatePromptStatusResponse,
     CategoryGetCategoryPersonasResponse,
+    CategoryGetCitationCategoriesResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -273,6 +274,48 @@ class TestCategories:
     def test_path_params_get_category_personas(self, client: Profound) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `category_id` but received ''"):
             client.organizations.categories.with_raw_response.get_category_personas(
+                "",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_get_citation_categories(self, client: Profound) -> None:
+        category = client.organizations.categories.get_citation_categories(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(CategoryGetCitationCategoriesResponse, category, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_get_citation_categories(self, client: Profound) -> None:
+        response = client.organizations.categories.with_raw_response.get_citation_categories(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        category = response.parse()
+        assert_matches_type(CategoryGetCitationCategoriesResponse, category, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_get_citation_categories(self, client: Profound) -> None:
+        with client.organizations.categories.with_streaming_response.get_citation_categories(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            category = response.parse()
+            assert_matches_type(CategoryGetCitationCategoriesResponse, category, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_path_params_get_citation_categories(self, client: Profound) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `category_id` but received ''"):
+            client.organizations.categories.with_raw_response.get_citation_categories(
                 "",
             )
 
@@ -872,6 +915,48 @@ class TestAsyncCategories:
     async def test_path_params_get_category_personas(self, async_client: AsyncProfound) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `category_id` but received ''"):
             await async_client.organizations.categories.with_raw_response.get_category_personas(
+                "",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_get_citation_categories(self, async_client: AsyncProfound) -> None:
+        category = await async_client.organizations.categories.get_citation_categories(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(CategoryGetCitationCategoriesResponse, category, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_get_citation_categories(self, async_client: AsyncProfound) -> None:
+        response = await async_client.organizations.categories.with_raw_response.get_citation_categories(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        category = await response.parse()
+        assert_matches_type(CategoryGetCitationCategoriesResponse, category, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_get_citation_categories(self, async_client: AsyncProfound) -> None:
+        async with async_client.organizations.categories.with_streaming_response.get_citation_categories(
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            category = await response.parse()
+            assert_matches_type(CategoryGetCitationCategoriesResponse, category, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_path_params_get_citation_categories(self, async_client: AsyncProfound) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `category_id` but received ''"):
+            await async_client.organizations.categories.with_raw_response.get_citation_categories(
                 "",
             )
 

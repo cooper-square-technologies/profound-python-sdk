@@ -5,10 +5,10 @@ from __future__ import annotations
 from typing import List, Iterable, Optional
 from typing_extensions import Literal, Required, TypedDict
 
-__all__ = ["ShoppingTriggerRateParams", "Filter"]
+__all__ = ["ShoppingStreamTriggerRateParams", "Filter"]
 
 
-class ShoppingTriggerRateParams(TypedDict, total=False):
+class ShoppingStreamTriggerRateParams(TypedDict, total=False):
     category_id: Required[str]
 
     end_date: Required[str]

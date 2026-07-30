@@ -5,10 +5,10 @@ from __future__ import annotations
 from typing import List, Iterable, Optional
 from typing_extensions import Literal, Required, TypedDict
 
-__all__ = ["ShoppingTriggerRateParams", "Filter"]
+__all__ = ["ShoppingStreamMerchantsParams", "Filter"]
 
 
-class ShoppingTriggerRateParams(TypedDict, total=False):
+class ShoppingStreamMerchantsParams(TypedDict, total=False):
     category_id: Required[str]
 
     end_date: Required[str]
@@ -22,8 +22,11 @@ class ShoppingTriggerRateParams(TypedDict, total=False):
     filter: Optional[Filter]
     """A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group."""
 
-    group_by: List[Literal["date", "topic", "region", "persona", "prompt"]]
-    """Group by `prompt`/`topic` for the per-prompt/-topic trigger rate."""
+    group_by: List[Literal["date", "brand", "product"]]
+    """
+    `[]` = distribution; `[brand]` = brand share within each merchant; `[product]` =
+    top products per merchant. `date` (distribution only) adds a time series.
+    """
 
     interval: Literal["day", "week", "month"]
 
@@ -33,7 +36,21 @@ class ShoppingTriggerRateParams(TypedDict, total=False):
     max_results: Optional[int]
     """Stream endpoint only: cap streamed rows."""
 
-    metrics: Optional[List[Literal["total_runs", "shopping_triggered_runs", "trigger_rate_percentage"]]]
+    metrics: Optional[
+        List[
+            Literal[
+                "merchant_share",
+                "merchant_share_rank",
+                "merchant_visibility",
+                "merchant_visibility_rank",
+                "visibility_rank",
+                "brand_share",
+                "product_visibility",
+                "product_rank",
+            ]
+        ]
+    ]
+    """Defaults to the chosen view's metrics; must be valid for that view."""
 
 
 _FilterReservedKeywords = TypedDict(

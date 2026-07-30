@@ -24,3 +24,6 @@ from .category_update_prompt_status_response import (
 from .category_get_category_personas_response import (
     CategoryGetCategoryPersonasResponse as CategoryGetCategoryPersonasResponse,
 )
+from .category_get_citation_categories_response import (
+    CategoryGetCitationCategoriesResponse as CategoryGetCitationCategoriesResponse,
+)
