@@ -36,6 +36,14 @@ class Prompt(TypedDict, total=False):
     topic: Required[IDOrNameParam]
     """Topic to assign. A new topic is created if the name doesn't exist."""
 
+    id: Optional[str]
+    """Optional client-generated UUID for the prompt.
+
+    When provided, creation is idempotent: retrying a request with the same id will
+    not create a duplicate prompt. Omit to have the server generate one
+    (non-idempotent).
+    """
+
     analysis_types: Optional[List[Literal["visibility", "sentiment", "sentiment_v2", "accuracy"]]]
     """Analysis types: 'visibility', 'sentiment', 'accuracy'.
 
