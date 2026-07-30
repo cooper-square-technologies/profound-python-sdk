@@ -2,8 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, List, Union, Iterable, Optional
-from datetime import datetime
+from typing import Any, List, Union, Optional, cast
 from typing_extensions import Literal
 
 import httpx
@@ -18,30 +17,26 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
+from ..._streaming import Stream, AsyncStream
 from ..._base_client import make_request_options
 from ...types.reports import (
-    shopping_executions_params,
-    shopping_visibility_params,
+    shopping_brands_params,
+    shopping_products_params,
+    shopping_merchants_params,
     shopping_trigger_rate_params,
-    shopping_merchant_share_params,
-    shopping_item_visibility_params,
-    shopping_merchant_by_items_params,
-    shopping_merchant_distribution_params,
-    shopping_product_merchant_urls_params,
-    shopping_all_items_with_merchants_params,
-    shopping_merchant_visibility_by_brand_params,
+    shopping_stream_brands_params,
+    shopping_stream_products_params,
+    shopping_stream_merchants_params,
+    shopping_stream_trigger_rate_params,
 )
-from ...types.shared_params.pagination import Pagination
-from ...types.reports.shopping_executions_response import ShoppingExecutionsResponse
-from ...types.reports.shopping_visibility_response import ShoppingVisibilityResponse
+from ...types.reports.shopping_brands_response import ShoppingBrandsResponse
+from ...types.reports.shopping_products_response import ShoppingProductsResponse
+from ...types.reports.shopping_merchants_response import ShoppingMerchantsResponse
 from ...types.reports.shopping_trigger_rate_response import ShoppingTriggerRateResponse
-from ...types.reports.shopping_merchant_share_response import ShoppingMerchantShareResponse
-from ...types.reports.shopping_item_visibility_response import ShoppingItemVisibilityResponse
-from ...types.reports.shopping_merchant_by_items_response import ShoppingMerchantByItemsResponse
-from ...types.reports.shopping_merchant_distribution_response import ShoppingMerchantDistributionResponse
-from ...types.reports.shopping_product_merchant_urls_response import ShoppingProductMerchantURLsResponse
-from ...types.reports.shopping_all_items_with_merchants_response import ShoppingAllItemsWithMerchantsResponse
-from ...types.reports.shopping_merchant_visibility_by_brand_response import ShoppingMerchantVisibilityByBrandResponse
+from ...types.reports.shopping_stream_brands_response import ShoppingStreamBrandsResponse
+from ...types.reports.shopping_stream_products_response import ShoppingStreamProductsResponse
+from ...types.reports.shopping_stream_merchants_response import ShoppingStreamMerchantsResponse
+from ...types.reports.shopping_stream_trigger_rate_response import ShoppingStreamTriggerRateResponse
 
 __all__ = ["ShoppingResource", "AsyncShoppingResource"]
 
@@ -66,70 +61,43 @@ class ShoppingResource(SyncAPIResource):
         """
         return ShoppingResourceWithStreamingResponse(self)
 
-    def all_items_with_merchants(
+    def brands(
         self,
         *,
         category_id: str,
-        end_date: Union[str, datetime],
-        start_date: Union[str, datetime],
-        comparison_end_date: Union[str, datetime, None] | Omit = omit,
-        comparison_start_date: Union[str, datetime, None] | Omit = omit,
-        date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
-        dimensions: List[
-            Literal[
-                "period",
-                "product_name",
-                "brand_name",
-                "product_url",
-                "product_image_urls",
-                "product_price",
-                "merchant_names",
-                "merchant_prices",
-            ]
-        ]
-        | Omit = omit,
-        exclude_topic_ids: bool | Omit = omit,
-        filters: Iterable[shopping_all_items_with_merchants_params.Filter] | Omit = omit,
-        include_count: bool | Omit = omit,
-        include_items: SequenceNotStr[str] | Omit = omit,
-        include_no_tag: bool | Omit = omit,
-        merchant_filter_type: Literal["any", "all"] | Omit = omit,
-        metrics: List[
-            Literal[
-                "visibility_score",
-                "share_of_voice",
-                "average_position",
-                "visibility_rank",
-                "product_rating",
-                "product_num_reviews",
-                "total_count",
-            ]
-        ]
-        | Omit = omit,
-        order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
-        owned_asset_names: SequenceNotStr[str] | Omit = omit,
-        pagination: Optional[Pagination] | Omit = omit,
-        rank_by: Literal["visibility", "average_position", "name"] | Omit = omit,
-        search_item: Optional[str] | Omit = omit,
-        sort_order: Literal["asc", "desc"] | Omit = omit,
-        tag_filter_type: Literal["any", "all"] | Omit = omit,
+        end_date: str,
+        start_date: str,
+        assets: Union[str, SequenceNotStr[str], None] | Omit = omit,
+        cursor: Optional[str] | Omit = omit,
+        filter: Optional[shopping_brands_params.Filter] | Omit = omit,
+        group_by: List[Literal["date", "topic", "region", "prompt"]] | Omit = omit,
+        interval: Literal["day", "week", "month"] | Omit = omit,
+        limit: Optional[int] | Omit = omit,
+        max_results: Optional[int] | Omit = omit,
+        metrics: Optional[List[Literal["visibility_score", "average_position", "visibility_rank"]]] | Omit = omit,
+        scope: Literal["owned", "all"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ShoppingAllItemsWithMerchantsResponse:
-        """Shopping All Items With Merchants
+    ) -> ShoppingBrandsResponse:
+        """
+        Query Shopping Brands V2
 
         Args:
-          end_date: End date.
+          end_date: YYYY-MM-DD, ET, inclusive
 
-        Accepts YYYY-MM-DD, YYYY-MM-DD HH:MM, or ISO timestamp.
+          start_date: YYYY-MM-DD, ET, inclusive
 
-          start_date: Start date. Accepts YYYY-MM-DD, YYYY-MM-DD HH:MM, or ISO timestamp.
+          assets: Restrict to these asset names (a name or list). Overrides `scope`.
 
-          pagination: Offset-based pagination parameters.
+          filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
+
+          limit: Page size for scope=all; default 10, max 50.
+
+          max_results: Stream endpoint only: cap the number of streamed rows (default: all).
 
           extra_headers: Send extra headers
 
@@ -140,75 +108,82 @@ class ShoppingResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/v1/reports/shopping/all-items-with-merchants",
+            "/v2/reports/shopping/brands",
             body=maybe_transform(
                 {
                     "category_id": category_id,
                     "end_date": end_date,
                     "start_date": start_date,
-                    "comparison_end_date": comparison_end_date,
-                    "comparison_start_date": comparison_start_date,
-                    "date_interval": date_interval,
-                    "dimensions": dimensions,
-                    "exclude_topic_ids": exclude_topic_ids,
-                    "filters": filters,
-                    "include_count": include_count,
-                    "include_items": include_items,
-                    "include_no_tag": include_no_tag,
-                    "merchant_filter_type": merchant_filter_type,
+                    "assets": assets,
+                    "cursor": cursor,
+                    "filter": filter,
+                    "group_by": group_by,
+                    "interval": interval,
+                    "limit": limit,
+                    "max_results": max_results,
                     "metrics": metrics,
-                    "order_by": order_by,
-                    "owned_asset_names": owned_asset_names,
-                    "pagination": pagination,
-                    "rank_by": rank_by,
-                    "search_item": search_item,
-                    "sort_order": sort_order,
-                    "tag_filter_type": tag_filter_type,
+                    "scope": scope,
                 },
-                shopping_all_items_with_merchants_params.ShoppingAllItemsWithMerchantsParams,
+                shopping_brands_params.ShoppingBrandsParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ShoppingAllItemsWithMerchantsResponse,
+            cast_to=ShoppingBrandsResponse,
         )
 
-    def executions(
+    def merchants(
         self,
         *,
         category_id: str,
-        end_date: Union[str, datetime],
-        start_date: Union[str, datetime],
-        analysis_filter_type: Literal["any", "all"] | Omit = omit,
-        analysis_types: List[Literal["visibility", "sentiment", "sentiment_v2", "accuracy"]] | Omit = omit,
-        comparison_end_date: Union[str, datetime, None] | Omit = omit,
-        comparison_start_date: Union[str, datetime, None] | Omit = omit,
-        date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
-        exclude_topic_ids: bool | Omit = omit,
-        filters: Iterable[shopping_executions_params.Filter] | Omit = omit,
-        include_count: bool | Omit = omit,
-        include_no_tag: bool | Omit = omit,
-        order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
-        owned_asset_names: SequenceNotStr[str] | Omit = omit,
-        pagination: Optional[Pagination] | Omit = omit,
-        tag_filter_type: Literal["any", "all"] | Omit = omit,
+        end_date: str,
+        start_date: str,
+        cursor: Optional[str] | Omit = omit,
+        filter: Optional[shopping_merchants_params.Filter] | Omit = omit,
+        group_by: List[Literal["date", "brand", "product"]] | Omit = omit,
+        interval: Literal["day", "week", "month"] | Omit = omit,
+        limit: Optional[int] | Omit = omit,
+        max_results: Optional[int] | Omit = omit,
+        metrics: Optional[
+            List[
+                Literal[
+                    "merchant_share",
+                    "merchant_share_rank",
+                    "merchant_visibility",
+                    "merchant_visibility_rank",
+                    "visibility_rank",
+                    "brand_share",
+                    "product_visibility",
+                    "product_rank",
+                ]
+            ]
+        ]
+        | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ShoppingExecutionsResponse:
-        """Shopping Executions
+    ) -> ShoppingMerchantsResponse:
+        """
+        Query Shopping Merchants V2
 
         Args:
-          end_date: End date.
+          end_date: YYYY-MM-DD, ET, inclusive
 
-        Accepts YYYY-MM-DD, YYYY-MM-DD HH:MM, or ISO timestamp.
+          start_date: YYYY-MM-DD, ET, inclusive
 
-          start_date: Start date. Accepts YYYY-MM-DD, YYYY-MM-DD HH:MM, or ISO timestamp.
+          filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
 
-          pagination: Offset-based pagination parameters.
+          group_by: `[]` = distribution; `[brand]` = brand share within each merchant; `[product]` =
+              top products per merchant. `date` (distribution only) adds a time series.
+
+          limit: Page size; default 10, max 50.
+
+          max_results: Stream endpoint only: cap streamed rows.
+
+          metrics: Defaults to the chosen view's metrics; must be valid for that view.
 
           extra_headers: Send extra headers
 
@@ -219,89 +194,58 @@ class ShoppingResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/v1/reports/shopping/executions",
+            "/v2/reports/shopping/merchants",
             body=maybe_transform(
                 {
                     "category_id": category_id,
                     "end_date": end_date,
                     "start_date": start_date,
-                    "analysis_filter_type": analysis_filter_type,
-                    "analysis_types": analysis_types,
-                    "comparison_end_date": comparison_end_date,
-                    "comparison_start_date": comparison_start_date,
-                    "date_interval": date_interval,
-                    "exclude_topic_ids": exclude_topic_ids,
-                    "filters": filters,
-                    "include_count": include_count,
-                    "include_no_tag": include_no_tag,
-                    "order_by": order_by,
-                    "owned_asset_names": owned_asset_names,
-                    "pagination": pagination,
-                    "tag_filter_type": tag_filter_type,
+                    "cursor": cursor,
+                    "filter": filter,
+                    "group_by": group_by,
+                    "interval": interval,
+                    "limit": limit,
+                    "max_results": max_results,
+                    "metrics": metrics,
                 },
-                shopping_executions_params.ShoppingExecutionsParams,
+                shopping_merchants_params.ShoppingMerchantsParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ShoppingExecutionsResponse,
+            cast_to=ShoppingMerchantsResponse,
         )
 
-    def item_visibility(
+    def products(
         self,
         *,
         category_id: str,
-        end_date: Union[str, datetime],
-        start_date: Union[str, datetime],
-        comparison_end_date: Union[str, datetime, None] | Omit = omit,
-        comparison_start_date: Union[str, datetime, None] | Omit = omit,
+        end_date: str,
+        start_date: str,
         competitor_limit: int | Omit = omit,
-        date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
-        dimensions: List[
-            Literal[
-                "period",
-                "product_key",
-                "product_name",
-                "brand_name",
-                "date",
-                "topic_id",
-                "prompt_id",
-                "prompt",
-                "product_url",
-                "product_image_urls",
-                "product_price",
+        cursor: Optional[str] | Omit = omit,
+        filter: Optional[shopping_products_params.Filter] | Omit = omit,
+        group_by: List[Literal["date", "topic", "prompt"]] | Omit = omit,
+        include_merchants: bool | Omit = omit,
+        interval: Literal["day", "week", "month"] | Omit = omit,
+        limit: Optional[int] | Omit = omit,
+        max_results: Optional[int] | Omit = omit,
+        metrics: Optional[
+            List[
+                Literal[
+                    "visibility_score",
+                    "average_position",
+                    "visibility_rank",
+                    "position1_percentage",
+                    "position2_percentage",
+                    "position3_percentage",
+                    "position_above3_percentage",
+                    "product_rating",
+                    "product_num_reviews",
+                ]
             ]
         ]
         | Omit = omit,
-        exclude_topic_ids: bool | Omit = omit,
-        filters: Iterable[shopping_item_visibility_params.Filter] | Omit = omit,
-        include_competitors: bool | Omit = omit,
-        include_count: bool | Omit = omit,
-        include_items: SequenceNotStr[str] | Omit = omit,
-        include_no_tag: bool | Omit = omit,
-        include_position_frequency: bool | Omit = omit,
-        merchant_filter_type: Literal["any", "all"] | Omit = omit,
-        metrics: List[
-            Literal[
-                "visibility_score",
-                "share_of_voice",
-                "average_position",
-                "visibility_rank",
-                "position1_percentage",
-                "position2_percentage",
-                "position3_percentage",
-                "position_above3_percentage",
-                "product_rating",
-                "product_num_reviews",
-                "total_count",
-            ]
-        ]
-        | Omit = omit,
-        order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
-        owned_asset_names: SequenceNotStr[str] | Omit = omit,
-        pagination: Optional[Pagination] | Omit = omit,
-        search_item: Optional[str] | Omit = omit,
-        tag_filter_type: Literal["any", "all"] | Omit = omit,
         target_product: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -309,17 +253,26 @@ class ShoppingResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ShoppingItemVisibilityResponse:
-        """Shopping Item Visibility
+    ) -> ShoppingProductsResponse:
+        """
+        Query Shopping Products V2
 
         Args:
-          end_date: End date.
+          end_date: YYYY-MM-DD, ET, inclusive
 
-        Accepts YYYY-MM-DD, YYYY-MM-DD HH:MM, or ISO timestamp.
+          start_date: YYYY-MM-DD, ET, inclusive
 
-          start_date: Start date. Accepts YYYY-MM-DD, YYYY-MM-DD HH:MM, or ISO timestamp.
+          competitor_limit: Competitors returned when `target_product` is set.
 
-          pagination: Offset-based pagination parameters.
+          filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
+
+          include_merchants: Include per-product merchant offers (names, prices, urls, images).
+
+          limit: Page size; default 10, max 50.
+
+          max_results: Stream endpoint only: cap streamed rows.
+
+          target_product: Return this product plus its top competitors (item view only).
 
           extra_headers: Send extra headers
 
@@ -330,94 +283,253 @@ class ShoppingResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/v1/reports/shopping/item-visibility",
+            "/v2/reports/shopping/products",
             body=maybe_transform(
                 {
                     "category_id": category_id,
                     "end_date": end_date,
                     "start_date": start_date,
-                    "comparison_end_date": comparison_end_date,
-                    "comparison_start_date": comparison_start_date,
                     "competitor_limit": competitor_limit,
-                    "date_interval": date_interval,
-                    "dimensions": dimensions,
-                    "exclude_topic_ids": exclude_topic_ids,
-                    "filters": filters,
-                    "include_competitors": include_competitors,
-                    "include_count": include_count,
-                    "include_items": include_items,
-                    "include_no_tag": include_no_tag,
-                    "include_position_frequency": include_position_frequency,
-                    "merchant_filter_type": merchant_filter_type,
+                    "cursor": cursor,
+                    "filter": filter,
+                    "group_by": group_by,
+                    "include_merchants": include_merchants,
+                    "interval": interval,
+                    "limit": limit,
+                    "max_results": max_results,
                     "metrics": metrics,
-                    "order_by": order_by,
-                    "owned_asset_names": owned_asset_names,
-                    "pagination": pagination,
-                    "search_item": search_item,
-                    "tag_filter_type": tag_filter_type,
                     "target_product": target_product,
                 },
-                shopping_item_visibility_params.ShoppingItemVisibilityParams,
+                shopping_products_params.ShoppingProductsParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ShoppingItemVisibilityResponse,
+            cast_to=ShoppingProductsResponse,
         )
 
-    def merchant_by_items(
+    def stream_brands(
         self,
         *,
         category_id: str,
-        end_date: Union[str, datetime],
-        start_date: Union[str, datetime],
-        comparison_end_date: Union[str, datetime, None] | Omit = omit,
-        comparison_start_date: Union[str, datetime, None] | Omit = omit,
-        date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
-        dimensions: List[
-            Literal[
-                "period",
-                "merchant_name",
-                "product_name",
-                "brand_name",
-                "product_image_urls",
-                "product_price",
-                "merchant_prices",
-                "has_instant_checkout",
-                "delivery_options",
-                "merchant_url",
+        end_date: str,
+        start_date: str,
+        assets: Union[str, SequenceNotStr[str], None] | Omit = omit,
+        cursor: Optional[str] | Omit = omit,
+        filter: Optional[shopping_stream_brands_params.Filter] | Omit = omit,
+        group_by: List[Literal["date", "topic", "region", "prompt"]] | Omit = omit,
+        interval: Literal["day", "week", "month"] | Omit = omit,
+        limit: Optional[int] | Omit = omit,
+        max_results: Optional[int] | Omit = omit,
+        metrics: Optional[List[Literal["visibility_score", "average_position", "visibility_rank"]]] | Omit = omit,
+        scope: Literal["owned", "all"] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> Stream[ShoppingStreamBrandsResponse]:
+        """
+        Stream Shopping Brands V2
+
+        Args:
+          end_date: YYYY-MM-DD, ET, inclusive
+
+          start_date: YYYY-MM-DD, ET, inclusive
+
+          assets: Restrict to these asset names (a name or list). Overrides `scope`.
+
+          filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
+
+          limit: Page size for scope=all; default 10, max 50.
+
+          max_results: Stream endpoint only: cap the number of streamed rows (default: all).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        extra_headers = {"Accept": "text/event-stream", **(extra_headers or {})}
+        return self._post(
+            "/v2/reports/shopping/brands/stream",
+            body=maybe_transform(
+                {
+                    "category_id": category_id,
+                    "end_date": end_date,
+                    "start_date": start_date,
+                    "assets": assets,
+                    "cursor": cursor,
+                    "filter": filter,
+                    "group_by": group_by,
+                    "interval": interval,
+                    "limit": limit,
+                    "max_results": max_results,
+                    "metrics": metrics,
+                    "scope": scope,
+                },
+                shopping_stream_brands_params.ShoppingStreamBrandsParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=cast(
+                Any, ShoppingStreamBrandsResponse
+            ),  # Union types cannot be passed in as arguments in the type system
+            stream=True,
+            stream_cls=Stream[ShoppingStreamBrandsResponse],
+        )
+
+    def stream_merchants(
+        self,
+        *,
+        category_id: str,
+        end_date: str,
+        start_date: str,
+        cursor: Optional[str] | Omit = omit,
+        filter: Optional[shopping_stream_merchants_params.Filter] | Omit = omit,
+        group_by: List[Literal["date", "brand", "product"]] | Omit = omit,
+        interval: Literal["day", "week", "month"] | Omit = omit,
+        limit: Optional[int] | Omit = omit,
+        max_results: Optional[int] | Omit = omit,
+        metrics: Optional[
+            List[
+                Literal[
+                    "merchant_share",
+                    "merchant_share_rank",
+                    "merchant_visibility",
+                    "merchant_visibility_rank",
+                    "visibility_rank",
+                    "brand_share",
+                    "product_visibility",
+                    "product_rank",
+                ]
             ]
         ]
         | Omit = omit,
-        exclude_topic_ids: bool | Omit = omit,
-        filters: Iterable[shopping_merchant_by_items_params.Filter] | Omit = omit,
-        include_count: bool | Omit = omit,
-        include_no_tag: bool | Omit = omit,
-        metrics: List[
-            Literal["merchant_visibility", "product_visibility", "product_rank", "avg_position", "total_count"]
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> Stream[ShoppingStreamMerchantsResponse]:
+        """
+        Stream Shopping Merchants V2
+
+        Args:
+          end_date: YYYY-MM-DD, ET, inclusive
+
+          start_date: YYYY-MM-DD, ET, inclusive
+
+          filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
+
+          group_by: `[]` = distribution; `[brand]` = brand share within each merchant; `[product]` =
+              top products per merchant. `date` (distribution only) adds a time series.
+
+          limit: Page size; default 10, max 50.
+
+          max_results: Stream endpoint only: cap streamed rows.
+
+          metrics: Defaults to the chosen view's metrics; must be valid for that view.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        extra_headers = {"Accept": "text/event-stream", **(extra_headers or {})}
+        return self._post(
+            "/v2/reports/shopping/merchants/stream",
+            body=maybe_transform(
+                {
+                    "category_id": category_id,
+                    "end_date": end_date,
+                    "start_date": start_date,
+                    "cursor": cursor,
+                    "filter": filter,
+                    "group_by": group_by,
+                    "interval": interval,
+                    "limit": limit,
+                    "max_results": max_results,
+                    "metrics": metrics,
+                },
+                shopping_stream_merchants_params.ShoppingStreamMerchantsParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=cast(
+                Any, ShoppingStreamMerchantsResponse
+            ),  # Union types cannot be passed in as arguments in the type system
+            stream=True,
+            stream_cls=Stream[ShoppingStreamMerchantsResponse],
+        )
+
+    def stream_products(
+        self,
+        *,
+        category_id: str,
+        end_date: str,
+        start_date: str,
+        competitor_limit: int | Omit = omit,
+        cursor: Optional[str] | Omit = omit,
+        filter: Optional[shopping_stream_products_params.Filter] | Omit = omit,
+        group_by: List[Literal["date", "topic", "prompt"]] | Omit = omit,
+        include_merchants: bool | Omit = omit,
+        interval: Literal["day", "week", "month"] | Omit = omit,
+        limit: Optional[int] | Omit = omit,
+        max_results: Optional[int] | Omit = omit,
+        metrics: Optional[
+            List[
+                Literal[
+                    "visibility_score",
+                    "average_position",
+                    "visibility_rank",
+                    "position1_percentage",
+                    "position2_percentage",
+                    "position3_percentage",
+                    "position_above3_percentage",
+                    "product_rating",
+                    "product_num_reviews",
+                ]
+            ]
         ]
         | Omit = omit,
-        order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
-        pagination: Optional[Pagination] | Omit = omit,
-        product_name: Optional[str] | Omit = omit,
-        tag_filter_type: Literal["any", "all"] | Omit = omit,
+        target_product: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ShoppingMerchantByItemsResponse:
-        """Shopping Merchant By Items
+    ) -> Stream[ShoppingStreamProductsResponse]:
+        """
+        Stream Shopping Products V2
 
         Args:
-          end_date: End date.
+          end_date: YYYY-MM-DD, ET, inclusive
 
-        Accepts YYYY-MM-DD, YYYY-MM-DD HH:MM, or ISO timestamp.
+          start_date: YYYY-MM-DD, ET, inclusive
 
-          start_date: Start date. Accepts YYYY-MM-DD, YYYY-MM-DD HH:MM, or ISO timestamp.
+          competitor_limit: Competitors returned when `target_product` is set.
 
-          pagination: Offset-based pagination parameters.
+          filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
+
+          include_merchants: Include per-product merchant offers (names, prices, urls, images).
+
+          limit: Page size; default 10, max 50.
+
+          max_results: Stream endpoint only: cap streamed rows.
+
+          target_product: Return this product plus its top competitors (item view only).
 
           extra_headers: Send extra headers
 
@@ -427,75 +539,73 @@ class ShoppingResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {"Accept": "text/event-stream", **(extra_headers or {})}
         return self._post(
-            "/v1/reports/shopping/merchant-by-items",
+            "/v2/reports/shopping/products/stream",
             body=maybe_transform(
                 {
                     "category_id": category_id,
                     "end_date": end_date,
                     "start_date": start_date,
-                    "comparison_end_date": comparison_end_date,
-                    "comparison_start_date": comparison_start_date,
-                    "date_interval": date_interval,
-                    "dimensions": dimensions,
-                    "exclude_topic_ids": exclude_topic_ids,
-                    "filters": filters,
-                    "include_count": include_count,
-                    "include_no_tag": include_no_tag,
+                    "competitor_limit": competitor_limit,
+                    "cursor": cursor,
+                    "filter": filter,
+                    "group_by": group_by,
+                    "include_merchants": include_merchants,
+                    "interval": interval,
+                    "limit": limit,
+                    "max_results": max_results,
                     "metrics": metrics,
-                    "order_by": order_by,
-                    "pagination": pagination,
-                    "product_name": product_name,
-                    "tag_filter_type": tag_filter_type,
+                    "target_product": target_product,
                 },
-                shopping_merchant_by_items_params.ShoppingMerchantByItemsParams,
+                shopping_stream_products_params.ShoppingStreamProductsParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ShoppingMerchantByItemsResponse,
+            cast_to=cast(
+                Any, ShoppingStreamProductsResponse
+            ),  # Union types cannot be passed in as arguments in the type system
+            stream=True,
+            stream_cls=Stream[ShoppingStreamProductsResponse],
         )
 
-    def merchant_distribution(
+    def stream_trigger_rate(
         self,
         *,
         category_id: str,
-        end_date: Union[str, datetime],
-        start_date: Union[str, datetime],
-        comparison_end_date: Union[str, datetime, None] | Omit = omit,
-        comparison_start_date: Union[str, datetime, None] | Omit = omit,
-        date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
-        dimensions: List[Literal["period", "merchant_name", "date", "owned_asset_name"]] | Omit = omit,
-        exclude_topic_ids: bool | Omit = omit,
-        filters: Iterable[shopping_merchant_distribution_params.Filter] | Omit = omit,
-        include_count: bool | Omit = omit,
-        include_no_tag: bool | Omit = omit,
-        metrics: List[
-            Literal["offer_count", "product_count", "average_rank", "share_of_offers", "visibility_rank", "total_count"]
-        ]
+        end_date: str,
+        start_date: str,
+        cursor: Optional[str] | Omit = omit,
+        filter: Optional[shopping_stream_trigger_rate_params.Filter] | Omit = omit,
+        group_by: List[Literal["date", "topic", "region", "persona", "prompt"]] | Omit = omit,
+        interval: Literal["day", "week", "month"] | Omit = omit,
+        limit: Optional[int] | Omit = omit,
+        max_results: Optional[int] | Omit = omit,
+        metrics: Optional[List[Literal["total_runs", "shopping_triggered_runs", "trigger_rate_percentage"]]]
         | Omit = omit,
-        order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
-        owned_asset_names: SequenceNotStr[str] | Omit = omit,
-        pagination: Optional[Pagination] | Omit = omit,
-        search_merchant: Optional[str] | Omit = omit,
-        tag_filter_type: Literal["any", "all"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ShoppingMerchantDistributionResponse:
-        """Shopping Merchant Distribution
+    ) -> Stream[ShoppingStreamTriggerRateResponse]:
+        """
+        Stream Shopping Trigger Rate V2
 
         Args:
-          end_date: End date.
+          end_date: YYYY-MM-DD, ET, inclusive
 
-        Accepts YYYY-MM-DD, YYYY-MM-DD HH:MM, or ISO timestamp.
+          start_date: YYYY-MM-DD, ET, inclusive
 
-          start_date: Start date. Accepts YYYY-MM-DD, YYYY-MM-DD HH:MM, or ISO timestamp.
+          filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
 
-          pagination: Offset-based pagination parameters.
+          group_by: Group by `prompt`/`topic` for the per-prompt/-topic trigger rate.
+
+          limit: Page size; default 10, max 50.
+
+          max_results: Stream endpoint only: cap streamed rows.
 
           extra_headers: Send extra headers
 
@@ -505,259 +615,48 @@ class ShoppingResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {"Accept": "text/event-stream", **(extra_headers or {})}
         return self._post(
-            "/v1/reports/shopping/merchant-distribution",
+            "/v2/reports/shopping/trigger-rate/stream",
             body=maybe_transform(
                 {
                     "category_id": category_id,
                     "end_date": end_date,
                     "start_date": start_date,
-                    "comparison_end_date": comparison_end_date,
-                    "comparison_start_date": comparison_start_date,
-                    "date_interval": date_interval,
-                    "dimensions": dimensions,
-                    "exclude_topic_ids": exclude_topic_ids,
-                    "filters": filters,
-                    "include_count": include_count,
-                    "include_no_tag": include_no_tag,
+                    "cursor": cursor,
+                    "filter": filter,
+                    "group_by": group_by,
+                    "interval": interval,
+                    "limit": limit,
+                    "max_results": max_results,
                     "metrics": metrics,
-                    "order_by": order_by,
-                    "owned_asset_names": owned_asset_names,
-                    "pagination": pagination,
-                    "search_merchant": search_merchant,
-                    "tag_filter_type": tag_filter_type,
                 },
-                shopping_merchant_distribution_params.ShoppingMerchantDistributionParams,
+                shopping_stream_trigger_rate_params.ShoppingStreamTriggerRateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ShoppingMerchantDistributionResponse,
-        )
-
-    def merchant_share(
-        self,
-        *,
-        category_id: str,
-        end_date: Union[str, datetime],
-        start_date: Union[str, datetime],
-        comparison_end_date: Union[str, datetime, None] | Omit = omit,
-        comparison_start_date: Union[str, datetime, None] | Omit = omit,
-        date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
-        dimensions: List[Literal["period", "topic_id", "prompt_id"]] | Omit = omit,
-        exclude_topic_ids: bool | Omit = omit,
-        filters: Iterable[shopping_merchant_share_params.Filter] | Omit = omit,
-        include_count: bool | Omit = omit,
-        include_no_tag: bool | Omit = omit,
-        metrics: List[Literal["merchant_share"]] | Omit = omit,
-        order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
-        owned_asset_names: SequenceNotStr[str] | Omit = omit,
-        pagination: Optional[Pagination] | Omit = omit,
-        tag_filter_type: Literal["any", "all"] | Omit = omit,
-        target_asset_names: SequenceNotStr[str] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ShoppingMerchantShareResponse:
-        """Shopping Merchant Share
-
-        Args:
-          end_date: End date.
-
-        Accepts YYYY-MM-DD, YYYY-MM-DD HH:MM, or ISO timestamp.
-
-          start_date: Start date. Accepts YYYY-MM-DD, YYYY-MM-DD HH:MM, or ISO timestamp.
-
-          pagination: Offset-based pagination parameters.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._post(
-            "/v1/reports/shopping/merchant-share",
-            body=maybe_transform(
-                {
-                    "category_id": category_id,
-                    "end_date": end_date,
-                    "start_date": start_date,
-                    "comparison_end_date": comparison_end_date,
-                    "comparison_start_date": comparison_start_date,
-                    "date_interval": date_interval,
-                    "dimensions": dimensions,
-                    "exclude_topic_ids": exclude_topic_ids,
-                    "filters": filters,
-                    "include_count": include_count,
-                    "include_no_tag": include_no_tag,
-                    "metrics": metrics,
-                    "order_by": order_by,
-                    "owned_asset_names": owned_asset_names,
-                    "pagination": pagination,
-                    "tag_filter_type": tag_filter_type,
-                    "target_asset_names": target_asset_names,
-                },
-                shopping_merchant_share_params.ShoppingMerchantShareParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ShoppingMerchantShareResponse,
-        )
-
-    def merchant_visibility_by_brand(
-        self,
-        *,
-        category_id: str,
-        end_date: Union[str, datetime],
-        start_date: Union[str, datetime],
-        comparison_end_date: Union[str, datetime, None] | Omit = omit,
-        comparison_start_date: Union[str, datetime, None] | Omit = omit,
-        date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
-        dimensions: List[Literal["period", "merchant_name", "brand_name"]] | Omit = omit,
-        exclude_topic_ids: bool | Omit = omit,
-        filters: Iterable[shopping_merchant_visibility_by_brand_params.Filter] | Omit = omit,
-        include_brand: Optional[str] | Omit = omit,
-        include_brand_only: bool | Omit = omit,
-        include_count: bool | Omit = omit,
-        include_no_tag: bool | Omit = omit,
-        metrics: List[
-            Literal["visibility_score", "share_of_voice", "average_position", "visibility_rank", "total_count"]
-        ]
-        | Omit = omit,
-        order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
-        owned_asset_names: SequenceNotStr[str] | Omit = omit,
-        pagination: Optional[Pagination] | Omit = omit,
-        search_brand: Optional[str] | Omit = omit,
-        tag_filter_type: Literal["any", "all"] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ShoppingMerchantVisibilityByBrandResponse:
-        """Shopping Merchant Visibility By Brand
-
-        Args:
-          end_date: End date.
-
-        Accepts YYYY-MM-DD, YYYY-MM-DD HH:MM, or ISO timestamp.
-
-          start_date: Start date. Accepts YYYY-MM-DD, YYYY-MM-DD HH:MM, or ISO timestamp.
-
-          pagination: Offset-based pagination parameters.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._post(
-            "/v1/reports/shopping/merchant-visibility-by-brand",
-            body=maybe_transform(
-                {
-                    "category_id": category_id,
-                    "end_date": end_date,
-                    "start_date": start_date,
-                    "comparison_end_date": comparison_end_date,
-                    "comparison_start_date": comparison_start_date,
-                    "date_interval": date_interval,
-                    "dimensions": dimensions,
-                    "exclude_topic_ids": exclude_topic_ids,
-                    "filters": filters,
-                    "include_brand": include_brand,
-                    "include_brand_only": include_brand_only,
-                    "include_count": include_count,
-                    "include_no_tag": include_no_tag,
-                    "metrics": metrics,
-                    "order_by": order_by,
-                    "owned_asset_names": owned_asset_names,
-                    "pagination": pagination,
-                    "search_brand": search_brand,
-                    "tag_filter_type": tag_filter_type,
-                },
-                shopping_merchant_visibility_by_brand_params.ShoppingMerchantVisibilityByBrandParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ShoppingMerchantVisibilityByBrandResponse,
-        )
-
-    def product_merchant_urls(
-        self,
-        *,
-        category_id: str,
-        end_date: Union[str, datetime],
-        product_names: SequenceNotStr[str],
-        start_date: Union[str, datetime],
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ShoppingProductMerchantURLsResponse:
-        """
-        Shopping Product Merchant Urls
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._post(
-            "/v1/reports/shopping/product-merchant-urls",
-            body=maybe_transform(
-                {
-                    "category_id": category_id,
-                    "end_date": end_date,
-                    "product_names": product_names,
-                    "start_date": start_date,
-                },
-                shopping_product_merchant_urls_params.ShoppingProductMerchantURLsParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ShoppingProductMerchantURLsResponse,
+            cast_to=cast(
+                Any, ShoppingStreamTriggerRateResponse
+            ),  # Union types cannot be passed in as arguments in the type system
+            stream=True,
+            stream_cls=Stream[ShoppingStreamTriggerRateResponse],
         )
 
     def trigger_rate(
         self,
         *,
         category_id: str,
-        end_date: Union[str, datetime],
-        start_date: Union[str, datetime],
-        comparison_end_date: Union[str, datetime, None] | Omit = omit,
-        comparison_start_date: Union[str, datetime, None] | Omit = omit,
-        date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
-        dimensions: List[
-            Literal["period", "date", "model_id", "topic_id", "region_id", "persona_id", "prompt_id", "prompt"]
-        ]
+        end_date: str,
+        start_date: str,
+        cursor: Optional[str] | Omit = omit,
+        filter: Optional[shopping_trigger_rate_params.Filter] | Omit = omit,
+        group_by: List[Literal["date", "topic", "region", "persona", "prompt"]] | Omit = omit,
+        interval: Literal["day", "week", "month"] | Omit = omit,
+        limit: Optional[int] | Omit = omit,
+        max_results: Optional[int] | Omit = omit,
+        metrics: Optional[List[Literal["total_runs", "shopping_triggered_runs", "trigger_rate_percentage"]]]
         | Omit = omit,
-        exclude_topic_ids: bool | Omit = omit,
-        filters: Iterable[shopping_trigger_rate_params.Filter] | Omit = omit,
-        include_count: bool | Omit = omit,
-        include_no_tag: bool | Omit = omit,
-        metrics: List[Literal["total_runs", "shopping_triggered_runs", "trigger_rate_percentage"]] | Omit = omit,
-        order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
-        pagination: Optional[Pagination] | Omit = omit,
-        tag_filter_type: Literal["any", "all"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -765,16 +664,21 @@ class ShoppingResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ShoppingTriggerRateResponse:
-        """Shopping Trigger Rate
+        """
+        Query Shopping Trigger Rate V2
 
         Args:
-          end_date: End date.
+          end_date: YYYY-MM-DD, ET, inclusive
 
-        Accepts YYYY-MM-DD, YYYY-MM-DD HH:MM, or ISO timestamp.
+          start_date: YYYY-MM-DD, ET, inclusive
 
-          start_date: Start date. Accepts YYYY-MM-DD, YYYY-MM-DD HH:MM, or ISO timestamp.
+          filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
 
-          pagination: Offset-based pagination parameters.
+          group_by: Group by `prompt`/`topic` for the per-prompt/-topic trigger rate.
+
+          limit: Page size; default 10, max 50.
+
+          max_results: Stream endpoint only: cap streamed rows.
 
           extra_headers: Send extra headers
 
@@ -785,24 +689,19 @@ class ShoppingResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/v1/reports/shopping/trigger-rate",
+            "/v2/reports/shopping/trigger-rate",
             body=maybe_transform(
                 {
                     "category_id": category_id,
                     "end_date": end_date,
                     "start_date": start_date,
-                    "comparison_end_date": comparison_end_date,
-                    "comparison_start_date": comparison_start_date,
-                    "date_interval": date_interval,
-                    "dimensions": dimensions,
-                    "exclude_topic_ids": exclude_topic_ids,
-                    "filters": filters,
-                    "include_count": include_count,
-                    "include_no_tag": include_no_tag,
+                    "cursor": cursor,
+                    "filter": filter,
+                    "group_by": group_by,
+                    "interval": interval,
+                    "limit": limit,
+                    "max_results": max_results,
                     "metrics": metrics,
-                    "order_by": order_by,
-                    "pagination": pagination,
-                    "tag_filter_type": tag_filter_type,
                 },
                 shopping_trigger_rate_params.ShoppingTriggerRateParams,
             ),
@@ -810,109 +709,6 @@ class ShoppingResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=ShoppingTriggerRateResponse,
-        )
-
-    def visibility(
-        self,
-        *,
-        category_id: str,
-        end_date: Union[str, datetime],
-        start_date: Union[str, datetime],
-        comparison_end_date: Union[str, datetime, None] | Omit = omit,
-        comparison_start_date: Union[str, datetime, None] | Omit = omit,
-        date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
-        dimensions: List[
-            Literal["period", "asset_name", "date", "model_id", "topic_id", "region_id", "prompt_id", "prompt"]
-        ]
-        | Omit = omit,
-        exclude_topic_ids: bool | Omit = omit,
-        filters: Iterable[shopping_visibility_params.Filter] | Omit = omit,
-        include_asset: Optional[str] | Omit = omit,
-        include_asset_only: bool | Omit = omit,
-        include_assets_only: SequenceNotStr[str] | Omit = omit,
-        include_count: bool | Omit = omit,
-        include_no_tag: bool | Omit = omit,
-        include_position_frequency: bool | Omit = omit,
-        metrics: List[
-            Literal[
-                "visibility_score",
-                "share_of_voice",
-                "average_position",
-                "visibility_rank",
-                "average_position_rank",
-                "position1_percentage",
-                "position2_percentage",
-                "position3_percentage",
-                "position_above3_percentage",
-                "total_count",
-            ]
-        ]
-        | Omit = omit,
-        order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
-        owned_asset_names: SequenceNotStr[str] | Omit = omit,
-        pagination: Optional[Pagination] | Omit = omit,
-        rank_by: Literal["visibility_score", "average_position"] | Omit = omit,
-        search_asset: Optional[str] | Omit = omit,
-        tag_filter_type: Literal["any", "all"] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ShoppingVisibilityResponse:
-        """Shopping Visibility
-
-        Args:
-          end_date: End date.
-
-        Accepts YYYY-MM-DD, YYYY-MM-DD HH:MM, or ISO timestamp.
-
-          start_date: Start date. Accepts YYYY-MM-DD, YYYY-MM-DD HH:MM, or ISO timestamp.
-
-          pagination: Offset-based pagination parameters.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._post(
-            "/v1/reports/shopping/visibility",
-            body=maybe_transform(
-                {
-                    "category_id": category_id,
-                    "end_date": end_date,
-                    "start_date": start_date,
-                    "comparison_end_date": comparison_end_date,
-                    "comparison_start_date": comparison_start_date,
-                    "date_interval": date_interval,
-                    "dimensions": dimensions,
-                    "exclude_topic_ids": exclude_topic_ids,
-                    "filters": filters,
-                    "include_asset": include_asset,
-                    "include_asset_only": include_asset_only,
-                    "include_assets_only": include_assets_only,
-                    "include_count": include_count,
-                    "include_no_tag": include_no_tag,
-                    "include_position_frequency": include_position_frequency,
-                    "metrics": metrics,
-                    "order_by": order_by,
-                    "owned_asset_names": owned_asset_names,
-                    "pagination": pagination,
-                    "rank_by": rank_by,
-                    "search_asset": search_asset,
-                    "tag_filter_type": tag_filter_type,
-                },
-                shopping_visibility_params.ShoppingVisibilityParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ShoppingVisibilityResponse,
         )
 
 
@@ -936,70 +732,43 @@ class AsyncShoppingResource(AsyncAPIResource):
         """
         return AsyncShoppingResourceWithStreamingResponse(self)
 
-    async def all_items_with_merchants(
+    async def brands(
         self,
         *,
         category_id: str,
-        end_date: Union[str, datetime],
-        start_date: Union[str, datetime],
-        comparison_end_date: Union[str, datetime, None] | Omit = omit,
-        comparison_start_date: Union[str, datetime, None] | Omit = omit,
-        date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
-        dimensions: List[
-            Literal[
-                "period",
-                "product_name",
-                "brand_name",
-                "product_url",
-                "product_image_urls",
-                "product_price",
-                "merchant_names",
-                "merchant_prices",
-            ]
-        ]
-        | Omit = omit,
-        exclude_topic_ids: bool | Omit = omit,
-        filters: Iterable[shopping_all_items_with_merchants_params.Filter] | Omit = omit,
-        include_count: bool | Omit = omit,
-        include_items: SequenceNotStr[str] | Omit = omit,
-        include_no_tag: bool | Omit = omit,
-        merchant_filter_type: Literal["any", "all"] | Omit = omit,
-        metrics: List[
-            Literal[
-                "visibility_score",
-                "share_of_voice",
-                "average_position",
-                "visibility_rank",
-                "product_rating",
-                "product_num_reviews",
-                "total_count",
-            ]
-        ]
-        | Omit = omit,
-        order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
-        owned_asset_names: SequenceNotStr[str] | Omit = omit,
-        pagination: Optional[Pagination] | Omit = omit,
-        rank_by: Literal["visibility", "average_position", "name"] | Omit = omit,
-        search_item: Optional[str] | Omit = omit,
-        sort_order: Literal["asc", "desc"] | Omit = omit,
-        tag_filter_type: Literal["any", "all"] | Omit = omit,
+        end_date: str,
+        start_date: str,
+        assets: Union[str, SequenceNotStr[str], None] | Omit = omit,
+        cursor: Optional[str] | Omit = omit,
+        filter: Optional[shopping_brands_params.Filter] | Omit = omit,
+        group_by: List[Literal["date", "topic", "region", "prompt"]] | Omit = omit,
+        interval: Literal["day", "week", "month"] | Omit = omit,
+        limit: Optional[int] | Omit = omit,
+        max_results: Optional[int] | Omit = omit,
+        metrics: Optional[List[Literal["visibility_score", "average_position", "visibility_rank"]]] | Omit = omit,
+        scope: Literal["owned", "all"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ShoppingAllItemsWithMerchantsResponse:
-        """Shopping All Items With Merchants
+    ) -> ShoppingBrandsResponse:
+        """
+        Query Shopping Brands V2
 
         Args:
-          end_date: End date.
+          end_date: YYYY-MM-DD, ET, inclusive
 
-        Accepts YYYY-MM-DD, YYYY-MM-DD HH:MM, or ISO timestamp.
+          start_date: YYYY-MM-DD, ET, inclusive
 
-          start_date: Start date. Accepts YYYY-MM-DD, YYYY-MM-DD HH:MM, or ISO timestamp.
+          assets: Restrict to these asset names (a name or list). Overrides `scope`.
 
-          pagination: Offset-based pagination parameters.
+          filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
+
+          limit: Page size for scope=all; default 10, max 50.
+
+          max_results: Stream endpoint only: cap the number of streamed rows (default: all).
 
           extra_headers: Send extra headers
 
@@ -1010,75 +779,82 @@ class AsyncShoppingResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/v1/reports/shopping/all-items-with-merchants",
+            "/v2/reports/shopping/brands",
             body=await async_maybe_transform(
                 {
                     "category_id": category_id,
                     "end_date": end_date,
                     "start_date": start_date,
-                    "comparison_end_date": comparison_end_date,
-                    "comparison_start_date": comparison_start_date,
-                    "date_interval": date_interval,
-                    "dimensions": dimensions,
-                    "exclude_topic_ids": exclude_topic_ids,
-                    "filters": filters,
-                    "include_count": include_count,
-                    "include_items": include_items,
-                    "include_no_tag": include_no_tag,
-                    "merchant_filter_type": merchant_filter_type,
+                    "assets": assets,
+                    "cursor": cursor,
+                    "filter": filter,
+                    "group_by": group_by,
+                    "interval": interval,
+                    "limit": limit,
+                    "max_results": max_results,
                     "metrics": metrics,
-                    "order_by": order_by,
-                    "owned_asset_names": owned_asset_names,
-                    "pagination": pagination,
-                    "rank_by": rank_by,
-                    "search_item": search_item,
-                    "sort_order": sort_order,
-                    "tag_filter_type": tag_filter_type,
+                    "scope": scope,
                 },
-                shopping_all_items_with_merchants_params.ShoppingAllItemsWithMerchantsParams,
+                shopping_brands_params.ShoppingBrandsParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ShoppingAllItemsWithMerchantsResponse,
+            cast_to=ShoppingBrandsResponse,
         )
 
-    async def executions(
+    async def merchants(
         self,
         *,
         category_id: str,
-        end_date: Union[str, datetime],
-        start_date: Union[str, datetime],
-        analysis_filter_type: Literal["any", "all"] | Omit = omit,
-        analysis_types: List[Literal["visibility", "sentiment", "sentiment_v2", "accuracy"]] | Omit = omit,
-        comparison_end_date: Union[str, datetime, None] | Omit = omit,
-        comparison_start_date: Union[str, datetime, None] | Omit = omit,
-        date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
-        exclude_topic_ids: bool | Omit = omit,
-        filters: Iterable[shopping_executions_params.Filter] | Omit = omit,
-        include_count: bool | Omit = omit,
-        include_no_tag: bool | Omit = omit,
-        order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
-        owned_asset_names: SequenceNotStr[str] | Omit = omit,
-        pagination: Optional[Pagination] | Omit = omit,
-        tag_filter_type: Literal["any", "all"] | Omit = omit,
+        end_date: str,
+        start_date: str,
+        cursor: Optional[str] | Omit = omit,
+        filter: Optional[shopping_merchants_params.Filter] | Omit = omit,
+        group_by: List[Literal["date", "brand", "product"]] | Omit = omit,
+        interval: Literal["day", "week", "month"] | Omit = omit,
+        limit: Optional[int] | Omit = omit,
+        max_results: Optional[int] | Omit = omit,
+        metrics: Optional[
+            List[
+                Literal[
+                    "merchant_share",
+                    "merchant_share_rank",
+                    "merchant_visibility",
+                    "merchant_visibility_rank",
+                    "visibility_rank",
+                    "brand_share",
+                    "product_visibility",
+                    "product_rank",
+                ]
+            ]
+        ]
+        | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ShoppingExecutionsResponse:
-        """Shopping Executions
+    ) -> ShoppingMerchantsResponse:
+        """
+        Query Shopping Merchants V2
 
         Args:
-          end_date: End date.
+          end_date: YYYY-MM-DD, ET, inclusive
 
-        Accepts YYYY-MM-DD, YYYY-MM-DD HH:MM, or ISO timestamp.
+          start_date: YYYY-MM-DD, ET, inclusive
 
-          start_date: Start date. Accepts YYYY-MM-DD, YYYY-MM-DD HH:MM, or ISO timestamp.
+          filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
 
-          pagination: Offset-based pagination parameters.
+          group_by: `[]` = distribution; `[brand]` = brand share within each merchant; `[product]` =
+              top products per merchant. `date` (distribution only) adds a time series.
+
+          limit: Page size; default 10, max 50.
+
+          max_results: Stream endpoint only: cap streamed rows.
+
+          metrics: Defaults to the chosen view's metrics; must be valid for that view.
 
           extra_headers: Send extra headers
 
@@ -1089,89 +865,58 @@ class AsyncShoppingResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/v1/reports/shopping/executions",
+            "/v2/reports/shopping/merchants",
             body=await async_maybe_transform(
                 {
                     "category_id": category_id,
                     "end_date": end_date,
                     "start_date": start_date,
-                    "analysis_filter_type": analysis_filter_type,
-                    "analysis_types": analysis_types,
-                    "comparison_end_date": comparison_end_date,
-                    "comparison_start_date": comparison_start_date,
-                    "date_interval": date_interval,
-                    "exclude_topic_ids": exclude_topic_ids,
-                    "filters": filters,
-                    "include_count": include_count,
-                    "include_no_tag": include_no_tag,
-                    "order_by": order_by,
-                    "owned_asset_names": owned_asset_names,
-                    "pagination": pagination,
-                    "tag_filter_type": tag_filter_type,
+                    "cursor": cursor,
+                    "filter": filter,
+                    "group_by": group_by,
+                    "interval": interval,
+                    "limit": limit,
+                    "max_results": max_results,
+                    "metrics": metrics,
                 },
-                shopping_executions_params.ShoppingExecutionsParams,
+                shopping_merchants_params.ShoppingMerchantsParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ShoppingExecutionsResponse,
+            cast_to=ShoppingMerchantsResponse,
         )
 
-    async def item_visibility(
+    async def products(
         self,
         *,
         category_id: str,
-        end_date: Union[str, datetime],
-        start_date: Union[str, datetime],
-        comparison_end_date: Union[str, datetime, None] | Omit = omit,
-        comparison_start_date: Union[str, datetime, None] | Omit = omit,
+        end_date: str,
+        start_date: str,
         competitor_limit: int | Omit = omit,
-        date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
-        dimensions: List[
-            Literal[
-                "period",
-                "product_key",
-                "product_name",
-                "brand_name",
-                "date",
-                "topic_id",
-                "prompt_id",
-                "prompt",
-                "product_url",
-                "product_image_urls",
-                "product_price",
+        cursor: Optional[str] | Omit = omit,
+        filter: Optional[shopping_products_params.Filter] | Omit = omit,
+        group_by: List[Literal["date", "topic", "prompt"]] | Omit = omit,
+        include_merchants: bool | Omit = omit,
+        interval: Literal["day", "week", "month"] | Omit = omit,
+        limit: Optional[int] | Omit = omit,
+        max_results: Optional[int] | Omit = omit,
+        metrics: Optional[
+            List[
+                Literal[
+                    "visibility_score",
+                    "average_position",
+                    "visibility_rank",
+                    "position1_percentage",
+                    "position2_percentage",
+                    "position3_percentage",
+                    "position_above3_percentage",
+                    "product_rating",
+                    "product_num_reviews",
+                ]
             ]
         ]
         | Omit = omit,
-        exclude_topic_ids: bool | Omit = omit,
-        filters: Iterable[shopping_item_visibility_params.Filter] | Omit = omit,
-        include_competitors: bool | Omit = omit,
-        include_count: bool | Omit = omit,
-        include_items: SequenceNotStr[str] | Omit = omit,
-        include_no_tag: bool | Omit = omit,
-        include_position_frequency: bool | Omit = omit,
-        merchant_filter_type: Literal["any", "all"] | Omit = omit,
-        metrics: List[
-            Literal[
-                "visibility_score",
-                "share_of_voice",
-                "average_position",
-                "visibility_rank",
-                "position1_percentage",
-                "position2_percentage",
-                "position3_percentage",
-                "position_above3_percentage",
-                "product_rating",
-                "product_num_reviews",
-                "total_count",
-            ]
-        ]
-        | Omit = omit,
-        order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
-        owned_asset_names: SequenceNotStr[str] | Omit = omit,
-        pagination: Optional[Pagination] | Omit = omit,
-        search_item: Optional[str] | Omit = omit,
-        tag_filter_type: Literal["any", "all"] | Omit = omit,
         target_product: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1179,17 +924,26 @@ class AsyncShoppingResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ShoppingItemVisibilityResponse:
-        """Shopping Item Visibility
+    ) -> ShoppingProductsResponse:
+        """
+        Query Shopping Products V2
 
         Args:
-          end_date: End date.
+          end_date: YYYY-MM-DD, ET, inclusive
 
-        Accepts YYYY-MM-DD, YYYY-MM-DD HH:MM, or ISO timestamp.
+          start_date: YYYY-MM-DD, ET, inclusive
 
-          start_date: Start date. Accepts YYYY-MM-DD, YYYY-MM-DD HH:MM, or ISO timestamp.
+          competitor_limit: Competitors returned when `target_product` is set.
 
-          pagination: Offset-based pagination parameters.
+          filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
+
+          include_merchants: Include per-product merchant offers (names, prices, urls, images).
+
+          limit: Page size; default 10, max 50.
+
+          max_results: Stream endpoint only: cap streamed rows.
+
+          target_product: Return this product plus its top competitors (item view only).
 
           extra_headers: Send extra headers
 
@@ -1200,94 +954,253 @@ class AsyncShoppingResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/v1/reports/shopping/item-visibility",
+            "/v2/reports/shopping/products",
             body=await async_maybe_transform(
                 {
                     "category_id": category_id,
                     "end_date": end_date,
                     "start_date": start_date,
-                    "comparison_end_date": comparison_end_date,
-                    "comparison_start_date": comparison_start_date,
                     "competitor_limit": competitor_limit,
-                    "date_interval": date_interval,
-                    "dimensions": dimensions,
-                    "exclude_topic_ids": exclude_topic_ids,
-                    "filters": filters,
-                    "include_competitors": include_competitors,
-                    "include_count": include_count,
-                    "include_items": include_items,
-                    "include_no_tag": include_no_tag,
-                    "include_position_frequency": include_position_frequency,
-                    "merchant_filter_type": merchant_filter_type,
+                    "cursor": cursor,
+                    "filter": filter,
+                    "group_by": group_by,
+                    "include_merchants": include_merchants,
+                    "interval": interval,
+                    "limit": limit,
+                    "max_results": max_results,
                     "metrics": metrics,
-                    "order_by": order_by,
-                    "owned_asset_names": owned_asset_names,
-                    "pagination": pagination,
-                    "search_item": search_item,
-                    "tag_filter_type": tag_filter_type,
                     "target_product": target_product,
                 },
-                shopping_item_visibility_params.ShoppingItemVisibilityParams,
+                shopping_products_params.ShoppingProductsParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ShoppingItemVisibilityResponse,
+            cast_to=ShoppingProductsResponse,
         )
 
-    async def merchant_by_items(
+    async def stream_brands(
         self,
         *,
         category_id: str,
-        end_date: Union[str, datetime],
-        start_date: Union[str, datetime],
-        comparison_end_date: Union[str, datetime, None] | Omit = omit,
-        comparison_start_date: Union[str, datetime, None] | Omit = omit,
-        date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
-        dimensions: List[
-            Literal[
-                "period",
-                "merchant_name",
-                "product_name",
-                "brand_name",
-                "product_image_urls",
-                "product_price",
-                "merchant_prices",
-                "has_instant_checkout",
-                "delivery_options",
-                "merchant_url",
+        end_date: str,
+        start_date: str,
+        assets: Union[str, SequenceNotStr[str], None] | Omit = omit,
+        cursor: Optional[str] | Omit = omit,
+        filter: Optional[shopping_stream_brands_params.Filter] | Omit = omit,
+        group_by: List[Literal["date", "topic", "region", "prompt"]] | Omit = omit,
+        interval: Literal["day", "week", "month"] | Omit = omit,
+        limit: Optional[int] | Omit = omit,
+        max_results: Optional[int] | Omit = omit,
+        metrics: Optional[List[Literal["visibility_score", "average_position", "visibility_rank"]]] | Omit = omit,
+        scope: Literal["owned", "all"] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AsyncStream[ShoppingStreamBrandsResponse]:
+        """
+        Stream Shopping Brands V2
+
+        Args:
+          end_date: YYYY-MM-DD, ET, inclusive
+
+          start_date: YYYY-MM-DD, ET, inclusive
+
+          assets: Restrict to these asset names (a name or list). Overrides `scope`.
+
+          filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
+
+          limit: Page size for scope=all; default 10, max 50.
+
+          max_results: Stream endpoint only: cap the number of streamed rows (default: all).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        extra_headers = {"Accept": "text/event-stream", **(extra_headers or {})}
+        return await self._post(
+            "/v2/reports/shopping/brands/stream",
+            body=await async_maybe_transform(
+                {
+                    "category_id": category_id,
+                    "end_date": end_date,
+                    "start_date": start_date,
+                    "assets": assets,
+                    "cursor": cursor,
+                    "filter": filter,
+                    "group_by": group_by,
+                    "interval": interval,
+                    "limit": limit,
+                    "max_results": max_results,
+                    "metrics": metrics,
+                    "scope": scope,
+                },
+                shopping_stream_brands_params.ShoppingStreamBrandsParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=cast(
+                Any, ShoppingStreamBrandsResponse
+            ),  # Union types cannot be passed in as arguments in the type system
+            stream=True,
+            stream_cls=AsyncStream[ShoppingStreamBrandsResponse],
+        )
+
+    async def stream_merchants(
+        self,
+        *,
+        category_id: str,
+        end_date: str,
+        start_date: str,
+        cursor: Optional[str] | Omit = omit,
+        filter: Optional[shopping_stream_merchants_params.Filter] | Omit = omit,
+        group_by: List[Literal["date", "brand", "product"]] | Omit = omit,
+        interval: Literal["day", "week", "month"] | Omit = omit,
+        limit: Optional[int] | Omit = omit,
+        max_results: Optional[int] | Omit = omit,
+        metrics: Optional[
+            List[
+                Literal[
+                    "merchant_share",
+                    "merchant_share_rank",
+                    "merchant_visibility",
+                    "merchant_visibility_rank",
+                    "visibility_rank",
+                    "brand_share",
+                    "product_visibility",
+                    "product_rank",
+                ]
             ]
         ]
         | Omit = omit,
-        exclude_topic_ids: bool | Omit = omit,
-        filters: Iterable[shopping_merchant_by_items_params.Filter] | Omit = omit,
-        include_count: bool | Omit = omit,
-        include_no_tag: bool | Omit = omit,
-        metrics: List[
-            Literal["merchant_visibility", "product_visibility", "product_rank", "avg_position", "total_count"]
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AsyncStream[ShoppingStreamMerchantsResponse]:
+        """
+        Stream Shopping Merchants V2
+
+        Args:
+          end_date: YYYY-MM-DD, ET, inclusive
+
+          start_date: YYYY-MM-DD, ET, inclusive
+
+          filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
+
+          group_by: `[]` = distribution; `[brand]` = brand share within each merchant; `[product]` =
+              top products per merchant. `date` (distribution only) adds a time series.
+
+          limit: Page size; default 10, max 50.
+
+          max_results: Stream endpoint only: cap streamed rows.
+
+          metrics: Defaults to the chosen view's metrics; must be valid for that view.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        extra_headers = {"Accept": "text/event-stream", **(extra_headers or {})}
+        return await self._post(
+            "/v2/reports/shopping/merchants/stream",
+            body=await async_maybe_transform(
+                {
+                    "category_id": category_id,
+                    "end_date": end_date,
+                    "start_date": start_date,
+                    "cursor": cursor,
+                    "filter": filter,
+                    "group_by": group_by,
+                    "interval": interval,
+                    "limit": limit,
+                    "max_results": max_results,
+                    "metrics": metrics,
+                },
+                shopping_stream_merchants_params.ShoppingStreamMerchantsParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=cast(
+                Any, ShoppingStreamMerchantsResponse
+            ),  # Union types cannot be passed in as arguments in the type system
+            stream=True,
+            stream_cls=AsyncStream[ShoppingStreamMerchantsResponse],
+        )
+
+    async def stream_products(
+        self,
+        *,
+        category_id: str,
+        end_date: str,
+        start_date: str,
+        competitor_limit: int | Omit = omit,
+        cursor: Optional[str] | Omit = omit,
+        filter: Optional[shopping_stream_products_params.Filter] | Omit = omit,
+        group_by: List[Literal["date", "topic", "prompt"]] | Omit = omit,
+        include_merchants: bool | Omit = omit,
+        interval: Literal["day", "week", "month"] | Omit = omit,
+        limit: Optional[int] | Omit = omit,
+        max_results: Optional[int] | Omit = omit,
+        metrics: Optional[
+            List[
+                Literal[
+                    "visibility_score",
+                    "average_position",
+                    "visibility_rank",
+                    "position1_percentage",
+                    "position2_percentage",
+                    "position3_percentage",
+                    "position_above3_percentage",
+                    "product_rating",
+                    "product_num_reviews",
+                ]
+            ]
         ]
         | Omit = omit,
-        order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
-        pagination: Optional[Pagination] | Omit = omit,
-        product_name: Optional[str] | Omit = omit,
-        tag_filter_type: Literal["any", "all"] | Omit = omit,
+        target_product: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ShoppingMerchantByItemsResponse:
-        """Shopping Merchant By Items
+    ) -> AsyncStream[ShoppingStreamProductsResponse]:
+        """
+        Stream Shopping Products V2
 
         Args:
-          end_date: End date.
+          end_date: YYYY-MM-DD, ET, inclusive
 
-        Accepts YYYY-MM-DD, YYYY-MM-DD HH:MM, or ISO timestamp.
+          start_date: YYYY-MM-DD, ET, inclusive
 
-          start_date: Start date. Accepts YYYY-MM-DD, YYYY-MM-DD HH:MM, or ISO timestamp.
+          competitor_limit: Competitors returned when `target_product` is set.
 
-          pagination: Offset-based pagination parameters.
+          filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
+
+          include_merchants: Include per-product merchant offers (names, prices, urls, images).
+
+          limit: Page size; default 10, max 50.
+
+          max_results: Stream endpoint only: cap streamed rows.
+
+          target_product: Return this product plus its top competitors (item view only).
 
           extra_headers: Send extra headers
 
@@ -1297,75 +1210,73 @@ class AsyncShoppingResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {"Accept": "text/event-stream", **(extra_headers or {})}
         return await self._post(
-            "/v1/reports/shopping/merchant-by-items",
+            "/v2/reports/shopping/products/stream",
             body=await async_maybe_transform(
                 {
                     "category_id": category_id,
                     "end_date": end_date,
                     "start_date": start_date,
-                    "comparison_end_date": comparison_end_date,
-                    "comparison_start_date": comparison_start_date,
-                    "date_interval": date_interval,
-                    "dimensions": dimensions,
-                    "exclude_topic_ids": exclude_topic_ids,
-                    "filters": filters,
-                    "include_count": include_count,
-                    "include_no_tag": include_no_tag,
+                    "competitor_limit": competitor_limit,
+                    "cursor": cursor,
+                    "filter": filter,
+                    "group_by": group_by,
+                    "include_merchants": include_merchants,
+                    "interval": interval,
+                    "limit": limit,
+                    "max_results": max_results,
                     "metrics": metrics,
-                    "order_by": order_by,
-                    "pagination": pagination,
-                    "product_name": product_name,
-                    "tag_filter_type": tag_filter_type,
+                    "target_product": target_product,
                 },
-                shopping_merchant_by_items_params.ShoppingMerchantByItemsParams,
+                shopping_stream_products_params.ShoppingStreamProductsParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ShoppingMerchantByItemsResponse,
+            cast_to=cast(
+                Any, ShoppingStreamProductsResponse
+            ),  # Union types cannot be passed in as arguments in the type system
+            stream=True,
+            stream_cls=AsyncStream[ShoppingStreamProductsResponse],
         )
 
-    async def merchant_distribution(
+    async def stream_trigger_rate(
         self,
         *,
         category_id: str,
-        end_date: Union[str, datetime],
-        start_date: Union[str, datetime],
-        comparison_end_date: Union[str, datetime, None] | Omit = omit,
-        comparison_start_date: Union[str, datetime, None] | Omit = omit,
-        date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
-        dimensions: List[Literal["period", "merchant_name", "date", "owned_asset_name"]] | Omit = omit,
-        exclude_topic_ids: bool | Omit = omit,
-        filters: Iterable[shopping_merchant_distribution_params.Filter] | Omit = omit,
-        include_count: bool | Omit = omit,
-        include_no_tag: bool | Omit = omit,
-        metrics: List[
-            Literal["offer_count", "product_count", "average_rank", "share_of_offers", "visibility_rank", "total_count"]
-        ]
+        end_date: str,
+        start_date: str,
+        cursor: Optional[str] | Omit = omit,
+        filter: Optional[shopping_stream_trigger_rate_params.Filter] | Omit = omit,
+        group_by: List[Literal["date", "topic", "region", "persona", "prompt"]] | Omit = omit,
+        interval: Literal["day", "week", "month"] | Omit = omit,
+        limit: Optional[int] | Omit = omit,
+        max_results: Optional[int] | Omit = omit,
+        metrics: Optional[List[Literal["total_runs", "shopping_triggered_runs", "trigger_rate_percentage"]]]
         | Omit = omit,
-        order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
-        owned_asset_names: SequenceNotStr[str] | Omit = omit,
-        pagination: Optional[Pagination] | Omit = omit,
-        search_merchant: Optional[str] | Omit = omit,
-        tag_filter_type: Literal["any", "all"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ShoppingMerchantDistributionResponse:
-        """Shopping Merchant Distribution
+    ) -> AsyncStream[ShoppingStreamTriggerRateResponse]:
+        """
+        Stream Shopping Trigger Rate V2
 
         Args:
-          end_date: End date.
+          end_date: YYYY-MM-DD, ET, inclusive
 
-        Accepts YYYY-MM-DD, YYYY-MM-DD HH:MM, or ISO timestamp.
+          start_date: YYYY-MM-DD, ET, inclusive
 
-          start_date: Start date. Accepts YYYY-MM-DD, YYYY-MM-DD HH:MM, or ISO timestamp.
+          filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
 
-          pagination: Offset-based pagination parameters.
+          group_by: Group by `prompt`/`topic` for the per-prompt/-topic trigger rate.
+
+          limit: Page size; default 10, max 50.
+
+          max_results: Stream endpoint only: cap streamed rows.
 
           extra_headers: Send extra headers
 
@@ -1375,259 +1286,48 @@ class AsyncShoppingResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {"Accept": "text/event-stream", **(extra_headers or {})}
         return await self._post(
-            "/v1/reports/shopping/merchant-distribution",
+            "/v2/reports/shopping/trigger-rate/stream",
             body=await async_maybe_transform(
                 {
                     "category_id": category_id,
                     "end_date": end_date,
                     "start_date": start_date,
-                    "comparison_end_date": comparison_end_date,
-                    "comparison_start_date": comparison_start_date,
-                    "date_interval": date_interval,
-                    "dimensions": dimensions,
-                    "exclude_topic_ids": exclude_topic_ids,
-                    "filters": filters,
-                    "include_count": include_count,
-                    "include_no_tag": include_no_tag,
+                    "cursor": cursor,
+                    "filter": filter,
+                    "group_by": group_by,
+                    "interval": interval,
+                    "limit": limit,
+                    "max_results": max_results,
                     "metrics": metrics,
-                    "order_by": order_by,
-                    "owned_asset_names": owned_asset_names,
-                    "pagination": pagination,
-                    "search_merchant": search_merchant,
-                    "tag_filter_type": tag_filter_type,
                 },
-                shopping_merchant_distribution_params.ShoppingMerchantDistributionParams,
+                shopping_stream_trigger_rate_params.ShoppingStreamTriggerRateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ShoppingMerchantDistributionResponse,
-        )
-
-    async def merchant_share(
-        self,
-        *,
-        category_id: str,
-        end_date: Union[str, datetime],
-        start_date: Union[str, datetime],
-        comparison_end_date: Union[str, datetime, None] | Omit = omit,
-        comparison_start_date: Union[str, datetime, None] | Omit = omit,
-        date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
-        dimensions: List[Literal["period", "topic_id", "prompt_id"]] | Omit = omit,
-        exclude_topic_ids: bool | Omit = omit,
-        filters: Iterable[shopping_merchant_share_params.Filter] | Omit = omit,
-        include_count: bool | Omit = omit,
-        include_no_tag: bool | Omit = omit,
-        metrics: List[Literal["merchant_share"]] | Omit = omit,
-        order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
-        owned_asset_names: SequenceNotStr[str] | Omit = omit,
-        pagination: Optional[Pagination] | Omit = omit,
-        tag_filter_type: Literal["any", "all"] | Omit = omit,
-        target_asset_names: SequenceNotStr[str] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ShoppingMerchantShareResponse:
-        """Shopping Merchant Share
-
-        Args:
-          end_date: End date.
-
-        Accepts YYYY-MM-DD, YYYY-MM-DD HH:MM, or ISO timestamp.
-
-          start_date: Start date. Accepts YYYY-MM-DD, YYYY-MM-DD HH:MM, or ISO timestamp.
-
-          pagination: Offset-based pagination parameters.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return await self._post(
-            "/v1/reports/shopping/merchant-share",
-            body=await async_maybe_transform(
-                {
-                    "category_id": category_id,
-                    "end_date": end_date,
-                    "start_date": start_date,
-                    "comparison_end_date": comparison_end_date,
-                    "comparison_start_date": comparison_start_date,
-                    "date_interval": date_interval,
-                    "dimensions": dimensions,
-                    "exclude_topic_ids": exclude_topic_ids,
-                    "filters": filters,
-                    "include_count": include_count,
-                    "include_no_tag": include_no_tag,
-                    "metrics": metrics,
-                    "order_by": order_by,
-                    "owned_asset_names": owned_asset_names,
-                    "pagination": pagination,
-                    "tag_filter_type": tag_filter_type,
-                    "target_asset_names": target_asset_names,
-                },
-                shopping_merchant_share_params.ShoppingMerchantShareParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ShoppingMerchantShareResponse,
-        )
-
-    async def merchant_visibility_by_brand(
-        self,
-        *,
-        category_id: str,
-        end_date: Union[str, datetime],
-        start_date: Union[str, datetime],
-        comparison_end_date: Union[str, datetime, None] | Omit = omit,
-        comparison_start_date: Union[str, datetime, None] | Omit = omit,
-        date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
-        dimensions: List[Literal["period", "merchant_name", "brand_name"]] | Omit = omit,
-        exclude_topic_ids: bool | Omit = omit,
-        filters: Iterable[shopping_merchant_visibility_by_brand_params.Filter] | Omit = omit,
-        include_brand: Optional[str] | Omit = omit,
-        include_brand_only: bool | Omit = omit,
-        include_count: bool | Omit = omit,
-        include_no_tag: bool | Omit = omit,
-        metrics: List[
-            Literal["visibility_score", "share_of_voice", "average_position", "visibility_rank", "total_count"]
-        ]
-        | Omit = omit,
-        order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
-        owned_asset_names: SequenceNotStr[str] | Omit = omit,
-        pagination: Optional[Pagination] | Omit = omit,
-        search_brand: Optional[str] | Omit = omit,
-        tag_filter_type: Literal["any", "all"] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ShoppingMerchantVisibilityByBrandResponse:
-        """Shopping Merchant Visibility By Brand
-
-        Args:
-          end_date: End date.
-
-        Accepts YYYY-MM-DD, YYYY-MM-DD HH:MM, or ISO timestamp.
-
-          start_date: Start date. Accepts YYYY-MM-DD, YYYY-MM-DD HH:MM, or ISO timestamp.
-
-          pagination: Offset-based pagination parameters.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return await self._post(
-            "/v1/reports/shopping/merchant-visibility-by-brand",
-            body=await async_maybe_transform(
-                {
-                    "category_id": category_id,
-                    "end_date": end_date,
-                    "start_date": start_date,
-                    "comparison_end_date": comparison_end_date,
-                    "comparison_start_date": comparison_start_date,
-                    "date_interval": date_interval,
-                    "dimensions": dimensions,
-                    "exclude_topic_ids": exclude_topic_ids,
-                    "filters": filters,
-                    "include_brand": include_brand,
-                    "include_brand_only": include_brand_only,
-                    "include_count": include_count,
-                    "include_no_tag": include_no_tag,
-                    "metrics": metrics,
-                    "order_by": order_by,
-                    "owned_asset_names": owned_asset_names,
-                    "pagination": pagination,
-                    "search_brand": search_brand,
-                    "tag_filter_type": tag_filter_type,
-                },
-                shopping_merchant_visibility_by_brand_params.ShoppingMerchantVisibilityByBrandParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ShoppingMerchantVisibilityByBrandResponse,
-        )
-
-    async def product_merchant_urls(
-        self,
-        *,
-        category_id: str,
-        end_date: Union[str, datetime],
-        product_names: SequenceNotStr[str],
-        start_date: Union[str, datetime],
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ShoppingProductMerchantURLsResponse:
-        """
-        Shopping Product Merchant Urls
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return await self._post(
-            "/v1/reports/shopping/product-merchant-urls",
-            body=await async_maybe_transform(
-                {
-                    "category_id": category_id,
-                    "end_date": end_date,
-                    "product_names": product_names,
-                    "start_date": start_date,
-                },
-                shopping_product_merchant_urls_params.ShoppingProductMerchantURLsParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ShoppingProductMerchantURLsResponse,
+            cast_to=cast(
+                Any, ShoppingStreamTriggerRateResponse
+            ),  # Union types cannot be passed in as arguments in the type system
+            stream=True,
+            stream_cls=AsyncStream[ShoppingStreamTriggerRateResponse],
         )
 
     async def trigger_rate(
         self,
         *,
         category_id: str,
-        end_date: Union[str, datetime],
-        start_date: Union[str, datetime],
-        comparison_end_date: Union[str, datetime, None] | Omit = omit,
-        comparison_start_date: Union[str, datetime, None] | Omit = omit,
-        date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
-        dimensions: List[
-            Literal["period", "date", "model_id", "topic_id", "region_id", "persona_id", "prompt_id", "prompt"]
-        ]
+        end_date: str,
+        start_date: str,
+        cursor: Optional[str] | Omit = omit,
+        filter: Optional[shopping_trigger_rate_params.Filter] | Omit = omit,
+        group_by: List[Literal["date", "topic", "region", "persona", "prompt"]] | Omit = omit,
+        interval: Literal["day", "week", "month"] | Omit = omit,
+        limit: Optional[int] | Omit = omit,
+        max_results: Optional[int] | Omit = omit,
+        metrics: Optional[List[Literal["total_runs", "shopping_triggered_runs", "trigger_rate_percentage"]]]
         | Omit = omit,
-        exclude_topic_ids: bool | Omit = omit,
-        filters: Iterable[shopping_trigger_rate_params.Filter] | Omit = omit,
-        include_count: bool | Omit = omit,
-        include_no_tag: bool | Omit = omit,
-        metrics: List[Literal["total_runs", "shopping_triggered_runs", "trigger_rate_percentage"]] | Omit = omit,
-        order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
-        pagination: Optional[Pagination] | Omit = omit,
-        tag_filter_type: Literal["any", "all"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1635,16 +1335,21 @@ class AsyncShoppingResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ShoppingTriggerRateResponse:
-        """Shopping Trigger Rate
+        """
+        Query Shopping Trigger Rate V2
 
         Args:
-          end_date: End date.
+          end_date: YYYY-MM-DD, ET, inclusive
 
-        Accepts YYYY-MM-DD, YYYY-MM-DD HH:MM, or ISO timestamp.
+          start_date: YYYY-MM-DD, ET, inclusive
 
-          start_date: Start date. Accepts YYYY-MM-DD, YYYY-MM-DD HH:MM, or ISO timestamp.
+          filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
 
-          pagination: Offset-based pagination parameters.
+          group_by: Group by `prompt`/`topic` for the per-prompt/-topic trigger rate.
+
+          limit: Page size; default 10, max 50.
+
+          max_results: Stream endpoint only: cap streamed rows.
 
           extra_headers: Send extra headers
 
@@ -1655,24 +1360,19 @@ class AsyncShoppingResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/v1/reports/shopping/trigger-rate",
+            "/v2/reports/shopping/trigger-rate",
             body=await async_maybe_transform(
                 {
                     "category_id": category_id,
                     "end_date": end_date,
                     "start_date": start_date,
-                    "comparison_end_date": comparison_end_date,
-                    "comparison_start_date": comparison_start_date,
-                    "date_interval": date_interval,
-                    "dimensions": dimensions,
-                    "exclude_topic_ids": exclude_topic_ids,
-                    "filters": filters,
-                    "include_count": include_count,
-                    "include_no_tag": include_no_tag,
+                    "cursor": cursor,
+                    "filter": filter,
+                    "group_by": group_by,
+                    "interval": interval,
+                    "limit": limit,
+                    "max_results": max_results,
                     "metrics": metrics,
-                    "order_by": order_by,
-                    "pagination": pagination,
-                    "tag_filter_type": tag_filter_type,
                 },
                 shopping_trigger_rate_params.ShoppingTriggerRateParams,
             ),
@@ -1682,143 +1382,34 @@ class AsyncShoppingResource(AsyncAPIResource):
             cast_to=ShoppingTriggerRateResponse,
         )
 
-    async def visibility(
-        self,
-        *,
-        category_id: str,
-        end_date: Union[str, datetime],
-        start_date: Union[str, datetime],
-        comparison_end_date: Union[str, datetime, None] | Omit = omit,
-        comparison_start_date: Union[str, datetime, None] | Omit = omit,
-        date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
-        dimensions: List[
-            Literal["period", "asset_name", "date", "model_id", "topic_id", "region_id", "prompt_id", "prompt"]
-        ]
-        | Omit = omit,
-        exclude_topic_ids: bool | Omit = omit,
-        filters: Iterable[shopping_visibility_params.Filter] | Omit = omit,
-        include_asset: Optional[str] | Omit = omit,
-        include_asset_only: bool | Omit = omit,
-        include_assets_only: SequenceNotStr[str] | Omit = omit,
-        include_count: bool | Omit = omit,
-        include_no_tag: bool | Omit = omit,
-        include_position_frequency: bool | Omit = omit,
-        metrics: List[
-            Literal[
-                "visibility_score",
-                "share_of_voice",
-                "average_position",
-                "visibility_rank",
-                "average_position_rank",
-                "position1_percentage",
-                "position2_percentage",
-                "position3_percentage",
-                "position_above3_percentage",
-                "total_count",
-            ]
-        ]
-        | Omit = omit,
-        order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
-        owned_asset_names: SequenceNotStr[str] | Omit = omit,
-        pagination: Optional[Pagination] | Omit = omit,
-        rank_by: Literal["visibility_score", "average_position"] | Omit = omit,
-        search_asset: Optional[str] | Omit = omit,
-        tag_filter_type: Literal["any", "all"] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ShoppingVisibilityResponse:
-        """Shopping Visibility
-
-        Args:
-          end_date: End date.
-
-        Accepts YYYY-MM-DD, YYYY-MM-DD HH:MM, or ISO timestamp.
-
-          start_date: Start date. Accepts YYYY-MM-DD, YYYY-MM-DD HH:MM, or ISO timestamp.
-
-          pagination: Offset-based pagination parameters.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return await self._post(
-            "/v1/reports/shopping/visibility",
-            body=await async_maybe_transform(
-                {
-                    "category_id": category_id,
-                    "end_date": end_date,
-                    "start_date": start_date,
-                    "comparison_end_date": comparison_end_date,
-                    "comparison_start_date": comparison_start_date,
-                    "date_interval": date_interval,
-                    "dimensions": dimensions,
-                    "exclude_topic_ids": exclude_topic_ids,
-                    "filters": filters,
-                    "include_asset": include_asset,
-                    "include_asset_only": include_asset_only,
-                    "include_assets_only": include_assets_only,
-                    "include_count": include_count,
-                    "include_no_tag": include_no_tag,
-                    "include_position_frequency": include_position_frequency,
-                    "metrics": metrics,
-                    "order_by": order_by,
-                    "owned_asset_names": owned_asset_names,
-                    "pagination": pagination,
-                    "rank_by": rank_by,
-                    "search_asset": search_asset,
-                    "tag_filter_type": tag_filter_type,
-                },
-                shopping_visibility_params.ShoppingVisibilityParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ShoppingVisibilityResponse,
-        )
-
 
 class ShoppingResourceWithRawResponse:
     def __init__(self, shopping: ShoppingResource) -> None:
         self._shopping = shopping
 
-        self.all_items_with_merchants = to_raw_response_wrapper(
-            shopping.all_items_with_merchants,
+        self.brands = to_raw_response_wrapper(
+            shopping.brands,
         )
-        self.executions = to_raw_response_wrapper(
-            shopping.executions,
+        self.merchants = to_raw_response_wrapper(
+            shopping.merchants,
         )
-        self.item_visibility = to_raw_response_wrapper(
-            shopping.item_visibility,
+        self.products = to_raw_response_wrapper(
+            shopping.products,
         )
-        self.merchant_by_items = to_raw_response_wrapper(
-            shopping.merchant_by_items,
+        self.stream_brands = to_raw_response_wrapper(
+            shopping.stream_brands,
         )
-        self.merchant_distribution = to_raw_response_wrapper(
-            shopping.merchant_distribution,
+        self.stream_merchants = to_raw_response_wrapper(
+            shopping.stream_merchants,
         )
-        self.merchant_share = to_raw_response_wrapper(
-            shopping.merchant_share,
+        self.stream_products = to_raw_response_wrapper(
+            shopping.stream_products,
         )
-        self.merchant_visibility_by_brand = to_raw_response_wrapper(
-            shopping.merchant_visibility_by_brand,
-        )
-        self.product_merchant_urls = to_raw_response_wrapper(
-            shopping.product_merchant_urls,
+        self.stream_trigger_rate = to_raw_response_wrapper(
+            shopping.stream_trigger_rate,
         )
         self.trigger_rate = to_raw_response_wrapper(
             shopping.trigger_rate,
-        )
-        self.visibility = to_raw_response_wrapper(
-            shopping.visibility,
         )
 
 
@@ -1826,35 +1417,29 @@ class AsyncShoppingResourceWithRawResponse:
     def __init__(self, shopping: AsyncShoppingResource) -> None:
         self._shopping = shopping
 
-        self.all_items_with_merchants = async_to_raw_response_wrapper(
-            shopping.all_items_with_merchants,
+        self.brands = async_to_raw_response_wrapper(
+            shopping.brands,
         )
-        self.executions = async_to_raw_response_wrapper(
-            shopping.executions,
+        self.merchants = async_to_raw_response_wrapper(
+            shopping.merchants,
         )
-        self.item_visibility = async_to_raw_response_wrapper(
-            shopping.item_visibility,
+        self.products = async_to_raw_response_wrapper(
+            shopping.products,
         )
-        self.merchant_by_items = async_to_raw_response_wrapper(
-            shopping.merchant_by_items,
+        self.stream_brands = async_to_raw_response_wrapper(
+            shopping.stream_brands,
         )
-        self.merchant_distribution = async_to_raw_response_wrapper(
-            shopping.merchant_distribution,
+        self.stream_merchants = async_to_raw_response_wrapper(
+            shopping.stream_merchants,
         )
-        self.merchant_share = async_to_raw_response_wrapper(
-            shopping.merchant_share,
+        self.stream_products = async_to_raw_response_wrapper(
+            shopping.stream_products,
         )
-        self.merchant_visibility_by_brand = async_to_raw_response_wrapper(
-            shopping.merchant_visibility_by_brand,
-        )
-        self.product_merchant_urls = async_to_raw_response_wrapper(
-            shopping.product_merchant_urls,
+        self.stream_trigger_rate = async_to_raw_response_wrapper(
+            shopping.stream_trigger_rate,
         )
         self.trigger_rate = async_to_raw_response_wrapper(
             shopping.trigger_rate,
-        )
-        self.visibility = async_to_raw_response_wrapper(
-            shopping.visibility,
         )
 
 
@@ -1862,35 +1447,29 @@ class ShoppingResourceWithStreamingResponse:
     def __init__(self, shopping: ShoppingResource) -> None:
         self._shopping = shopping
 
-        self.all_items_with_merchants = to_streamed_response_wrapper(
-            shopping.all_items_with_merchants,
+        self.brands = to_streamed_response_wrapper(
+            shopping.brands,
         )
-        self.executions = to_streamed_response_wrapper(
-            shopping.executions,
+        self.merchants = to_streamed_response_wrapper(
+            shopping.merchants,
         )
-        self.item_visibility = to_streamed_response_wrapper(
-            shopping.item_visibility,
+        self.products = to_streamed_response_wrapper(
+            shopping.products,
         )
-        self.merchant_by_items = to_streamed_response_wrapper(
-            shopping.merchant_by_items,
+        self.stream_brands = to_streamed_response_wrapper(
+            shopping.stream_brands,
         )
-        self.merchant_distribution = to_streamed_response_wrapper(
-            shopping.merchant_distribution,
+        self.stream_merchants = to_streamed_response_wrapper(
+            shopping.stream_merchants,
         )
-        self.merchant_share = to_streamed_response_wrapper(
-            shopping.merchant_share,
+        self.stream_products = to_streamed_response_wrapper(
+            shopping.stream_products,
         )
-        self.merchant_visibility_by_brand = to_streamed_response_wrapper(
-            shopping.merchant_visibility_by_brand,
-        )
-        self.product_merchant_urls = to_streamed_response_wrapper(
-            shopping.product_merchant_urls,
+        self.stream_trigger_rate = to_streamed_response_wrapper(
+            shopping.stream_trigger_rate,
         )
         self.trigger_rate = to_streamed_response_wrapper(
             shopping.trigger_rate,
-        )
-        self.visibility = to_streamed_response_wrapper(
-            shopping.visibility,
         )
 
 
@@ -1898,33 +1477,27 @@ class AsyncShoppingResourceWithStreamingResponse:
     def __init__(self, shopping: AsyncShoppingResource) -> None:
         self._shopping = shopping
 
-        self.all_items_with_merchants = async_to_streamed_response_wrapper(
-            shopping.all_items_with_merchants,
+        self.brands = async_to_streamed_response_wrapper(
+            shopping.brands,
         )
-        self.executions = async_to_streamed_response_wrapper(
-            shopping.executions,
+        self.merchants = async_to_streamed_response_wrapper(
+            shopping.merchants,
         )
-        self.item_visibility = async_to_streamed_response_wrapper(
-            shopping.item_visibility,
+        self.products = async_to_streamed_response_wrapper(
+            shopping.products,
         )
-        self.merchant_by_items = async_to_streamed_response_wrapper(
-            shopping.merchant_by_items,
+        self.stream_brands = async_to_streamed_response_wrapper(
+            shopping.stream_brands,
         )
-        self.merchant_distribution = async_to_streamed_response_wrapper(
-            shopping.merchant_distribution,
+        self.stream_merchants = async_to_streamed_response_wrapper(
+            shopping.stream_merchants,
         )
-        self.merchant_share = async_to_streamed_response_wrapper(
-            shopping.merchant_share,
+        self.stream_products = async_to_streamed_response_wrapper(
+            shopping.stream_products,
         )
-        self.merchant_visibility_by_brand = async_to_streamed_response_wrapper(
-            shopping.merchant_visibility_by_brand,
-        )
-        self.product_merchant_urls = async_to_streamed_response_wrapper(
-            shopping.product_merchant_urls,
+        self.stream_trigger_rate = async_to_streamed_response_wrapper(
+            shopping.stream_trigger_rate,
         )
         self.trigger_rate = async_to_streamed_response_wrapper(
             shopping.trigger_rate,
-        )
-        self.visibility = async_to_streamed_response_wrapper(
-            shopping.visibility,
         )

@@ -2,13 +2,15 @@
 
 from __future__ import annotations
 
-from typing import List, Iterable, Optional
+from typing import List, Union, Iterable, Optional
 from typing_extensions import Literal, Required, TypedDict
 
-__all__ = ["ShoppingTriggerRateParams", "Filter"]
+from ..._types import SequenceNotStr
+
+__all__ = ["ShoppingBrandsParams", "Filter"]
 
 
-class ShoppingTriggerRateParams(TypedDict, total=False):
+class ShoppingBrandsParams(TypedDict, total=False):
     category_id: Required[str]
 
     end_date: Required[str]
@@ -17,23 +19,27 @@ class ShoppingTriggerRateParams(TypedDict, total=False):
     start_date: Required[str]
     """YYYY-MM-DD, ET, inclusive"""
 
+    assets: Union[str, SequenceNotStr[str], None]
+    """Restrict to these asset names (a name or list). Overrides `scope`."""
+
     cursor: Optional[str]
 
     filter: Optional[Filter]
     """A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group."""
 
-    group_by: List[Literal["date", "topic", "region", "persona", "prompt"]]
-    """Group by `prompt`/`topic` for the per-prompt/-topic trigger rate."""
+    group_by: List[Literal["date", "topic", "region", "prompt"]]
 
     interval: Literal["day", "week", "month"]
 
     limit: Optional[int]
-    """Page size; default 10, max 50."""
+    """Page size for scope=all; default 10, max 50."""
 
     max_results: Optional[int]
-    """Stream endpoint only: cap streamed rows."""
+    """Stream endpoint only: cap the number of streamed rows (default: all)."""
 
-    metrics: Optional[List[Literal["total_runs", "shopping_triggered_runs", "trigger_rate_percentage"]]]
+    metrics: Optional[List[Literal["visibility_score", "average_position", "visibility_rank"]]]
+
+    scope: Literal["owned", "all"]
 
 
 _FilterReservedKeywords = TypedDict(
