@@ -6,63 +6,39 @@ from pydantic import Field as FieldInfo
 
 from ..._models import BaseModel
 
-__all__ = ["ShoppingTriggerRateResponse", "Data", "DataPersona", "DataPrompt", "DataRegion", "DataTopic", "Info"]
-
-
-class DataPersona(BaseModel):
-    """An ``{id, name}`` reference for a grouped dimension value."""
-
-    id: Optional[str] = None
-
-    name: Optional[str] = None
-
-
-class DataPrompt(BaseModel):
-    """An ``{id, name}`` reference for a grouped dimension value."""
-
-    id: Optional[str] = None
-
-    name: Optional[str] = None
-
-
-class DataRegion(BaseModel):
-    """An ``{id, name}`` reference for a grouped dimension value."""
-
-    id: Optional[str] = None
-
-    name: Optional[str] = None
-
-
-class DataTopic(BaseModel):
-    """An ``{id, name}`` reference for a grouped dimension value."""
-
-    id: Optional[str] = None
-
-    name: Optional[str] = None
+__all__ = ["ShoppingMerchantsResponse", "Data", "Info"]
 
 
 class Data(BaseModel):
-    """One trigger-rate row. Group dims present depend on `group_by`."""
+    """One merchant row.
+
+    `brand_name`/`brand_share` appear in the brand-share view; `product`/product
+    metrics in the top-products view; metrics vary by view.
+    """
+
+    brand_name: Optional[str] = None
+
+    brand_share: Optional[float] = None
 
     date: Optional[str] = None
 
-    persona: Optional[DataPersona] = None
-    """An `{id, name}` reference for a grouped dimension value."""
+    merchant_name: Optional[str] = None
 
-    prompt: Optional[DataPrompt] = None
-    """An `{id, name}` reference for a grouped dimension value."""
+    merchant_share: Optional[float] = None
 
-    region: Optional[DataRegion] = None
-    """An `{id, name}` reference for a grouped dimension value."""
+    merchant_share_rank: Optional[int] = None
 
-    shopping_triggered_runs: Optional[int] = None
+    merchant_visibility: Optional[float] = None
 
-    topic: Optional[DataTopic] = None
-    """An `{id, name}` reference for a grouped dimension value."""
+    merchant_visibility_rank: Optional[int] = None
 
-    total_runs: Optional[int] = None
+    product: Optional[Dict[str, object]] = None
 
-    trigger_rate_percentage: Optional[float] = None
+    product_rank: Optional[int] = None
+
+    product_visibility: Optional[float] = None
+
+    visibility_rank: Optional[int] = None
 
     if TYPE_CHECKING:
         # Some versions of Pydantic <2.8.0 have a bug and don’t allow assigning a
@@ -93,6 +69,9 @@ class Info(BaseModel):
     start_date: str
     """Echoed request start date (YYYY-MM-DD, ET)."""
 
+    view: str
+    """`distribution`, `brand_share`, or `top_products`."""
+
     filter: Optional[Dict[str, object]] = None
     """Echoed normalized filter tree, or null when no filter was sent."""
 
@@ -115,7 +94,7 @@ class Info(BaseModel):
         __pydantic_extra__: Dict[str, object]
 
 
-class ShoppingTriggerRateResponse(BaseModel):
+class ShoppingMerchantsResponse(BaseModel):
     data: List[Data]
 
     info: Info

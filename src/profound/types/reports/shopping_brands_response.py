@@ -1,20 +1,12 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import TYPE_CHECKING, Dict, List, Optional
+from typing import TYPE_CHECKING, Dict, List, Union, Optional
 
 from pydantic import Field as FieldInfo
 
 from ..._models import BaseModel
 
-__all__ = ["ShoppingTriggerRateResponse", "Data", "DataPersona", "DataPrompt", "DataRegion", "DataTopic", "Info"]
-
-
-class DataPersona(BaseModel):
-    """An ``{id, name}`` reference for a grouped dimension value."""
-
-    id: Optional[str] = None
-
-    name: Optional[str] = None
+__all__ = ["ShoppingBrandsResponse", "Data", "DataPrompt", "DataRegion", "DataTopic", "Info"]
 
 
 class DataPrompt(BaseModel):
@@ -42,27 +34,33 @@ class DataTopic(BaseModel):
 
 
 class Data(BaseModel):
-    """One trigger-rate row. Group dims present depend on `group_by`."""
+    """One (asset x group) row.
+
+    Group dims/metrics present depend on `group_by`/`metrics`.
+    """
+
+    asset: Optional[Dict[str, object]] = None
+
+    average_position: Optional[float] = None
 
     date: Optional[str] = None
-
-    persona: Optional[DataPersona] = None
-    """An `{id, name}` reference for a grouped dimension value."""
 
     prompt: Optional[DataPrompt] = None
     """An `{id, name}` reference for a grouped dimension value."""
 
+    rank: Optional[int] = None
+    """Asset visibility rank as a top-level field (ungrouped only)."""
+
     region: Optional[DataRegion] = None
     """An `{id, name}` reference for a grouped dimension value."""
-
-    shopping_triggered_runs: Optional[int] = None
 
     topic: Optional[DataTopic] = None
     """An `{id, name}` reference for a grouped dimension value."""
 
-    total_runs: Optional[int] = None
+    visibility_rank: Optional[int] = None
+    """Asset visibility rank (present on grouped rows)."""
 
-    trigger_rate_percentage: Optional[float] = None
+    visibility_score: Optional[float] = None
 
     if TYPE_CHECKING:
         # Some versions of Pydantic <2.8.0 have a bug and don’t allow assigning a
@@ -79,7 +77,11 @@ class Data(BaseModel):
 
 class Info(BaseModel):
     count: int
-    """Number of rows returned in `data` for this page."""
+    """Number of assets on this page.
+
+    When grouped by `date`, `data` holds one row per asset x bucket, so `len(data)`
+    can exceed `count`.
+    """
 
     end_date: str
     """Echoed request end date (YYYY-MM-DD, ET)."""
@@ -90,8 +92,14 @@ class Info(BaseModel):
     models: List[str]
     """Display names of the models the report covers."""
 
+    scope: str
+    """Asset scope: `all`, `owned`, or `custom` when `assets` was given."""
+
     start_date: str
     """Echoed request start date (YYYY-MM-DD, ET)."""
+
+    assets: Union[str, List[str], None] = None
+    """Echoed `assets` selection; when set it overrides `scope`."""
 
     filter: Optional[Dict[str, object]] = None
     """Echoed normalized filter tree, or null when no filter was sent."""
@@ -100,7 +108,7 @@ class Info(BaseModel):
     """Opaque cursor for the next page; null on the last page."""
 
     total_results: Optional[int] = None
-    """Total rows matching the query before pagination (null when not computed)."""
+    """Total assets matching the query before pagination."""
 
     if TYPE_CHECKING:
         # Some versions of Pydantic <2.8.0 have a bug and don’t allow assigning a
@@ -115,7 +123,7 @@ class Info(BaseModel):
         __pydantic_extra__: Dict[str, object]
 
 
-class ShoppingTriggerRateResponse(BaseModel):
+class ShoppingBrandsResponse(BaseModel):
     data: List[Data]
 
     info: Info

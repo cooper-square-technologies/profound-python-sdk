@@ -64,6 +64,7 @@ from profound.types.organizations import (
     CategoryAssetsResponse,
     CategoryCreatePromptsResponse,
     CategoryGetCategoryPersonasResponse,
+    CategoryGetCitationCategoriesResponse,
     CategoryPromptsResponse,
     CategoryRetrieveRegionsResponse,
     CategoryTagsResponse,
@@ -79,6 +80,7 @@ Methods:
 - <code title="get /v1/org/categories/{category_id}/assets">client.organizations.categories.<a href="./src/profound/resources/organizations/categories.py">assets</a>(category_id) -> <a href="./src/profound/types/organizations/category_assets_response.py">CategoryAssetsResponse</a></code>
 - <code title="post /v1/org/categories/{category_id}/prompts">client.organizations.categories.<a href="./src/profound/resources/organizations/categories.py">create_prompts</a>(category_id, \*\*<a href="src/profound/types/organizations/category_create_prompts_params.py">params</a>) -> <a href="./src/profound/types/organizations/category_create_prompts_response.py">CategoryCreatePromptsResponse</a></code>
 - <code title="get /v1/org/categories/{category_id}/personas">client.organizations.categories.<a href="./src/profound/resources/organizations/categories.py">get_category_personas</a>(category_id) -> <a href="./src/profound/types/organizations/category_get_category_personas_response.py">CategoryGetCategoryPersonasResponse</a></code>
+- <code title="get /v1/org/categories/{category_id}/citation-categories">client.organizations.categories.<a href="./src/profound/resources/organizations/categories.py">get_citation_categories</a>(category_id) -> <a href="./src/profound/types/organizations/category_get_citation_categories_response.py">CategoryGetCitationCategoriesResponse</a></code>
 - <code title="get /v1/org/categories/{category_id}/prompts">client.organizations.categories.<a href="./src/profound/resources/organizations/categories.py">prompts</a>(category_id, \*\*<a href="src/profound/types/organizations/category_prompts_params.py">params</a>) -> <a href="./src/profound/types/organizations/category_prompts_response.py">CategoryPromptsResponse</a></code>
 - <code title="get /v1/org/categories/{category_id}/regions">client.organizations.categories.<a href="./src/profound/resources/organizations/categories.py">retrieve_regions</a>(category_id) -> <a href="./src/profound/types/organizations/category_retrieve_regions_response.py">CategoryRetrieveRegionsResponse</a></code>
 - <code title="get /v1/org/categories/{category_id}/tags">client.organizations.categories.<a href="./src/profound/resources/organizations/categories.py">tags</a>(category_id) -> <a href="./src/profound/types/organizations/category_tags_response.py">CategoryTagsResponse</a></code>
@@ -180,31 +182,27 @@ from profound.types.reports import (
     BrandNameFilter,
     MerchantNameFilter,
     ProductNameFilter,
-    ShoppingAllItemsWithMerchantsResponse,
-    ShoppingExecutionsResponse,
-    ShoppingItemVisibilityResponse,
-    ShoppingMerchantByItemsResponse,
-    ShoppingMerchantDistributionResponse,
-    ShoppingMerchantShareResponse,
-    ShoppingMerchantVisibilityByBrandResponse,
-    ShoppingProductMerchantURLsResponse,
+    ShoppingBrandsResponse,
+    ShoppingMerchantsResponse,
+    ShoppingProductsResponse,
+    ShoppingStreamBrandsResponse,
+    ShoppingStreamMerchantsResponse,
+    ShoppingStreamProductsResponse,
+    ShoppingStreamTriggerRateResponse,
     ShoppingTriggerRateResponse,
-    ShoppingVisibilityResponse,
 )
 ```
 
 Methods:
 
-- <code title="post /v1/reports/shopping/all-items-with-merchants">client.reports.shopping.<a href="./src/profound/resources/reports/shopping.py">all_items_with_merchants</a>(\*\*<a href="src/profound/types/reports/shopping_all_items_with_merchants_params.py">params</a>) -> <a href="./src/profound/types/reports/shopping_all_items_with_merchants_response.py">ShoppingAllItemsWithMerchantsResponse</a></code>
-- <code title="post /v1/reports/shopping/executions">client.reports.shopping.<a href="./src/profound/resources/reports/shopping.py">executions</a>(\*\*<a href="src/profound/types/reports/shopping_executions_params.py">params</a>) -> <a href="./src/profound/types/reports/shopping_executions_response.py">ShoppingExecutionsResponse</a></code>
-- <code title="post /v1/reports/shopping/item-visibility">client.reports.shopping.<a href="./src/profound/resources/reports/shopping.py">item_visibility</a>(\*\*<a href="src/profound/types/reports/shopping_item_visibility_params.py">params</a>) -> <a href="./src/profound/types/reports/shopping_item_visibility_response.py">ShoppingItemVisibilityResponse</a></code>
-- <code title="post /v1/reports/shopping/merchant-by-items">client.reports.shopping.<a href="./src/profound/resources/reports/shopping.py">merchant_by_items</a>(\*\*<a href="src/profound/types/reports/shopping_merchant_by_items_params.py">params</a>) -> <a href="./src/profound/types/reports/shopping_merchant_by_items_response.py">ShoppingMerchantByItemsResponse</a></code>
-- <code title="post /v1/reports/shopping/merchant-distribution">client.reports.shopping.<a href="./src/profound/resources/reports/shopping.py">merchant_distribution</a>(\*\*<a href="src/profound/types/reports/shopping_merchant_distribution_params.py">params</a>) -> <a href="./src/profound/types/reports/shopping_merchant_distribution_response.py">ShoppingMerchantDistributionResponse</a></code>
-- <code title="post /v1/reports/shopping/merchant-share">client.reports.shopping.<a href="./src/profound/resources/reports/shopping.py">merchant_share</a>(\*\*<a href="src/profound/types/reports/shopping_merchant_share_params.py">params</a>) -> <a href="./src/profound/types/reports/shopping_merchant_share_response.py">ShoppingMerchantShareResponse</a></code>
-- <code title="post /v1/reports/shopping/merchant-visibility-by-brand">client.reports.shopping.<a href="./src/profound/resources/reports/shopping.py">merchant_visibility_by_brand</a>(\*\*<a href="src/profound/types/reports/shopping_merchant_visibility_by_brand_params.py">params</a>) -> <a href="./src/profound/types/reports/shopping_merchant_visibility_by_brand_response.py">ShoppingMerchantVisibilityByBrandResponse</a></code>
-- <code title="post /v1/reports/shopping/product-merchant-urls">client.reports.shopping.<a href="./src/profound/resources/reports/shopping.py">product_merchant_urls</a>(\*\*<a href="src/profound/types/reports/shopping_product_merchant_urls_params.py">params</a>) -> <a href="./src/profound/types/reports/shopping_product_merchant_urls_response.py">ShoppingProductMerchantURLsResponse</a></code>
-- <code title="post /v1/reports/shopping/trigger-rate">client.reports.shopping.<a href="./src/profound/resources/reports/shopping.py">trigger_rate</a>(\*\*<a href="src/profound/types/reports/shopping_trigger_rate_params.py">params</a>) -> <a href="./src/profound/types/reports/shopping_trigger_rate_response.py">ShoppingTriggerRateResponse</a></code>
-- <code title="post /v1/reports/shopping/visibility">client.reports.shopping.<a href="./src/profound/resources/reports/shopping.py">visibility</a>(\*\*<a href="src/profound/types/reports/shopping_visibility_params.py">params</a>) -> <a href="./src/profound/types/reports/shopping_visibility_response.py">ShoppingVisibilityResponse</a></code>
+- <code title="post /v2/reports/shopping/brands">client.reports.shopping.<a href="./src/profound/resources/reports/shopping.py">brands</a>(\*\*<a href="src/profound/types/reports/shopping_brands_params.py">params</a>) -> <a href="./src/profound/types/reports/shopping_brands_response.py">ShoppingBrandsResponse</a></code>
+- <code title="post /v2/reports/shopping/merchants">client.reports.shopping.<a href="./src/profound/resources/reports/shopping.py">merchants</a>(\*\*<a href="src/profound/types/reports/shopping_merchants_params.py">params</a>) -> <a href="./src/profound/types/reports/shopping_merchants_response.py">ShoppingMerchantsResponse</a></code>
+- <code title="post /v2/reports/shopping/products">client.reports.shopping.<a href="./src/profound/resources/reports/shopping.py">products</a>(\*\*<a href="src/profound/types/reports/shopping_products_params.py">params</a>) -> <a href="./src/profound/types/reports/shopping_products_response.py">ShoppingProductsResponse</a></code>
+- <code title="post /v2/reports/shopping/brands/stream">client.reports.shopping.<a href="./src/profound/resources/reports/shopping.py">stream_brands</a>(\*\*<a href="src/profound/types/reports/shopping_stream_brands_params.py">params</a>) -> <a href="./src/profound/types/reports/shopping_stream_brands_response.py">ShoppingStreamBrandsResponse</a></code>
+- <code title="post /v2/reports/shopping/merchants/stream">client.reports.shopping.<a href="./src/profound/resources/reports/shopping.py">stream_merchants</a>(\*\*<a href="src/profound/types/reports/shopping_stream_merchants_params.py">params</a>) -> <a href="./src/profound/types/reports/shopping_stream_merchants_response.py">ShoppingStreamMerchantsResponse</a></code>
+- <code title="post /v2/reports/shopping/products/stream">client.reports.shopping.<a href="./src/profound/resources/reports/shopping.py">stream_products</a>(\*\*<a href="src/profound/types/reports/shopping_stream_products_params.py">params</a>) -> <a href="./src/profound/types/reports/shopping_stream_products_response.py">ShoppingStreamProductsResponse</a></code>
+- <code title="post /v2/reports/shopping/trigger-rate/stream">client.reports.shopping.<a href="./src/profound/resources/reports/shopping.py">stream_trigger_rate</a>(\*\*<a href="src/profound/types/reports/shopping_stream_trigger_rate_params.py">params</a>) -> <a href="./src/profound/types/reports/shopping_stream_trigger_rate_response.py">ShoppingStreamTriggerRateResponse</a></code>
+- <code title="post /v2/reports/shopping/trigger-rate">client.reports.shopping.<a href="./src/profound/resources/reports/shopping.py">trigger_rate</a>(\*\*<a href="src/profound/types/reports/shopping_trigger_rate_params.py">params</a>) -> <a href="./src/profound/types/reports/shopping_trigger_rate_response.py">ShoppingTriggerRateResponse</a></code>
 
 ## Accuracy
 

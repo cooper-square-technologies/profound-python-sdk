@@ -6,26 +6,10 @@ from pydantic import Field as FieldInfo
 
 from ..._models import BaseModel
 
-__all__ = ["ShoppingTriggerRateResponse", "Data", "DataPersona", "DataPrompt", "DataRegion", "DataTopic", "Info"]
-
-
-class DataPersona(BaseModel):
-    """An ``{id, name}`` reference for a grouped dimension value."""
-
-    id: Optional[str] = None
-
-    name: Optional[str] = None
+__all__ = ["ShoppingProductsResponse", "Data", "DataPrompt", "DataTopic", "Info"]
 
 
 class DataPrompt(BaseModel):
-    """An ``{id, name}`` reference for a grouped dimension value."""
-
-    id: Optional[str] = None
-
-    name: Optional[str] = None
-
-
-class DataRegion(BaseModel):
     """An ``{id, name}`` reference for a grouped dimension value."""
 
     id: Optional[str] = None
@@ -42,27 +26,42 @@ class DataTopic(BaseModel):
 
 
 class Data(BaseModel):
-    """One trigger-rate row. Group dims present depend on `group_by`."""
+    """One product row. Merchant fields present only when `include_merchants` is true."""
+
+    average_position: Optional[float] = None
 
     date: Optional[str] = None
 
-    persona: Optional[DataPersona] = None
-    """An `{id, name}` reference for a grouped dimension value."""
+    merchants: Optional[List[Dict[str, object]]] = None
+    """Per-product merchant offers `{name, price}` (only with `include_merchants`)."""
+
+    position_above3_percentage: Optional[float] = None
+
+    position1_percentage: Optional[float] = None
+
+    position2_percentage: Optional[float] = None
+
+    position3_percentage: Optional[float] = None
+
+    product: Optional[Dict[str, object]] = None
+
+    product_image_urls: Optional[List[str]] = None
+
+    product_num_reviews: Optional[int] = None
+
+    product_rating: Optional[float] = None
+
+    product_url: Optional[str] = None
 
     prompt: Optional[DataPrompt] = None
     """An `{id, name}` reference for a grouped dimension value."""
 
-    region: Optional[DataRegion] = None
-    """An `{id, name}` reference for a grouped dimension value."""
-
-    shopping_triggered_runs: Optional[int] = None
-
     topic: Optional[DataTopic] = None
     """An `{id, name}` reference for a grouped dimension value."""
 
-    total_runs: Optional[int] = None
+    visibility_rank: Optional[int] = None
 
-    trigger_rate_percentage: Optional[float] = None
+    visibility_score: Optional[float] = None
 
     if TYPE_CHECKING:
         # Some versions of Pydantic <2.8.0 have a bug and don’t allow assigning a
@@ -79,10 +78,17 @@ class Data(BaseModel):
 
 class Info(BaseModel):
     count: int
-    """Number of rows returned in `data` for this page."""
+    """Number of products on this page.
+
+    When grouped by `date`/`topic`/`prompt`, `data` holds one row per product x
+    bucket, so `len(data)` can exceed `count`.
+    """
 
     end_date: str
     """Echoed request end date (YYYY-MM-DD, ET)."""
+
+    include_merchants: bool
+    """Whether merchant offers are included in each row."""
 
     metrics: List[str]
     """Metrics returned per row."""
@@ -100,7 +106,7 @@ class Info(BaseModel):
     """Opaque cursor for the next page; null on the last page."""
 
     total_results: Optional[int] = None
-    """Total rows matching the query before pagination (null when not computed)."""
+    """Total products matching the query before pagination."""
 
     if TYPE_CHECKING:
         # Some versions of Pydantic <2.8.0 have a bug and don’t allow assigning a
@@ -115,7 +121,7 @@ class Info(BaseModel):
         __pydantic_extra__: Dict[str, object]
 
 
-class ShoppingTriggerRateResponse(BaseModel):
+class ShoppingProductsResponse(BaseModel):
     data: List[Data]
 
     info: Info

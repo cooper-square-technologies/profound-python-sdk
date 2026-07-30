@@ -5,10 +5,10 @@ from __future__ import annotations
 from typing import List, Iterable, Optional
 from typing_extensions import Literal, Required, TypedDict
 
-__all__ = ["ShoppingTriggerRateParams", "Filter"]
+__all__ = ["ShoppingProductsParams", "Filter"]
 
 
-class ShoppingTriggerRateParams(TypedDict, total=False):
+class ShoppingProductsParams(TypedDict, total=False):
     category_id: Required[str]
 
     end_date: Required[str]
@@ -17,13 +17,18 @@ class ShoppingTriggerRateParams(TypedDict, total=False):
     start_date: Required[str]
     """YYYY-MM-DD, ET, inclusive"""
 
+    competitor_limit: int
+    """Competitors returned when `target_product` is set."""
+
     cursor: Optional[str]
 
     filter: Optional[Filter]
     """A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group."""
 
-    group_by: List[Literal["date", "topic", "region", "persona", "prompt"]]
-    """Group by `prompt`/`topic` for the per-prompt/-topic trigger rate."""
+    group_by: List[Literal["date", "topic", "prompt"]]
+
+    include_merchants: bool
+    """Include per-product merchant offers (names, prices, urls, images)."""
 
     interval: Literal["day", "week", "month"]
 
@@ -33,7 +38,24 @@ class ShoppingTriggerRateParams(TypedDict, total=False):
     max_results: Optional[int]
     """Stream endpoint only: cap streamed rows."""
 
-    metrics: Optional[List[Literal["total_runs", "shopping_triggered_runs", "trigger_rate_percentage"]]]
+    metrics: Optional[
+        List[
+            Literal[
+                "visibility_score",
+                "average_position",
+                "visibility_rank",
+                "position1_percentage",
+                "position2_percentage",
+                "position3_percentage",
+                "position_above3_percentage",
+                "product_rating",
+                "product_num_reviews",
+            ]
+        ]
+    ]
+
+    target_product: Optional[str]
+    """Return this product plus its top competitors (item view only)."""
 
 
 _FilterReservedKeywords = TypedDict(
