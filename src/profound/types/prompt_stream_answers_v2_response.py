@@ -7,7 +7,14 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-__all__ = ["PromptStreamAnswersV2Response", "AnswersV2Info", "AnswerRow", "AnswerRowCitationDetail", "AnswerRowModel"]
+__all__ = [
+    "PromptStreamAnswersV2Response",
+    "AnswersV2Info",
+    "AnswerRow",
+    "AnswerRowCitationDetail",
+    "AnswerRowCitationDetailGroup",
+    "AnswerRowModel",
+]
 
 
 class AnswersV2Info(BaseModel):
@@ -50,6 +57,12 @@ class AnswersV2Info(BaseModel):
         __pydantic_extra__: Dict[str, object]
 
 
+class AnswerRowCitationDetailGroup(BaseModel):
+    group_id: int
+
+    group_position: int
+
+
 class AnswerRowCitationDetail(BaseModel):
     clean_url: str
 
@@ -64,6 +77,10 @@ class AnswerRowCitationDetail(BaseModel):
     citation_category: Optional[str] = None
 
     first_cited_at: Optional[str] = None
+
+    groups: Optional[List[AnswerRowCitationDetailGroup]] = None
+
+    positions: Optional[List[int]] = None
 
     text: Optional[str] = None
 
@@ -82,6 +99,12 @@ class AnswerRow(BaseModel):
     analysis_types: Optional[List[str]] = None
 
     citation_details: Optional[List[AnswerRowCitationDetail]] = None
+    """Citation metadata.
+
+    `positions` identify citation locations in the answer text. Each `groups` entry
+    represents a rendered citation pill; `group_position` is the source's position
+    within that pill.
+    """
 
     citations: Optional[List[str]] = None
 
