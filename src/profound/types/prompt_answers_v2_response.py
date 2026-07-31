@@ -6,7 +6,13 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-__all__ = ["PromptAnswersV2Response", "Data", "DataCitationDetail", "DataModel", "Info"]
+__all__ = ["PromptAnswersV2Response", "Data", "DataCitationDetail", "DataCitationDetailGroup", "DataModel", "Info"]
+
+
+class DataCitationDetailGroup(BaseModel):
+    group_id: int
+
+    group_position: int
 
 
 class DataCitationDetail(BaseModel):
@@ -23,6 +29,10 @@ class DataCitationDetail(BaseModel):
     citation_category: Optional[str] = None
 
     first_cited_at: Optional[str] = None
+
+    groups: Optional[List[DataCitationDetailGroup]] = None
+
+    positions: Optional[List[int]] = None
 
     text: Optional[str] = None
 
@@ -44,6 +54,12 @@ class Data(BaseModel):
     analysis_types: Optional[List[str]] = None
 
     citation_details: Optional[List[DataCitationDetail]] = None
+    """Citation metadata.
+
+    `positions` identify citation locations in the answer text. Each `groups` entry
+    represents a rendered citation pill; `group_position` is the source's position
+    within that pill.
+    """
 
     citations: Optional[List[str]] = None
 
