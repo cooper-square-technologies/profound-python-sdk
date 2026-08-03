@@ -1,5 +1,13 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from .ads import (
+    AdsResource,
+    AsyncAdsResource,
+    AdsResourceWithRawResponse,
+    AsyncAdsResourceWithRawResponse,
+    AdsResourceWithStreamingResponse,
+    AsyncAdsResourceWithStreamingResponse,
+)
 from .agents import (
     AgentsResource,
     AsyncAgentsResource,
@@ -39,6 +47,14 @@ from .projects import (
     AsyncProjectsResourceWithRawResponse,
     ProjectsResourceWithStreamingResponse,
     AsyncProjectsResourceWithStreamingResponse,
+)
+from .documents import (
+    DocumentsResource,
+    AsyncDocumentsResource,
+    DocumentsResourceWithRawResponse,
+    AsyncDocumentsResourceWithRawResponse,
+    DocumentsResourceWithStreamingResponse,
+    AsyncDocumentsResourceWithStreamingResponse,
 )
 from .integrations import (
     IntegrationsResource,
@@ -114,4 +130,16 @@ __all__ = [
     "AsyncIntegrationsResourceWithRawResponse",
     "IntegrationsResourceWithStreamingResponse",
     "AsyncIntegrationsResourceWithStreamingResponse",
+    "DocumentsResource",
+    "AsyncDocumentsResource",
+    "DocumentsResourceWithRawResponse",
+    "AsyncDocumentsResourceWithRawResponse",
+    "DocumentsResourceWithStreamingResponse",
+    "AsyncDocumentsResourceWithStreamingResponse",
+    "AdsResource",
+    "AsyncAdsResource",
+    "AdsResourceWithRawResponse",
+    "AsyncAdsResourceWithRawResponse",
+    "AdsResourceWithStreamingResponse",
+    "AsyncAdsResourceWithStreamingResponse",
 ]
