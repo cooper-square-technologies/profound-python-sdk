@@ -1,4 +1,4 @@
 configured_endpoints: 104
-openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/profound/profound-282fe163293645cf746f6dfb4a03a2daaf9fa72cb9f870f98eee1d35abec7205.yml
-openapi_spec_hash: c61a66daf313a6e674f3c723dc99c66b
+openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/profound/profound-9ca1ccdc4000f3a8f6f24c496aaf8c2bcf525495321560f3c3015d11767efb1d.yml
+openapi_spec_hash: c5b6a7ebb81747654c7a3746b14d73f4
 config_hash: 191a4ee80e1a76fd6ac596027c4ef244
