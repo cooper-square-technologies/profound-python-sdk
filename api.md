@@ -449,3 +449,31 @@ from profound.types import IntegrationListResponse
 Methods:
 
 - <code title="get /v1/integrations">client.integrations.<a href="./src/profound/resources/integrations.py">list</a>(\*\*<a href="src/profound/types/integration_list_params.py">params</a>) -> <a href="./src/profound/types/integration_list_response.py">IntegrationListResponse</a></code>
+
+# Documents
+
+Types:
+
+```python
+from profound.types import DocumentCreateResponse
+```
+
+Methods:
+
+- <code title="post /v1/documents">client.documents.<a href="./src/profound/resources/documents.py">create</a>(\*\*<a href="src/profound/types/document_create_params.py">params</a>) -> <a href="./src/profound/types/document_create_response.py">DocumentCreateResponse</a></code>
+
+# Ads
+
+## OpenAIAds
+
+### AdAccount
+
+Types:
+
+```python
+from profound.types.ads.openai_ads import AdAccountRetrieveInsightsResponse
+```
+
+Methods:
+
+- <code title="get /v1/ads/openai-ads/ad-account/insights">client.ads.openai_ads.ad_account.<a href="./src/profound/resources/ads/openai_ads/ad_account.py">retrieve_insights</a>(\*\*<a href="src/profound/types/ads/openai_ads/ad_account_retrieve_insights_params.py">params</a>) -> <a href="./src/profound/types/ads/openai_ads/ad_account_retrieve_insights_response.py">AdAccountRetrieveInsightsResponse</a></code>
