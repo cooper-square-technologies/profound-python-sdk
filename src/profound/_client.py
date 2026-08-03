@@ -36,8 +36,21 @@ from ._base_client import (
 )
 
 if TYPE_CHECKING:
-    from .resources import agents, content, prompts, reports, projects, integrations, organizations, knowledge_bases
+    from .resources import (
+        ads,
+        agents,
+        content,
+        prompts,
+        reports,
+        projects,
+        documents,
+        integrations,
+        organizations,
+        knowledge_bases,
+    )
+    from .resources.ads.ads import AdsResource, AsyncAdsResource
     from .resources.prompts import PromptsResource, AsyncPromptsResource
+    from .resources.documents import DocumentsResource, AsyncDocumentsResource
     from .resources.integrations import IntegrationsResource, AsyncIntegrationsResource
     from .resources.agents.agents import AgentsResource, AsyncAgentsResource
     from .resources.content.content import ContentResource, AsyncContentResource
@@ -203,6 +216,18 @@ class Profound(SyncAPIClient):
         from .resources.integrations import IntegrationsResource
 
         return IntegrationsResource(self)
+
+    @cached_property
+    def documents(self) -> DocumentsResource:
+        from .resources.documents import DocumentsResource
+
+        return DocumentsResource(self)
+
+    @cached_property
+    def ads(self) -> AdsResource:
+        from .resources.ads import AdsResource
+
+        return AdsResource(self)
 
     @cached_property
     def with_raw_response(self) -> ProfoundWithRawResponse:
@@ -487,6 +512,18 @@ class AsyncProfound(AsyncAPIClient):
         return AsyncIntegrationsResource(self)
 
     @cached_property
+    def documents(self) -> AsyncDocumentsResource:
+        from .resources.documents import AsyncDocumentsResource
+
+        return AsyncDocumentsResource(self)
+
+    @cached_property
+    def ads(self) -> AsyncAdsResource:
+        from .resources.ads import AsyncAdsResource
+
+        return AsyncAdsResource(self)
+
+    @cached_property
     def with_raw_response(self) -> AsyncProfoundWithRawResponse:
         return AsyncProfoundWithRawResponse(self)
 
@@ -682,6 +719,18 @@ class ProfoundWithRawResponse:
 
         return IntegrationsResourceWithRawResponse(self._client.integrations)
 
+    @cached_property
+    def documents(self) -> documents.DocumentsResourceWithRawResponse:
+        from .resources.documents import DocumentsResourceWithRawResponse
+
+        return DocumentsResourceWithRawResponse(self._client.documents)
+
+    @cached_property
+    def ads(self) -> ads.AdsResourceWithRawResponse:
+        from .resources.ads import AdsResourceWithRawResponse
+
+        return AdsResourceWithRawResponse(self._client.ads)
+
 
 class AsyncProfoundWithRawResponse:
     _client: AsyncProfound
@@ -736,6 +785,18 @@ class AsyncProfoundWithRawResponse:
         from .resources.integrations import AsyncIntegrationsResourceWithRawResponse
 
         return AsyncIntegrationsResourceWithRawResponse(self._client.integrations)
+
+    @cached_property
+    def documents(self) -> documents.AsyncDocumentsResourceWithRawResponse:
+        from .resources.documents import AsyncDocumentsResourceWithRawResponse
+
+        return AsyncDocumentsResourceWithRawResponse(self._client.documents)
+
+    @cached_property
+    def ads(self) -> ads.AsyncAdsResourceWithRawResponse:
+        from .resources.ads import AsyncAdsResourceWithRawResponse
+
+        return AsyncAdsResourceWithRawResponse(self._client.ads)
 
 
 class ProfoundWithStreamedResponse:
@@ -792,6 +853,18 @@ class ProfoundWithStreamedResponse:
 
         return IntegrationsResourceWithStreamingResponse(self._client.integrations)
 
+    @cached_property
+    def documents(self) -> documents.DocumentsResourceWithStreamingResponse:
+        from .resources.documents import DocumentsResourceWithStreamingResponse
+
+        return DocumentsResourceWithStreamingResponse(self._client.documents)
+
+    @cached_property
+    def ads(self) -> ads.AdsResourceWithStreamingResponse:
+        from .resources.ads import AdsResourceWithStreamingResponse
+
+        return AdsResourceWithStreamingResponse(self._client.ads)
+
 
 class AsyncProfoundWithStreamedResponse:
     _client: AsyncProfound
@@ -846,6 +919,18 @@ class AsyncProfoundWithStreamedResponse:
         from .resources.integrations import AsyncIntegrationsResourceWithStreamingResponse
 
         return AsyncIntegrationsResourceWithStreamingResponse(self._client.integrations)
+
+    @cached_property
+    def documents(self) -> documents.AsyncDocumentsResourceWithStreamingResponse:
+        from .resources.documents import AsyncDocumentsResourceWithStreamingResponse
+
+        return AsyncDocumentsResourceWithStreamingResponse(self._client.documents)
+
+    @cached_property
+    def ads(self) -> ads.AsyncAdsResourceWithStreamingResponse:
+        from .resources.ads import AsyncAdsResourceWithStreamingResponse
+
+        return AsyncAdsResourceWithStreamingResponse(self._client.ads)
 
 
 Client = Profound

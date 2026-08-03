@@ -42,6 +42,7 @@ from .project_list_response import ProjectListResponse as ProjectListResponse
 from .prompt_answers_params import PromptAnswersParams as PromptAnswersParams
 from .tag_name_filter_param import TagNameFilterParam as TagNameFilterParam
 from .agent_publish_response import AgentPublishResponse as AgentPublishResponse
+from .document_create_params import DocumentCreateParams as DocumentCreateParams
 from .project_archive_params import ProjectArchiveParams as ProjectArchiveParams
 from .prompt_id_filter_param import PromptIDFilterParam as PromptIDFilterParam
 from .agent_retrieve_response import AgentRetrieveResponse as AgentRetrieveResponse
@@ -52,6 +53,7 @@ from .prompt_answers_response import PromptAnswersResponse as PromptAnswersRespo
 from .report_citations_params import ReportCitationsParams as ReportCitationsParams
 from .report_sentiment_params import ReportSentimentParams as ReportSentimentParams
 from .topic_name_filter_param import TopicNameFilterParam as TopicNameFilterParam
+from .document_create_response import DocumentCreateResponse as DocumentCreateResponse
 from .persona_profile_behavior import PersonaProfileBehavior as PersonaProfileBehavior
 from .project_archive_response import ProjectArchiveResponse as ProjectArchiveResponse
 from .project_unarchive_params import ProjectUnarchiveParams as ProjectUnarchiveParams
