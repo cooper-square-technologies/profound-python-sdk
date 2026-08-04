@@ -31,8 +31,6 @@ class AccuracyCreateBreakdownParams(TypedDict, total=False):
 
     group_by: Optional[List[Literal["platform", "topic", "prompt", "tag", "region", "persona", "theme", "date"]]]
 
-    include_groups_without_scores: bool
-
     include_no_persona: bool
 
     include_no_tag: bool
