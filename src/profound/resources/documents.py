@@ -65,6 +65,11 @@ class DocumentsResource(SyncAPIResource):
         New documents are visible only to their creator; share them from the Profound
         app, or open one with the `url` in the response.
 
+        A `201` response does not confirm that a new document was created: it is also
+        returned when `id` already existed, in which case the existing document comes
+        back unchanged. Upstream gives no signal to tell the two apart, so this endpoint
+        does not claim to either — it is safe to retry with the same `id` either way.
+
         Args:
           id:
               ID for the new document, chosen by you. Creation is idempotent on this ID:
@@ -149,6 +154,11 @@ class AsyncDocumentsResource(AsyncAPIResource):
 
         New documents are visible only to their creator; share them from the Profound
         app, or open one with the `url` in the response.
+
+        A `201` response does not confirm that a new document was created: it is also
+        returned when `id` already existed, in which case the existing document comes
+        back unchanged. Upstream gives no signal to tell the two apart, so this endpoint
+        does not claim to either — it is safe to retry with the same `id` either way.
 
         Args:
           id:
