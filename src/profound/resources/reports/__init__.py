@@ -1,5 +1,13 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from .social import (
+    SocialResource,
+    AsyncSocialResource,
+    SocialResourceWithRawResponse,
+    AsyncSocialResourceWithRawResponse,
+    SocialResourceWithStreamingResponse,
+    AsyncSocialResourceWithStreamingResponse,
+)
 from .reports import (
     ReportsResource,
     AsyncReportsResource,
@@ -66,6 +74,12 @@ __all__ = [
     "AsyncFactcheckResourceWithRawResponse",
     "FactcheckResourceWithStreamingResponse",
     "AsyncFactcheckResourceWithStreamingResponse",
+    "SocialResource",
+    "AsyncSocialResource",
+    "SocialResourceWithRawResponse",
+    "AsyncSocialResourceWithRawResponse",
+    "SocialResourceWithStreamingResponse",
+    "AsyncSocialResourceWithStreamingResponse",
     "ReportsResource",
     "AsyncReportsResource",
     "ReportsResourceWithRawResponse",

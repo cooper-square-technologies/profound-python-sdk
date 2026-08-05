@@ -32,6 +32,7 @@ from .agent_create_params import AgentCreateParams as AgentCreateParams
 from .agent_list_response import AgentListResponse as AgentListResponse
 from .agent_update_params import AgentUpdateParams as AgentUpdateParams
 from .project_list_params import ProjectListParams as ProjectListParams
+from .document_list_params import DocumentListParams as DocumentListParams
 from .agent_create_response import AgentCreateResponse as AgentCreateResponse
 from .agent_retrieve_params import AgentRetrieveParams as AgentRetrieveParams
 from .agent_update_response import AgentUpdateResponse as AgentUpdateResponse
@@ -43,6 +44,9 @@ from .prompt_answers_params import PromptAnswersParams as PromptAnswersParams
 from .tag_name_filter_param import TagNameFilterParam as TagNameFilterParam
 from .agent_publish_response import AgentPublishResponse as AgentPublishResponse
 from .document_create_params import DocumentCreateParams as DocumentCreateParams
+from .document_delete_params import DocumentDeleteParams as DocumentDeleteParams
+from .document_list_response import DocumentListResponse as DocumentListResponse
+from .document_update_params import DocumentUpdateParams as DocumentUpdateParams
 from .project_archive_params import ProjectArchiveParams as ProjectArchiveParams
 from .prompt_id_filter_param import PromptIDFilterParam as PromptIDFilterParam
 from .agent_retrieve_response import AgentRetrieveResponse as AgentRetrieveResponse
@@ -54,6 +58,8 @@ from .report_citations_params import ReportCitationsParams as ReportCitationsPar
 from .report_sentiment_params import ReportSentimentParams as ReportSentimentParams
 from .topic_name_filter_param import TopicNameFilterParam as TopicNameFilterParam
 from .document_create_response import DocumentCreateResponse as DocumentCreateResponse
+from .document_retrieve_params import DocumentRetrieveParams as DocumentRetrieveParams
+from .document_update_response import DocumentUpdateResponse as DocumentUpdateResponse
 from .persona_profile_behavior import PersonaProfileBehavior as PersonaProfileBehavior
 from .project_archive_response import ProjectArchiveResponse as ProjectArchiveResponse
 from .project_unarchive_params import ProjectUnarchiveParams as ProjectUnarchiveParams
@@ -64,6 +70,7 @@ from .integration_list_response import IntegrationListResponse as IntegrationLis
 from .project_get_status_params import ProjectGetStatusParams as ProjectGetStatusParams
 from .project_retrieve_response import ProjectRetrieveResponse as ProjectRetrieveResponse
 from .report_citations_response import ReportCitationsResponse as ReportCitationsResponse
+from .document_retrieve_response import DocumentRetrieveResponse as DocumentRetrieveResponse
 from .knowledge_base_list_params import KnowledgeBaseListParams as KnowledgeBaseListParams
 from .organization_list_response import OrganizationListResponse as OrganizationListResponse
 from .persona_profile_employment import PersonaProfileEmployment as PersonaProfileEmployment
@@ -90,6 +97,7 @@ from .knowledge_base_search_response import KnowledgeBaseSearchResponse as Knowl
 from .report_query_visibility_params import ReportQueryVisibilityParams as ReportQueryVisibilityParams
 from .report_stream_citations_params import ReportStreamCitationsParams as ReportStreamCitationsParams
 from .report_stream_sentiment_params import ReportStreamSentimentParams as ReportStreamSentimentParams
+from .document_replace_content_params import DocumentReplaceContentParams as DocumentReplaceContentParams
 from .organization_list_assets_params import OrganizationListAssetsParams as OrganizationListAssetsParams
 from .prompt_stream_answers_v2_params import PromptStreamAnswersV2Params as PromptStreamAnswersV2Params
 from .report_query_citations_response import ReportQueryCitationsResponse as ReportQueryCitationsResponse
@@ -100,6 +108,7 @@ from .report_get_bots_report_v2_params import ReportGetBotsReportV2Params as Rep
 from .report_query_visibility_response import ReportQueryVisibilityResponse as ReportQueryVisibilityResponse
 from .report_stream_citations_response import ReportStreamCitationsResponse as ReportStreamCitationsResponse
 from .report_stream_sentiment_response import ReportStreamSentimentResponse as ReportStreamSentimentResponse
+from .document_replace_content_response import DocumentReplaceContentResponse as DocumentReplaceContentResponse
 from .organization_list_assets_response import OrganizationListAssetsResponse as OrganizationListAssetsResponse
 from .prompt_stream_answers_v2_response import PromptStreamAnswersV2Response as PromptStreamAnswersV2Response
 from .report_query_query_fanouts_params import ReportQueryQueryFanoutsParams as ReportQueryQueryFanoutsParams

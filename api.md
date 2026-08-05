@@ -268,6 +268,26 @@ Methods:
 - <code title="post /v2/reports/factcheck/claims">client.reports.factcheck.claims.<a href="./src/profound/resources/reports/factcheck/claims.py">query_claims</a>(\*\*<a href="src/profound/types/reports/factcheck/claim_query_claims_params.py">params</a>) -> <a href="./src/profound/types/reports/factcheck/claim_query_claims_response.py">ClaimQueryClaimsResponse</a></code>
 - <code title="post /v2/reports/factcheck/claims/stream">client.reports.factcheck.claims.<a href="./src/profound/resources/reports/factcheck/claims.py">stream_claims</a>(\*\*<a href="src/profound/types/reports/factcheck/claim_stream_claims_params.py">params</a>) -> <a href="./src/profound/types/reports/factcheck/claim_stream_claims_response.py">ClaimStreamClaimsResponse</a></code>
 
+## Social
+
+### Youtube
+
+Types:
+
+```python
+from profound.types.reports.social import (
+    YoutubeGetChannelsResponse,
+    YoutubeGetSummaryResponse,
+    YoutubeGetVideosResponse,
+)
+```
+
+Methods:
+
+- <code title="post /v2/reports/social/youtube/channels">client.reports.social.youtube.<a href="./src/profound/resources/reports/social/youtube.py">get_channels</a>(\*\*<a href="src/profound/types/reports/social/youtube_get_channels_params.py">params</a>) -> <a href="./src/profound/types/reports/social/youtube_get_channels_response.py">YoutubeGetChannelsResponse</a></code>
+- <code title="post /v2/reports/social/youtube/summary">client.reports.social.youtube.<a href="./src/profound/resources/reports/social/youtube.py">get_summary</a>(\*\*<a href="src/profound/types/reports/social/youtube_get_summary_params.py">params</a>) -> <a href="./src/profound/types/reports/social/youtube_get_summary_response.py">YoutubeGetSummaryResponse</a></code>
+- <code title="post /v2/reports/social/youtube/videos">client.reports.social.youtube.<a href="./src/profound/resources/reports/social/youtube.py">get_videos</a>(\*\*<a href="src/profound/types/reports/social/youtube_get_videos_params.py">params</a>) -> <a href="./src/profound/types/reports/social/youtube_get_videos_response.py">YoutubeGetVideosResponse</a></code>
+
 # Content
 
 ## Optimization
@@ -455,12 +475,23 @@ Methods:
 Types:
 
 ```python
-from profound.types import DocumentCreateResponse
+from profound.types import (
+    DocumentCreateResponse,
+    DocumentRetrieveResponse,
+    DocumentUpdateResponse,
+    DocumentListResponse,
+    DocumentReplaceContentResponse,
+)
 ```
 
 Methods:
 
 - <code title="post /v1/documents">client.documents.<a href="./src/profound/resources/documents.py">create</a>(\*\*<a href="src/profound/types/document_create_params.py">params</a>) -> <a href="./src/profound/types/document_create_response.py">DocumentCreateResponse</a></code>
+- <code title="get /v1/documents/{document_id}">client.documents.<a href="./src/profound/resources/documents.py">retrieve</a>(document_id, \*\*<a href="src/profound/types/document_retrieve_params.py">params</a>) -> <a href="./src/profound/types/document_retrieve_response.py">DocumentRetrieveResponse</a></code>
+- <code title="patch /v1/documents/{document_id}">client.documents.<a href="./src/profound/resources/documents.py">update</a>(document_id, \*\*<a href="src/profound/types/document_update_params.py">params</a>) -> <a href="./src/profound/types/document_update_response.py">DocumentUpdateResponse</a></code>
+- <code title="get /v1/documents">client.documents.<a href="./src/profound/resources/documents.py">list</a>(\*\*<a href="src/profound/types/document_list_params.py">params</a>) -> <a href="./src/profound/types/document_list_response.py">DocumentListResponse</a></code>
+- <code title="delete /v1/documents/{document_id}">client.documents.<a href="./src/profound/resources/documents.py">delete</a>(document_id, \*\*<a href="src/profound/types/document_delete_params.py">params</a>) -> None</code>
+- <code title="post /v1/documents/{document_id}/content">client.documents.<a href="./src/profound/resources/documents.py">replace_content</a>(document_id, \*\*<a href="src/profound/types/document_replace_content_params.py">params</a>) -> <a href="./src/profound/types/document_replace_content_response.py">DocumentReplaceContentResponse</a></code>
 
 # Ads
 
