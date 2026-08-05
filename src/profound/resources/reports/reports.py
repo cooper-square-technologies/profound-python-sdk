@@ -57,6 +57,14 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._streaming import Stream, AsyncStream
+from .social.social import (
+    SocialResource,
+    AsyncSocialResource,
+    SocialResourceWithRawResponse,
+    AsyncSocialResourceWithRawResponse,
+    SocialResourceWithStreamingResponse,
+    AsyncSocialResourceWithStreamingResponse,
+)
 from ..._base_client import make_request_options
 from .web_search_results import (
     WebSearchResultsResource,
@@ -109,6 +117,10 @@ class ReportsResource(SyncAPIResource):
     @cached_property
     def factcheck(self) -> FactcheckResource:
         return FactcheckResource(self._client)
+
+    @cached_property
+    def social(self) -> SocialResource:
+        return SocialResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> ReportsResourceWithRawResponse:
@@ -1924,6 +1936,10 @@ class AsyncReportsResource(AsyncAPIResource):
     @cached_property
     def factcheck(self) -> AsyncFactcheckResource:
         return AsyncFactcheckResource(self._client)
+
+    @cached_property
+    def social(self) -> AsyncSocialResource:
+        return AsyncSocialResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncReportsResourceWithRawResponse:
@@ -3804,6 +3820,10 @@ class ReportsResourceWithRawResponse:
     def factcheck(self) -> FactcheckResourceWithRawResponse:
         return FactcheckResourceWithRawResponse(self._reports.factcheck)
 
+    @cached_property
+    def social(self) -> SocialResourceWithRawResponse:
+        return SocialResourceWithRawResponse(self._reports.social)
+
 
 class AsyncReportsResourceWithRawResponse:
     def __init__(self, reports: AsyncReportsResource) -> None:
@@ -3885,6 +3905,10 @@ class AsyncReportsResourceWithRawResponse:
     @cached_property
     def factcheck(self) -> AsyncFactcheckResourceWithRawResponse:
         return AsyncFactcheckResourceWithRawResponse(self._reports.factcheck)
+
+    @cached_property
+    def social(self) -> AsyncSocialResourceWithRawResponse:
+        return AsyncSocialResourceWithRawResponse(self._reports.social)
 
 
 class ReportsResourceWithStreamingResponse:
@@ -3968,6 +3992,10 @@ class ReportsResourceWithStreamingResponse:
     def factcheck(self) -> FactcheckResourceWithStreamingResponse:
         return FactcheckResourceWithStreamingResponse(self._reports.factcheck)
 
+    @cached_property
+    def social(self) -> SocialResourceWithStreamingResponse:
+        return SocialResourceWithStreamingResponse(self._reports.social)
+
 
 class AsyncReportsResourceWithStreamingResponse:
     def __init__(self, reports: AsyncReportsResource) -> None:
@@ -4049,3 +4077,7 @@ class AsyncReportsResourceWithStreamingResponse:
     @cached_property
     def factcheck(self) -> AsyncFactcheckResourceWithStreamingResponse:
         return AsyncFactcheckResourceWithStreamingResponse(self._reports.factcheck)
+
+    @cached_property
+    def social(self) -> AsyncSocialResourceWithStreamingResponse:
+        return AsyncSocialResourceWithStreamingResponse(self._reports.social)
