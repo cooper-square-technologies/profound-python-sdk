@@ -36,7 +36,10 @@ class YoutubeGetVideosParams(TypedDict, total=False):
     source_types: Optional[List[Literal["video", "short", "channel", "playlist", "other"]]]
     """
     Limit results to YouTube source types: `video`, `short`, `channel`, `playlist`,
-    or `other`. Omit to include every source type.
+    or `other`. Omit to include `video` and `short` with the default
+    `attribution='attributed'`; `unattributed` and `all` widen the default to all
+    five source types. Requests containing `other` with `attribution='attributed'`
+    are rejected.
     """
 
 

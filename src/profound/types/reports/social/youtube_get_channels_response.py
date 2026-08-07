@@ -41,7 +41,10 @@ class Data(BaseModel):
     """
 
     rank: int
-    """1-based position in the full ranked set, continuing across pages."""
+    """
+    Leading channel's 1-based position in the full ranked set, continuing across
+    pages; repeated across that channel's cross-tab rows rather than numbering rows.
+    """
 
     videos: int
     """Distinct videos of this channel that were cited."""
@@ -70,8 +73,9 @@ class Data(BaseModel):
 
     video_category: Optional[str] = None
     """
-    Present when grouped by video category, including as the second dimension of a
-    cross-tab.
+    Populated for a secondary video-category slice; with group_by
+    `["video_category"]`, the category is returned in `name` instead. An unresolved
+    category is returned as an empty string.
     """
 
     if TYPE_CHECKING:
@@ -88,7 +92,7 @@ class Data(BaseModel):
 
 
 class Info(BaseModel):
-    """YouTube report metadata, including the effective request settings."""
+    """Channel report metadata, including effective paging and grouping settings."""
 
     category_id: str
     """Echoed category id this report covers."""
@@ -99,50 +103,47 @@ class Info(BaseModel):
     end_date: str
     """Echoed request end date (YYYY-MM-DD, ET)."""
 
+    group_by: List[str]
+    """Echoed dimensions that define a row.
+
+    Channel reports echo `["channel"]` when group_by is omitted.
+    """
+
+    limit: int
+    """Effective page size in leading channels, not returned rows."""
+
     models: List[str]
     """Display names of the models the report covers."""
+
+    source_types: List[Literal["video", "short", "channel", "playlist", "other"]]
+    """Source types this report covers.
+
+    Derived from the request, not returned rows, so a listed type may have no rows.
+    """
 
     start_date: str
     """Echoed request start date (YYYY-MM-DD, ET)."""
 
-    attribution: Optional[Literal["attributed", "unattributed", "all"]] = None
-    """Effective video attribution mode; absent on channels and the summary report."""
+    total_results: int
+    """
+    Distinct leading channels matching the window; this can differ from the number
+    of rows returned.
+    """
 
     cursor: Optional[str] = None
-    """Echoed request cursor; omitted on the first page and on the summary report."""
+    """Echoed request cursor; omitted on the first page."""
 
     filter: Optional[Dict[str, object]] = None
     """Echoed normalized filter tree, or null when no filter was sent."""
 
-    group_by: Optional[List[str]] = None
-    """Echoed dimensions that define a row.
-
-    Channel reports echo `["channel"]` when group_by is omitted; absent on reports
-    that do not group.
-    """
-
     interval: Optional[Literal["day", "week", "month"]] = None
     """
     Effective channel time-series interval, or null when the channel report covers
-    the full window; absent on other reports.
+    the full window.
     """
-
-    limit: Optional[int] = None
-    """Effective page size applied to a paged report; omitted on the summary report."""
 
     next_cursor: Optional[str] = None
     """Opaque cursor for the next page; null on the last page."""
-
-    source_types: Optional[List[Literal["video", "short", "channel", "playlist", "other"]]] = None
-    """
-    Source types this report covers: the requested set, or the report default when
-    omitted (`video` and `short` for attributed `/videos`; all types except `other`
-    for `/channels`). Derived from the request, not returned rows, so a listed type
-    may have no rows.
-    """
-
-    total_results: Optional[int] = None
-    """Total rows matching the query before pagination (null when not computed)."""
 
     if TYPE_CHECKING:
         # Some versions of Pydantic <2.8.0 have a bug and don’t allow assigning a
@@ -161,4 +162,4 @@ class YoutubeGetChannelsResponse(BaseModel):
     data: List[Data]
 
     info: Info
-    """YouTube report metadata, including the effective request settings."""
+    """Channel report metadata, including effective paging and grouping settings."""

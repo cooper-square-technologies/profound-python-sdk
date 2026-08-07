@@ -29,8 +29,8 @@ class YoutubeGetChannelsParams(TypedDict, total=False):
     categories; `["source_type"]` ranks source types;
     `["channel", "video_category"]`, `["channel", "source_type"]` and
     `["channel", "model"]` return cross-tabs — a row per channel per category, or
-    per answer engine. `limit` counts channels in every case, so ten channels across
-    nine engines is ten channels and ninety rows.
+    per answer engine. `limit` counts leading channels in every case, so ten
+    channels across nine engines is ten channels and ninety rows.
     """
 
     interval: Optional[Literal["day", "week", "month"]]
@@ -46,7 +46,9 @@ class YoutubeGetChannelsParams(TypedDict, total=False):
     source_types: Optional[List[Literal["video", "short", "channel", "playlist", "other"]]]
     """
     Limit results to YouTube source types: `video`, `short`, `channel`, `playlist`,
-    or `other`. Omit to include every source type.
+    or `other`. Omit to include `video`, `short`, `channel`, and `playlist`; `other`
+    is excluded because those citations have no channel. Requests containing `other`
+    are rejected.
     """
 
 
