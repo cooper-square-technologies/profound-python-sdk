@@ -55,7 +55,7 @@ class Data(BaseModel):
 
 
 class Info(BaseModel):
-    """YouTube report metadata, including the effective request settings."""
+    """Summary report metadata."""
 
     category_id: str
     """Echoed category id this report covers."""
@@ -69,44 +69,20 @@ class Info(BaseModel):
     models: List[str]
     """Display names of the models the report covers."""
 
+    source_types: List[Literal["video", "short", "channel", "playlist", "other"]]
+    """
+    All five YouTube source types; this endpoint has no source_types request field
+    and cannot be narrowed.
+    """
+
     start_date: str
     """Echoed request start date (YYYY-MM-DD, ET)."""
-
-    attribution: Optional[Literal["attributed", "unattributed", "all"]] = None
-    """Effective video attribution mode; absent on channels and the summary report."""
-
-    cursor: Optional[str] = None
-    """Echoed request cursor; omitted on the first page and on the summary report."""
 
     filter: Optional[Dict[str, object]] = None
     """Echoed normalized filter tree, or null when no filter was sent."""
 
-    group_by: Optional[List[str]] = None
-    """Echoed dimensions that define a row.
-
-    Channel reports echo `["channel"]` when group_by is omitted; absent on reports
-    that do not group.
-    """
-
-    interval: Optional[Literal["day", "week", "month"]] = None
-    """
-    Effective channel time-series interval, or null when the channel report covers
-    the full window; absent on other reports.
-    """
-
-    limit: Optional[int] = None
-    """Effective page size applied to a paged report; omitted on the summary report."""
-
     next_cursor: Optional[str] = None
     """Opaque cursor for the next page; null on the last page."""
-
-    source_types: Optional[List[Literal["video", "short", "channel", "playlist", "other"]]] = None
-    """
-    Source types this report covers: the requested set, or the report default when
-    omitted (`video` and `short` for attributed `/videos`; all types except `other`
-    for `/channels`). Derived from the request, not returned rows, so a listed type
-    may have no rows.
-    """
 
     total_results: Optional[int] = None
     """Total rows matching the query before pagination (null when not computed)."""
@@ -129,4 +105,4 @@ class YoutubeGetSummaryResponse(BaseModel):
     """How much of youtube.com the rollups can speak for."""
 
     info: Info
-    """YouTube report metadata, including the effective request settings."""
+    """Summary report metadata."""

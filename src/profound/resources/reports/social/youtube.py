@@ -80,8 +80,8 @@ class YoutubeResource(SyncAPIResource):
               `["video_category"]` ranks content categories; `["source_type"]` ranks source
               types; `["channel", "video_category"]`, `["channel", "source_type"]` and
               `["channel", "model"]` return cross-tabs — a row per channel per category, or
-              per answer engine. `limit` counts channels in every case, so ten channels across
-              nine engines is ten channels and ninety rows.
+              per answer engine. `limit` counts leading channels in every case, so ten
+              channels across nine engines is ten channels and ninety rows.
 
           interval: Return a time series instead of window totals: one row per entity per period,
               each carrying `date`. `citation_share` is then relative to that period, so the
@@ -90,7 +90,9 @@ class YoutubeResource(SyncAPIResource):
           limit: Page size; default 10, max 50.
 
           source_types: Limit results to YouTube source types: `video`, `short`, `channel`, `playlist`,
-              or `other`. Omit to include every source type.
+              or `other`. Omit to include `video`, `short`, `channel`, and `playlist`; `other`
+              is excluded because those citations have no channel. Requests containing `other`
+              are rejected.
 
           extra_headers: Send extra headers
 
@@ -206,7 +208,10 @@ class YoutubeResource(SyncAPIResource):
           limit: Page size; default 10, max 50.
 
           source_types: Limit results to YouTube source types: `video`, `short`, `channel`, `playlist`,
-              or `other`. Omit to include every source type.
+              or `other`. Omit to include `video` and `short` with the default
+              `attribution='attributed'`; `unattributed` and `all` widen the default to all
+              five source types. Requests containing `other` with `attribution='attributed'`
+              are rejected.
 
           extra_headers: Send extra headers
 
@@ -292,8 +297,8 @@ class AsyncYoutubeResource(AsyncAPIResource):
               `["video_category"]` ranks content categories; `["source_type"]` ranks source
               types; `["channel", "video_category"]`, `["channel", "source_type"]` and
               `["channel", "model"]` return cross-tabs — a row per channel per category, or
-              per answer engine. `limit` counts channels in every case, so ten channels across
-              nine engines is ten channels and ninety rows.
+              per answer engine. `limit` counts leading channels in every case, so ten
+              channels across nine engines is ten channels and ninety rows.
 
           interval: Return a time series instead of window totals: one row per entity per period,
               each carrying `date`. `citation_share` is then relative to that period, so the
@@ -302,7 +307,9 @@ class AsyncYoutubeResource(AsyncAPIResource):
           limit: Page size; default 10, max 50.
 
           source_types: Limit results to YouTube source types: `video`, `short`, `channel`, `playlist`,
-              or `other`. Omit to include every source type.
+              or `other`. Omit to include `video`, `short`, `channel`, and `playlist`; `other`
+              is excluded because those citations have no channel. Requests containing `other`
+              are rejected.
 
           extra_headers: Send extra headers
 
@@ -418,7 +425,10 @@ class AsyncYoutubeResource(AsyncAPIResource):
           limit: Page size; default 10, max 50.
 
           source_types: Limit results to YouTube source types: `video`, `short`, `channel`, `playlist`,
-              or `other`. Omit to include every source type.
+              or `other`. Omit to include `video` and `short` with the default
+              `attribution='attributed'`; `unattributed` and `all` widen the default to all
+              five source types. Requests containing `other` with `attribution='attributed'`
+              are rejected.
 
           extra_headers: Send extra headers
 
