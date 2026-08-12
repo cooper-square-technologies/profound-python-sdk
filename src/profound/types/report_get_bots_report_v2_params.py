@@ -32,7 +32,7 @@ class ReportGetBotsReportV2Params(TypedDict, total=False):
     date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"]
     """Date interval for the report. (only used with date dimension)"""
 
-    dimensions: List[Literal["date", "hour", "path", "bot_name", "bot_provider", "bot_type"]]
+    dimensions: List[Literal["date", "hour", "host", "path", "bot_name", "bot_provider", "bot_type"]]
     """Dimensions to group the report by."""
 
     domain_id: Optional[str]

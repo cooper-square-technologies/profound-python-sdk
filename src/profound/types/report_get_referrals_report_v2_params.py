@@ -36,7 +36,7 @@ class ReportGetReferralsReportV2Params(TypedDict, total=False):
     date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"]
     """Date interval for the report. (only used with date dimension)"""
 
-    dimensions: List[Literal["date", "hour", "path", "referral_source", "referral_type"]]
+    dimensions: List[Literal["date", "hour", "host", "path", "referral_source", "referral_type"]]
     """Dimensions to group the report by."""
 
     end_date: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
