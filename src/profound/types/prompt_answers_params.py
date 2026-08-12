@@ -8,6 +8,7 @@ from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from .._types import SequenceNotStr
 from .._utils import PropertyInfo
+from .prompt_id_filter_param import PromptIDFilterParam
 from .shared_params.pagination import Pagination
 from .shared_params.prompt_filter import PromptFilter
 from .shared_params.tag_id_filter import TagIDFilter
@@ -69,6 +70,7 @@ Filter: TypeAlias = Union[
     AnalysisTypeFilter,
     PromptTypeFilter,
     PromptFilter,
+    PromptIDFilterParam,
     PersonaIDFilter,
     TopicIDFilter,
     AssetIDFilter,

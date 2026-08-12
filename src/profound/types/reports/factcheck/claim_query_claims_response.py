@@ -72,6 +72,7 @@ class DataClaimModel(BaseModel):
     name: Optional[str] = None
 
     occurrence: Optional[float] = None
+    """Only populated for entries in `models`; omitted from grouped-section `model`."""
 
 
 class DataClaim(BaseModel):
@@ -120,11 +121,12 @@ class DataEvidence(BaseModel):
 
 
 class DataModel(BaseModel):
-    """An ``{id, name}`` reference for a grouped dimension value."""
-
     id: Optional[str] = None
 
     name: Optional[str] = None
+
+    occurrence: Optional[float] = None
+    """Only populated for entries in `models`; omitted from grouped-section `model`."""
 
 
 class DataPersona(BaseModel):
@@ -202,7 +204,6 @@ class Data(BaseModel):
     inaccurate: Optional[int] = None
 
     model: Optional[DataModel] = None
-    """An `{id, name}` reference for a grouped dimension value."""
 
     models: Optional[List[DataModel]] = None
 

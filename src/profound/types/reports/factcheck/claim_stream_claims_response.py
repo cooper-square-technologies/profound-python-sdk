@@ -115,6 +115,7 @@ class FactcheckClaimsRowClaimModel(BaseModel):
     name: Optional[str] = None
 
     occurrence: Optional[float] = None
+    """Only populated for entries in `models`; omitted from grouped-section `model`."""
 
 
 class FactcheckClaimsRowClaim(BaseModel):
@@ -163,11 +164,12 @@ class FactcheckClaimsRowEvidence(BaseModel):
 
 
 class FactcheckClaimsRowModel(BaseModel):
-    """An ``{id, name}`` reference for a grouped dimension value."""
-
     id: Optional[str] = None
 
     name: Optional[str] = None
+
+    occurrence: Optional[float] = None
+    """Only populated for entries in `models`; omitted from grouped-section `model`."""
 
 
 class FactcheckClaimsRowPersona(BaseModel):
@@ -241,7 +243,6 @@ class FactcheckClaimsRow(BaseModel):
     inaccurate: Optional[int] = None
 
     model: Optional[FactcheckClaimsRowModel] = None
-    """An `{id, name}` reference for a grouped dimension value."""
 
     models: Optional[List[FactcheckClaimsRowModel]] = None
 
