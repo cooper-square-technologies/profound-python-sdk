@@ -102,8 +102,8 @@ class AnswerRow(BaseModel):
     """Citation metadata.
 
     `positions` identify citation locations in the answer text. Each `groups` entry
-    represents a rendered citation pill; `group_position` is the source's position
-    within that pill.
+    represents a rendered citation pill, including single-source pills;
+    `group_position` is the source's position within that pill.
     """
 
     citations: Optional[List[str]] = None
