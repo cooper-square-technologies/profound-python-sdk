@@ -1,6 +1,8 @@
 # profound
 
-Generated Python SDK for profound API.
+This library provides convenient access to the profound REST API from Python.
+
+The full API of this library can be found in [api.md](./api.md).
 
 <br />
 
@@ -37,12 +39,11 @@ import os
 from profound import Profound
 
 client = Profound(
-    api_key_header=os.environ.get("API_KEY_HEADER"),
+    api_key=os.environ.get("PROFOUND_API_KEY"),
 )
 
-organization = client.organization.list_category_regions_v1_org_categories_category_regions_get(
-    category_id="categoryId",
-)
+organization = client.organizations.regions()
+
 print(organization)
 ```
 
@@ -61,11 +62,11 @@ import asyncio
 
 from profound import AsyncProfound
 
+
 async def main() -> None:
     client = AsyncProfound()
-    organization = await client.organization.list_category_regions_v1_org_categories_category_regions_get(
-        category_id="categoryId",
-    )
+    organization = await client.organizations.regions()
+
 
 asyncio.run(main())
 ```
@@ -77,11 +78,16 @@ asyncio.run(main())
 Streaming endpoints return an async iterator that yields results as the server emits them.
 
 ```python
-stream = client.prompts.answers.stream_v2_v2_prompts_stream_post(
-    category_id="",
-    start_date="",
-    end_date="",
+stream = client.reports.stream_citations(
+    date_interval="day",
+    dimensions=[],
+    metrics=[],
+    order_by={},
+    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    start_date="2024-01-01T00:00:00.000Z",
+    end_date="2024-01-01T00:00:00.000Z",
 )
+
 for event in stream:
     print(event)
 ```
@@ -94,8 +100,8 @@ Pass credentials to the generated client constructor. Environment variables are 
 
 | Option | Type | Default | Description |
 | --- | --- | --- | --- |
-| `api_key_header` | `string \| provider` | - | Credential for the APIKeyHeader scheme. Defaults to API_KEY_HEADER. |
-| `bearer_auth` | `string \| provider` | - | Credential for the BearerAuth scheme. Defaults to BEARER_AUTH. |
+| `api_key` | `string \| provider` | - | Credential for the APIKeyHeader scheme. Defaults to PROFOUND_API_KEY. |
+| `access_token` | `string \| provider` | - | Credential for the BearerAuth scheme. Defaults to PROFOUND_ACCESS_TOKEN. |
 
 Declared schemes:
 
@@ -112,9 +118,7 @@ Non-success responses throw generated API errors. Error objects expose status, h
 from profound import APIStatusError
 
 try:
-    organization = client.organization.list_category_regions_v1_org_categories_category_regions_get(
-        category_id="categoryId",
-    )
+    organization = client.organizations.regions()
 except APIStatusError as err:
     print(err.status_code, err.message)
     raise
@@ -139,8 +143,8 @@ client = Profound(
 
 | Option | Type | Default | Description |
 | --- | --- | --- | --- |
-| `api_key_header` | `str \| None` | `os.environ.get("API_KEY_HEADER")` | Credential for the APIKeyHeader scheme. |
-| `bearer_auth` | `str \| None` | `os.environ.get("BEARER_AUTH")` | Credential for the BearerAuth scheme. |
+| `api_key` | `str \| None` | `os.environ.get("PROFOUND_API_KEY")` | Credential for the APIKeyHeader scheme. |
+| `access_token` | `str \| None` | `os.environ.get("PROFOUND_ACCESS_TOKEN")` | Credential for the BearerAuth scheme. |
 | `base_url` | `str \| httpx.URL \| None` | - | Override the default API base URL. |
 | `timeout` | `float \| Timeout \| None` | `60.0` | Maximum time in seconds to wait for a response before aborting a request. |
 | `max_retries` | `int` | `2` | Number of retries for temporary failures. |
@@ -174,11 +178,3 @@ Generated clients support request timeouts and retry temporary failures such as 
 - Python 3.8 or newer
 
 Powered by Scalar.
-
-
-## Contributions
-
-This SDK is generated programmatically. Manual edits to generated files will be
-overwritten on the next build.
-
-### SDK created by [Scalar](https://www.scalar.com/?utm_source=external-api-2-python&utm_campaign=sdk)
