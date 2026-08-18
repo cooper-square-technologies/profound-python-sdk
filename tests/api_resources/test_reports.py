@@ -210,6 +210,7 @@ class TestReports:
             },
             tags=["string"],
             timezone="timezone",
+            view_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(ReportResponse, report, path=["response"])
 
@@ -357,6 +358,7 @@ class TestReports:
                 "offset": 0,
             },
             timezone="timezone",
+            view_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(ReportResponse, report, path=["response"])
 
@@ -1599,6 +1601,7 @@ class TestAsyncReports:
             },
             tags=["string"],
             timezone="timezone",
+            view_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(ReportResponse, report, path=["response"])
 
@@ -1746,6 +1749,7 @@ class TestAsyncReports:
                 "offset": 0,
             },
             timezone="timezone",
+            view_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(ReportResponse, report, path=["response"])
 

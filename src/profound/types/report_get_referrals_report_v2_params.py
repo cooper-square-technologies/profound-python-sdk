@@ -72,6 +72,12 @@ class ReportGetReferralsReportV2Params(TypedDict, total=False):
     timezone: str
     """IANA timezone name for date bucketing and filter boundaries."""
 
+    view_id: Optional[str]
+    """
+    Domain segment UUID used to scope the query to a configured subset of hosts and
+    paths.
+    """
+
 
 class FilterReferralSourceFilter(TypedDict, total=False):
     """Filter by referral source.
