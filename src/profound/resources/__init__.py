@@ -1,12 +1,12 @@
 # File generated from our OpenAPI spec by Scalar. See README.md for details.
 
-from .organizations import (
-    OrganizationsResource,
-    AsyncOrganizationsResource,
-    OrganizationsResourceWithRawResponse,
-    AsyncOrganizationsResourceWithRawResponse,
-    OrganizationsResourceWithStreamingResponse,
-    AsyncOrganizationsResourceWithStreamingResponse,
+from .organization import (
+    OrganizationResource,
+    AsyncOrganizationResource,
+    OrganizationResourceWithRawResponse,
+    AsyncOrganizationResourceWithRawResponse,
+    OrganizationResourceWithStreamingResponse,
+    AsyncOrganizationResourceWithStreamingResponse,
 )
 from .prompts import (
     PromptsResource,
@@ -32,14 +32,6 @@ from .content import (
     ContentResourceWithStreamingResponse,
     AsyncContentResourceWithStreamingResponse,
 )
-from .agents import (
-    AgentsResource,
-    AsyncAgentsResource,
-    AgentsResourceWithRawResponse,
-    AsyncAgentsResourceWithRawResponse,
-    AgentsResourceWithStreamingResponse,
-    AsyncAgentsResourceWithStreamingResponse,
-)
 from .knowledge_bases import (
     KnowledgeBasesResource,
     AsyncKnowledgeBasesResource,
@@ -48,14 +40,54 @@ from .knowledge_bases import (
     KnowledgeBasesResourceWithStreamingResponse,
     AsyncKnowledgeBasesResourceWithStreamingResponse,
 )
+from .integrations import (
+    IntegrationsResource,
+    AsyncIntegrationsResource,
+    IntegrationsResourceWithRawResponse,
+    AsyncIntegrationsResourceWithRawResponse,
+    IntegrationsResourceWithStreamingResponse,
+    AsyncIntegrationsResourceWithStreamingResponse,
+)
+from .documents import (
+    DocumentsResource,
+    AsyncDocumentsResource,
+    DocumentsResourceWithRawResponse,
+    AsyncDocumentsResourceWithRawResponse,
+    DocumentsResourceWithStreamingResponse,
+    AsyncDocumentsResourceWithStreamingResponse,
+)
+from .open_ai_ads import (
+    OpenAIAdsResource,
+    AsyncOpenAIAdsResource,
+    OpenAIAdsResourceWithRawResponse,
+    AsyncOpenAIAdsResourceWithRawResponse,
+    OpenAIAdsResourceWithStreamingResponse,
+    AsyncOpenAIAdsResourceWithStreamingResponse,
+)
+from .projects import (
+    ProjectsResource,
+    AsyncProjectsResource,
+    ProjectsResourceWithRawResponse,
+    AsyncProjectsResourceWithRawResponse,
+    ProjectsResourceWithStreamingResponse,
+    AsyncProjectsResourceWithStreamingResponse,
+)
+from .agents import (
+    AgentsResource,
+    AsyncAgentsResource,
+    AgentsResourceWithRawResponse,
+    AsyncAgentsResourceWithRawResponse,
+    AgentsResourceWithStreamingResponse,
+    AsyncAgentsResourceWithStreamingResponse,
+)
 
 __all__ = [
-    "OrganizationsResource",
-    "AsyncOrganizationsResource",
-    "OrganizationsResourceWithRawResponse",
-    "AsyncOrganizationsResourceWithRawResponse",
-    "OrganizationsResourceWithStreamingResponse",
-    "AsyncOrganizationsResourceWithStreamingResponse",
+    "OrganizationResource",
+    "AsyncOrganizationResource",
+    "OrganizationResourceWithRawResponse",
+    "AsyncOrganizationResourceWithRawResponse",
+    "OrganizationResourceWithStreamingResponse",
+    "AsyncOrganizationResourceWithStreamingResponse",
     "PromptsResource",
     "AsyncPromptsResource",
     "PromptsResourceWithRawResponse",
@@ -74,16 +106,40 @@ __all__ = [
     "AsyncContentResourceWithRawResponse",
     "ContentResourceWithStreamingResponse",
     "AsyncContentResourceWithStreamingResponse",
-    "AgentsResource",
-    "AsyncAgentsResource",
-    "AgentsResourceWithRawResponse",
-    "AsyncAgentsResourceWithRawResponse",
-    "AgentsResourceWithStreamingResponse",
-    "AsyncAgentsResourceWithStreamingResponse",
     "KnowledgeBasesResource",
     "AsyncKnowledgeBasesResource",
     "KnowledgeBasesResourceWithRawResponse",
     "AsyncKnowledgeBasesResourceWithRawResponse",
     "KnowledgeBasesResourceWithStreamingResponse",
     "AsyncKnowledgeBasesResourceWithStreamingResponse",
+    "IntegrationsResource",
+    "AsyncIntegrationsResource",
+    "IntegrationsResourceWithRawResponse",
+    "AsyncIntegrationsResourceWithRawResponse",
+    "IntegrationsResourceWithStreamingResponse",
+    "AsyncIntegrationsResourceWithStreamingResponse",
+    "DocumentsResource",
+    "AsyncDocumentsResource",
+    "DocumentsResourceWithRawResponse",
+    "AsyncDocumentsResourceWithRawResponse",
+    "DocumentsResourceWithStreamingResponse",
+    "AsyncDocumentsResourceWithStreamingResponse",
+    "OpenAIAdsResource",
+    "AsyncOpenAIAdsResource",
+    "OpenAIAdsResourceWithRawResponse",
+    "AsyncOpenAIAdsResourceWithRawResponse",
+    "OpenAIAdsResourceWithStreamingResponse",
+    "AsyncOpenAIAdsResourceWithStreamingResponse",
+    "ProjectsResource",
+    "AsyncProjectsResource",
+    "ProjectsResourceWithRawResponse",
+    "AsyncProjectsResourceWithRawResponse",
+    "ProjectsResourceWithStreamingResponse",
+    "AsyncProjectsResourceWithStreamingResponse",
+    "AgentsResource",
+    "AsyncAgentsResource",
+    "AgentsResourceWithRawResponse",
+    "AsyncAgentsResourceWithRawResponse",
+    "AgentsResourceWithStreamingResponse",
+    "AsyncAgentsResourceWithStreamingResponse",
 ]

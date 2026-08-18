@@ -33,8 +33,8 @@ from .folders import (
     FoldersResourceWithStreamingResponse,
     AsyncFoldersResourceWithStreamingResponse,
 )
-from ...types.knowledge_base_list_response import KnowledgeBaseListResponse
-from ...types import knowledge_base_list_params, knowledge_base_search_params
+from ...types.knowledge_base_list_v1_get_response import KnowledgeBaseListV1GetResponse
+from ...types import knowledge_base_list_v1_get_params, knowledge_base_search_params
 from ...types.knowledge_base_search_response import KnowledgeBaseSearchResponse
 
 __all__ = ["KnowledgeBasesResource", "AsyncKnowledgeBasesResource"]
@@ -57,7 +57,7 @@ class KnowledgeBasesResource(SyncAPIResource):
     def with_streaming_response(self) -> KnowledgeBasesResourceWithStreamingResponse:
         return KnowledgeBasesResourceWithStreamingResponse(self)
 
-    def list(
+    def list_v1_get(
         self,
         *,
         organization_id: Optional[str] | Omit = omit,
@@ -67,7 +67,7 @@ class KnowledgeBasesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> KnowledgeBaseListResponse:
+    ) -> KnowledgeBaseListV1GetResponse:
         """
         List knowledge bases accessible to the API key.
 
@@ -79,11 +79,11 @@ class KnowledgeBasesResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            KnowledgeBaseListResponse: Successful Response
+            KnowledgeBaseListV1GetResponse: Successful Response
 
         Example:
             ```python
-            knowledge_base = client.knowledge_bases.list()
+            knowledge_base = client.knowledge_bases.list_v1_get()
             ```
         """
         return self._get(
@@ -94,10 +94,10 @@ class KnowledgeBasesResource(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=maybe_transform(
-                    {"organization_id": organization_id}, knowledge_base_list_params.KnowledgeBaseListParams
+                    {"organization_id": organization_id}, knowledge_base_list_v1_get_params.KnowledgeBaseListV1GetParams
                 ),
             ),
-            cast_to=KnowledgeBaseListResponse,
+            cast_to=KnowledgeBaseListV1GetResponse,
         )
 
     def search(
@@ -187,7 +187,7 @@ class AsyncKnowledgeBasesResource(AsyncAPIResource):
     def with_streaming_response(self) -> AsyncKnowledgeBasesResourceWithStreamingResponse:
         return AsyncKnowledgeBasesResourceWithStreamingResponse(self)
 
-    async def list(
+    async def list_v1_get(
         self,
         *,
         organization_id: Optional[str] | Omit = omit,
@@ -197,7 +197,7 @@ class AsyncKnowledgeBasesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> KnowledgeBaseListResponse:
+    ) -> KnowledgeBaseListV1GetResponse:
         """
         List knowledge bases accessible to the API key.
 
@@ -209,11 +209,11 @@ class AsyncKnowledgeBasesResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            KnowledgeBaseListResponse: Successful Response
+            KnowledgeBaseListV1GetResponse: Successful Response
 
         Example:
             ```python
-            knowledge_base = await client.knowledge_bases.list()
+            knowledge_base = await client.knowledge_bases.list_v1_get()
             ```
         """
         return await self._get(
@@ -224,10 +224,10 @@ class AsyncKnowledgeBasesResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"organization_id": organization_id}, knowledge_base_list_params.KnowledgeBaseListParams
+                    {"organization_id": organization_id}, knowledge_base_list_v1_get_params.KnowledgeBaseListV1GetParams
                 ),
             ),
-            cast_to=KnowledgeBaseListResponse,
+            cast_to=KnowledgeBaseListV1GetResponse,
         )
 
     async def search(
@@ -304,8 +304,8 @@ class KnowledgeBasesResourceWithRawResponse:
     def __init__(self, knowledge_bases: KnowledgeBasesResource) -> None:
         self._knowledge_bases = knowledge_bases
 
-        self.list = to_raw_response_wrapper(
-            knowledge_bases.list,
+        self.list_v1_get = to_raw_response_wrapper(
+            knowledge_bases.list_v1_get,
         )
         self.search = to_raw_response_wrapper(
             knowledge_bases.search,
@@ -324,8 +324,8 @@ class AsyncKnowledgeBasesResourceWithRawResponse:
     def __init__(self, knowledge_bases: AsyncKnowledgeBasesResource) -> None:
         self._knowledge_bases = knowledge_bases
 
-        self.list = async_to_raw_response_wrapper(
-            knowledge_bases.list,
+        self.list_v1_get = async_to_raw_response_wrapper(
+            knowledge_bases.list_v1_get,
         )
         self.search = async_to_raw_response_wrapper(
             knowledge_bases.search,
@@ -344,8 +344,8 @@ class KnowledgeBasesResourceWithStreamingResponse:
     def __init__(self, knowledge_bases: KnowledgeBasesResource) -> None:
         self._knowledge_bases = knowledge_bases
 
-        self.list = to_streamed_response_wrapper(
-            knowledge_bases.list,
+        self.list_v1_get = to_streamed_response_wrapper(
+            knowledge_bases.list_v1_get,
         )
         self.search = to_streamed_response_wrapper(
             knowledge_bases.search,
@@ -364,8 +364,8 @@ class AsyncKnowledgeBasesResourceWithStreamingResponse:
     def __init__(self, knowledge_bases: AsyncKnowledgeBasesResource) -> None:
         self._knowledge_bases = knowledge_bases
 
-        self.list = async_to_streamed_response_wrapper(
-            knowledge_bases.list,
+        self.list_v1_get = async_to_streamed_response_wrapper(
+            knowledge_bases.list_v1_get,
         )
         self.search = async_to_streamed_response_wrapper(
             knowledge_bases.search,

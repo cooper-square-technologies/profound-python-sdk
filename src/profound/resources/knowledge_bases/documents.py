@@ -17,10 +17,12 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.knowledge_bases.document_create_response import DocumentCreateResponse
-from ...types.knowledge_bases import document_create_params, document_update_params, document_delete_params
-from ...types.knowledge_bases.document_update_response import DocumentUpdateResponse
-from ...types.knowledge_bases.document_delete_response import DocumentDeleteResponse
+from ...types.shared.document_operation_response import DocumentOperationResponse
+from ...types.knowledge_bases import (
+    document_create_v1_id_post_params,
+    document_update_v1_id_put_params,
+    document_delete_v1_id_delete_params,
+)
 
 __all__ = ["DocumentsResource", "AsyncDocumentsResource"]
 
@@ -34,7 +36,7 @@ class DocumentsResource(SyncAPIResource):
     def with_streaming_response(self) -> DocumentsResourceWithStreamingResponse:
         return DocumentsResourceWithStreamingResponse(self)
 
-    def create(
+    def create_v1_id_post(
         self,
         knowledge_base_id: str,
         *,
@@ -48,7 +50,7 @@ class DocumentsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> DocumentCreateResponse:
+    ) -> DocumentOperationResponse:
         """
         Add a document to a knowledge base using JSON text or multipart file upload.
 
@@ -64,11 +66,11 @@ class DocumentsResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            DocumentCreateResponse: Successful Response
+            DocumentOperationResponse: Successful Response
 
         Example:
             ```python
-            document = client.knowledge_bases.documents.create(
+            document = client.knowledge_bases.documents.create_v1_id_post(
                 knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 name="x",
                 text="x",
@@ -87,7 +89,7 @@ class DocumentsResource(SyncAPIResource):
                     "text": text,
                     "folder": folder,
                 },
-                document_create_params.DocumentCreateParams,
+                document_create_v1_id_post_params.DocumentCreateV1IDPostParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -95,13 +97,13 @@ class DocumentsResource(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=maybe_transform(
-                    {"organization_id": organization_id}, document_create_params.DocumentCreateParams
+                    {"organization_id": organization_id}, document_create_v1_id_post_params.DocumentCreateV1IDPostParams
                 ),
             ),
-            cast_to=DocumentCreateResponse,
+            cast_to=DocumentOperationResponse,
         )
 
-    def update(
+    def update_v1_id_put(
         self,
         knowledge_base_id: str,
         *,
@@ -115,7 +117,7 @@ class DocumentsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> DocumentUpdateResponse:
+    ) -> DocumentOperationResponse:
         """
         Overwrite a knowledge base document using JSON text or multipart file upload.
 
@@ -131,11 +133,11 @@ class DocumentsResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            DocumentUpdateResponse: Successful Response
+            DocumentOperationResponse: Successful Response
 
         Example:
             ```python
-            document = client.knowledge_bases.documents.update(
+            document = client.knowledge_bases.documents.update_v1_id_put(
                 knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 name="x",
                 text="x",
@@ -154,7 +156,7 @@ class DocumentsResource(SyncAPIResource):
                     "text": text,
                     "folder": folder,
                 },
-                document_update_params.DocumentUpdateParams,
+                document_update_v1_id_put_params.DocumentUpdateV1IDPutParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -162,13 +164,13 @@ class DocumentsResource(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=maybe_transform(
-                    {"organization_id": organization_id}, document_update_params.DocumentUpdateParams
+                    {"organization_id": organization_id}, document_update_v1_id_put_params.DocumentUpdateV1IDPutParams
                 ),
             ),
-            cast_to=DocumentUpdateResponse,
+            cast_to=DocumentOperationResponse,
         )
 
-    def delete(
+    def delete_v1_id_delete(
         self,
         knowledge_base_id: str,
         *,
@@ -180,7 +182,7 @@ class DocumentsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> DocumentDeleteResponse:
+    ) -> DocumentOperationResponse:
         """
         Delete an existing document from a knowledge base.
 
@@ -194,11 +196,11 @@ class DocumentsResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            DocumentDeleteResponse: Successful Response
+            DocumentOperationResponse: Successful Response
 
         Example:
             ```python
-            document = client.knowledge_bases.documents.delete(
+            document = client.knowledge_bases.documents.delete_v1_id_delete(
                 knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 name="x",
             )
@@ -212,7 +214,7 @@ class DocumentsResource(SyncAPIResource):
             ),
             body=maybe_transform(
                 {"name": name},
-                document_delete_params.DocumentDeleteParams,
+                document_delete_v1_id_delete_params.DocumentDeleteV1IDDeleteParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -220,10 +222,11 @@ class DocumentsResource(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=maybe_transform(
-                    {"organization_id": organization_id}, document_delete_params.DocumentDeleteParams
+                    {"organization_id": organization_id},
+                    document_delete_v1_id_delete_params.DocumentDeleteV1IDDeleteParams,
                 ),
             ),
-            cast_to=DocumentDeleteResponse,
+            cast_to=DocumentOperationResponse,
         )
 
 
@@ -236,7 +239,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
     def with_streaming_response(self) -> AsyncDocumentsResourceWithStreamingResponse:
         return AsyncDocumentsResourceWithStreamingResponse(self)
 
-    async def create(
+    async def create_v1_id_post(
         self,
         knowledge_base_id: str,
         *,
@@ -250,7 +253,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> DocumentCreateResponse:
+    ) -> DocumentOperationResponse:
         """
         Add a document to a knowledge base using JSON text or multipart file upload.
 
@@ -266,11 +269,11 @@ class AsyncDocumentsResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            DocumentCreateResponse: Successful Response
+            DocumentOperationResponse: Successful Response
 
         Example:
             ```python
-            document = await client.knowledge_bases.documents.create(
+            document = await client.knowledge_bases.documents.create_v1_id_post(
                 knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 name="x",
                 text="x",
@@ -289,7 +292,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
                     "text": text,
                     "folder": folder,
                 },
-                document_create_params.DocumentCreateParams,
+                document_create_v1_id_post_params.DocumentCreateV1IDPostParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -297,13 +300,13 @@ class AsyncDocumentsResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"organization_id": organization_id}, document_create_params.DocumentCreateParams
+                    {"organization_id": organization_id}, document_create_v1_id_post_params.DocumentCreateV1IDPostParams
                 ),
             ),
-            cast_to=DocumentCreateResponse,
+            cast_to=DocumentOperationResponse,
         )
 
-    async def update(
+    async def update_v1_id_put(
         self,
         knowledge_base_id: str,
         *,
@@ -317,7 +320,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> DocumentUpdateResponse:
+    ) -> DocumentOperationResponse:
         """
         Overwrite a knowledge base document using JSON text or multipart file upload.
 
@@ -333,11 +336,11 @@ class AsyncDocumentsResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            DocumentUpdateResponse: Successful Response
+            DocumentOperationResponse: Successful Response
 
         Example:
             ```python
-            document = await client.knowledge_bases.documents.update(
+            document = await client.knowledge_bases.documents.update_v1_id_put(
                 knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 name="x",
                 text="x",
@@ -356,7 +359,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
                     "text": text,
                     "folder": folder,
                 },
-                document_update_params.DocumentUpdateParams,
+                document_update_v1_id_put_params.DocumentUpdateV1IDPutParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -364,13 +367,13 @@ class AsyncDocumentsResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"organization_id": organization_id}, document_update_params.DocumentUpdateParams
+                    {"organization_id": organization_id}, document_update_v1_id_put_params.DocumentUpdateV1IDPutParams
                 ),
             ),
-            cast_to=DocumentUpdateResponse,
+            cast_to=DocumentOperationResponse,
         )
 
-    async def delete(
+    async def delete_v1_id_delete(
         self,
         knowledge_base_id: str,
         *,
@@ -382,7 +385,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> DocumentDeleteResponse:
+    ) -> DocumentOperationResponse:
         """
         Delete an existing document from a knowledge base.
 
@@ -396,11 +399,11 @@ class AsyncDocumentsResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            DocumentDeleteResponse: Successful Response
+            DocumentOperationResponse: Successful Response
 
         Example:
             ```python
-            document = await client.knowledge_bases.documents.delete(
+            document = await client.knowledge_bases.documents.delete_v1_id_delete(
                 knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 name="x",
             )
@@ -414,7 +417,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
             ),
             body=await async_maybe_transform(
                 {"name": name},
-                document_delete_params.DocumentDeleteParams,
+                document_delete_v1_id_delete_params.DocumentDeleteV1IDDeleteParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -422,10 +425,11 @@ class AsyncDocumentsResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"organization_id": organization_id}, document_delete_params.DocumentDeleteParams
+                    {"organization_id": organization_id},
+                    document_delete_v1_id_delete_params.DocumentDeleteV1IDDeleteParams,
                 ),
             ),
-            cast_to=DocumentDeleteResponse,
+            cast_to=DocumentOperationResponse,
         )
 
 
@@ -433,14 +437,14 @@ class DocumentsResourceWithRawResponse:
     def __init__(self, documents: DocumentsResource) -> None:
         self._documents = documents
 
-        self.create = to_raw_response_wrapper(
-            documents.create,
+        self.create_v1_id_post = to_raw_response_wrapper(
+            documents.create_v1_id_post,
         )
-        self.update = to_raw_response_wrapper(
-            documents.update,
+        self.update_v1_id_put = to_raw_response_wrapper(
+            documents.update_v1_id_put,
         )
-        self.delete = to_raw_response_wrapper(
-            documents.delete,
+        self.delete_v1_id_delete = to_raw_response_wrapper(
+            documents.delete_v1_id_delete,
         )
 
 
@@ -448,14 +452,14 @@ class AsyncDocumentsResourceWithRawResponse:
     def __init__(self, documents: AsyncDocumentsResource) -> None:
         self._documents = documents
 
-        self.create = async_to_raw_response_wrapper(
-            documents.create,
+        self.create_v1_id_post = async_to_raw_response_wrapper(
+            documents.create_v1_id_post,
         )
-        self.update = async_to_raw_response_wrapper(
-            documents.update,
+        self.update_v1_id_put = async_to_raw_response_wrapper(
+            documents.update_v1_id_put,
         )
-        self.delete = async_to_raw_response_wrapper(
-            documents.delete,
+        self.delete_v1_id_delete = async_to_raw_response_wrapper(
+            documents.delete_v1_id_delete,
         )
 
 
@@ -463,14 +467,14 @@ class DocumentsResourceWithStreamingResponse:
     def __init__(self, documents: DocumentsResource) -> None:
         self._documents = documents
 
-        self.create = to_streamed_response_wrapper(
-            documents.create,
+        self.create_v1_id_post = to_streamed_response_wrapper(
+            documents.create_v1_id_post,
         )
-        self.update = to_streamed_response_wrapper(
-            documents.update,
+        self.update_v1_id_put = to_streamed_response_wrapper(
+            documents.update_v1_id_put,
         )
-        self.delete = to_streamed_response_wrapper(
-            documents.delete,
+        self.delete_v1_id_delete = to_streamed_response_wrapper(
+            documents.delete_v1_id_delete,
         )
 
 
@@ -478,12 +482,12 @@ class AsyncDocumentsResourceWithStreamingResponse:
     def __init__(self, documents: AsyncDocumentsResource) -> None:
         self._documents = documents
 
-        self.create = async_to_streamed_response_wrapper(
-            documents.create,
+        self.create_v1_id_post = async_to_streamed_response_wrapper(
+            documents.create_v1_id_post,
         )
-        self.update = async_to_streamed_response_wrapper(
-            documents.update,
+        self.update_v1_id_put = async_to_streamed_response_wrapper(
+            documents.update_v1_id_put,
         )
-        self.delete = async_to_streamed_response_wrapper(
-            documents.delete,
+        self.delete_v1_id_delete = async_to_streamed_response_wrapper(
+            documents.delete_v1_id_delete,
         )

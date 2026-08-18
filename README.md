@@ -42,7 +42,7 @@ client = Profound(
     api_key=os.environ.get("PROFOUND_API_KEY"),
 )
 
-organization = client.organizations.regions()
+organization = client.organization.list_v1_org_get()
 
 print(organization)
 ```
@@ -65,7 +65,7 @@ from profound import AsyncProfound
 
 async def main() -> None:
     client = AsyncProfound()
-    organization = await client.organizations.regions()
+    organization = await client.organization.list_v1_org_get()
 
 
 asyncio.run(main())
@@ -78,14 +78,10 @@ asyncio.run(main())
 Streaming endpoints return an async iterator that yields results as the server emits them.
 
 ```python
-stream = client.reports.stream_citations(
-    date_interval="day",
-    dimensions=[],
-    metrics=[],
-    order_by={},
+stream = client.prompts.answers.stream_v2_v2_stream_post(
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    start_date="2024-01-01T00:00:00.000Z",
-    end_date="2024-01-01T00:00:00.000Z",
+    start_date="",
+    end_date="",
 )
 
 for event in stream:
@@ -118,7 +114,7 @@ Non-success responses throw generated API errors. Error objects expose status, h
 from profound import APIStatusError
 
 try:
-    organization = client.organizations.regions()
+    organization = client.organization.list_v1_org_get()
 except APIStatusError as err:
     print(err.status_code, err.message)
     raise

@@ -1,0 +1,96 @@
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
+
+from typing import Dict, List, Optional, TYPE_CHECKING
+
+from pydantic import Field as FieldInfo
+
+from ..._models import BaseModel
+
+__all__ = ["ShoppingQueryMerchantsV2V2MerchantsPostResponse", "Info", "Data"]
+
+
+class Data(BaseModel):
+    merchant_name: Optional[str] = None
+
+    merchant_share: Optional[float] = None
+
+    merchant_share_rank: Optional[int] = None
+
+    merchant_visibility: Optional[float] = None
+
+    merchant_visibility_rank: Optional[int] = None
+
+    date: Optional[str] = None
+
+    visibility_rank: Optional[int] = None
+
+    brand_name: Optional[str] = None
+
+    brand_share: Optional[float] = None
+
+    product: Optional[Dict[str, object]] = None
+
+    product_visibility: Optional[float] = None
+
+    product_rank: Optional[int] = None
+
+    if TYPE_CHECKING:
+        # Some versions of Pydantic <2.8.0 have a bug and don’t allow assigning a
+        # value to this field, so for compatibility we avoid doing it at runtime.
+        __pydantic_extra__: Dict[str, object] = FieldInfo(init=False)  # pyright: ignore[reportIncompatibleVariableOverride]
+
+        # Stub to indicate that arbitrary properties are accepted.
+        # To access properties that are not valid identifiers you can use `getattr`, e.g.
+        # `getattr(obj, '$type')`
+        def __getattr__(self, attr: str) -> object: ...
+
+    else:
+        __pydantic_extra__: Dict[str, object]
+
+
+class Info(BaseModel):
+    total_results: Optional[int] = None
+    """Total rows matching the query before pagination (null when not computed)."""
+
+    count: int
+    """Number of rows returned in `data` for this page."""
+
+    next_cursor: Optional[str] = None
+    """Opaque cursor for the next page; null on the last page."""
+
+    models: List[str]
+    """Display names of the models the report covers."""
+
+    start_date: str
+    """Echoed request start date (YYYY-MM-DD, ET)."""
+
+    end_date: str
+    """Echoed request end date (YYYY-MM-DD, ET)."""
+
+    filter: Optional[Dict[str, object]] = None
+    """Echoed normalized filter tree, or null when no filter was sent."""
+
+    view: str
+    """`distribution`, `brand_share`, or `top_products`."""
+
+    metrics: List[str]
+    """Metrics returned per row."""
+
+    if TYPE_CHECKING:
+        # Some versions of Pydantic <2.8.0 have a bug and don’t allow assigning a
+        # value to this field, so for compatibility we avoid doing it at runtime.
+        __pydantic_extra__: Dict[str, object] = FieldInfo(init=False)  # pyright: ignore[reportIncompatibleVariableOverride]
+
+        # Stub to indicate that arbitrary properties are accepted.
+        # To access properties that are not valid identifiers you can use `getattr`, e.g.
+        # `getattr(obj, '$type')`
+        def __getattr__(self, attr: str) -> object: ...
+
+    else:
+        __pydantic_extra__: Dict[str, object]
+
+
+class ShoppingQueryMerchantsV2V2MerchantsPostResponse(BaseModel):
+    info: Info
+
+    data: List[Data]

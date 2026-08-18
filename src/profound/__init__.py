@@ -15,6 +15,7 @@ from ._client import (
     AsyncStream,
     AsyncProfound,
     RequestOptions,
+    ENVIRONMENTS,
 )
 from ._models import BaseModel
 from ._version import __title__, __version__
@@ -40,6 +41,7 @@ from ._base_client import DefaultHttpxClient, DefaultAioHttpClient, DefaultAsync
 from ._utils._logs import setup_logging as _setup_logging
 
 __all__ = [
+    "ENVIRONMENTS",
     "types",
     "__version__",
     "__title__",

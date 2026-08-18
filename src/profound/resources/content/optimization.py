@@ -15,9 +15,11 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.content.optimization_list_response import OptimizationListResponse
-from ...types.content import optimization_list_params
-from ...types.content.optimization_retrieve_response import OptimizationRetrieveResponse
+from ...types.content.optimization_list_v1_asset_id_get_response import OptimizationListV1AssetIDGetResponse
+from ...types.content import optimization_list_v1_asset_id_get_params
+from ...types.content.optimization_analysis_v1_asset_id_id_get_response import (
+    OptimizationAnalysisV1AssetIDIDGetResponse,
+)
 
 __all__ = ["OptimizationResource", "AsyncOptimizationResource"]
 
@@ -31,7 +33,7 @@ class OptimizationResource(SyncAPIResource):
     def with_streaming_response(self) -> OptimizationResourceWithStreamingResponse:
         return OptimizationResourceWithStreamingResponse(self)
 
-    def list(
+    def list_v1_asset_id_get(
         self,
         asset_id: str,
         *,
@@ -43,7 +45,7 @@ class OptimizationResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> OptimizationListResponse:
+    ) -> OptimizationListV1AssetIDGetResponse:
         """
         Optimization List
 
@@ -57,11 +59,11 @@ class OptimizationResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            OptimizationListResponse: Successful Response
+            OptimizationListV1AssetIDGetResponse: Successful Response
 
         Example:
             ```python
-            optimization = client.content.optimization.list(
+            optimization = client.content.optimization.list_v1_asset_id_get(
                 asset_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 limit=10000,
                 offset=0,
@@ -78,13 +80,14 @@ class OptimizationResource(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=maybe_transform(
-                    {"limit": limit, "offset": offset}, optimization_list_params.OptimizationListParams
+                    {"limit": limit, "offset": offset},
+                    optimization_list_v1_asset_id_get_params.OptimizationListV1AssetIDGetParams,
                 ),
             ),
-            cast_to=OptimizationListResponse,
+            cast_to=OptimizationListV1AssetIDGetResponse,
         )
 
-    def retrieve(
+    def analysis_v1_asset_id_id_get(
         self,
         content_id: str,
         *,
@@ -95,7 +98,7 @@ class OptimizationResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> OptimizationRetrieveResponse:
+    ) -> OptimizationAnalysisV1AssetIDIDGetResponse:
         """
         Optimization Analysis
 
@@ -108,11 +111,11 @@ class OptimizationResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            OptimizationRetrieveResponse: Successful Response
+            OptimizationAnalysisV1AssetIDIDGetResponse: Successful Response
 
         Example:
             ```python
-            optimization = client.content.optimization.retrieve(
+            optimization = client.content.optimization.analysis_v1_asset_id_id_get(
                 asset_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 content_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
             )
@@ -129,7 +132,7 @@ class OptimizationResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=OptimizationRetrieveResponse,
+            cast_to=OptimizationAnalysisV1AssetIDIDGetResponse,
         )
 
 
@@ -142,7 +145,7 @@ class AsyncOptimizationResource(AsyncAPIResource):
     def with_streaming_response(self) -> AsyncOptimizationResourceWithStreamingResponse:
         return AsyncOptimizationResourceWithStreamingResponse(self)
 
-    async def list(
+    async def list_v1_asset_id_get(
         self,
         asset_id: str,
         *,
@@ -154,7 +157,7 @@ class AsyncOptimizationResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> OptimizationListResponse:
+    ) -> OptimizationListV1AssetIDGetResponse:
         """
         Optimization List
 
@@ -168,11 +171,11 @@ class AsyncOptimizationResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            OptimizationListResponse: Successful Response
+            OptimizationListV1AssetIDGetResponse: Successful Response
 
         Example:
             ```python
-            optimization = await client.content.optimization.list(
+            optimization = await client.content.optimization.list_v1_asset_id_get(
                 asset_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 limit=10000,
                 offset=0,
@@ -189,13 +192,14 @@ class AsyncOptimizationResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"limit": limit, "offset": offset}, optimization_list_params.OptimizationListParams
+                    {"limit": limit, "offset": offset},
+                    optimization_list_v1_asset_id_get_params.OptimizationListV1AssetIDGetParams,
                 ),
             ),
-            cast_to=OptimizationListResponse,
+            cast_to=OptimizationListV1AssetIDGetResponse,
         )
 
-    async def retrieve(
+    async def analysis_v1_asset_id_id_get(
         self,
         content_id: str,
         *,
@@ -206,7 +210,7 @@ class AsyncOptimizationResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> OptimizationRetrieveResponse:
+    ) -> OptimizationAnalysisV1AssetIDIDGetResponse:
         """
         Optimization Analysis
 
@@ -219,11 +223,11 @@ class AsyncOptimizationResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            OptimizationRetrieveResponse: Successful Response
+            OptimizationAnalysisV1AssetIDIDGetResponse: Successful Response
 
         Example:
             ```python
-            optimization = await client.content.optimization.retrieve(
+            optimization = await client.content.optimization.analysis_v1_asset_id_id_get(
                 asset_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 content_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
             )
@@ -240,7 +244,7 @@ class AsyncOptimizationResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=OptimizationRetrieveResponse,
+            cast_to=OptimizationAnalysisV1AssetIDIDGetResponse,
         )
 
 
@@ -248,11 +252,11 @@ class OptimizationResourceWithRawResponse:
     def __init__(self, optimization: OptimizationResource) -> None:
         self._optimization = optimization
 
-        self.list = to_raw_response_wrapper(
-            optimization.list,
+        self.list_v1_asset_id_get = to_raw_response_wrapper(
+            optimization.list_v1_asset_id_get,
         )
-        self.retrieve = to_raw_response_wrapper(
-            optimization.retrieve,
+        self.analysis_v1_asset_id_id_get = to_raw_response_wrapper(
+            optimization.analysis_v1_asset_id_id_get,
         )
 
 
@@ -260,11 +264,11 @@ class AsyncOptimizationResourceWithRawResponse:
     def __init__(self, optimization: AsyncOptimizationResource) -> None:
         self._optimization = optimization
 
-        self.list = async_to_raw_response_wrapper(
-            optimization.list,
+        self.list_v1_asset_id_get = async_to_raw_response_wrapper(
+            optimization.list_v1_asset_id_get,
         )
-        self.retrieve = async_to_raw_response_wrapper(
-            optimization.retrieve,
+        self.analysis_v1_asset_id_id_get = async_to_raw_response_wrapper(
+            optimization.analysis_v1_asset_id_id_get,
         )
 
 
@@ -272,11 +276,11 @@ class OptimizationResourceWithStreamingResponse:
     def __init__(self, optimization: OptimizationResource) -> None:
         self._optimization = optimization
 
-        self.list = to_streamed_response_wrapper(
-            optimization.list,
+        self.list_v1_asset_id_get = to_streamed_response_wrapper(
+            optimization.list_v1_asset_id_get,
         )
-        self.retrieve = to_streamed_response_wrapper(
-            optimization.retrieve,
+        self.analysis_v1_asset_id_id_get = to_streamed_response_wrapper(
+            optimization.analysis_v1_asset_id_id_get,
         )
 
 
@@ -284,9 +288,9 @@ class AsyncOptimizationResourceWithStreamingResponse:
     def __init__(self, optimization: AsyncOptimizationResource) -> None:
         self._optimization = optimization
 
-        self.list = async_to_streamed_response_wrapper(
-            optimization.list,
+        self.list_v1_asset_id_get = async_to_streamed_response_wrapper(
+            optimization.list_v1_asset_id_get,
         )
-        self.retrieve = async_to_streamed_response_wrapper(
-            optimization.retrieve,
+        self.analysis_v1_asset_id_id_get = async_to_streamed_response_wrapper(
+            optimization.analysis_v1_asset_id_id_get,
         )

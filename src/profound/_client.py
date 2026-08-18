@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import os
 import threading
-from typing import TYPE_CHECKING, Any, Mapping
-from typing_extensions import Self, override
+from typing import TYPE_CHECKING, Any, Mapping, cast
+from typing_extensions import Literal, Self, override
 
 import httpx
 
@@ -33,19 +33,40 @@ from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._version import __version__
 
 if TYPE_CHECKING:
-    from .resources import organizations, prompts, reports, content, agents, knowledge_bases
-    from .resources.organizations import OrganizationsResource, AsyncOrganizationsResource
+    from .resources import (
+        organization,
+        prompts,
+        reports,
+        content,
+        knowledge_bases,
+        integrations,
+        documents,
+        open_ai_ads,
+        projects,
+        agents,
+    )
+    from .resources.organization import OrganizationResource, AsyncOrganizationResource
     from .resources.prompts import PromptsResource, AsyncPromptsResource
     from .resources.reports import ReportsResource, AsyncReportsResource
     from .resources.content import ContentResource, AsyncContentResource
-    from .resources.agents import AgentsResource, AsyncAgentsResource
     from .resources.knowledge_bases import KnowledgeBasesResource, AsyncKnowledgeBasesResource
+    from .resources.integrations import IntegrationsResource, AsyncIntegrationsResource
+    from .resources.documents import DocumentsResource, AsyncDocumentsResource
+    from .resources.open_ai_ads import OpenAIAdsResource, AsyncOpenAIAdsResource
+    from .resources.projects import ProjectsResource, AsyncProjectsResource
+    from .resources.agents import AgentsResource, AsyncAgentsResource
 
 # Serializes lazy resource imports so concurrent cold access from multiple
 # threads cannot deadlock on CPython import locks (see CPython 3.14).
 _RESOURCE_IMPORT_LOCK = threading.RLock()
 
+ENVIRONMENTS: dict[str, str] = {
+    "production": "https://api.tryprofound.com",
+    "development": "https://dev.api.tryprofound.com",
+}
+
 __all__ = [
+    "ENVIRONMENTS",
     "Profound",
     "AsyncProfound",
     "Client",
@@ -62,12 +83,15 @@ class Profound(SyncAPIClient):
     access_token: str | None
     api_key: str | None
 
+    _environment: Literal["production", "development"] | NotGiven
+
     def __init__(
         self,
         *,
         access_token: str | None = None,
         api_key: str | None = None,
-        base_url: str | httpx.URL | None = None,
+        environment: Literal["production", "development"] | NotGiven = not_given,
+        base_url: str | httpx.URL | None | NotGiven = not_given,
         timeout: float | Timeout | None | NotGiven = not_given,
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
@@ -98,10 +122,30 @@ class Profound(SyncAPIClient):
         if api_key is None:
             api_key = os.environ.get("PROFOUND_API_KEY")
         self.api_key = api_key
-        if base_url is None:
-            base_url = os.environ.get("PROFOUND_BASE_URL")
-        if base_url is None:
-            base_url = "https://api.tryprofound.com"
+        self._environment = environment
+        base_url_env = os.environ.get("PROFOUND_BASE_URL")
+        if is_given(base_url) and base_url is not None:
+            # An explicit `base_url` wins over `environment` so callers can point a
+            # pinned-environment client at a proxy or mock, and so `copy()` can pass
+            # both the inherited host and the inherited environment without conflict.
+            base_url = cast("str | httpx.URL", base_url)
+        elif is_given(environment):
+            if base_url_env and base_url is not None:
+                raise ValueError(
+                    "Ambiguous URL; the base URL environment variable and the `environment` argument are both set. Pass base_url=None to use the environment.",
+                )
+            try:
+                base_url = ENVIRONMENTS[environment]
+            except KeyError as exc:
+                raise ValueError(f"Unknown environment: {environment}") from exc
+        elif base_url_env is not None:
+            base_url = base_url_env
+        else:
+            self._environment = environment = "production"
+            try:
+                base_url = ENVIRONMENTS[environment]
+            except KeyError as exc:
+                raise ValueError(f"Unknown environment: {environment}") from exc
         custom_headers_env = os.environ.get("PROFOUND_CUSTOM_HEADERS")
         if custom_headers_env is not None:
             parsed: dict[str, str] = {}
@@ -124,10 +168,10 @@ class Profound(SyncAPIClient):
         self._default_stream_cls = Stream
 
     @cached_property
-    def organizations(self) -> "OrganizationsResource":
+    def organization(self) -> "OrganizationResource":
         with _RESOURCE_IMPORT_LOCK:
-            from .resources.organizations import OrganizationsResource
-        return OrganizationsResource(self)
+            from .resources.organization import OrganizationResource
+        return OrganizationResource(self)
 
     @cached_property
     def prompts(self) -> "PromptsResource":
@@ -148,16 +192,40 @@ class Profound(SyncAPIClient):
         return ContentResource(self)
 
     @cached_property
-    def agents(self) -> "AgentsResource":
-        with _RESOURCE_IMPORT_LOCK:
-            from .resources.agents import AgentsResource
-        return AgentsResource(self)
-
-    @cached_property
     def knowledge_bases(self) -> "KnowledgeBasesResource":
         with _RESOURCE_IMPORT_LOCK:
             from .resources.knowledge_bases import KnowledgeBasesResource
         return KnowledgeBasesResource(self)
+
+    @cached_property
+    def integrations(self) -> "IntegrationsResource":
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.integrations import IntegrationsResource
+        return IntegrationsResource(self)
+
+    @cached_property
+    def documents(self) -> "DocumentsResource":
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.documents import DocumentsResource
+        return DocumentsResource(self)
+
+    @cached_property
+    def open_ai_ads(self) -> "OpenAIAdsResource":
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.open_ai_ads import OpenAIAdsResource
+        return OpenAIAdsResource(self)
+
+    @cached_property
+    def projects(self) -> "ProjectsResource":
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.projects import ProjectsResource
+        return ProjectsResource(self)
+
+    @cached_property
+    def agents(self) -> "AgentsResource":
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.agents import AgentsResource
+        return AgentsResource(self)
 
     @cached_property
     def with_raw_response(self) -> ProfoundWithRawResponse:
@@ -238,6 +306,7 @@ class Profound(SyncAPIClient):
         *,
         access_token: str | None = None,
         api_key: str | None = None,
+        environment: Literal["production", "development"] | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.Client | None = None,
@@ -264,10 +333,15 @@ class Profound(SyncAPIClient):
         elif set_default_query is not None:
             params = set_default_query
         http_client = http_client or self._client
+        copied_base_url: str | httpx.URL | None = base_url if base_url is not None else self.base_url
+        # Environment overrides must resolve their own URL instead of reusing this client's host.
+        if environment is not None and base_url is None:
+            copied_base_url = None
         return self.__class__(
             access_token=access_token or self.access_token,
             api_key=api_key or self.api_key,
-            base_url=base_url or self.base_url,
+            environment=environment if environment is not None else self._environment,
+            base_url=copied_base_url,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
             max_retries=max_retries if is_given(max_retries) else self.max_retries,
@@ -305,12 +379,15 @@ class AsyncProfound(AsyncAPIClient):
     access_token: str | None
     api_key: str | None
 
+    _environment: Literal["production", "development"] | NotGiven
+
     def __init__(
         self,
         *,
         access_token: str | None = None,
         api_key: str | None = None,
-        base_url: str | httpx.URL | None = None,
+        environment: Literal["production", "development"] | NotGiven = not_given,
+        base_url: str | httpx.URL | None | NotGiven = not_given,
         timeout: float | Timeout | None | NotGiven = not_given,
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
@@ -341,10 +418,30 @@ class AsyncProfound(AsyncAPIClient):
         if api_key is None:
             api_key = os.environ.get("PROFOUND_API_KEY")
         self.api_key = api_key
-        if base_url is None:
-            base_url = os.environ.get("PROFOUND_BASE_URL")
-        if base_url is None:
-            base_url = "https://api.tryprofound.com"
+        self._environment = environment
+        base_url_env = os.environ.get("PROFOUND_BASE_URL")
+        if is_given(base_url) and base_url is not None:
+            # An explicit `base_url` wins over `environment` so callers can point a
+            # pinned-environment client at a proxy or mock, and so `copy()` can pass
+            # both the inherited host and the inherited environment without conflict.
+            base_url = cast("str | httpx.URL", base_url)
+        elif is_given(environment):
+            if base_url_env and base_url is not None:
+                raise ValueError(
+                    "Ambiguous URL; the base URL environment variable and the `environment` argument are both set. Pass base_url=None to use the environment.",
+                )
+            try:
+                base_url = ENVIRONMENTS[environment]
+            except KeyError as exc:
+                raise ValueError(f"Unknown environment: {environment}") from exc
+        elif base_url_env is not None:
+            base_url = base_url_env
+        else:
+            self._environment = environment = "production"
+            try:
+                base_url = ENVIRONMENTS[environment]
+            except KeyError as exc:
+                raise ValueError(f"Unknown environment: {environment}") from exc
         custom_headers_env = os.environ.get("PROFOUND_CUSTOM_HEADERS")
         if custom_headers_env is not None:
             parsed: dict[str, str] = {}
@@ -367,10 +464,10 @@ class AsyncProfound(AsyncAPIClient):
         self._default_stream_cls = AsyncStream
 
     @cached_property
-    def organizations(self) -> "AsyncOrganizationsResource":
+    def organization(self) -> "AsyncOrganizationResource":
         with _RESOURCE_IMPORT_LOCK:
-            from .resources.organizations import AsyncOrganizationsResource
-        return AsyncOrganizationsResource(self)
+            from .resources.organization import AsyncOrganizationResource
+        return AsyncOrganizationResource(self)
 
     @cached_property
     def prompts(self) -> "AsyncPromptsResource":
@@ -391,16 +488,40 @@ class AsyncProfound(AsyncAPIClient):
         return AsyncContentResource(self)
 
     @cached_property
-    def agents(self) -> "AsyncAgentsResource":
-        with _RESOURCE_IMPORT_LOCK:
-            from .resources.agents import AsyncAgentsResource
-        return AsyncAgentsResource(self)
-
-    @cached_property
     def knowledge_bases(self) -> "AsyncKnowledgeBasesResource":
         with _RESOURCE_IMPORT_LOCK:
             from .resources.knowledge_bases import AsyncKnowledgeBasesResource
         return AsyncKnowledgeBasesResource(self)
+
+    @cached_property
+    def integrations(self) -> "AsyncIntegrationsResource":
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.integrations import AsyncIntegrationsResource
+        return AsyncIntegrationsResource(self)
+
+    @cached_property
+    def documents(self) -> "AsyncDocumentsResource":
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.documents import AsyncDocumentsResource
+        return AsyncDocumentsResource(self)
+
+    @cached_property
+    def open_ai_ads(self) -> "AsyncOpenAIAdsResource":
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.open_ai_ads import AsyncOpenAIAdsResource
+        return AsyncOpenAIAdsResource(self)
+
+    @cached_property
+    def projects(self) -> "AsyncProjectsResource":
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.projects import AsyncProjectsResource
+        return AsyncProjectsResource(self)
+
+    @cached_property
+    def agents(self) -> "AsyncAgentsResource":
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.agents import AsyncAgentsResource
+        return AsyncAgentsResource(self)
 
     @cached_property
     def with_raw_response(self) -> AsyncProfoundWithRawResponse:
@@ -481,6 +602,7 @@ class AsyncProfound(AsyncAPIClient):
         *,
         access_token: str | None = None,
         api_key: str | None = None,
+        environment: Literal["production", "development"] | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.AsyncClient | None = None,
@@ -507,10 +629,15 @@ class AsyncProfound(AsyncAPIClient):
         elif set_default_query is not None:
             params = set_default_query
         http_client = http_client or self._client
+        copied_base_url: str | httpx.URL | None = base_url if base_url is not None else self.base_url
+        # Environment overrides must resolve their own URL instead of reusing this client's host.
+        if environment is not None and base_url is None:
+            copied_base_url = None
         return self.__class__(
             access_token=access_token or self.access_token,
             api_key=api_key or self.api_key,
-            base_url=base_url or self.base_url,
+            environment=environment if environment is not None else self._environment,
+            base_url=copied_base_url,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
             max_retries=max_retries if is_given(max_retries) else self.max_retries,
@@ -550,10 +677,10 @@ class ProfoundWithRawResponse:
         self._client = client
 
     @cached_property
-    def organizations(self) -> organizations.OrganizationsResourceWithRawResponse:
+    def organization(self) -> organization.OrganizationResourceWithRawResponse:
         with _RESOURCE_IMPORT_LOCK:
-            from .resources.organizations import OrganizationsResourceWithRawResponse
-        return OrganizationsResourceWithRawResponse(self._client.organizations)
+            from .resources.organization import OrganizationResourceWithRawResponse
+        return OrganizationResourceWithRawResponse(self._client.organization)
 
     @cached_property
     def prompts(self) -> prompts.PromptsResourceWithRawResponse:
@@ -574,16 +701,40 @@ class ProfoundWithRawResponse:
         return ContentResourceWithRawResponse(self._client.content)
 
     @cached_property
-    def agents(self) -> agents.AgentsResourceWithRawResponse:
-        with _RESOURCE_IMPORT_LOCK:
-            from .resources.agents import AgentsResourceWithRawResponse
-        return AgentsResourceWithRawResponse(self._client.agents)
-
-    @cached_property
     def knowledge_bases(self) -> knowledge_bases.KnowledgeBasesResourceWithRawResponse:
         with _RESOURCE_IMPORT_LOCK:
             from .resources.knowledge_bases import KnowledgeBasesResourceWithRawResponse
         return KnowledgeBasesResourceWithRawResponse(self._client.knowledge_bases)
+
+    @cached_property
+    def integrations(self) -> integrations.IntegrationsResourceWithRawResponse:
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.integrations import IntegrationsResourceWithRawResponse
+        return IntegrationsResourceWithRawResponse(self._client.integrations)
+
+    @cached_property
+    def documents(self) -> documents.DocumentsResourceWithRawResponse:
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.documents import DocumentsResourceWithRawResponse
+        return DocumentsResourceWithRawResponse(self._client.documents)
+
+    @cached_property
+    def open_ai_ads(self) -> open_ai_ads.OpenAIAdsResourceWithRawResponse:
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.open_ai_ads import OpenAIAdsResourceWithRawResponse
+        return OpenAIAdsResourceWithRawResponse(self._client.open_ai_ads)
+
+    @cached_property
+    def projects(self) -> projects.ProjectsResourceWithRawResponse:
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.projects import ProjectsResourceWithRawResponse
+        return ProjectsResourceWithRawResponse(self._client.projects)
+
+    @cached_property
+    def agents(self) -> agents.AgentsResourceWithRawResponse:
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.agents import AgentsResourceWithRawResponse
+        return AgentsResourceWithRawResponse(self._client.agents)
 
 
 class AsyncProfoundWithRawResponse:
@@ -593,10 +744,10 @@ class AsyncProfoundWithRawResponse:
         self._client = client
 
     @cached_property
-    def organizations(self) -> organizations.AsyncOrganizationsResourceWithRawResponse:
+    def organization(self) -> organization.AsyncOrganizationResourceWithRawResponse:
         with _RESOURCE_IMPORT_LOCK:
-            from .resources.organizations import AsyncOrganizationsResourceWithRawResponse
-        return AsyncOrganizationsResourceWithRawResponse(self._client.organizations)
+            from .resources.organization import AsyncOrganizationResourceWithRawResponse
+        return AsyncOrganizationResourceWithRawResponse(self._client.organization)
 
     @cached_property
     def prompts(self) -> prompts.AsyncPromptsResourceWithRawResponse:
@@ -617,16 +768,40 @@ class AsyncProfoundWithRawResponse:
         return AsyncContentResourceWithRawResponse(self._client.content)
 
     @cached_property
-    def agents(self) -> agents.AsyncAgentsResourceWithRawResponse:
-        with _RESOURCE_IMPORT_LOCK:
-            from .resources.agents import AsyncAgentsResourceWithRawResponse
-        return AsyncAgentsResourceWithRawResponse(self._client.agents)
-
-    @cached_property
     def knowledge_bases(self) -> knowledge_bases.AsyncKnowledgeBasesResourceWithRawResponse:
         with _RESOURCE_IMPORT_LOCK:
             from .resources.knowledge_bases import AsyncKnowledgeBasesResourceWithRawResponse
         return AsyncKnowledgeBasesResourceWithRawResponse(self._client.knowledge_bases)
+
+    @cached_property
+    def integrations(self) -> integrations.AsyncIntegrationsResourceWithRawResponse:
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.integrations import AsyncIntegrationsResourceWithRawResponse
+        return AsyncIntegrationsResourceWithRawResponse(self._client.integrations)
+
+    @cached_property
+    def documents(self) -> documents.AsyncDocumentsResourceWithRawResponse:
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.documents import AsyncDocumentsResourceWithRawResponse
+        return AsyncDocumentsResourceWithRawResponse(self._client.documents)
+
+    @cached_property
+    def open_ai_ads(self) -> open_ai_ads.AsyncOpenAIAdsResourceWithRawResponse:
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.open_ai_ads import AsyncOpenAIAdsResourceWithRawResponse
+        return AsyncOpenAIAdsResourceWithRawResponse(self._client.open_ai_ads)
+
+    @cached_property
+    def projects(self) -> projects.AsyncProjectsResourceWithRawResponse:
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.projects import AsyncProjectsResourceWithRawResponse
+        return AsyncProjectsResourceWithRawResponse(self._client.projects)
+
+    @cached_property
+    def agents(self) -> agents.AsyncAgentsResourceWithRawResponse:
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.agents import AsyncAgentsResourceWithRawResponse
+        return AsyncAgentsResourceWithRawResponse(self._client.agents)
 
 
 class ProfoundWithStreamedResponse:
@@ -636,10 +811,10 @@ class ProfoundWithStreamedResponse:
         self._client = client
 
     @cached_property
-    def organizations(self) -> organizations.OrganizationsResourceWithStreamingResponse:
+    def organization(self) -> organization.OrganizationResourceWithStreamingResponse:
         with _RESOURCE_IMPORT_LOCK:
-            from .resources.organizations import OrganizationsResourceWithStreamingResponse
-        return OrganizationsResourceWithStreamingResponse(self._client.organizations)
+            from .resources.organization import OrganizationResourceWithStreamingResponse
+        return OrganizationResourceWithStreamingResponse(self._client.organization)
 
     @cached_property
     def prompts(self) -> prompts.PromptsResourceWithStreamingResponse:
@@ -660,16 +835,40 @@ class ProfoundWithStreamedResponse:
         return ContentResourceWithStreamingResponse(self._client.content)
 
     @cached_property
-    def agents(self) -> agents.AgentsResourceWithStreamingResponse:
-        with _RESOURCE_IMPORT_LOCK:
-            from .resources.agents import AgentsResourceWithStreamingResponse
-        return AgentsResourceWithStreamingResponse(self._client.agents)
-
-    @cached_property
     def knowledge_bases(self) -> knowledge_bases.KnowledgeBasesResourceWithStreamingResponse:
         with _RESOURCE_IMPORT_LOCK:
             from .resources.knowledge_bases import KnowledgeBasesResourceWithStreamingResponse
         return KnowledgeBasesResourceWithStreamingResponse(self._client.knowledge_bases)
+
+    @cached_property
+    def integrations(self) -> integrations.IntegrationsResourceWithStreamingResponse:
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.integrations import IntegrationsResourceWithStreamingResponse
+        return IntegrationsResourceWithStreamingResponse(self._client.integrations)
+
+    @cached_property
+    def documents(self) -> documents.DocumentsResourceWithStreamingResponse:
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.documents import DocumentsResourceWithStreamingResponse
+        return DocumentsResourceWithStreamingResponse(self._client.documents)
+
+    @cached_property
+    def open_ai_ads(self) -> open_ai_ads.OpenAIAdsResourceWithStreamingResponse:
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.open_ai_ads import OpenAIAdsResourceWithStreamingResponse
+        return OpenAIAdsResourceWithStreamingResponse(self._client.open_ai_ads)
+
+    @cached_property
+    def projects(self) -> projects.ProjectsResourceWithStreamingResponse:
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.projects import ProjectsResourceWithStreamingResponse
+        return ProjectsResourceWithStreamingResponse(self._client.projects)
+
+    @cached_property
+    def agents(self) -> agents.AgentsResourceWithStreamingResponse:
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.agents import AgentsResourceWithStreamingResponse
+        return AgentsResourceWithStreamingResponse(self._client.agents)
 
 
 class AsyncProfoundWithStreamedResponse:
@@ -679,10 +878,10 @@ class AsyncProfoundWithStreamedResponse:
         self._client = client
 
     @cached_property
-    def organizations(self) -> organizations.AsyncOrganizationsResourceWithStreamingResponse:
+    def organization(self) -> organization.AsyncOrganizationResourceWithStreamingResponse:
         with _RESOURCE_IMPORT_LOCK:
-            from .resources.organizations import AsyncOrganizationsResourceWithStreamingResponse
-        return AsyncOrganizationsResourceWithStreamingResponse(self._client.organizations)
+            from .resources.organization import AsyncOrganizationResourceWithStreamingResponse
+        return AsyncOrganizationResourceWithStreamingResponse(self._client.organization)
 
     @cached_property
     def prompts(self) -> prompts.AsyncPromptsResourceWithStreamingResponse:
@@ -703,16 +902,40 @@ class AsyncProfoundWithStreamedResponse:
         return AsyncContentResourceWithStreamingResponse(self._client.content)
 
     @cached_property
-    def agents(self) -> agents.AsyncAgentsResourceWithStreamingResponse:
-        with _RESOURCE_IMPORT_LOCK:
-            from .resources.agents import AsyncAgentsResourceWithStreamingResponse
-        return AsyncAgentsResourceWithStreamingResponse(self._client.agents)
-
-    @cached_property
     def knowledge_bases(self) -> knowledge_bases.AsyncKnowledgeBasesResourceWithStreamingResponse:
         with _RESOURCE_IMPORT_LOCK:
             from .resources.knowledge_bases import AsyncKnowledgeBasesResourceWithStreamingResponse
         return AsyncKnowledgeBasesResourceWithStreamingResponse(self._client.knowledge_bases)
+
+    @cached_property
+    def integrations(self) -> integrations.AsyncIntegrationsResourceWithStreamingResponse:
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.integrations import AsyncIntegrationsResourceWithStreamingResponse
+        return AsyncIntegrationsResourceWithStreamingResponse(self._client.integrations)
+
+    @cached_property
+    def documents(self) -> documents.AsyncDocumentsResourceWithStreamingResponse:
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.documents import AsyncDocumentsResourceWithStreamingResponse
+        return AsyncDocumentsResourceWithStreamingResponse(self._client.documents)
+
+    @cached_property
+    def open_ai_ads(self) -> open_ai_ads.AsyncOpenAIAdsResourceWithStreamingResponse:
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.open_ai_ads import AsyncOpenAIAdsResourceWithStreamingResponse
+        return AsyncOpenAIAdsResourceWithStreamingResponse(self._client.open_ai_ads)
+
+    @cached_property
+    def projects(self) -> projects.AsyncProjectsResourceWithStreamingResponse:
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.projects import AsyncProjectsResourceWithStreamingResponse
+        return AsyncProjectsResourceWithStreamingResponse(self._client.projects)
+
+    @cached_property
+    def agents(self) -> agents.AsyncAgentsResourceWithStreamingResponse:
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.agents import AsyncAgentsResourceWithStreamingResponse
+        return AsyncAgentsResourceWithStreamingResponse(self._client.agents)
 
 
 # Alias names for the documented `Client` / `AsyncClient` symbols.

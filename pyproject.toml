@@ -5,7 +5,7 @@ description = "profound Python client."
 readme = "README.md"
 license = "Apache-2.0"
 authors = [
-  { name = "Profound" },
+  { name = "Profound", email = "support@tryprofound.com" },
 ]
 requires-python = ">= 3.9"
 dependencies = [
@@ -16,6 +16,9 @@ dependencies = [
   "distro>=1.7.0, <2",
   "sniffio",
 ]
+
+[project.urls]
+Documentation = "https://docs.tryprofound.com"
 
 [project.optional-dependencies]
 aiohttp = ["aiohttp", "httpx_aiohttp>=0.1.9"]

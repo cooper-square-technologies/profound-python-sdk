@@ -20,10 +20,10 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ..._streaming import Stream, AsyncStream
-from ...types.reports.web_search_result_query_response import WebSearchResultQueryResponse
+from ...types.reports.web_search_result_query_v1_post_response import WebSearchResultQueryV1PostResponse
 from ...types.shared_params.pagination import Pagination
-from ...types.reports import web_search_result_query_params, web_search_result_stream_params
-from ...types.reports.web_search_result_stream_response import WebSearchResultStreamResponse
+from ...types.reports import web_search_result_query_v1_post_params, web_search_result_stream_v1_stream_post_params
+from ...types.reports.web_search_result_stream_v1_stream_post_response import WebSearchResultStreamV1StreamPostResponse
 
 __all__ = ["WebSearchResultsResource", "AsyncWebSearchResultsResource"]
 
@@ -37,7 +37,7 @@ class WebSearchResultsResource(SyncAPIResource):
     def with_streaming_response(self) -> WebSearchResultsResourceWithStreamingResponse:
         return WebSearchResultsResourceWithStreamingResponse(self)
 
-    def query(
+    def query_v1_post(
         self,
         *,
         date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
@@ -66,14 +66,14 @@ class WebSearchResultsResource(SyncAPIResource):
         category_id: str,
         start_date: Union[str, datetime],
         end_date: Union[str, datetime],
-        filters: Iterable[web_search_result_query_params.Filter] | Omit = omit,
+        filters: Iterable[web_search_result_query_v1_post_params.Filter] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> WebSearchResultQueryResponse:
+    ) -> WebSearchResultQueryV1PostResponse:
         """
         Get web search results for a given category.
 
@@ -93,11 +93,11 @@ class WebSearchResultsResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            WebSearchResultQueryResponse: Successful Response
+            WebSearchResultQueryV1PostResponse: Successful Response
 
         Example:
             ```python
-            web_search_result = client.reports.web_search_results.query(
+            web_search_result = client.reports.web_search_results.query_v1_post(
                 date_interval="day",
                 dimensions=[],
                 metrics=[],
@@ -122,15 +122,15 @@ class WebSearchResultsResource(SyncAPIResource):
                     "end_date": end_date,
                     "filters": filters,
                 },
-                web_search_result_query_params.WebSearchResultQueryParams,
+                web_search_result_query_v1_post_params.WebSearchResultQueryV1PostParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=WebSearchResultQueryResponse,
+            cast_to=WebSearchResultQueryV1PostResponse,
         )
 
-    def stream(
+    def stream_v1_stream_post(
         self,
         *,
         date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
@@ -159,14 +159,14 @@ class WebSearchResultsResource(SyncAPIResource):
         category_id: str,
         start_date: Union[str, datetime],
         end_date: Union[str, datetime],
-        filters: Iterable[web_search_result_stream_params.Filter] | Omit = omit,
+        filters: Iterable[web_search_result_stream_v1_stream_post_params.Filter] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Stream[WebSearchResultStreamResponse]:
+    ) -> Stream[WebSearchResultStreamV1StreamPostResponse]:
         """
         Stream Web Search Results
 
@@ -186,11 +186,11 @@ class WebSearchResultsResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            Stream[WebSearchResultStreamResponse]: Server-sent events stream. Emits a `summary` event first, then one `row` event per streamed row.
+            Stream[WebSearchResultStreamV1StreamPostResponse]: Server-sent events stream. Emits a `summary` event first, then one `row` event per streamed row.
 
         Example:
             ```python
-            stream = client.reports.web_search_results.stream(
+            stream = client.reports.web_search_results.stream_v1_stream_post(
                 date_interval="day",
                 dimensions=[],
                 metrics=[],
@@ -219,14 +219,14 @@ class WebSearchResultsResource(SyncAPIResource):
                     "end_date": end_date,
                     "filters": filters,
                 },
-                web_search_result_stream_params.WebSearchResultStreamParams,
+                web_search_result_stream_v1_stream_post_params.WebSearchResultStreamV1StreamPostParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=WebSearchResultStreamResponse,
+            cast_to=WebSearchResultStreamV1StreamPostResponse,
             stream=True,
-            stream_cls=Stream[WebSearchResultStreamResponse],
+            stream_cls=Stream[WebSearchResultStreamV1StreamPostResponse],
         )
 
 
@@ -239,7 +239,7 @@ class AsyncWebSearchResultsResource(AsyncAPIResource):
     def with_streaming_response(self) -> AsyncWebSearchResultsResourceWithStreamingResponse:
         return AsyncWebSearchResultsResourceWithStreamingResponse(self)
 
-    async def query(
+    async def query_v1_post(
         self,
         *,
         date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
@@ -268,14 +268,14 @@ class AsyncWebSearchResultsResource(AsyncAPIResource):
         category_id: str,
         start_date: Union[str, datetime],
         end_date: Union[str, datetime],
-        filters: Iterable[web_search_result_query_params.Filter] | Omit = omit,
+        filters: Iterable[web_search_result_query_v1_post_params.Filter] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> WebSearchResultQueryResponse:
+    ) -> WebSearchResultQueryV1PostResponse:
         """
         Get web search results for a given category.
 
@@ -295,11 +295,11 @@ class AsyncWebSearchResultsResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            WebSearchResultQueryResponse: Successful Response
+            WebSearchResultQueryV1PostResponse: Successful Response
 
         Example:
             ```python
-            web_search_result = await client.reports.web_search_results.query(
+            web_search_result = await client.reports.web_search_results.query_v1_post(
                 date_interval="day",
                 dimensions=[],
                 metrics=[],
@@ -324,15 +324,15 @@ class AsyncWebSearchResultsResource(AsyncAPIResource):
                     "end_date": end_date,
                     "filters": filters,
                 },
-                web_search_result_query_params.WebSearchResultQueryParams,
+                web_search_result_query_v1_post_params.WebSearchResultQueryV1PostParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=WebSearchResultQueryResponse,
+            cast_to=WebSearchResultQueryV1PostResponse,
         )
 
-    async def stream(
+    async def stream_v1_stream_post(
         self,
         *,
         date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
@@ -361,14 +361,14 @@ class AsyncWebSearchResultsResource(AsyncAPIResource):
         category_id: str,
         start_date: Union[str, datetime],
         end_date: Union[str, datetime],
-        filters: Iterable[web_search_result_stream_params.Filter] | Omit = omit,
+        filters: Iterable[web_search_result_stream_v1_stream_post_params.Filter] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AsyncStream[WebSearchResultStreamResponse]:
+    ) -> AsyncStream[WebSearchResultStreamV1StreamPostResponse]:
         """
         Stream Web Search Results
 
@@ -388,11 +388,11 @@ class AsyncWebSearchResultsResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            AsyncStream[WebSearchResultStreamResponse]: Server-sent events stream. Emits a `summary` event first, then one `row` event per streamed row.
+            AsyncStream[WebSearchResultStreamV1StreamPostResponse]: Server-sent events stream. Emits a `summary` event first, then one `row` event per streamed row.
 
         Example:
             ```python
-            stream = await client.reports.web_search_results.stream(
+            stream = await client.reports.web_search_results.stream_v1_stream_post(
                 date_interval="day",
                 dimensions=[],
                 metrics=[],
@@ -421,14 +421,14 @@ class AsyncWebSearchResultsResource(AsyncAPIResource):
                     "end_date": end_date,
                     "filters": filters,
                 },
-                web_search_result_stream_params.WebSearchResultStreamParams,
+                web_search_result_stream_v1_stream_post_params.WebSearchResultStreamV1StreamPostParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=WebSearchResultStreamResponse,
+            cast_to=WebSearchResultStreamV1StreamPostResponse,
             stream=True,
-            stream_cls=AsyncStream[WebSearchResultStreamResponse],
+            stream_cls=AsyncStream[WebSearchResultStreamV1StreamPostResponse],
         )
 
 
@@ -436,11 +436,11 @@ class WebSearchResultsResourceWithRawResponse:
     def __init__(self, web_search_results: WebSearchResultsResource) -> None:
         self._web_search_results = web_search_results
 
-        self.query = to_raw_response_wrapper(
-            web_search_results.query,
+        self.query_v1_post = to_raw_response_wrapper(
+            web_search_results.query_v1_post,
         )
-        self.stream = to_raw_response_wrapper(
-            web_search_results.stream,
+        self.stream_v1_stream_post = to_raw_response_wrapper(
+            web_search_results.stream_v1_stream_post,
         )
 
 
@@ -448,11 +448,11 @@ class AsyncWebSearchResultsResourceWithRawResponse:
     def __init__(self, web_search_results: AsyncWebSearchResultsResource) -> None:
         self._web_search_results = web_search_results
 
-        self.query = async_to_raw_response_wrapper(
-            web_search_results.query,
+        self.query_v1_post = async_to_raw_response_wrapper(
+            web_search_results.query_v1_post,
         )
-        self.stream = async_to_raw_response_wrapper(
-            web_search_results.stream,
+        self.stream_v1_stream_post = async_to_raw_response_wrapper(
+            web_search_results.stream_v1_stream_post,
         )
 
 
@@ -460,11 +460,11 @@ class WebSearchResultsResourceWithStreamingResponse:
     def __init__(self, web_search_results: WebSearchResultsResource) -> None:
         self._web_search_results = web_search_results
 
-        self.query = to_streamed_response_wrapper(
-            web_search_results.query,
+        self.query_v1_post = to_streamed_response_wrapper(
+            web_search_results.query_v1_post,
         )
-        self.stream = to_streamed_response_wrapper(
-            web_search_results.stream,
+        self.stream_v1_stream_post = to_streamed_response_wrapper(
+            web_search_results.stream_v1_stream_post,
         )
 
 
@@ -472,9 +472,9 @@ class AsyncWebSearchResultsResourceWithStreamingResponse:
     def __init__(self, web_search_results: AsyncWebSearchResultsResource) -> None:
         self._web_search_results = web_search_results
 
-        self.query = async_to_streamed_response_wrapper(
-            web_search_results.query,
+        self.query_v1_post = async_to_streamed_response_wrapper(
+            web_search_results.query_v1_post,
         )
-        self.stream = async_to_streamed_response_wrapper(
-            web_search_results.stream,
+        self.stream_v1_stream_post = async_to_streamed_response_wrapper(
+            web_search_results.stream_v1_stream_post,
         )
