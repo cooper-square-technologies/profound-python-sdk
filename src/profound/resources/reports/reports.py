@@ -356,6 +356,7 @@ class ReportsResource(SyncAPIResource):
         pagination: Pagination | Omit = omit,
         tags: SequenceNotStr[str] | Omit = omit,
         timezone: str | Omit = omit,
+        view_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -367,7 +368,8 @@ class ReportsResource(SyncAPIResource):
         Get bot traffic report from the hourly aggregated materialized view (UTC-based).
 
         Supports date_interval="hour", calendar intervals through "year", "quarter", and
-        "relative_week".
+        "relative_week". When `view_id` is provided, the query is scoped to that domain
+        segment's hosts and paths.
 
         Metrics:
 
@@ -415,6 +417,9 @@ class ReportsResource(SyncAPIResource):
 
           timezone: IANA timezone name for date bucketing and filter boundaries.
 
+          view_id: Domain segment UUID used to scope the query to a configured subset of hosts and
+              paths.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -441,6 +446,7 @@ class ReportsResource(SyncAPIResource):
                     "pagination": pagination,
                     "tags": tags,
                     "timezone": timezone,
+                    "view_id": view_id,
                 },
                 report_get_bots_report_v2_params.ReportGetBotsReportV2Params,
             ),
@@ -554,6 +560,7 @@ class ReportsResource(SyncAPIResource):
         organization_id: Optional[str] | Omit = omit,
         pagination: Pagination | Omit = omit,
         timezone: str | Omit = omit,
+        view_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -566,7 +573,8 @@ class ReportsResource(SyncAPIResource):
         (UTC-based).
 
         Supports date_interval="hour", calendar intervals through "year", "quarter", and
-        "relative_week".
+        "relative_week". When `view_id` is provided, the query is scoped to that domain
+        segment's hosts and paths.
 
         Args:
           domain: Domain to query logs for.
@@ -600,6 +608,9 @@ class ReportsResource(SyncAPIResource):
 
           timezone: IANA timezone name for date bucketing and filter boundaries.
 
+          view_id: Domain segment UUID used to scope the query to a configured subset of hosts and
+              paths.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -624,6 +635,7 @@ class ReportsResource(SyncAPIResource):
                     "organization_id": organization_id,
                     "pagination": pagination,
                     "timezone": timezone,
+                    "view_id": view_id,
                 },
                 report_get_referrals_report_v2_params.ReportGetReferralsReportV2Params,
             ),
@@ -2175,6 +2187,7 @@ class AsyncReportsResource(AsyncAPIResource):
         pagination: Pagination | Omit = omit,
         tags: SequenceNotStr[str] | Omit = omit,
         timezone: str | Omit = omit,
+        view_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -2186,7 +2199,8 @@ class AsyncReportsResource(AsyncAPIResource):
         Get bot traffic report from the hourly aggregated materialized view (UTC-based).
 
         Supports date_interval="hour", calendar intervals through "year", "quarter", and
-        "relative_week".
+        "relative_week". When `view_id` is provided, the query is scoped to that domain
+        segment's hosts and paths.
 
         Metrics:
 
@@ -2234,6 +2248,9 @@ class AsyncReportsResource(AsyncAPIResource):
 
           timezone: IANA timezone name for date bucketing and filter boundaries.
 
+          view_id: Domain segment UUID used to scope the query to a configured subset of hosts and
+              paths.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -2260,6 +2277,7 @@ class AsyncReportsResource(AsyncAPIResource):
                     "pagination": pagination,
                     "tags": tags,
                     "timezone": timezone,
+                    "view_id": view_id,
                 },
                 report_get_bots_report_v2_params.ReportGetBotsReportV2Params,
             ),
@@ -2373,6 +2391,7 @@ class AsyncReportsResource(AsyncAPIResource):
         organization_id: Optional[str] | Omit = omit,
         pagination: Pagination | Omit = omit,
         timezone: str | Omit = omit,
+        view_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -2385,7 +2404,8 @@ class AsyncReportsResource(AsyncAPIResource):
         (UTC-based).
 
         Supports date_interval="hour", calendar intervals through "year", "quarter", and
-        "relative_week".
+        "relative_week". When `view_id` is provided, the query is scoped to that domain
+        segment's hosts and paths.
 
         Args:
           domain: Domain to query logs for.
@@ -2419,6 +2439,9 @@ class AsyncReportsResource(AsyncAPIResource):
 
           timezone: IANA timezone name for date bucketing and filter boundaries.
 
+          view_id: Domain segment UUID used to scope the query to a configured subset of hosts and
+              paths.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -2443,6 +2466,7 @@ class AsyncReportsResource(AsyncAPIResource):
                     "organization_id": organization_id,
                     "pagination": pagination,
                     "timezone": timezone,
+                    "view_id": view_id,
                 },
                 report_get_referrals_report_v2_params.ReportGetReferralsReportV2Params,
             ),
