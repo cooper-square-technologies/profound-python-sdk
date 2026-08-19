@@ -44,6 +44,7 @@ if TYPE_CHECKING:
         open_ai_ads,
         projects,
         agents,
+        domain_segments,
     )
     from .resources.organization import OrganizationResource, AsyncOrganizationResource
     from .resources.prompts import PromptsResource, AsyncPromptsResource
@@ -55,6 +56,7 @@ if TYPE_CHECKING:
     from .resources.open_ai_ads import OpenAIAdsResource, AsyncOpenAIAdsResource
     from .resources.projects import ProjectsResource, AsyncProjectsResource
     from .resources.agents import AgentsResource, AsyncAgentsResource
+    from .resources.domain_segments import DomainSegmentsResource, AsyncDomainSegmentsResource
 
 # Serializes lazy resource imports so concurrent cold access from multiple
 # threads cannot deadlock on CPython import locks (see CPython 3.14).
@@ -226,6 +228,12 @@ class Profound(SyncAPIClient):
         with _RESOURCE_IMPORT_LOCK:
             from .resources.agents import AgentsResource
         return AgentsResource(self)
+
+    @cached_property
+    def domain_segments(self) -> "DomainSegmentsResource":
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.domain_segments import DomainSegmentsResource
+        return DomainSegmentsResource(self)
 
     @cached_property
     def with_raw_response(self) -> ProfoundWithRawResponse:
@@ -524,6 +532,12 @@ class AsyncProfound(AsyncAPIClient):
         return AsyncAgentsResource(self)
 
     @cached_property
+    def domain_segments(self) -> "AsyncDomainSegmentsResource":
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.domain_segments import AsyncDomainSegmentsResource
+        return AsyncDomainSegmentsResource(self)
+
+    @cached_property
     def with_raw_response(self) -> AsyncProfoundWithRawResponse:
         return AsyncProfoundWithRawResponse(self)
 
@@ -736,6 +750,12 @@ class ProfoundWithRawResponse:
             from .resources.agents import AgentsResourceWithRawResponse
         return AgentsResourceWithRawResponse(self._client.agents)
 
+    @cached_property
+    def domain_segments(self) -> domain_segments.DomainSegmentsResourceWithRawResponse:
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.domain_segments import DomainSegmentsResourceWithRawResponse
+        return DomainSegmentsResourceWithRawResponse(self._client.domain_segments)
+
 
 class AsyncProfoundWithRawResponse:
     _client: AsyncProfound
@@ -802,6 +822,12 @@ class AsyncProfoundWithRawResponse:
         with _RESOURCE_IMPORT_LOCK:
             from .resources.agents import AsyncAgentsResourceWithRawResponse
         return AsyncAgentsResourceWithRawResponse(self._client.agents)
+
+    @cached_property
+    def domain_segments(self) -> domain_segments.AsyncDomainSegmentsResourceWithRawResponse:
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.domain_segments import AsyncDomainSegmentsResourceWithRawResponse
+        return AsyncDomainSegmentsResourceWithRawResponse(self._client.domain_segments)
 
 
 class ProfoundWithStreamedResponse:
@@ -870,6 +896,12 @@ class ProfoundWithStreamedResponse:
             from .resources.agents import AgentsResourceWithStreamingResponse
         return AgentsResourceWithStreamingResponse(self._client.agents)
 
+    @cached_property
+    def domain_segments(self) -> domain_segments.DomainSegmentsResourceWithStreamingResponse:
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.domain_segments import DomainSegmentsResourceWithStreamingResponse
+        return DomainSegmentsResourceWithStreamingResponse(self._client.domain_segments)
+
 
 class AsyncProfoundWithStreamedResponse:
     _client: AsyncProfound
@@ -936,6 +968,12 @@ class AsyncProfoundWithStreamedResponse:
         with _RESOURCE_IMPORT_LOCK:
             from .resources.agents import AsyncAgentsResourceWithStreamingResponse
         return AsyncAgentsResourceWithStreamingResponse(self._client.agents)
+
+    @cached_property
+    def domain_segments(self) -> domain_segments.AsyncDomainSegmentsResourceWithStreamingResponse:
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.domain_segments import AsyncDomainSegmentsResourceWithStreamingResponse
+        return AsyncDomainSegmentsResourceWithStreamingResponse(self._client.domain_segments)
 
 
 # Alias names for the documented `Client` / `AsyncClient` symbols.

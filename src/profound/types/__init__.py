@@ -155,6 +155,8 @@ from .agent_update_v1_id_patch_response import AgentUpdateV1IDPatchResponse as A
 from .agent_update_v1_id_patch_params import AgentUpdateV1IDPatchParams as AgentUpdateV1IDPatchParams
 from .agent_list_graph_v1_graph_get_response import AgentListGraphV1GraphGetResponse as AgentListGraphV1GraphGetResponse
 from .agent_list_graph_v1_graph_get_params import AgentListGraphV1GraphGetParams as AgentListGraphV1GraphGetParams
+from .domain_segment_list_v2_get_response import DomainSegmentListV2GetResponse as DomainSegmentListV2GetResponse
+from .domain_segment_list_v2_get_params import DomainSegmentListV2GetParams as DomainSegmentListV2GetParams
 from .shared.accuracy_trend_point import AccuracyTrendPoint as AccuracyTrendPoint
 from .shared.agent import Agent as Agent
 from .shared.agent_version import AgentVersion as AgentVersion

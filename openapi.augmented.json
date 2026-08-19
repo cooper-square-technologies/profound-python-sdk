@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "External API",
-    "version": "0.58.0",
+    "version": "0.59.0",
     "x-scalar-sdk-installation": [
       {
         "lang": "Python",
@@ -7306,7 +7306,7 @@
           "Human Referrals"
         ],
         "summary": "Get Referrals Report V2",
-        "description": "Get referral traffic report from the hourly aggregated materialized view (UTC-based).\n\nSupports date_interval=\"hour\", calendar intervals through \"year\", \"quarter\", and \"relative_week\".",
+        "description": "Get referral traffic report from the hourly aggregated materialized view (UTC-based).\n\nSupports date_interval=\"hour\", calendar intervals through \"year\", \"quarter\", and \"relative_week\".\nWhen `view_id` is provided, the query is scoped to that domain segment's hosts and paths.",
         "operationId": "get_referrals_report_v2_v2_reports_referrals_post",
         "requestBody": {
           "content": {
@@ -7364,7 +7364,7 @@
           "Bot Traffic Reports"
         ],
         "summary": "Get Bots Report V2",
-        "description": "Get bot traffic report from the hourly aggregated materialized view (UTC-based).\n\nSupports date_interval=\"hour\", calendar intervals through \"year\", \"quarter\", and \"relative_week\".\n\nMetrics:\n- count: unique bot visits\n- citations: unique citation events (ai_assistant bot type)\n- indexing: unique indexing events (index bot type)\n- training: unique training events (ai_training bot type)\n- last_visit: most recent visit timestamp\n\nDimensions:\n- date, path, bot_name, bot_provider, bot_type",
+        "description": "Get bot traffic report from the hourly aggregated materialized view (UTC-based).\n\nSupports date_interval=\"hour\", calendar intervals through \"year\", \"quarter\", and \"relative_week\".\nWhen `view_id` is provided, the query is scoped to that domain segment's hosts and paths.\n\nMetrics:\n- count: unique bot visits\n- citations: unique citation events (ai_assistant bot type)\n- indexing: unique indexing events (index bot type)\n- training: unique training events (ai_training bot type)\n- last_visit: most recent visit timestamp\n\nDimensions:\n- date, path, bot_name, bot_provider, bot_type",
         "operationId": "get_bots_report_v2_v2_reports_bots_post",
         "requestBody": {
           "content": {
@@ -7411,6 +7411,78 @@
             "lang": "Python",
             "label": "Python",
             "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nbot = client.reports.bots.create_v2_v2_post(\n    date_interval=\"day\",\n    dimensions=[],\n    metrics=[],\n    order_by={},\n    domain=\"\",\n    start_date=\"2024-01-01T00:00:00.000Z\",\n    timezone=\"UTC\",\n)\n\nprint(bot)"
+          }
+        ]
+      }
+    },
+    "/v2/domain-segments": {
+      "get": {
+        "tags": [
+          "Agent Analytics Domain Segments"
+        ],
+        "summary": "List Domain Segments",
+        "description": "List domain segments visible to the caller for a workspace.\n\nReturns the id and name of every domain segment the caller can access, so a\ncustomer can discover a `view_id` to pass into agent analytics report queries.",
+        "operationId": "list_domain_segments_v2_domain_segments_get",
+        "security": [
+          {
+            "APIKeyHeader": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "organization_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Organization UUID to list segments for. Required when the caller belongs to multiple organizations.",
+              "title": "Organization Id"
+            },
+            "description": "Organization UUID to list segments for. Required when the caller belongs to multiple organizations."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DomainSegmentListItem"
+                  },
+                  "title": "Response List Domain Segments V2 Domain Segments Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Python",
+            "label": "Python",
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\ndomain_segment = client.domain_segments.list_v2_get()\n\nprint(domain_segment)"
           }
         ]
       }
@@ -10948,7 +11020,7 @@
               }
             ],
             "title": "Citation Details",
-            "description": "Citation metadata. `positions` identify citation locations in the answer text. Each `groups` entry represents a rendered citation pill; `group_position` is the source's position within that pill."
+            "description": "Citation metadata. `positions` identify citation locations in the answer text. Each `groups` entry represents a rendered citation pill, including single-source pills; `group_position` is the source's position within that pill."
           },
           "search_queries": {
             "anyOf": [
@@ -12211,6 +12283,19 @@
             "title": "Timezone",
             "description": "IANA timezone name for date bucketing and filter boundaries.",
             "default": "UTC"
+          },
+          "view_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "View Id",
+            "description": "Domain segment UUID used to scope the query to a configured subset of hosts and paths."
           },
           "metric_filters": {
             "items": {
@@ -15718,6 +15803,25 @@
           "path"
         ],
         "title": "DocumentOperationResponse"
+      },
+      "DomainSegmentListItem": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "title": "DomainSegmentListItem"
       },
       "DomainWithOrganization": {
         "properties": {
@@ -22504,6 +22608,19 @@
             "title": "Timezone",
             "description": "IANA timezone name for date bucketing and filter boundaries.",
             "default": "UTC"
+          },
+          "view_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "View Id",
+            "description": "Domain segment UUID used to scope the query to a configured subset of hosts and paths."
           },
           "metric_filters": {
             "items": {

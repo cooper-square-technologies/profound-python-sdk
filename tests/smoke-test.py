@@ -1215,6 +1215,10 @@ def _smoke_case_124() -> None:
     )
 
 
+def _smoke_case_125() -> None:
+    domain_segment = client.domain_segments.list_v2_get()
+
+
 cases: list[SmokeCase] = [
     {
         "operation": "listV1OrgGet",
@@ -1965,6 +1969,12 @@ cases: list[SmokeCase] = [
         "method": "GET",
         "path": "/v1/agents/{agent_id}/runs/{run_id}",
         "run": _smoke_case_124,
+    },
+    {
+        "operation": "listV2Get",
+        "method": "GET",
+        "path": "/v2/domain-segments",
+        "run": _smoke_case_125,
     },
 ]
 

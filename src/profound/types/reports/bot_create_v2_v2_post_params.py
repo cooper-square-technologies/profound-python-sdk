@@ -54,6 +54,9 @@ class BotCreateV2V2PostParams(TypedDict, total=False):
     timezone: str
     """IANA timezone name for date bucketing and filter boundaries."""
 
+    view_id: Optional[str]
+    """Domain segment UUID used to scope the query to a configured subset of hosts and paths."""
+
     metric_filters: Iterable[NumericMetricFilter]
     """Numeric filters applied after report metrics are calculated."""
 

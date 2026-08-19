@@ -69,7 +69,7 @@ class Data(BaseModel):
     citations: Optional[List[str]] = None
 
     citation_details: Optional[List[DataCitationDetail]] = None
-    """Citation metadata. `positions` identify citation locations in the answer text. Each `groups` entry represents a rendered citation pill; `group_position` is the source's position within that pill."""
+    """Citation metadata. `positions` identify citation locations in the answer text. Each `groups` entry represents a rendered citation pill, including single-source pills; `group_position` is the source's position within that pill."""
 
     search_queries: Optional[List[str]] = None
 

@@ -5719,6 +5719,25 @@
             }
           },
           {
+            "name": "view_id",
+            "publicName": "view_id",
+            "required": false,
+            "deprecated": false,
+            "type": {
+              "kind": "union",
+              "variants": [
+                {
+                  "kind": "primitive",
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "kind": "null"
+                }
+              ]
+            }
+          },
+          {
             "name": "metric_filters",
             "publicName": "metric_filters",
             "required": false,
@@ -11625,6 +11644,39 @@
                   "kind": "null"
                 }
               ]
+            }
+          }
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "domain_segment_list_item",
+      "source": "domain_segment_list_item",
+      "publicAliases": [],
+      "deprecated": false,
+      "type": {
+        "kind": "object",
+        "properties": [
+          {
+            "name": "id",
+            "publicName": "id",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "primitive",
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "name",
+            "publicName": "name",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "primitive",
+              "type": "string"
             }
           }
         ],
@@ -23309,6 +23361,25 @@
             "type": {
               "kind": "primitive",
               "type": "string"
+            }
+          },
+          {
+            "name": "view_id",
+            "publicName": "view_id",
+            "required": false,
+            "deprecated": false,
+            "type": {
+              "kind": "union",
+              "variants": [
+                {
+                  "kind": "primitive",
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "kind": "null"
+                }
+              ]
             }
           },
           {
@@ -41262,7 +41333,8 @@
     "projects.tasks",
     "agents",
     "agents.nodeTypes",
-    "agents.runs"
+    "agents.runs",
+    "domainSegments"
   ],
   "publicResources": [
     "organization",
@@ -41293,7 +41365,8 @@
     "projects.tasks",
     "agents",
     "agents.nodeTypes",
-    "agents.runs"
+    "agents.runs",
+    "domainSegments"
   ],
   "operations": [
     {
@@ -45589,6 +45662,7 @@
         "end_date",
         "organization_id",
         "timezone",
+        "view_id",
         "metric_filters",
         "filters"
       ],
@@ -45603,6 +45677,7 @@
         "end_date",
         "organization_id",
         "timezone",
+        "view_id",
         "metric_filters",
         "filters"
       ],
@@ -45645,6 +45720,10 @@
         },
         {
           "name": "timezone",
+          "required": false
+        },
+        {
+          "name": "view_id",
           "required": false
         },
         {
@@ -45893,6 +45972,7 @@
         "end_date",
         "organization_id",
         "timezone",
+        "view_id",
         "metric_filters",
         "filters",
         "domain_id",
@@ -45909,6 +45989,7 @@
         "end_date",
         "organization_id",
         "timezone",
+        "view_id",
         "metric_filters",
         "filters",
         "domain_id",
@@ -45953,6 +46034,10 @@
         },
         {
           "name": "timezone",
+          "required": false
+        },
+        {
+          "name": "view_id",
           "required": false
         },
         {
@@ -57222,6 +57307,80 @@
       "responseModel": {
         "name": "agent_run",
         "publicAliases": []
+      },
+      "result": {
+        "successStatus": "200",
+        "errorStatuses": [
+          "422"
+        ]
+      },
+      "errorResponses": [
+        {
+          "status": "422",
+          "contentType": "application/json",
+          "encoding": "json",
+          "contents": [
+            {
+              "contentType": "application/json",
+              "encoding": "json"
+            }
+          ],
+          "model": {
+            "name": "http_validation_error",
+            "publicAliases": []
+          }
+        }
+      ],
+      "responseLinks": [],
+      "transport": "http"
+    },
+    {
+      "resource": "domainSegments",
+      "publicResource": "domainSegments",
+      "operation": "listV2Get",
+      "publicOperation": "listV2Get",
+      "deprecated": false,
+      "method": "GET",
+      "path": "/v2/domain-segments",
+      "pathParams": [],
+      "publicPathParams": [],
+      "queryParams": [
+        "organization_id"
+      ],
+      "publicQueryParams": [
+        "organization_id"
+      ],
+      "headerParams": [],
+      "publicHeaderParams": [],
+      "bodyParams": [],
+      "publicBodyParams": [],
+      "bodyParamDetails": [],
+      "pathParamDetails": [],
+      "queryParamDetails": [
+        {
+          "name": "organization_id",
+          "required": false,
+          "style": "form",
+          "explode": true
+        }
+      ],
+      "headerParamDetails": [],
+      "cookieParams": [],
+      "publicCookieParams": [],
+      "cookieParamDetails": [],
+      "paramsModel": {
+        "publicName": "DomainSegmentListV2GetParams"
+      },
+      "response": {
+        "status": "200",
+        "contentType": "application/json",
+        "encoding": "json",
+        "contents": [
+          {
+            "contentType": "application/json",
+            "encoding": "json"
+          }
+        ]
       },
       "result": {
         "successStatus": "200",

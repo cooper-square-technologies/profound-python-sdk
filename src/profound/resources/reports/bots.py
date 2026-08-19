@@ -140,6 +140,7 @@ class BotsResource(SyncAPIResource):
         end_date: Union[str, datetime] | Omit = omit,
         organization_id: Optional[str] | Omit = omit,
         timezone: str | Omit = omit,
+        view_id: Optional[str] | Omit = omit,
         metric_filters: Iterable[NumericMetricFilter] | Omit = omit,
         filters: Iterable[bot_create_v2_v2_post_params.Filter] | Omit = omit,
         domain_id: Optional[str] | Omit = omit,
@@ -155,6 +156,7 @@ class BotsResource(SyncAPIResource):
         Get bot traffic report from the hourly aggregated materialized view (UTC-based).
 
         Supports date_interval="hour", calendar intervals through "year", "quarter", and "relative_week".
+        When `view_id` is provided, the query is scoped to that domain segment's hosts and paths.
 
         Metrics:
         - count: unique bot visits
@@ -177,6 +179,7 @@ class BotsResource(SyncAPIResource):
             end_date: End date in UTC. Accepts same formats as start_date. Defaults to now UTC if omitted.
             organization_id: Body parameter.
             timezone: IANA timezone name for date bucketing and filter boundaries.
+            view_id: Domain segment UUID used to scope the query to a configured subset of hosts and paths.
             metric_filters: Numeric filters applied after report metrics are calculated.
             filters: Filters for bots report.
             domain_id: Domain UUID used for tag lookups.
@@ -216,6 +219,7 @@ class BotsResource(SyncAPIResource):
                     "end_date": end_date,
                     "organization_id": organization_id,
                     "timezone": timezone,
+                    "view_id": view_id,
                     "metric_filters": metric_filters,
                     "filters": filters,
                     "domain_id": domain_id,
@@ -342,6 +346,7 @@ class AsyncBotsResource(AsyncAPIResource):
         end_date: Union[str, datetime] | Omit = omit,
         organization_id: Optional[str] | Omit = omit,
         timezone: str | Omit = omit,
+        view_id: Optional[str] | Omit = omit,
         metric_filters: Iterable[NumericMetricFilter] | Omit = omit,
         filters: Iterable[bot_create_v2_v2_post_params.Filter] | Omit = omit,
         domain_id: Optional[str] | Omit = omit,
@@ -357,6 +362,7 @@ class AsyncBotsResource(AsyncAPIResource):
         Get bot traffic report from the hourly aggregated materialized view (UTC-based).
 
         Supports date_interval="hour", calendar intervals through "year", "quarter", and "relative_week".
+        When `view_id` is provided, the query is scoped to that domain segment's hosts and paths.
 
         Metrics:
         - count: unique bot visits
@@ -379,6 +385,7 @@ class AsyncBotsResource(AsyncAPIResource):
             end_date: End date in UTC. Accepts same formats as start_date. Defaults to now UTC if omitted.
             organization_id: Body parameter.
             timezone: IANA timezone name for date bucketing and filter boundaries.
+            view_id: Domain segment UUID used to scope the query to a configured subset of hosts and paths.
             metric_filters: Numeric filters applied after report metrics are calculated.
             filters: Filters for bots report.
             domain_id: Domain UUID used for tag lookups.
@@ -418,6 +425,7 @@ class AsyncBotsResource(AsyncAPIResource):
                     "end_date": end_date,
                     "organization_id": organization_id,
                     "timezone": timezone,
+                    "view_id": view_id,
                     "metric_filters": metric_filters,
                     "filters": filters,
                     "domain_id": domain_id,

@@ -80,6 +80,14 @@ from .agents import (
     AgentsResourceWithStreamingResponse,
     AsyncAgentsResourceWithStreamingResponse,
 )
+from .domain_segments import (
+    DomainSegmentsResource,
+    AsyncDomainSegmentsResource,
+    DomainSegmentsResourceWithRawResponse,
+    AsyncDomainSegmentsResourceWithRawResponse,
+    DomainSegmentsResourceWithStreamingResponse,
+    AsyncDomainSegmentsResourceWithStreamingResponse,
+)
 
 __all__ = [
     "OrganizationResource",
@@ -142,4 +150,10 @@ __all__ = [
     "AsyncAgentsResourceWithRawResponse",
     "AgentsResourceWithStreamingResponse",
     "AsyncAgentsResourceWithStreamingResponse",
+    "DomainSegmentsResource",
+    "AsyncDomainSegmentsResource",
+    "DomainSegmentsResourceWithRawResponse",
+    "AsyncDomainSegmentsResourceWithRawResponse",
+    "DomainSegmentsResourceWithStreamingResponse",
+    "AsyncDomainSegmentsResourceWithStreamingResponse",
 ]

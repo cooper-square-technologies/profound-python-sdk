@@ -158,6 +158,8 @@ Complete reference of every operation, grouped by resource. See [the README](./R
   - [`Agents Runs`](#agents-runs)
     - [Run an agent](#run-an-agent)
     - [Get an agent run](#get-an-agent-run)
+- [`DomainSegments`](#domainsegments)
+  - [List Domain Segments](#list-domain-segments)
 
 ## Setup
 
@@ -841,6 +843,7 @@ referral = client.reports.referrals.create_v1_v1_post(
 Get referral traffic report from the hourly aggregated materialized view (UTC-based).
 
 Supports date_interval="hour", calendar intervals through "year", "quarter", and "relative_week".
+When `view_id` is provided, the query is scoped to that domain segment's hosts and paths.
 
 | Direction | Type |
 | --- | --- |
@@ -896,6 +899,7 @@ bot = client.reports.bots.create_v1_v1_post(
 Get bot traffic report from the hourly aggregated materialized view (UTC-based).
 
 Supports date_interval="hour", calendar intervals through "year", "quarter", and "relative_week".
+When `view_id` is provided, the query is scoped to that domain segment's hosts and paths.
 
 Metrics:
 - count: unique bot visits
@@ -2541,4 +2545,22 @@ run = client.agents.runs.retrieve_v1_get(
     run_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     verbose=False,
 )
+```
+
+## `DomainSegments`
+
+### List Domain Segments
+
+List domain segments visible to the caller for a workspace.
+
+Returns the id and name of every domain segment the caller can access, so a
+customer can discover a `view_id` to pass into agent analytics report queries.
+
+| Direction | Type |
+| --- | --- |
+| Request | [`DomainSegmentListV2GetParams`](./src/profound/types/domain_segment_list_v2_get_params.py) |
+| Response | [`DomainSegmentListV2GetResponse`](./src/profound/types/domain_segment_list_v2_get_response.py) |
+
+```python
+domain_segment = client.domain_segments.list_v2_get()
 ```
