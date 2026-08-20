@@ -15,8 +15,8 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.agents.node_type_list_v1_get_response import NodeTypeListV1GetResponse
-from ...types.agents.node_type_list_schema_v1_schema_get_response import NodeTypeListSchemaV1SchemaGetResponse
+from ...types.agents.node_type_list_response import NodeTypeListResponse
+from ...types.agents.node_type_retrieve_schema_response import NodeTypeRetrieveSchemaResponse
 
 __all__ = ["NodeTypesResource", "AsyncNodeTypesResource"]
 
@@ -30,7 +30,7 @@ class NodeTypesResource(SyncAPIResource):
     def with_streaming_response(self) -> NodeTypesResourceWithStreamingResponse:
         return NodeTypesResourceWithStreamingResponse(self)
 
-    def list_v1_get(
+    def list(
         self,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -39,7 +39,7 @@ class NodeTypesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> NodeTypeListV1GetResponse:
+    ) -> NodeTypeListResponse:
         """
         List the node types available for building agents.
 
@@ -54,11 +54,11 @@ class NodeTypesResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            NodeTypeListV1GetResponse: Successful Response
+            NodeTypeListResponse: Successful Response
 
         Example:
             ```python
-            node_type = client.agents.node_types.list_v1_get()
+            node_type = client.agents.node_types.list()
             ```
         """
         return self._get(
@@ -66,10 +66,10 @@ class NodeTypesResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NodeTypeListV1GetResponse,
+            cast_to=NodeTypeListResponse,
         )
 
-    def list_schema_v1_schema_get(
+    def retrieve_schema(
         self,
         node_type: str,
         *,
@@ -79,7 +79,7 @@ class NodeTypesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> NodeTypeListSchemaV1SchemaGetResponse:
+    ) -> NodeTypeRetrieveSchemaResponse:
         """
         Retrieve the JSON schema for a single node type.
 
@@ -94,11 +94,11 @@ class NodeTypesResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            NodeTypeListSchemaV1SchemaGetResponse: Successful Response
+            NodeTypeRetrieveSchemaResponse: Successful Response
 
         Example:
             ```python
-            node_type = client.agents.node_types.list_schema_v1_schema_get(
+            node_type = client.agents.node_types.retrieve_schema(
                 node_type="nodeType",
             )
             ```
@@ -110,7 +110,7 @@ class NodeTypesResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NodeTypeListSchemaV1SchemaGetResponse,
+            cast_to=NodeTypeRetrieveSchemaResponse,
         )
 
 
@@ -123,7 +123,7 @@ class AsyncNodeTypesResource(AsyncAPIResource):
     def with_streaming_response(self) -> AsyncNodeTypesResourceWithStreamingResponse:
         return AsyncNodeTypesResourceWithStreamingResponse(self)
 
-    async def list_v1_get(
+    async def list(
         self,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -132,7 +132,7 @@ class AsyncNodeTypesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> NodeTypeListV1GetResponse:
+    ) -> NodeTypeListResponse:
         """
         List the node types available for building agents.
 
@@ -147,11 +147,11 @@ class AsyncNodeTypesResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            NodeTypeListV1GetResponse: Successful Response
+            NodeTypeListResponse: Successful Response
 
         Example:
             ```python
-            node_type = await client.agents.node_types.list_v1_get()
+            node_type = await client.agents.node_types.list()
             ```
         """
         return await self._get(
@@ -159,10 +159,10 @@ class AsyncNodeTypesResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NodeTypeListV1GetResponse,
+            cast_to=NodeTypeListResponse,
         )
 
-    async def list_schema_v1_schema_get(
+    async def retrieve_schema(
         self,
         node_type: str,
         *,
@@ -172,7 +172,7 @@ class AsyncNodeTypesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> NodeTypeListSchemaV1SchemaGetResponse:
+    ) -> NodeTypeRetrieveSchemaResponse:
         """
         Retrieve the JSON schema for a single node type.
 
@@ -187,11 +187,11 @@ class AsyncNodeTypesResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            NodeTypeListSchemaV1SchemaGetResponse: Successful Response
+            NodeTypeRetrieveSchemaResponse: Successful Response
 
         Example:
             ```python
-            node_type = await client.agents.node_types.list_schema_v1_schema_get(
+            node_type = await client.agents.node_types.retrieve_schema(
                 node_type="nodeType",
             )
             ```
@@ -203,7 +203,7 @@ class AsyncNodeTypesResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NodeTypeListSchemaV1SchemaGetResponse,
+            cast_to=NodeTypeRetrieveSchemaResponse,
         )
 
 
@@ -211,11 +211,11 @@ class NodeTypesResourceWithRawResponse:
     def __init__(self, node_types: NodeTypesResource) -> None:
         self._node_types = node_types
 
-        self.list_v1_get = to_raw_response_wrapper(
-            node_types.list_v1_get,
+        self.list = to_raw_response_wrapper(
+            node_types.list,
         )
-        self.list_schema_v1_schema_get = to_raw_response_wrapper(
-            node_types.list_schema_v1_schema_get,
+        self.retrieve_schema = to_raw_response_wrapper(
+            node_types.retrieve_schema,
         )
 
 
@@ -223,11 +223,11 @@ class AsyncNodeTypesResourceWithRawResponse:
     def __init__(self, node_types: AsyncNodeTypesResource) -> None:
         self._node_types = node_types
 
-        self.list_v1_get = async_to_raw_response_wrapper(
-            node_types.list_v1_get,
+        self.list = async_to_raw_response_wrapper(
+            node_types.list,
         )
-        self.list_schema_v1_schema_get = async_to_raw_response_wrapper(
-            node_types.list_schema_v1_schema_get,
+        self.retrieve_schema = async_to_raw_response_wrapper(
+            node_types.retrieve_schema,
         )
 
 
@@ -235,11 +235,11 @@ class NodeTypesResourceWithStreamingResponse:
     def __init__(self, node_types: NodeTypesResource) -> None:
         self._node_types = node_types
 
-        self.list_v1_get = to_streamed_response_wrapper(
-            node_types.list_v1_get,
+        self.list = to_streamed_response_wrapper(
+            node_types.list,
         )
-        self.list_schema_v1_schema_get = to_streamed_response_wrapper(
-            node_types.list_schema_v1_schema_get,
+        self.retrieve_schema = to_streamed_response_wrapper(
+            node_types.retrieve_schema,
         )
 
 
@@ -247,9 +247,9 @@ class AsyncNodeTypesResourceWithStreamingResponse:
     def __init__(self, node_types: AsyncNodeTypesResource) -> None:
         self._node_types = node_types
 
-        self.list_v1_get = async_to_streamed_response_wrapper(
-            node_types.list_v1_get,
+        self.list = async_to_streamed_response_wrapper(
+            node_types.list,
         )
-        self.list_schema_v1_schema_get = async_to_streamed_response_wrapper(
-            node_types.list_schema_v1_schema_get,
+        self.retrieve_schema = async_to_streamed_response_wrapper(
+            node_types.retrieve_schema,
         )

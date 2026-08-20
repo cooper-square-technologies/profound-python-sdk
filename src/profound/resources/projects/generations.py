@@ -17,9 +17,9 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.projects.generation_list_v1_get_response import GenerationListV1GetResponse
-from ...types.projects import generation_list_v1_get_params, generation_retrieve_status_v1_run_get_params
-from ...types.projects.generation_retrieve_status_v1_run_get_response import GenerationRetrieveStatusV1RunGetResponse
+from ...types.projects.generation_list_response import GenerationListResponse
+from ...types.projects import generation_list_params, generation_retrieve_params
+from ...types.projects.generation_retrieve_response import GenerationRetrieveResponse
 
 __all__ = ["GenerationsResource", "AsyncGenerationsResource"]
 
@@ -33,7 +33,7 @@ class GenerationsResource(SyncAPIResource):
     def with_streaming_response(self) -> GenerationsResourceWithStreamingResponse:
         return GenerationsResourceWithStreamingResponse(self)
 
-    def list_v1_get(
+    def list(
         self,
         *,
         category_id: str,
@@ -46,7 +46,7 @@ class GenerationsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> GenerationListV1GetResponse:
+    ) -> GenerationListResponse:
         """
         List Project Generations
 
@@ -61,11 +61,11 @@ class GenerationsResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            GenerationListV1GetResponse: Successful Response
+            GenerationListResponse: Successful Response
 
         Example:
             ```python
-            generation = client.projects.generations.list_v1_get(
+            generation = client.projects.generations.list(
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 limit=100,
                 offset=0,
@@ -81,13 +81,13 @@ class GenerationsResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {"category_id": category_id, "status": status, "limit": limit, "offset": offset},
-                    generation_list_v1_get_params.GenerationListV1GetParams,
+                    generation_list_params.GenerationListParams,
                 ),
             ),
-            cast_to=GenerationListV1GetResponse,
+            cast_to=GenerationListResponse,
         )
 
-    def retrieve_status_v1_run_get(
+    def retrieve(
         self,
         run_id: str,
         *,
@@ -98,7 +98,7 @@ class GenerationsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> GenerationRetrieveStatusV1RunGetResponse:
+    ) -> GenerationRetrieveResponse:
         """
         Get Project Generation Status
 
@@ -111,11 +111,11 @@ class GenerationsResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            GenerationRetrieveStatusV1RunGetResponse: Successful Response
+            GenerationRetrieveResponse: Successful Response
 
         Example:
             ```python
-            generation = client.projects.generations.retrieve_status_v1_run_get(
+            generation = client.projects.generations.retrieve(
                 run_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
             )
@@ -131,11 +131,10 @@ class GenerationsResource(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=maybe_transform(
-                    {"category_id": category_id},
-                    generation_retrieve_status_v1_run_get_params.GenerationRetrieveStatusV1RunGetParams,
+                    {"category_id": category_id}, generation_retrieve_params.GenerationRetrieveParams
                 ),
             ),
-            cast_to=GenerationRetrieveStatusV1RunGetResponse,
+            cast_to=GenerationRetrieveResponse,
         )
 
 
@@ -148,7 +147,7 @@ class AsyncGenerationsResource(AsyncAPIResource):
     def with_streaming_response(self) -> AsyncGenerationsResourceWithStreamingResponse:
         return AsyncGenerationsResourceWithStreamingResponse(self)
 
-    async def list_v1_get(
+    async def list(
         self,
         *,
         category_id: str,
@@ -161,7 +160,7 @@ class AsyncGenerationsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> GenerationListV1GetResponse:
+    ) -> GenerationListResponse:
         """
         List Project Generations
 
@@ -176,11 +175,11 @@ class AsyncGenerationsResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            GenerationListV1GetResponse: Successful Response
+            GenerationListResponse: Successful Response
 
         Example:
             ```python
-            generation = await client.projects.generations.list_v1_get(
+            generation = await client.projects.generations.list(
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 limit=100,
                 offset=0,
@@ -196,13 +195,13 @@ class AsyncGenerationsResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {"category_id": category_id, "status": status, "limit": limit, "offset": offset},
-                    generation_list_v1_get_params.GenerationListV1GetParams,
+                    generation_list_params.GenerationListParams,
                 ),
             ),
-            cast_to=GenerationListV1GetResponse,
+            cast_to=GenerationListResponse,
         )
 
-    async def retrieve_status_v1_run_get(
+    async def retrieve(
         self,
         run_id: str,
         *,
@@ -213,7 +212,7 @@ class AsyncGenerationsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> GenerationRetrieveStatusV1RunGetResponse:
+    ) -> GenerationRetrieveResponse:
         """
         Get Project Generation Status
 
@@ -226,11 +225,11 @@ class AsyncGenerationsResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            GenerationRetrieveStatusV1RunGetResponse: Successful Response
+            GenerationRetrieveResponse: Successful Response
 
         Example:
             ```python
-            generation = await client.projects.generations.retrieve_status_v1_run_get(
+            generation = await client.projects.generations.retrieve(
                 run_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
             )
@@ -246,11 +245,10 @@ class AsyncGenerationsResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"category_id": category_id},
-                    generation_retrieve_status_v1_run_get_params.GenerationRetrieveStatusV1RunGetParams,
+                    {"category_id": category_id}, generation_retrieve_params.GenerationRetrieveParams
                 ),
             ),
-            cast_to=GenerationRetrieveStatusV1RunGetResponse,
+            cast_to=GenerationRetrieveResponse,
         )
 
 
@@ -258,11 +256,11 @@ class GenerationsResourceWithRawResponse:
     def __init__(self, generations: GenerationsResource) -> None:
         self._generations = generations
 
-        self.list_v1_get = to_raw_response_wrapper(
-            generations.list_v1_get,
+        self.list = to_raw_response_wrapper(
+            generations.list,
         )
-        self.retrieve_status_v1_run_get = to_raw_response_wrapper(
-            generations.retrieve_status_v1_run_get,
+        self.retrieve = to_raw_response_wrapper(
+            generations.retrieve,
         )
 
 
@@ -270,11 +268,11 @@ class AsyncGenerationsResourceWithRawResponse:
     def __init__(self, generations: AsyncGenerationsResource) -> None:
         self._generations = generations
 
-        self.list_v1_get = async_to_raw_response_wrapper(
-            generations.list_v1_get,
+        self.list = async_to_raw_response_wrapper(
+            generations.list,
         )
-        self.retrieve_status_v1_run_get = async_to_raw_response_wrapper(
-            generations.retrieve_status_v1_run_get,
+        self.retrieve = async_to_raw_response_wrapper(
+            generations.retrieve,
         )
 
 
@@ -282,11 +280,11 @@ class GenerationsResourceWithStreamingResponse:
     def __init__(self, generations: GenerationsResource) -> None:
         self._generations = generations
 
-        self.list_v1_get = to_streamed_response_wrapper(
-            generations.list_v1_get,
+        self.list = to_streamed_response_wrapper(
+            generations.list,
         )
-        self.retrieve_status_v1_run_get = to_streamed_response_wrapper(
-            generations.retrieve_status_v1_run_get,
+        self.retrieve = to_streamed_response_wrapper(
+            generations.retrieve,
         )
 
 
@@ -294,9 +292,9 @@ class AsyncGenerationsResourceWithStreamingResponse:
     def __init__(self, generations: AsyncGenerationsResource) -> None:
         self._generations = generations
 
-        self.list_v1_get = async_to_streamed_response_wrapper(
-            generations.list_v1_get,
+        self.list = async_to_streamed_response_wrapper(
+            generations.list,
         )
-        self.retrieve_status_v1_run_get = async_to_streamed_response_wrapper(
-            generations.retrieve_status_v1_run_get,
+        self.retrieve = async_to_streamed_response_wrapper(
+            generations.retrieve,
         )

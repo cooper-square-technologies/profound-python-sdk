@@ -4,73 +4,54 @@ Complete reference of every operation, grouped by resource. See [the README](./R
 
 ## Contents
 
-- [`Organization`](#organization)
-  - [List organizations](#list-organizations)
+- [`Organizations`](#organizations)
   - [Get Regions](#get-regions)
   - [Get Models](#get-models)
   - [Get Domains](#get-domains)
   - [Get Assets](#get-assets)
   - [Get Personas](#get-personas)
-  - [Get Categories](#get-categories)
-  - [Get Category Topics](#get-category-topics)
-  - [Get Category Tags](#get-category-tags)
-  - [Get Category Regions](#get-category-regions)
-  - [Get Category Citation Categories](#get-category-citation-categories)
-  - [Get Category Citation Tags](#get-category-citation-tags)
-  - [List prompts](#list-prompts)
-  - [Create prompts](#create-prompts)
-  - [Update prompts](#update-prompts)
-  - [Update prompt status](#update-prompt-status)
-  - [Get Category Assets](#get-category-assets)
-  - [Get Category Personas](#get-category-personas)
+  - [List organizations](#list-organizations)
+  - [`Organizations Categories`](#organizations-categories)
+    - [Get Categories](#get-categories)
+    - [Get Category Topics](#get-category-topics)
+    - [Get Category Tags](#get-category-tags)
+    - [List prompts](#list-prompts)
+    - [Get Category Assets](#get-category-assets)
+    - [Get Category Personas](#get-category-personas)
+    - [Create prompts](#create-prompts)
+    - [Update prompts](#update-prompts)
+    - [Update prompt status](#update-prompt-status)
+    - [Get Category Regions](#get-category-regions)
+    - [Get Category Citation Categories](#get-category-citation-categories)
 - [`Prompts`](#prompts)
-  - [`Prompts Answers`](#prompts-answers)
-    - [Get Answers](#get-answers)
-    - [Query Answers V2](#query-answers-v2)
-    - [Stream Answers V2](#stream-answers-v2)
+  - [Get Answers](#get-answers)
+  - [Query Answers V2](#query-answers-v2)
+  - [Stream Answers V2](#stream-answers-v2)
 - [`Reports`](#reports)
+  - [Query Citations](#query-citations)
+  - [Query Visibility](#query-visibility)
+  - [Query Sentiment](#query-sentiment)
   - [Query Sentiment V2](#query-sentiment-v2)
-  - [`Reports Citations`](#reports-citations)
-    - [Query Citations](#query-citations)
-    - [Stream Citations](#stream-citations)
-    - [Query Citations V2](#query-citations-v2)
-    - [Stream Citations V2](#stream-citations-v2)
-  - [`Reports Visibility`](#reports-visibility)
-    - [Query Visibility](#query-visibility)
-    - [Stream Visibility](#stream-visibility)
-    - [Query Visibility V2](#query-visibility-v2)
-    - [Stream Visibility V2](#stream-visibility-v2)
-  - [`Reports Sentiment`](#reports-sentiment)
-    - [Query Sentiment](#query-sentiment)
-    - [Stream Sentiment](#stream-sentiment)
-    - [Query Sentiment V2](#query-sentiment-v2-1)
-    - [Stream Sentiment V2](#stream-sentiment-v2)
+  - [Get Referrals Report V1](#get-referrals-report-v1)
+  - [Get Bots Report V1](#get-bots-report-v1)
+  - [Query Fanouts](#query-fanouts)
+  - [Stream Citations](#stream-citations)
+  - [Stream Visibility](#stream-visibility)
+  - [Stream Sentiment](#stream-sentiment)
+  - [Stream Citations V2](#stream-citations-v2)
+  - [Stream Visibility V2](#stream-visibility-v2)
+  - [Stream Sentiment V2](#stream-sentiment-v2)
+  - [Stream Query Fanouts V2](#stream-query-fanouts-v2)
+  - [Get Referrals Report V2](#get-referrals-report-v2)
+  - [Get Bots Report V2](#get-bots-report-v2)
+  - [Query Visibility V2](#query-visibility-v2)
+  - [Query Citations V2](#query-citations-v2)
+  - [Query Sentiment V2](#query-sentiment-v2-1)
+  - [Query Fanouts V2](#query-fanouts-v2)
   - [`Reports WebSearchResults`](#reports-websearchresults)
     - [Query Web Search Results](#query-web-search-results)
     - [Stream Web Search Results](#stream-web-search-results)
-  - [`Reports Referrals`](#reports-referrals)
-    - [Get Referrals Report V1](#get-referrals-report-v1)
-    - [Get Referrals Report V2](#get-referrals-report-v2)
-  - [`Reports Bots`](#reports-bots)
-    - [Get Bots Report V1](#get-bots-report-v1)
-    - [Get Bots Report V2](#get-bots-report-v2)
-  - [`Reports QueryFanouts`](#reports-queryfanouts)
-    - [Query Fanouts](#query-fanouts)
-    - [Query Fanouts V2](#query-fanouts-v2)
-    - [Stream Query Fanouts V2](#stream-query-fanouts-v2)
   - [`Reports Shopping`](#reports-shopping)
-    - [Shopping Visibility](#shopping-visibility)
-    - [Shopping Item Visibility](#shopping-item-visibility)
-    - [Shopping Merchant Distribution](#shopping-merchant-distribution)
-    - [Shopping Merchant Visibility By Brand](#shopping-merchant-visibility-by-brand)
-    - [Shopping Merchant By Items](#shopping-merchant-by-items)
-    - [Shopping All Items With Merchants](#shopping-all-items-with-merchants)
-    - [Shopping Trigger Rate](#shopping-trigger-rate)
-    - [Shopping Triggered Prompts](#shopping-triggered-prompts)
-    - [Shopping Triggered Topics](#shopping-triggered-topics)
-    - [Shopping Merchant Share](#shopping-merchant-share)
-    - [Shopping Product Merchant Urls](#shopping-product-merchant-urls)
-    - [Shopping Executions](#shopping-executions)
     - [Query Shopping Brands V2](#query-shopping-brands-v2)
     - [Stream Shopping Brands V2](#stream-shopping-brands-v2)
     - [Query Shopping Products V2](#query-shopping-products-v2)
@@ -96,16 +77,31 @@ Complete reference of every operation, grouped by resource. See [the README](./R
   - [`Reports Factcheck`](#reports-factcheck)
     - [Query Scores](#query-scores)
     - [Stream Scores](#stream-scores)
-    - [Query Claims](#query-claims)
-    - [Stream Claims](#stream-claims)
+    - [`Reports Factcheck Claims`](#reports-factcheck-claims)
+      - [Query Claims](#query-claims)
+      - [Stream Claims](#stream-claims)
   - [`Reports Social`](#reports-social)
-    - [Query Youtube Channels](#query-youtube-channels)
-    - [Query Youtube Videos](#query-youtube-videos)
-    - [Query Youtube Summary](#query-youtube-summary)
+    - [`Reports Social Youtube`](#reports-social-youtube)
+      - [Query Youtube Channels](#query-youtube-channels)
+      - [Query Youtube Videos](#query-youtube-videos)
+      - [Query Youtube Summary](#query-youtube-summary)
 - [`Content`](#content)
   - [`Content Optimization`](#content-optimization)
     - [Optimization List](#optimization-list)
     - [Optimization Analysis](#optimization-analysis)
+- [`Agents`](#agents)
+  - [List agents](#list-agents)
+  - [Get an agent](#get-an-agent)
+  - [Create an agent](#create-an-agent)
+  - [Publish an agent](#publish-an-agent)
+  - [Update an agent](#update-an-agent)
+  - [Get an agent's graph](#get-an-agents-graph)
+  - [`Agents Runs`](#agents-runs)
+    - [Run an agent](#run-an-agent)
+    - [Get an agent run](#get-an-agent-run)
+  - [`Agents NodeTypes`](#agents-nodetypes)
+    - [List node types](#list-node-types)
+    - [Get a node type schema](#get-a-node-type-schema)
 - [`KnowledgeBases`](#knowledgebases)
   - [List Knowledge Bases](#list-knowledge-bases)
   - [Search Knowledge Base](#search-knowledge-base)
@@ -116,17 +112,6 @@ Complete reference of every operation, grouped by resource. See [the README](./R
   - [`KnowledgeBases Folders`](#knowledgebases-folders)
     - [Add Folder](#add-folder)
     - [Delete Folder](#delete-folder)
-- [`Integrations`](#integrations)
-  - [List Integrations](#list-integrations)
-- [`Documents`](#documents)
-  - [List documents](#list-documents)
-  - [Create a document](#create-a-document)
-  - [Read a document](#read-a-document)
-  - [Rename or reshare a document](#rename-or-reshare-a-document)
-  - [Delete a document](#delete-a-document)
-  - [Replace a document's content](#replace-a-documents-content)
-- [`OpenAiAds`](#openaiads)
-  - [Get Account Insights](#get-account-insights)
 - [`Projects`](#projects)
   - [List Projects](#list-projects)
   - [Create Project](#create-project)
@@ -145,21 +130,19 @@ Complete reference of every operation, grouped by resource. See [the README](./R
     - [Update Project Task](#update-project-task)
     - [Delete Project Task](#delete-project-task)
     - [Update Project Task Status](#update-project-task-status)
-- [`Agents`](#agents)
-  - [List agents](#list-agents)
-  - [Create an agent](#create-an-agent)
-  - [Publish an agent](#publish-an-agent)
-  - [Get an agent](#get-an-agent)
-  - [Update an agent](#update-an-agent)
-  - [Get an agent's graph](#get-an-agents-graph)
-  - [`Agents NodeTypes`](#agents-nodetypes)
-    - [List node types](#list-node-types)
-    - [Get a node type schema](#get-a-node-type-schema)
-  - [`Agents Runs`](#agents-runs)
-    - [Run an agent](#run-an-agent)
-    - [Get an agent run](#get-an-agent-run)
-- [`DomainSegments`](#domainsegments)
-  - [List Domain Segments](#list-domain-segments)
+- [`Integrations`](#integrations)
+  - [List Integrations](#list-integrations)
+- [`Documents`](#documents)
+  - [Create a document](#create-a-document)
+  - [List documents](#list-documents)
+  - [Read a document](#read-a-document)
+  - [Rename or reshare a document](#rename-or-reshare-a-document)
+  - [Delete a document](#delete-a-document)
+  - [Replace a document's content](#replace-a-documents-content)
+- [`Ads`](#ads)
+  - [`Ads OpenaiAds`](#ads-openaiads)
+    - [`Ads OpenaiAds AdAccount`](#ads-openaiads-adaccount)
+      - [Get Account Insights](#get-account-insights)
 
 ## Setup
 
@@ -173,19 +156,7 @@ client = Profound(
 )
 ```
 
-## `Organization`
-
-### List organizations
-
-Return every organization the caller's API key grants access to. Use this to discover organization IDs before calling endpoints that accept an `organization_id` filter.
-
-| Direction | Type |
-| --- | --- |
-| Response | [`OrganizationListV1OrgGetResponse`](./src/profound/types/organization_list_v1_org_get_response.py) |
-
-```python
-organization = client.organization.list_v1_org_get()
-```
+## `Organizations`
 
 ### Get Regions
 
@@ -193,11 +164,11 @@ Get the organization regions.
 
 | Direction | Type |
 | --- | --- |
-| Request | [`OrganizationListRegionsV1OrgRegionsGetParams`](./src/profound/types/organization_list_regions_v1_org_regions_get_params.py) |
-| Response | [`OrganizationListRegionsV1OrgRegionsGetResponse`](./src/profound/types/organization_list_regions_v1_org_regions_get_response.py) |
+| Request | [`OrganizationRegionsParams`](./src/profound/types/organization_regions_params.py) |
+| Response | [`OrganizationRegionsResponse`](./src/profound/types/organization_regions_response.py) |
 
 ```python
-organization = client.organization.list_regions_v1_org_regions_get()
+organization = client.organizations.regions()
 ```
 
 ### Get Models
@@ -206,10 +177,10 @@ Get the organization models.
 
 | Direction | Type |
 | --- | --- |
-| Response | [`OrganizationListModelsV1OrgModelsGetResponse`](./src/profound/types/organization_list_models_v1_org_models_get_response.py) |
+| Response | [`OrganizationModelsResponse`](./src/profound/types/organization_models_response.py) |
 
 ```python
-organization = client.organization.list_models_v1_org_models_get()
+organization = client.organizations.models()
 ```
 
 ### Get Domains
@@ -218,11 +189,11 @@ Get the organization domains.
 
 | Direction | Type |
 | --- | --- |
-| Request | [`OrganizationListDomainsV1OrgDomainsGetParams`](./src/profound/types/organization_list_domains_v1_org_domains_get_params.py) |
-| Response | [`OrganizationListDomainsV1OrgDomainsGetResponse`](./src/profound/types/organization_list_domains_v1_org_domains_get_response.py) |
+| Request | [`OrganizationDomainsParams`](./src/profound/types/organization_domains_params.py) |
+| Response | [`OrganizationDomainsResponse`](./src/profound/types/organization_domains_response.py) |
 
 ```python
-organization = client.organization.list_domains_v1_org_domains_get()
+organization = client.organizations.domains()
 ```
 
 ### Get Assets
@@ -234,11 +205,11 @@ emitted per owning org so no association is silently dropped.
 
 | Direction | Type |
 | --- | --- |
-| Request | [`OrganizationListAssetsV1OrgAssetsGetParams`](./src/profound/types/organization_list_assets_v1_org_assets_get_params.py) |
-| Response | [`OrganizationListAssetsV1OrgAssetsGetResponse`](./src/profound/types/organization_list_assets_v1_org_assets_get_response.py) |
+| Request | [`OrganizationListAssetsParams`](./src/profound/types/organization_list_assets_params.py) |
+| Response | [`OrganizationListAssetsResponse`](./src/profound/types/organization_list_assets_response.py) |
 
 ```python
-organization = client.organization.list_assets_v1_org_assets_get()
+organization = client.organizations.list_assets()
 ```
 
 ### Get Personas
@@ -251,148 +222,144 @@ association is silently dropped.
 
 | Direction | Type |
 | --- | --- |
-| Request | [`OrganizationListPersonasV1OrgPersonasGetParams`](./src/profound/types/organization_list_personas_v1_org_personas_get_params.py) |
-| Response | [`OrganizationListPersonasV1OrgPersonasGetResponse`](./src/profound/types/organization_list_personas_v1_org_personas_get_response.py) |
+| Request | [`OrganizationGetPersonasParams`](./src/profound/types/organization_get_personas_params.py) |
+| Response | [`OrganizationGetPersonasResponse`](./src/profound/types/organization_get_personas_response.py) |
 
 ```python
-organization = client.organization.list_personas_v1_org_personas_get()
+organization = client.organizations.get_personas()
 ```
 
-### Get Categories
+### List organizations
+
+Return every organization the caller's API key grants access to. Use this to discover organization IDs before calling endpoints that accept an `organization_id` filter.
+
+| Direction | Type |
+| --- | --- |
+| Response | [`OrganizationListResponse`](./src/profound/types/organization_list_response.py) |
+
+```python
+organization = client.organizations.list()
+```
+
+### `Organizations Categories`
+
+#### Get Categories
 
 Get the organization categories, one row per (category, organization) pair.
 
 | Direction | Type |
 | --- | --- |
-| Request | [`OrganizationListCategoriesV1OrgCategoriesGetParams`](./src/profound/types/organization_list_categories_v1_org_categories_get_params.py) |
-| Response | [`OrganizationListCategoriesV1OrgCategoriesGetResponse`](./src/profound/types/organization_list_categories_v1_org_categories_get_response.py) |
+| Request | [`CategoryListParams`](./src/profound/types/organizations/category_list_params.py) |
+| Response | [`CategoryListResponse`](./src/profound/types/organizations/category_list_response.py) |
 
 ```python
-organization = client.organization.list_categories_v1_org_categories_get()
+category = client.organizations.categories.list()
 ```
 
-### Get Category Topics
+#### Get Category Topics
 
 Get the topics for a specific category.
 
 | Direction | Type |
 | --- | --- |
-| Response | [`OrganizationListCategoryTopicsV1OrgCategoriesCategoryTopicsGetResponse`](./src/profound/types/organization_list_category_topics_v1_org_categories_category_topics_get_response.py) |
+| Response | [`CategoryTopicsResponse`](./src/profound/types/organizations/category_topics_response.py) |
 
 ```python
-organization = client.organization.list_category_topics_v1_org_categories_category_topics_get(
+category = client.organizations.categories.topics(
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
 )
 ```
 
-### Get Category Tags
+#### Get Category Tags
 
 Get the tags for a specific category.
 
 | Direction | Type |
 | --- | --- |
-| Response | [`OrganizationListCategoryTagsV1OrgCategoriesCategoryTagsGetResponse`](./src/profound/types/organization_list_category_tags_v1_org_categories_category_tags_get_response.py) |
+| Response | [`CategoryTagsResponse`](./src/profound/types/organizations/category_tags_response.py) |
 
 ```python
-organization = client.organization.list_category_tags_v1_org_categories_category_tags_get(
+category = client.organizations.categories.tags(
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
 )
 ```
 
-### Get Category Regions
-
-Get the regions for a specific category.
-
-| Direction | Type |
-| --- | --- |
-| Response | [`OrganizationListCategoryRegionsV1OrgCategoriesCategoryRegionsGetResponse`](./src/profound/types/organization_list_category_regions_v1_org_categories_category_regions_get_response.py) |
-
-```python
-organization = client.organization.list_category_regions_v1_org_categories_category_regions_get(
-    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-)
-```
-
-### Get Category Citation Categories
-
-Get the citation categories for a category: the built-in buckets plus any custom categories.
-
-| Direction | Type |
-| --- | --- |
-| Response | [`OrganizationListCategoryCitationCategoriesV1OrgCategoriesCategoryCitationCategoriesGetResponse`](./src/profound/types/organization_list_category_citation_categories_v1_org_categories_category_citation_categories_get_response.py) |
-
-```python
-organization = client.organization.list_category_citation_categories_v1_org_categories_category_citation_categories_get(
-    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-)
-```
-
-### Get Category Citation Tags
-
-Get the custom citation tags defined for a category.
-
-| Direction | Type |
-| --- | --- |
-| Response | [`OrganizationListCategoryCitationTagsV1OrgCategoriesCategoryCitationTagsGetResponse`](./src/profound/types/organization_list_category_citation_tags_v1_org_categories_category_citation_tags_get_response.py) |
-
-```python
-organization = client.organization.list_category_citation_tags_v1_org_categories_category_citation_tags_get(
-    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-)
-```
-
-### List prompts
+#### List prompts
 
 Retrieve prompts in a category with optional filtering by type, topic, tag, region, platform, or persona. Supports cursor-based pagination.
 
 | Direction | Type |
 | --- | --- |
-| Request | [`OrganizationListCategoryPromptsV1OrgCategoriesCategoryPromptsGetParams`](./src/profound/types/organization_list_category_prompts_v1_org_categories_category_prompts_get_params.py) |
-| Response | [`OrganizationListCategoryPromptsV1OrgCategoriesCategoryPromptsGetResponse`](./src/profound/types/organization_list_category_prompts_v1_org_categories_category_prompts_get_response.py) |
+| Request | [`CategoryPromptsParams`](./src/profound/types/organizations/category_prompts_params.py) |
+| Response | [`CategoryPromptsResponse`](./src/profound/types/organizations/category_prompts_response.py) |
 
 ```python
-organization = client.organization.list_category_prompts_v1_org_categories_category_prompts_get(
+category = client.organizations.categories.prompts(
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     limit=10000,
     status=["active"],
 )
 ```
 
-### Create prompts
+#### Get Category Assets
+
+| Direction | Type |
+| --- | --- |
+| Response | [`CategoryAssetsResponse`](./src/profound/types/organizations/category_assets_response.py) |
+
+```python
+category = client.organizations.categories.assets(
+    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+)
+```
+
+#### Get Category Personas
+
+| Direction | Type |
+| --- | --- |
+| Response | [`CategoryGetCategoryPersonasResponse`](./src/profound/types/organizations/category_get_category_personas_response.py) |
+
+```python
+category = client.organizations.categories.get_category_personas(
+    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+)
+```
+
+#### Create prompts
 
 Create one or more prompts in a category. Topics and tags are auto-created if referenced by name and not yet existing. Use dry_run to preview without persisting.
 
 | Direction | Type |
 | --- | --- |
-| Request | [`OrganizationCreateCategoryPromptsV1OrgCategoriesCategoryIDPromptsPostParams`](./src/profound/types/organization_create_category_prompts_v1_org_categories_category_id_prompts_post_params.py) |
-| Response | [`OrganizationCreateCategoryPromptsV1OrgCategoriesCategoryIDPromptsPostResponse`](./src/profound/types/organization_create_category_prompts_v1_org_categories_category_id_prompts_post_response.py) |
+| Request | [`CategoryCreatePromptsParams`](./src/profound/types/organizations/category_create_prompts_params.py) |
+| Response | [`CategoryCreatePromptsResponse`](./src/profound/types/organizations/category_create_prompts_response.py) |
 
 ```python
-organization = client.organization.create_category_prompts_v1_org_categories_category_id_prompts_post(
+category = client.organizations.categories.create_prompts(
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     prompts=[],
     dry_run=False,
 )
 ```
 
-### Update prompts
+#### Update prompts
 
 Update one or more existing prompts. Only provided fields are changed. Dimension fields (regions, platforms, personas, tags) replace the full set when provided. Use dry_run to preview without persisting.
 
 | Direction | Type |
 | --- | --- |
-| Request | [`OrganizationUpdateCategoryPromptsV1OrgCategoriesCategoryIDPromptsPatchParams`](./src/profound/types/organization_update_category_prompts_v1_org_categories_category_id_prompts_patch_params.py) |
-| Response | [`OrganizationUpdateCategoryPromptsV1OrgCategoriesCategoryIDPromptsPatchResponse`](./src/profound/types/organization_update_category_prompts_v1_org_categories_category_id_prompts_patch_response.py) |
+| Request | [`CategoryUpdatePromptsParams`](./src/profound/types/organizations/category_update_prompts_params.py) |
+| Response | [`CategoryUpdatePromptsResponse`](./src/profound/types/organizations/category_update_prompts_response.py) |
 
 ```python
-organization = client.organization.update_category_prompts_v1_org_categories_category_id_prompts_patch(
+category = client.organizations.categories.update_prompts(
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     prompts=[],
     dry_run=False,
 )
 ```
 
-### Update prompt status
+#### Update prompt status
 
 Bulk-update the status of one or more prompts. Prompts already in the target status are skipped. Use dry_run to preview without persisting.
 
@@ -403,11 +370,11 @@ Status options:
 
 | Direction | Type |
 | --- | --- |
-| Request | [`OrganizationUpdateCategoryPromptStatusV1OrgCategoriesCategoryIDPromptsStatusPatchParams`](./src/profound/types/organization_update_category_prompt_status_v1_org_categories_category_id_prompts_status_patch_params.py) |
-| Response | [`OrganizationUpdateCategoryPromptStatusV1OrgCategoriesCategoryIDPromptsStatusPatchResponse`](./src/profound/types/organization_update_category_prompt_status_v1_org_categories_category_id_prompts_status_patch_response.py) |
+| Request | [`CategoryUpdatePromptStatusParams`](./src/profound/types/organizations/category_update_prompt_status_params.py) |
+| Response | [`CategoryUpdatePromptStatusResponse`](./src/profound/types/organizations/category_update_prompt_status_response.py) |
 
 ```python
-organization = client.organization.update_category_prompt_status_v1_org_categories_category_id_prompts_status_patch(
+category = client.organizations.categories.update_prompt_status(
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     prompt_ids=[],
     status="active",
@@ -415,73 +382,75 @@ organization = client.organization.update_category_prompt_status_v1_org_categori
 )
 ```
 
-### Get Category Assets
+#### Get Category Regions
+
+Get the regions for a specific category.
 
 | Direction | Type |
 | --- | --- |
-| Response | [`OrganizationListCategoryAssetsV1OrgCategoriesCategoryAssetsGetResponse`](./src/profound/types/organization_list_category_assets_v1_org_categories_category_assets_get_response.py) |
+| Response | [`CategoryRetrieveRegionsResponse`](./src/profound/types/organizations/category_retrieve_regions_response.py) |
 
 ```python
-organization = client.organization.list_category_assets_v1_org_categories_category_assets_get(
+category = client.organizations.categories.retrieve_regions(
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
 )
 ```
 
-### Get Category Personas
+#### Get Category Citation Categories
+
+Get the citation categories for a category: the built-in buckets plus any custom categories.
 
 | Direction | Type |
 | --- | --- |
-| Response | [`OrganizationListCategoryPersonasV1OrgCategoriesCategoryPersonasGetResponse`](./src/profound/types/organization_list_category_personas_v1_org_categories_category_personas_get_response.py) |
+| Response | [`CategoryGetCitationCategoriesResponse`](./src/profound/types/organizations/category_get_citation_categories_response.py) |
 
 ```python
-organization = client.organization.list_category_personas_v1_org_categories_category_personas_get(
+category = client.organizations.categories.get_citation_categories(
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
 )
 ```
 
 ## `Prompts`
 
-### `Prompts Answers`
-
-#### Get Answers
+### Get Answers
 
 | Direction | Type |
 | --- | --- |
-| Request | [`AnswerCreateV1PostParams`](./src/profound/types/prompts/answer_create_v1_post_params.py) |
-| Response | [`AnswerCreateV1PostResponse`](./src/profound/types/prompts/answer_create_v1_post_response.py) |
+| Request | [`PromptAnswersParams`](./src/profound/types/prompt_answers_params.py) |
+| Response | [`PromptAnswersResponse`](./src/profound/types/prompt_answers_response.py) |
 
 ```python
-answer = client.prompts.answers.create_v1_post(
+prompt = client.prompts.answers(
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     start_date="2024-01-01T00:00:00.000Z",
     end_date="2024-01-01T00:00:00.000Z",
 )
 ```
 
-#### Query Answers V2
+### Query Answers V2
 
 | Direction | Type |
 | --- | --- |
-| Request | [`AnswerQueryV2V2PostParams`](./src/profound/types/prompts/answer_query_v2_v2_post_params.py) |
-| Response | [`AnswerQueryV2V2PostResponse`](./src/profound/types/prompts/answer_query_v2_v2_post_response.py) |
+| Request | [`PromptAnswersV2Params`](./src/profound/types/prompt_answers_v2_params.py) |
+| Response | [`PromptAnswersV2Response`](./src/profound/types/prompt_answers_v2_response.py) |
 
 ```python
-answer = client.prompts.answers.query_v2_v2_post(
+prompt = client.prompts.answers_v2(
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     start_date="",
     end_date="",
 )
 ```
 
-#### Stream Answers V2
+### Stream Answers V2
 
 | Direction | Type |
 | --- | --- |
-| Request | [`AnswerStreamV2V2StreamPostParams`](./src/profound/types/prompts/answer_stream_v2_v2_stream_post_params.py) |
-| Response | [`AnswerStreamV2V2StreamPostResponse`](./src/profound/types/prompts/answer_stream_v2_v2_stream_post_response.py) |
+| Request | [`PromptStreamAnswersV2Params`](./src/profound/types/prompt_stream_answers_v2_params.py) |
+| Response | [`PromptStreamAnswersV2Response`](./src/profound/types/prompt_stream_answers_v2_response.py) |
 
 ```python
-stream = client.prompts.answers.stream_v2_v2_stream_post(
+stream = client.prompts.stream_answers_v2(
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     start_date="",
     end_date="",
@@ -493,27 +462,7 @@ for event in stream:
 
 ## `Reports`
 
-### Query Sentiment V2
-
-| Direction | Type |
-| --- | --- |
-| Request | [`ReportQuerySentimentV2V1SentimentV2PostParams`](./src/profound/types/report_query_sentiment_v2_v1_sentiment_v2_post_params.py) |
-| Response | [`ReportQuerySentimentV2V1SentimentV2PostResponse`](./src/profound/types/report_query_sentiment_v2_v1_sentiment_v2_post_response.py) |
-
-```python
-report = client.reports.query_sentiment_v2_v1_sentiment_v2_post(
-    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    asset_name="",
-    start_date="2024-01-01T00:00:00.000Z",
-    end_date="2024-01-01T00:00:00.000Z",
-    date_bucket="day",
-    metrics=[],
-)
-```
-
-### `Reports Citations`
-
-#### Query Citations
+### Query Citations
 
 Get citations for a given category.
 
@@ -524,11 +473,11 @@ otherwise eligible citations in its denominator when this filter is used.
 
 | Direction | Type |
 | --- | --- |
-| Request | [`CitationQueryV1PostParams`](./src/profound/types/reports/citation_query_v1_post_params.py) |
-| Response | [`CitationQueryV1PostResponse`](./src/profound/types/reports/citation_query_v1_post_response.py) |
+| Request | [`ReportCitationsParams`](./src/profound/types/report_citations_params.py) |
+| Response | [`ReportCitationsResponse`](./src/profound/types/report_citations_response.py) |
 
 ```python
-citation = client.reports.citations.query_v1_post(
+report = client.reports.citations(
     date_interval="day",
     dimensions=[],
     metrics=[],
@@ -539,82 +488,17 @@ citation = client.reports.citations.query_v1_post(
 )
 ```
 
-#### Stream Citations
-
-Stream citations with the same filter semantics as the non-streaming route.
-
-| Direction | Type |
-| --- | --- |
-| Request | [`CitationStreamV1StreamPostParams`](./src/profound/types/reports/citation_stream_v1_stream_post_params.py) |
-| Response | [`CitationStreamV1StreamPostResponse`](./src/profound/types/reports/citation_stream_v1_stream_post_response.py) |
-
-```python
-stream = client.reports.citations.stream_v1_stream_post(
-    date_interval="day",
-    dimensions=[],
-    metrics=[],
-    order_by={},
-    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    start_date="2024-01-01T00:00:00.000Z",
-    end_date="2024-01-01T00:00:00.000Z",
-)
-
-for event in stream:
-    print(event)
-```
-
-#### Query Citations V2
-
-| Direction | Type |
-| --- | --- |
-| Request | [`CitationQueryV2V2PostParams`](./src/profound/types/reports/citation_query_v2_v2_post_params.py) |
-| Response | [`CitationQueryV2V2PostResponse`](./src/profound/types/reports/citation_query_v2_v2_post_response.py) |
-
-```python
-citation = client.reports.citations.query_v2_v2_post(
-    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    start_date="",
-    end_date="",
-    entity="domain",
-    interval="day",
-    scope="all",
-)
-```
-
-#### Stream Citations V2
-
-| Direction | Type |
-| --- | --- |
-| Request | [`CitationStreamV2V2StreamPostParams`](./src/profound/types/reports/citation_stream_v2_v2_stream_post_params.py) |
-| Response | [`CitationStreamV2V2StreamPostResponse`](./src/profound/types/reports/citation_stream_v2_v2_stream_post_response.py) |
-
-```python
-stream = client.reports.citations.stream_v2_v2_stream_post(
-    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    start_date="",
-    end_date="",
-    entity="domain",
-    interval="day",
-    scope="all",
-)
-
-for event in stream:
-    print(event)
-```
-
-### `Reports Visibility`
-
-#### Query Visibility
+### Query Visibility
 
 Query visibility report.
 
 | Direction | Type |
 | --- | --- |
-| Request | [`VisibilityQueryV1PostParams`](./src/profound/types/reports/visibility_query_v1_post_params.py) |
-| Response | [`Response`](./src/profound/types/shared/response.py) |
+| Request | [`ReportVisibilityParams`](./src/profound/types/report_visibility_params.py) |
+| Response | [`ReportResponse`](./src/profound/types/report_response.py) |
 
 ```python
-visibility = client.reports.visibility.query_v1_post(
+report = client.reports.visibility(
     date_interval="day",
     dimensions=[],
     metrics=[],
@@ -625,78 +509,17 @@ visibility = client.reports.visibility.query_v1_post(
 )
 ```
 
-#### Stream Visibility
-
-| Direction | Type |
-| --- | --- |
-| Request | [`VisibilityStreamV1StreamPostParams`](./src/profound/types/reports/visibility_stream_v1_stream_post_params.py) |
-| Response | [`VisibilityStreamV1StreamPostResponse`](./src/profound/types/reports/visibility_stream_v1_stream_post_response.py) |
-
-```python
-stream = client.reports.visibility.stream_v1_stream_post(
-    date_interval="day",
-    dimensions=[],
-    metrics=[],
-    order_by={},
-    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    start_date="2024-01-01T00:00:00.000Z",
-    end_date="2024-01-01T00:00:00.000Z",
-)
-
-for event in stream:
-    print(event)
-```
-
-#### Query Visibility V2
-
-| Direction | Type |
-| --- | --- |
-| Request | [`VisibilityQueryV2V2PostParams`](./src/profound/types/reports/visibility_query_v2_v2_post_params.py) |
-| Response | [`VisibilityQueryV2V2PostResponse`](./src/profound/types/reports/visibility_query_v2_v2_post_response.py) |
-
-```python
-visibility = client.reports.visibility.query_v2_v2_post(
-    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    start_date="",
-    end_date="",
-    interval="day",
-    scope="owned",
-)
-```
-
-#### Stream Visibility V2
-
-| Direction | Type |
-| --- | --- |
-| Request | [`VisibilityStreamV2V2StreamPostParams`](./src/profound/types/reports/visibility_stream_v2_v2_stream_post_params.py) |
-| Response | [`VisibilityStreamV2V2StreamPostResponse`](./src/profound/types/reports/visibility_stream_v2_v2_stream_post_response.py) |
-
-```python
-stream = client.reports.visibility.stream_v2_v2_stream_post(
-    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    start_date="",
-    end_date="",
-    interval="day",
-    scope="owned",
-)
-
-for event in stream:
-    print(event)
-```
-
-### `Reports Sentiment`
-
-#### Query Sentiment
+### Query Sentiment
 
 Get citations for a given category.
 
 | Direction | Type |
 | --- | --- |
-| Request | [`SentimentQueryV1PostParams`](./src/profound/types/reports/sentiment_query_v1_post_params.py) |
-| Response | [`Response`](./src/profound/types/shared/response.py) |
+| Request | [`ReportSentimentParams`](./src/profound/types/report_sentiment_params.py) |
+| Response | [`ReportResponse`](./src/profound/types/report_response.py) |
 
 ```python
-sentiment = client.reports.sentiment.query_v1_post(
+report = client.reports.sentiment(
     date_interval="day",
     dimensions=[],
     metrics=[],
@@ -707,115 +530,25 @@ sentiment = client.reports.sentiment.query_v1_post(
 )
 ```
 
-#### Stream Sentiment
+### Query Sentiment V2
 
 | Direction | Type |
 | --- | --- |
-| Request | [`SentimentStreamV1StreamPostParams`](./src/profound/types/reports/sentiment_stream_v1_stream_post_params.py) |
-| Response | [`SentimentStreamV1StreamPostResponse`](./src/profound/types/reports/sentiment_stream_v1_stream_post_response.py) |
+| Request | [`ReportSentimentV2Params`](./src/profound/types/report_sentiment_v2_params.py) |
+| Response | [`ReportSentimentV2Response`](./src/profound/types/report_sentiment_v2_response.py) |
 
 ```python
-stream = client.reports.sentiment.stream_v1_stream_post(
-    date_interval="day",
-    dimensions=[],
-    metrics=[],
-    order_by={},
+report = client.reports.sentiment_v2(
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    asset_name="",
     start_date="2024-01-01T00:00:00.000Z",
     end_date="2024-01-01T00:00:00.000Z",
-)
-
-for event in stream:
-    print(event)
-```
-
-#### Query Sentiment V2
-
-| Direction | Type |
-| --- | --- |
-| Request | [`SentimentQueryV2V2PostParams`](./src/profound/types/reports/sentiment_query_v2_v2_post_params.py) |
-| Response | [`SentimentQueryV2V2PostResponse`](./src/profound/types/reports/sentiment_query_v2_v2_post_response.py) |
-
-```python
-sentiment = client.reports.sentiment.query_v2_v2_post(
-    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    asset="",
-    start_date="",
-    end_date="",
-    interval="day",
-    include_cited_websites=False,
-)
-```
-
-#### Stream Sentiment V2
-
-| Direction | Type |
-| --- | --- |
-| Request | [`SentimentStreamV2V2StreamPostParams`](./src/profound/types/reports/sentiment_stream_v2_v2_stream_post_params.py) |
-| Response | [`SentimentStreamV2V2StreamPostResponse`](./src/profound/types/reports/sentiment_stream_v2_v2_stream_post_response.py) |
-
-```python
-stream = client.reports.sentiment.stream_v2_v2_stream_post(
-    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    asset="",
-    start_date="",
-    end_date="",
-    interval="day",
-    include_cited_websites=False,
-)
-
-for event in stream:
-    print(event)
-```
-
-### `Reports WebSearchResults`
-
-#### Query Web Search Results
-
-Get web search results for a given category.
-
-| Direction | Type |
-| --- | --- |
-| Request | [`WebSearchResultQueryV1PostParams`](./src/profound/types/reports/web_search_result_query_v1_post_params.py) |
-| Response | [`WebSearchResultQueryV1PostResponse`](./src/profound/types/reports/web_search_result_query_v1_post_response.py) |
-
-```python
-web_search_result = client.reports.web_search_results.query_v1_post(
-    date_interval="day",
-    dimensions=[],
+    date_bucket="day",
     metrics=[],
-    order_by={},
-    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    start_date="2024-01-01T00:00:00.000Z",
-    end_date="2024-01-01T00:00:00.000Z",
 )
 ```
 
-#### Stream Web Search Results
-
-| Direction | Type |
-| --- | --- |
-| Request | [`WebSearchResultStreamV1StreamPostParams`](./src/profound/types/reports/web_search_result_stream_v1_stream_post_params.py) |
-| Response | [`WebSearchResultStreamV1StreamPostResponse`](./src/profound/types/reports/web_search_result_stream_v1_stream_post_response.py) |
-
-```python
-stream = client.reports.web_search_results.stream_v1_stream_post(
-    date_interval="day",
-    dimensions=[],
-    metrics=[],
-    order_by={},
-    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    start_date="2024-01-01T00:00:00.000Z",
-    end_date="2024-01-01T00:00:00.000Z",
-)
-
-for event in stream:
-    print(event)
-```
-
-### `Reports Referrals`
-
-#### Get Referrals Report V1
+### Get Referrals Report V1
 
 Get referral traffic report from the daily aggregated materialized view.
 
@@ -824,11 +557,11 @@ for large date ranges and high-traffic sites.
 
 | Direction | Type |
 | --- | --- |
-| Request | [`ReferralCreateV1V1PostParams`](./src/profound/types/reports/referral_create_v1_v1_post_params.py) |
-| Response | [`Response`](./src/profound/types/shared/response.py) |
+| Request | [`ReportGetReferralsReportParams`](./src/profound/types/report_get_referrals_report_params.py) |
+| Response | [`ReportResponse`](./src/profound/types/report_response.py) |
 
 ```python
-referral = client.reports.referrals.create_v1_v1_post(
+report = client.reports.get_referrals_report(
     date_interval="day",
     dimensions=[],
     metrics=[],
@@ -838,33 +571,7 @@ referral = client.reports.referrals.create_v1_v1_post(
 )
 ```
 
-#### Get Referrals Report V2
-
-Get referral traffic report from the hourly aggregated materialized view (UTC-based).
-
-Supports date_interval="hour", calendar intervals through "year", "quarter", and "relative_week".
-When `view_id` is provided, the query is scoped to that domain segment's hosts and paths.
-
-| Direction | Type |
-| --- | --- |
-| Request | [`ReferralCreateV2V2PostParams`](./src/profound/types/reports/referral_create_v2_v2_post_params.py) |
-| Response | [`Response`](./src/profound/types/shared/response.py) |
-
-```python
-referral = client.reports.referrals.create_v2_v2_post(
-    date_interval="day",
-    dimensions=[],
-    metrics=[],
-    order_by={},
-    domain="",
-    start_date="2024-01-01T00:00:00.000Z",
-    timezone="UTC",
-)
-```
-
-### `Reports Bots`
-
-#### Get Bots Report V1
+### Get Bots Report V1
 
 Get bot traffic report from the daily aggregated materialized view.
 
@@ -880,11 +587,11 @@ Metrics:
 
 | Direction | Type |
 | --- | --- |
-| Request | [`BotCreateV1V1PostParams`](./src/profound/types/reports/bot_create_v1_v1_post_params.py) |
-| Response | [`Response`](./src/profound/types/shared/response.py) |
+| Request | [`ReportGetBotsReportParams`](./src/profound/types/report_get_bots_report_params.py) |
+| Response | [`ReportResponse`](./src/profound/types/report_response.py) |
 
 ```python
-bot = client.reports.bots.create_v1_v1_post(
+report = client.reports.get_bots_report(
     date_interval="day",
     dimensions=[],
     metrics=[],
@@ -894,7 +601,199 @@ bot = client.reports.bots.create_v1_v1_post(
 )
 ```
 
-#### Get Bots Report V2
+### Query Fanouts
+
+| Direction | Type |
+| --- | --- |
+| Request | [`ReportQueryFanoutsParams`](./src/profound/types/report_query_fanouts_params.py) |
+| Response | [`ReportResponse`](./src/profound/types/report_response.py) |
+
+```python
+report = client.reports.query_fanouts(
+    date_interval="day",
+    dimensions=[],
+    metrics=[],
+    order_by={},
+    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    start_date="2024-01-01T00:00:00.000Z",
+    end_date="2024-01-01T00:00:00.000Z",
+)
+```
+
+### Stream Citations
+
+Stream citations with the same filter semantics as the non-streaming route.
+
+| Direction | Type |
+| --- | --- |
+| Request | [`ReportStreamCitationsParams`](./src/profound/types/report_stream_citations_params.py) |
+| Response | [`ReportStreamCitationsResponse`](./src/profound/types/report_stream_citations_response.py) |
+
+```python
+stream = client.reports.stream_citations(
+    date_interval="day",
+    dimensions=[],
+    metrics=[],
+    order_by={},
+    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    start_date="2024-01-01T00:00:00.000Z",
+    end_date="2024-01-01T00:00:00.000Z",
+)
+
+for event in stream:
+    print(event)
+```
+
+### Stream Visibility
+
+| Direction | Type |
+| --- | --- |
+| Request | [`ReportStreamVisibilityParams`](./src/profound/types/report_stream_visibility_params.py) |
+| Response | [`ReportStreamVisibilityResponse`](./src/profound/types/report_stream_visibility_response.py) |
+
+```python
+stream = client.reports.stream_visibility(
+    date_interval="day",
+    dimensions=[],
+    metrics=[],
+    order_by={},
+    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    start_date="2024-01-01T00:00:00.000Z",
+    end_date="2024-01-01T00:00:00.000Z",
+)
+
+for event in stream:
+    print(event)
+```
+
+### Stream Sentiment
+
+| Direction | Type |
+| --- | --- |
+| Request | [`ReportStreamSentimentParams`](./src/profound/types/report_stream_sentiment_params.py) |
+| Response | [`ReportStreamSentimentResponse`](./src/profound/types/report_stream_sentiment_response.py) |
+
+```python
+stream = client.reports.stream_sentiment(
+    date_interval="day",
+    dimensions=[],
+    metrics=[],
+    order_by={},
+    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    start_date="2024-01-01T00:00:00.000Z",
+    end_date="2024-01-01T00:00:00.000Z",
+)
+
+for event in stream:
+    print(event)
+```
+
+### Stream Citations V2
+
+| Direction | Type |
+| --- | --- |
+| Request | [`ReportStreamCitationsV2Params`](./src/profound/types/report_stream_citations_v2_params.py) |
+| Response | [`ReportStreamCitationsV2Response`](./src/profound/types/report_stream_citations_v2_response.py) |
+
+```python
+stream = client.reports.stream_citations_v2(
+    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    start_date="",
+    end_date="",
+    entity="domain",
+    interval="day",
+    scope="all",
+)
+
+for event in stream:
+    print(event)
+```
+
+### Stream Visibility V2
+
+| Direction | Type |
+| --- | --- |
+| Request | [`ReportStreamVisibilityV2Params`](./src/profound/types/report_stream_visibility_v2_params.py) |
+| Response | [`ReportStreamVisibilityV2Response`](./src/profound/types/report_stream_visibility_v2_response.py) |
+
+```python
+stream = client.reports.stream_visibility_v2(
+    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    start_date="",
+    end_date="",
+    interval="day",
+    scope="owned",
+)
+
+for event in stream:
+    print(event)
+```
+
+### Stream Sentiment V2
+
+| Direction | Type |
+| --- | --- |
+| Request | [`ReportStreamSentimentV2Params`](./src/profound/types/report_stream_sentiment_v2_params.py) |
+| Response | [`ReportStreamSentimentV2Response`](./src/profound/types/report_stream_sentiment_v2_response.py) |
+
+```python
+stream = client.reports.stream_sentiment_v2(
+    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    asset="",
+    start_date="",
+    end_date="",
+    interval="day",
+    include_cited_websites=False,
+)
+
+for event in stream:
+    print(event)
+```
+
+### Stream Query Fanouts V2
+
+| Direction | Type |
+| --- | --- |
+| Request | [`ReportStreamQueryFanoutsParams`](./src/profound/types/report_stream_query_fanouts_params.py) |
+| Response | [`ReportStreamQueryFanoutsResponse`](./src/profound/types/report_stream_query_fanouts_response.py) |
+
+```python
+stream = client.reports.stream_query_fanouts(
+    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    start_date="",
+    end_date="",
+    interval="day",
+)
+
+for event in stream:
+    print(event)
+```
+
+### Get Referrals Report V2
+
+Get referral traffic report from the hourly aggregated materialized view (UTC-based).
+
+Supports date_interval="hour", calendar intervals through "year", "quarter", and "relative_week".
+When `view_id` is provided, the query is scoped to that domain segment's hosts and paths.
+
+| Direction | Type |
+| --- | --- |
+| Request | [`ReportGetReferralsReportV2Params`](./src/profound/types/report_get_referrals_report_v2_params.py) |
+| Response | [`ReportResponse`](./src/profound/types/report_response.py) |
+
+```python
+report = client.reports.get_referrals_report_v2(
+    date_interval="day",
+    dimensions=[],
+    metrics=[],
+    order_by={},
+    domain="",
+    start_date="2024-01-01T00:00:00.000Z",
+    timezone="UTC",
+)
+```
+
+### Get Bots Report V2
 
 Get bot traffic report from the hourly aggregated materialized view (UTC-based).
 
@@ -913,11 +812,11 @@ Dimensions:
 
 | Direction | Type |
 | --- | --- |
-| Request | [`BotCreateV2V2PostParams`](./src/profound/types/reports/bot_create_v2_v2_post_params.py) |
-| Response | [`Response`](./src/profound/types/shared/response.py) |
+| Request | [`ReportGetBotsReportV2Params`](./src/profound/types/report_get_bots_report_v2_params.py) |
+| Response | [`ReportResponse`](./src/profound/types/report_response.py) |
 
 ```python
-bot = client.reports.bots.create_v2_v2_post(
+report = client.reports.get_bots_report_v2(
     date_interval="day",
     dimensions=[],
     metrics=[],
@@ -928,17 +827,88 @@ bot = client.reports.bots.create_v2_v2_post(
 )
 ```
 
-### `Reports QueryFanouts`
-
-#### Query Fanouts
+### Query Visibility V2
 
 | Direction | Type |
 | --- | --- |
-| Request | [`QueryFanoutV1PostParams`](./src/profound/types/reports/query_fanout_v1_post_params.py) |
-| Response | [`Response`](./src/profound/types/shared/response.py) |
+| Request | [`ReportQueryVisibilityParams`](./src/profound/types/report_query_visibility_params.py) |
+| Response | [`ReportQueryVisibilityResponse`](./src/profound/types/report_query_visibility_response.py) |
 
 ```python
-query_fanout = client.reports.query_fanouts.v1_post(
+report = client.reports.query_visibility(
+    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    start_date="",
+    end_date="",
+    interval="day",
+    scope="owned",
+)
+```
+
+### Query Citations V2
+
+| Direction | Type |
+| --- | --- |
+| Request | [`ReportQueryCitationsParams`](./src/profound/types/report_query_citations_params.py) |
+| Response | [`ReportQueryCitationsResponse`](./src/profound/types/report_query_citations_response.py) |
+
+```python
+report = client.reports.query_citations(
+    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    start_date="",
+    end_date="",
+    entity="domain",
+    interval="day",
+    scope="all",
+)
+```
+
+### Query Sentiment V2
+
+| Direction | Type |
+| --- | --- |
+| Request | [`ReportQuerySentimentParams`](./src/profound/types/report_query_sentiment_params.py) |
+| Response | [`ReportQuerySentimentResponse`](./src/profound/types/report_query_sentiment_response.py) |
+
+```python
+report = client.reports.query_sentiment(
+    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    asset="",
+    start_date="",
+    end_date="",
+    interval="day",
+    include_cited_websites=False,
+)
+```
+
+### Query Fanouts V2
+
+| Direction | Type |
+| --- | --- |
+| Request | [`ReportQueryQueryFanoutsParams`](./src/profound/types/report_query_query_fanouts_params.py) |
+| Response | [`ReportQueryQueryFanoutsResponse`](./src/profound/types/report_query_query_fanouts_response.py) |
+
+```python
+report = client.reports.query_query_fanouts(
+    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    start_date="",
+    end_date="",
+    interval="day",
+)
+```
+
+### `Reports WebSearchResults`
+
+#### Query Web Search Results
+
+Get web search results for a given category.
+
+| Direction | Type |
+| --- | --- |
+| Request | [`WebSearchResultQueryParams`](./src/profound/types/reports/web_search_result_query_params.py) |
+| Response | [`WebSearchResultQueryResponse`](./src/profound/types/reports/web_search_result_query_response.py) |
+
+```python
+web_search_result = client.reports.web_search_results.query(
     date_interval="day",
     dimensions=[],
     metrics=[],
@@ -949,35 +919,22 @@ query_fanout = client.reports.query_fanouts.v1_post(
 )
 ```
 
-#### Query Fanouts V2
+#### Stream Web Search Results
 
 | Direction | Type |
 | --- | --- |
-| Request | [`QueryFanoutV2V2PostParams`](./src/profound/types/reports/query_fanout_v2_v2_post_params.py) |
-| Response | [`QueryFanoutV2V2PostResponse`](./src/profound/types/reports/query_fanout_v2_v2_post_response.py) |
+| Request | [`WebSearchResultStreamParams`](./src/profound/types/reports/web_search_result_stream_params.py) |
+| Response | [`WebSearchResultStreamResponse`](./src/profound/types/reports/web_search_result_stream_response.py) |
 
 ```python
-query_fanout = client.reports.query_fanouts.v2_v2_post(
+stream = client.reports.web_search_results.stream(
+    date_interval="day",
+    dimensions=[],
+    metrics=[],
+    order_by={},
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    start_date="",
-    end_date="",
-    interval="day",
-)
-```
-
-#### Stream Query Fanouts V2
-
-| Direction | Type |
-| --- | --- |
-| Request | [`QueryFanoutStreamV2V2StreamPostParams`](./src/profound/types/reports/query_fanout_stream_v2_v2_stream_post_params.py) |
-| Response | [`QueryFanoutStreamV2V2StreamPostResponse`](./src/profound/types/reports/query_fanout_stream_v2_v2_stream_post_response.py) |
-
-```python
-stream = client.reports.query_fanouts.stream_v2_v2_stream_post(
-    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    start_date="",
-    end_date="",
-    interval="day",
+    start_date="2024-01-01T00:00:00.000Z",
+    end_date="2024-01-01T00:00:00.000Z",
 )
 
 for event in stream:
@@ -986,263 +943,15 @@ for event in stream:
 
 ### `Reports Shopping`
 
-#### Shopping Visibility
-
-| Direction | Type |
-| --- | --- |
-| Request | [`ShoppingVisibilityV1VisibilityPostParams`](./src/profound/types/reports/shopping_visibility_v1_visibility_post_params.py) |
-| Response | [`ShoppingRowsResponse`](./src/profound/types/shared/shopping_rows_response.py) |
-
-```python
-shopping = client.reports.shopping.visibility_v1_visibility_post(
-    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    start_date="2024-01-01T00:00:00.000Z",
-    end_date="2024-01-01T00:00:00.000Z",
-    date_interval="day",
-    include_count=False,
-    tag_filter_type="any",
-    include_no_tag=False,
-    exclude_topic_ids=False,
-    include_asset_only=False,
-    rank_by="visibility_score",
-    include_position_frequency=False,
-)
-```
-
-#### Shopping Item Visibility
-
-| Direction | Type |
-| --- | --- |
-| Request | [`ShoppingItemVisibilityV1ItemVisibilityPostParams`](./src/profound/types/reports/shopping_item_visibility_v1_item_visibility_post_params.py) |
-| Response | [`ShoppingRowsResponse`](./src/profound/types/shared/shopping_rows_response.py) |
-
-```python
-shopping = client.reports.shopping.item_visibility_v1_item_visibility_post(
-    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    start_date="2024-01-01T00:00:00.000Z",
-    end_date="2024-01-01T00:00:00.000Z",
-    date_interval="day",
-    include_count=False,
-    tag_filter_type="any",
-    include_no_tag=False,
-    exclude_topic_ids=False,
-    merchant_filter_type="any",
-    include_competitors=False,
-    competitor_limit=5,
-    include_position_frequency=False,
-)
-```
-
-#### Shopping Merchant Distribution
-
-| Direction | Type |
-| --- | --- |
-| Request | [`ShoppingMerchantDistributionV1MerchantDistributionPostParams`](./src/profound/types/reports/shopping_merchant_distribution_v1_merchant_distribution_post_params.py) |
-| Response | [`ShoppingRowsResponse`](./src/profound/types/shared/shopping_rows_response.py) |
-
-```python
-shopping = client.reports.shopping.merchant_distribution_v1_merchant_distribution_post(
-    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    start_date="2024-01-01T00:00:00.000Z",
-    end_date="2024-01-01T00:00:00.000Z",
-    date_interval="day",
-    include_count=False,
-    tag_filter_type="any",
-    include_no_tag=False,
-    exclude_topic_ids=False,
-)
-```
-
-#### Shopping Merchant Visibility By Brand
-
-| Direction | Type |
-| --- | --- |
-| Request | [`ShoppingMerchantVisibilityByBrandV1MerchantVisibilityByBrandPostParams`](./src/profound/types/reports/shopping_merchant_visibility_by_brand_v1_merchant_visibility_by_brand_post_params.py) |
-| Response | [`ShoppingRowsResponse`](./src/profound/types/shared/shopping_rows_response.py) |
-
-```python
-shopping = client.reports.shopping.merchant_visibility_by_brand_v1_merchant_visibility_by_brand_post(
-    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    start_date="2024-01-01T00:00:00.000Z",
-    end_date="2024-01-01T00:00:00.000Z",
-    date_interval="day",
-    include_count=False,
-    tag_filter_type="any",
-    include_no_tag=False,
-    exclude_topic_ids=False,
-    include_brand_only=False,
-)
-```
-
-#### Shopping Merchant By Items
-
-| Direction | Type |
-| --- | --- |
-| Request | [`ShoppingMerchantByItemsV1MerchantByItemsPostParams`](./src/profound/types/reports/shopping_merchant_by_items_v1_merchant_by_items_post_params.py) |
-| Response | [`ShoppingRowsResponse`](./src/profound/types/shared/shopping_rows_response.py) |
-
-```python
-shopping = client.reports.shopping.merchant_by_items_v1_merchant_by_items_post(
-    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    start_date="2024-01-01T00:00:00.000Z",
-    end_date="2024-01-01T00:00:00.000Z",
-    date_interval="day",
-    include_count=False,
-    tag_filter_type="any",
-    include_no_tag=False,
-    exclude_topic_ids=False,
-)
-```
-
-#### Shopping All Items With Merchants
-
-| Direction | Type |
-| --- | --- |
-| Request | [`ShoppingAllItemsWithMerchantsV1AllItemsWithMerchantsPostParams`](./src/profound/types/reports/shopping_all_items_with_merchants_v1_all_items_with_merchants_post_params.py) |
-| Response | [`ShoppingRowsResponse`](./src/profound/types/shared/shopping_rows_response.py) |
-
-```python
-shopping = client.reports.shopping.all_items_with_merchants_v1_all_items_with_merchants_post(
-    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    start_date="2024-01-01T00:00:00.000Z",
-    end_date="2024-01-01T00:00:00.000Z",
-    date_interval="day",
-    include_count=False,
-    tag_filter_type="any",
-    include_no_tag=False,
-    exclude_topic_ids=False,
-    merchant_filter_type="any",
-    rank_by="visibility",
-    sort_order="desc",
-)
-```
-
-#### Shopping Trigger Rate
-
-| Direction | Type |
-| --- | --- |
-| Request | [`ShoppingTriggerRateV1TriggerRatePostParams`](./src/profound/types/reports/shopping_trigger_rate_v1_trigger_rate_post_params.py) |
-| Response | [`ShoppingRowsResponse`](./src/profound/types/shared/shopping_rows_response.py) |
-
-```python
-shopping = client.reports.shopping.trigger_rate_v1_trigger_rate_post(
-    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    start_date="2024-01-01T00:00:00.000Z",
-    end_date="2024-01-01T00:00:00.000Z",
-    date_interval="day",
-    include_count=False,
-    tag_filter_type="any",
-    include_no_tag=False,
-    exclude_topic_ids=False,
-)
-```
-
-#### Shopping Triggered Prompts
-
-| Direction | Type |
-| --- | --- |
-| Request | [`ShoppingTriggeredPromptsV1TriggeredPromptsPostParams`](./src/profound/types/reports/shopping_triggered_prompts_v1_triggered_prompts_post_params.py) |
-| Response | [`ShoppingRowsResponse`](./src/profound/types/shared/shopping_rows_response.py) |
-
-```python
-shopping = client.reports.shopping.triggered_prompts_v1_triggered_prompts_post(
-    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    start_date="2024-01-01T00:00:00.000Z",
-    end_date="2024-01-01T00:00:00.000Z",
-    date_interval="day",
-    include_count=False,
-    tag_filter_type="any",
-    include_no_tag=False,
-    exclude_topic_ids=False,
-)
-```
-
-#### Shopping Triggered Topics
-
-| Direction | Type |
-| --- | --- |
-| Request | [`ShoppingTriggeredTopicsV1TriggeredTopicsPostParams`](./src/profound/types/reports/shopping_triggered_topics_v1_triggered_topics_post_params.py) |
-| Response | [`ShoppingRowsResponse`](./src/profound/types/shared/shopping_rows_response.py) |
-
-```python
-shopping = client.reports.shopping.triggered_topics_v1_triggered_topics_post(
-    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    start_date="2024-01-01T00:00:00.000Z",
-    end_date="2024-01-01T00:00:00.000Z",
-    date_interval="day",
-    include_count=False,
-    tag_filter_type="any",
-    include_no_tag=False,
-    exclude_topic_ids=False,
-)
-```
-
-#### Shopping Merchant Share
-
-| Direction | Type |
-| --- | --- |
-| Request | [`ShoppingMerchantShareV1MerchantSharePostParams`](./src/profound/types/reports/shopping_merchant_share_v1_merchant_share_post_params.py) |
-| Response | [`ShoppingRowsResponse`](./src/profound/types/shared/shopping_rows_response.py) |
-
-```python
-shopping = client.reports.shopping.merchant_share_v1_merchant_share_post(
-    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    start_date="2024-01-01T00:00:00.000Z",
-    end_date="2024-01-01T00:00:00.000Z",
-    date_interval="day",
-    include_count=False,
-    tag_filter_type="any",
-    include_no_tag=False,
-    exclude_topic_ids=False,
-)
-```
-
-#### Shopping Product Merchant Urls
-
-| Direction | Type |
-| --- | --- |
-| Request | [`ShoppingProductMerchantURLsV1ProductMerchantURLsPostParams`](./src/profound/types/reports/shopping_product_merchant_urls_v1_product_merchant_urls_post_params.py) |
-| Response | [`ShoppingRowsResponse`](./src/profound/types/shared/shopping_rows_response.py) |
-
-```python
-shopping = client.reports.shopping.product_merchant_urls_v1_product_merchant_urls_post(
-    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    product_names=[],
-    start_date="2024-01-01T00:00:00.000Z",
-    end_date="2024-01-01T00:00:00.000Z",
-)
-```
-
-#### Shopping Executions
-
-| Direction | Type |
-| --- | --- |
-| Request | [`ShoppingExecutionsV1ExecutionsPostParams`](./src/profound/types/reports/shopping_executions_v1_executions_post_params.py) |
-| Response | [`ShoppingRowsResponse`](./src/profound/types/shared/shopping_rows_response.py) |
-
-```python
-shopping = client.reports.shopping.executions_v1_executions_post(
-    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    start_date="2024-01-01T00:00:00.000Z",
-    end_date="2024-01-01T00:00:00.000Z",
-    date_interval="day",
-    include_count=False,
-    tag_filter_type="any",
-    include_no_tag=False,
-    exclude_topic_ids=False,
-    analysis_filter_type="any",
-)
-```
-
 #### Query Shopping Brands V2
 
 | Direction | Type |
 | --- | --- |
-| Request | [`ShoppingQueryBrandsV2V2BrandsPostParams`](./src/profound/types/reports/shopping_query_brands_v2_v2_brands_post_params.py) |
-| Response | [`ShoppingQueryBrandsV2V2BrandsPostResponse`](./src/profound/types/reports/shopping_query_brands_v2_v2_brands_post_response.py) |
+| Request | [`ShoppingBrandsParams`](./src/profound/types/reports/shopping_brands_params.py) |
+| Response | [`ShoppingBrandsResponse`](./src/profound/types/reports/shopping_brands_response.py) |
 
 ```python
-shopping = client.reports.shopping.query_brands_v2_v2_brands_post(
+shopping = client.reports.shopping.brands(
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     start_date="",
     end_date="",
@@ -1255,11 +964,11 @@ shopping = client.reports.shopping.query_brands_v2_v2_brands_post(
 
 | Direction | Type |
 | --- | --- |
-| Request | [`ShoppingStreamBrandsV2V2BrandsStreamPostParams`](./src/profound/types/reports/shopping_stream_brands_v2_v2_brands_stream_post_params.py) |
-| Response | [`ShoppingStreamBrandsV2V2BrandsStreamPostResponse`](./src/profound/types/reports/shopping_stream_brands_v2_v2_brands_stream_post_response.py) |
+| Request | [`ShoppingStreamBrandsParams`](./src/profound/types/reports/shopping_stream_brands_params.py) |
+| Response | [`ShoppingStreamBrandsResponse`](./src/profound/types/reports/shopping_stream_brands_response.py) |
 
 ```python
-stream = client.reports.shopping.stream_brands_v2_v2_brands_stream_post(
+stream = client.reports.shopping.stream_brands(
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     start_date="",
     end_date="",
@@ -1275,11 +984,11 @@ for event in stream:
 
 | Direction | Type |
 | --- | --- |
-| Request | [`ShoppingQueryProductsV2V2ProductsPostParams`](./src/profound/types/reports/shopping_query_products_v2_v2_products_post_params.py) |
-| Response | [`ShoppingQueryProductsV2V2ProductsPostResponse`](./src/profound/types/reports/shopping_query_products_v2_v2_products_post_response.py) |
+| Request | [`ShoppingProductsParams`](./src/profound/types/reports/shopping_products_params.py) |
+| Response | [`ShoppingProductsResponse`](./src/profound/types/reports/shopping_products_response.py) |
 
 ```python
-shopping = client.reports.shopping.query_products_v2_v2_products_post(
+shopping = client.reports.shopping.products(
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     start_date="",
     end_date="",
@@ -1293,11 +1002,11 @@ shopping = client.reports.shopping.query_products_v2_v2_products_post(
 
 | Direction | Type |
 | --- | --- |
-| Request | [`ShoppingStreamProductsV2V2ProductsStreamPostParams`](./src/profound/types/reports/shopping_stream_products_v2_v2_products_stream_post_params.py) |
-| Response | [`ShoppingStreamProductsV2V2ProductsStreamPostResponse`](./src/profound/types/reports/shopping_stream_products_v2_v2_products_stream_post_response.py) |
+| Request | [`ShoppingStreamProductsParams`](./src/profound/types/reports/shopping_stream_products_params.py) |
+| Response | [`ShoppingStreamProductsResponse`](./src/profound/types/reports/shopping_stream_products_response.py) |
 
 ```python
-stream = client.reports.shopping.stream_products_v2_v2_products_stream_post(
+stream = client.reports.shopping.stream_products(
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     start_date="",
     end_date="",
@@ -1314,11 +1023,11 @@ for event in stream:
 
 | Direction | Type |
 | --- | --- |
-| Request | [`ShoppingQueryMerchantsV2V2MerchantsPostParams`](./src/profound/types/reports/shopping_query_merchants_v2_v2_merchants_post_params.py) |
-| Response | [`ShoppingQueryMerchantsV2V2MerchantsPostResponse`](./src/profound/types/reports/shopping_query_merchants_v2_v2_merchants_post_response.py) |
+| Request | [`ShoppingMerchantsParams`](./src/profound/types/reports/shopping_merchants_params.py) |
+| Response | [`ShoppingMerchantsResponse`](./src/profound/types/reports/shopping_merchants_response.py) |
 
 ```python
-shopping = client.reports.shopping.query_merchants_v2_v2_merchants_post(
+shopping = client.reports.shopping.merchants(
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     start_date="",
     end_date="",
@@ -1330,11 +1039,11 @@ shopping = client.reports.shopping.query_merchants_v2_v2_merchants_post(
 
 | Direction | Type |
 | --- | --- |
-| Request | [`ShoppingStreamMerchantsV2V2MerchantsStreamPostParams`](./src/profound/types/reports/shopping_stream_merchants_v2_v2_merchants_stream_post_params.py) |
-| Response | [`ShoppingStreamMerchantsV2V2MerchantsStreamPostResponse`](./src/profound/types/reports/shopping_stream_merchants_v2_v2_merchants_stream_post_response.py) |
+| Request | [`ShoppingStreamMerchantsParams`](./src/profound/types/reports/shopping_stream_merchants_params.py) |
+| Response | [`ShoppingStreamMerchantsResponse`](./src/profound/types/reports/shopping_stream_merchants_response.py) |
 
 ```python
-stream = client.reports.shopping.stream_merchants_v2_v2_merchants_stream_post(
+stream = client.reports.shopping.stream_merchants(
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     start_date="",
     end_date="",
@@ -1349,11 +1058,11 @@ for event in stream:
 
 | Direction | Type |
 | --- | --- |
-| Request | [`ShoppingQueryTriggerRateV2V2TriggerRatePostParams`](./src/profound/types/reports/shopping_query_trigger_rate_v2_v2_trigger_rate_post_params.py) |
-| Response | [`ShoppingQueryTriggerRateV2V2TriggerRatePostResponse`](./src/profound/types/reports/shopping_query_trigger_rate_v2_v2_trigger_rate_post_response.py) |
+| Request | [`ShoppingTriggerRateParams`](./src/profound/types/reports/shopping_trigger_rate_params.py) |
+| Response | [`ShoppingTriggerRateResponse`](./src/profound/types/reports/shopping_trigger_rate_response.py) |
 
 ```python
-shopping = client.reports.shopping.query_trigger_rate_v2_v2_trigger_rate_post(
+shopping = client.reports.shopping.trigger_rate(
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     start_date="",
     end_date="",
@@ -1365,11 +1074,11 @@ shopping = client.reports.shopping.query_trigger_rate_v2_v2_trigger_rate_post(
 
 | Direction | Type |
 | --- | --- |
-| Request | [`ShoppingStreamTriggerRateV2V2TriggerRateStreamPostParams`](./src/profound/types/reports/shopping_stream_trigger_rate_v2_v2_trigger_rate_stream_post_params.py) |
-| Response | [`ShoppingStreamTriggerRateV2V2TriggerRateStreamPostResponse`](./src/profound/types/reports/shopping_stream_trigger_rate_v2_v2_trigger_rate_stream_post_response.py) |
+| Request | [`ShoppingStreamTriggerRateParams`](./src/profound/types/reports/shopping_stream_trigger_rate_params.py) |
+| Response | [`ShoppingStreamTriggerRateResponse`](./src/profound/types/reports/shopping_stream_trigger_rate_response.py) |
 
 ```python
-stream = client.reports.shopping.stream_trigger_rate_v2_v2_trigger_rate_stream_post(
+stream = client.reports.shopping.stream_trigger_rate(
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     start_date="",
     end_date="",
@@ -1386,11 +1095,11 @@ for event in stream:
 
 | Direction | Type |
 | --- | --- |
-| Request | [`AccuracyOverviewV1OverviewPostParams`](./src/profound/types/reports/accuracy_overview_v1_overview_post_params.py) |
-| Response | [`AccuracyOverviewV1OverviewPostResponse`](./src/profound/types/reports/accuracy_overview_v1_overview_post_response.py) |
+| Request | [`AccuracyCreateOverviewParams`](./src/profound/types/reports/accuracy_create_overview_params.py) |
+| Response | [`AccuracyCreateOverviewResponse`](./src/profound/types/reports/accuracy_create_overview_response.py) |
 
 ```python
-accuracy = client.reports.accuracy.overview_v1_overview_post(
+accuracy = client.reports.accuracy.create_overview(
     start_date="",
     end_date="",
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -1406,11 +1115,11 @@ accuracy = client.reports.accuracy.overview_v1_overview_post(
 
 | Direction | Type |
 | --- | --- |
-| Request | [`AccuracyBreakdownV1BreakdownPostParams`](./src/profound/types/reports/accuracy_breakdown_v1_breakdown_post_params.py) |
-| Response | [`AccuracyBreakdownV1BreakdownPostResponse`](./src/profound/types/reports/accuracy_breakdown_v1_breakdown_post_response.py) |
+| Request | [`AccuracyCreateBreakdownParams`](./src/profound/types/reports/accuracy_create_breakdown_params.py) |
+| Response | [`AccuracyCreateBreakdownResponse`](./src/profound/types/reports/accuracy_create_breakdown_response.py) |
 
 ```python
-accuracy = client.reports.accuracy.breakdown_v1_breakdown_post(
+accuracy = client.reports.accuracy.create_breakdown(
     start_date="",
     end_date="",
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -1430,11 +1139,11 @@ accuracy = client.reports.accuracy.breakdown_v1_breakdown_post(
 
 | Direction | Type |
 | --- | --- |
-| Request | [`AccuracyCitationAnalysisV1CitationAnalysisPostParams`](./src/profound/types/reports/accuracy_citation_analysis_v1_citation_analysis_post_params.py) |
-| Response | [`AccuracyCitationAnalysisV1CitationAnalysisPostResponse`](./src/profound/types/reports/accuracy_citation_analysis_v1_citation_analysis_post_response.py) |
+| Request | [`AccuracyCreateCitationAnalysisParams`](./src/profound/types/reports/accuracy_create_citation_analysis_params.py) |
+| Response | [`AccuracyCreateCitationAnalysisResponse`](./src/profound/types/reports/accuracy_create_citation_analysis_response.py) |
 
 ```python
-accuracy = client.reports.accuracy.citation_analysis_v1_citation_analysis_post(
+accuracy = client.reports.accuracy.create_citation_analysis(
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     clean_href="",
     start_date="",
@@ -1446,11 +1155,11 @@ accuracy = client.reports.accuracy.citation_analysis_v1_citation_analysis_post(
 
 | Direction | Type |
 | --- | --- |
-| Request | [`AccuracyTopicIDsV1TopicIDsPostParams`](./src/profound/types/reports/accuracy_topic_ids_v1_topic_ids_post_params.py) |
-| Response | [`AccuracyTopicIDsV1TopicIDsPostResponse`](./src/profound/types/reports/accuracy_topic_ids_v1_topic_ids_post_response.py) |
+| Request | [`AccuracyCreateTopicIDsParams`](./src/profound/types/reports/accuracy_create_topic_ids_params.py) |
+| Response | [`AccuracyCreateTopicIDsResponse`](./src/profound/types/reports/accuracy_create_topic_ids_response.py) |
 
 ```python
-accuracy = client.reports.accuracy.topic_ids_v1_topic_ids_post(
+accuracy = client.reports.accuracy.create_topic_ids(
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     start_date="",
     end_date="",
@@ -1461,11 +1170,11 @@ accuracy = client.reports.accuracy.topic_ids_v1_topic_ids_post(
 
 | Direction | Type |
 | --- | --- |
-| Request | [`AccuracyInaccurateThemesV1InaccurateThemesPostParams`](./src/profound/types/reports/accuracy_inaccurate_themes_v1_inaccurate_themes_post_params.py) |
-| Response | [`AccuracyInaccurateThemesV1InaccurateThemesPostResponse`](./src/profound/types/reports/accuracy_inaccurate_themes_v1_inaccurate_themes_post_response.py) |
+| Request | [`AccuracyCreateInaccurateThemesParams`](./src/profound/types/reports/accuracy_create_inaccurate_themes_params.py) |
+| Response | [`AccuracyCreateInaccurateThemesResponse`](./src/profound/types/reports/accuracy_create_inaccurate_themes_response.py) |
 
 ```python
-accuracy = client.reports.accuracy.inaccurate_themes_v1_inaccurate_themes_post(
+accuracy = client.reports.accuracy.create_inaccurate_themes(
     start_date="",
     end_date="",
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -1484,11 +1193,11 @@ accuracy = client.reports.accuracy.inaccurate_themes_v1_inaccurate_themes_post(
 
 | Direction | Type |
 | --- | --- |
-| Request | [`AccuracyInaccurateClustersV1InaccurateClustersPostParams`](./src/profound/types/reports/accuracy_inaccurate_clusters_v1_inaccurate_clusters_post_params.py) |
-| Response | [`AccuracyInaccurateClustersV1InaccurateClustersPostResponse`](./src/profound/types/reports/accuracy_inaccurate_clusters_v1_inaccurate_clusters_post_response.py) |
+| Request | [`AccuracyCreateInaccurateClustersParams`](./src/profound/types/reports/accuracy_create_inaccurate_clusters_params.py) |
+| Response | [`AccuracyCreateInaccurateClustersResponse`](./src/profound/types/reports/accuracy_create_inaccurate_clusters_response.py) |
 
 ```python
-accuracy = client.reports.accuracy.inaccurate_clusters_v1_inaccurate_clusters_post(
+accuracy = client.reports.accuracy.create_inaccurate_clusters(
     start_date="",
     end_date="",
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -1506,11 +1215,11 @@ accuracy = client.reports.accuracy.inaccurate_clusters_v1_inaccurate_clusters_po
 
 | Direction | Type |
 | --- | --- |
-| Request | [`AccuracyInaccuracyDriversV1InaccuracyDriversPostParams`](./src/profound/types/reports/accuracy_inaccuracy_drivers_v1_inaccuracy_drivers_post_params.py) |
-| Response | [`AccuracyInaccuracyDriversV1InaccuracyDriversPostResponse`](./src/profound/types/reports/accuracy_inaccuracy_drivers_v1_inaccuracy_drivers_post_response.py) |
+| Request | [`AccuracyCreateInaccuracyDriversParams`](./src/profound/types/reports/accuracy_create_inaccuracy_drivers_params.py) |
+| Response | [`AccuracyCreateInaccuracyDriversResponse`](./src/profound/types/reports/accuracy_create_inaccuracy_drivers_response.py) |
 
 ```python
-accuracy = client.reports.accuracy.inaccuracy_drivers_v1_inaccuracy_drivers_post(
+accuracy = client.reports.accuracy.create_inaccuracy_drivers(
     start_date="",
     end_date="",
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -1526,11 +1235,11 @@ accuracy = client.reports.accuracy.inaccuracy_drivers_v1_inaccuracy_drivers_post
 
 | Direction | Type |
 | --- | --- |
-| Request | [`AccuracyTopInaccurateClaimsV1TopInaccurateClaimsPostParams`](./src/profound/types/reports/accuracy_top_inaccurate_claims_v1_top_inaccurate_claims_post_params.py) |
-| Response | [`AccuracyTopInaccurateClaimsV1TopInaccurateClaimsPostResponse`](./src/profound/types/reports/accuracy_top_inaccurate_claims_v1_top_inaccurate_claims_post_response.py) |
+| Request | [`AccuracyCreateTopInaccurateClaimsParams`](./src/profound/types/reports/accuracy_create_top_inaccurate_claims_params.py) |
+| Response | [`AccuracyCreateTopInaccurateClaimsResponse`](./src/profound/types/reports/accuracy_create_top_inaccurate_claims_response.py) |
 
 ```python
-accuracy = client.reports.accuracy.top_inaccurate_claims_v1_top_inaccurate_claims_post(
+accuracy = client.reports.accuracy.create_top_inaccurate_claims(
     start_date="",
     end_date="",
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -1546,11 +1255,11 @@ accuracy = client.reports.accuracy.top_inaccurate_claims_v1_top_inaccurate_claim
 
 | Direction | Type |
 | --- | --- |
-| Request | [`AccuracyClaimBreakdownV1ClaimBreakdownPostParams`](./src/profound/types/reports/accuracy_claim_breakdown_v1_claim_breakdown_post_params.py) |
-| Response | [`AccuracyClaimBreakdownV1ClaimBreakdownPostResponse`](./src/profound/types/reports/accuracy_claim_breakdown_v1_claim_breakdown_post_response.py) |
+| Request | [`AccuracyCreateClaimBreakdownParams`](./src/profound/types/reports/accuracy_create_claim_breakdown_params.py) |
+| Response | [`AccuracyCreateClaimBreakdownResponse`](./src/profound/types/reports/accuracy_create_claim_breakdown_response.py) |
 
 ```python
-accuracy = client.reports.accuracy.claim_breakdown_v1_claim_breakdown_post(
+accuracy = client.reports.accuracy.create_claim_breakdown(
     start_date="",
     end_date="",
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -1566,11 +1275,11 @@ accuracy = client.reports.accuracy.claim_breakdown_v1_claim_breakdown_post(
 
 | Direction | Type |
 | --- | --- |
-| Request | [`AccuracyClaimCitationsV1ClaimCitationsPostParams`](./src/profound/types/reports/accuracy_claim_citations_v1_claim_citations_post_params.py) |
-| Response | [`AccuracyClaimCitationsV1ClaimCitationsPostResponse`](./src/profound/types/reports/accuracy_claim_citations_v1_claim_citations_post_response.py) |
+| Request | [`AccuracyCreateClaimCitationsParams`](./src/profound/types/reports/accuracy_create_claim_citations_params.py) |
+| Response | [`AccuracyCreateClaimCitationsResponse`](./src/profound/types/reports/accuracy_create_claim_citations_response.py) |
 
 ```python
-accuracy = client.reports.accuracy.claim_citations_v1_claim_citations_post(
+accuracy = client.reports.accuracy.create_claim_citations(
     start_date="",
     end_date="",
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -1589,11 +1298,11 @@ accuracy = client.reports.accuracy.claim_citations_v1_claim_citations_post(
 
 | Direction | Type |
 | --- | --- |
-| Request | [`AccuracyClusterExampleRunsV1ClusterExampleRunsPostParams`](./src/profound/types/reports/accuracy_cluster_example_runs_v1_cluster_example_runs_post_params.py) |
-| Response | [`AccuracyClusterExampleRunsV1ClusterExampleRunsPostResponse`](./src/profound/types/reports/accuracy_cluster_example_runs_v1_cluster_example_runs_post_response.py) |
+| Request | [`AccuracyCreateClusterExampleRunsParams`](./src/profound/types/reports/accuracy_create_cluster_example_runs_params.py) |
+| Response | [`AccuracyCreateClusterExampleRunsResponse`](./src/profound/types/reports/accuracy_create_cluster_example_runs_response.py) |
 
 ```python
-accuracy = client.reports.accuracy.cluster_example_runs_v1_cluster_example_runs_post(
+accuracy = client.reports.accuracy.create_cluster_example_runs(
     start_date="",
     end_date="",
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -1611,11 +1320,11 @@ accuracy = client.reports.accuracy.cluster_example_runs_v1_cluster_example_runs_
 
 | Direction | Type |
 | --- | --- |
-| Request | [`AccuracyClusterVerificationPairsV1ClusterVerificationPairsPostParams`](./src/profound/types/reports/accuracy_cluster_verification_pairs_v1_cluster_verification_pairs_post_params.py) |
-| Response | [`AccuracyClusterVerificationPairsV1ClusterVerificationPairsPostResponse`](./src/profound/types/reports/accuracy_cluster_verification_pairs_v1_cluster_verification_pairs_post_response.py) |
+| Request | [`AccuracyCreateClusterVerificationPairsParams`](./src/profound/types/reports/accuracy_create_cluster_verification_pairs_params.py) |
+| Response | [`AccuracyCreateClusterVerificationPairsResponse`](./src/profound/types/reports/accuracy_create_cluster_verification_pairs_response.py) |
 
 ```python
-accuracy = client.reports.accuracy.cluster_verification_pairs_v1_cluster_verification_pairs_post(
+accuracy = client.reports.accuracy.create_cluster_verification_pairs(
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     cluster_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
 )
@@ -1625,11 +1334,11 @@ accuracy = client.reports.accuracy.cluster_verification_pairs_v1_cluster_verific
 
 | Direction | Type |
 | --- | --- |
-| Request | [`AccuracyFactcheckSetupStatusV1FactcheckSetupStatusPostParams`](./src/profound/types/reports/accuracy_factcheck_setup_status_v1_factcheck_setup_status_post_params.py) |
-| Response | [`AccuracyFactcheckSetupStatusV1FactcheckSetupStatusPostResponse`](./src/profound/types/reports/accuracy_factcheck_setup_status_v1_factcheck_setup_status_post_response.py) |
+| Request | [`AccuracyCreateFactcheckSetupStatusParams`](./src/profound/types/reports/accuracy_create_factcheck_setup_status_params.py) |
+| Response | [`AccuracyCreateFactcheckSetupStatusResponse`](./src/profound/types/reports/accuracy_create_factcheck_setup_status_response.py) |
 
 ```python
-accuracy = client.reports.accuracy.factcheck_setup_status_v1_factcheck_setup_status_post(
+accuracy = client.reports.accuracy.create_factcheck_setup_status(
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
 )
 ```
@@ -1640,11 +1349,11 @@ accuracy = client.reports.accuracy.factcheck_setup_status_v1_factcheck_setup_sta
 
 | Direction | Type |
 | --- | --- |
-| Request | [`FactcheckQueryScoresV2PostParams`](./src/profound/types/reports/factcheck_query_scores_v2_post_params.py) |
-| Response | [`FactcheckQueryScoresV2PostResponse`](./src/profound/types/reports/factcheck_query_scores_v2_post_response.py) |
+| Request | [`FactcheckQueryScoresParams`](./src/profound/types/reports/factcheck_query_scores_params.py) |
+| Response | [`FactcheckQueryScoresResponse`](./src/profound/types/reports/factcheck_query_scores_response.py) |
 
 ```python
-factcheck = client.reports.factcheck.query_scores_v2_post(
+factcheck = client.reports.factcheck.query_scores(
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     start_date="",
     end_date="",
@@ -1655,11 +1364,11 @@ factcheck = client.reports.factcheck.query_scores_v2_post(
 
 | Direction | Type |
 | --- | --- |
-| Request | [`FactcheckStreamScoresV2StreamPostParams`](./src/profound/types/reports/factcheck_stream_scores_v2_stream_post_params.py) |
-| Response | [`FactcheckStreamScoresV2StreamPostResponse`](./src/profound/types/reports/factcheck_stream_scores_v2_stream_post_response.py) |
+| Request | [`FactcheckStreamScoresParams`](./src/profound/types/reports/factcheck_stream_scores_params.py) |
+| Response | [`FactcheckStreamScoresResponse`](./src/profound/types/reports/factcheck_stream_scores_response.py) |
 
 ```python
-stream = client.reports.factcheck.stream_scores_v2_stream_post(
+stream = client.reports.factcheck.stream_scores(
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     start_date="",
     end_date="",
@@ -1669,30 +1378,32 @@ for event in stream:
     print(event)
 ```
 
-#### Query Claims
+#### `Reports Factcheck Claims`
+
+##### Query Claims
 
 | Direction | Type |
 | --- | --- |
-| Request | [`FactcheckQueryClaimsV2ClaimsPostParams`](./src/profound/types/reports/factcheck_query_claims_v2_claims_post_params.py) |
-| Response | [`FactcheckQueryClaimsV2ClaimsPostResponse`](./src/profound/types/reports/factcheck_query_claims_v2_claims_post_response.py) |
+| Request | [`ClaimQueryClaimsParams`](./src/profound/types/reports/factcheck/claim_query_claims_params.py) |
+| Response | [`ClaimQueryClaimsResponse`](./src/profound/types/reports/factcheck/claim_query_claims_response.py) |
 
 ```python
-factcheck = client.reports.factcheck.query_claims_v2_claims_post(
+claim = client.reports.factcheck.claims.query_claims(
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     start_date="",
     end_date="",
 )
 ```
 
-#### Stream Claims
+##### Stream Claims
 
 | Direction | Type |
 | --- | --- |
-| Request | [`FactcheckStreamClaimsV2ClaimsStreamPostParams`](./src/profound/types/reports/factcheck_stream_claims_v2_claims_stream_post_params.py) |
-| Response | [`FactcheckStreamClaimsV2ClaimsStreamPostResponse`](./src/profound/types/reports/factcheck_stream_claims_v2_claims_stream_post_response.py) |
+| Request | [`ClaimStreamClaimsParams`](./src/profound/types/reports/factcheck/claim_stream_claims_params.py) |
+| Response | [`ClaimStreamClaimsResponse`](./src/profound/types/reports/factcheck/claim_stream_claims_response.py) |
 
 ```python
-stream = client.reports.factcheck.stream_claims_v2_claims_stream_post(
+stream = client.reports.factcheck.claims.stream_claims(
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     start_date="",
     end_date="",
@@ -1704,34 +1415,36 @@ for event in stream:
 
 ### `Reports Social`
 
-#### Query Youtube Channels
+#### `Reports Social Youtube`
+
+##### Query Youtube Channels
 
 Rank the YouTube channels cited in a category, or the video categories they publish in.
 
 | Direction | Type |
 | --- | --- |
-| Request | [`SocialQueryYoutubeChannelsV2YoutubeChannelsPostParams`](./src/profound/types/reports/social_query_youtube_channels_v2_youtube_channels_post_params.py) |
-| Response | [`SocialQueryYoutubeChannelsV2YoutubeChannelsPostResponse`](./src/profound/types/reports/social_query_youtube_channels_v2_youtube_channels_post_response.py) |
+| Request | [`YoutubeGetChannelsParams`](./src/profound/types/reports/social/youtube_get_channels_params.py) |
+| Response | [`YoutubeGetChannelsResponse`](./src/profound/types/reports/social/youtube_get_channels_response.py) |
 
 ```python
-social = client.reports.social.query_youtube_channels_v2_youtube_channels_post(
+youtube = client.reports.social.youtube.get_channels(
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     start_date="",
     end_date="",
 )
 ```
 
-#### Query Youtube Videos
+##### Query Youtube Videos
 
 Rank cited YouTube videos, for one channel or across all of them.
 
 | Direction | Type |
 | --- | --- |
-| Request | [`SocialQueryYoutubeVideosV2YoutubeVideosPostParams`](./src/profound/types/reports/social_query_youtube_videos_v2_youtube_videos_post_params.py) |
-| Response | [`SocialQueryYoutubeVideosV2YoutubeVideosPostResponse`](./src/profound/types/reports/social_query_youtube_videos_v2_youtube_videos_post_response.py) |
+| Request | [`YoutubeGetVideosParams`](./src/profound/types/reports/social/youtube_get_videos_params.py) |
+| Response | [`YoutubeGetVideosResponse`](./src/profound/types/reports/social/youtube_get_videos_response.py) |
 
 ```python
-social = client.reports.social.query_youtube_videos_v2_youtube_videos_post(
+youtube = client.reports.social.youtube.get_videos(
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     start_date="",
     end_date="",
@@ -1739,17 +1452,17 @@ social = client.reports.social.query_youtube_videos_v2_youtube_videos_post(
 )
 ```
 
-#### Query Youtube Summary
+##### Query Youtube Summary
 
 Report how much of youtube.com the channel and video rankings account for.
 
 | Direction | Type |
 | --- | --- |
-| Request | [`SocialQueryYoutubeSummaryV2YoutubeSummaryPostParams`](./src/profound/types/reports/social_query_youtube_summary_v2_youtube_summary_post_params.py) |
-| Response | [`SocialQueryYoutubeSummaryV2YoutubeSummaryPostResponse`](./src/profound/types/reports/social_query_youtube_summary_v2_youtube_summary_post_response.py) |
+| Request | [`YoutubeGetSummaryParams`](./src/profound/types/reports/social/youtube_get_summary_params.py) |
+| Response | [`YoutubeGetSummaryResponse`](./src/profound/types/reports/social/youtube_get_summary_response.py) |
 
 ```python
-social = client.reports.social.query_youtube_summary_v2_youtube_summary_post(
+youtube = client.reports.social.youtube.get_summary(
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     start_date="",
     end_date="",
@@ -1764,11 +1477,11 @@ social = client.reports.social.query_youtube_summary_v2_youtube_summary_post(
 
 | Direction | Type |
 | --- | --- |
-| Request | [`OptimizationListV1AssetIDGetParams`](./src/profound/types/content/optimization_list_v1_asset_id_get_params.py) |
-| Response | [`OptimizationListV1AssetIDGetResponse`](./src/profound/types/content/optimization_list_v1_asset_id_get_response.py) |
+| Request | [`OptimizationListParams`](./src/profound/types/content/optimization_list_params.py) |
+| Response | [`OptimizationListResponse`](./src/profound/types/content/optimization_list_response.py) |
 
 ```python
-optimization = client.content.optimization.list_v1_asset_id_get(
+optimization = client.content.optimization.list(
     asset_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     limit=10000,
     offset=0,
@@ -1779,12 +1492,204 @@ optimization = client.content.optimization.list_v1_asset_id_get(
 
 | Direction | Type |
 | --- | --- |
-| Response | [`OptimizationAnalysisV1AssetIDIDGetResponse`](./src/profound/types/content/optimization_analysis_v1_asset_id_id_get_response.py) |
+| Response | [`OptimizationRetrieveResponse`](./src/profound/types/content/optimization_retrieve_response.py) |
 
 ```python
-optimization = client.content.optimization.analysis_v1_asset_id_id_get(
+optimization = client.content.optimization.retrieve(
     asset_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     content_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+)
+```
+
+## `Agents`
+
+### List agents
+
+List agents available to your organization.
+
+Agent status reflects whether an agent has ever been published. `published`
+agents have a live published version. `draft` agents have not been
+published yet.
+
+| Direction | Type |
+| --- | --- |
+| Request | [`AgentListParams`](./src/profound/types/agent_list_params.py) |
+| Response | [`AgentListResponse`](./src/profound/types/agent_list_response.py) |
+
+```python
+agent = client.agents.list(
+    limit=100,
+)
+```
+
+### Get an agent
+
+Retrieve an agent and its schema details.
+
+Agents can have both a live published version and a draft version with newer
+unpublished changes. Use the `version` parameter to choose which state to return.
+
+| Direction | Type |
+| --- | --- |
+| Request | [`AgentRetrieveParams`](./src/profound/types/agent_retrieve_params.py) |
+| Response | [`AgentRetrieveResponse`](./src/profound/types/agent_retrieve_response.py) |
+
+```python
+agent = client.agents.retrieve(
+    agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+)
+```
+
+### Create an agent
+
+Create a new draft agent owned by the given organization.
+
+`organization_id` is required and you must be a member of it. The agent is created
+as a `draft`; publish it with `POST /v1/agents/{agent_id}/publish` once its graph
+is ready.
+
+| Direction | Type |
+| --- | --- |
+| Request | [`AgentCreateParams`](./src/profound/types/agent_create_params.py) |
+| Response | [`Agent`](./src/profound/types/shared/agent.py) |
+
+```python
+agent = client.agents.create(
+    organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    name="x",
+)
+```
+
+### Publish an agent
+
+Publish an agent's latest draft as its live published version.
+
+You must be a member of the agent's organization. Publishing promotes the current
+draft graph to a new published version. A draft that cannot produce its declared
+input/output contract is rejected with `422` and is not published.
+
+| Direction | Type |
+| --- | --- |
+| Response | [`Agent`](./src/profound/types/shared/agent.py) |
+
+```python
+agent = client.agents.publish(
+    agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+)
+```
+
+### Update an agent
+
+Update an agent's draft graph in place.
+
+You must be a member of the agent's organization. The agent's draft is replaced with the
+supplied graph and re-validated, so you can iterate one draft — create, then update per
+fix — instead of creating a new agent on every change. The response carries the updated
+`validation`; publish with `POST /v1/agents/{agent_id}/publish` once `validation.valid`.
+
+| Direction | Type |
+| --- | --- |
+| Request | [`AgentUpdateParams`](./src/profound/types/agent_update_params.py) |
+| Response | [`AgentUpdateResponse`](./src/profound/types/agent_update_response.py) |
+
+```python
+agent = client.agents.update(
+    agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    graph={},
+)
+```
+
+### Get an agent's graph
+
+Retrieve an agent's full workflow graph (`{nodes, edges}`).
+
+The graph is returned verbatim in the canonical dialect — the same shape `POST /v1/agents`
+and `PATCH /v1/agents/{agent_id}` accept — so a known-good agent can be read back, copied,
+and edited. Tool-backed nodes appear in their lowered `tool` form rather than the friendly
+v1 node types. A `draft` is visible only to its creator; the `published` version is visible
+across its organization.
+
+| Direction | Type |
+| --- | --- |
+| Request | [`AgentRetrieveGraphParams`](./src/profound/types/agent_retrieve_graph_params.py) |
+| Response | [`AgentRetrieveGraphResponse`](./src/profound/types/agent_retrieve_graph_response.py) |
+
+```python
+agent = client.agents.retrieve_graph(
+    agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+)
+```
+
+### `Agents Runs`
+
+#### Run an agent
+
+Start a new run for an agent.
+
+Runs always execute the agent's live published version, so the agent must be
+published first with `POST /v1/agents/{agent_id}/publish`. Unpublished drafts
+cannot be run.
+
+| Direction | Type |
+| --- | --- |
+| Request | [`RunCreateParams`](./src/profound/types/agents/run_create_params.py) |
+| Response | [`RunCreateResponse`](./src/profound/types/agents/run_create_response.py) |
+
+```python
+run = client.agents.runs.create(
+    agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+)
+```
+
+#### Get an agent run
+
+Retrieve the current status and result details for an agent run.
+
+| Direction | Type |
+| --- | --- |
+| Request | [`RunRetrieveParams`](./src/profound/types/agents/run_retrieve_params.py) |
+| Response | [`RunRetrieveResponse`](./src/profound/types/agents/run_retrieve_response.py) |
+
+```python
+run = client.agents.runs.retrieve(
+    agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    run_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    verbose=False,
+)
+```
+
+### `Agents NodeTypes`
+
+#### List node types
+
+List the node types available for building agents.
+
+The set is deterministic and does not depend on the caller, so the response
+is safe to cache across sessions. Integration-dependent and dynamic-schema
+node types are intentionally excluded in v1.
+
+| Direction | Type |
+| --- | --- |
+| Response | [`NodeTypeListResponse`](./src/profound/types/agents/node_type_list_response.py) |
+
+```python
+node_type = client.agents.node_types.list()
+```
+
+#### Get a node type schema
+
+Retrieve the JSON schema for a single node type.
+
+The `schema` field is an opaque JSON Schema for the node's configuration.
+Use `schema_version` as a cache key — it bumps whenever the schema changes.
+
+| Direction | Type |
+| --- | --- |
+| Response | [`NodeTypeRetrieveSchemaResponse`](./src/profound/types/agents/node_type_retrieve_schema_response.py) |
+
+```python
+node_type = client.agents.node_types.retrieve_schema(
+    node_type="nodeType",
 )
 ```
 
@@ -1796,11 +1701,11 @@ List knowledge bases accessible to the API key.
 
 | Direction | Type |
 | --- | --- |
-| Request | [`KnowledgeBaseListV1GetParams`](./src/profound/types/knowledge_base_list_v1_get_params.py) |
-| Response | [`KnowledgeBaseListV1GetResponse`](./src/profound/types/knowledge_base_list_v1_get_response.py) |
+| Request | [`KnowledgeBaseListParams`](./src/profound/types/knowledge_base_list_params.py) |
+| Response | [`KnowledgeBaseListResponse`](./src/profound/types/knowledge_base_list_response.py) |
 
 ```python
-knowledge_base = client.knowledge_bases.list_v1_get()
+knowledge_base = client.knowledge_bases.list()
 ```
 
 ### Search Knowledge Base
@@ -1829,11 +1734,11 @@ Add a document to a knowledge base using JSON text or multipart file upload.
 
 | Direction | Type |
 | --- | --- |
-| Request | [`DocumentCreateV1IDPostParams`](./src/profound/types/knowledge_bases/document_create_v1_id_post_params.py) |
+| Request | [`DocumentCreateParams`](./src/profound/types/knowledge_bases/document_create_params.py) |
 | Response | [`DocumentOperationResponse`](./src/profound/types/shared/document_operation_response.py) |
 
 ```python
-document = client.knowledge_bases.documents.create_v1_id_post(
+document = client.knowledge_bases.documents.create(
     knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     name="x",
     text="x",
@@ -1846,11 +1751,11 @@ Overwrite a knowledge base document using JSON text or multipart file upload.
 
 | Direction | Type |
 | --- | --- |
-| Request | [`DocumentUpdateV1IDPutParams`](./src/profound/types/knowledge_bases/document_update_v1_id_put_params.py) |
+| Request | [`DocumentUpdateParams`](./src/profound/types/knowledge_bases/document_update_params.py) |
 | Response | [`DocumentOperationResponse`](./src/profound/types/shared/document_operation_response.py) |
 
 ```python
-document = client.knowledge_bases.documents.update_v1_id_put(
+document = client.knowledge_bases.documents.update(
     knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     name="x",
     text="x",
@@ -1863,11 +1768,11 @@ Delete an existing document from a knowledge base.
 
 | Direction | Type |
 | --- | --- |
-| Request | [`DocumentDeleteV1IDDeleteParams`](./src/profound/types/knowledge_bases/document_delete_v1_id_delete_params.py) |
+| Request | [`DocumentDeleteParams`](./src/profound/types/knowledge_bases/document_delete_params.py) |
 | Response | [`DocumentOperationResponse`](./src/profound/types/shared/document_operation_response.py) |
 
 ```python
-document = client.knowledge_bases.documents.delete_v1_id_delete(
+document = client.knowledge_bases.documents.delete(
     knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     name="x",
 )
@@ -1881,11 +1786,11 @@ Create an empty folder at the requested knowledge base path.
 
 | Direction | Type |
 | --- | --- |
-| Request | [`FolderCreateV1IDPostParams`](./src/profound/types/knowledge_bases/folder_create_v1_id_post_params.py) |
-| Response | [`FolderCreateV1IDPostResponse`](./src/profound/types/knowledge_bases/folder_create_v1_id_post_response.py) |
+| Request | [`FolderCreateParams`](./src/profound/types/knowledge_bases/folder_create_params.py) |
+| Response | [`FolderCreateResponse`](./src/profound/types/knowledge_bases/folder_create_response.py) |
 
 ```python
-folder = client.knowledge_bases.folders.create_v1_id_post(
+folder = client.knowledge_bases.folders.create(
     knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     path="x",
 )
@@ -1897,14 +1802,235 @@ Delete a folder. With recursive=false, non-empty folders return 409 and no conte
 
 | Direction | Type |
 | --- | --- |
-| Request | [`FolderDeleteV1IDDeleteParams`](./src/profound/types/knowledge_bases/folder_delete_v1_id_delete_params.py) |
-| Response | [`FolderDeleteV1IDDeleteResponse`](./src/profound/types/knowledge_bases/folder_delete_v1_id_delete_response.py) |
+| Request | [`FolderDeleteParams`](./src/profound/types/knowledge_bases/folder_delete_params.py) |
+| Response | [`FolderDeleteResponse`](./src/profound/types/knowledge_bases/folder_delete_response.py) |
 
 ```python
-folder = client.knowledge_bases.folders.delete_v1_id_delete(
+folder = client.knowledge_bases.folders.delete(
     knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     path="x",
     recursive=False,
+)
+```
+
+## `Projects`
+
+### List Projects
+
+| Direction | Type |
+| --- | --- |
+| Request | [`ProjectListParams`](./src/profound/types/project_list_params.py) |
+| Response | [`ProjectListResponse`](./src/profound/types/project_list_response.py) |
+
+```python
+project = client.projects.list(
+    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    limit=100,
+    offset=0,
+)
+```
+
+### Create Project
+
+| Direction | Type |
+| --- | --- |
+| Request | [`ProjectCreateParams`](./src/profound/types/project_create_params.py) |
+| Response | [`ProjectCreateResponse`](./src/profound/types/project_create_response.py) |
+
+```python
+project = client.projects.create(
+    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+)
+```
+
+### Get Project
+
+| Direction | Type |
+| --- | --- |
+| Request | [`ProjectRetrieveParams`](./src/profound/types/project_retrieve_params.py) |
+| Response | [`ProjectRetrieveResponse`](./src/profound/types/project_retrieve_response.py) |
+
+```python
+project = client.projects.retrieve(
+    project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+)
+```
+
+### Delete Project
+
+| Direction | Type |
+| --- | --- |
+| Request | [`ProjectDeleteParams`](./src/profound/types/project_delete_params.py) |
+
+```python
+client.projects.delete(
+    project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+)
+```
+
+### Get Project Status
+
+| Direction | Type |
+| --- | --- |
+| Request | [`ProjectGetStatusParams`](./src/profound/types/project_get_status_params.py) |
+| Response | [`ProjectGetStatusResponse`](./src/profound/types/project_get_status_response.py) |
+
+```python
+project = client.projects.get_status(
+    project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+)
+```
+
+### Archive Project
+
+| Direction | Type |
+| --- | --- |
+| Request | [`ProjectArchiveParams`](./src/profound/types/project_archive_params.py) |
+| Response | [`ProjectArchiveResponse`](./src/profound/types/project_archive_response.py) |
+
+```python
+project = client.projects.archive(
+    project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+)
+```
+
+### Unarchive Project
+
+| Direction | Type |
+| --- | --- |
+| Request | [`ProjectUnarchiveParams`](./src/profound/types/project_unarchive_params.py) |
+| Response | [`ProjectUnarchiveResponse`](./src/profound/types/project_unarchive_response.py) |
+
+```python
+project = client.projects.unarchive(
+    project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+)
+```
+
+### `Projects Generations`
+
+#### List Project Generations
+
+| Direction | Type |
+| --- | --- |
+| Request | [`GenerationListParams`](./src/profound/types/projects/generation_list_params.py) |
+| Response | [`GenerationListResponse`](./src/profound/types/projects/generation_list_response.py) |
+
+```python
+generation = client.projects.generations.list(
+    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    limit=100,
+    offset=0,
+)
+```
+
+#### Get Project Generation Status
+
+| Direction | Type |
+| --- | --- |
+| Request | [`GenerationRetrieveParams`](./src/profound/types/projects/generation_retrieve_params.py) |
+| Response | [`GenerationRetrieveResponse`](./src/profound/types/projects/generation_retrieve_response.py) |
+
+```python
+generation = client.projects.generations.retrieve(
+    run_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+)
+```
+
+### `Projects Tasks`
+
+#### List Project Tasks
+
+| Direction | Type |
+| --- | --- |
+| Request | [`TaskListParams`](./src/profound/types/projects/task_list_params.py) |
+| Response | [`TaskListResponse`](./src/profound/types/projects/task_list_response.py) |
+
+```python
+task = client.projects.tasks.list(
+    project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+)
+```
+
+#### Create Project Task
+
+| Direction | Type |
+| --- | --- |
+| Request | [`TaskCreateParams`](./src/profound/types/projects/task_create_params.py) |
+| Response | [`TaskCreateResponse`](./src/profound/types/projects/task_create_response.py) |
+
+```python
+task = client.projects.tasks.create(
+    project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    title="x",
+    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+)
+```
+
+#### Get Project Task
+
+| Direction | Type |
+| --- | --- |
+| Request | [`TaskRetrieveParams`](./src/profound/types/projects/task_retrieve_params.py) |
+| Response | [`TaskRetrieveResponse`](./src/profound/types/projects/task_retrieve_response.py) |
+
+```python
+task = client.projects.tasks.retrieve(
+    project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    task_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+)
+```
+
+#### Update Project Task
+
+| Direction | Type |
+| --- | --- |
+| Request | [`TaskUpdateParams`](./src/profound/types/projects/task_update_params.py) |
+| Response | [`TaskUpdateResponse`](./src/profound/types/projects/task_update_response.py) |
+
+```python
+task = client.projects.tasks.update(
+    project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    task_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+)
+```
+
+#### Delete Project Task
+
+| Direction | Type |
+| --- | --- |
+| Request | [`TaskDeleteParams`](./src/profound/types/projects/task_delete_params.py) |
+
+```python
+client.projects.tasks.delete(
+    project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    task_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+)
+```
+
+#### Update Project Task Status
+
+| Direction | Type |
+| --- | --- |
+| Request | [`TaskUpdateStatusParams`](./src/profound/types/projects/task_update_status_params.py) |
+| Response | [`TaskUpdateStatusResponse`](./src/profound/types/projects/task_update_status_response.py) |
+
+```python
+task = client.projects.tasks.update_status(
+    project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    task_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    status="not_started",
+    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
 )
 ```
 
@@ -1920,14 +2046,44 @@ Each row's `integration_id` is the value a hub-backed node needs bound to it.
 
 | Direction | Type |
 | --- | --- |
-| Request | [`IntegrationListV1GetParams`](./src/profound/types/integration_list_v1_get_params.py) |
-| Response | [`IntegrationListV1GetResponse`](./src/profound/types/integration_list_v1_get_response.py) |
+| Request | [`IntegrationListParams`](./src/profound/types/integration_list_params.py) |
+| Response | [`IntegrationListResponse`](./src/profound/types/integration_list_response.py) |
 
 ```python
-integration = client.integrations.list_v1_get()
+integration = client.integrations.list()
 ```
 
 ## `Documents`
+
+### Create a document
+
+Create a Profound document with markdown content.
+
+`organization_id` is required and you must be a member of it. You choose the
+document's `id`, and creation is idempotent on it: repeating the request returns
+the existing document rather than creating a second one.
+
+New documents are visible only to their creator; share them from the Profound app,
+or open one with the `url` in the response.
+
+A `201` response does not confirm that a new document was created: it is also
+returned when `id` already existed, in which case the existing document comes
+back unchanged. Upstream gives no signal to tell the two apart, so this endpoint
+does not claim to either — it is safe to retry with the same `id` either way.
+
+| Direction | Type |
+| --- | --- |
+| Request | [`DocumentCreateParams`](./src/profound/types/document_create_params.py) |
+| Response | [`DocumentCreateResponse`](./src/profound/types/document_create_response.py) |
+
+```python
+document = client.documents.create(
+    id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    name="x",
+    content_markdown="x",
+)
+```
 
 ### List documents
 
@@ -1948,43 +2104,13 @@ documents, so the last page of a walk may legitimately be an empty one.
 
 | Direction | Type |
 | --- | --- |
-| Request | [`DocumentListV1GetParams`](./src/profound/types/document_list_v1_get_params.py) |
-| Response | [`DocumentListV1GetResponse`](./src/profound/types/document_list_v1_get_response.py) |
+| Request | [`DocumentListParams`](./src/profound/types/document_list_params.py) |
+| Response | [`DocumentListResponse`](./src/profound/types/document_list_response.py) |
 
 ```python
-document = client.documents.list_v1_get(
+document = client.documents.list(
     organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     limit=20,
-)
-```
-
-### Create a document
-
-Create a Profound document with markdown content.
-
-`organization_id` is required and you must be a member of it. You choose the
-document's `id`, and creation is idempotent on it: repeating the request returns
-the existing document rather than creating a second one.
-
-New documents are visible only to their creator; share them from the Profound app,
-or open one with the `url` in the response.
-
-A `201` response does not confirm that a new document was created: it is also
-returned when `id` already existed, in which case the existing document comes
-back unchanged. Upstream gives no signal to tell the two apart, so this endpoint
-does not claim to either — it is safe to retry with the same `id` either way.
-
-| Direction | Type |
-| --- | --- |
-| Request | [`DocumentCreateV1PostParams`](./src/profound/types/document_create_v1_post_params.py) |
-| Response | [`DocumentCreateV1PostResponse`](./src/profound/types/document_create_v1_post_response.py) |
-
-```python
-document = client.documents.create_v1_post(
-    id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    name="x",
-    content_markdown="x",
 )
 ```
 
@@ -2001,11 +2127,11 @@ blindly. Pass `preview=false` when you intend to write.
 
 | Direction | Type |
 | --- | --- |
-| Request | [`DocumentReadV1IDGetParams`](./src/profound/types/document_read_v1_id_get_params.py) |
-| Response | [`DocumentReadV1IDGetResponse`](./src/profound/types/document_read_v1_id_get_response.py) |
+| Request | [`DocumentRetrieveParams`](./src/profound/types/document_retrieve_params.py) |
+| Response | [`DocumentRetrieveResponse`](./src/profound/types/document_retrieve_response.py) |
 
 ```python
-document = client.documents.read_v1_id_get(
+document = client.documents.retrieve(
     document_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     include_tabs=True,
@@ -2028,11 +2154,11 @@ yourself in the Profound app — not one merely shared with you.
 
 | Direction | Type |
 | --- | --- |
-| Request | [`DocumentPatchV1IDPatchParams`](./src/profound/types/document_patch_v1_id_patch_params.py) |
-| Response | [`DocumentPatchV1IDPatchResponse`](./src/profound/types/document_patch_v1_id_patch_response.py) |
+| Request | [`DocumentUpdateParams`](./src/profound/types/document_update_params.py) |
+| Response | [`DocumentUpdateResponse`](./src/profound/types/document_update_response.py) |
 
 ```python
-document = client.documents.patch_v1_id_patch(
+document = client.documents.update(
     document_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
 )
@@ -2064,10 +2190,10 @@ is not enough to remove a document out from under its owner.
 
 | Direction | Type |
 | --- | --- |
-| Request | [`DocumentDeleteV1IDDeleteParams`](./src/profound/types/document_delete_v1_id_delete_params.py) |
+| Request | [`DocumentDeleteParams`](./src/profound/types/document_delete_params.py) |
 
 ```python
-client.documents.delete_v1_id_delete(
+client.documents.delete(
     document_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
 )
@@ -2103,11 +2229,11 @@ not merely one shared with you.
 
 | Direction | Type |
 | --- | --- |
-| Request | [`DocumentReplaceContentV1IDContentPostParams`](./src/profound/types/document_replace_content_v1_id_content_post_params.py) |
-| Response | [`DocumentReplaceContentV1IDContentPostResponse`](./src/profound/types/document_replace_content_v1_id_content_post_response.py) |
+| Request | [`DocumentReplaceContentParams`](./src/profound/types/document_replace_content_params.py) |
+| Response | [`DocumentReplaceContentResponse`](./src/profound/types/document_replace_content_response.py) |
 
 ```python
-document = client.documents.replace_content_v1_id_content_post(
+document = client.documents.replace_content(
     document_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     content_markdown="",
@@ -2115,9 +2241,13 @@ document = client.documents.replace_content_v1_id_content_post(
 )
 ```
 
-## `OpenAiAds`
+## `Ads`
 
-### Get Account Insights
+### `Ads OpenaiAds`
+
+#### `Ads OpenaiAds AdAccount`
+
+##### Get Account Insights
 
 Get ad account insights for the organization's OpenAI Ads partner brand.
 
@@ -2127,440 +2257,9 @@ a single call; `time_granularity=daily` gives per-day rows (e.g. daily spend).
 
 | Direction | Type |
 | --- | --- |
-| Request | [`OpenAIAdListAccountInsightsV1OpenAIAccountInsightsGetParams`](./src/profound/types/open_ai_ad_list_account_insights_v1_openai_account_insights_get_params.py) |
-| Response | [`OpenAIAdListAccountInsightsV1OpenAIAccountInsightsGetResponse`](./src/profound/types/open_ai_ad_list_account_insights_v1_openai_account_insights_get_response.py) |
+| Request | [`AdAccountRetrieveInsightsParams`](./src/profound/types/ads/openai_ads/ad_account_retrieve_insights_params.py) |
+| Response | [`AdAccountRetrieveInsightsResponse`](./src/profound/types/ads/openai_ads/ad_account_retrieve_insights_response.py) |
 
 ```python
-open_ai_ad = client.open_ai_ads.list_account_insights_v1_openai_account_insights_get()
-```
-
-## `Projects`
-
-### List Projects
-
-| Direction | Type |
-| --- | --- |
-| Request | [`ProjectListV1GetParams`](./src/profound/types/project_list_v1_get_params.py) |
-| Response | [`ProjectListV1GetResponse`](./src/profound/types/project_list_v1_get_response.py) |
-
-```python
-project = client.projects.list_v1_get(
-    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    limit=100,
-    offset=0,
-)
-```
-
-### Create Project
-
-| Direction | Type |
-| --- | --- |
-| Request | [`ProjectCreateV1PostParams`](./src/profound/types/project_create_v1_post_params.py) |
-| Response | [`ProjectCreateV1PostResponse`](./src/profound/types/project_create_v1_post_response.py) |
-
-```python
-project = client.projects.create_v1_post(
-    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-)
-```
-
-### Get Project
-
-| Direction | Type |
-| --- | --- |
-| Request | [`ProjectRetrieveV1GetParams`](./src/profound/types/project_retrieve_v1_get_params.py) |
-| Response | [`ProjectRetrieveV1GetResponse`](./src/profound/types/project_retrieve_v1_get_response.py) |
-
-```python
-project = client.projects.retrieve_v1_get(
-    project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-)
-```
-
-### Delete Project
-
-| Direction | Type |
-| --- | --- |
-| Request | [`ProjectDeleteV1IDDeleteParams`](./src/profound/types/project_delete_v1_id_delete_params.py) |
-
-```python
-client.projects.delete_v1_id_delete(
-    project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-)
-```
-
-### Get Project Status
-
-| Direction | Type |
-| --- | --- |
-| Request | [`ProjectListStatusV1StatusGetParams`](./src/profound/types/project_list_status_v1_status_get_params.py) |
-| Response | [`ProjectListStatusV1StatusGetResponse`](./src/profound/types/project_list_status_v1_status_get_response.py) |
-
-```python
-project = client.projects.list_status_v1_status_get(
-    project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-)
-```
-
-### Archive Project
-
-| Direction | Type |
-| --- | --- |
-| Request | [`ProjectArchiveV1IDArchivePostParams`](./src/profound/types/project_archive_v1_id_archive_post_params.py) |
-| Response | [`ProjectArchiveV1IDArchivePostResponse`](./src/profound/types/project_archive_v1_id_archive_post_response.py) |
-
-```python
-project = client.projects.archive_v1_id_archive_post(
-    project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-)
-```
-
-### Unarchive Project
-
-| Direction | Type |
-| --- | --- |
-| Request | [`ProjectUnarchiveV1IDUnarchivePostParams`](./src/profound/types/project_unarchive_v1_id_unarchive_post_params.py) |
-| Response | [`ProjectUnarchiveV1IDUnarchivePostResponse`](./src/profound/types/project_unarchive_v1_id_unarchive_post_response.py) |
-
-```python
-project = client.projects.unarchive_v1_id_unarchive_post(
-    project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-)
-```
-
-### `Projects Generations`
-
-#### List Project Generations
-
-| Direction | Type |
-| --- | --- |
-| Request | [`GenerationListV1GetParams`](./src/profound/types/projects/generation_list_v1_get_params.py) |
-| Response | [`GenerationListV1GetResponse`](./src/profound/types/projects/generation_list_v1_get_response.py) |
-
-```python
-generation = client.projects.generations.list_v1_get(
-    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    limit=100,
-    offset=0,
-)
-```
-
-#### Get Project Generation Status
-
-| Direction | Type |
-| --- | --- |
-| Request | [`GenerationRetrieveStatusV1RunGetParams`](./src/profound/types/projects/generation_retrieve_status_v1_run_get_params.py) |
-| Response | [`GenerationRetrieveStatusV1RunGetResponse`](./src/profound/types/projects/generation_retrieve_status_v1_run_get_response.py) |
-
-```python
-generation = client.projects.generations.retrieve_status_v1_run_get(
-    run_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-)
-```
-
-### `Projects Tasks`
-
-#### List Project Tasks
-
-| Direction | Type |
-| --- | --- |
-| Request | [`TaskListV1IDGetParams`](./src/profound/types/projects/task_list_v1_id_get_params.py) |
-| Response | [`TaskListV1IDGetResponse`](./src/profound/types/projects/task_list_v1_id_get_response.py) |
-
-```python
-task = client.projects.tasks.list_v1_id_get(
-    project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-)
-```
-
-#### Create Project Task
-
-| Direction | Type |
-| --- | --- |
-| Request | [`TaskCreateV1IDPostParams`](./src/profound/types/projects/task_create_v1_id_post_params.py) |
-| Response | [`TaskCreateV1IDPostResponse`](./src/profound/types/projects/task_create_v1_id_post_response.py) |
-
-```python
-task = client.projects.tasks.create_v1_id_post(
-    project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    title="x",
-    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-)
-```
-
-#### Get Project Task
-
-| Direction | Type |
-| --- | --- |
-| Request | [`TaskRetrieveV1GetParams`](./src/profound/types/projects/task_retrieve_v1_get_params.py) |
-| Response | [`TaskRetrieveV1GetResponse`](./src/profound/types/projects/task_retrieve_v1_get_response.py) |
-
-```python
-task = client.projects.tasks.retrieve_v1_get(
-    project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    task_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-)
-```
-
-#### Update Project Task
-
-| Direction | Type |
-| --- | --- |
-| Request | [`TaskUpdateV1IDIDPatchParams`](./src/profound/types/projects/task_update_v1_id_id_patch_params.py) |
-| Response | [`TaskUpdateV1IDIDPatchResponse`](./src/profound/types/projects/task_update_v1_id_id_patch_response.py) |
-
-```python
-task = client.projects.tasks.update_v1_id_id_patch(
-    project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    task_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-)
-```
-
-#### Delete Project Task
-
-| Direction | Type |
-| --- | --- |
-| Request | [`TaskDeleteV1IDIDDeleteParams`](./src/profound/types/projects/task_delete_v1_id_id_delete_params.py) |
-
-```python
-client.projects.tasks.delete_v1_id_id_delete(
-    project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    task_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-)
-```
-
-#### Update Project Task Status
-
-| Direction | Type |
-| --- | --- |
-| Request | [`TaskUpdateStatusV1IDIDStatusPostParams`](./src/profound/types/projects/task_update_status_v1_id_id_status_post_params.py) |
-| Response | [`TaskUpdateStatusV1IDIDStatusPostResponse`](./src/profound/types/projects/task_update_status_v1_id_id_status_post_response.py) |
-
-```python
-task = client.projects.tasks.update_status_v1_id_id_status_post(
-    project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    task_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    status="not_started",
-    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-)
-```
-
-## `Agents`
-
-### List agents
-
-List agents available to your organization.
-
-Agent status reflects whether an agent has ever been published. `published`
-agents have a live published version. `draft` agents have not been
-published yet.
-
-| Direction | Type |
-| --- | --- |
-| Request | [`AgentListV1GetParams`](./src/profound/types/agent_list_v1_get_params.py) |
-| Response | [`AgentListV1GetResponse`](./src/profound/types/agent_list_v1_get_response.py) |
-
-```python
-agent = client.agents.list_v1_get(
-    limit=100,
-)
-```
-
-### Create an agent
-
-Create a new draft agent owned by the given organization.
-
-`organization_id` is required and you must be a member of it. The agent is created
-as a `draft`; publish it with `POST /v1/agents/{agent_id}/publish` once its graph
-is ready.
-
-| Direction | Type |
-| --- | --- |
-| Request | [`AgentCreateV1PostParams`](./src/profound/types/agent_create_v1_post_params.py) |
-| Response | [`Agent`](./src/profound/types/shared/agent.py) |
-
-```python
-agent = client.agents.create_v1_post(
-    organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    name="x",
-)
-```
-
-### Publish an agent
-
-Publish an agent's latest draft as its live published version.
-
-You must be a member of the agent's organization. Publishing promotes the current
-draft graph to a new published version. A draft that cannot produce its declared
-input/output contract is rejected with `422` and is not published.
-
-| Direction | Type |
-| --- | --- |
-| Response | [`Agent`](./src/profound/types/shared/agent.py) |
-
-```python
-agent = client.agents.publish_v1_id_publish_post(
-    agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-)
-```
-
-### Get an agent
-
-Retrieve an agent and its schema details.
-
-Agents can have both a live published version and a draft version with newer
-unpublished changes. Use the `version` parameter to choose which state to return.
-
-| Direction | Type |
-| --- | --- |
-| Request | [`AgentRetrieveV1GetParams`](./src/profound/types/agent_retrieve_v1_get_params.py) |
-| Response | [`AgentRetrieveV1GetResponse`](./src/profound/types/agent_retrieve_v1_get_response.py) |
-
-```python
-agent = client.agents.retrieve_v1_get(
-    agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-)
-```
-
-### Update an agent
-
-Update an agent's draft graph in place.
-
-You must be a member of the agent's organization. The agent's draft is replaced with the
-supplied graph and re-validated, so you can iterate one draft — create, then update per
-fix — instead of creating a new agent on every change. The response carries the updated
-`validation`; publish with `POST /v1/agents/{agent_id}/publish` once `validation.valid`.
-
-| Direction | Type |
-| --- | --- |
-| Request | [`AgentUpdateV1IDPatchParams`](./src/profound/types/agent_update_v1_id_patch_params.py) |
-| Response | [`AgentUpdateV1IDPatchResponse`](./src/profound/types/agent_update_v1_id_patch_response.py) |
-
-```python
-agent = client.agents.update_v1_id_patch(
-    agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    graph={},
-)
-```
-
-### Get an agent's graph
-
-Retrieve an agent's full workflow graph (`{nodes, edges}`).
-
-The graph is returned verbatim in the canonical dialect — the same shape `POST /v1/agents`
-and `PATCH /v1/agents/{agent_id}` accept — so a known-good agent can be read back, copied,
-and edited. Tool-backed nodes appear in their lowered `tool` form rather than the friendly
-v1 node types. A `draft` is visible only to its creator; the `published` version is visible
-across its organization.
-
-| Direction | Type |
-| --- | --- |
-| Request | [`AgentListGraphV1GraphGetParams`](./src/profound/types/agent_list_graph_v1_graph_get_params.py) |
-| Response | [`AgentListGraphV1GraphGetResponse`](./src/profound/types/agent_list_graph_v1_graph_get_response.py) |
-
-```python
-agent = client.agents.list_graph_v1_graph_get(
-    agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-)
-```
-
-### `Agents NodeTypes`
-
-#### List node types
-
-List the node types available for building agents.
-
-The set is deterministic and does not depend on the caller, so the response
-is safe to cache across sessions. Integration-dependent and dynamic-schema
-node types are intentionally excluded in v1.
-
-| Direction | Type |
-| --- | --- |
-| Response | [`NodeTypeListV1GetResponse`](./src/profound/types/agents/node_type_list_v1_get_response.py) |
-
-```python
-node_type = client.agents.node_types.list_v1_get()
-```
-
-#### Get a node type schema
-
-Retrieve the JSON schema for a single node type.
-
-The `schema` field is an opaque JSON Schema for the node's configuration.
-Use `schema_version` as a cache key — it bumps whenever the schema changes.
-
-| Direction | Type |
-| --- | --- |
-| Response | [`NodeTypeListSchemaV1SchemaGetResponse`](./src/profound/types/agents/node_type_list_schema_v1_schema_get_response.py) |
-
-```python
-node_type = client.agents.node_types.list_schema_v1_schema_get(
-    node_type="nodeType",
-)
-```
-
-### `Agents Runs`
-
-#### Run an agent
-
-Start a new run for an agent.
-
-Runs always execute the agent's live published version, so the agent must be
-published first with `POST /v1/agents/{agent_id}/publish`. Unpublished drafts
-cannot be run.
-
-| Direction | Type |
-| --- | --- |
-| Request | [`RunV1IDPostParams`](./src/profound/types/agents/run_v1_id_post_params.py) |
-| Response | [`RunV1IDPostResponse`](./src/profound/types/agents/run_v1_id_post_response.py) |
-
-```python
-run = client.agents.runs.v1_id_post(
-    agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-)
-```
-
-#### Get an agent run
-
-Retrieve the current status and result details for an agent run.
-
-| Direction | Type |
-| --- | --- |
-| Request | [`RunRetrieveV1GetParams`](./src/profound/types/agents/run_retrieve_v1_get_params.py) |
-| Response | [`RunRetrieveV1GetResponse`](./src/profound/types/agents/run_retrieve_v1_get_response.py) |
-
-```python
-run = client.agents.runs.retrieve_v1_get(
-    agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    run_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    verbose=False,
-)
-```
-
-## `DomainSegments`
-
-### List Domain Segments
-
-List domain segments visible to the caller for a workspace.
-
-Returns the id and name of every domain segment the caller can access, so a
-customer can discover a `view_id` to pass into agent analytics report queries.
-
-| Direction | Type |
-| --- | --- |
-| Request | [`DomainSegmentListV2GetParams`](./src/profound/types/domain_segment_list_v2_get_params.py) |
-| Response | [`DomainSegmentListV2GetResponse`](./src/profound/types/domain_segment_list_v2_get_response.py) |
-
-```python
-domain_segment = client.domain_segments.list_v2_get()
+ad_account = client.ads.openai_ads.ad_account.retrieve_insights()
 ```

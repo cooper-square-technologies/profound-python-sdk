@@ -34,29 +34,27 @@ from ._version import __version__
 
 if TYPE_CHECKING:
     from .resources import (
-        organization,
+        organizations,
         prompts,
         reports,
         content,
+        agents,
         knowledge_bases,
+        projects,
         integrations,
         documents,
-        open_ai_ads,
-        projects,
-        agents,
-        domain_segments,
+        ads,
     )
-    from .resources.organization import OrganizationResource, AsyncOrganizationResource
+    from .resources.organizations import OrganizationsResource, AsyncOrganizationsResource
     from .resources.prompts import PromptsResource, AsyncPromptsResource
     from .resources.reports import ReportsResource, AsyncReportsResource
     from .resources.content import ContentResource, AsyncContentResource
+    from .resources.agents import AgentsResource, AsyncAgentsResource
     from .resources.knowledge_bases import KnowledgeBasesResource, AsyncKnowledgeBasesResource
+    from .resources.projects import ProjectsResource, AsyncProjectsResource
     from .resources.integrations import IntegrationsResource, AsyncIntegrationsResource
     from .resources.documents import DocumentsResource, AsyncDocumentsResource
-    from .resources.open_ai_ads import OpenAIAdsResource, AsyncOpenAIAdsResource
-    from .resources.projects import ProjectsResource, AsyncProjectsResource
-    from .resources.agents import AgentsResource, AsyncAgentsResource
-    from .resources.domain_segments import DomainSegmentsResource, AsyncDomainSegmentsResource
+    from .resources.ads import AdsResource, AsyncAdsResource
 
 # Serializes lazy resource imports so concurrent cold access from multiple
 # threads cannot deadlock on CPython import locks (see CPython 3.14).
@@ -170,10 +168,10 @@ class Profound(SyncAPIClient):
         self._default_stream_cls = Stream
 
     @cached_property
-    def organization(self) -> "OrganizationResource":
+    def organizations(self) -> "OrganizationsResource":
         with _RESOURCE_IMPORT_LOCK:
-            from .resources.organization import OrganizationResource
-        return OrganizationResource(self)
+            from .resources.organizations import OrganizationsResource
+        return OrganizationsResource(self)
 
     @cached_property
     def prompts(self) -> "PromptsResource":
@@ -194,10 +192,22 @@ class Profound(SyncAPIClient):
         return ContentResource(self)
 
     @cached_property
+    def agents(self) -> "AgentsResource":
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.agents import AgentsResource
+        return AgentsResource(self)
+
+    @cached_property
     def knowledge_bases(self) -> "KnowledgeBasesResource":
         with _RESOURCE_IMPORT_LOCK:
             from .resources.knowledge_bases import KnowledgeBasesResource
         return KnowledgeBasesResource(self)
+
+    @cached_property
+    def projects(self) -> "ProjectsResource":
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.projects import ProjectsResource
+        return ProjectsResource(self)
 
     @cached_property
     def integrations(self) -> "IntegrationsResource":
@@ -212,28 +222,10 @@ class Profound(SyncAPIClient):
         return DocumentsResource(self)
 
     @cached_property
-    def open_ai_ads(self) -> "OpenAIAdsResource":
+    def ads(self) -> "AdsResource":
         with _RESOURCE_IMPORT_LOCK:
-            from .resources.open_ai_ads import OpenAIAdsResource
-        return OpenAIAdsResource(self)
-
-    @cached_property
-    def projects(self) -> "ProjectsResource":
-        with _RESOURCE_IMPORT_LOCK:
-            from .resources.projects import ProjectsResource
-        return ProjectsResource(self)
-
-    @cached_property
-    def agents(self) -> "AgentsResource":
-        with _RESOURCE_IMPORT_LOCK:
-            from .resources.agents import AgentsResource
-        return AgentsResource(self)
-
-    @cached_property
-    def domain_segments(self) -> "DomainSegmentsResource":
-        with _RESOURCE_IMPORT_LOCK:
-            from .resources.domain_segments import DomainSegmentsResource
-        return DomainSegmentsResource(self)
+            from .resources.ads import AdsResource
+        return AdsResource(self)
 
     @cached_property
     def with_raw_response(self) -> ProfoundWithRawResponse:
@@ -472,10 +464,10 @@ class AsyncProfound(AsyncAPIClient):
         self._default_stream_cls = AsyncStream
 
     @cached_property
-    def organization(self) -> "AsyncOrganizationResource":
+    def organizations(self) -> "AsyncOrganizationsResource":
         with _RESOURCE_IMPORT_LOCK:
-            from .resources.organization import AsyncOrganizationResource
-        return AsyncOrganizationResource(self)
+            from .resources.organizations import AsyncOrganizationsResource
+        return AsyncOrganizationsResource(self)
 
     @cached_property
     def prompts(self) -> "AsyncPromptsResource":
@@ -496,10 +488,22 @@ class AsyncProfound(AsyncAPIClient):
         return AsyncContentResource(self)
 
     @cached_property
+    def agents(self) -> "AsyncAgentsResource":
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.agents import AsyncAgentsResource
+        return AsyncAgentsResource(self)
+
+    @cached_property
     def knowledge_bases(self) -> "AsyncKnowledgeBasesResource":
         with _RESOURCE_IMPORT_LOCK:
             from .resources.knowledge_bases import AsyncKnowledgeBasesResource
         return AsyncKnowledgeBasesResource(self)
+
+    @cached_property
+    def projects(self) -> "AsyncProjectsResource":
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.projects import AsyncProjectsResource
+        return AsyncProjectsResource(self)
 
     @cached_property
     def integrations(self) -> "AsyncIntegrationsResource":
@@ -514,28 +518,10 @@ class AsyncProfound(AsyncAPIClient):
         return AsyncDocumentsResource(self)
 
     @cached_property
-    def open_ai_ads(self) -> "AsyncOpenAIAdsResource":
+    def ads(self) -> "AsyncAdsResource":
         with _RESOURCE_IMPORT_LOCK:
-            from .resources.open_ai_ads import AsyncOpenAIAdsResource
-        return AsyncOpenAIAdsResource(self)
-
-    @cached_property
-    def projects(self) -> "AsyncProjectsResource":
-        with _RESOURCE_IMPORT_LOCK:
-            from .resources.projects import AsyncProjectsResource
-        return AsyncProjectsResource(self)
-
-    @cached_property
-    def agents(self) -> "AsyncAgentsResource":
-        with _RESOURCE_IMPORT_LOCK:
-            from .resources.agents import AsyncAgentsResource
-        return AsyncAgentsResource(self)
-
-    @cached_property
-    def domain_segments(self) -> "AsyncDomainSegmentsResource":
-        with _RESOURCE_IMPORT_LOCK:
-            from .resources.domain_segments import AsyncDomainSegmentsResource
-        return AsyncDomainSegmentsResource(self)
+            from .resources.ads import AsyncAdsResource
+        return AsyncAdsResource(self)
 
     @cached_property
     def with_raw_response(self) -> AsyncProfoundWithRawResponse:
@@ -691,10 +677,10 @@ class ProfoundWithRawResponse:
         self._client = client
 
     @cached_property
-    def organization(self) -> organization.OrganizationResourceWithRawResponse:
+    def organizations(self) -> organizations.OrganizationsResourceWithRawResponse:
         with _RESOURCE_IMPORT_LOCK:
-            from .resources.organization import OrganizationResourceWithRawResponse
-        return OrganizationResourceWithRawResponse(self._client.organization)
+            from .resources.organizations import OrganizationsResourceWithRawResponse
+        return OrganizationsResourceWithRawResponse(self._client.organizations)
 
     @cached_property
     def prompts(self) -> prompts.PromptsResourceWithRawResponse:
@@ -715,10 +701,22 @@ class ProfoundWithRawResponse:
         return ContentResourceWithRawResponse(self._client.content)
 
     @cached_property
+    def agents(self) -> agents.AgentsResourceWithRawResponse:
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.agents import AgentsResourceWithRawResponse
+        return AgentsResourceWithRawResponse(self._client.agents)
+
+    @cached_property
     def knowledge_bases(self) -> knowledge_bases.KnowledgeBasesResourceWithRawResponse:
         with _RESOURCE_IMPORT_LOCK:
             from .resources.knowledge_bases import KnowledgeBasesResourceWithRawResponse
         return KnowledgeBasesResourceWithRawResponse(self._client.knowledge_bases)
+
+    @cached_property
+    def projects(self) -> projects.ProjectsResourceWithRawResponse:
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.projects import ProjectsResourceWithRawResponse
+        return ProjectsResourceWithRawResponse(self._client.projects)
 
     @cached_property
     def integrations(self) -> integrations.IntegrationsResourceWithRawResponse:
@@ -733,28 +731,10 @@ class ProfoundWithRawResponse:
         return DocumentsResourceWithRawResponse(self._client.documents)
 
     @cached_property
-    def open_ai_ads(self) -> open_ai_ads.OpenAIAdsResourceWithRawResponse:
+    def ads(self) -> ads.AdsResourceWithRawResponse:
         with _RESOURCE_IMPORT_LOCK:
-            from .resources.open_ai_ads import OpenAIAdsResourceWithRawResponse
-        return OpenAIAdsResourceWithRawResponse(self._client.open_ai_ads)
-
-    @cached_property
-    def projects(self) -> projects.ProjectsResourceWithRawResponse:
-        with _RESOURCE_IMPORT_LOCK:
-            from .resources.projects import ProjectsResourceWithRawResponse
-        return ProjectsResourceWithRawResponse(self._client.projects)
-
-    @cached_property
-    def agents(self) -> agents.AgentsResourceWithRawResponse:
-        with _RESOURCE_IMPORT_LOCK:
-            from .resources.agents import AgentsResourceWithRawResponse
-        return AgentsResourceWithRawResponse(self._client.agents)
-
-    @cached_property
-    def domain_segments(self) -> domain_segments.DomainSegmentsResourceWithRawResponse:
-        with _RESOURCE_IMPORT_LOCK:
-            from .resources.domain_segments import DomainSegmentsResourceWithRawResponse
-        return DomainSegmentsResourceWithRawResponse(self._client.domain_segments)
+            from .resources.ads import AdsResourceWithRawResponse
+        return AdsResourceWithRawResponse(self._client.ads)
 
 
 class AsyncProfoundWithRawResponse:
@@ -764,10 +744,10 @@ class AsyncProfoundWithRawResponse:
         self._client = client
 
     @cached_property
-    def organization(self) -> organization.AsyncOrganizationResourceWithRawResponse:
+    def organizations(self) -> organizations.AsyncOrganizationsResourceWithRawResponse:
         with _RESOURCE_IMPORT_LOCK:
-            from .resources.organization import AsyncOrganizationResourceWithRawResponse
-        return AsyncOrganizationResourceWithRawResponse(self._client.organization)
+            from .resources.organizations import AsyncOrganizationsResourceWithRawResponse
+        return AsyncOrganizationsResourceWithRawResponse(self._client.organizations)
 
     @cached_property
     def prompts(self) -> prompts.AsyncPromptsResourceWithRawResponse:
@@ -788,10 +768,22 @@ class AsyncProfoundWithRawResponse:
         return AsyncContentResourceWithRawResponse(self._client.content)
 
     @cached_property
+    def agents(self) -> agents.AsyncAgentsResourceWithRawResponse:
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.agents import AsyncAgentsResourceWithRawResponse
+        return AsyncAgentsResourceWithRawResponse(self._client.agents)
+
+    @cached_property
     def knowledge_bases(self) -> knowledge_bases.AsyncKnowledgeBasesResourceWithRawResponse:
         with _RESOURCE_IMPORT_LOCK:
             from .resources.knowledge_bases import AsyncKnowledgeBasesResourceWithRawResponse
         return AsyncKnowledgeBasesResourceWithRawResponse(self._client.knowledge_bases)
+
+    @cached_property
+    def projects(self) -> projects.AsyncProjectsResourceWithRawResponse:
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.projects import AsyncProjectsResourceWithRawResponse
+        return AsyncProjectsResourceWithRawResponse(self._client.projects)
 
     @cached_property
     def integrations(self) -> integrations.AsyncIntegrationsResourceWithRawResponse:
@@ -806,28 +798,10 @@ class AsyncProfoundWithRawResponse:
         return AsyncDocumentsResourceWithRawResponse(self._client.documents)
 
     @cached_property
-    def open_ai_ads(self) -> open_ai_ads.AsyncOpenAIAdsResourceWithRawResponse:
+    def ads(self) -> ads.AsyncAdsResourceWithRawResponse:
         with _RESOURCE_IMPORT_LOCK:
-            from .resources.open_ai_ads import AsyncOpenAIAdsResourceWithRawResponse
-        return AsyncOpenAIAdsResourceWithRawResponse(self._client.open_ai_ads)
-
-    @cached_property
-    def projects(self) -> projects.AsyncProjectsResourceWithRawResponse:
-        with _RESOURCE_IMPORT_LOCK:
-            from .resources.projects import AsyncProjectsResourceWithRawResponse
-        return AsyncProjectsResourceWithRawResponse(self._client.projects)
-
-    @cached_property
-    def agents(self) -> agents.AsyncAgentsResourceWithRawResponse:
-        with _RESOURCE_IMPORT_LOCK:
-            from .resources.agents import AsyncAgentsResourceWithRawResponse
-        return AsyncAgentsResourceWithRawResponse(self._client.agents)
-
-    @cached_property
-    def domain_segments(self) -> domain_segments.AsyncDomainSegmentsResourceWithRawResponse:
-        with _RESOURCE_IMPORT_LOCK:
-            from .resources.domain_segments import AsyncDomainSegmentsResourceWithRawResponse
-        return AsyncDomainSegmentsResourceWithRawResponse(self._client.domain_segments)
+            from .resources.ads import AsyncAdsResourceWithRawResponse
+        return AsyncAdsResourceWithRawResponse(self._client.ads)
 
 
 class ProfoundWithStreamedResponse:
@@ -837,10 +811,10 @@ class ProfoundWithStreamedResponse:
         self._client = client
 
     @cached_property
-    def organization(self) -> organization.OrganizationResourceWithStreamingResponse:
+    def organizations(self) -> organizations.OrganizationsResourceWithStreamingResponse:
         with _RESOURCE_IMPORT_LOCK:
-            from .resources.organization import OrganizationResourceWithStreamingResponse
-        return OrganizationResourceWithStreamingResponse(self._client.organization)
+            from .resources.organizations import OrganizationsResourceWithStreamingResponse
+        return OrganizationsResourceWithStreamingResponse(self._client.organizations)
 
     @cached_property
     def prompts(self) -> prompts.PromptsResourceWithStreamingResponse:
@@ -861,10 +835,22 @@ class ProfoundWithStreamedResponse:
         return ContentResourceWithStreamingResponse(self._client.content)
 
     @cached_property
+    def agents(self) -> agents.AgentsResourceWithStreamingResponse:
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.agents import AgentsResourceWithStreamingResponse
+        return AgentsResourceWithStreamingResponse(self._client.agents)
+
+    @cached_property
     def knowledge_bases(self) -> knowledge_bases.KnowledgeBasesResourceWithStreamingResponse:
         with _RESOURCE_IMPORT_LOCK:
             from .resources.knowledge_bases import KnowledgeBasesResourceWithStreamingResponse
         return KnowledgeBasesResourceWithStreamingResponse(self._client.knowledge_bases)
+
+    @cached_property
+    def projects(self) -> projects.ProjectsResourceWithStreamingResponse:
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.projects import ProjectsResourceWithStreamingResponse
+        return ProjectsResourceWithStreamingResponse(self._client.projects)
 
     @cached_property
     def integrations(self) -> integrations.IntegrationsResourceWithStreamingResponse:
@@ -879,28 +865,10 @@ class ProfoundWithStreamedResponse:
         return DocumentsResourceWithStreamingResponse(self._client.documents)
 
     @cached_property
-    def open_ai_ads(self) -> open_ai_ads.OpenAIAdsResourceWithStreamingResponse:
+    def ads(self) -> ads.AdsResourceWithStreamingResponse:
         with _RESOURCE_IMPORT_LOCK:
-            from .resources.open_ai_ads import OpenAIAdsResourceWithStreamingResponse
-        return OpenAIAdsResourceWithStreamingResponse(self._client.open_ai_ads)
-
-    @cached_property
-    def projects(self) -> projects.ProjectsResourceWithStreamingResponse:
-        with _RESOURCE_IMPORT_LOCK:
-            from .resources.projects import ProjectsResourceWithStreamingResponse
-        return ProjectsResourceWithStreamingResponse(self._client.projects)
-
-    @cached_property
-    def agents(self) -> agents.AgentsResourceWithStreamingResponse:
-        with _RESOURCE_IMPORT_LOCK:
-            from .resources.agents import AgentsResourceWithStreamingResponse
-        return AgentsResourceWithStreamingResponse(self._client.agents)
-
-    @cached_property
-    def domain_segments(self) -> domain_segments.DomainSegmentsResourceWithStreamingResponse:
-        with _RESOURCE_IMPORT_LOCK:
-            from .resources.domain_segments import DomainSegmentsResourceWithStreamingResponse
-        return DomainSegmentsResourceWithStreamingResponse(self._client.domain_segments)
+            from .resources.ads import AdsResourceWithStreamingResponse
+        return AdsResourceWithStreamingResponse(self._client.ads)
 
 
 class AsyncProfoundWithStreamedResponse:
@@ -910,10 +878,10 @@ class AsyncProfoundWithStreamedResponse:
         self._client = client
 
     @cached_property
-    def organization(self) -> organization.AsyncOrganizationResourceWithStreamingResponse:
+    def organizations(self) -> organizations.AsyncOrganizationsResourceWithStreamingResponse:
         with _RESOURCE_IMPORT_LOCK:
-            from .resources.organization import AsyncOrganizationResourceWithStreamingResponse
-        return AsyncOrganizationResourceWithStreamingResponse(self._client.organization)
+            from .resources.organizations import AsyncOrganizationsResourceWithStreamingResponse
+        return AsyncOrganizationsResourceWithStreamingResponse(self._client.organizations)
 
     @cached_property
     def prompts(self) -> prompts.AsyncPromptsResourceWithStreamingResponse:
@@ -934,10 +902,22 @@ class AsyncProfoundWithStreamedResponse:
         return AsyncContentResourceWithStreamingResponse(self._client.content)
 
     @cached_property
+    def agents(self) -> agents.AsyncAgentsResourceWithStreamingResponse:
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.agents import AsyncAgentsResourceWithStreamingResponse
+        return AsyncAgentsResourceWithStreamingResponse(self._client.agents)
+
+    @cached_property
     def knowledge_bases(self) -> knowledge_bases.AsyncKnowledgeBasesResourceWithStreamingResponse:
         with _RESOURCE_IMPORT_LOCK:
             from .resources.knowledge_bases import AsyncKnowledgeBasesResourceWithStreamingResponse
         return AsyncKnowledgeBasesResourceWithStreamingResponse(self._client.knowledge_bases)
+
+    @cached_property
+    def projects(self) -> projects.AsyncProjectsResourceWithStreamingResponse:
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.projects import AsyncProjectsResourceWithStreamingResponse
+        return AsyncProjectsResourceWithStreamingResponse(self._client.projects)
 
     @cached_property
     def integrations(self) -> integrations.AsyncIntegrationsResourceWithStreamingResponse:
@@ -952,28 +932,10 @@ class AsyncProfoundWithStreamedResponse:
         return AsyncDocumentsResourceWithStreamingResponse(self._client.documents)
 
     @cached_property
-    def open_ai_ads(self) -> open_ai_ads.AsyncOpenAIAdsResourceWithStreamingResponse:
+    def ads(self) -> ads.AsyncAdsResourceWithStreamingResponse:
         with _RESOURCE_IMPORT_LOCK:
-            from .resources.open_ai_ads import AsyncOpenAIAdsResourceWithStreamingResponse
-        return AsyncOpenAIAdsResourceWithStreamingResponse(self._client.open_ai_ads)
-
-    @cached_property
-    def projects(self) -> projects.AsyncProjectsResourceWithStreamingResponse:
-        with _RESOURCE_IMPORT_LOCK:
-            from .resources.projects import AsyncProjectsResourceWithStreamingResponse
-        return AsyncProjectsResourceWithStreamingResponse(self._client.projects)
-
-    @cached_property
-    def agents(self) -> agents.AsyncAgentsResourceWithStreamingResponse:
-        with _RESOURCE_IMPORT_LOCK:
-            from .resources.agents import AsyncAgentsResourceWithStreamingResponse
-        return AsyncAgentsResourceWithStreamingResponse(self._client.agents)
-
-    @cached_property
-    def domain_segments(self) -> domain_segments.AsyncDomainSegmentsResourceWithStreamingResponse:
-        with _RESOURCE_IMPORT_LOCK:
-            from .resources.domain_segments import AsyncDomainSegmentsResourceWithStreamingResponse
-        return AsyncDomainSegmentsResourceWithStreamingResponse(self._client.domain_segments)
+            from .resources.ads import AsyncAdsResourceWithStreamingResponse
+        return AsyncAdsResourceWithStreamingResponse(self._client.ads)
 
 
 # Alias names for the documented `Client` / `AsyncClient` symbols.

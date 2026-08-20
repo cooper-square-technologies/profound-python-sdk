@@ -18,11 +18,7 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.shared.document_operation_response import DocumentOperationResponse
-from ...types.knowledge_bases import (
-    document_create_v1_id_post_params,
-    document_update_v1_id_put_params,
-    document_delete_v1_id_delete_params,
-)
+from ...types.knowledge_bases import document_create_params, document_update_params, document_delete_params
 
 __all__ = ["DocumentsResource", "AsyncDocumentsResource"]
 
@@ -36,7 +32,7 @@ class DocumentsResource(SyncAPIResource):
     def with_streaming_response(self) -> DocumentsResourceWithStreamingResponse:
         return DocumentsResourceWithStreamingResponse(self)
 
-    def create_v1_id_post(
+    def create(
         self,
         knowledge_base_id: str,
         *,
@@ -70,7 +66,7 @@ class DocumentsResource(SyncAPIResource):
 
         Example:
             ```python
-            document = client.knowledge_bases.documents.create_v1_id_post(
+            document = client.knowledge_bases.documents.create(
                 knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 name="x",
                 text="x",
@@ -89,7 +85,7 @@ class DocumentsResource(SyncAPIResource):
                     "text": text,
                     "folder": folder,
                 },
-                document_create_v1_id_post_params.DocumentCreateV1IDPostParams,
+                document_create_params.DocumentCreateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -97,13 +93,13 @@ class DocumentsResource(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=maybe_transform(
-                    {"organization_id": organization_id}, document_create_v1_id_post_params.DocumentCreateV1IDPostParams
+                    {"organization_id": organization_id}, document_create_params.DocumentCreateParams
                 ),
             ),
             cast_to=DocumentOperationResponse,
         )
 
-    def update_v1_id_put(
+    def update(
         self,
         knowledge_base_id: str,
         *,
@@ -137,7 +133,7 @@ class DocumentsResource(SyncAPIResource):
 
         Example:
             ```python
-            document = client.knowledge_bases.documents.update_v1_id_put(
+            document = client.knowledge_bases.documents.update(
                 knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 name="x",
                 text="x",
@@ -156,7 +152,7 @@ class DocumentsResource(SyncAPIResource):
                     "text": text,
                     "folder": folder,
                 },
-                document_update_v1_id_put_params.DocumentUpdateV1IDPutParams,
+                document_update_params.DocumentUpdateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -164,13 +160,13 @@ class DocumentsResource(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=maybe_transform(
-                    {"organization_id": organization_id}, document_update_v1_id_put_params.DocumentUpdateV1IDPutParams
+                    {"organization_id": organization_id}, document_update_params.DocumentUpdateParams
                 ),
             ),
             cast_to=DocumentOperationResponse,
         )
 
-    def delete_v1_id_delete(
+    def delete(
         self,
         knowledge_base_id: str,
         *,
@@ -200,7 +196,7 @@ class DocumentsResource(SyncAPIResource):
 
         Example:
             ```python
-            document = client.knowledge_bases.documents.delete_v1_id_delete(
+            document = client.knowledge_bases.documents.delete(
                 knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 name="x",
             )
@@ -214,7 +210,7 @@ class DocumentsResource(SyncAPIResource):
             ),
             body=maybe_transform(
                 {"name": name},
-                document_delete_v1_id_delete_params.DocumentDeleteV1IDDeleteParams,
+                document_delete_params.DocumentDeleteParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -222,8 +218,7 @@ class DocumentsResource(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=maybe_transform(
-                    {"organization_id": organization_id},
-                    document_delete_v1_id_delete_params.DocumentDeleteV1IDDeleteParams,
+                    {"organization_id": organization_id}, document_delete_params.DocumentDeleteParams
                 ),
             ),
             cast_to=DocumentOperationResponse,
@@ -239,7 +234,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
     def with_streaming_response(self) -> AsyncDocumentsResourceWithStreamingResponse:
         return AsyncDocumentsResourceWithStreamingResponse(self)
 
-    async def create_v1_id_post(
+    async def create(
         self,
         knowledge_base_id: str,
         *,
@@ -273,7 +268,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
 
         Example:
             ```python
-            document = await client.knowledge_bases.documents.create_v1_id_post(
+            document = await client.knowledge_bases.documents.create(
                 knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 name="x",
                 text="x",
@@ -292,7 +287,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
                     "text": text,
                     "folder": folder,
                 },
-                document_create_v1_id_post_params.DocumentCreateV1IDPostParams,
+                document_create_params.DocumentCreateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -300,13 +295,13 @@ class AsyncDocumentsResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"organization_id": organization_id}, document_create_v1_id_post_params.DocumentCreateV1IDPostParams
+                    {"organization_id": organization_id}, document_create_params.DocumentCreateParams
                 ),
             ),
             cast_to=DocumentOperationResponse,
         )
 
-    async def update_v1_id_put(
+    async def update(
         self,
         knowledge_base_id: str,
         *,
@@ -340,7 +335,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
 
         Example:
             ```python
-            document = await client.knowledge_bases.documents.update_v1_id_put(
+            document = await client.knowledge_bases.documents.update(
                 knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 name="x",
                 text="x",
@@ -359,7 +354,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
                     "text": text,
                     "folder": folder,
                 },
-                document_update_v1_id_put_params.DocumentUpdateV1IDPutParams,
+                document_update_params.DocumentUpdateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -367,13 +362,13 @@ class AsyncDocumentsResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"organization_id": organization_id}, document_update_v1_id_put_params.DocumentUpdateV1IDPutParams
+                    {"organization_id": organization_id}, document_update_params.DocumentUpdateParams
                 ),
             ),
             cast_to=DocumentOperationResponse,
         )
 
-    async def delete_v1_id_delete(
+    async def delete(
         self,
         knowledge_base_id: str,
         *,
@@ -403,7 +398,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
 
         Example:
             ```python
-            document = await client.knowledge_bases.documents.delete_v1_id_delete(
+            document = await client.knowledge_bases.documents.delete(
                 knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 name="x",
             )
@@ -417,7 +412,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
             ),
             body=await async_maybe_transform(
                 {"name": name},
-                document_delete_v1_id_delete_params.DocumentDeleteV1IDDeleteParams,
+                document_delete_params.DocumentDeleteParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -425,8 +420,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"organization_id": organization_id},
-                    document_delete_v1_id_delete_params.DocumentDeleteV1IDDeleteParams,
+                    {"organization_id": organization_id}, document_delete_params.DocumentDeleteParams
                 ),
             ),
             cast_to=DocumentOperationResponse,
@@ -437,14 +431,14 @@ class DocumentsResourceWithRawResponse:
     def __init__(self, documents: DocumentsResource) -> None:
         self._documents = documents
 
-        self.create_v1_id_post = to_raw_response_wrapper(
-            documents.create_v1_id_post,
+        self.create = to_raw_response_wrapper(
+            documents.create,
         )
-        self.update_v1_id_put = to_raw_response_wrapper(
-            documents.update_v1_id_put,
+        self.update = to_raw_response_wrapper(
+            documents.update,
         )
-        self.delete_v1_id_delete = to_raw_response_wrapper(
-            documents.delete_v1_id_delete,
+        self.delete = to_raw_response_wrapper(
+            documents.delete,
         )
 
 
@@ -452,14 +446,14 @@ class AsyncDocumentsResourceWithRawResponse:
     def __init__(self, documents: AsyncDocumentsResource) -> None:
         self._documents = documents
 
-        self.create_v1_id_post = async_to_raw_response_wrapper(
-            documents.create_v1_id_post,
+        self.create = async_to_raw_response_wrapper(
+            documents.create,
         )
-        self.update_v1_id_put = async_to_raw_response_wrapper(
-            documents.update_v1_id_put,
+        self.update = async_to_raw_response_wrapper(
+            documents.update,
         )
-        self.delete_v1_id_delete = async_to_raw_response_wrapper(
-            documents.delete_v1_id_delete,
+        self.delete = async_to_raw_response_wrapper(
+            documents.delete,
         )
 
 
@@ -467,14 +461,14 @@ class DocumentsResourceWithStreamingResponse:
     def __init__(self, documents: DocumentsResource) -> None:
         self._documents = documents
 
-        self.create_v1_id_post = to_streamed_response_wrapper(
-            documents.create_v1_id_post,
+        self.create = to_streamed_response_wrapper(
+            documents.create,
         )
-        self.update_v1_id_put = to_streamed_response_wrapper(
-            documents.update_v1_id_put,
+        self.update = to_streamed_response_wrapper(
+            documents.update,
         )
-        self.delete_v1_id_delete = to_streamed_response_wrapper(
-            documents.delete_v1_id_delete,
+        self.delete = to_streamed_response_wrapper(
+            documents.delete,
         )
 
 
@@ -482,12 +476,12 @@ class AsyncDocumentsResourceWithStreamingResponse:
     def __init__(self, documents: AsyncDocumentsResource) -> None:
         self._documents = documents
 
-        self.create_v1_id_post = async_to_streamed_response_wrapper(
-            documents.create_v1_id_post,
+        self.create = async_to_streamed_response_wrapper(
+            documents.create,
         )
-        self.update_v1_id_put = async_to_streamed_response_wrapper(
-            documents.update_v1_id_put,
+        self.update = async_to_streamed_response_wrapper(
+            documents.update,
         )
-        self.delete_v1_id_delete = async_to_streamed_response_wrapper(
-            documents.delete_v1_id_delete,
+        self.delete = async_to_streamed_response_wrapper(
+            documents.delete,
         )

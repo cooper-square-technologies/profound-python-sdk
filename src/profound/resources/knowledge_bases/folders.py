@@ -17,9 +17,9 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.knowledge_bases.folder_create_v1_id_post_response import FolderCreateV1IDPostResponse
-from ...types.knowledge_bases import folder_create_v1_id_post_params, folder_delete_v1_id_delete_params
-from ...types.knowledge_bases.folder_delete_v1_id_delete_response import FolderDeleteV1IDDeleteResponse
+from ...types.knowledge_bases.folder_create_response import FolderCreateResponse
+from ...types.knowledge_bases import folder_create_params, folder_delete_params
+from ...types.knowledge_bases.folder_delete_response import FolderDeleteResponse
 
 __all__ = ["FoldersResource", "AsyncFoldersResource"]
 
@@ -33,7 +33,7 @@ class FoldersResource(SyncAPIResource):
     def with_streaming_response(self) -> FoldersResourceWithStreamingResponse:
         return FoldersResourceWithStreamingResponse(self)
 
-    def create_v1_id_post(
+    def create(
         self,
         knowledge_base_id: str,
         *,
@@ -45,7 +45,7 @@ class FoldersResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> FolderCreateV1IDPostResponse:
+    ) -> FolderCreateResponse:
         """
         Create an empty folder at the requested knowledge base path.
 
@@ -59,11 +59,11 @@ class FoldersResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            FolderCreateV1IDPostResponse: Successful Response
+            FolderCreateResponse: Successful Response
 
         Example:
             ```python
-            folder = client.knowledge_bases.folders.create_v1_id_post(
+            folder = client.knowledge_bases.folders.create(
                 knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 path="x",
             )
@@ -77,21 +77,19 @@ class FoldersResource(SyncAPIResource):
             ),
             body=maybe_transform(
                 {"path": path},
-                folder_create_v1_id_post_params.FolderCreateV1IDPostParams,
+                folder_create_params.FolderCreateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform(
-                    {"organization_id": organization_id}, folder_create_v1_id_post_params.FolderCreateV1IDPostParams
-                ),
+                query=maybe_transform({"organization_id": organization_id}, folder_create_params.FolderCreateParams),
             ),
-            cast_to=FolderCreateV1IDPostResponse,
+            cast_to=FolderCreateResponse,
         )
 
-    def delete_v1_id_delete(
+    def delete(
         self,
         knowledge_base_id: str,
         *,
@@ -104,7 +102,7 @@ class FoldersResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> FolderDeleteV1IDDeleteResponse:
+    ) -> FolderDeleteResponse:
         """
         Delete a folder. With recursive=false, non-empty folders return 409 and no contents are deleted.
 
@@ -119,11 +117,11 @@ class FoldersResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            FolderDeleteV1IDDeleteResponse: Successful Response
+            FolderDeleteResponse: Successful Response
 
         Example:
             ```python
-            folder = client.knowledge_bases.folders.delete_v1_id_delete(
+            folder = client.knowledge_bases.folders.delete(
                 knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 path="x",
                 recursive=False,
@@ -141,18 +139,16 @@ class FoldersResource(SyncAPIResource):
                     "path": path,
                     "recursive": recursive,
                 },
-                folder_delete_v1_id_delete_params.FolderDeleteV1IDDeleteParams,
+                folder_delete_params.FolderDeleteParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform(
-                    {"organization_id": organization_id}, folder_delete_v1_id_delete_params.FolderDeleteV1IDDeleteParams
-                ),
+                query=maybe_transform({"organization_id": organization_id}, folder_delete_params.FolderDeleteParams),
             ),
-            cast_to=FolderDeleteV1IDDeleteResponse,
+            cast_to=FolderDeleteResponse,
         )
 
 
@@ -165,7 +161,7 @@ class AsyncFoldersResource(AsyncAPIResource):
     def with_streaming_response(self) -> AsyncFoldersResourceWithStreamingResponse:
         return AsyncFoldersResourceWithStreamingResponse(self)
 
-    async def create_v1_id_post(
+    async def create(
         self,
         knowledge_base_id: str,
         *,
@@ -177,7 +173,7 @@ class AsyncFoldersResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> FolderCreateV1IDPostResponse:
+    ) -> FolderCreateResponse:
         """
         Create an empty folder at the requested knowledge base path.
 
@@ -191,11 +187,11 @@ class AsyncFoldersResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            FolderCreateV1IDPostResponse: Successful Response
+            FolderCreateResponse: Successful Response
 
         Example:
             ```python
-            folder = await client.knowledge_bases.folders.create_v1_id_post(
+            folder = await client.knowledge_bases.folders.create(
                 knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 path="x",
             )
@@ -209,7 +205,7 @@ class AsyncFoldersResource(AsyncAPIResource):
             ),
             body=await async_maybe_transform(
                 {"path": path},
-                folder_create_v1_id_post_params.FolderCreateV1IDPostParams,
+                folder_create_params.FolderCreateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -217,13 +213,13 @@ class AsyncFoldersResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"organization_id": organization_id}, folder_create_v1_id_post_params.FolderCreateV1IDPostParams
+                    {"organization_id": organization_id}, folder_create_params.FolderCreateParams
                 ),
             ),
-            cast_to=FolderCreateV1IDPostResponse,
+            cast_to=FolderCreateResponse,
         )
 
-    async def delete_v1_id_delete(
+    async def delete(
         self,
         knowledge_base_id: str,
         *,
@@ -236,7 +232,7 @@ class AsyncFoldersResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> FolderDeleteV1IDDeleteResponse:
+    ) -> FolderDeleteResponse:
         """
         Delete a folder. With recursive=false, non-empty folders return 409 and no contents are deleted.
 
@@ -251,11 +247,11 @@ class AsyncFoldersResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            FolderDeleteV1IDDeleteResponse: Successful Response
+            FolderDeleteResponse: Successful Response
 
         Example:
             ```python
-            folder = await client.knowledge_bases.folders.delete_v1_id_delete(
+            folder = await client.knowledge_bases.folders.delete(
                 knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 path="x",
                 recursive=False,
@@ -273,7 +269,7 @@ class AsyncFoldersResource(AsyncAPIResource):
                     "path": path,
                     "recursive": recursive,
                 },
-                folder_delete_v1_id_delete_params.FolderDeleteV1IDDeleteParams,
+                folder_delete_params.FolderDeleteParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -281,10 +277,10 @@ class AsyncFoldersResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"organization_id": organization_id}, folder_delete_v1_id_delete_params.FolderDeleteV1IDDeleteParams
+                    {"organization_id": organization_id}, folder_delete_params.FolderDeleteParams
                 ),
             ),
-            cast_to=FolderDeleteV1IDDeleteResponse,
+            cast_to=FolderDeleteResponse,
         )
 
 
@@ -292,11 +288,11 @@ class FoldersResourceWithRawResponse:
     def __init__(self, folders: FoldersResource) -> None:
         self._folders = folders
 
-        self.create_v1_id_post = to_raw_response_wrapper(
-            folders.create_v1_id_post,
+        self.create = to_raw_response_wrapper(
+            folders.create,
         )
-        self.delete_v1_id_delete = to_raw_response_wrapper(
-            folders.delete_v1_id_delete,
+        self.delete = to_raw_response_wrapper(
+            folders.delete,
         )
 
 
@@ -304,11 +300,11 @@ class AsyncFoldersResourceWithRawResponse:
     def __init__(self, folders: AsyncFoldersResource) -> None:
         self._folders = folders
 
-        self.create_v1_id_post = async_to_raw_response_wrapper(
-            folders.create_v1_id_post,
+        self.create = async_to_raw_response_wrapper(
+            folders.create,
         )
-        self.delete_v1_id_delete = async_to_raw_response_wrapper(
-            folders.delete_v1_id_delete,
+        self.delete = async_to_raw_response_wrapper(
+            folders.delete,
         )
 
 
@@ -316,11 +312,11 @@ class FoldersResourceWithStreamingResponse:
     def __init__(self, folders: FoldersResource) -> None:
         self._folders = folders
 
-        self.create_v1_id_post = to_streamed_response_wrapper(
-            folders.create_v1_id_post,
+        self.create = to_streamed_response_wrapper(
+            folders.create,
         )
-        self.delete_v1_id_delete = to_streamed_response_wrapper(
-            folders.delete_v1_id_delete,
+        self.delete = to_streamed_response_wrapper(
+            folders.delete,
         )
 
 
@@ -328,9 +324,9 @@ class AsyncFoldersResourceWithStreamingResponse:
     def __init__(self, folders: AsyncFoldersResource) -> None:
         self._folders = folders
 
-        self.create_v1_id_post = async_to_streamed_response_wrapper(
-            folders.create_v1_id_post,
+        self.create = async_to_streamed_response_wrapper(
+            folders.create,
         )
-        self.delete_v1_id_delete = async_to_streamed_response_wrapper(
-            folders.delete_v1_id_delete,
+        self.delete = async_to_streamed_response_wrapper(
+            folders.delete,
         )

@@ -18,19 +18,19 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.document_list_v1_get_response import DocumentListV1GetResponse
+from ..types.document_create_response import DocumentCreateResponse
 from ..types import (
-    document_list_v1_get_params,
-    document_create_v1_post_params,
-    document_read_v1_id_get_params,
-    document_patch_v1_id_patch_params,
-    document_delete_v1_id_delete_params,
-    document_replace_content_v1_id_content_post_params,
+    document_create_params,
+    document_list_params,
+    document_retrieve_params,
+    document_update_params,
+    document_delete_params,
+    document_replace_content_params,
 )
-from ..types.document_create_v1_post_response import DocumentCreateV1PostResponse
-from ..types.document_read_v1_id_get_response import DocumentReadV1IDGetResponse
-from ..types.document_patch_v1_id_patch_response import DocumentPatchV1IDPatchResponse
-from ..types.document_replace_content_v1_id_content_post_response import DocumentReplaceContentV1IDContentPostResponse
+from ..types.document_list_response import DocumentListResponse
+from ..types.document_retrieve_response import DocumentRetrieveResponse
+from ..types.document_update_response import DocumentUpdateResponse
+from ..types.document_replace_content_response import DocumentReplaceContentResponse
 
 __all__ = ["DocumentsResource", "AsyncDocumentsResource"]
 
@@ -44,7 +44,76 @@ class DocumentsResource(SyncAPIResource):
     def with_streaming_response(self) -> DocumentsResourceWithStreamingResponse:
         return DocumentsResourceWithStreamingResponse(self)
 
-    def list_v1_get(
+    def create(
+        self,
+        *,
+        id: str,
+        organization_id: str,
+        name: str,
+        content_markdown: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> DocumentCreateResponse:
+        """
+        Create a Profound document with markdown content.
+
+        `organization_id` is required and you must be a member of it. You choose the
+        document's `id`, and creation is idempotent on it: repeating the request returns
+        the existing document rather than creating a second one.
+
+        New documents are visible only to their creator; share them from the Profound app,
+        or open one with the `url` in the response.
+
+        A `201` response does not confirm that a new document was created: it is also
+        returned when `id` already existed, in which case the existing document comes
+        back unchanged. Upstream gives no signal to tell the two apart, so this endpoint
+        does not claim to either — it is safe to retry with the same `id` either way.
+
+        Args:
+            id: ID for the new document, chosen by you. Creation is idempotent on this ID: repeating a request with the same ID returns the existing document instead of creating a second one, so a retry after a network error is safe.
+            organization_id: ID of the organization that will own the document. Required — Profound API keys are user-scoped, so the owning organization must be chosen explicitly. The caller must be a member of this organization.
+            name: Title for the document. Must be non-empty.
+            content_markdown: Initial document body as markdown. Must be non-empty. Rendered into the collaborative editor, so the result is real editable content, not a stored blob.
+            extra_headers: Send extra headers with the request.
+            extra_query: Send extra query parameters with the request.
+            extra_body: Send extra JSON properties with the request.
+            timeout: Override the client-level default timeout for this request, in seconds.
+
+        Returns:
+            DocumentCreateResponse: Successful Response
+
+        Example:
+            ```python
+            document = client.documents.create(
+                id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+                organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+                name="x",
+                content_markdown="x",
+            )
+            ```
+        """
+        return self._post(
+            "/v1/documents",
+            body=maybe_transform(
+                {
+                    "id": id,
+                    "organization_id": organization_id,
+                    "name": name,
+                    "content_markdown": content_markdown,
+                },
+                document_create_params.DocumentCreateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=DocumentCreateResponse,
+        )
+
+    def list(
         self,
         *,
         organization_id: str,
@@ -58,7 +127,7 @@ class DocumentsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> DocumentListV1GetResponse:
+    ) -> DocumentListResponse:
         """
         List documents visible to your organization, newest-modified-first.
 
@@ -87,11 +156,11 @@ class DocumentsResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            DocumentListV1GetResponse: Successful Response
+            DocumentListResponse: Successful Response
 
         Example:
             ```python
-            document = client.documents.list_v1_get(
+            document = client.documents.list(
                 organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 limit=20,
             )
@@ -112,82 +181,13 @@ class DocumentsResource(SyncAPIResource):
                         "limit": limit,
                         "next_cursor": next_cursor,
                     },
-                    document_list_v1_get_params.DocumentListV1GetParams,
+                    document_list_params.DocumentListParams,
                 ),
             ),
-            cast_to=DocumentListV1GetResponse,
+            cast_to=DocumentListResponse,
         )
 
-    def create_v1_post(
-        self,
-        *,
-        id: str,
-        organization_id: str,
-        name: str,
-        content_markdown: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> DocumentCreateV1PostResponse:
-        """
-        Create a Profound document with markdown content.
-
-        `organization_id` is required and you must be a member of it. You choose the
-        document's `id`, and creation is idempotent on it: repeating the request returns
-        the existing document rather than creating a second one.
-
-        New documents are visible only to their creator; share them from the Profound app,
-        or open one with the `url` in the response.
-
-        A `201` response does not confirm that a new document was created: it is also
-        returned when `id` already existed, in which case the existing document comes
-        back unchanged. Upstream gives no signal to tell the two apart, so this endpoint
-        does not claim to either — it is safe to retry with the same `id` either way.
-
-        Args:
-            id: ID for the new document, chosen by you. Creation is idempotent on this ID: repeating a request with the same ID returns the existing document instead of creating a second one, so a retry after a network error is safe.
-            organization_id: ID of the organization that will own the document. Required — Profound API keys are user-scoped, so the owning organization must be chosen explicitly. The caller must be a member of this organization.
-            name: Title for the document. Must be non-empty.
-            content_markdown: Initial document body as markdown. Must be non-empty. Rendered into the collaborative editor, so the result is real editable content, not a stored blob.
-            extra_headers: Send extra headers with the request.
-            extra_query: Send extra query parameters with the request.
-            extra_body: Send extra JSON properties with the request.
-            timeout: Override the client-level default timeout for this request, in seconds.
-
-        Returns:
-            DocumentCreateV1PostResponse: Successful Response
-
-        Example:
-            ```python
-            document = client.documents.create_v1_post(
-                id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-                organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-                name="x",
-                content_markdown="x",
-            )
-            ```
-        """
-        return self._post(
-            "/v1/documents",
-            body=maybe_transform(
-                {
-                    "id": id,
-                    "organization_id": organization_id,
-                    "name": name,
-                    "content_markdown": content_markdown,
-                },
-                document_create_v1_post_params.DocumentCreateV1PostParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=DocumentCreateV1PostResponse,
-        )
-
-    def read_v1_id_get(
+    def retrieve(
         self,
         document_id: str,
         *,
@@ -201,7 +201,7 @@ class DocumentsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> DocumentReadV1IDGetResponse:
+    ) -> DocumentRetrieveResponse:
         """
         Read a document: its metadata, its default tab's body, its other tabs, its comments, and its version hash.
 
@@ -224,11 +224,11 @@ class DocumentsResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            DocumentReadV1IDGetResponse: Successful Response
+            DocumentRetrieveResponse: Successful Response
 
         Example:
             ```python
-            document = client.documents.read_v1_id_get(
+            document = client.documents.retrieve(
                 document_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 include_tabs=True,
@@ -253,13 +253,13 @@ class DocumentsResource(SyncAPIResource):
                         "include_comments": include_comments,
                         "preview": preview,
                     },
-                    document_read_v1_id_get_params.DocumentReadV1IDGetParams,
+                    document_retrieve_params.DocumentRetrieveParams,
                 ),
             ),
-            cast_to=DocumentReadV1IDGetResponse,
+            cast_to=DocumentRetrieveResponse,
         )
 
-    def patch_v1_id_patch(
+    def update(
         self,
         document_id: str,
         *,
@@ -272,7 +272,7 @@ class DocumentsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> DocumentPatchV1IDPatchResponse:
+    ) -> DocumentUpdateResponse:
         """
         Rename a document, change who can see it, or both in one call.
 
@@ -295,11 +295,11 @@ class DocumentsResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            DocumentPatchV1IDPatchResponse: Successful Response
+            DocumentUpdateResponse: Successful Response
 
         Example:
             ```python
-            document = client.documents.patch_v1_id_patch(
+            document = client.documents.update(
                 document_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
             )
@@ -315,15 +315,15 @@ class DocumentsResource(SyncAPIResource):
                     "name": name,
                     "visibility": visibility,
                 },
-                document_patch_v1_id_patch_params.DocumentPatchV1IDPatchParams,
+                document_update_params.DocumentUpdateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=DocumentPatchV1IDPatchResponse,
+            cast_to=DocumentUpdateResponse,
         )
 
-    def delete_v1_id_delete(
+    def delete(
         self,
         document_id: str,
         *,
@@ -371,7 +371,7 @@ class DocumentsResource(SyncAPIResource):
 
         Example:
             ```python
-            client.documents.delete_v1_id_delete(
+            client.documents.delete(
                 document_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
             )
@@ -388,14 +388,13 @@ class DocumentsResource(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=maybe_transform(
-                    {"organization_id": organization_id},
-                    document_delete_v1_id_delete_params.DocumentDeleteV1IDDeleteParams,
+                    {"organization_id": organization_id}, document_delete_params.DocumentDeleteParams
                 ),
             ),
             cast_to=NoneType,
         )
 
-    def replace_content_v1_id_content_post(
+    def replace_content(
         self,
         document_id: str,
         *,
@@ -408,7 +407,7 @@ class DocumentsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> DocumentReplaceContentV1IDContentPostResponse:
+    ) -> DocumentReplaceContentResponse:
         """
         Overwrite a document's entire body with new markdown, replacing what it held before.
 
@@ -447,11 +446,11 @@ class DocumentsResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            DocumentReplaceContentV1IDContentPostResponse: Successful Response
+            DocumentReplaceContentResponse: Successful Response
 
         Example:
             ```python
-            document = client.documents.replace_content_v1_id_content_post(
+            document = client.documents.replace_content(
                 document_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 content_markdown="",
@@ -469,12 +468,12 @@ class DocumentsResource(SyncAPIResource):
                     "content_markdown": content_markdown,
                     "skip_title_sync": skip_title_sync,
                 },
-                document_replace_content_v1_id_content_post_params.DocumentReplaceContentV1IDContentPostParams,
+                document_replace_content_params.DocumentReplaceContentParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=DocumentReplaceContentV1IDContentPostResponse,
+            cast_to=DocumentReplaceContentResponse,
         )
 
 
@@ -487,7 +486,76 @@ class AsyncDocumentsResource(AsyncAPIResource):
     def with_streaming_response(self) -> AsyncDocumentsResourceWithStreamingResponse:
         return AsyncDocumentsResourceWithStreamingResponse(self)
 
-    async def list_v1_get(
+    async def create(
+        self,
+        *,
+        id: str,
+        organization_id: str,
+        name: str,
+        content_markdown: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> DocumentCreateResponse:
+        """
+        Create a Profound document with markdown content.
+
+        `organization_id` is required and you must be a member of it. You choose the
+        document's `id`, and creation is idempotent on it: repeating the request returns
+        the existing document rather than creating a second one.
+
+        New documents are visible only to their creator; share them from the Profound app,
+        or open one with the `url` in the response.
+
+        A `201` response does not confirm that a new document was created: it is also
+        returned when `id` already existed, in which case the existing document comes
+        back unchanged. Upstream gives no signal to tell the two apart, so this endpoint
+        does not claim to either — it is safe to retry with the same `id` either way.
+
+        Args:
+            id: ID for the new document, chosen by you. Creation is idempotent on this ID: repeating a request with the same ID returns the existing document instead of creating a second one, so a retry after a network error is safe.
+            organization_id: ID of the organization that will own the document. Required — Profound API keys are user-scoped, so the owning organization must be chosen explicitly. The caller must be a member of this organization.
+            name: Title for the document. Must be non-empty.
+            content_markdown: Initial document body as markdown. Must be non-empty. Rendered into the collaborative editor, so the result is real editable content, not a stored blob.
+            extra_headers: Send extra headers with the request.
+            extra_query: Send extra query parameters with the request.
+            extra_body: Send extra JSON properties with the request.
+            timeout: Override the client-level default timeout for this request, in seconds.
+
+        Returns:
+            DocumentCreateResponse: Successful Response
+
+        Example:
+            ```python
+            document = await client.documents.create(
+                id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+                organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+                name="x",
+                content_markdown="x",
+            )
+            ```
+        """
+        return await self._post(
+            "/v1/documents",
+            body=await async_maybe_transform(
+                {
+                    "id": id,
+                    "organization_id": organization_id,
+                    "name": name,
+                    "content_markdown": content_markdown,
+                },
+                document_create_params.DocumentCreateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=DocumentCreateResponse,
+        )
+
+    async def list(
         self,
         *,
         organization_id: str,
@@ -501,7 +569,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> DocumentListV1GetResponse:
+    ) -> DocumentListResponse:
         """
         List documents visible to your organization, newest-modified-first.
 
@@ -530,11 +598,11 @@ class AsyncDocumentsResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            DocumentListV1GetResponse: Successful Response
+            DocumentListResponse: Successful Response
 
         Example:
             ```python
-            document = await client.documents.list_v1_get(
+            document = await client.documents.list(
                 organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 limit=20,
             )
@@ -555,82 +623,13 @@ class AsyncDocumentsResource(AsyncAPIResource):
                         "limit": limit,
                         "next_cursor": next_cursor,
                     },
-                    document_list_v1_get_params.DocumentListV1GetParams,
+                    document_list_params.DocumentListParams,
                 ),
             ),
-            cast_to=DocumentListV1GetResponse,
+            cast_to=DocumentListResponse,
         )
 
-    async def create_v1_post(
-        self,
-        *,
-        id: str,
-        organization_id: str,
-        name: str,
-        content_markdown: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> DocumentCreateV1PostResponse:
-        """
-        Create a Profound document with markdown content.
-
-        `organization_id` is required and you must be a member of it. You choose the
-        document's `id`, and creation is idempotent on it: repeating the request returns
-        the existing document rather than creating a second one.
-
-        New documents are visible only to their creator; share them from the Profound app,
-        or open one with the `url` in the response.
-
-        A `201` response does not confirm that a new document was created: it is also
-        returned when `id` already existed, in which case the existing document comes
-        back unchanged. Upstream gives no signal to tell the two apart, so this endpoint
-        does not claim to either — it is safe to retry with the same `id` either way.
-
-        Args:
-            id: ID for the new document, chosen by you. Creation is idempotent on this ID: repeating a request with the same ID returns the existing document instead of creating a second one, so a retry after a network error is safe.
-            organization_id: ID of the organization that will own the document. Required — Profound API keys are user-scoped, so the owning organization must be chosen explicitly. The caller must be a member of this organization.
-            name: Title for the document. Must be non-empty.
-            content_markdown: Initial document body as markdown. Must be non-empty. Rendered into the collaborative editor, so the result is real editable content, not a stored blob.
-            extra_headers: Send extra headers with the request.
-            extra_query: Send extra query parameters with the request.
-            extra_body: Send extra JSON properties with the request.
-            timeout: Override the client-level default timeout for this request, in seconds.
-
-        Returns:
-            DocumentCreateV1PostResponse: Successful Response
-
-        Example:
-            ```python
-            document = await client.documents.create_v1_post(
-                id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-                organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-                name="x",
-                content_markdown="x",
-            )
-            ```
-        """
-        return await self._post(
-            "/v1/documents",
-            body=await async_maybe_transform(
-                {
-                    "id": id,
-                    "organization_id": organization_id,
-                    "name": name,
-                    "content_markdown": content_markdown,
-                },
-                document_create_v1_post_params.DocumentCreateV1PostParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=DocumentCreateV1PostResponse,
-        )
-
-    async def read_v1_id_get(
+    async def retrieve(
         self,
         document_id: str,
         *,
@@ -644,7 +643,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> DocumentReadV1IDGetResponse:
+    ) -> DocumentRetrieveResponse:
         """
         Read a document: its metadata, its default tab's body, its other tabs, its comments, and its version hash.
 
@@ -667,11 +666,11 @@ class AsyncDocumentsResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            DocumentReadV1IDGetResponse: Successful Response
+            DocumentRetrieveResponse: Successful Response
 
         Example:
             ```python
-            document = await client.documents.read_v1_id_get(
+            document = await client.documents.retrieve(
                 document_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 include_tabs=True,
@@ -696,13 +695,13 @@ class AsyncDocumentsResource(AsyncAPIResource):
                         "include_comments": include_comments,
                         "preview": preview,
                     },
-                    document_read_v1_id_get_params.DocumentReadV1IDGetParams,
+                    document_retrieve_params.DocumentRetrieveParams,
                 ),
             ),
-            cast_to=DocumentReadV1IDGetResponse,
+            cast_to=DocumentRetrieveResponse,
         )
 
-    async def patch_v1_id_patch(
+    async def update(
         self,
         document_id: str,
         *,
@@ -715,7 +714,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> DocumentPatchV1IDPatchResponse:
+    ) -> DocumentUpdateResponse:
         """
         Rename a document, change who can see it, or both in one call.
 
@@ -738,11 +737,11 @@ class AsyncDocumentsResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            DocumentPatchV1IDPatchResponse: Successful Response
+            DocumentUpdateResponse: Successful Response
 
         Example:
             ```python
-            document = await client.documents.patch_v1_id_patch(
+            document = await client.documents.update(
                 document_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
             )
@@ -758,15 +757,15 @@ class AsyncDocumentsResource(AsyncAPIResource):
                     "name": name,
                     "visibility": visibility,
                 },
-                document_patch_v1_id_patch_params.DocumentPatchV1IDPatchParams,
+                document_update_params.DocumentUpdateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=DocumentPatchV1IDPatchResponse,
+            cast_to=DocumentUpdateResponse,
         )
 
-    async def delete_v1_id_delete(
+    async def delete(
         self,
         document_id: str,
         *,
@@ -814,7 +813,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
 
         Example:
             ```python
-            await client.documents.delete_v1_id_delete(
+            await client.documents.delete(
                 document_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
             )
@@ -831,14 +830,13 @@ class AsyncDocumentsResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"organization_id": organization_id},
-                    document_delete_v1_id_delete_params.DocumentDeleteV1IDDeleteParams,
+                    {"organization_id": organization_id}, document_delete_params.DocumentDeleteParams
                 ),
             ),
             cast_to=NoneType,
         )
 
-    async def replace_content_v1_id_content_post(
+    async def replace_content(
         self,
         document_id: str,
         *,
@@ -851,7 +849,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> DocumentReplaceContentV1IDContentPostResponse:
+    ) -> DocumentReplaceContentResponse:
         """
         Overwrite a document's entire body with new markdown, replacing what it held before.
 
@@ -890,11 +888,11 @@ class AsyncDocumentsResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            DocumentReplaceContentV1IDContentPostResponse: Successful Response
+            DocumentReplaceContentResponse: Successful Response
 
         Example:
             ```python
-            document = await client.documents.replace_content_v1_id_content_post(
+            document = await client.documents.replace_content(
                 document_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 content_markdown="",
@@ -912,12 +910,12 @@ class AsyncDocumentsResource(AsyncAPIResource):
                     "content_markdown": content_markdown,
                     "skip_title_sync": skip_title_sync,
                 },
-                document_replace_content_v1_id_content_post_params.DocumentReplaceContentV1IDContentPostParams,
+                document_replace_content_params.DocumentReplaceContentParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=DocumentReplaceContentV1IDContentPostResponse,
+            cast_to=DocumentReplaceContentResponse,
         )
 
 
@@ -925,23 +923,23 @@ class DocumentsResourceWithRawResponse:
     def __init__(self, documents: DocumentsResource) -> None:
         self._documents = documents
 
-        self.list_v1_get = to_raw_response_wrapper(
-            documents.list_v1_get,
+        self.create = to_raw_response_wrapper(
+            documents.create,
         )
-        self.create_v1_post = to_raw_response_wrapper(
-            documents.create_v1_post,
+        self.list = to_raw_response_wrapper(
+            documents.list,
         )
-        self.read_v1_id_get = to_raw_response_wrapper(
-            documents.read_v1_id_get,
+        self.retrieve = to_raw_response_wrapper(
+            documents.retrieve,
         )
-        self.patch_v1_id_patch = to_raw_response_wrapper(
-            documents.patch_v1_id_patch,
+        self.update = to_raw_response_wrapper(
+            documents.update,
         )
-        self.delete_v1_id_delete = to_raw_response_wrapper(
-            documents.delete_v1_id_delete,
+        self.delete = to_raw_response_wrapper(
+            documents.delete,
         )
-        self.replace_content_v1_id_content_post = to_raw_response_wrapper(
-            documents.replace_content_v1_id_content_post,
+        self.replace_content = to_raw_response_wrapper(
+            documents.replace_content,
         )
 
 
@@ -949,23 +947,23 @@ class AsyncDocumentsResourceWithRawResponse:
     def __init__(self, documents: AsyncDocumentsResource) -> None:
         self._documents = documents
 
-        self.list_v1_get = async_to_raw_response_wrapper(
-            documents.list_v1_get,
+        self.create = async_to_raw_response_wrapper(
+            documents.create,
         )
-        self.create_v1_post = async_to_raw_response_wrapper(
-            documents.create_v1_post,
+        self.list = async_to_raw_response_wrapper(
+            documents.list,
         )
-        self.read_v1_id_get = async_to_raw_response_wrapper(
-            documents.read_v1_id_get,
+        self.retrieve = async_to_raw_response_wrapper(
+            documents.retrieve,
         )
-        self.patch_v1_id_patch = async_to_raw_response_wrapper(
-            documents.patch_v1_id_patch,
+        self.update = async_to_raw_response_wrapper(
+            documents.update,
         )
-        self.delete_v1_id_delete = async_to_raw_response_wrapper(
-            documents.delete_v1_id_delete,
+        self.delete = async_to_raw_response_wrapper(
+            documents.delete,
         )
-        self.replace_content_v1_id_content_post = async_to_raw_response_wrapper(
-            documents.replace_content_v1_id_content_post,
+        self.replace_content = async_to_raw_response_wrapper(
+            documents.replace_content,
         )
 
 
@@ -973,23 +971,23 @@ class DocumentsResourceWithStreamingResponse:
     def __init__(self, documents: DocumentsResource) -> None:
         self._documents = documents
 
-        self.list_v1_get = to_streamed_response_wrapper(
-            documents.list_v1_get,
+        self.create = to_streamed_response_wrapper(
+            documents.create,
         )
-        self.create_v1_post = to_streamed_response_wrapper(
-            documents.create_v1_post,
+        self.list = to_streamed_response_wrapper(
+            documents.list,
         )
-        self.read_v1_id_get = to_streamed_response_wrapper(
-            documents.read_v1_id_get,
+        self.retrieve = to_streamed_response_wrapper(
+            documents.retrieve,
         )
-        self.patch_v1_id_patch = to_streamed_response_wrapper(
-            documents.patch_v1_id_patch,
+        self.update = to_streamed_response_wrapper(
+            documents.update,
         )
-        self.delete_v1_id_delete = to_streamed_response_wrapper(
-            documents.delete_v1_id_delete,
+        self.delete = to_streamed_response_wrapper(
+            documents.delete,
         )
-        self.replace_content_v1_id_content_post = to_streamed_response_wrapper(
-            documents.replace_content_v1_id_content_post,
+        self.replace_content = to_streamed_response_wrapper(
+            documents.replace_content,
         )
 
 
@@ -997,21 +995,21 @@ class AsyncDocumentsResourceWithStreamingResponse:
     def __init__(self, documents: AsyncDocumentsResource) -> None:
         self._documents = documents
 
-        self.list_v1_get = async_to_streamed_response_wrapper(
-            documents.list_v1_get,
+        self.create = async_to_streamed_response_wrapper(
+            documents.create,
         )
-        self.create_v1_post = async_to_streamed_response_wrapper(
-            documents.create_v1_post,
+        self.list = async_to_streamed_response_wrapper(
+            documents.list,
         )
-        self.read_v1_id_get = async_to_streamed_response_wrapper(
-            documents.read_v1_id_get,
+        self.retrieve = async_to_streamed_response_wrapper(
+            documents.retrieve,
         )
-        self.patch_v1_id_patch = async_to_streamed_response_wrapper(
-            documents.patch_v1_id_patch,
+        self.update = async_to_streamed_response_wrapper(
+            documents.update,
         )
-        self.delete_v1_id_delete = async_to_streamed_response_wrapper(
-            documents.delete_v1_id_delete,
+        self.delete = async_to_streamed_response_wrapper(
+            documents.delete,
         )
-        self.replace_content_v1_id_content_post = async_to_streamed_response_wrapper(
-            documents.replace_content_v1_id_content_post,
+        self.replace_content = async_to_streamed_response_wrapper(
+            documents.replace_content,
         )

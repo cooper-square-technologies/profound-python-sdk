@@ -4,13 +4,13 @@ from typing import Dict, List
 
 from ..._models import BaseModel
 
-from .info import Info
+from ..report_info import ReportInfo
 
 __all__ = ["ShoppingRowsResponse"]
 
 
 class ShoppingRowsResponse(BaseModel):
-    info: Info
+    info: ReportInfo
     """Base model for report information."""
 
     data: List[Dict[str, object]]

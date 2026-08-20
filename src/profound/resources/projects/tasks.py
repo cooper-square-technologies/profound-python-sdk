@@ -18,19 +18,19 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.projects.task_list_v1_id_get_response import TaskListV1IDGetResponse
+from ...types.projects.task_list_response import TaskListResponse
 from ...types.projects import (
-    task_list_v1_id_get_params,
-    task_create_v1_id_post_params,
-    task_retrieve_v1_get_params,
-    task_update_v1_id_id_patch_params,
-    task_delete_v1_id_id_delete_params,
-    task_update_status_v1_id_id_status_post_params,
+    task_list_params,
+    task_create_params,
+    task_retrieve_params,
+    task_update_params,
+    task_delete_params,
+    task_update_status_params,
 )
-from ...types.projects.task_create_v1_id_post_response import TaskCreateV1IDPostResponse
-from ...types.projects.task_retrieve_v1_get_response import TaskRetrieveV1GetResponse
-from ...types.projects.task_update_v1_id_id_patch_response import TaskUpdateV1IDIDPatchResponse
-from ...types.projects.task_update_status_v1_id_id_status_post_response import TaskUpdateStatusV1IDIDStatusPostResponse
+from ...types.projects.task_create_response import TaskCreateResponse
+from ...types.projects.task_retrieve_response import TaskRetrieveResponse
+from ...types.projects.task_update_response import TaskUpdateResponse
+from ...types.projects.task_update_status_response import TaskUpdateStatusResponse
 
 __all__ = ["TasksResource", "AsyncTasksResource"]
 
@@ -44,7 +44,7 @@ class TasksResource(SyncAPIResource):
     def with_streaming_response(self) -> TasksResourceWithStreamingResponse:
         return TasksResourceWithStreamingResponse(self)
 
-    def list_v1_id_get(
+    def list(
         self,
         project_id: str,
         *,
@@ -55,7 +55,7 @@ class TasksResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> TaskListV1IDGetResponse:
+    ) -> TaskListResponse:
         """
         List Project Tasks
 
@@ -68,11 +68,11 @@ class TasksResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            TaskListV1IDGetResponse: Successful Response
+            TaskListResponse: Successful Response
 
         Example:
             ```python
-            task = client.projects.tasks.list_v1_id_get(
+            task = client.projects.tasks.list(
                 project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
             )
@@ -87,12 +87,12 @@ class TasksResource(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform({"category_id": category_id}, task_list_v1_id_get_params.TaskListV1IDGetParams),
+                query=maybe_transform({"category_id": category_id}, task_list_params.TaskListParams),
             ),
-            cast_to=TaskListV1IDGetResponse,
+            cast_to=TaskListResponse,
         )
 
-    def create_v1_id_post(
+    def create(
         self,
         project_id: str,
         *,
@@ -112,7 +112,7 @@ class TasksResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> TaskCreateV1IDPostResponse:
+    ) -> TaskCreateResponse:
         """
         Create Project Task
 
@@ -134,11 +134,11 @@ class TasksResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            TaskCreateV1IDPostResponse: Successful Response
+            TaskCreateResponse: Successful Response
 
         Example:
             ```python
-            task = client.projects.tasks.create_v1_id_post(
+            task = client.projects.tasks.create(
                 project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 title="x",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -161,21 +161,19 @@ class TasksResource(SyncAPIResource):
                     "reference_label": reference_label,
                     "position": position,
                 },
-                task_create_v1_id_post_params.TaskCreateV1IDPostParams,
+                task_create_params.TaskCreateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform(
-                    {"category_id": category_id}, task_create_v1_id_post_params.TaskCreateV1IDPostParams
-                ),
+                query=maybe_transform({"category_id": category_id}, task_create_params.TaskCreateParams),
             ),
-            cast_to=TaskCreateV1IDPostResponse,
+            cast_to=TaskCreateResponse,
         )
 
-    def retrieve_v1_get(
+    def retrieve(
         self,
         task_id: str,
         *,
@@ -187,7 +185,7 @@ class TasksResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> TaskRetrieveV1GetResponse:
+    ) -> TaskRetrieveResponse:
         """
         Get Project Task
 
@@ -201,11 +199,11 @@ class TasksResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            TaskRetrieveV1GetResponse: Successful Response
+            TaskRetrieveResponse: Successful Response
 
         Example:
             ```python
-            task = client.projects.tasks.retrieve_v1_get(
+            task = client.projects.tasks.retrieve(
                 project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 task_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -225,14 +223,12 @@ class TasksResource(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform(
-                    {"category_id": category_id}, task_retrieve_v1_get_params.TaskRetrieveV1GetParams
-                ),
+                query=maybe_transform({"category_id": category_id}, task_retrieve_params.TaskRetrieveParams),
             ),
-            cast_to=TaskRetrieveV1GetResponse,
+            cast_to=TaskRetrieveResponse,
         )
 
-    def update_v1_id_id_patch(
+    def update(
         self,
         task_id: str,
         *,
@@ -252,7 +248,7 @@ class TasksResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> TaskUpdateV1IDIDPatchResponse:
+    ) -> TaskUpdateResponse:
         """
         Update Project Task
 
@@ -274,11 +270,11 @@ class TasksResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            TaskUpdateV1IDIDPatchResponse: Successful Response
+            TaskUpdateResponse: Successful Response
 
         Example:
             ```python
-            task = client.projects.tasks.update_v1_id_id_patch(
+            task = client.projects.tasks.update(
                 project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 task_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -304,21 +300,19 @@ class TasksResource(SyncAPIResource):
                     "reference_url": reference_url,
                     "reference_label": reference_label,
                 },
-                task_update_v1_id_id_patch_params.TaskUpdateV1IDIDPatchParams,
+                task_update_params.TaskUpdateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform(
-                    {"category_id": category_id}, task_update_v1_id_id_patch_params.TaskUpdateV1IDIDPatchParams
-                ),
+                query=maybe_transform({"category_id": category_id}, task_update_params.TaskUpdateParams),
             ),
-            cast_to=TaskUpdateV1IDIDPatchResponse,
+            cast_to=TaskUpdateResponse,
         )
 
-    def delete_v1_id_id_delete(
+    def delete(
         self,
         task_id: str,
         *,
@@ -348,7 +342,7 @@ class TasksResource(SyncAPIResource):
 
         Example:
             ```python
-            client.projects.tasks.delete_v1_id_id_delete(
+            client.projects.tasks.delete(
                 project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 task_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -369,14 +363,12 @@ class TasksResource(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform(
-                    {"category_id": category_id}, task_delete_v1_id_id_delete_params.TaskDeleteV1IDIDDeleteParams
-                ),
+                query=maybe_transform({"category_id": category_id}, task_delete_params.TaskDeleteParams),
             ),
             cast_to=NoneType,
         )
 
-    def update_status_v1_id_id_status_post(
+    def update_status(
         self,
         task_id: str,
         *,
@@ -390,7 +382,7 @@ class TasksResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> TaskUpdateStatusV1IDIDStatusPostResponse:
+    ) -> TaskUpdateStatusResponse:
         """
         Update Project Task Status
 
@@ -406,11 +398,11 @@ class TasksResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            TaskUpdateStatusV1IDIDStatusPostResponse: Successful Response
+            TaskUpdateStatusResponse: Successful Response
 
         Example:
             ```python
-            task = client.projects.tasks.update_status_v1_id_id_status_post(
+            task = client.projects.tasks.update_status(
                 project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 task_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 status="not_started",
@@ -431,19 +423,16 @@ class TasksResource(SyncAPIResource):
                     "status": status,
                     "note": note,
                 },
-                task_update_status_v1_id_id_status_post_params.TaskUpdateStatusV1IDIDStatusPostParams,
+                task_update_status_params.TaskUpdateStatusParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform(
-                    {"category_id": category_id},
-                    task_update_status_v1_id_id_status_post_params.TaskUpdateStatusV1IDIDStatusPostParams,
-                ),
+                query=maybe_transform({"category_id": category_id}, task_update_status_params.TaskUpdateStatusParams),
             ),
-            cast_to=TaskUpdateStatusV1IDIDStatusPostResponse,
+            cast_to=TaskUpdateStatusResponse,
         )
 
 
@@ -456,7 +445,7 @@ class AsyncTasksResource(AsyncAPIResource):
     def with_streaming_response(self) -> AsyncTasksResourceWithStreamingResponse:
         return AsyncTasksResourceWithStreamingResponse(self)
 
-    async def list_v1_id_get(
+    async def list(
         self,
         project_id: str,
         *,
@@ -467,7 +456,7 @@ class AsyncTasksResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> TaskListV1IDGetResponse:
+    ) -> TaskListResponse:
         """
         List Project Tasks
 
@@ -480,11 +469,11 @@ class AsyncTasksResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            TaskListV1IDGetResponse: Successful Response
+            TaskListResponse: Successful Response
 
         Example:
             ```python
-            task = await client.projects.tasks.list_v1_id_get(
+            task = await client.projects.tasks.list(
                 project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
             )
@@ -499,14 +488,12 @@ class AsyncTasksResource(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=await async_maybe_transform(
-                    {"category_id": category_id}, task_list_v1_id_get_params.TaskListV1IDGetParams
-                ),
+                query=await async_maybe_transform({"category_id": category_id}, task_list_params.TaskListParams),
             ),
-            cast_to=TaskListV1IDGetResponse,
+            cast_to=TaskListResponse,
         )
 
-    async def create_v1_id_post(
+    async def create(
         self,
         project_id: str,
         *,
@@ -526,7 +513,7 @@ class AsyncTasksResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> TaskCreateV1IDPostResponse:
+    ) -> TaskCreateResponse:
         """
         Create Project Task
 
@@ -548,11 +535,11 @@ class AsyncTasksResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            TaskCreateV1IDPostResponse: Successful Response
+            TaskCreateResponse: Successful Response
 
         Example:
             ```python
-            task = await client.projects.tasks.create_v1_id_post(
+            task = await client.projects.tasks.create(
                 project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 title="x",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -575,21 +562,19 @@ class AsyncTasksResource(AsyncAPIResource):
                     "reference_label": reference_label,
                     "position": position,
                 },
-                task_create_v1_id_post_params.TaskCreateV1IDPostParams,
+                task_create_params.TaskCreateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=await async_maybe_transform(
-                    {"category_id": category_id}, task_create_v1_id_post_params.TaskCreateV1IDPostParams
-                ),
+                query=await async_maybe_transform({"category_id": category_id}, task_create_params.TaskCreateParams),
             ),
-            cast_to=TaskCreateV1IDPostResponse,
+            cast_to=TaskCreateResponse,
         )
 
-    async def retrieve_v1_get(
+    async def retrieve(
         self,
         task_id: str,
         *,
@@ -601,7 +586,7 @@ class AsyncTasksResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> TaskRetrieveV1GetResponse:
+    ) -> TaskRetrieveResponse:
         """
         Get Project Task
 
@@ -615,11 +600,11 @@ class AsyncTasksResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            TaskRetrieveV1GetResponse: Successful Response
+            TaskRetrieveResponse: Successful Response
 
         Example:
             ```python
-            task = await client.projects.tasks.retrieve_v1_get(
+            task = await client.projects.tasks.retrieve(
                 project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 task_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -640,13 +625,13 @@ class AsyncTasksResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"category_id": category_id}, task_retrieve_v1_get_params.TaskRetrieveV1GetParams
+                    {"category_id": category_id}, task_retrieve_params.TaskRetrieveParams
                 ),
             ),
-            cast_to=TaskRetrieveV1GetResponse,
+            cast_to=TaskRetrieveResponse,
         )
 
-    async def update_v1_id_id_patch(
+    async def update(
         self,
         task_id: str,
         *,
@@ -666,7 +651,7 @@ class AsyncTasksResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> TaskUpdateV1IDIDPatchResponse:
+    ) -> TaskUpdateResponse:
         """
         Update Project Task
 
@@ -688,11 +673,11 @@ class AsyncTasksResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            TaskUpdateV1IDIDPatchResponse: Successful Response
+            TaskUpdateResponse: Successful Response
 
         Example:
             ```python
-            task = await client.projects.tasks.update_v1_id_id_patch(
+            task = await client.projects.tasks.update(
                 project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 task_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -718,21 +703,19 @@ class AsyncTasksResource(AsyncAPIResource):
                     "reference_url": reference_url,
                     "reference_label": reference_label,
                 },
-                task_update_v1_id_id_patch_params.TaskUpdateV1IDIDPatchParams,
+                task_update_params.TaskUpdateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=await async_maybe_transform(
-                    {"category_id": category_id}, task_update_v1_id_id_patch_params.TaskUpdateV1IDIDPatchParams
-                ),
+                query=await async_maybe_transform({"category_id": category_id}, task_update_params.TaskUpdateParams),
             ),
-            cast_to=TaskUpdateV1IDIDPatchResponse,
+            cast_to=TaskUpdateResponse,
         )
 
-    async def delete_v1_id_id_delete(
+    async def delete(
         self,
         task_id: str,
         *,
@@ -762,7 +745,7 @@ class AsyncTasksResource(AsyncAPIResource):
 
         Example:
             ```python
-            await client.projects.tasks.delete_v1_id_id_delete(
+            await client.projects.tasks.delete(
                 project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 task_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -783,14 +766,12 @@ class AsyncTasksResource(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=await async_maybe_transform(
-                    {"category_id": category_id}, task_delete_v1_id_id_delete_params.TaskDeleteV1IDIDDeleteParams
-                ),
+                query=await async_maybe_transform({"category_id": category_id}, task_delete_params.TaskDeleteParams),
             ),
             cast_to=NoneType,
         )
 
-    async def update_status_v1_id_id_status_post(
+    async def update_status(
         self,
         task_id: str,
         *,
@@ -804,7 +785,7 @@ class AsyncTasksResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> TaskUpdateStatusV1IDIDStatusPostResponse:
+    ) -> TaskUpdateStatusResponse:
         """
         Update Project Task Status
 
@@ -820,11 +801,11 @@ class AsyncTasksResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            TaskUpdateStatusV1IDIDStatusPostResponse: Successful Response
+            TaskUpdateStatusResponse: Successful Response
 
         Example:
             ```python
-            task = await client.projects.tasks.update_status_v1_id_id_status_post(
+            task = await client.projects.tasks.update_status(
                 project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 task_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 status="not_started",
@@ -845,7 +826,7 @@ class AsyncTasksResource(AsyncAPIResource):
                     "status": status,
                     "note": note,
                 },
-                task_update_status_v1_id_id_status_post_params.TaskUpdateStatusV1IDIDStatusPostParams,
+                task_update_status_params.TaskUpdateStatusParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -853,11 +834,10 @@ class AsyncTasksResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"category_id": category_id},
-                    task_update_status_v1_id_id_status_post_params.TaskUpdateStatusV1IDIDStatusPostParams,
+                    {"category_id": category_id}, task_update_status_params.TaskUpdateStatusParams
                 ),
             ),
-            cast_to=TaskUpdateStatusV1IDIDStatusPostResponse,
+            cast_to=TaskUpdateStatusResponse,
         )
 
 
@@ -865,23 +845,23 @@ class TasksResourceWithRawResponse:
     def __init__(self, tasks: TasksResource) -> None:
         self._tasks = tasks
 
-        self.list_v1_id_get = to_raw_response_wrapper(
-            tasks.list_v1_id_get,
+        self.list = to_raw_response_wrapper(
+            tasks.list,
         )
-        self.create_v1_id_post = to_raw_response_wrapper(
-            tasks.create_v1_id_post,
+        self.create = to_raw_response_wrapper(
+            tasks.create,
         )
-        self.retrieve_v1_get = to_raw_response_wrapper(
-            tasks.retrieve_v1_get,
+        self.retrieve = to_raw_response_wrapper(
+            tasks.retrieve,
         )
-        self.update_v1_id_id_patch = to_raw_response_wrapper(
-            tasks.update_v1_id_id_patch,
+        self.update = to_raw_response_wrapper(
+            tasks.update,
         )
-        self.delete_v1_id_id_delete = to_raw_response_wrapper(
-            tasks.delete_v1_id_id_delete,
+        self.delete = to_raw_response_wrapper(
+            tasks.delete,
         )
-        self.update_status_v1_id_id_status_post = to_raw_response_wrapper(
-            tasks.update_status_v1_id_id_status_post,
+        self.update_status = to_raw_response_wrapper(
+            tasks.update_status,
         )
 
 
@@ -889,23 +869,23 @@ class AsyncTasksResourceWithRawResponse:
     def __init__(self, tasks: AsyncTasksResource) -> None:
         self._tasks = tasks
 
-        self.list_v1_id_get = async_to_raw_response_wrapper(
-            tasks.list_v1_id_get,
+        self.list = async_to_raw_response_wrapper(
+            tasks.list,
         )
-        self.create_v1_id_post = async_to_raw_response_wrapper(
-            tasks.create_v1_id_post,
+        self.create = async_to_raw_response_wrapper(
+            tasks.create,
         )
-        self.retrieve_v1_get = async_to_raw_response_wrapper(
-            tasks.retrieve_v1_get,
+        self.retrieve = async_to_raw_response_wrapper(
+            tasks.retrieve,
         )
-        self.update_v1_id_id_patch = async_to_raw_response_wrapper(
-            tasks.update_v1_id_id_patch,
+        self.update = async_to_raw_response_wrapper(
+            tasks.update,
         )
-        self.delete_v1_id_id_delete = async_to_raw_response_wrapper(
-            tasks.delete_v1_id_id_delete,
+        self.delete = async_to_raw_response_wrapper(
+            tasks.delete,
         )
-        self.update_status_v1_id_id_status_post = async_to_raw_response_wrapper(
-            tasks.update_status_v1_id_id_status_post,
+        self.update_status = async_to_raw_response_wrapper(
+            tasks.update_status,
         )
 
 
@@ -913,23 +893,23 @@ class TasksResourceWithStreamingResponse:
     def __init__(self, tasks: TasksResource) -> None:
         self._tasks = tasks
 
-        self.list_v1_id_get = to_streamed_response_wrapper(
-            tasks.list_v1_id_get,
+        self.list = to_streamed_response_wrapper(
+            tasks.list,
         )
-        self.create_v1_id_post = to_streamed_response_wrapper(
-            tasks.create_v1_id_post,
+        self.create = to_streamed_response_wrapper(
+            tasks.create,
         )
-        self.retrieve_v1_get = to_streamed_response_wrapper(
-            tasks.retrieve_v1_get,
+        self.retrieve = to_streamed_response_wrapper(
+            tasks.retrieve,
         )
-        self.update_v1_id_id_patch = to_streamed_response_wrapper(
-            tasks.update_v1_id_id_patch,
+        self.update = to_streamed_response_wrapper(
+            tasks.update,
         )
-        self.delete_v1_id_id_delete = to_streamed_response_wrapper(
-            tasks.delete_v1_id_id_delete,
+        self.delete = to_streamed_response_wrapper(
+            tasks.delete,
         )
-        self.update_status_v1_id_id_status_post = to_streamed_response_wrapper(
-            tasks.update_status_v1_id_id_status_post,
+        self.update_status = to_streamed_response_wrapper(
+            tasks.update_status,
         )
 
 
@@ -937,21 +917,21 @@ class AsyncTasksResourceWithStreamingResponse:
     def __init__(self, tasks: AsyncTasksResource) -> None:
         self._tasks = tasks
 
-        self.list_v1_id_get = async_to_streamed_response_wrapper(
-            tasks.list_v1_id_get,
+        self.list = async_to_streamed_response_wrapper(
+            tasks.list,
         )
-        self.create_v1_id_post = async_to_streamed_response_wrapper(
-            tasks.create_v1_id_post,
+        self.create = async_to_streamed_response_wrapper(
+            tasks.create,
         )
-        self.retrieve_v1_get = async_to_streamed_response_wrapper(
-            tasks.retrieve_v1_get,
+        self.retrieve = async_to_streamed_response_wrapper(
+            tasks.retrieve,
         )
-        self.update_v1_id_id_patch = async_to_streamed_response_wrapper(
-            tasks.update_v1_id_id_patch,
+        self.update = async_to_streamed_response_wrapper(
+            tasks.update,
         )
-        self.delete_v1_id_id_delete = async_to_streamed_response_wrapper(
-            tasks.delete_v1_id_id_delete,
+        self.delete = async_to_streamed_response_wrapper(
+            tasks.delete,
         )
-        self.update_status_v1_id_id_status_post = async_to_streamed_response_wrapper(
-            tasks.update_status_v1_id_id_status_post,
+        self.update_status = async_to_streamed_response_wrapper(
+            tasks.update_status,
         )

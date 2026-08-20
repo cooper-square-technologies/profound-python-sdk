@@ -34,21 +34,21 @@ from .tasks import (
     TasksResourceWithStreamingResponse,
     AsyncTasksResourceWithStreamingResponse,
 )
-from ...types.project_list_v1_get_response import ProjectListV1GetResponse
+from ...types.project_list_response import ProjectListResponse
 from ...types import (
-    project_list_v1_get_params,
-    project_create_v1_post_params,
-    project_retrieve_v1_get_params,
-    project_delete_v1_id_delete_params,
-    project_list_status_v1_status_get_params,
-    project_archive_v1_id_archive_post_params,
-    project_unarchive_v1_id_unarchive_post_params,
+    project_list_params,
+    project_create_params,
+    project_retrieve_params,
+    project_delete_params,
+    project_get_status_params,
+    project_archive_params,
+    project_unarchive_params,
 )
-from ...types.project_create_v1_post_response import ProjectCreateV1PostResponse
-from ...types.project_retrieve_v1_get_response import ProjectRetrieveV1GetResponse
-from ...types.project_list_status_v1_status_get_response import ProjectListStatusV1StatusGetResponse
-from ...types.project_archive_v1_id_archive_post_response import ProjectArchiveV1IDArchivePostResponse
-from ...types.project_unarchive_v1_id_unarchive_post_response import ProjectUnarchiveV1IDUnarchivePostResponse
+from ...types.project_create_response import ProjectCreateResponse
+from ...types.project_retrieve_response import ProjectRetrieveResponse
+from ...types.project_get_status_response import ProjectGetStatusResponse
+from ...types.project_archive_response import ProjectArchiveResponse
+from ...types.project_unarchive_response import ProjectUnarchiveResponse
 
 __all__ = ["ProjectsResource", "AsyncProjectsResource"]
 
@@ -70,7 +70,7 @@ class ProjectsResource(SyncAPIResource):
     def with_streaming_response(self) -> ProjectsResourceWithStreamingResponse:
         return ProjectsResourceWithStreamingResponse(self)
 
-    def list_v1_get(
+    def list(
         self,
         *,
         category_id: str,
@@ -83,7 +83,7 @@ class ProjectsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ProjectListV1GetResponse:
+    ) -> ProjectListResponse:
         """
         List Projects
 
@@ -98,11 +98,11 @@ class ProjectsResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            ProjectListV1GetResponse: Successful Response
+            ProjectListResponse: Successful Response
 
         Example:
             ```python
-            project = client.projects.list_v1_get(
+            project = client.projects.list(
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 limit=100,
                 offset=0,
@@ -118,13 +118,13 @@ class ProjectsResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {"category_id": category_id, "status": status, "limit": limit, "offset": offset},
-                    project_list_v1_get_params.ProjectListV1GetParams,
+                    project_list_params.ProjectListParams,
                 ),
             ),
-            cast_to=ProjectListV1GetResponse,
+            cast_to=ProjectListResponse,
         )
 
-    def create_v1_post(
+    def create(
         self,
         *,
         category_id: str,
@@ -132,15 +132,15 @@ class ProjectsResource(SyncAPIResource):
         project_name: Optional[str] | Omit = omit,
         focus: Optional[str] | Omit = omit,
         topics: SequenceNotStr[str] | Omit = omit,
-        attachments: Iterable[project_create_v1_post_params.Attachment] | Omit = omit,
-        generation_context: Optional[project_create_v1_post_params.GenerationContext] | Omit = omit,
+        attachments: Iterable[project_create_params.Attachment] | Omit = omit,
+        generation_context: Optional[project_create_params.GenerationContext] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ProjectCreateV1PostResponse:
+    ) -> ProjectCreateResponse:
         """
         Create Project
 
@@ -158,11 +158,11 @@ class ProjectsResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            ProjectCreateV1PostResponse: Successful Response
+            ProjectCreateResponse: Successful Response
 
         Example:
             ```python
-            project = client.projects.create_v1_post(
+            project = client.projects.create(
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
             )
             ```
@@ -179,15 +179,15 @@ class ProjectsResource(SyncAPIResource):
                     "attachments": attachments,
                     "generation_context": generation_context,
                 },
-                project_create_v1_post_params.ProjectCreateV1PostParams,
+                project_create_params.ProjectCreateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ProjectCreateV1PostResponse,
+            cast_to=ProjectCreateResponse,
         )
 
-    def retrieve_v1_get(
+    def retrieve(
         self,
         project_id: str,
         *,
@@ -198,7 +198,7 @@ class ProjectsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ProjectRetrieveV1GetResponse:
+    ) -> ProjectRetrieveResponse:
         """
         Get Project
 
@@ -211,11 +211,11 @@ class ProjectsResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            ProjectRetrieveV1GetResponse: Successful Response
+            ProjectRetrieveResponse: Successful Response
 
         Example:
             ```python
-            project = client.projects.retrieve_v1_get(
+            project = client.projects.retrieve(
                 project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
             )
@@ -230,14 +230,12 @@ class ProjectsResource(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform(
-                    {"category_id": category_id}, project_retrieve_v1_get_params.ProjectRetrieveV1GetParams
-                ),
+                query=maybe_transform({"category_id": category_id}, project_retrieve_params.ProjectRetrieveParams),
             ),
-            cast_to=ProjectRetrieveV1GetResponse,
+            cast_to=ProjectRetrieveResponse,
         )
 
-    def delete_v1_id_delete(
+    def delete(
         self,
         project_id: str,
         *,
@@ -265,7 +263,7 @@ class ProjectsResource(SyncAPIResource):
 
         Example:
             ```python
-            client.projects.delete_v1_id_delete(
+            client.projects.delete(
                 project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
             )
@@ -281,14 +279,12 @@ class ProjectsResource(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform(
-                    {"category_id": category_id}, project_delete_v1_id_delete_params.ProjectDeleteV1IDDeleteParams
-                ),
+                query=maybe_transform({"category_id": category_id}, project_delete_params.ProjectDeleteParams),
             ),
             cast_to=NoneType,
         )
 
-    def list_status_v1_status_get(
+    def get_status(
         self,
         project_id: str,
         *,
@@ -299,7 +295,7 @@ class ProjectsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ProjectListStatusV1StatusGetResponse:
+    ) -> ProjectGetStatusResponse:
         """
         Get Project Status
 
@@ -312,11 +308,11 @@ class ProjectsResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            ProjectListStatusV1StatusGetResponse: Successful Response
+            ProjectGetStatusResponse: Successful Response
 
         Example:
             ```python
-            project = client.projects.list_status_v1_status_get(
+            project = client.projects.get_status(
                 project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
             )
@@ -331,15 +327,12 @@ class ProjectsResource(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform(
-                    {"category_id": category_id},
-                    project_list_status_v1_status_get_params.ProjectListStatusV1StatusGetParams,
-                ),
+                query=maybe_transform({"category_id": category_id}, project_get_status_params.ProjectGetStatusParams),
             ),
-            cast_to=ProjectListStatusV1StatusGetResponse,
+            cast_to=ProjectGetStatusResponse,
         )
 
-    def archive_v1_id_archive_post(
+    def archive(
         self,
         project_id: str,
         *,
@@ -351,7 +344,7 @@ class ProjectsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ProjectArchiveV1IDArchivePostResponse:
+    ) -> ProjectArchiveResponse:
         """
         Archive Project
 
@@ -365,11 +358,11 @@ class ProjectsResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            ProjectArchiveV1IDArchivePostResponse: Successful Response
+            ProjectArchiveResponse: Successful Response
 
         Example:
             ```python
-            project = client.projects.archive_v1_id_archive_post(
+            project = client.projects.archive(
                 project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
             )
@@ -381,22 +374,19 @@ class ProjectsResource(SyncAPIResource):
             path_template("/v1/projects/{project_id}/archive", **{"project_id": project_id}),
             body=maybe_transform(
                 {"reason": reason},
-                project_archive_v1_id_archive_post_params.ProjectArchiveV1IDArchivePostParams,
+                project_archive_params.ProjectArchiveParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform(
-                    {"category_id": category_id},
-                    project_archive_v1_id_archive_post_params.ProjectArchiveV1IDArchivePostParams,
-                ),
+                query=maybe_transform({"category_id": category_id}, project_archive_params.ProjectArchiveParams),
             ),
-            cast_to=ProjectArchiveV1IDArchivePostResponse,
+            cast_to=ProjectArchiveResponse,
         )
 
-    def unarchive_v1_id_unarchive_post(
+    def unarchive(
         self,
         project_id: str,
         *,
@@ -407,7 +397,7 @@ class ProjectsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ProjectUnarchiveV1IDUnarchivePostResponse:
+    ) -> ProjectUnarchiveResponse:
         """
         Unarchive Project
 
@@ -420,11 +410,11 @@ class ProjectsResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            ProjectUnarchiveV1IDUnarchivePostResponse: Successful Response
+            ProjectUnarchiveResponse: Successful Response
 
         Example:
             ```python
-            project = client.projects.unarchive_v1_id_unarchive_post(
+            project = client.projects.unarchive(
                 project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
             )
@@ -439,12 +429,9 @@ class ProjectsResource(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform(
-                    {"category_id": category_id},
-                    project_unarchive_v1_id_unarchive_post_params.ProjectUnarchiveV1IDUnarchivePostParams,
-                ),
+                query=maybe_transform({"category_id": category_id}, project_unarchive_params.ProjectUnarchiveParams),
             ),
-            cast_to=ProjectUnarchiveV1IDUnarchivePostResponse,
+            cast_to=ProjectUnarchiveResponse,
         )
 
 
@@ -465,7 +452,7 @@ class AsyncProjectsResource(AsyncAPIResource):
     def with_streaming_response(self) -> AsyncProjectsResourceWithStreamingResponse:
         return AsyncProjectsResourceWithStreamingResponse(self)
 
-    async def list_v1_get(
+    async def list(
         self,
         *,
         category_id: str,
@@ -478,7 +465,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ProjectListV1GetResponse:
+    ) -> ProjectListResponse:
         """
         List Projects
 
@@ -493,11 +480,11 @@ class AsyncProjectsResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            ProjectListV1GetResponse: Successful Response
+            ProjectListResponse: Successful Response
 
         Example:
             ```python
-            project = await client.projects.list_v1_get(
+            project = await client.projects.list(
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 limit=100,
                 offset=0,
@@ -513,13 +500,13 @@ class AsyncProjectsResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {"category_id": category_id, "status": status, "limit": limit, "offset": offset},
-                    project_list_v1_get_params.ProjectListV1GetParams,
+                    project_list_params.ProjectListParams,
                 ),
             ),
-            cast_to=ProjectListV1GetResponse,
+            cast_to=ProjectListResponse,
         )
 
-    async def create_v1_post(
+    async def create(
         self,
         *,
         category_id: str,
@@ -527,15 +514,15 @@ class AsyncProjectsResource(AsyncAPIResource):
         project_name: Optional[str] | Omit = omit,
         focus: Optional[str] | Omit = omit,
         topics: SequenceNotStr[str] | Omit = omit,
-        attachments: Iterable[project_create_v1_post_params.Attachment] | Omit = omit,
-        generation_context: Optional[project_create_v1_post_params.GenerationContext] | Omit = omit,
+        attachments: Iterable[project_create_params.Attachment] | Omit = omit,
+        generation_context: Optional[project_create_params.GenerationContext] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ProjectCreateV1PostResponse:
+    ) -> ProjectCreateResponse:
         """
         Create Project
 
@@ -553,11 +540,11 @@ class AsyncProjectsResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            ProjectCreateV1PostResponse: Successful Response
+            ProjectCreateResponse: Successful Response
 
         Example:
             ```python
-            project = await client.projects.create_v1_post(
+            project = await client.projects.create(
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
             )
             ```
@@ -574,15 +561,15 @@ class AsyncProjectsResource(AsyncAPIResource):
                     "attachments": attachments,
                     "generation_context": generation_context,
                 },
-                project_create_v1_post_params.ProjectCreateV1PostParams,
+                project_create_params.ProjectCreateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ProjectCreateV1PostResponse,
+            cast_to=ProjectCreateResponse,
         )
 
-    async def retrieve_v1_get(
+    async def retrieve(
         self,
         project_id: str,
         *,
@@ -593,7 +580,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ProjectRetrieveV1GetResponse:
+    ) -> ProjectRetrieveResponse:
         """
         Get Project
 
@@ -606,11 +593,11 @@ class AsyncProjectsResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            ProjectRetrieveV1GetResponse: Successful Response
+            ProjectRetrieveResponse: Successful Response
 
         Example:
             ```python
-            project = await client.projects.retrieve_v1_get(
+            project = await client.projects.retrieve(
                 project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
             )
@@ -626,13 +613,13 @@ class AsyncProjectsResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"category_id": category_id}, project_retrieve_v1_get_params.ProjectRetrieveV1GetParams
+                    {"category_id": category_id}, project_retrieve_params.ProjectRetrieveParams
                 ),
             ),
-            cast_to=ProjectRetrieveV1GetResponse,
+            cast_to=ProjectRetrieveResponse,
         )
 
-    async def delete_v1_id_delete(
+    async def delete(
         self,
         project_id: str,
         *,
@@ -660,7 +647,7 @@ class AsyncProjectsResource(AsyncAPIResource):
 
         Example:
             ```python
-            await client.projects.delete_v1_id_delete(
+            await client.projects.delete(
                 project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
             )
@@ -677,13 +664,13 @@ class AsyncProjectsResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"category_id": category_id}, project_delete_v1_id_delete_params.ProjectDeleteV1IDDeleteParams
+                    {"category_id": category_id}, project_delete_params.ProjectDeleteParams
                 ),
             ),
             cast_to=NoneType,
         )
 
-    async def list_status_v1_status_get(
+    async def get_status(
         self,
         project_id: str,
         *,
@@ -694,7 +681,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ProjectListStatusV1StatusGetResponse:
+    ) -> ProjectGetStatusResponse:
         """
         Get Project Status
 
@@ -707,11 +694,11 @@ class AsyncProjectsResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            ProjectListStatusV1StatusGetResponse: Successful Response
+            ProjectGetStatusResponse: Successful Response
 
         Example:
             ```python
-            project = await client.projects.list_status_v1_status_get(
+            project = await client.projects.get_status(
                 project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
             )
@@ -727,14 +714,13 @@ class AsyncProjectsResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"category_id": category_id},
-                    project_list_status_v1_status_get_params.ProjectListStatusV1StatusGetParams,
+                    {"category_id": category_id}, project_get_status_params.ProjectGetStatusParams
                 ),
             ),
-            cast_to=ProjectListStatusV1StatusGetResponse,
+            cast_to=ProjectGetStatusResponse,
         )
 
-    async def archive_v1_id_archive_post(
+    async def archive(
         self,
         project_id: str,
         *,
@@ -746,7 +732,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ProjectArchiveV1IDArchivePostResponse:
+    ) -> ProjectArchiveResponse:
         """
         Archive Project
 
@@ -760,11 +746,11 @@ class AsyncProjectsResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            ProjectArchiveV1IDArchivePostResponse: Successful Response
+            ProjectArchiveResponse: Successful Response
 
         Example:
             ```python
-            project = await client.projects.archive_v1_id_archive_post(
+            project = await client.projects.archive(
                 project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
             )
@@ -776,7 +762,7 @@ class AsyncProjectsResource(AsyncAPIResource):
             path_template("/v1/projects/{project_id}/archive", **{"project_id": project_id}),
             body=await async_maybe_transform(
                 {"reason": reason},
-                project_archive_v1_id_archive_post_params.ProjectArchiveV1IDArchivePostParams,
+                project_archive_params.ProjectArchiveParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -784,14 +770,13 @@ class AsyncProjectsResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"category_id": category_id},
-                    project_archive_v1_id_archive_post_params.ProjectArchiveV1IDArchivePostParams,
+                    {"category_id": category_id}, project_archive_params.ProjectArchiveParams
                 ),
             ),
-            cast_to=ProjectArchiveV1IDArchivePostResponse,
+            cast_to=ProjectArchiveResponse,
         )
 
-    async def unarchive_v1_id_unarchive_post(
+    async def unarchive(
         self,
         project_id: str,
         *,
@@ -802,7 +787,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ProjectUnarchiveV1IDUnarchivePostResponse:
+    ) -> ProjectUnarchiveResponse:
         """
         Unarchive Project
 
@@ -815,11 +800,11 @@ class AsyncProjectsResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            ProjectUnarchiveV1IDUnarchivePostResponse: Successful Response
+            ProjectUnarchiveResponse: Successful Response
 
         Example:
             ```python
-            project = await client.projects.unarchive_v1_id_unarchive_post(
+            project = await client.projects.unarchive(
                 project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
             )
@@ -835,11 +820,10 @@ class AsyncProjectsResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"category_id": category_id},
-                    project_unarchive_v1_id_unarchive_post_params.ProjectUnarchiveV1IDUnarchivePostParams,
+                    {"category_id": category_id}, project_unarchive_params.ProjectUnarchiveParams
                 ),
             ),
-            cast_to=ProjectUnarchiveV1IDUnarchivePostResponse,
+            cast_to=ProjectUnarchiveResponse,
         )
 
 
@@ -847,26 +831,26 @@ class ProjectsResourceWithRawResponse:
     def __init__(self, projects: ProjectsResource) -> None:
         self._projects = projects
 
-        self.list_v1_get = to_raw_response_wrapper(
-            projects.list_v1_get,
+        self.list = to_raw_response_wrapper(
+            projects.list,
         )
-        self.create_v1_post = to_raw_response_wrapper(
-            projects.create_v1_post,
+        self.create = to_raw_response_wrapper(
+            projects.create,
         )
-        self.retrieve_v1_get = to_raw_response_wrapper(
-            projects.retrieve_v1_get,
+        self.retrieve = to_raw_response_wrapper(
+            projects.retrieve,
         )
-        self.delete_v1_id_delete = to_raw_response_wrapper(
-            projects.delete_v1_id_delete,
+        self.delete = to_raw_response_wrapper(
+            projects.delete,
         )
-        self.list_status_v1_status_get = to_raw_response_wrapper(
-            projects.list_status_v1_status_get,
+        self.get_status = to_raw_response_wrapper(
+            projects.get_status,
         )
-        self.archive_v1_id_archive_post = to_raw_response_wrapper(
-            projects.archive_v1_id_archive_post,
+        self.archive = to_raw_response_wrapper(
+            projects.archive,
         )
-        self.unarchive_v1_id_unarchive_post = to_raw_response_wrapper(
-            projects.unarchive_v1_id_unarchive_post,
+        self.unarchive = to_raw_response_wrapper(
+            projects.unarchive,
         )
 
     @cached_property
@@ -882,26 +866,26 @@ class AsyncProjectsResourceWithRawResponse:
     def __init__(self, projects: AsyncProjectsResource) -> None:
         self._projects = projects
 
-        self.list_v1_get = async_to_raw_response_wrapper(
-            projects.list_v1_get,
+        self.list = async_to_raw_response_wrapper(
+            projects.list,
         )
-        self.create_v1_post = async_to_raw_response_wrapper(
-            projects.create_v1_post,
+        self.create = async_to_raw_response_wrapper(
+            projects.create,
         )
-        self.retrieve_v1_get = async_to_raw_response_wrapper(
-            projects.retrieve_v1_get,
+        self.retrieve = async_to_raw_response_wrapper(
+            projects.retrieve,
         )
-        self.delete_v1_id_delete = async_to_raw_response_wrapper(
-            projects.delete_v1_id_delete,
+        self.delete = async_to_raw_response_wrapper(
+            projects.delete,
         )
-        self.list_status_v1_status_get = async_to_raw_response_wrapper(
-            projects.list_status_v1_status_get,
+        self.get_status = async_to_raw_response_wrapper(
+            projects.get_status,
         )
-        self.archive_v1_id_archive_post = async_to_raw_response_wrapper(
-            projects.archive_v1_id_archive_post,
+        self.archive = async_to_raw_response_wrapper(
+            projects.archive,
         )
-        self.unarchive_v1_id_unarchive_post = async_to_raw_response_wrapper(
-            projects.unarchive_v1_id_unarchive_post,
+        self.unarchive = async_to_raw_response_wrapper(
+            projects.unarchive,
         )
 
     @cached_property
@@ -917,26 +901,26 @@ class ProjectsResourceWithStreamingResponse:
     def __init__(self, projects: ProjectsResource) -> None:
         self._projects = projects
 
-        self.list_v1_get = to_streamed_response_wrapper(
-            projects.list_v1_get,
+        self.list = to_streamed_response_wrapper(
+            projects.list,
         )
-        self.create_v1_post = to_streamed_response_wrapper(
-            projects.create_v1_post,
+        self.create = to_streamed_response_wrapper(
+            projects.create,
         )
-        self.retrieve_v1_get = to_streamed_response_wrapper(
-            projects.retrieve_v1_get,
+        self.retrieve = to_streamed_response_wrapper(
+            projects.retrieve,
         )
-        self.delete_v1_id_delete = to_streamed_response_wrapper(
-            projects.delete_v1_id_delete,
+        self.delete = to_streamed_response_wrapper(
+            projects.delete,
         )
-        self.list_status_v1_status_get = to_streamed_response_wrapper(
-            projects.list_status_v1_status_get,
+        self.get_status = to_streamed_response_wrapper(
+            projects.get_status,
         )
-        self.archive_v1_id_archive_post = to_streamed_response_wrapper(
-            projects.archive_v1_id_archive_post,
+        self.archive = to_streamed_response_wrapper(
+            projects.archive,
         )
-        self.unarchive_v1_id_unarchive_post = to_streamed_response_wrapper(
-            projects.unarchive_v1_id_unarchive_post,
+        self.unarchive = to_streamed_response_wrapper(
+            projects.unarchive,
         )
 
     @cached_property
@@ -952,26 +936,26 @@ class AsyncProjectsResourceWithStreamingResponse:
     def __init__(self, projects: AsyncProjectsResource) -> None:
         self._projects = projects
 
-        self.list_v1_get = async_to_streamed_response_wrapper(
-            projects.list_v1_get,
+        self.list = async_to_streamed_response_wrapper(
+            projects.list,
         )
-        self.create_v1_post = async_to_streamed_response_wrapper(
-            projects.create_v1_post,
+        self.create = async_to_streamed_response_wrapper(
+            projects.create,
         )
-        self.retrieve_v1_get = async_to_streamed_response_wrapper(
-            projects.retrieve_v1_get,
+        self.retrieve = async_to_streamed_response_wrapper(
+            projects.retrieve,
         )
-        self.delete_v1_id_delete = async_to_streamed_response_wrapper(
-            projects.delete_v1_id_delete,
+        self.delete = async_to_streamed_response_wrapper(
+            projects.delete,
         )
-        self.list_status_v1_status_get = async_to_streamed_response_wrapper(
-            projects.list_status_v1_status_get,
+        self.get_status = async_to_streamed_response_wrapper(
+            projects.get_status,
         )
-        self.archive_v1_id_archive_post = async_to_streamed_response_wrapper(
-            projects.archive_v1_id_archive_post,
+        self.archive = async_to_streamed_response_wrapper(
+            projects.archive,
         )
-        self.unarchive_v1_id_unarchive_post = async_to_streamed_response_wrapper(
-            projects.unarchive_v1_id_unarchive_post,
+        self.unarchive = async_to_streamed_response_wrapper(
+            projects.unarchive,
         )
 
     @cached_property

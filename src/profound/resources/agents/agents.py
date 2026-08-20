@@ -18,14 +18,6 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from .node_types import (
-    NodeTypesResource,
-    AsyncNodeTypesResource,
-    NodeTypesResourceWithRawResponse,
-    AsyncNodeTypesResourceWithRawResponse,
-    NodeTypesResourceWithStreamingResponse,
-    AsyncNodeTypesResourceWithStreamingResponse,
-)
 from .runs import (
     RunsResource,
     AsyncRunsResource,
@@ -34,31 +26,39 @@ from .runs import (
     RunsResourceWithStreamingResponse,
     AsyncRunsResourceWithStreamingResponse,
 )
-from ...types.agent_list_v1_get_response import AgentListV1GetResponse
-from ...types import (
-    agent_list_v1_get_params,
-    agent_create_v1_post_params,
-    agent_retrieve_v1_get_params,
-    agent_update_v1_id_patch_params,
-    agent_list_graph_v1_graph_get_params,
+from .node_types import (
+    NodeTypesResource,
+    AsyncNodeTypesResource,
+    NodeTypesResourceWithRawResponse,
+    AsyncNodeTypesResourceWithRawResponse,
+    NodeTypesResourceWithStreamingResponse,
+    AsyncNodeTypesResourceWithStreamingResponse,
 )
-from ...types.shared.agent import Agent
-from ...types.agent_retrieve_v1_get_response import AgentRetrieveV1GetResponse
+from ...types.agent_list_response import AgentListResponse
+from ...types import (
+    agent_list_params,
+    agent_retrieve_params,
+    agent_create_params,
+    agent_update_params,
+    agent_retrieve_graph_params,
+)
+from ...types.agent_retrieve_response import AgentRetrieveResponse
 from ...types.shared.agent_version import AgentVersion
-from ...types.agent_update_v1_id_patch_response import AgentUpdateV1IDPatchResponse
-from ...types.agent_list_graph_v1_graph_get_response import AgentListGraphV1GraphGetResponse
+from ...types.shared.agent import Agent
+from ...types.agent_update_response import AgentUpdateResponse
+from ...types.agent_retrieve_graph_response import AgentRetrieveGraphResponse
 
 __all__ = ["AgentsResource", "AsyncAgentsResource"]
 
 
 class AgentsResource(SyncAPIResource):
     @cached_property
-    def node_types(self) -> NodeTypesResource:
-        return NodeTypesResource(self._client)
-
-    @cached_property
     def runs(self) -> RunsResource:
         return RunsResource(self._client)
+
+    @cached_property
+    def node_types(self) -> NodeTypesResource:
+        return NodeTypesResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AgentsResourceWithRawResponse:
@@ -68,7 +68,7 @@ class AgentsResource(SyncAPIResource):
     def with_streaming_response(self) -> AgentsResourceWithStreamingResponse:
         return AgentsResourceWithStreamingResponse(self)
 
-    def list_v1_get(
+    def list(
         self,
         *,
         statuses: Optional[List[Literal["published", "draft"]]] | Omit = omit,
@@ -80,7 +80,7 @@ class AgentsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AgentListV1GetResponse:
+    ) -> AgentListResponse:
         """
         List agents available to your organization.
 
@@ -98,11 +98,11 @@ class AgentsResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            AgentListV1GetResponse: Successful Response
+            AgentListResponse: Successful Response
 
         Example:
             ```python
-            agent = client.agents.list_v1_get(
+            agent = client.agents.list(
                 limit=100,
             )
             ```
@@ -116,13 +116,63 @@ class AgentsResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {"statuses": statuses, "limit": limit, "next_cursor": next_cursor},
-                    agent_list_v1_get_params.AgentListV1GetParams,
+                    agent_list_params.AgentListParams,
                 ),
             ),
-            cast_to=AgentListV1GetResponse,
+            cast_to=AgentListResponse,
         )
 
-    def create_v1_post(
+    def retrieve(
+        self,
+        agent_id: str,
+        *,
+        version: AgentVersion | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AgentRetrieveResponse:
+        """
+        Retrieve an agent and its schema details.
+
+        Agents can have both a live published version and a draft version with newer
+        unpublished changes. Use the `version` parameter to choose which state to return.
+
+        Args:
+            agent_id: The ID of the agent to retrieve.
+            version: Version of the agent to retrieve. Use `published` for the live version, or `draft` for the latest unpublished changes for the same agent. Defaults to `published`.
+            extra_headers: Send extra headers with the request.
+            extra_query: Send extra query parameters with the request.
+            extra_body: Send extra JSON properties with the request.
+            timeout: Override the client-level default timeout for this request, in seconds.
+
+        Returns:
+            AgentRetrieveResponse: Successful Response
+
+        Example:
+            ```python
+            agent = client.agents.retrieve(
+                agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+            )
+            ```
+        """
+        if agent_id is None or (isinstance(agent_id, str) and not agent_id):
+            raise ValueError(f"Expected a non-empty value for `agent_id` but received {agent_id!r}")
+        return self._get(
+            path_template("/v1/agents/{agent_id}", **{"agent_id": agent_id}),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform({"version": version}, agent_retrieve_params.AgentRetrieveParams),
+            ),
+            cast_to=AgentRetrieveResponse,
+        )
+
+    def create(
         self,
         *,
         organization_id: str,
@@ -158,7 +208,7 @@ class AgentsResource(SyncAPIResource):
 
         Example:
             ```python
-            agent = client.agents.create_v1_post(
+            agent = client.agents.create(
                 organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 name="x",
             )
@@ -173,7 +223,7 @@ class AgentsResource(SyncAPIResource):
                     "description": description,
                     "graph": graph,
                 },
-                agent_create_v1_post_params.AgentCreateV1PostParams,
+                agent_create_params.AgentCreateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -181,7 +231,7 @@ class AgentsResource(SyncAPIResource):
             cast_to=Agent,
         )
 
-    def publish_v1_id_publish_post(
+    def publish(
         self,
         agent_id: str,
         *,
@@ -211,7 +261,7 @@ class AgentsResource(SyncAPIResource):
 
         Example:
             ```python
-            agent = client.agents.publish_v1_id_publish_post(
+            agent = client.agents.publish(
                 agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
             )
             ```
@@ -226,57 +276,7 @@ class AgentsResource(SyncAPIResource):
             cast_to=Agent,
         )
 
-    def retrieve_v1_get(
-        self,
-        agent_id: str,
-        *,
-        version: AgentVersion | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AgentRetrieveV1GetResponse:
-        """
-        Retrieve an agent and its schema details.
-
-        Agents can have both a live published version and a draft version with newer
-        unpublished changes. Use the `version` parameter to choose which state to return.
-
-        Args:
-            agent_id: The ID of the agent to retrieve.
-            version: Version of the agent to retrieve. Use `published` for the live version, or `draft` for the latest unpublished changes for the same agent. Defaults to `published`.
-            extra_headers: Send extra headers with the request.
-            extra_query: Send extra query parameters with the request.
-            extra_body: Send extra JSON properties with the request.
-            timeout: Override the client-level default timeout for this request, in seconds.
-
-        Returns:
-            AgentRetrieveV1GetResponse: Successful Response
-
-        Example:
-            ```python
-            agent = client.agents.retrieve_v1_get(
-                agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-            )
-            ```
-        """
-        if agent_id is None or (isinstance(agent_id, str) and not agent_id):
-            raise ValueError(f"Expected a non-empty value for `agent_id` but received {agent_id!r}")
-        return self._get(
-            path_template("/v1/agents/{agent_id}", **{"agent_id": agent_id}),
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform({"version": version}, agent_retrieve_v1_get_params.AgentRetrieveV1GetParams),
-            ),
-            cast_to=AgentRetrieveV1GetResponse,
-        )
-
-    def update_v1_id_patch(
+    def update(
         self,
         agent_id: str,
         *,
@@ -287,7 +287,7 @@ class AgentsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AgentUpdateV1IDPatchResponse:
+    ) -> AgentUpdateResponse:
         """
         Update an agent's draft graph in place.
 
@@ -305,11 +305,11 @@ class AgentsResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            AgentUpdateV1IDPatchResponse: Successful Response
+            AgentUpdateResponse: Successful Response
 
         Example:
             ```python
-            agent = client.agents.update_v1_id_patch(
+            agent = client.agents.update(
                 agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 graph={},
             )
@@ -321,15 +321,15 @@ class AgentsResource(SyncAPIResource):
             path_template("/v1/agents/{agent_id}", **{"agent_id": agent_id}),
             body=maybe_transform(
                 {"graph": graph},
-                agent_update_v1_id_patch_params.AgentUpdateV1IDPatchParams,
+                agent_update_params.AgentUpdateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AgentUpdateV1IDPatchResponse,
+            cast_to=AgentUpdateResponse,
         )
 
-    def list_graph_v1_graph_get(
+    def retrieve_graph(
         self,
         agent_id: str,
         *,
@@ -340,7 +340,7 @@ class AgentsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AgentListGraphV1GraphGetResponse:
+    ) -> AgentRetrieveGraphResponse:
         """
         Retrieve an agent's full workflow graph (`{nodes, edges}`).
 
@@ -359,11 +359,11 @@ class AgentsResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            AgentListGraphV1GraphGetResponse: Successful Response
+            AgentRetrieveGraphResponse: Successful Response
 
         Example:
             ```python
-            agent = client.agents.list_graph_v1_graph_get(
+            agent = client.agents.retrieve_graph(
                 agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
             )
             ```
@@ -377,22 +377,20 @@ class AgentsResource(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform(
-                    {"version": version}, agent_list_graph_v1_graph_get_params.AgentListGraphV1GraphGetParams
-                ),
+                query=maybe_transform({"version": version}, agent_retrieve_graph_params.AgentRetrieveGraphParams),
             ),
-            cast_to=AgentListGraphV1GraphGetResponse,
+            cast_to=AgentRetrieveGraphResponse,
         )
 
 
 class AsyncAgentsResource(AsyncAPIResource):
     @cached_property
-    def node_types(self) -> AsyncNodeTypesResource:
-        return AsyncNodeTypesResource(self._client)
-
-    @cached_property
     def runs(self) -> AsyncRunsResource:
         return AsyncRunsResource(self._client)
+
+    @cached_property
+    def node_types(self) -> AsyncNodeTypesResource:
+        return AsyncNodeTypesResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncAgentsResourceWithRawResponse:
@@ -402,7 +400,7 @@ class AsyncAgentsResource(AsyncAPIResource):
     def with_streaming_response(self) -> AsyncAgentsResourceWithStreamingResponse:
         return AsyncAgentsResourceWithStreamingResponse(self)
 
-    async def list_v1_get(
+    async def list(
         self,
         *,
         statuses: Optional[List[Literal["published", "draft"]]] | Omit = omit,
@@ -414,7 +412,7 @@ class AsyncAgentsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AgentListV1GetResponse:
+    ) -> AgentListResponse:
         """
         List agents available to your organization.
 
@@ -432,11 +430,11 @@ class AsyncAgentsResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            AgentListV1GetResponse: Successful Response
+            AgentListResponse: Successful Response
 
         Example:
             ```python
-            agent = await client.agents.list_v1_get(
+            agent = await client.agents.list(
                 limit=100,
             )
             ```
@@ -450,13 +448,63 @@ class AsyncAgentsResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {"statuses": statuses, "limit": limit, "next_cursor": next_cursor},
-                    agent_list_v1_get_params.AgentListV1GetParams,
+                    agent_list_params.AgentListParams,
                 ),
             ),
-            cast_to=AgentListV1GetResponse,
+            cast_to=AgentListResponse,
         )
 
-    async def create_v1_post(
+    async def retrieve(
+        self,
+        agent_id: str,
+        *,
+        version: AgentVersion | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AgentRetrieveResponse:
+        """
+        Retrieve an agent and its schema details.
+
+        Agents can have both a live published version and a draft version with newer
+        unpublished changes. Use the `version` parameter to choose which state to return.
+
+        Args:
+            agent_id: The ID of the agent to retrieve.
+            version: Version of the agent to retrieve. Use `published` for the live version, or `draft` for the latest unpublished changes for the same agent. Defaults to `published`.
+            extra_headers: Send extra headers with the request.
+            extra_query: Send extra query parameters with the request.
+            extra_body: Send extra JSON properties with the request.
+            timeout: Override the client-level default timeout for this request, in seconds.
+
+        Returns:
+            AgentRetrieveResponse: Successful Response
+
+        Example:
+            ```python
+            agent = await client.agents.retrieve(
+                agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+            )
+            ```
+        """
+        if agent_id is None or (isinstance(agent_id, str) and not agent_id):
+            raise ValueError(f"Expected a non-empty value for `agent_id` but received {agent_id!r}")
+        return await self._get(
+            path_template("/v1/agents/{agent_id}", **{"agent_id": agent_id}),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform({"version": version}, agent_retrieve_params.AgentRetrieveParams),
+            ),
+            cast_to=AgentRetrieveResponse,
+        )
+
+    async def create(
         self,
         *,
         organization_id: str,
@@ -492,7 +540,7 @@ class AsyncAgentsResource(AsyncAPIResource):
 
         Example:
             ```python
-            agent = await client.agents.create_v1_post(
+            agent = await client.agents.create(
                 organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 name="x",
             )
@@ -507,7 +555,7 @@ class AsyncAgentsResource(AsyncAPIResource):
                     "description": description,
                     "graph": graph,
                 },
-                agent_create_v1_post_params.AgentCreateV1PostParams,
+                agent_create_params.AgentCreateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -515,7 +563,7 @@ class AsyncAgentsResource(AsyncAPIResource):
             cast_to=Agent,
         )
 
-    async def publish_v1_id_publish_post(
+    async def publish(
         self,
         agent_id: str,
         *,
@@ -545,7 +593,7 @@ class AsyncAgentsResource(AsyncAPIResource):
 
         Example:
             ```python
-            agent = await client.agents.publish_v1_id_publish_post(
+            agent = await client.agents.publish(
                 agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
             )
             ```
@@ -560,59 +608,7 @@ class AsyncAgentsResource(AsyncAPIResource):
             cast_to=Agent,
         )
 
-    async def retrieve_v1_get(
-        self,
-        agent_id: str,
-        *,
-        version: AgentVersion | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AgentRetrieveV1GetResponse:
-        """
-        Retrieve an agent and its schema details.
-
-        Agents can have both a live published version and a draft version with newer
-        unpublished changes. Use the `version` parameter to choose which state to return.
-
-        Args:
-            agent_id: The ID of the agent to retrieve.
-            version: Version of the agent to retrieve. Use `published` for the live version, or `draft` for the latest unpublished changes for the same agent. Defaults to `published`.
-            extra_headers: Send extra headers with the request.
-            extra_query: Send extra query parameters with the request.
-            extra_body: Send extra JSON properties with the request.
-            timeout: Override the client-level default timeout for this request, in seconds.
-
-        Returns:
-            AgentRetrieveV1GetResponse: Successful Response
-
-        Example:
-            ```python
-            agent = await client.agents.retrieve_v1_get(
-                agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-            )
-            ```
-        """
-        if agent_id is None or (isinstance(agent_id, str) and not agent_id):
-            raise ValueError(f"Expected a non-empty value for `agent_id` but received {agent_id!r}")
-        return await self._get(
-            path_template("/v1/agents/{agent_id}", **{"agent_id": agent_id}),
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {"version": version}, agent_retrieve_v1_get_params.AgentRetrieveV1GetParams
-                ),
-            ),
-            cast_to=AgentRetrieveV1GetResponse,
-        )
-
-    async def update_v1_id_patch(
+    async def update(
         self,
         agent_id: str,
         *,
@@ -623,7 +619,7 @@ class AsyncAgentsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AgentUpdateV1IDPatchResponse:
+    ) -> AgentUpdateResponse:
         """
         Update an agent's draft graph in place.
 
@@ -641,11 +637,11 @@ class AsyncAgentsResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            AgentUpdateV1IDPatchResponse: Successful Response
+            AgentUpdateResponse: Successful Response
 
         Example:
             ```python
-            agent = await client.agents.update_v1_id_patch(
+            agent = await client.agents.update(
                 agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 graph={},
             )
@@ -657,15 +653,15 @@ class AsyncAgentsResource(AsyncAPIResource):
             path_template("/v1/agents/{agent_id}", **{"agent_id": agent_id}),
             body=await async_maybe_transform(
                 {"graph": graph},
-                agent_update_v1_id_patch_params.AgentUpdateV1IDPatchParams,
+                agent_update_params.AgentUpdateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AgentUpdateV1IDPatchResponse,
+            cast_to=AgentUpdateResponse,
         )
 
-    async def list_graph_v1_graph_get(
+    async def retrieve_graph(
         self,
         agent_id: str,
         *,
@@ -676,7 +672,7 @@ class AsyncAgentsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AgentListGraphV1GraphGetResponse:
+    ) -> AgentRetrieveGraphResponse:
         """
         Retrieve an agent's full workflow graph (`{nodes, edges}`).
 
@@ -695,11 +691,11 @@ class AsyncAgentsResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            AgentListGraphV1GraphGetResponse: Successful Response
+            AgentRetrieveGraphResponse: Successful Response
 
         Example:
             ```python
-            agent = await client.agents.list_graph_v1_graph_get(
+            agent = await client.agents.retrieve_graph(
                 agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
             )
             ```
@@ -714,10 +710,10 @@ class AsyncAgentsResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"version": version}, agent_list_graph_v1_graph_get_params.AgentListGraphV1GraphGetParams
+                    {"version": version}, agent_retrieve_graph_params.AgentRetrieveGraphParams
                 ),
             ),
-            cast_to=AgentListGraphV1GraphGetResponse,
+            cast_to=AgentRetrieveGraphResponse,
         )
 
 
@@ -725,125 +721,125 @@ class AgentsResourceWithRawResponse:
     def __init__(self, agents: AgentsResource) -> None:
         self._agents = agents
 
-        self.list_v1_get = to_raw_response_wrapper(
-            agents.list_v1_get,
+        self.list = to_raw_response_wrapper(
+            agents.list,
         )
-        self.create_v1_post = to_raw_response_wrapper(
-            agents.create_v1_post,
+        self.retrieve = to_raw_response_wrapper(
+            agents.retrieve,
         )
-        self.publish_v1_id_publish_post = to_raw_response_wrapper(
-            agents.publish_v1_id_publish_post,
+        self.create = to_raw_response_wrapper(
+            agents.create,
         )
-        self.retrieve_v1_get = to_raw_response_wrapper(
-            agents.retrieve_v1_get,
+        self.publish = to_raw_response_wrapper(
+            agents.publish,
         )
-        self.update_v1_id_patch = to_raw_response_wrapper(
-            agents.update_v1_id_patch,
+        self.update = to_raw_response_wrapper(
+            agents.update,
         )
-        self.list_graph_v1_graph_get = to_raw_response_wrapper(
-            agents.list_graph_v1_graph_get,
+        self.retrieve_graph = to_raw_response_wrapper(
+            agents.retrieve_graph,
         )
-
-    @cached_property
-    def node_types(self) -> NodeTypesResourceWithRawResponse:
-        return NodeTypesResourceWithRawResponse(self._agents.node_types)
 
     @cached_property
     def runs(self) -> RunsResourceWithRawResponse:
         return RunsResourceWithRawResponse(self._agents.runs)
+
+    @cached_property
+    def node_types(self) -> NodeTypesResourceWithRawResponse:
+        return NodeTypesResourceWithRawResponse(self._agents.node_types)
 
 
 class AsyncAgentsResourceWithRawResponse:
     def __init__(self, agents: AsyncAgentsResource) -> None:
         self._agents = agents
 
-        self.list_v1_get = async_to_raw_response_wrapper(
-            agents.list_v1_get,
+        self.list = async_to_raw_response_wrapper(
+            agents.list,
         )
-        self.create_v1_post = async_to_raw_response_wrapper(
-            agents.create_v1_post,
+        self.retrieve = async_to_raw_response_wrapper(
+            agents.retrieve,
         )
-        self.publish_v1_id_publish_post = async_to_raw_response_wrapper(
-            agents.publish_v1_id_publish_post,
+        self.create = async_to_raw_response_wrapper(
+            agents.create,
         )
-        self.retrieve_v1_get = async_to_raw_response_wrapper(
-            agents.retrieve_v1_get,
+        self.publish = async_to_raw_response_wrapper(
+            agents.publish,
         )
-        self.update_v1_id_patch = async_to_raw_response_wrapper(
-            agents.update_v1_id_patch,
+        self.update = async_to_raw_response_wrapper(
+            agents.update,
         )
-        self.list_graph_v1_graph_get = async_to_raw_response_wrapper(
-            agents.list_graph_v1_graph_get,
+        self.retrieve_graph = async_to_raw_response_wrapper(
+            agents.retrieve_graph,
         )
-
-    @cached_property
-    def node_types(self) -> AsyncNodeTypesResourceWithRawResponse:
-        return AsyncNodeTypesResourceWithRawResponse(self._agents.node_types)
 
     @cached_property
     def runs(self) -> AsyncRunsResourceWithRawResponse:
         return AsyncRunsResourceWithRawResponse(self._agents.runs)
+
+    @cached_property
+    def node_types(self) -> AsyncNodeTypesResourceWithRawResponse:
+        return AsyncNodeTypesResourceWithRawResponse(self._agents.node_types)
 
 
 class AgentsResourceWithStreamingResponse:
     def __init__(self, agents: AgentsResource) -> None:
         self._agents = agents
 
-        self.list_v1_get = to_streamed_response_wrapper(
-            agents.list_v1_get,
+        self.list = to_streamed_response_wrapper(
+            agents.list,
         )
-        self.create_v1_post = to_streamed_response_wrapper(
-            agents.create_v1_post,
+        self.retrieve = to_streamed_response_wrapper(
+            agents.retrieve,
         )
-        self.publish_v1_id_publish_post = to_streamed_response_wrapper(
-            agents.publish_v1_id_publish_post,
+        self.create = to_streamed_response_wrapper(
+            agents.create,
         )
-        self.retrieve_v1_get = to_streamed_response_wrapper(
-            agents.retrieve_v1_get,
+        self.publish = to_streamed_response_wrapper(
+            agents.publish,
         )
-        self.update_v1_id_patch = to_streamed_response_wrapper(
-            agents.update_v1_id_patch,
+        self.update = to_streamed_response_wrapper(
+            agents.update,
         )
-        self.list_graph_v1_graph_get = to_streamed_response_wrapper(
-            agents.list_graph_v1_graph_get,
+        self.retrieve_graph = to_streamed_response_wrapper(
+            agents.retrieve_graph,
         )
-
-    @cached_property
-    def node_types(self) -> NodeTypesResourceWithStreamingResponse:
-        return NodeTypesResourceWithStreamingResponse(self._agents.node_types)
 
     @cached_property
     def runs(self) -> RunsResourceWithStreamingResponse:
         return RunsResourceWithStreamingResponse(self._agents.runs)
+
+    @cached_property
+    def node_types(self) -> NodeTypesResourceWithStreamingResponse:
+        return NodeTypesResourceWithStreamingResponse(self._agents.node_types)
 
 
 class AsyncAgentsResourceWithStreamingResponse:
     def __init__(self, agents: AsyncAgentsResource) -> None:
         self._agents = agents
 
-        self.list_v1_get = async_to_streamed_response_wrapper(
-            agents.list_v1_get,
+        self.list = async_to_streamed_response_wrapper(
+            agents.list,
         )
-        self.create_v1_post = async_to_streamed_response_wrapper(
-            agents.create_v1_post,
+        self.retrieve = async_to_streamed_response_wrapper(
+            agents.retrieve,
         )
-        self.publish_v1_id_publish_post = async_to_streamed_response_wrapper(
-            agents.publish_v1_id_publish_post,
+        self.create = async_to_streamed_response_wrapper(
+            agents.create,
         )
-        self.retrieve_v1_get = async_to_streamed_response_wrapper(
-            agents.retrieve_v1_get,
+        self.publish = async_to_streamed_response_wrapper(
+            agents.publish,
         )
-        self.update_v1_id_patch = async_to_streamed_response_wrapper(
-            agents.update_v1_id_patch,
+        self.update = async_to_streamed_response_wrapper(
+            agents.update,
         )
-        self.list_graph_v1_graph_get = async_to_streamed_response_wrapper(
-            agents.list_graph_v1_graph_get,
+        self.retrieve_graph = async_to_streamed_response_wrapper(
+            agents.retrieve_graph,
         )
-
-    @cached_property
-    def node_types(self) -> AsyncNodeTypesResourceWithStreamingResponse:
-        return AsyncNodeTypesResourceWithStreamingResponse(self._agents.node_types)
 
     @cached_property
     def runs(self) -> AsyncRunsResourceWithStreamingResponse:
         return AsyncRunsResourceWithStreamingResponse(self._agents.runs)
+
+    @cached_property
+    def node_types(self) -> AsyncNodeTypesResourceWithStreamingResponse:
+        return AsyncNodeTypesResourceWithStreamingResponse(self._agents.node_types)

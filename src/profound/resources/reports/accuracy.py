@@ -19,54 +19,36 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.reports.accuracy_overview_v1_overview_post_response import AccuracyOverviewV1OverviewPostResponse
+from ...types.reports.accuracy_create_overview_response import AccuracyCreateOverviewResponse
 from ...types.reports import (
-    accuracy_overview_v1_overview_post_params,
-    accuracy_breakdown_v1_breakdown_post_params,
-    accuracy_citation_analysis_v1_citation_analysis_post_params,
-    accuracy_topic_ids_v1_topic_ids_post_params,
-    accuracy_inaccurate_themes_v1_inaccurate_themes_post_params,
-    accuracy_inaccurate_clusters_v1_inaccurate_clusters_post_params,
-    accuracy_inaccuracy_drivers_v1_inaccuracy_drivers_post_params,
-    accuracy_top_inaccurate_claims_v1_top_inaccurate_claims_post_params,
-    accuracy_claim_breakdown_v1_claim_breakdown_post_params,
-    accuracy_claim_citations_v1_claim_citations_post_params,
-    accuracy_cluster_example_runs_v1_cluster_example_runs_post_params,
-    accuracy_cluster_verification_pairs_v1_cluster_verification_pairs_post_params,
-    accuracy_factcheck_setup_status_v1_factcheck_setup_status_post_params,
+    accuracy_create_overview_params,
+    accuracy_create_breakdown_params,
+    accuracy_create_citation_analysis_params,
+    accuracy_create_topic_ids_params,
+    accuracy_create_inaccurate_themes_params,
+    accuracy_create_inaccurate_clusters_params,
+    accuracy_create_inaccuracy_drivers_params,
+    accuracy_create_top_inaccurate_claims_params,
+    accuracy_create_claim_breakdown_params,
+    accuracy_create_claim_citations_params,
+    accuracy_create_cluster_example_runs_params,
+    accuracy_create_cluster_verification_pairs_params,
+    accuracy_create_factcheck_setup_status_params,
 )
-from ...types.reports.accuracy_breakdown_v1_breakdown_post_response import AccuracyBreakdownV1BreakdownPostResponse
-from ...types.reports.accuracy_citation_analysis_v1_citation_analysis_post_response import (
-    AccuracyCitationAnalysisV1CitationAnalysisPostResponse,
+from ...types.reports.accuracy_create_breakdown_response import AccuracyCreateBreakdownResponse
+from ...types.reports.accuracy_create_citation_analysis_response import AccuracyCreateCitationAnalysisResponse
+from ...types.reports.accuracy_create_topic_ids_response import AccuracyCreateTopicIDsResponse
+from ...types.reports.accuracy_create_inaccurate_themes_response import AccuracyCreateInaccurateThemesResponse
+from ...types.reports.accuracy_create_inaccurate_clusters_response import AccuracyCreateInaccurateClustersResponse
+from ...types.reports.accuracy_create_inaccuracy_drivers_response import AccuracyCreateInaccuracyDriversResponse
+from ...types.reports.accuracy_create_top_inaccurate_claims_response import AccuracyCreateTopInaccurateClaimsResponse
+from ...types.reports.accuracy_create_claim_breakdown_response import AccuracyCreateClaimBreakdownResponse
+from ...types.reports.accuracy_create_claim_citations_response import AccuracyCreateClaimCitationsResponse
+from ...types.reports.accuracy_create_cluster_example_runs_response import AccuracyCreateClusterExampleRunsResponse
+from ...types.reports.accuracy_create_cluster_verification_pairs_response import (
+    AccuracyCreateClusterVerificationPairsResponse,
 )
-from ...types.reports.accuracy_topic_ids_v1_topic_ids_post_response import AccuracyTopicIDsV1TopicIDsPostResponse
-from ...types.reports.accuracy_inaccurate_themes_v1_inaccurate_themes_post_response import (
-    AccuracyInaccurateThemesV1InaccurateThemesPostResponse,
-)
-from ...types.reports.accuracy_inaccurate_clusters_v1_inaccurate_clusters_post_response import (
-    AccuracyInaccurateClustersV1InaccurateClustersPostResponse,
-)
-from ...types.reports.accuracy_inaccuracy_drivers_v1_inaccuracy_drivers_post_response import (
-    AccuracyInaccuracyDriversV1InaccuracyDriversPostResponse,
-)
-from ...types.reports.accuracy_top_inaccurate_claims_v1_top_inaccurate_claims_post_response import (
-    AccuracyTopInaccurateClaimsV1TopInaccurateClaimsPostResponse,
-)
-from ...types.reports.accuracy_claim_breakdown_v1_claim_breakdown_post_response import (
-    AccuracyClaimBreakdownV1ClaimBreakdownPostResponse,
-)
-from ...types.reports.accuracy_claim_citations_v1_claim_citations_post_response import (
-    AccuracyClaimCitationsV1ClaimCitationsPostResponse,
-)
-from ...types.reports.accuracy_cluster_example_runs_v1_cluster_example_runs_post_response import (
-    AccuracyClusterExampleRunsV1ClusterExampleRunsPostResponse,
-)
-from ...types.reports.accuracy_cluster_verification_pairs_v1_cluster_verification_pairs_post_response import (
-    AccuracyClusterVerificationPairsV1ClusterVerificationPairsPostResponse,
-)
-from ...types.reports.accuracy_factcheck_setup_status_v1_factcheck_setup_status_post_response import (
-    AccuracyFactcheckSetupStatusV1FactcheckSetupStatusPostResponse,
-)
+from ...types.reports.accuracy_create_factcheck_setup_status_response import AccuracyCreateFactcheckSetupStatusResponse
 
 __all__ = ["AccuracyResource", "AsyncAccuracyResource"]
 
@@ -80,7 +62,7 @@ class AccuracyResource(SyncAPIResource):
     def with_streaming_response(self) -> AccuracyResourceWithStreamingResponse:
         return AccuracyResourceWithStreamingResponse(self)
 
-    def overview_v1_overview_post(
+    def create_overview(
         self,
         *,
         start_date: str,
@@ -107,7 +89,7 @@ class AccuracyResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AccuracyOverviewV1OverviewPostResponse:
+    ) -> AccuracyCreateOverviewResponse:
         """
         Accuracy Overview
 
@@ -136,11 +118,11 @@ class AccuracyResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            AccuracyOverviewV1OverviewPostResponse: Successful Response
+            AccuracyCreateOverviewResponse: Successful Response
 
         Example:
             ```python
-            accuracy = client.reports.accuracy.overview_v1_overview_post(
+            accuracy = client.reports.accuracy.create_overview(
                 start_date="",
                 end_date="",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -175,15 +157,15 @@ class AccuracyResource(SyncAPIResource):
                     "date_bucket": date_bucket,
                     "group_by": group_by,
                 },
-                accuracy_overview_v1_overview_post_params.AccuracyOverviewV1OverviewPostParams,
+                accuracy_create_overview_params.AccuracyCreateOverviewParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccuracyOverviewV1OverviewPostResponse,
+            cast_to=AccuracyCreateOverviewResponse,
         )
 
-    def breakdown_v1_breakdown_post(
+    def create_breakdown(
         self,
         *,
         start_date: str,
@@ -212,14 +194,14 @@ class AccuracyResource(SyncAPIResource):
         search_query: Optional[str] | Omit = omit,
         sort_by: Literal["citationShare", "accuracy"] | Omit = omit,
         sort_order: Literal["asc", "desc"] | Omit = omit,
-        pagination: Optional[accuracy_breakdown_v1_breakdown_post_params.Pagination] | Omit = omit,
+        pagination: Optional[accuracy_create_breakdown_params.Pagination] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AccuracyBreakdownV1BreakdownPostResponse:
+    ) -> AccuracyCreateBreakdownResponse:
         """
         Accuracy Breakdown
 
@@ -255,11 +237,11 @@ class AccuracyResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            AccuracyBreakdownV1BreakdownPostResponse: Successful Response
+            AccuracyCreateBreakdownResponse: Successful Response
 
         Example:
             ```python
-            accuracy = client.reports.accuracy.breakdown_v1_breakdown_post(
+            accuracy = client.reports.accuracy.create_breakdown(
                 start_date="",
                 end_date="",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -305,15 +287,15 @@ class AccuracyResource(SyncAPIResource):
                     "sort_order": sort_order,
                     "pagination": pagination,
                 },
-                accuracy_breakdown_v1_breakdown_post_params.AccuracyBreakdownV1BreakdownPostParams,
+                accuracy_create_breakdown_params.AccuracyCreateBreakdownParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccuracyBreakdownV1BreakdownPostResponse,
+            cast_to=AccuracyCreateBreakdownResponse,
         )
 
-    def citation_analysis_v1_citation_analysis_post(
+    def create_citation_analysis(
         self,
         *,
         category_id: str,
@@ -326,7 +308,7 @@ class AccuracyResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AccuracyCitationAnalysisV1CitationAnalysisPostResponse:
+    ) -> AccuracyCreateCitationAnalysisResponse:
         """
         Accuracy Citation Analysis
 
@@ -341,11 +323,11 @@ class AccuracyResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            AccuracyCitationAnalysisV1CitationAnalysisPostResponse: Successful Response
+            AccuracyCreateCitationAnalysisResponse: Successful Response
 
         Example:
             ```python
-            accuracy = client.reports.accuracy.citation_analysis_v1_citation_analysis_post(
+            accuracy = client.reports.accuracy.create_citation_analysis(
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 clean_href="",
                 start_date="",
@@ -362,15 +344,15 @@ class AccuracyResource(SyncAPIResource):
                     "start_date": start_date,
                     "end_date": end_date,
                 },
-                accuracy_citation_analysis_v1_citation_analysis_post_params.AccuracyCitationAnalysisV1CitationAnalysisPostParams,
+                accuracy_create_citation_analysis_params.AccuracyCreateCitationAnalysisParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccuracyCitationAnalysisV1CitationAnalysisPostResponse,
+            cast_to=AccuracyCreateCitationAnalysisResponse,
         )
 
-    def topic_ids_v1_topic_ids_post(
+    def create_topic_ids(
         self,
         *,
         category_id: str,
@@ -382,7 +364,7 @@ class AccuracyResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AccuracyTopicIDsV1TopicIDsPostResponse:
+    ) -> AccuracyCreateTopicIDsResponse:
         """
         Accuracy Topic Ids
 
@@ -396,11 +378,11 @@ class AccuracyResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            AccuracyTopicIDsV1TopicIDsPostResponse: Successful Response
+            AccuracyCreateTopicIDsResponse: Successful Response
 
         Example:
             ```python
-            accuracy = client.reports.accuracy.topic_ids_v1_topic_ids_post(
+            accuracy = client.reports.accuracy.create_topic_ids(
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 start_date="",
                 end_date="",
@@ -415,15 +397,15 @@ class AccuracyResource(SyncAPIResource):
                     "start_date": start_date,
                     "end_date": end_date,
                 },
-                accuracy_topic_ids_v1_topic_ids_post_params.AccuracyTopicIDsV1TopicIDsPostParams,
+                accuracy_create_topic_ids_params.AccuracyCreateTopicIDsParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccuracyTopicIDsV1TopicIDsPostResponse,
+            cast_to=AccuracyCreateTopicIDsResponse,
         )
 
-    def inaccurate_themes_v1_inaccurate_themes_post(
+    def create_inaccurate_themes(
         self,
         *,
         start_date: str,
@@ -453,7 +435,7 @@ class AccuracyResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AccuracyInaccurateThemesV1InaccurateThemesPostResponse:
+    ) -> AccuracyCreateInaccurateThemesResponse:
         """
         Accuracy Inaccurate Themes
 
@@ -485,11 +467,11 @@ class AccuracyResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            AccuracyInaccurateThemesV1InaccurateThemesPostResponse: Successful Response
+            AccuracyCreateInaccurateThemesResponse: Successful Response
 
         Example:
             ```python
-            accuracy = client.reports.accuracy.inaccurate_themes_v1_inaccurate_themes_post(
+            accuracy = client.reports.accuracy.create_inaccurate_themes(
                 start_date="",
                 end_date="",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -530,15 +512,15 @@ class AccuracyResource(SyncAPIResource):
                     "sort_order": sort_order,
                     "search_query": search_query,
                 },
-                accuracy_inaccurate_themes_v1_inaccurate_themes_post_params.AccuracyInaccurateThemesV1InaccurateThemesPostParams,
+                accuracy_create_inaccurate_themes_params.AccuracyCreateInaccurateThemesParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccuracyInaccurateThemesV1InaccurateThemesPostResponse,
+            cast_to=AccuracyCreateInaccurateThemesResponse,
         )
 
-    def inaccurate_clusters_v1_inaccurate_clusters_post(
+    def create_inaccurate_clusters(
         self,
         *,
         start_date: str,
@@ -568,7 +550,7 @@ class AccuracyResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AccuracyInaccurateClustersV1InaccurateClustersPostResponse:
+    ) -> AccuracyCreateInaccurateClustersResponse:
         """
         Accuracy Inaccurate Clusters
 
@@ -600,11 +582,11 @@ class AccuracyResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            AccuracyInaccurateClustersV1InaccurateClustersPostResponse: Successful Response
+            AccuracyCreateInaccurateClustersResponse: Successful Response
 
         Example:
             ```python
-            accuracy = client.reports.accuracy.inaccurate_clusters_v1_inaccurate_clusters_post(
+            accuracy = client.reports.accuracy.create_inaccurate_clusters(
                 start_date="",
                 end_date="",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -644,15 +626,15 @@ class AccuracyResource(SyncAPIResource):
                     "search_query": search_query,
                     "include_models": include_models,
                 },
-                accuracy_inaccurate_clusters_v1_inaccurate_clusters_post_params.AccuracyInaccurateClustersV1InaccurateClustersPostParams,
+                accuracy_create_inaccurate_clusters_params.AccuracyCreateInaccurateClustersParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccuracyInaccurateClustersV1InaccurateClustersPostResponse,
+            cast_to=AccuracyCreateInaccurateClustersResponse,
         )
 
-    def inaccuracy_drivers_v1_inaccuracy_drivers_post(
+    def create_inaccuracy_drivers(
         self,
         *,
         start_date: str,
@@ -678,7 +660,7 @@ class AccuracyResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AccuracyInaccuracyDriversV1InaccuracyDriversPostResponse:
+    ) -> AccuracyCreateInaccuracyDriversResponse:
         """
         Accuracy Inaccuracy Drivers
 
@@ -706,11 +688,11 @@ class AccuracyResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            AccuracyInaccuracyDriversV1InaccuracyDriversPostResponse: Successful Response
+            AccuracyCreateInaccuracyDriversResponse: Successful Response
 
         Example:
             ```python
-            accuracy = client.reports.accuracy.inaccuracy_drivers_v1_inaccuracy_drivers_post(
+            accuracy = client.reports.accuracy.create_inaccuracy_drivers(
                 start_date="",
                 end_date="",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -744,15 +726,15 @@ class AccuracyResource(SyncAPIResource):
                     "citation_categories": citation_categories,
                     "limit": limit,
                 },
-                accuracy_inaccuracy_drivers_v1_inaccuracy_drivers_post_params.AccuracyInaccuracyDriversV1InaccuracyDriversPostParams,
+                accuracy_create_inaccuracy_drivers_params.AccuracyCreateInaccuracyDriversParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccuracyInaccuracyDriversV1InaccuracyDriversPostResponse,
+            cast_to=AccuracyCreateInaccuracyDriversResponse,
         )
 
-    def top_inaccurate_claims_v1_top_inaccurate_claims_post(
+    def create_top_inaccurate_claims(
         self,
         *,
         start_date: str,
@@ -778,7 +760,7 @@ class AccuracyResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AccuracyTopInaccurateClaimsV1TopInaccurateClaimsPostResponse:
+    ) -> AccuracyCreateTopInaccurateClaimsResponse:
         """
         Accuracy Top Inaccurate Claims
 
@@ -806,11 +788,11 @@ class AccuracyResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            AccuracyTopInaccurateClaimsV1TopInaccurateClaimsPostResponse: Successful Response
+            AccuracyCreateTopInaccurateClaimsResponse: Successful Response
 
         Example:
             ```python
-            accuracy = client.reports.accuracy.top_inaccurate_claims_v1_top_inaccurate_claims_post(
+            accuracy = client.reports.accuracy.create_top_inaccurate_claims(
                 start_date="",
                 end_date="",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -844,15 +826,15 @@ class AccuracyResource(SyncAPIResource):
                     "citation_categories": citation_categories,
                     "limit": limit,
                 },
-                accuracy_top_inaccurate_claims_v1_top_inaccurate_claims_post_params.AccuracyTopInaccurateClaimsV1TopInaccurateClaimsPostParams,
+                accuracy_create_top_inaccurate_claims_params.AccuracyCreateTopInaccurateClaimsParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccuracyTopInaccurateClaimsV1TopInaccurateClaimsPostResponse,
+            cast_to=AccuracyCreateTopInaccurateClaimsResponse,
         )
 
-    def claim_breakdown_v1_claim_breakdown_post(
+    def create_claim_breakdown(
         self,
         *,
         start_date: str,
@@ -878,7 +860,7 @@ class AccuracyResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AccuracyClaimBreakdownV1ClaimBreakdownPostResponse:
+    ) -> AccuracyCreateClaimBreakdownResponse:
         """
         Accuracy Claim Breakdown
 
@@ -906,11 +888,11 @@ class AccuracyResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            AccuracyClaimBreakdownV1ClaimBreakdownPostResponse: Successful Response
+            AccuracyCreateClaimBreakdownResponse: Successful Response
 
         Example:
             ```python
-            accuracy = client.reports.accuracy.claim_breakdown_v1_claim_breakdown_post(
+            accuracy = client.reports.accuracy.create_claim_breakdown(
                 start_date="",
                 end_date="",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -944,15 +926,15 @@ class AccuracyResource(SyncAPIResource):
                     "citation_categories": citation_categories,
                     "cluster_id": cluster_id,
                 },
-                accuracy_claim_breakdown_v1_claim_breakdown_post_params.AccuracyClaimBreakdownV1ClaimBreakdownPostParams,
+                accuracy_create_claim_breakdown_params.AccuracyCreateClaimBreakdownParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccuracyClaimBreakdownV1ClaimBreakdownPostResponse,
+            cast_to=AccuracyCreateClaimBreakdownResponse,
         )
 
-    def claim_citations_v1_claim_citations_post(
+    def create_claim_citations(
         self,
         *,
         start_date: str,
@@ -982,7 +964,7 @@ class AccuracyResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AccuracyClaimCitationsV1ClaimCitationsPostResponse:
+    ) -> AccuracyCreateClaimCitationsResponse:
         """
         Accuracy Claim Citations
 
@@ -1014,11 +996,11 @@ class AccuracyResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            AccuracyClaimCitationsV1ClaimCitationsPostResponse: Successful Response
+            AccuracyCreateClaimCitationsResponse: Successful Response
 
         Example:
             ```python
-            accuracy = client.reports.accuracy.claim_citations_v1_claim_citations_post(
+            accuracy = client.reports.accuracy.create_claim_citations(
                 start_date="",
                 end_date="",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -1059,15 +1041,15 @@ class AccuracyResource(SyncAPIResource):
                     "search_query": search_query,
                     "sort_order": sort_order,
                 },
-                accuracy_claim_citations_v1_claim_citations_post_params.AccuracyClaimCitationsV1ClaimCitationsPostParams,
+                accuracy_create_claim_citations_params.AccuracyCreateClaimCitationsParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccuracyClaimCitationsV1ClaimCitationsPostResponse,
+            cast_to=AccuracyCreateClaimCitationsResponse,
         )
 
-    def cluster_example_runs_v1_cluster_example_runs_post(
+    def create_cluster_example_runs(
         self,
         *,
         start_date: str,
@@ -1095,7 +1077,7 @@ class AccuracyResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AccuracyClusterExampleRunsV1ClusterExampleRunsPostResponse:
+    ) -> AccuracyCreateClusterExampleRunsResponse:
         """
         Accuracy Cluster Example Runs
 
@@ -1125,11 +1107,11 @@ class AccuracyResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            AccuracyClusterExampleRunsV1ClusterExampleRunsPostResponse: Successful Response
+            AccuracyCreateClusterExampleRunsResponse: Successful Response
 
         Example:
             ```python
-            accuracy = client.reports.accuracy.cluster_example_runs_v1_cluster_example_runs_post(
+            accuracy = client.reports.accuracy.create_cluster_example_runs(
                 start_date="",
                 end_date="",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -1167,15 +1149,15 @@ class AccuracyResource(SyncAPIResource):
                     "limit": limit,
                     "offset": offset,
                 },
-                accuracy_cluster_example_runs_v1_cluster_example_runs_post_params.AccuracyClusterExampleRunsV1ClusterExampleRunsPostParams,
+                accuracy_create_cluster_example_runs_params.AccuracyCreateClusterExampleRunsParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccuracyClusterExampleRunsV1ClusterExampleRunsPostResponse,
+            cast_to=AccuracyCreateClusterExampleRunsResponse,
         )
 
-    def cluster_verification_pairs_v1_cluster_verification_pairs_post(
+    def create_cluster_verification_pairs(
         self,
         *,
         category_id: str,
@@ -1186,7 +1168,7 @@ class AccuracyResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AccuracyClusterVerificationPairsV1ClusterVerificationPairsPostResponse:
+    ) -> AccuracyCreateClusterVerificationPairsResponse:
         """
         Accuracy Cluster Verification Pairs
 
@@ -1199,11 +1181,11 @@ class AccuracyResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            AccuracyClusterVerificationPairsV1ClusterVerificationPairsPostResponse: Successful Response
+            AccuracyCreateClusterVerificationPairsResponse: Successful Response
 
         Example:
             ```python
-            accuracy = client.reports.accuracy.cluster_verification_pairs_v1_cluster_verification_pairs_post(
+            accuracy = client.reports.accuracy.create_cluster_verification_pairs(
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 cluster_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
             )
@@ -1216,15 +1198,15 @@ class AccuracyResource(SyncAPIResource):
                     "category_id": category_id,
                     "cluster_id": cluster_id,
                 },
-                accuracy_cluster_verification_pairs_v1_cluster_verification_pairs_post_params.AccuracyClusterVerificationPairsV1ClusterVerificationPairsPostParams,
+                accuracy_create_cluster_verification_pairs_params.AccuracyCreateClusterVerificationPairsParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccuracyClusterVerificationPairsV1ClusterVerificationPairsPostResponse,
+            cast_to=AccuracyCreateClusterVerificationPairsResponse,
         )
 
-    def factcheck_setup_status_v1_factcheck_setup_status_post(
+    def create_factcheck_setup_status(
         self,
         *,
         category_id: str,
@@ -1234,7 +1216,7 @@ class AccuracyResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AccuracyFactcheckSetupStatusV1FactcheckSetupStatusPostResponse:
+    ) -> AccuracyCreateFactcheckSetupStatusResponse:
         """
         Accuracy Factcheck Setup Status
 
@@ -1246,11 +1228,11 @@ class AccuracyResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            AccuracyFactcheckSetupStatusV1FactcheckSetupStatusPostResponse: Successful Response
+            AccuracyCreateFactcheckSetupStatusResponse: Successful Response
 
         Example:
             ```python
-            accuracy = client.reports.accuracy.factcheck_setup_status_v1_factcheck_setup_status_post(
+            accuracy = client.reports.accuracy.create_factcheck_setup_status(
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
             )
             ```
@@ -1259,12 +1241,12 @@ class AccuracyResource(SyncAPIResource):
             "/v1/reports/accuracy/factcheck-setup-status",
             body=maybe_transform(
                 {"category_id": category_id},
-                accuracy_factcheck_setup_status_v1_factcheck_setup_status_post_params.AccuracyFactcheckSetupStatusV1FactcheckSetupStatusPostParams,
+                accuracy_create_factcheck_setup_status_params.AccuracyCreateFactcheckSetupStatusParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccuracyFactcheckSetupStatusV1FactcheckSetupStatusPostResponse,
+            cast_to=AccuracyCreateFactcheckSetupStatusResponse,
         )
 
 
@@ -1277,7 +1259,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
     def with_streaming_response(self) -> AsyncAccuracyResourceWithStreamingResponse:
         return AsyncAccuracyResourceWithStreamingResponse(self)
 
-    async def overview_v1_overview_post(
+    async def create_overview(
         self,
         *,
         start_date: str,
@@ -1304,7 +1286,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AccuracyOverviewV1OverviewPostResponse:
+    ) -> AccuracyCreateOverviewResponse:
         """
         Accuracy Overview
 
@@ -1333,11 +1315,11 @@ class AsyncAccuracyResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            AccuracyOverviewV1OverviewPostResponse: Successful Response
+            AccuracyCreateOverviewResponse: Successful Response
 
         Example:
             ```python
-            accuracy = await client.reports.accuracy.overview_v1_overview_post(
+            accuracy = await client.reports.accuracy.create_overview(
                 start_date="",
                 end_date="",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -1372,15 +1354,15 @@ class AsyncAccuracyResource(AsyncAPIResource):
                     "date_bucket": date_bucket,
                     "group_by": group_by,
                 },
-                accuracy_overview_v1_overview_post_params.AccuracyOverviewV1OverviewPostParams,
+                accuracy_create_overview_params.AccuracyCreateOverviewParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccuracyOverviewV1OverviewPostResponse,
+            cast_to=AccuracyCreateOverviewResponse,
         )
 
-    async def breakdown_v1_breakdown_post(
+    async def create_breakdown(
         self,
         *,
         start_date: str,
@@ -1409,14 +1391,14 @@ class AsyncAccuracyResource(AsyncAPIResource):
         search_query: Optional[str] | Omit = omit,
         sort_by: Literal["citationShare", "accuracy"] | Omit = omit,
         sort_order: Literal["asc", "desc"] | Omit = omit,
-        pagination: Optional[accuracy_breakdown_v1_breakdown_post_params.Pagination] | Omit = omit,
+        pagination: Optional[accuracy_create_breakdown_params.Pagination] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AccuracyBreakdownV1BreakdownPostResponse:
+    ) -> AccuracyCreateBreakdownResponse:
         """
         Accuracy Breakdown
 
@@ -1452,11 +1434,11 @@ class AsyncAccuracyResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            AccuracyBreakdownV1BreakdownPostResponse: Successful Response
+            AccuracyCreateBreakdownResponse: Successful Response
 
         Example:
             ```python
-            accuracy = await client.reports.accuracy.breakdown_v1_breakdown_post(
+            accuracy = await client.reports.accuracy.create_breakdown(
                 start_date="",
                 end_date="",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -1502,15 +1484,15 @@ class AsyncAccuracyResource(AsyncAPIResource):
                     "sort_order": sort_order,
                     "pagination": pagination,
                 },
-                accuracy_breakdown_v1_breakdown_post_params.AccuracyBreakdownV1BreakdownPostParams,
+                accuracy_create_breakdown_params.AccuracyCreateBreakdownParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccuracyBreakdownV1BreakdownPostResponse,
+            cast_to=AccuracyCreateBreakdownResponse,
         )
 
-    async def citation_analysis_v1_citation_analysis_post(
+    async def create_citation_analysis(
         self,
         *,
         category_id: str,
@@ -1523,7 +1505,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AccuracyCitationAnalysisV1CitationAnalysisPostResponse:
+    ) -> AccuracyCreateCitationAnalysisResponse:
         """
         Accuracy Citation Analysis
 
@@ -1538,11 +1520,11 @@ class AsyncAccuracyResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            AccuracyCitationAnalysisV1CitationAnalysisPostResponse: Successful Response
+            AccuracyCreateCitationAnalysisResponse: Successful Response
 
         Example:
             ```python
-            accuracy = await client.reports.accuracy.citation_analysis_v1_citation_analysis_post(
+            accuracy = await client.reports.accuracy.create_citation_analysis(
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 clean_href="",
                 start_date="",
@@ -1559,15 +1541,15 @@ class AsyncAccuracyResource(AsyncAPIResource):
                     "start_date": start_date,
                     "end_date": end_date,
                 },
-                accuracy_citation_analysis_v1_citation_analysis_post_params.AccuracyCitationAnalysisV1CitationAnalysisPostParams,
+                accuracy_create_citation_analysis_params.AccuracyCreateCitationAnalysisParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccuracyCitationAnalysisV1CitationAnalysisPostResponse,
+            cast_to=AccuracyCreateCitationAnalysisResponse,
         )
 
-    async def topic_ids_v1_topic_ids_post(
+    async def create_topic_ids(
         self,
         *,
         category_id: str,
@@ -1579,7 +1561,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AccuracyTopicIDsV1TopicIDsPostResponse:
+    ) -> AccuracyCreateTopicIDsResponse:
         """
         Accuracy Topic Ids
 
@@ -1593,11 +1575,11 @@ class AsyncAccuracyResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            AccuracyTopicIDsV1TopicIDsPostResponse: Successful Response
+            AccuracyCreateTopicIDsResponse: Successful Response
 
         Example:
             ```python
-            accuracy = await client.reports.accuracy.topic_ids_v1_topic_ids_post(
+            accuracy = await client.reports.accuracy.create_topic_ids(
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 start_date="",
                 end_date="",
@@ -1612,15 +1594,15 @@ class AsyncAccuracyResource(AsyncAPIResource):
                     "start_date": start_date,
                     "end_date": end_date,
                 },
-                accuracy_topic_ids_v1_topic_ids_post_params.AccuracyTopicIDsV1TopicIDsPostParams,
+                accuracy_create_topic_ids_params.AccuracyCreateTopicIDsParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccuracyTopicIDsV1TopicIDsPostResponse,
+            cast_to=AccuracyCreateTopicIDsResponse,
         )
 
-    async def inaccurate_themes_v1_inaccurate_themes_post(
+    async def create_inaccurate_themes(
         self,
         *,
         start_date: str,
@@ -1650,7 +1632,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AccuracyInaccurateThemesV1InaccurateThemesPostResponse:
+    ) -> AccuracyCreateInaccurateThemesResponse:
         """
         Accuracy Inaccurate Themes
 
@@ -1682,11 +1664,11 @@ class AsyncAccuracyResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            AccuracyInaccurateThemesV1InaccurateThemesPostResponse: Successful Response
+            AccuracyCreateInaccurateThemesResponse: Successful Response
 
         Example:
             ```python
-            accuracy = await client.reports.accuracy.inaccurate_themes_v1_inaccurate_themes_post(
+            accuracy = await client.reports.accuracy.create_inaccurate_themes(
                 start_date="",
                 end_date="",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -1727,15 +1709,15 @@ class AsyncAccuracyResource(AsyncAPIResource):
                     "sort_order": sort_order,
                     "search_query": search_query,
                 },
-                accuracy_inaccurate_themes_v1_inaccurate_themes_post_params.AccuracyInaccurateThemesV1InaccurateThemesPostParams,
+                accuracy_create_inaccurate_themes_params.AccuracyCreateInaccurateThemesParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccuracyInaccurateThemesV1InaccurateThemesPostResponse,
+            cast_to=AccuracyCreateInaccurateThemesResponse,
         )
 
-    async def inaccurate_clusters_v1_inaccurate_clusters_post(
+    async def create_inaccurate_clusters(
         self,
         *,
         start_date: str,
@@ -1765,7 +1747,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AccuracyInaccurateClustersV1InaccurateClustersPostResponse:
+    ) -> AccuracyCreateInaccurateClustersResponse:
         """
         Accuracy Inaccurate Clusters
 
@@ -1797,11 +1779,11 @@ class AsyncAccuracyResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            AccuracyInaccurateClustersV1InaccurateClustersPostResponse: Successful Response
+            AccuracyCreateInaccurateClustersResponse: Successful Response
 
         Example:
             ```python
-            accuracy = await client.reports.accuracy.inaccurate_clusters_v1_inaccurate_clusters_post(
+            accuracy = await client.reports.accuracy.create_inaccurate_clusters(
                 start_date="",
                 end_date="",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -1841,15 +1823,15 @@ class AsyncAccuracyResource(AsyncAPIResource):
                     "search_query": search_query,
                     "include_models": include_models,
                 },
-                accuracy_inaccurate_clusters_v1_inaccurate_clusters_post_params.AccuracyInaccurateClustersV1InaccurateClustersPostParams,
+                accuracy_create_inaccurate_clusters_params.AccuracyCreateInaccurateClustersParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccuracyInaccurateClustersV1InaccurateClustersPostResponse,
+            cast_to=AccuracyCreateInaccurateClustersResponse,
         )
 
-    async def inaccuracy_drivers_v1_inaccuracy_drivers_post(
+    async def create_inaccuracy_drivers(
         self,
         *,
         start_date: str,
@@ -1875,7 +1857,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AccuracyInaccuracyDriversV1InaccuracyDriversPostResponse:
+    ) -> AccuracyCreateInaccuracyDriversResponse:
         """
         Accuracy Inaccuracy Drivers
 
@@ -1903,11 +1885,11 @@ class AsyncAccuracyResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            AccuracyInaccuracyDriversV1InaccuracyDriversPostResponse: Successful Response
+            AccuracyCreateInaccuracyDriversResponse: Successful Response
 
         Example:
             ```python
-            accuracy = await client.reports.accuracy.inaccuracy_drivers_v1_inaccuracy_drivers_post(
+            accuracy = await client.reports.accuracy.create_inaccuracy_drivers(
                 start_date="",
                 end_date="",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -1941,15 +1923,15 @@ class AsyncAccuracyResource(AsyncAPIResource):
                     "citation_categories": citation_categories,
                     "limit": limit,
                 },
-                accuracy_inaccuracy_drivers_v1_inaccuracy_drivers_post_params.AccuracyInaccuracyDriversV1InaccuracyDriversPostParams,
+                accuracy_create_inaccuracy_drivers_params.AccuracyCreateInaccuracyDriversParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccuracyInaccuracyDriversV1InaccuracyDriversPostResponse,
+            cast_to=AccuracyCreateInaccuracyDriversResponse,
         )
 
-    async def top_inaccurate_claims_v1_top_inaccurate_claims_post(
+    async def create_top_inaccurate_claims(
         self,
         *,
         start_date: str,
@@ -1975,7 +1957,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AccuracyTopInaccurateClaimsV1TopInaccurateClaimsPostResponse:
+    ) -> AccuracyCreateTopInaccurateClaimsResponse:
         """
         Accuracy Top Inaccurate Claims
 
@@ -2003,11 +1985,11 @@ class AsyncAccuracyResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            AccuracyTopInaccurateClaimsV1TopInaccurateClaimsPostResponse: Successful Response
+            AccuracyCreateTopInaccurateClaimsResponse: Successful Response
 
         Example:
             ```python
-            accuracy = await client.reports.accuracy.top_inaccurate_claims_v1_top_inaccurate_claims_post(
+            accuracy = await client.reports.accuracy.create_top_inaccurate_claims(
                 start_date="",
                 end_date="",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -2041,15 +2023,15 @@ class AsyncAccuracyResource(AsyncAPIResource):
                     "citation_categories": citation_categories,
                     "limit": limit,
                 },
-                accuracy_top_inaccurate_claims_v1_top_inaccurate_claims_post_params.AccuracyTopInaccurateClaimsV1TopInaccurateClaimsPostParams,
+                accuracy_create_top_inaccurate_claims_params.AccuracyCreateTopInaccurateClaimsParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccuracyTopInaccurateClaimsV1TopInaccurateClaimsPostResponse,
+            cast_to=AccuracyCreateTopInaccurateClaimsResponse,
         )
 
-    async def claim_breakdown_v1_claim_breakdown_post(
+    async def create_claim_breakdown(
         self,
         *,
         start_date: str,
@@ -2075,7 +2057,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AccuracyClaimBreakdownV1ClaimBreakdownPostResponse:
+    ) -> AccuracyCreateClaimBreakdownResponse:
         """
         Accuracy Claim Breakdown
 
@@ -2103,11 +2085,11 @@ class AsyncAccuracyResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            AccuracyClaimBreakdownV1ClaimBreakdownPostResponse: Successful Response
+            AccuracyCreateClaimBreakdownResponse: Successful Response
 
         Example:
             ```python
-            accuracy = await client.reports.accuracy.claim_breakdown_v1_claim_breakdown_post(
+            accuracy = await client.reports.accuracy.create_claim_breakdown(
                 start_date="",
                 end_date="",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -2141,15 +2123,15 @@ class AsyncAccuracyResource(AsyncAPIResource):
                     "citation_categories": citation_categories,
                     "cluster_id": cluster_id,
                 },
-                accuracy_claim_breakdown_v1_claim_breakdown_post_params.AccuracyClaimBreakdownV1ClaimBreakdownPostParams,
+                accuracy_create_claim_breakdown_params.AccuracyCreateClaimBreakdownParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccuracyClaimBreakdownV1ClaimBreakdownPostResponse,
+            cast_to=AccuracyCreateClaimBreakdownResponse,
         )
 
-    async def claim_citations_v1_claim_citations_post(
+    async def create_claim_citations(
         self,
         *,
         start_date: str,
@@ -2179,7 +2161,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AccuracyClaimCitationsV1ClaimCitationsPostResponse:
+    ) -> AccuracyCreateClaimCitationsResponse:
         """
         Accuracy Claim Citations
 
@@ -2211,11 +2193,11 @@ class AsyncAccuracyResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            AccuracyClaimCitationsV1ClaimCitationsPostResponse: Successful Response
+            AccuracyCreateClaimCitationsResponse: Successful Response
 
         Example:
             ```python
-            accuracy = await client.reports.accuracy.claim_citations_v1_claim_citations_post(
+            accuracy = await client.reports.accuracy.create_claim_citations(
                 start_date="",
                 end_date="",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -2256,15 +2238,15 @@ class AsyncAccuracyResource(AsyncAPIResource):
                     "search_query": search_query,
                     "sort_order": sort_order,
                 },
-                accuracy_claim_citations_v1_claim_citations_post_params.AccuracyClaimCitationsV1ClaimCitationsPostParams,
+                accuracy_create_claim_citations_params.AccuracyCreateClaimCitationsParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccuracyClaimCitationsV1ClaimCitationsPostResponse,
+            cast_to=AccuracyCreateClaimCitationsResponse,
         )
 
-    async def cluster_example_runs_v1_cluster_example_runs_post(
+    async def create_cluster_example_runs(
         self,
         *,
         start_date: str,
@@ -2292,7 +2274,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AccuracyClusterExampleRunsV1ClusterExampleRunsPostResponse:
+    ) -> AccuracyCreateClusterExampleRunsResponse:
         """
         Accuracy Cluster Example Runs
 
@@ -2322,11 +2304,11 @@ class AsyncAccuracyResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            AccuracyClusterExampleRunsV1ClusterExampleRunsPostResponse: Successful Response
+            AccuracyCreateClusterExampleRunsResponse: Successful Response
 
         Example:
             ```python
-            accuracy = await client.reports.accuracy.cluster_example_runs_v1_cluster_example_runs_post(
+            accuracy = await client.reports.accuracy.create_cluster_example_runs(
                 start_date="",
                 end_date="",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -2364,15 +2346,15 @@ class AsyncAccuracyResource(AsyncAPIResource):
                     "limit": limit,
                     "offset": offset,
                 },
-                accuracy_cluster_example_runs_v1_cluster_example_runs_post_params.AccuracyClusterExampleRunsV1ClusterExampleRunsPostParams,
+                accuracy_create_cluster_example_runs_params.AccuracyCreateClusterExampleRunsParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccuracyClusterExampleRunsV1ClusterExampleRunsPostResponse,
+            cast_to=AccuracyCreateClusterExampleRunsResponse,
         )
 
-    async def cluster_verification_pairs_v1_cluster_verification_pairs_post(
+    async def create_cluster_verification_pairs(
         self,
         *,
         category_id: str,
@@ -2383,7 +2365,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AccuracyClusterVerificationPairsV1ClusterVerificationPairsPostResponse:
+    ) -> AccuracyCreateClusterVerificationPairsResponse:
         """
         Accuracy Cluster Verification Pairs
 
@@ -2396,11 +2378,11 @@ class AsyncAccuracyResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            AccuracyClusterVerificationPairsV1ClusterVerificationPairsPostResponse: Successful Response
+            AccuracyCreateClusterVerificationPairsResponse: Successful Response
 
         Example:
             ```python
-            accuracy = await client.reports.accuracy.cluster_verification_pairs_v1_cluster_verification_pairs_post(
+            accuracy = await client.reports.accuracy.create_cluster_verification_pairs(
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 cluster_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
             )
@@ -2413,15 +2395,15 @@ class AsyncAccuracyResource(AsyncAPIResource):
                     "category_id": category_id,
                     "cluster_id": cluster_id,
                 },
-                accuracy_cluster_verification_pairs_v1_cluster_verification_pairs_post_params.AccuracyClusterVerificationPairsV1ClusterVerificationPairsPostParams,
+                accuracy_create_cluster_verification_pairs_params.AccuracyCreateClusterVerificationPairsParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccuracyClusterVerificationPairsV1ClusterVerificationPairsPostResponse,
+            cast_to=AccuracyCreateClusterVerificationPairsResponse,
         )
 
-    async def factcheck_setup_status_v1_factcheck_setup_status_post(
+    async def create_factcheck_setup_status(
         self,
         *,
         category_id: str,
@@ -2431,7 +2413,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AccuracyFactcheckSetupStatusV1FactcheckSetupStatusPostResponse:
+    ) -> AccuracyCreateFactcheckSetupStatusResponse:
         """
         Accuracy Factcheck Setup Status
 
@@ -2443,11 +2425,11 @@ class AsyncAccuracyResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            AccuracyFactcheckSetupStatusV1FactcheckSetupStatusPostResponse: Successful Response
+            AccuracyCreateFactcheckSetupStatusResponse: Successful Response
 
         Example:
             ```python
-            accuracy = await client.reports.accuracy.factcheck_setup_status_v1_factcheck_setup_status_post(
+            accuracy = await client.reports.accuracy.create_factcheck_setup_status(
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
             )
             ```
@@ -2456,12 +2438,12 @@ class AsyncAccuracyResource(AsyncAPIResource):
             "/v1/reports/accuracy/factcheck-setup-status",
             body=await async_maybe_transform(
                 {"category_id": category_id},
-                accuracy_factcheck_setup_status_v1_factcheck_setup_status_post_params.AccuracyFactcheckSetupStatusV1FactcheckSetupStatusPostParams,
+                accuracy_create_factcheck_setup_status_params.AccuracyCreateFactcheckSetupStatusParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AccuracyFactcheckSetupStatusV1FactcheckSetupStatusPostResponse,
+            cast_to=AccuracyCreateFactcheckSetupStatusResponse,
         )
 
 
@@ -2469,44 +2451,44 @@ class AccuracyResourceWithRawResponse:
     def __init__(self, accuracy: AccuracyResource) -> None:
         self._accuracy = accuracy
 
-        self.overview_v1_overview_post = to_raw_response_wrapper(
-            accuracy.overview_v1_overview_post,
+        self.create_overview = to_raw_response_wrapper(
+            accuracy.create_overview,
         )
-        self.breakdown_v1_breakdown_post = to_raw_response_wrapper(
-            accuracy.breakdown_v1_breakdown_post,
+        self.create_breakdown = to_raw_response_wrapper(
+            accuracy.create_breakdown,
         )
-        self.citation_analysis_v1_citation_analysis_post = to_raw_response_wrapper(
-            accuracy.citation_analysis_v1_citation_analysis_post,
+        self.create_citation_analysis = to_raw_response_wrapper(
+            accuracy.create_citation_analysis,
         )
-        self.topic_ids_v1_topic_ids_post = to_raw_response_wrapper(
-            accuracy.topic_ids_v1_topic_ids_post,
+        self.create_topic_ids = to_raw_response_wrapper(
+            accuracy.create_topic_ids,
         )
-        self.inaccurate_themes_v1_inaccurate_themes_post = to_raw_response_wrapper(
-            accuracy.inaccurate_themes_v1_inaccurate_themes_post,
+        self.create_inaccurate_themes = to_raw_response_wrapper(
+            accuracy.create_inaccurate_themes,
         )
-        self.inaccurate_clusters_v1_inaccurate_clusters_post = to_raw_response_wrapper(
-            accuracy.inaccurate_clusters_v1_inaccurate_clusters_post,
+        self.create_inaccurate_clusters = to_raw_response_wrapper(
+            accuracy.create_inaccurate_clusters,
         )
-        self.inaccuracy_drivers_v1_inaccuracy_drivers_post = to_raw_response_wrapper(
-            accuracy.inaccuracy_drivers_v1_inaccuracy_drivers_post,
+        self.create_inaccuracy_drivers = to_raw_response_wrapper(
+            accuracy.create_inaccuracy_drivers,
         )
-        self.top_inaccurate_claims_v1_top_inaccurate_claims_post = to_raw_response_wrapper(
-            accuracy.top_inaccurate_claims_v1_top_inaccurate_claims_post,
+        self.create_top_inaccurate_claims = to_raw_response_wrapper(
+            accuracy.create_top_inaccurate_claims,
         )
-        self.claim_breakdown_v1_claim_breakdown_post = to_raw_response_wrapper(
-            accuracy.claim_breakdown_v1_claim_breakdown_post,
+        self.create_claim_breakdown = to_raw_response_wrapper(
+            accuracy.create_claim_breakdown,
         )
-        self.claim_citations_v1_claim_citations_post = to_raw_response_wrapper(
-            accuracy.claim_citations_v1_claim_citations_post,
+        self.create_claim_citations = to_raw_response_wrapper(
+            accuracy.create_claim_citations,
         )
-        self.cluster_example_runs_v1_cluster_example_runs_post = to_raw_response_wrapper(
-            accuracy.cluster_example_runs_v1_cluster_example_runs_post,
+        self.create_cluster_example_runs = to_raw_response_wrapper(
+            accuracy.create_cluster_example_runs,
         )
-        self.cluster_verification_pairs_v1_cluster_verification_pairs_post = to_raw_response_wrapper(
-            accuracy.cluster_verification_pairs_v1_cluster_verification_pairs_post,
+        self.create_cluster_verification_pairs = to_raw_response_wrapper(
+            accuracy.create_cluster_verification_pairs,
         )
-        self.factcheck_setup_status_v1_factcheck_setup_status_post = to_raw_response_wrapper(
-            accuracy.factcheck_setup_status_v1_factcheck_setup_status_post,
+        self.create_factcheck_setup_status = to_raw_response_wrapper(
+            accuracy.create_factcheck_setup_status,
         )
 
 
@@ -2514,44 +2496,44 @@ class AsyncAccuracyResourceWithRawResponse:
     def __init__(self, accuracy: AsyncAccuracyResource) -> None:
         self._accuracy = accuracy
 
-        self.overview_v1_overview_post = async_to_raw_response_wrapper(
-            accuracy.overview_v1_overview_post,
+        self.create_overview = async_to_raw_response_wrapper(
+            accuracy.create_overview,
         )
-        self.breakdown_v1_breakdown_post = async_to_raw_response_wrapper(
-            accuracy.breakdown_v1_breakdown_post,
+        self.create_breakdown = async_to_raw_response_wrapper(
+            accuracy.create_breakdown,
         )
-        self.citation_analysis_v1_citation_analysis_post = async_to_raw_response_wrapper(
-            accuracy.citation_analysis_v1_citation_analysis_post,
+        self.create_citation_analysis = async_to_raw_response_wrapper(
+            accuracy.create_citation_analysis,
         )
-        self.topic_ids_v1_topic_ids_post = async_to_raw_response_wrapper(
-            accuracy.topic_ids_v1_topic_ids_post,
+        self.create_topic_ids = async_to_raw_response_wrapper(
+            accuracy.create_topic_ids,
         )
-        self.inaccurate_themes_v1_inaccurate_themes_post = async_to_raw_response_wrapper(
-            accuracy.inaccurate_themes_v1_inaccurate_themes_post,
+        self.create_inaccurate_themes = async_to_raw_response_wrapper(
+            accuracy.create_inaccurate_themes,
         )
-        self.inaccurate_clusters_v1_inaccurate_clusters_post = async_to_raw_response_wrapper(
-            accuracy.inaccurate_clusters_v1_inaccurate_clusters_post,
+        self.create_inaccurate_clusters = async_to_raw_response_wrapper(
+            accuracy.create_inaccurate_clusters,
         )
-        self.inaccuracy_drivers_v1_inaccuracy_drivers_post = async_to_raw_response_wrapper(
-            accuracy.inaccuracy_drivers_v1_inaccuracy_drivers_post,
+        self.create_inaccuracy_drivers = async_to_raw_response_wrapper(
+            accuracy.create_inaccuracy_drivers,
         )
-        self.top_inaccurate_claims_v1_top_inaccurate_claims_post = async_to_raw_response_wrapper(
-            accuracy.top_inaccurate_claims_v1_top_inaccurate_claims_post,
+        self.create_top_inaccurate_claims = async_to_raw_response_wrapper(
+            accuracy.create_top_inaccurate_claims,
         )
-        self.claim_breakdown_v1_claim_breakdown_post = async_to_raw_response_wrapper(
-            accuracy.claim_breakdown_v1_claim_breakdown_post,
+        self.create_claim_breakdown = async_to_raw_response_wrapper(
+            accuracy.create_claim_breakdown,
         )
-        self.claim_citations_v1_claim_citations_post = async_to_raw_response_wrapper(
-            accuracy.claim_citations_v1_claim_citations_post,
+        self.create_claim_citations = async_to_raw_response_wrapper(
+            accuracy.create_claim_citations,
         )
-        self.cluster_example_runs_v1_cluster_example_runs_post = async_to_raw_response_wrapper(
-            accuracy.cluster_example_runs_v1_cluster_example_runs_post,
+        self.create_cluster_example_runs = async_to_raw_response_wrapper(
+            accuracy.create_cluster_example_runs,
         )
-        self.cluster_verification_pairs_v1_cluster_verification_pairs_post = async_to_raw_response_wrapper(
-            accuracy.cluster_verification_pairs_v1_cluster_verification_pairs_post,
+        self.create_cluster_verification_pairs = async_to_raw_response_wrapper(
+            accuracy.create_cluster_verification_pairs,
         )
-        self.factcheck_setup_status_v1_factcheck_setup_status_post = async_to_raw_response_wrapper(
-            accuracy.factcheck_setup_status_v1_factcheck_setup_status_post,
+        self.create_factcheck_setup_status = async_to_raw_response_wrapper(
+            accuracy.create_factcheck_setup_status,
         )
 
 
@@ -2559,44 +2541,44 @@ class AccuracyResourceWithStreamingResponse:
     def __init__(self, accuracy: AccuracyResource) -> None:
         self._accuracy = accuracy
 
-        self.overview_v1_overview_post = to_streamed_response_wrapper(
-            accuracy.overview_v1_overview_post,
+        self.create_overview = to_streamed_response_wrapper(
+            accuracy.create_overview,
         )
-        self.breakdown_v1_breakdown_post = to_streamed_response_wrapper(
-            accuracy.breakdown_v1_breakdown_post,
+        self.create_breakdown = to_streamed_response_wrapper(
+            accuracy.create_breakdown,
         )
-        self.citation_analysis_v1_citation_analysis_post = to_streamed_response_wrapper(
-            accuracy.citation_analysis_v1_citation_analysis_post,
+        self.create_citation_analysis = to_streamed_response_wrapper(
+            accuracy.create_citation_analysis,
         )
-        self.topic_ids_v1_topic_ids_post = to_streamed_response_wrapper(
-            accuracy.topic_ids_v1_topic_ids_post,
+        self.create_topic_ids = to_streamed_response_wrapper(
+            accuracy.create_topic_ids,
         )
-        self.inaccurate_themes_v1_inaccurate_themes_post = to_streamed_response_wrapper(
-            accuracy.inaccurate_themes_v1_inaccurate_themes_post,
+        self.create_inaccurate_themes = to_streamed_response_wrapper(
+            accuracy.create_inaccurate_themes,
         )
-        self.inaccurate_clusters_v1_inaccurate_clusters_post = to_streamed_response_wrapper(
-            accuracy.inaccurate_clusters_v1_inaccurate_clusters_post,
+        self.create_inaccurate_clusters = to_streamed_response_wrapper(
+            accuracy.create_inaccurate_clusters,
         )
-        self.inaccuracy_drivers_v1_inaccuracy_drivers_post = to_streamed_response_wrapper(
-            accuracy.inaccuracy_drivers_v1_inaccuracy_drivers_post,
+        self.create_inaccuracy_drivers = to_streamed_response_wrapper(
+            accuracy.create_inaccuracy_drivers,
         )
-        self.top_inaccurate_claims_v1_top_inaccurate_claims_post = to_streamed_response_wrapper(
-            accuracy.top_inaccurate_claims_v1_top_inaccurate_claims_post,
+        self.create_top_inaccurate_claims = to_streamed_response_wrapper(
+            accuracy.create_top_inaccurate_claims,
         )
-        self.claim_breakdown_v1_claim_breakdown_post = to_streamed_response_wrapper(
-            accuracy.claim_breakdown_v1_claim_breakdown_post,
+        self.create_claim_breakdown = to_streamed_response_wrapper(
+            accuracy.create_claim_breakdown,
         )
-        self.claim_citations_v1_claim_citations_post = to_streamed_response_wrapper(
-            accuracy.claim_citations_v1_claim_citations_post,
+        self.create_claim_citations = to_streamed_response_wrapper(
+            accuracy.create_claim_citations,
         )
-        self.cluster_example_runs_v1_cluster_example_runs_post = to_streamed_response_wrapper(
-            accuracy.cluster_example_runs_v1_cluster_example_runs_post,
+        self.create_cluster_example_runs = to_streamed_response_wrapper(
+            accuracy.create_cluster_example_runs,
         )
-        self.cluster_verification_pairs_v1_cluster_verification_pairs_post = to_streamed_response_wrapper(
-            accuracy.cluster_verification_pairs_v1_cluster_verification_pairs_post,
+        self.create_cluster_verification_pairs = to_streamed_response_wrapper(
+            accuracy.create_cluster_verification_pairs,
         )
-        self.factcheck_setup_status_v1_factcheck_setup_status_post = to_streamed_response_wrapper(
-            accuracy.factcheck_setup_status_v1_factcheck_setup_status_post,
+        self.create_factcheck_setup_status = to_streamed_response_wrapper(
+            accuracy.create_factcheck_setup_status,
         )
 
 
@@ -2604,42 +2586,42 @@ class AsyncAccuracyResourceWithStreamingResponse:
     def __init__(self, accuracy: AsyncAccuracyResource) -> None:
         self._accuracy = accuracy
 
-        self.overview_v1_overview_post = async_to_streamed_response_wrapper(
-            accuracy.overview_v1_overview_post,
+        self.create_overview = async_to_streamed_response_wrapper(
+            accuracy.create_overview,
         )
-        self.breakdown_v1_breakdown_post = async_to_streamed_response_wrapper(
-            accuracy.breakdown_v1_breakdown_post,
+        self.create_breakdown = async_to_streamed_response_wrapper(
+            accuracy.create_breakdown,
         )
-        self.citation_analysis_v1_citation_analysis_post = async_to_streamed_response_wrapper(
-            accuracy.citation_analysis_v1_citation_analysis_post,
+        self.create_citation_analysis = async_to_streamed_response_wrapper(
+            accuracy.create_citation_analysis,
         )
-        self.topic_ids_v1_topic_ids_post = async_to_streamed_response_wrapper(
-            accuracy.topic_ids_v1_topic_ids_post,
+        self.create_topic_ids = async_to_streamed_response_wrapper(
+            accuracy.create_topic_ids,
         )
-        self.inaccurate_themes_v1_inaccurate_themes_post = async_to_streamed_response_wrapper(
-            accuracy.inaccurate_themes_v1_inaccurate_themes_post,
+        self.create_inaccurate_themes = async_to_streamed_response_wrapper(
+            accuracy.create_inaccurate_themes,
         )
-        self.inaccurate_clusters_v1_inaccurate_clusters_post = async_to_streamed_response_wrapper(
-            accuracy.inaccurate_clusters_v1_inaccurate_clusters_post,
+        self.create_inaccurate_clusters = async_to_streamed_response_wrapper(
+            accuracy.create_inaccurate_clusters,
         )
-        self.inaccuracy_drivers_v1_inaccuracy_drivers_post = async_to_streamed_response_wrapper(
-            accuracy.inaccuracy_drivers_v1_inaccuracy_drivers_post,
+        self.create_inaccuracy_drivers = async_to_streamed_response_wrapper(
+            accuracy.create_inaccuracy_drivers,
         )
-        self.top_inaccurate_claims_v1_top_inaccurate_claims_post = async_to_streamed_response_wrapper(
-            accuracy.top_inaccurate_claims_v1_top_inaccurate_claims_post,
+        self.create_top_inaccurate_claims = async_to_streamed_response_wrapper(
+            accuracy.create_top_inaccurate_claims,
         )
-        self.claim_breakdown_v1_claim_breakdown_post = async_to_streamed_response_wrapper(
-            accuracy.claim_breakdown_v1_claim_breakdown_post,
+        self.create_claim_breakdown = async_to_streamed_response_wrapper(
+            accuracy.create_claim_breakdown,
         )
-        self.claim_citations_v1_claim_citations_post = async_to_streamed_response_wrapper(
-            accuracy.claim_citations_v1_claim_citations_post,
+        self.create_claim_citations = async_to_streamed_response_wrapper(
+            accuracy.create_claim_citations,
         )
-        self.cluster_example_runs_v1_cluster_example_runs_post = async_to_streamed_response_wrapper(
-            accuracy.cluster_example_runs_v1_cluster_example_runs_post,
+        self.create_cluster_example_runs = async_to_streamed_response_wrapper(
+            accuracy.create_cluster_example_runs,
         )
-        self.cluster_verification_pairs_v1_cluster_verification_pairs_post = async_to_streamed_response_wrapper(
-            accuracy.cluster_verification_pairs_v1_cluster_verification_pairs_post,
+        self.create_cluster_verification_pairs = async_to_streamed_response_wrapper(
+            accuracy.create_cluster_verification_pairs,
         )
-        self.factcheck_setup_status_v1_factcheck_setup_status_post = async_to_streamed_response_wrapper(
-            accuracy.factcheck_setup_status_v1_factcheck_setup_status_post,
+        self.create_factcheck_setup_status = async_to_streamed_response_wrapper(
+            accuracy.create_factcheck_setup_status,
         )

@@ -63,7 +63,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\norganization = client.organization.list_v1_org_get()\n\nprint(organization)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\norganization = client.organizations.list()\n\nprint(organization)"
           }
         ]
       }
@@ -138,7 +138,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\norganization = client.organization.list_regions_v1_org_regions_get()\n\nprint(organization)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\norganization = client.organizations.regions()\n\nprint(organization)"
           }
         ]
       }
@@ -189,7 +189,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\norganization = client.organization.list_models_v1_org_models_get()\n\nprint(organization)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\norganization = client.organizations.models()\n\nprint(organization)"
           }
         ]
       }
@@ -264,7 +264,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\norganization = client.organization.list_domains_v1_org_domains_get()\n\nprint(organization)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\norganization = client.organizations.domains()\n\nprint(organization)"
           }
         ]
       }
@@ -335,7 +335,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\norganization = client.organization.list_assets_v1_org_assets_get()\n\nprint(organization)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\norganization = client.organizations.list_assets()\n\nprint(organization)"
           }
         ]
       }
@@ -406,7 +406,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\norganization = client.organization.list_personas_v1_org_personas_get()\n\nprint(organization)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\norganization = client.organizations.get_personas()\n\nprint(organization)"
           }
         ]
       }
@@ -482,7 +482,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\norganization = client.organization.list_categories_v1_org_categories_get()\n\nprint(organization)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\ncategory = client.organizations.categories.list()\n\nprint(category)"
           }
         ]
       }
@@ -546,7 +546,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\norganization = client.organization.list_category_topics_v1_org_categories_category_topics_get(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(organization)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\ncategory = client.organizations.categories.topics(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(category)"
           }
         ]
       }
@@ -610,7 +610,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\norganization = client.organization.list_category_tags_v1_org_categories_category_tags_get(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(organization)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\ncategory = client.organizations.categories.tags(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(category)"
           }
         ]
       }
@@ -674,7 +674,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\norganization = client.organization.list_category_regions_v1_org_categories_category_regions_get(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(organization)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\ncategory = client.organizations.categories.retrieve_regions(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(category)"
           }
         ]
       }
@@ -734,7 +734,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\norganization = client.organization.list_category_citation_categories_v1_org_categories_category_citation_categories_get(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(organization)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\ncategory = client.organizations.categories.get_citation_categories(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(category)"
           }
         ]
       }
@@ -789,14 +789,7 @@
               }
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Python",
-            "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\norganization = client.organization.list_category_citation_tags_v1_org_categories_category_citation_tags_get(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(organization)"
-          }
-        ]
+        }
       }
     },
     "/v1/org/categories/{category_id}/prompts": {
@@ -1039,7 +1032,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\norganization = client.organization.list_category_prompts_v1_org_categories_category_prompts_get(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    limit=10000,\n    status=[\"active\"],\n)\n\nprint(organization)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\ncategory = client.organizations.categories.prompts(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    limit=10000,\n    status=[\"active\"],\n)\n\nprint(category)"
           }
         ]
       },
@@ -1107,7 +1100,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\norganization = client.organization.create_category_prompts_v1_org_categories_category_id_prompts_post(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    prompts=[],\n    dry_run=False,\n)\n\nprint(organization)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\ncategory = client.organizations.categories.create_prompts(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    prompts=[],\n    dry_run=False,\n)\n\nprint(category)"
           }
         ]
       },
@@ -1175,7 +1168,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\norganization = client.organization.update_category_prompts_v1_org_categories_category_id_prompts_patch(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    prompts=[],\n    dry_run=False,\n)\n\nprint(organization)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\ncategory = client.organizations.categories.update_prompts(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    prompts=[],\n    dry_run=False,\n)\n\nprint(category)"
           }
         ]
       }
@@ -1245,7 +1238,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\norganization = client.organization.update_category_prompt_status_v1_org_categories_category_id_prompts_status_patch(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    prompt_ids=[],\n    status=\"active\",\n    dry_run=False,\n)\n\nprint(organization)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\ncategory = client.organizations.categories.update_prompt_status(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    prompt_ids=[],\n    status=\"active\",\n    dry_run=False,\n)\n\nprint(category)"
           }
         ]
       }
@@ -1308,7 +1301,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\norganization = client.organization.list_category_assets_v1_org_categories_category_assets_get(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(organization)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\ncategory = client.organizations.categories.assets(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(category)"
           }
         ]
       }
@@ -1367,7 +1360,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\norganization = client.organization.list_category_personas_v1_org_categories_category_personas_get(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(organization)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\ncategory = client.organizations.categories.get_category_personas(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(category)"
           }
         ]
       }
@@ -1423,7 +1416,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nanswer = client.prompts.answers.create_v1_post(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"2024-01-01T00:00:00.000Z\",\n    end_date=\"2024-01-01T00:00:00.000Z\",\n)\n\nprint(answer)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nprompt = client.prompts.answers(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"2024-01-01T00:00:00.000Z\",\n    end_date=\"2024-01-01T00:00:00.000Z\",\n)\n\nprint(prompt)"
           }
         ]
       }
@@ -1481,7 +1474,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\ncitation = client.reports.citations.query_v1_post(\n    date_interval=\"day\",\n    dimensions=[],\n    metrics=[],\n    order_by={},\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"2024-01-01T00:00:00.000Z\",\n    end_date=\"2024-01-01T00:00:00.000Z\",\n)\n\nprint(citation)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nreport = client.reports.citations(\n    date_interval=\"day\",\n    dimensions=[],\n    metrics=[],\n    order_by={},\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"2024-01-01T00:00:00.000Z\",\n    end_date=\"2024-01-01T00:00:00.000Z\",\n)\n\nprint(report)"
           }
         ]
       }
@@ -1593,7 +1586,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nstream = client.reports.citations.stream_v1_stream_post(\n    date_interval=\"day\",\n    dimensions=[],\n    metrics=[],\n    order_by={},\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"2024-01-01T00:00:00.000Z\",\n    end_date=\"2024-01-01T00:00:00.000Z\",\n)\n\nfor event in stream:\n    print(event)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nstream = client.reports.stream_citations(\n    date_interval=\"day\",\n    dimensions=[],\n    metrics=[],\n    order_by={},\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"2024-01-01T00:00:00.000Z\",\n    end_date=\"2024-01-01T00:00:00.000Z\",\n)\n\nfor event in stream:\n    print(event)"
           }
         ]
       }
@@ -1651,7 +1644,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nvisibility = client.reports.visibility.query_v1_post(\n    date_interval=\"day\",\n    dimensions=[],\n    metrics=[],\n    order_by={},\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"2024-01-01T00:00:00.000Z\",\n    end_date=\"2024-01-01T00:00:00.000Z\",\n)\n\nprint(visibility)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nreport = client.reports.visibility(\n    date_interval=\"day\",\n    dimensions=[],\n    metrics=[],\n    order_by={},\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"2024-01-01T00:00:00.000Z\",\n    end_date=\"2024-01-01T00:00:00.000Z\",\n)\n\nprint(report)"
           }
         ]
       }
@@ -1762,7 +1755,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nstream = client.reports.visibility.stream_v1_stream_post(\n    date_interval=\"day\",\n    dimensions=[],\n    metrics=[],\n    order_by={},\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"2024-01-01T00:00:00.000Z\",\n    end_date=\"2024-01-01T00:00:00.000Z\",\n)\n\nfor event in stream:\n    print(event)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nstream = client.reports.stream_visibility(\n    date_interval=\"day\",\n    dimensions=[],\n    metrics=[],\n    order_by={},\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"2024-01-01T00:00:00.000Z\",\n    end_date=\"2024-01-01T00:00:00.000Z\",\n)\n\nfor event in stream:\n    print(event)"
           }
         ]
       }
@@ -1820,7 +1813,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nsentiment = client.reports.sentiment.query_v1_post(\n    date_interval=\"day\",\n    dimensions=[],\n    metrics=[],\n    order_by={},\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"2024-01-01T00:00:00.000Z\",\n    end_date=\"2024-01-01T00:00:00.000Z\",\n)\n\nprint(sentiment)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nreport = client.reports.sentiment(\n    date_interval=\"day\",\n    dimensions=[],\n    metrics=[],\n    order_by={},\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"2024-01-01T00:00:00.000Z\",\n    end_date=\"2024-01-01T00:00:00.000Z\",\n)\n\nprint(report)"
           }
         ]
       }
@@ -1928,7 +1921,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nstream = client.reports.sentiment.stream_v1_stream_post(\n    date_interval=\"day\",\n    dimensions=[],\n    metrics=[],\n    order_by={},\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"2024-01-01T00:00:00.000Z\",\n    end_date=\"2024-01-01T00:00:00.000Z\",\n)\n\nfor event in stream:\n    print(event)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nstream = client.reports.stream_sentiment(\n    date_interval=\"day\",\n    dimensions=[],\n    metrics=[],\n    order_by={},\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"2024-01-01T00:00:00.000Z\",\n    end_date=\"2024-01-01T00:00:00.000Z\",\n)\n\nfor event in stream:\n    print(event)"
           }
         ]
       }
@@ -1985,7 +1978,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nreport = client.reports.query_sentiment_v2_v1_sentiment_v2_post(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    asset_name=\"\",\n    start_date=\"2024-01-01T00:00:00.000Z\",\n    end_date=\"2024-01-01T00:00:00.000Z\",\n    date_bucket=\"day\",\n    metrics=[],\n)\n\nprint(report)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nreport = client.reports.sentiment_v2(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    asset_name=\"\",\n    start_date=\"2024-01-01T00:00:00.000Z\",\n    end_date=\"2024-01-01T00:00:00.000Z\",\n    date_bucket=\"day\",\n    metrics=[],\n)\n\nprint(report)"
           }
         ]
       }
@@ -2043,7 +2036,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nweb_search_result = client.reports.web_search_results.query_v1_post(\n    date_interval=\"day\",\n    dimensions=[],\n    metrics=[],\n    order_by={},\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"2024-01-01T00:00:00.000Z\",\n    end_date=\"2024-01-01T00:00:00.000Z\",\n)\n\nprint(web_search_result)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nweb_search_result = client.reports.web_search_results.query(\n    date_interval=\"day\",\n    dimensions=[],\n    metrics=[],\n    order_by={},\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"2024-01-01T00:00:00.000Z\",\n    end_date=\"2024-01-01T00:00:00.000Z\",\n)\n\nprint(web_search_result)"
           }
         ]
       }
@@ -2154,7 +2147,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nstream = client.reports.web_search_results.stream_v1_stream_post(\n    date_interval=\"day\",\n    dimensions=[],\n    metrics=[],\n    order_by={},\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"2024-01-01T00:00:00.000Z\",\n    end_date=\"2024-01-01T00:00:00.000Z\",\n)\n\nfor event in stream:\n    print(event)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nstream = client.reports.web_search_results.stream(\n    date_interval=\"day\",\n    dimensions=[],\n    metrics=[],\n    order_by={},\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"2024-01-01T00:00:00.000Z\",\n    end_date=\"2024-01-01T00:00:00.000Z\",\n)\n\nfor event in stream:\n    print(event)"
           }
         ]
       }
@@ -2212,7 +2205,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nreferral = client.reports.referrals.create_v1_v1_post(\n    date_interval=\"day\",\n    dimensions=[],\n    metrics=[],\n    order_by={},\n    domain=\"\",\n    start_date=\"2024-01-01T00:00:00.000Z\",\n)\n\nprint(referral)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nreport = client.reports.get_referrals_report(\n    date_interval=\"day\",\n    dimensions=[],\n    metrics=[],\n    order_by={},\n    domain=\"\",\n    start_date=\"2024-01-01T00:00:00.000Z\",\n)\n\nprint(report)"
           }
         ]
       }
@@ -2270,7 +2263,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nbot = client.reports.bots.create_v1_v1_post(\n    date_interval=\"day\",\n    dimensions=[],\n    metrics=[],\n    order_by={},\n    domain=\"\",\n    start_date=\"2024-01-01T00:00:00.000Z\",\n)\n\nprint(bot)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nreport = client.reports.get_bots_report(\n    date_interval=\"day\",\n    dimensions=[],\n    metrics=[],\n    order_by={},\n    domain=\"\",\n    start_date=\"2024-01-01T00:00:00.000Z\",\n)\n\nprint(report)"
           }
         ]
       }
@@ -2357,7 +2350,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\noptimization = client.content.optimization.list_v1_asset_id_get(\n    asset_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    limit=10000,\n    offset=0,\n)\n\nprint(optimization)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\noptimization = client.content.optimization.list(\n    asset_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    limit=10000,\n    offset=0,\n)\n\nprint(optimization)"
           }
         ]
       }
@@ -2427,7 +2420,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\noptimization = client.content.optimization.analysis_v1_asset_id_id_get(\n    asset_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    content_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(optimization)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\noptimization = client.content.optimization.retrieve(\n    asset_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    content_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(optimization)"
           }
         ]
       }
@@ -2495,7 +2488,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nknowledge_base = client.knowledge_bases.list_v1_get()\n\nprint(knowledge_base)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nknowledge_base = client.knowledge_bases.list()\n\nprint(knowledge_base)"
           }
         ]
       }
@@ -2732,7 +2725,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\ndocument = client.knowledge_bases.documents.create_v1_id_post(\n    knowledge_base_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    name=\"x\",\n    text=\"x\",\n)\n\nprint(document)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\ndocument = client.knowledge_bases.documents.create(\n    knowledge_base_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    name=\"x\",\n    text=\"x\",\n)\n\nprint(document)"
           }
         ]
       },
@@ -2877,7 +2870,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\ndocument = client.knowledge_bases.documents.update_v1_id_put(\n    knowledge_base_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    name=\"x\",\n    text=\"x\",\n)\n\nprint(document)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\ndocument = client.knowledge_bases.documents.update(\n    knowledge_base_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    name=\"x\",\n    text=\"x\",\n)\n\nprint(document)"
           }
         ]
       },
@@ -2965,7 +2958,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\ndocument = client.knowledge_bases.documents.delete_v1_id_delete(\n    knowledge_base_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    name=\"x\",\n)\n\nprint(document)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\ndocument = client.knowledge_bases.documents.delete(\n    knowledge_base_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    name=\"x\",\n)\n\nprint(document)"
           }
         ]
       }
@@ -3055,7 +3048,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nfolder = client.knowledge_bases.folders.create_v1_id_post(\n    knowledge_base_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    path=\"x\",\n)\n\nprint(folder)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nfolder = client.knowledge_bases.folders.create(\n    knowledge_base_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    path=\"x\",\n)\n\nprint(folder)"
           }
         ]
       },
@@ -3143,7 +3136,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nfolder = client.knowledge_bases.folders.delete_v1_id_delete(\n    knowledge_base_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    path=\"x\",\n    recursive=False,\n)\n\nprint(folder)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nfolder = client.knowledge_bases.folders.delete(\n    knowledge_base_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    path=\"x\",\n    recursive=False,\n)\n\nprint(folder)"
           }
         ]
       }
@@ -3254,7 +3247,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nintegration = client.integrations.list_v1_get()\n\nprint(integration)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nintegration = client.integrations.list()\n\nprint(integration)"
           }
         ]
       }
@@ -3379,7 +3372,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\ndocument = client.documents.list_v1_get(\n    organization_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    limit=20,\n)\n\nprint(document)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\ndocument = client.documents.list(\n    organization_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    limit=20,\n)\n\nprint(document)"
           }
         ]
       },
@@ -3435,7 +3428,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\ndocument = client.documents.create_v1_post(\n    id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    organization_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    name=\"x\",\n    content_markdown=\"x\",\n)\n\nprint(document)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\ndocument = client.documents.create(\n    id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    organization_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    name=\"x\",\n    content_markdown=\"x\",\n)\n\nprint(document)"
           }
         ]
       }
@@ -3544,7 +3537,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\ndocument = client.documents.read_v1_id_get(\n    document_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    organization_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    include_tabs=True,\n    include_comments=True,\n    preview=True,\n)\n\nprint(document)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\ndocument = client.documents.retrieve(\n    document_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    organization_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    include_tabs=True,\n    include_comments=True,\n    preview=True,\n)\n\nprint(document)"
           }
         ]
       },
@@ -3614,7 +3607,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\ndocument = client.documents.patch_v1_id_patch(\n    document_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    organization_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(document)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\ndocument = client.documents.update(\n    document_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    organization_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(document)"
           }
         ]
       },
@@ -3678,7 +3671,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nclient.documents.delete_v1_id_delete(\n    document_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    organization_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nclient.documents.delete(\n    document_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    organization_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)"
           }
         ]
       }
@@ -3750,7 +3743,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\ndocument = client.documents.replace_content_v1_id_content_post(\n    document_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    organization_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    content_markdown=\"\",\n    skip_title_sync=False,\n)\n\nprint(document)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\ndocument = client.documents.replace_content(\n    document_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    organization_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    content_markdown=\"\",\n    skip_title_sync=False,\n)\n\nprint(document)"
           }
         ]
       }
@@ -3943,7 +3936,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nopen_ai_ad = client.open_ai_ads.list_account_insights_v1_openai_account_insights_get()\n\nprint(open_ai_ad)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nad_account = client.ads.openai_ads.ad_account.retrieve_insights()\n\nprint(ad_account)"
           }
         ]
       }
@@ -4044,7 +4037,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nproject = client.projects.list_v1_get(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    limit=100,\n    offset=0,\n)\n\nprint(project)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nproject = client.projects.list(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    limit=100,\n    offset=0,\n)\n\nprint(project)"
           }
         ]
       },
@@ -4098,7 +4091,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nproject = client.projects.create_v1_post(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(project)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nproject = client.projects.create(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(project)"
           }
         ]
       }
@@ -4199,7 +4192,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\ngeneration = client.projects.generations.list_v1_get(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    limit=100,\n    offset=0,\n)\n\nprint(generation)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\ngeneration = client.projects.generations.list(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    limit=100,\n    offset=0,\n)\n\nprint(generation)"
           }
         ]
       }
@@ -4271,7 +4264,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\ngeneration = client.projects.generations.retrieve_status_v1_run_get(\n    run_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(generation)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\ngeneration = client.projects.generations.retrieve(\n    run_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(generation)"
           }
         ]
       }
@@ -4343,7 +4336,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nproject = client.projects.retrieve_v1_get(\n    project_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(project)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nproject = client.projects.retrieve(\n    project_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(project)"
           }
         ]
       },
@@ -4406,7 +4399,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nclient.projects.delete_v1_id_delete(\n    project_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nclient.projects.delete(\n    project_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)"
           }
         ]
       }
@@ -4478,7 +4471,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nproject = client.projects.list_status_v1_status_get(\n    project_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(project)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nproject = client.projects.get_status(\n    project_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(project)"
           }
         ]
       }
@@ -4567,7 +4560,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nproject = client.projects.archive_v1_id_archive_post(\n    project_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(project)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nproject = client.projects.archive(\n    project_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(project)"
           }
         ]
       }
@@ -4639,7 +4632,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nproject = client.projects.unarchive_v1_id_unarchive_post(\n    project_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(project)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nproject = client.projects.unarchive(\n    project_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(project)"
           }
         ]
       }
@@ -4711,7 +4704,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\ntask = client.projects.tasks.list_v1_id_get(\n    project_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(task)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\ntask = client.projects.tasks.list(\n    project_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(task)"
           }
         ]
       },
@@ -4791,7 +4784,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\ntask = client.projects.tasks.create_v1_id_post(\n    project_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    title=\"x\",\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(task)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\ntask = client.projects.tasks.create(\n    project_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    title=\"x\",\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(task)"
           }
         ]
       }
@@ -4875,7 +4868,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\ntask = client.projects.tasks.retrieve_v1_get(\n    project_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    task_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(task)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\ntask = client.projects.tasks.retrieve(\n    project_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    task_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(task)"
           }
         ]
       },
@@ -4967,7 +4960,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\ntask = client.projects.tasks.update_v1_id_id_patch(\n    project_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    task_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(task)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\ntask = client.projects.tasks.update(\n    project_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    task_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(task)"
           }
         ]
       },
@@ -5042,7 +5035,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nclient.projects.tasks.delete_v1_id_id_delete(\n    project_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    task_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nclient.projects.tasks.delete(\n    project_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    task_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)"
           }
         ]
       }
@@ -5136,7 +5129,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\ntask = client.projects.tasks.update_status_v1_id_id_status_post(\n    project_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    task_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    status=\"not_started\",\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(task)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\ntask = client.projects.tasks.update_status(\n    project_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    task_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    status=\"not_started\",\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(task)"
           }
         ]
       }
@@ -5192,7 +5185,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nquery_fanout = client.reports.query_fanouts.v1_post(\n    date_interval=\"day\",\n    dimensions=[],\n    metrics=[],\n    order_by={},\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"2024-01-01T00:00:00.000Z\",\n    end_date=\"2024-01-01T00:00:00.000Z\",\n)\n\nprint(query_fanout)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nreport = client.reports.query_fanouts(\n    date_interval=\"day\",\n    dimensions=[],\n    metrics=[],\n    order_by={},\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"2024-01-01T00:00:00.000Z\",\n    end_date=\"2024-01-01T00:00:00.000Z\",\n)\n\nprint(report)"
           }
         ]
       }
@@ -5243,13 +5236,6 @@
           {
             "BearerAuth": []
           }
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Python",
-            "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nshopping = client.reports.shopping.visibility_v1_visibility_post(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"2024-01-01T00:00:00.000Z\",\n    end_date=\"2024-01-01T00:00:00.000Z\",\n    date_interval=\"day\",\n    include_count=False,\n    tag_filter_type=\"any\",\n    include_no_tag=False,\n    exclude_topic_ids=False,\n    include_asset_only=False,\n    rank_by=\"visibility_score\",\n    include_position_frequency=False,\n)\n\nprint(shopping)"
-          }
         ]
       }
     },
@@ -5298,13 +5284,6 @@
           },
           {
             "BearerAuth": []
-          }
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Python",
-            "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nshopping = client.reports.shopping.item_visibility_v1_item_visibility_post(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"2024-01-01T00:00:00.000Z\",\n    end_date=\"2024-01-01T00:00:00.000Z\",\n    date_interval=\"day\",\n    include_count=False,\n    tag_filter_type=\"any\",\n    include_no_tag=False,\n    exclude_topic_ids=False,\n    merchant_filter_type=\"any\",\n    include_competitors=False,\n    competitor_limit=5,\n    include_position_frequency=False,\n)\n\nprint(shopping)"
           }
         ]
       }
@@ -5355,13 +5334,6 @@
           {
             "BearerAuth": []
           }
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Python",
-            "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nshopping = client.reports.shopping.merchant_distribution_v1_merchant_distribution_post(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"2024-01-01T00:00:00.000Z\",\n    end_date=\"2024-01-01T00:00:00.000Z\",\n    date_interval=\"day\",\n    include_count=False,\n    tag_filter_type=\"any\",\n    include_no_tag=False,\n    exclude_topic_ids=False,\n)\n\nprint(shopping)"
-          }
         ]
       }
     },
@@ -5410,13 +5382,6 @@
           },
           {
             "BearerAuth": []
-          }
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Python",
-            "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nshopping = client.reports.shopping.merchant_visibility_by_brand_v1_merchant_visibility_by_brand_post(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"2024-01-01T00:00:00.000Z\",\n    end_date=\"2024-01-01T00:00:00.000Z\",\n    date_interval=\"day\",\n    include_count=False,\n    tag_filter_type=\"any\",\n    include_no_tag=False,\n    exclude_topic_ids=False,\n    include_brand_only=False,\n)\n\nprint(shopping)"
           }
         ]
       }
@@ -5467,13 +5432,6 @@
           {
             "BearerAuth": []
           }
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Python",
-            "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nshopping = client.reports.shopping.merchant_by_items_v1_merchant_by_items_post(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"2024-01-01T00:00:00.000Z\",\n    end_date=\"2024-01-01T00:00:00.000Z\",\n    date_interval=\"day\",\n    include_count=False,\n    tag_filter_type=\"any\",\n    include_no_tag=False,\n    exclude_topic_ids=False,\n)\n\nprint(shopping)"
-          }
         ]
       }
     },
@@ -5522,13 +5480,6 @@
           },
           {
             "BearerAuth": []
-          }
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Python",
-            "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nshopping = client.reports.shopping.all_items_with_merchants_v1_all_items_with_merchants_post(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"2024-01-01T00:00:00.000Z\",\n    end_date=\"2024-01-01T00:00:00.000Z\",\n    date_interval=\"day\",\n    include_count=False,\n    tag_filter_type=\"any\",\n    include_no_tag=False,\n    exclude_topic_ids=False,\n    merchant_filter_type=\"any\",\n    rank_by=\"visibility\",\n    sort_order=\"desc\",\n)\n\nprint(shopping)"
           }
         ]
       }
@@ -5579,13 +5530,6 @@
           {
             "BearerAuth": []
           }
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Python",
-            "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nshopping = client.reports.shopping.trigger_rate_v1_trigger_rate_post(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"2024-01-01T00:00:00.000Z\",\n    end_date=\"2024-01-01T00:00:00.000Z\",\n    date_interval=\"day\",\n    include_count=False,\n    tag_filter_type=\"any\",\n    include_no_tag=False,\n    exclude_topic_ids=False,\n)\n\nprint(shopping)"
-          }
         ]
       }
     },
@@ -5634,13 +5578,6 @@
           },
           {
             "BearerAuth": []
-          }
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Python",
-            "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nshopping = client.reports.shopping.triggered_prompts_v1_triggered_prompts_post(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"2024-01-01T00:00:00.000Z\",\n    end_date=\"2024-01-01T00:00:00.000Z\",\n    date_interval=\"day\",\n    include_count=False,\n    tag_filter_type=\"any\",\n    include_no_tag=False,\n    exclude_topic_ids=False,\n)\n\nprint(shopping)"
           }
         ]
       }
@@ -5691,13 +5628,6 @@
           {
             "BearerAuth": []
           }
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Python",
-            "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nshopping = client.reports.shopping.triggered_topics_v1_triggered_topics_post(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"2024-01-01T00:00:00.000Z\",\n    end_date=\"2024-01-01T00:00:00.000Z\",\n    date_interval=\"day\",\n    include_count=False,\n    tag_filter_type=\"any\",\n    include_no_tag=False,\n    exclude_topic_ids=False,\n)\n\nprint(shopping)"
-          }
         ]
       }
     },
@@ -5746,13 +5676,6 @@
           },
           {
             "BearerAuth": []
-          }
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Python",
-            "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nshopping = client.reports.shopping.merchant_share_v1_merchant_share_post(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"2024-01-01T00:00:00.000Z\",\n    end_date=\"2024-01-01T00:00:00.000Z\",\n    date_interval=\"day\",\n    include_count=False,\n    tag_filter_type=\"any\",\n    include_no_tag=False,\n    exclude_topic_ids=False,\n)\n\nprint(shopping)"
           }
         ]
       }
@@ -5803,13 +5726,6 @@
           {
             "BearerAuth": []
           }
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Python",
-            "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nshopping = client.reports.shopping.product_merchant_urls_v1_product_merchant_urls_post(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    product_names=[],\n    start_date=\"2024-01-01T00:00:00.000Z\",\n    end_date=\"2024-01-01T00:00:00.000Z\",\n)\n\nprint(shopping)"
-          }
         ]
       }
     },
@@ -5858,13 +5774,6 @@
           },
           {
             "BearerAuth": []
-          }
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "Python",
-            "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nshopping = client.reports.shopping.executions_v1_executions_post(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"2024-01-01T00:00:00.000Z\",\n    end_date=\"2024-01-01T00:00:00.000Z\",\n    date_interval=\"day\",\n    include_count=False,\n    tag_filter_type=\"any\",\n    include_no_tag=False,\n    exclude_topic_ids=False,\n    analysis_filter_type=\"any\",\n)\n\nprint(shopping)"
           }
         ]
       }
@@ -5962,7 +5871,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nagent = client.agents.list_v1_get(\n    limit=100,\n)\n\nprint(agent)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nagent = client.agents.list(\n    limit=100,\n)\n\nprint(agent)"
           }
         ]
       },
@@ -6018,7 +5927,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nagent = client.agents.create_v1_post(\n    organization_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    name=\"x\",\n)\n\nprint(agent)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nagent = client.agents.create(\n    organization_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    name=\"x\",\n)\n\nprint(agent)"
           }
         ]
       }
@@ -6079,7 +5988,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nagent = client.agents.publish_v1_id_publish_post(\n    agent_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(agent)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nagent = client.agents.publish(\n    agent_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(agent)"
           }
         ]
       }
@@ -6126,7 +6035,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nnode_type = client.agents.node_types.list_v1_get()\n\nprint(node_type)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nnode_type = client.agents.node_types.list()\n\nprint(node_type)"
           }
         ]
       }
@@ -6186,7 +6095,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nnode_type = client.agents.node_types.list_schema_v1_schema_get(\n    node_type=\"nodeType\",\n)\n\nprint(node_type)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nnode_type = client.agents.node_types.retrieve_schema(\n    node_type=\"nodeType\",\n)\n\nprint(node_type)"
           }
         ]
       }
@@ -6257,7 +6166,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nagent = client.agents.retrieve_v1_get(\n    agent_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(agent)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nagent = client.agents.retrieve(\n    agent_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(agent)"
           }
         ]
       },
@@ -6327,7 +6236,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nagent = client.agents.update_v1_id_patch(\n    agent_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    graph={},\n)\n\nprint(agent)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nagent = client.agents.update(\n    agent_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    graph={},\n)\n\nprint(agent)"
           }
         ]
       }
@@ -6398,7 +6307,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nagent = client.agents.list_graph_v1_graph_get(\n    agent_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(agent)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nagent = client.agents.retrieve_graph(\n    agent_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(agent)"
           }
         ]
       }
@@ -6477,7 +6386,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nrun = client.agents.runs.v1_id_post(\n    agent_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(run)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nrun = client.agents.runs.create(\n    agent_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(run)"
           }
         ]
       }
@@ -6562,7 +6471,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nrun = client.agents.runs.retrieve_v1_get(\n    agent_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    run_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    verbose=False,\n)\n\nprint(run)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nrun = client.agents.runs.retrieve(\n    agent_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    run_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    verbose=False,\n)\n\nprint(run)"
           }
         ]
       }
@@ -6618,7 +6527,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\naccuracy = client.reports.accuracy.overview_v1_overview_post(\n    start_date=\"\",\n    end_date=\"\",\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    exclude_topic_ids=False,\n    tag_filter_type=\"any\",\n    include_no_tag=False,\n    include_no_persona=False,\n    group_by=\"period\",\n)\n\nprint(accuracy)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\naccuracy = client.reports.accuracy.create_overview(\n    start_date=\"\",\n    end_date=\"\",\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    exclude_topic_ids=False,\n    tag_filter_type=\"any\",\n    include_no_tag=False,\n    include_no_persona=False,\n    group_by=\"period\",\n)\n\nprint(accuracy)"
           }
         ]
       }
@@ -6674,7 +6583,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\naccuracy = client.reports.accuracy.breakdown_v1_breakdown_post(\n    start_date=\"\",\n    end_date=\"\",\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    exclude_topic_ids=False,\n    tag_filter_type=\"any\",\n    include_no_tag=False,\n    include_no_persona=False,\n    breakdown_by=\"citation\",\n    limit=10,\n    offset=0,\n    sort_by=\"citationShare\",\n    sort_order=\"desc\",\n)\n\nprint(accuracy)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\naccuracy = client.reports.accuracy.create_breakdown(\n    start_date=\"\",\n    end_date=\"\",\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    exclude_topic_ids=False,\n    tag_filter_type=\"any\",\n    include_no_tag=False,\n    include_no_persona=False,\n    breakdown_by=\"citation\",\n    limit=10,\n    offset=0,\n    sort_by=\"citationShare\",\n    sort_order=\"desc\",\n)\n\nprint(accuracy)"
           }
         ]
       }
@@ -6730,7 +6639,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\naccuracy = client.reports.accuracy.citation_analysis_v1_citation_analysis_post(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    clean_href=\"\",\n    start_date=\"\",\n    end_date=\"\",\n)\n\nprint(accuracy)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\naccuracy = client.reports.accuracy.create_citation_analysis(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    clean_href=\"\",\n    start_date=\"\",\n    end_date=\"\",\n)\n\nprint(accuracy)"
           }
         ]
       }
@@ -6790,7 +6699,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\naccuracy = client.reports.accuracy.topic_ids_v1_topic_ids_post(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n)\n\nprint(accuracy)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\naccuracy = client.reports.accuracy.create_topic_ids(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n)\n\nprint(accuracy)"
           }
         ]
       }
@@ -6846,7 +6755,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\naccuracy = client.reports.accuracy.inaccurate_themes_v1_inaccurate_themes_post(\n    start_date=\"\",\n    end_date=\"\",\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    exclude_topic_ids=False,\n    tag_filter_type=\"any\",\n    include_no_tag=False,\n    include_no_persona=False,\n    limit=10,\n    offset=0,\n    sort_by=\"response_share\",\n    sort_order=\"desc\",\n)\n\nprint(accuracy)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\naccuracy = client.reports.accuracy.create_inaccurate_themes(\n    start_date=\"\",\n    end_date=\"\",\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    exclude_topic_ids=False,\n    tag_filter_type=\"any\",\n    include_no_tag=False,\n    include_no_persona=False,\n    limit=10,\n    offset=0,\n    sort_by=\"response_share\",\n    sort_order=\"desc\",\n)\n\nprint(accuracy)"
           }
         ]
       }
@@ -6902,7 +6811,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\naccuracy = client.reports.accuracy.inaccurate_clusters_v1_inaccurate_clusters_post(\n    start_date=\"\",\n    end_date=\"\",\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    exclude_topic_ids=False,\n    tag_filter_type=\"any\",\n    include_no_tag=False,\n    include_no_persona=False,\n    limit=5000,\n    offset=0,\n    include_models=False,\n)\n\nprint(accuracy)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\naccuracy = client.reports.accuracy.create_inaccurate_clusters(\n    start_date=\"\",\n    end_date=\"\",\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    exclude_topic_ids=False,\n    tag_filter_type=\"any\",\n    include_no_tag=False,\n    include_no_persona=False,\n    limit=5000,\n    offset=0,\n    include_models=False,\n)\n\nprint(accuracy)"
           }
         ]
       }
@@ -6958,7 +6867,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\naccuracy = client.reports.accuracy.inaccuracy_drivers_v1_inaccuracy_drivers_post(\n    start_date=\"\",\n    end_date=\"\",\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    exclude_topic_ids=False,\n    tag_filter_type=\"any\",\n    include_no_tag=False,\n    include_no_persona=False,\n    limit=5,\n)\n\nprint(accuracy)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\naccuracy = client.reports.accuracy.create_inaccuracy_drivers(\n    start_date=\"\",\n    end_date=\"\",\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    exclude_topic_ids=False,\n    tag_filter_type=\"any\",\n    include_no_tag=False,\n    include_no_persona=False,\n    limit=5,\n)\n\nprint(accuracy)"
           }
         ]
       }
@@ -7014,7 +6923,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\naccuracy = client.reports.accuracy.top_inaccurate_claims_v1_top_inaccurate_claims_post(\n    start_date=\"\",\n    end_date=\"\",\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    exclude_topic_ids=False,\n    tag_filter_type=\"any\",\n    include_no_tag=False,\n    include_no_persona=False,\n    limit=5,\n)\n\nprint(accuracy)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\naccuracy = client.reports.accuracy.create_top_inaccurate_claims(\n    start_date=\"\",\n    end_date=\"\",\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    exclude_topic_ids=False,\n    tag_filter_type=\"any\",\n    include_no_tag=False,\n    include_no_persona=False,\n    limit=5,\n)\n\nprint(accuracy)"
           }
         ]
       }
@@ -7070,7 +6979,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\naccuracy = client.reports.accuracy.claim_breakdown_v1_claim_breakdown_post(\n    start_date=\"\",\n    end_date=\"\",\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    exclude_topic_ids=False,\n    tag_filter_type=\"any\",\n    include_no_tag=False,\n    include_no_persona=False,\n    cluster_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(accuracy)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\naccuracy = client.reports.accuracy.create_claim_breakdown(\n    start_date=\"\",\n    end_date=\"\",\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    exclude_topic_ids=False,\n    tag_filter_type=\"any\",\n    include_no_tag=False,\n    include_no_persona=False,\n    cluster_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(accuracy)"
           }
         ]
       }
@@ -7126,7 +7035,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\naccuracy = client.reports.accuracy.claim_citations_v1_claim_citations_post(\n    start_date=\"\",\n    end_date=\"\",\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    exclude_topic_ids=False,\n    tag_filter_type=\"any\",\n    include_no_tag=False,\n    include_no_persona=False,\n    cluster_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    limit=10,\n    offset=0,\n    sort_order=\"desc\",\n)\n\nprint(accuracy)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\naccuracy = client.reports.accuracy.create_claim_citations(\n    start_date=\"\",\n    end_date=\"\",\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    exclude_topic_ids=False,\n    tag_filter_type=\"any\",\n    include_no_tag=False,\n    include_no_persona=False,\n    cluster_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    limit=10,\n    offset=0,\n    sort_order=\"desc\",\n)\n\nprint(accuracy)"
           }
         ]
       }
@@ -7182,7 +7091,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\naccuracy = client.reports.accuracy.cluster_example_runs_v1_cluster_example_runs_post(\n    start_date=\"\",\n    end_date=\"\",\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    exclude_topic_ids=False,\n    tag_filter_type=\"any\",\n    include_no_tag=False,\n    include_no_persona=False,\n    cluster_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    limit=20,\n    offset=0,\n)\n\nprint(accuracy)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\naccuracy = client.reports.accuracy.create_cluster_example_runs(\n    start_date=\"\",\n    end_date=\"\",\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    exclude_topic_ids=False,\n    tag_filter_type=\"any\",\n    include_no_tag=False,\n    include_no_persona=False,\n    cluster_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    limit=20,\n    offset=0,\n)\n\nprint(accuracy)"
           }
         ]
       }
@@ -7238,7 +7147,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\naccuracy = client.reports.accuracy.cluster_verification_pairs_v1_cluster_verification_pairs_post(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    cluster_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(accuracy)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\naccuracy = client.reports.accuracy.create_cluster_verification_pairs(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    cluster_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(accuracy)"
           }
         ]
       }
@@ -7294,7 +7203,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\naccuracy = client.reports.accuracy.factcheck_setup_status_v1_factcheck_setup_status_post(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(accuracy)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\naccuracy = client.reports.accuracy.create_factcheck_setup_status(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n)\n\nprint(accuracy)"
           }
         ]
       }
@@ -7352,7 +7261,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nreferral = client.reports.referrals.create_v2_v2_post(\n    date_interval=\"day\",\n    dimensions=[],\n    metrics=[],\n    order_by={},\n    domain=\"\",\n    start_date=\"2024-01-01T00:00:00.000Z\",\n    timezone=\"UTC\",\n)\n\nprint(referral)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nreport = client.reports.get_referrals_report_v2(\n    date_interval=\"day\",\n    dimensions=[],\n    metrics=[],\n    order_by={},\n    domain=\"\",\n    start_date=\"2024-01-01T00:00:00.000Z\",\n    timezone=\"UTC\",\n)\n\nprint(report)"
           }
         ]
       }
@@ -7410,7 +7319,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nbot = client.reports.bots.create_v2_v2_post(\n    date_interval=\"day\",\n    dimensions=[],\n    metrics=[],\n    order_by={},\n    domain=\"\",\n    start_date=\"2024-01-01T00:00:00.000Z\",\n    timezone=\"UTC\",\n)\n\nprint(bot)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nreport = client.reports.get_bots_report_v2(\n    date_interval=\"day\",\n    dimensions=[],\n    metrics=[],\n    order_by={},\n    domain=\"\",\n    start_date=\"2024-01-01T00:00:00.000Z\",\n    timezone=\"UTC\",\n)\n\nprint(report)"
           }
         ]
       }
@@ -7477,14 +7386,7 @@
               }
             }
           }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Python",
-            "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\ndomain_segment = client.domain_segments.list_v2_get()\n\nprint(domain_segment)"
-          }
-        ]
+        }
       }
     },
     "/v2/reports/visibility": {
@@ -7539,7 +7441,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nvisibility = client.reports.visibility.query_v2_v2_post(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n    interval=\"day\",\n    scope=\"owned\",\n)\n\nprint(visibility)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nreport = client.reports.query_visibility(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n    interval=\"day\",\n    scope=\"owned\",\n)\n\nprint(report)"
           }
         ]
       }
@@ -7605,7 +7507,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nstream = client.reports.visibility.stream_v2_v2_stream_post(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n    interval=\"day\",\n    scope=\"owned\",\n)\n\nfor event in stream:\n    print(event)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nstream = client.reports.stream_visibility_v2(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n    interval=\"day\",\n    scope=\"owned\",\n)\n\nfor event in stream:\n    print(event)"
           }
         ]
       }
@@ -7662,7 +7564,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\ncitation = client.reports.citations.query_v2_v2_post(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n    entity=\"domain\",\n    interval=\"day\",\n    scope=\"all\",\n)\n\nprint(citation)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nreport = client.reports.query_citations(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n    entity=\"domain\",\n    interval=\"day\",\n    scope=\"all\",\n)\n\nprint(report)"
           }
         ]
       }
@@ -7728,7 +7630,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nstream = client.reports.citations.stream_v2_v2_stream_post(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n    entity=\"domain\",\n    interval=\"day\",\n    scope=\"all\",\n)\n\nfor event in stream:\n    print(event)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nstream = client.reports.stream_citations_v2(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n    entity=\"domain\",\n    interval=\"day\",\n    scope=\"all\",\n)\n\nfor event in stream:\n    print(event)"
           }
         ]
       }
@@ -7785,7 +7687,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nsentiment = client.reports.sentiment.query_v2_v2_post(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    asset=\"\",\n    start_date=\"\",\n    end_date=\"\",\n    interval=\"day\",\n    include_cited_websites=False,\n)\n\nprint(sentiment)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nreport = client.reports.query_sentiment(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    asset=\"\",\n    start_date=\"\",\n    end_date=\"\",\n    interval=\"day\",\n    include_cited_websites=False,\n)\n\nprint(report)"
           }
         ]
       }
@@ -7851,7 +7753,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nstream = client.reports.sentiment.stream_v2_v2_stream_post(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    asset=\"\",\n    start_date=\"\",\n    end_date=\"\",\n    interval=\"day\",\n    include_cited_websites=False,\n)\n\nfor event in stream:\n    print(event)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nstream = client.reports.stream_sentiment_v2(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    asset=\"\",\n    start_date=\"\",\n    end_date=\"\",\n    interval=\"day\",\n    include_cited_websites=False,\n)\n\nfor event in stream:\n    print(event)"
           }
         ]
       }
@@ -7908,7 +7810,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nquery_fanout = client.reports.query_fanouts.v2_v2_post(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n    interval=\"day\",\n)\n\nprint(query_fanout)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nreport = client.reports.query_query_fanouts(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n    interval=\"day\",\n)\n\nprint(report)"
           }
         ]
       }
@@ -7974,7 +7876,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nstream = client.reports.query_fanouts.stream_v2_v2_stream_post(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n    interval=\"day\",\n)\n\nfor event in stream:\n    print(event)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nstream = client.reports.stream_query_fanouts(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n    interval=\"day\",\n)\n\nfor event in stream:\n    print(event)"
           }
         ]
       }
@@ -8031,7 +7933,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nfactcheck = client.reports.factcheck.query_scores_v2_post(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n)\n\nprint(factcheck)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nfactcheck = client.reports.factcheck.query_scores(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n)\n\nprint(factcheck)"
           }
         ]
       }
@@ -8097,7 +7999,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nstream = client.reports.factcheck.stream_scores_v2_stream_post(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n)\n\nfor event in stream:\n    print(event)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nstream = client.reports.factcheck.stream_scores(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n)\n\nfor event in stream:\n    print(event)"
           }
         ]
       }
@@ -8154,7 +8056,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nfactcheck = client.reports.factcheck.query_claims_v2_claims_post(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n)\n\nprint(factcheck)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nclaim = client.reports.factcheck.claims.query_claims(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n)\n\nprint(claim)"
           }
         ]
       }
@@ -8220,7 +8122,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nstream = client.reports.factcheck.stream_claims_v2_claims_stream_post(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n)\n\nfor event in stream:\n    print(event)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nstream = client.reports.factcheck.claims.stream_claims(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n)\n\nfor event in stream:\n    print(event)"
           }
         ]
       }
@@ -8278,7 +8180,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nsocial = client.reports.social.query_youtube_channels_v2_youtube_channels_post(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n)\n\nprint(social)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nyoutube = client.reports.social.youtube.get_channels(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n)\n\nprint(youtube)"
           }
         ]
       }
@@ -8336,7 +8238,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nsocial = client.reports.social.query_youtube_videos_v2_youtube_videos_post(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n    attribution=\"attributed\",\n)\n\nprint(social)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nyoutube = client.reports.social.youtube.get_videos(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n    attribution=\"attributed\",\n)\n\nprint(youtube)"
           }
         ]
       }
@@ -8394,7 +8296,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nsocial = client.reports.social.query_youtube_summary_v2_youtube_summary_post(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n)\n\nprint(social)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nyoutube = client.reports.social.youtube.get_summary(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n)\n\nprint(youtube)"
           }
         ]
       }
@@ -8450,7 +8352,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nanswer = client.prompts.answers.query_v2_v2_post(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n)\n\nprint(answer)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nprompt = client.prompts.answers_v2(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n)\n\nprint(prompt)"
           }
         ]
       }
@@ -8515,7 +8417,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nstream = client.prompts.answers.stream_v2_v2_stream_post(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n)\n\nfor event in stream:\n    print(event)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nstream = client.prompts.stream_answers_v2(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n)\n\nfor event in stream:\n    print(event)"
           }
         ]
       }
@@ -8572,7 +8474,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nshopping = client.reports.shopping.query_brands_v2_v2_brands_post(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n    interval=\"day\",\n    scope=\"owned\",\n)\n\nprint(shopping)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nshopping = client.reports.shopping.brands(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n    interval=\"day\",\n    scope=\"owned\",\n)\n\nprint(shopping)"
           }
         ]
       }
@@ -8638,7 +8540,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nstream = client.reports.shopping.stream_brands_v2_v2_brands_stream_post(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n    interval=\"day\",\n    scope=\"owned\",\n)\n\nfor event in stream:\n    print(event)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nstream = client.reports.shopping.stream_brands(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n    interval=\"day\",\n    scope=\"owned\",\n)\n\nfor event in stream:\n    print(event)"
           }
         ]
       }
@@ -8695,7 +8597,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nshopping = client.reports.shopping.query_products_v2_v2_products_post(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n    interval=\"day\",\n    include_merchants=False,\n    competitor_limit=5,\n)\n\nprint(shopping)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nshopping = client.reports.shopping.products(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n    interval=\"day\",\n    include_merchants=False,\n    competitor_limit=5,\n)\n\nprint(shopping)"
           }
         ]
       }
@@ -8761,7 +8663,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nstream = client.reports.shopping.stream_products_v2_v2_products_stream_post(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n    interval=\"day\",\n    include_merchants=False,\n    competitor_limit=5,\n)\n\nfor event in stream:\n    print(event)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nstream = client.reports.shopping.stream_products(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n    interval=\"day\",\n    include_merchants=False,\n    competitor_limit=5,\n)\n\nfor event in stream:\n    print(event)"
           }
         ]
       }
@@ -8818,7 +8720,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nshopping = client.reports.shopping.query_merchants_v2_v2_merchants_post(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n    interval=\"day\",\n)\n\nprint(shopping)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nshopping = client.reports.shopping.merchants(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n    interval=\"day\",\n)\n\nprint(shopping)"
           }
         ]
       }
@@ -8884,7 +8786,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nstream = client.reports.shopping.stream_merchants_v2_v2_merchants_stream_post(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n    interval=\"day\",\n)\n\nfor event in stream:\n    print(event)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nstream = client.reports.shopping.stream_merchants(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n    interval=\"day\",\n)\n\nfor event in stream:\n    print(event)"
           }
         ]
       }
@@ -8941,7 +8843,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nshopping = client.reports.shopping.query_trigger_rate_v2_v2_trigger_rate_post(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n    interval=\"day\",\n)\n\nprint(shopping)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nshopping = client.reports.shopping.trigger_rate(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n    interval=\"day\",\n)\n\nprint(shopping)"
           }
         ]
       }
@@ -9007,7 +8909,7 @@
           {
             "lang": "Python",
             "label": "Python",
-            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nstream = client.reports.shopping.stream_trigger_rate_v2_v2_trigger_rate_stream_post(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n    interval=\"day\",\n)\n\nfor event in stream:\n    print(event)"
+            "source": "import os\n\nfrom profound import Profound\n\nclient = Profound(\n    api_key=os.environ.get(\"PROFOUND_API_KEY\"),\n)\n\nstream = client.reports.shopping.stream_trigger_rate(\n    category_id=\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    start_date=\"\",\n    end_date=\"\",\n    interval=\"day\",\n)\n\nfor event in stream:\n    print(event)"
           }
         ]
       }

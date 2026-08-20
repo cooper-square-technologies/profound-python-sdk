@@ -18,8 +18,8 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.integration_list_v1_get_response import IntegrationListV1GetResponse
-from ..types import integration_list_v1_get_params
+from ..types.integration_list_response import IntegrationListResponse
+from ..types import integration_list_params
 
 __all__ = ["IntegrationsResource", "AsyncIntegrationsResource"]
 
@@ -33,7 +33,7 @@ class IntegrationsResource(SyncAPIResource):
     def with_streaming_response(self) -> IntegrationsResourceWithStreamingResponse:
         return IntegrationsResourceWithStreamingResponse(self)
 
-    def list_v1_get(
+    def list(
         self,
         *,
         organization_id: Optional[str] | Omit = omit,
@@ -45,7 +45,7 @@ class IntegrationsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> IntegrationListV1GetResponse:
+    ) -> IntegrationListResponse:
         """
         List the organization's connected integrations.
 
@@ -63,11 +63,11 @@ class IntegrationsResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            IntegrationListV1GetResponse: Successful Response
+            IntegrationListResponse: Successful Response
 
         Example:
             ```python
-            integration = client.integrations.list_v1_get()
+            integration = client.integrations.list()
             ```
         """
         return self._get(
@@ -79,10 +79,10 @@ class IntegrationsResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {"organization_id": organization_id, "provider": provider, "status_filter": status_filter},
-                    integration_list_v1_get_params.IntegrationListV1GetParams,
+                    integration_list_params.IntegrationListParams,
                 ),
             ),
-            cast_to=IntegrationListV1GetResponse,
+            cast_to=IntegrationListResponse,
         )
 
 
@@ -95,7 +95,7 @@ class AsyncIntegrationsResource(AsyncAPIResource):
     def with_streaming_response(self) -> AsyncIntegrationsResourceWithStreamingResponse:
         return AsyncIntegrationsResourceWithStreamingResponse(self)
 
-    async def list_v1_get(
+    async def list(
         self,
         *,
         organization_id: Optional[str] | Omit = omit,
@@ -107,7 +107,7 @@ class AsyncIntegrationsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> IntegrationListV1GetResponse:
+    ) -> IntegrationListResponse:
         """
         List the organization's connected integrations.
 
@@ -125,11 +125,11 @@ class AsyncIntegrationsResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            IntegrationListV1GetResponse: Successful Response
+            IntegrationListResponse: Successful Response
 
         Example:
             ```python
-            integration = await client.integrations.list_v1_get()
+            integration = await client.integrations.list()
             ```
         """
         return await self._get(
@@ -141,10 +141,10 @@ class AsyncIntegrationsResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {"organization_id": organization_id, "provider": provider, "status_filter": status_filter},
-                    integration_list_v1_get_params.IntegrationListV1GetParams,
+                    integration_list_params.IntegrationListParams,
                 ),
             ),
-            cast_to=IntegrationListV1GetResponse,
+            cast_to=IntegrationListResponse,
         )
 
 
@@ -152,8 +152,8 @@ class IntegrationsResourceWithRawResponse:
     def __init__(self, integrations: IntegrationsResource) -> None:
         self._integrations = integrations
 
-        self.list_v1_get = to_raw_response_wrapper(
-            integrations.list_v1_get,
+        self.list = to_raw_response_wrapper(
+            integrations.list,
         )
 
 
@@ -161,8 +161,8 @@ class AsyncIntegrationsResourceWithRawResponse:
     def __init__(self, integrations: AsyncIntegrationsResource) -> None:
         self._integrations = integrations
 
-        self.list_v1_get = async_to_raw_response_wrapper(
-            integrations.list_v1_get,
+        self.list = async_to_raw_response_wrapper(
+            integrations.list,
         )
 
 
@@ -170,8 +170,8 @@ class IntegrationsResourceWithStreamingResponse:
     def __init__(self, integrations: IntegrationsResource) -> None:
         self._integrations = integrations
 
-        self.list_v1_get = to_streamed_response_wrapper(
-            integrations.list_v1_get,
+        self.list = to_streamed_response_wrapper(
+            integrations.list,
         )
 
 
@@ -179,6 +179,6 @@ class AsyncIntegrationsResourceWithStreamingResponse:
     def __init__(self, integrations: AsyncIntegrationsResource) -> None:
         self._integrations = integrations
 
-        self.list_v1_get = async_to_streamed_response_wrapper(
-            integrations.list_v1_get,
+        self.list = async_to_streamed_response_wrapper(
+            integrations.list,
         )
