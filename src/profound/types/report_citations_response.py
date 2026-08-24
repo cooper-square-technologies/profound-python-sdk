@@ -10,7 +10,7 @@ __all__ = ["ReportCitationsResponse", "Data"]
 
 
 class Data(BaseModel):
-    metrics: List[Optional[Union[float, str]]]
+    metrics: List[Optional[Union[int, float, str]]]
 
     dimensions: List[str]
 

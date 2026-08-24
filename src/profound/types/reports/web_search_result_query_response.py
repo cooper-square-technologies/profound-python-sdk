@@ -10,7 +10,7 @@ __all__ = ["WebSearchResultQueryResponse", "Data"]
 
 
 class Data(BaseModel):
-    metrics: List[Union[float, str]]
+    metrics: List[Union[int, float, str]]
 
     dimensions: List[Optional[str]]
 

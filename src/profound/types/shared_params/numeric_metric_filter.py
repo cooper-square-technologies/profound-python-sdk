@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Union
 from typing_extensions import Literal, Required, TypedDict
 
 __all__ = ["NumericMetricFilter"]
@@ -12,4 +13,4 @@ class NumericMetricFilter(TypedDict, total=False):
 
     operator: Required[Literal[">", ">=", "<", "<=", "=", "==", "!="]]
 
-    value: Required[float]
+    value: Required[Union[int, float]]

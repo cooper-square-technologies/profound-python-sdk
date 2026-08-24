@@ -1,5 +1,6 @@
 # File generated from our OpenAPI spec by Scalar. See README.md for details.
 
+from typing import Union
 from typing_extensions import Literal
 
 from ..._models import BaseModel
@@ -12,4 +13,4 @@ class NumericMetricFilter(BaseModel):
 
     operator: Literal[">", ">=", "<", "<=", "=", "==", "!="]
 
-    value: float
+    value: Union[int, float]
