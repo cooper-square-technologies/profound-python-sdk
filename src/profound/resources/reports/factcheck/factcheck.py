@@ -28,7 +28,6 @@ from .claims import (
     AsyncClaimsResourceWithStreamingResponse,
 )
 from ....types.reports.factcheck_query_scores_response import FactcheckQueryScoresResponse
-from ....types.shared_params.filter_node import FilterNode
 from ....types.reports import factcheck_query_scores_params, factcheck_stream_scores_params
 from ....types.reports.factcheck_stream_scores_response import FactcheckStreamScoresResponse
 
@@ -56,7 +55,7 @@ class FactcheckResource(SyncAPIResource):
         end_date: str,
         group_by: List[Literal["date", "model", "region", "persona", "prompt", "topic", "tag", "citation", "theme"]]
         | Omit = omit,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[factcheck_query_scores_params.Filter] | Omit = omit,
         limit: Optional[int] | Omit = omit,
         max_results: Optional[int] | Omit = omit,
         cursor: Optional[str] | Omit = omit,
@@ -125,7 +124,7 @@ class FactcheckResource(SyncAPIResource):
         end_date: str,
         group_by: List[Literal["date", "model", "region", "persona", "prompt", "topic", "tag", "citation", "theme"]]
         | Omit = omit,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[factcheck_stream_scores_params.Filter] | Omit = omit,
         limit: Optional[int] | Omit = omit,
         max_results: Optional[int] | Omit = omit,
         cursor: Optional[str] | Omit = omit,
@@ -214,7 +213,7 @@ class AsyncFactcheckResource(AsyncAPIResource):
         end_date: str,
         group_by: List[Literal["date", "model", "region", "persona", "prompt", "topic", "tag", "citation", "theme"]]
         | Omit = omit,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[factcheck_query_scores_params.Filter] | Omit = omit,
         limit: Optional[int] | Omit = omit,
         max_results: Optional[int] | Omit = omit,
         cursor: Optional[str] | Omit = omit,
@@ -283,7 +282,7 @@ class AsyncFactcheckResource(AsyncAPIResource):
         end_date: str,
         group_by: List[Literal["date", "model", "region", "persona", "prompt", "topic", "tag", "citation", "theme"]]
         | Omit = omit,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[factcheck_stream_scores_params.Filter] | Omit = omit,
         limit: Optional[int] | Omit = omit,
         max_results: Optional[int] | Omit = omit,
         cursor: Optional[str] | Omit = omit,

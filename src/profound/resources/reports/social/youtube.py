@@ -19,7 +19,6 @@ from ...._response import (
 )
 from ...._base_client import make_request_options
 from ....types.reports.social.youtube_get_channels_response import YoutubeGetChannelsResponse
-from ....types.shared_params.filter_node import FilterNode
 from ....types.reports.social import youtube_get_channels_params, youtube_get_videos_params, youtube_get_summary_params
 from ....types.reports.social.youtube_get_videos_response import YoutubeGetVideosResponse
 from ....types.reports.social.youtube_get_summary_response import YoutubeGetSummaryResponse
@@ -42,7 +41,7 @@ class YoutubeResource(SyncAPIResource):
         category_id: str,
         start_date: str,
         end_date: str,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[youtube_get_channels_params.Filter] | Omit = omit,
         limit: Optional[int] | Omit = omit,
         cursor: Optional[str] | Omit = omit,
         source_types: Optional[List[Literal["video", "short", "channel", "playlist", "other"]]] | Omit = omit,
@@ -113,7 +112,7 @@ class YoutubeResource(SyncAPIResource):
         category_id: str,
         start_date: str,
         end_date: str,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[youtube_get_videos_params.Filter] | Omit = omit,
         limit: Optional[int] | Omit = omit,
         cursor: Optional[str] | Omit = omit,
         source_types: Optional[List[Literal["video", "short", "channel", "playlist", "other"]]] | Omit = omit,
@@ -182,7 +181,7 @@ class YoutubeResource(SyncAPIResource):
         category_id: str,
         start_date: str,
         end_date: str,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[youtube_get_summary_params.Filter] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -248,7 +247,7 @@ class AsyncYoutubeResource(AsyncAPIResource):
         category_id: str,
         start_date: str,
         end_date: str,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[youtube_get_channels_params.Filter] | Omit = omit,
         limit: Optional[int] | Omit = omit,
         cursor: Optional[str] | Omit = omit,
         source_types: Optional[List[Literal["video", "short", "channel", "playlist", "other"]]] | Omit = omit,
@@ -319,7 +318,7 @@ class AsyncYoutubeResource(AsyncAPIResource):
         category_id: str,
         start_date: str,
         end_date: str,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[youtube_get_videos_params.Filter] | Omit = omit,
         limit: Optional[int] | Omit = omit,
         cursor: Optional[str] | Omit = omit,
         source_types: Optional[List[Literal["video", "short", "channel", "playlist", "other"]]] | Omit = omit,
@@ -388,7 +387,7 @@ class AsyncYoutubeResource(AsyncAPIResource):
         category_id: str,
         start_date: str,
         end_date: str,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[youtube_get_summary_params.Filter] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

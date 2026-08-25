@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from . import (
-    shared,
     reports,
 )
 from .. import _compat
@@ -77,7 +76,9 @@ from .agent_list_response import AgentListResponse as AgentListResponse
 from .agent_list_params import AgentListParams as AgentListParams
 from .agent_retrieve_response import AgentRetrieveResponse as AgentRetrieveResponse
 from .agent_retrieve_params import AgentRetrieveParams as AgentRetrieveParams
+from .agent_create_response import AgentCreateResponse as AgentCreateResponse
 from .agent_create_params import AgentCreateParams as AgentCreateParams
+from .agent_publish_response import AgentPublishResponse as AgentPublishResponse
 from .agent_update_response import AgentUpdateResponse as AgentUpdateResponse
 from .agent_update_params import AgentUpdateParams as AgentUpdateParams
 from .agent_retrieve_graph_response import AgentRetrieveGraphResponse as AgentRetrieveGraphResponse
@@ -112,48 +113,25 @@ from .document_update_params import DocumentUpdateParams as DocumentUpdateParams
 from .document_delete_params import DocumentDeleteParams as DocumentDeleteParams
 from .document_replace_content_response import DocumentReplaceContentResponse as DocumentReplaceContentResponse
 from .document_replace_content_params import DocumentReplaceContentParams as DocumentReplaceContentParams
-from .shared.accuracy_trend_point import AccuracyTrendPoint as AccuracyTrendPoint
-from .shared.agent import Agent as Agent
-from .shared.agent_version import AgentVersion as AgentVersion
 from .shared.analysis_type_filter import AnalysisTypeFilter as AnalysisTypeFilter
 from .shared.asset_id_filter import AssetIDFilter as AssetIDFilter
 from .shared.bot_name_filter import BotNameFilter as BotNameFilter
 from .shared.bot_provider_filter import BotProviderFilter as BotProviderFilter
-from .shared.claim_model_occurrence import ClaimModelOccurrence as ClaimModelOccurrence
 from .shared.cursor_pagination import CursorPagination as CursorPagination
-from .shared.dimension_ref import DimensionRef as DimensionRef
-from .shared.document_operation_response import DocumentOperationResponse as DocumentOperationResponse
-from .shared.filter_node import FilterNode as FilterNode
-from .shared.http_validation_error import HTTPValidationError as HTTPValidationError
-from .shared.live_generation import LiveGeneration as LiveGeneration
 from .shared.model_id_filter import ModelIDFilter as ModelIDFilter
-from .shared.numeric_metric_filter import NumericMetricFilter as NumericMetricFilter
 from .shared.pagination import Pagination as Pagination
 from .shared.path_filter import PathFilter as PathFilter
 from .shared.persona_id_filter import PersonaIDFilter as PersonaIDFilter
-from .shared.project_generation_context_item import ProjectGenerationContextItem as ProjectGenerationContextItem
-from .shared.project_task import ProjectTask as ProjectTask
 from .shared.prompt_filter import PromptFilter as PromptFilter
 from .shared.prompt_type_filter import PromptTypeFilter as PromptTypeFilter
 from .shared.region_id_filter import RegionIDFilter as RegionIDFilter
 from .shared.region_name_filter import RegionNameFilter as RegionNameFilter
-from .shared.shopping_rows_response import ShoppingRowsResponse as ShoppingRowsResponse
 from .shared.tag_id_filter import TagIDFilter as TagIDFilter
 from .shared.topic_id_filter import TopicIDFilter as TopicIDFilter
-from .shared.profound_answer_engine_insights_filters_asset_name_filter import (
-    ProfoundAnswerEngineInsightsFiltersAssetNameFilter as ProfoundAnswerEngineInsightsFiltersAssetNameFilter,
-)
-from .shared.profound_shopping_api_asset_name_filter import (
-    ProfoundShoppingAPIAssetNameFilter as ProfoundShoppingAPIAssetNameFilter,
-)
 
 # Rebuild the models that carry forward references only after every module is imported, so the
 # names their annotations mention are all bound by the time the model schema is built.
 if _compat.PYDANTIC_V1:
-    shared.accuracy_trend_point.AccuracyTrendPoint.update_forward_refs()  # type: ignore
-    shared.filter_node.FilterNode.update_forward_refs()  # type: ignore
     reports.accuracy_create_overview_response.AccuracyCreateOverviewResponse.update_forward_refs()  # type: ignore
 else:
-    shared.accuracy_trend_point.AccuracyTrendPoint.model_rebuild(_parent_namespace_depth=0)
-    shared.filter_node.FilterNode.model_rebuild(_parent_namespace_depth=0)
     reports.accuracy_create_overview_response.AccuracyCreateOverviewResponse.model_rebuild(_parent_namespace_depth=0)

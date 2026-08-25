@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Dict, Iterable, List, Union
 from datetime import datetime
 from typing_extensions import Annotated, Literal, Required, TypeAlias, TypedDict
+from .._types import SequenceNotStr
 
 from .._utils import PropertyInfo
 
@@ -14,16 +15,13 @@ from .shared_params.region_name_filter import RegionNameFilter
 from .shared_params.model_id_filter import ModelIDFilter
 from .shared_params.topic_id_filter import TopicIDFilter
 from .topic_name_filter_param import TopicNameFilterParam
-from .shared_params.profound_answer_engine_insights_filters_asset_name_filter import (
-    ProfoundAnswerEngineInsightsFiltersAssetNameFilter,
-)
 from .shared_params.tag_id_filter import TagIDFilter
 from .tag_name_filter_param import TagNameFilterParam
 from .prompt_id_filter_param import PromptIDFilterParam
 from .shared_params.prompt_filter import PromptFilter
 from .shared_params.persona_id_filter import PersonaIDFilter
 
-__all__ = ["ReportVisibilityParams", "Filter"]
+__all__ = ["ReportVisibilityParams", "Filter", "FilterProfoundAnswerEngineInsightsFiltersAssetNameFilter"]
 
 
 class ReportVisibilityParams(TypedDict, total=False):
@@ -78,6 +76,28 @@ class ReportVisibilityParams(TypedDict, total=False):
     """List of filters to apply to the visibility report."""
 
 
+class FilterProfoundAnswerEngineInsightsFiltersAssetNameFilter(TypedDict, total=False):
+    """Filter by asset name"""
+
+    field: Required[Literal["asset_name"]]
+
+    operator: Required[
+        Literal[
+            "is",
+            "not_is",
+            "in",
+            "not_in",
+            "contains",
+            "not_contains",
+            "matches",
+            "contains_case_insensitive",
+            "not_contains_case_insensitive",
+        ]
+    ]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
 Filter: TypeAlias = Annotated[
     Union[
         RegionIDFilter,
@@ -85,7 +105,7 @@ Filter: TypeAlias = Annotated[
         ModelIDFilter,
         TopicIDFilter,
         TopicNameFilterParam,
-        ProfoundAnswerEngineInsightsFiltersAssetNameFilter,
+        FilterProfoundAnswerEngineInsightsFiltersAssetNameFilter,
         TagIDFilter,
         TagNameFilterParam,
         PromptIDFilterParam,

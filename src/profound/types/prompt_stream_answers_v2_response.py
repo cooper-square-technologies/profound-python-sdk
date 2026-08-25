@@ -9,12 +9,11 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-from .shared.dimension_ref import DimensionRef
-
 __all__ = [
     "PromptStreamAnswersV2Response",
     "AnswersV2Info",
     "AnswerRow",
+    "AnswerRowModel",
     "AnswerRowCitationDetail",
     "AnswerRowCitationDetailGroup",
 ]
@@ -48,12 +47,18 @@ class AnswerRowCitationDetail(BaseModel):
     citation_category: Optional[str] = None
 
 
+class AnswerRowModel(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
 class AnswerRow(BaseModel):
     run_id: Optional[str] = None
 
     date: Optional[str] = None
 
-    model: Optional[DimensionRef] = None
+    model: Optional[AnswerRowModel] = None
 
     topic: Optional[str] = None
 

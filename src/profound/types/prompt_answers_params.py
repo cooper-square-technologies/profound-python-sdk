@@ -4,7 +4,8 @@ from __future__ import annotations
 
 from typing import Iterable, Union
 from datetime import datetime
-from typing_extensions import Annotated, Required, TypeAlias, TypedDict
+from typing_extensions import Annotated, Literal, Required, TypeAlias, TypedDict
+from .._types import SequenceNotStr
 
 from .._utils import PropertyInfo
 
@@ -20,11 +21,8 @@ from .prompt_id_filter_param import PromptIDFilterParam
 from .shared_params.persona_id_filter import PersonaIDFilter
 from .shared_params.topic_id_filter import TopicIDFilter
 from .shared_params.asset_id_filter import AssetIDFilter
-from .shared_params.profound_answer_engine_insights_filters_asset_name_filter import (
-    ProfoundAnswerEngineInsightsFiltersAssetNameFilter,
-)
 
-__all__ = ["PromptAnswersParams", "Filter", "Include"]
+__all__ = ["PromptAnswersParams", "Filter", "FilterProfoundAnswerEngineInsightsFiltersAssetNameFilter", "Include"]
 
 
 class PromptAnswersParams(TypedDict, total=False):
@@ -95,6 +93,28 @@ class Include(TypedDict, total=False):
     persona: bool
 
 
+class FilterProfoundAnswerEngineInsightsFiltersAssetNameFilter(TypedDict, total=False):
+    """Filter by asset name"""
+
+    field: Required[Literal["asset_name"]]
+
+    operator: Required[
+        Literal[
+            "is",
+            "not_is",
+            "in",
+            "not_in",
+            "contains",
+            "not_contains",
+            "matches",
+            "contains_case_insensitive",
+            "not_contains_case_insensitive",
+        ]
+    ]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
 Filter: TypeAlias = Annotated[
     Union[
         RegionIDFilter,
@@ -108,7 +128,7 @@ Filter: TypeAlias = Annotated[
         PersonaIDFilter,
         TopicIDFilter,
         AssetIDFilter,
-        ProfoundAnswerEngineInsightsFiltersAssetNameFilter,
+        FilterProfoundAnswerEngineInsightsFiltersAssetNameFilter,
     ],
     PropertyInfo(discriminator="field"),
 ]

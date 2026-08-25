@@ -11,9 +11,6 @@ from .._utils import PropertyInfo
 
 from .shared_params.pagination import Pagination
 from .shared_params.asset_id_filter import AssetIDFilter
-from .shared_params.profound_answer_engine_insights_filters_asset_name_filter import (
-    ProfoundAnswerEngineInsightsFiltersAssetNameFilter,
-)
 from .shared_params.region_id_filter import RegionIDFilter
 from .shared_params.region_name_filter import RegionNameFilter
 from .shared_params.topic_id_filter import TopicIDFilter
@@ -24,7 +21,12 @@ from .tag_name_filter_param import TagNameFilterParam
 from .shared_params.prompt_filter import PromptFilter
 from .shared_params.persona_id_filter import PersonaIDFilter
 
-__all__ = ["ReportSentimentParams", "Filter", "FilterThemeFilter"]
+__all__ = [
+    "ReportSentimentParams",
+    "Filter",
+    "FilterProfoundAnswerEngineInsightsFiltersAssetNameFilter",
+    "FilterThemeFilter",
+]
 
 
 class ReportSentimentParams(TypedDict, total=False):
@@ -101,10 +103,32 @@ class FilterThemeFilter(TypedDict, total=False):
     value: Required[Union[str, SequenceNotStr[str]]]
 
 
+class FilterProfoundAnswerEngineInsightsFiltersAssetNameFilter(TypedDict, total=False):
+    """Filter by asset name"""
+
+    field: Required[Literal["asset_name"]]
+
+    operator: Required[
+        Literal[
+            "is",
+            "not_is",
+            "in",
+            "not_in",
+            "contains",
+            "not_contains",
+            "matches",
+            "contains_case_insensitive",
+            "not_contains_case_insensitive",
+        ]
+    ]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
 Filter: TypeAlias = Annotated[
     Union[
         AssetIDFilter,
-        ProfoundAnswerEngineInsightsFiltersAssetNameFilter,
+        FilterProfoundAnswerEngineInsightsFiltersAssetNameFilter,
         FilterThemeFilter,
         RegionIDFilter,
         RegionNameFilter,

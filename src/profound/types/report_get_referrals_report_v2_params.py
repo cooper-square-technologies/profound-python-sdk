@@ -10,10 +10,15 @@ from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 
 from .shared_params.pagination import Pagination
-from .shared_params.numeric_metric_filter import NumericMetricFilter
 from .shared_params.path_filter import PathFilter
 
-__all__ = ["ReportGetReferralsReportV2Params", "Filter", "FilterReferralSourceFilter", "FilterReferralTypeFilter"]
+__all__ = [
+    "ReportGetReferralsReportV2Params",
+    "MetricFilter",
+    "Filter",
+    "FilterReferralSourceFilter",
+    "FilterReferralTypeFilter",
+]
 
 
 class ReportGetReferralsReportV2Params(TypedDict, total=False):
@@ -57,7 +62,7 @@ class ReportGetReferralsReportV2Params(TypedDict, total=False):
     view_id: Optional[str]
     """Domain segment UUID used to scope the query to a configured subset of hosts and paths."""
 
-    metric_filters: Iterable[NumericMetricFilter]
+    metric_filters: Iterable[MetricFilter]
     """Numeric filters applied after report metrics are calculated."""
 
     filters: Iterable[Filter]
@@ -116,3 +121,11 @@ class FilterReferralSourceFilter(TypedDict, total=False):
 Filter: TypeAlias = Annotated[
     Union[PathFilter, FilterReferralSourceFilter, FilterReferralTypeFilter], PropertyInfo(discriminator="field")
 ]
+
+
+class MetricFilter(TypedDict, total=False):
+    field: Required[str]
+
+    operator: Required[Literal[">", ">=", "<", "<=", "=", "==", "!="]]
+
+    value: Required[Union[int, float]]

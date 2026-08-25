@@ -8,9 +8,47 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-from .shared.dimension_ref import DimensionRef
+__all__ = [
+    "ReportQueryVisibilityResponse",
+    "Info",
+    "Data",
+    "DataAsset",
+    "DataModel",
+    "DataTopic",
+    "DataRegion",
+    "DataPrompt",
+    "DataPersona",
+]
 
-__all__ = ["ReportQueryVisibilityResponse", "Info", "Data", "DataAsset"]
+
+class DataPersona(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class DataPrompt(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class DataRegion(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class DataTopic(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class DataModel(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
 
 
 class DataAsset(BaseModel):
@@ -28,15 +66,15 @@ class Data(BaseModel):
 
     date: Optional[str] = None
 
-    model: Optional[DimensionRef] = None
+    model: Optional[DataModel] = None
 
-    topic: Optional[DimensionRef] = None
+    topic: Optional[DataTopic] = None
 
-    region: Optional[DimensionRef] = None
+    region: Optional[DataRegion] = None
 
-    prompt: Optional[DimensionRef] = None
+    prompt: Optional[DataPrompt] = None
 
-    persona: Optional[DimensionRef] = None
+    persona: Optional[DataPersona] = None
 
     visibility_score: Optional[float] = None
 

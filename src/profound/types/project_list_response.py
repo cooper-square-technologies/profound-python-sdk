@@ -1,15 +1,28 @@
 # File generated from our OpenAPI spec by Scalar. See README.md for details.
 
+from __future__ import annotations
+
 from typing import List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
 from .._models import BaseModel
 
-from .shared.live_generation import LiveGeneration
 from .shared.pagination import Pagination
 
-__all__ = ["ProjectListResponse", "Data"]
+__all__ = ["ProjectListResponse", "Data", "DataLiveGeneration"]
+
+
+class DataLiveGeneration(BaseModel):
+    run_id: str
+
+    status: Literal["queued", "running", "completed", "failed"]
+
+    started_at: Optional[datetime] = None
+
+    finished_at: Optional[datetime] = None
+
+    error: Optional[str] = None
 
 
 class Data(BaseModel):
@@ -39,7 +52,7 @@ class Data(BaseModel):
 
     retired_reason: Optional[str] = None
 
-    live_generation: Optional[LiveGeneration] = None
+    live_generation: Optional[DataLiveGeneration] = None
 
 
 class ProjectListResponse(BaseModel):

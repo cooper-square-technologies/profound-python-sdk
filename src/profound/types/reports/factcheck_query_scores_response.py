@@ -8,9 +8,19 @@ from pydantic import Field as FieldInfo
 
 from ..._models import BaseModel
 
-from ..shared.dimension_ref import DimensionRef
-
-__all__ = ["FactcheckQueryScoresResponse", "Info", "Data", "DataCitation"]
+__all__ = [
+    "FactcheckQueryScoresResponse",
+    "Info",
+    "Data",
+    "DataModel",
+    "DataRegion",
+    "DataPersona",
+    "DataPrompt",
+    "DataTopic",
+    "DataTag",
+    "DataTheme",
+    "DataCitation",
+]
 
 
 class DataCitation(BaseModel):
@@ -19,22 +29,64 @@ class DataCitation(BaseModel):
     citation_category: Optional[str] = None
 
 
+class DataTheme(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class DataTag(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class DataTopic(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class DataPrompt(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class DataPersona(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class DataRegion(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class DataModel(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
 class Data(BaseModel):
     date: Optional[str] = None
 
-    model: Optional[DimensionRef] = None
+    model: Optional[DataModel] = None
 
-    region: Optional[DimensionRef] = None
+    region: Optional[DataRegion] = None
 
-    persona: Optional[DimensionRef] = None
+    persona: Optional[DataPersona] = None
 
-    prompt: Optional[DimensionRef] = None
+    prompt: Optional[DataPrompt] = None
 
-    topic: Optional[DimensionRef] = None
+    topic: Optional[DataTopic] = None
 
-    tag: Optional[DimensionRef] = None
+    tag: Optional[DataTag] = None
 
-    theme: Optional[DimensionRef] = None
+    theme: Optional[DataTheme] = None
 
     citation: Optional[DataCitation] = None
 

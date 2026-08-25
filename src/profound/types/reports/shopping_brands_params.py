@@ -2,11 +2,11 @@
 
 from __future__ import annotations
 
-from typing import List, Optional, Union
+from typing import Iterable, List, Optional, Union
 from typing_extensions import Literal, Required, TypedDict
 from ..._types import SequenceNotStr
 
-__all__ = ["ShoppingBrandsParams"]
+__all__ = ["ShoppingBrandsParams", "Filter"]
 
 
 class ShoppingBrandsParams(TypedDict, total=False):
@@ -29,7 +29,7 @@ class ShoppingBrandsParams(TypedDict, total=False):
     assets: Optional[Union[str, SequenceNotStr[str]]]
     """Restrict to these asset names (a name or list). Overrides `scope`."""
 
-    filter: Optional["FilterNode"]
+    filter: Optional[Filter]
     """A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group."""
 
     limit: Optional[int]
@@ -41,4 +41,22 @@ class ShoppingBrandsParams(TypedDict, total=False):
     cursor: Optional[str]
 
 
-from ..shared_params.filter_node import FilterNode
+_FilterReservedKeywords = TypedDict(
+    "_FilterReservedKeywords",
+    {
+        "and": Optional[Iterable["Filter"]],
+        "or": Optional[Iterable["Filter"]],
+        "not": Optional["Filter"],
+    },
+    total=False,
+)
+
+
+class Filter(_FilterReservedKeywords, total=False):
+    """A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group."""
+
+    field: Optional[str]
+
+    op: Optional[str]
+
+    value: object

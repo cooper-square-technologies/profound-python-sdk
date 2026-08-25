@@ -1,15 +1,58 @@
 # File generated from our OpenAPI spec by Scalar. See README.md for details.
 
+from __future__ import annotations
+
 from typing import Dict, List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
 from .._models import BaseModel
 
-from .shared.live_generation import LiveGeneration
-from .shared.project_task import ProjectTask
+__all__ = ["ProjectRetrieveResponse", "Data", "DataLiveGeneration", "DataTask"]
 
-__all__ = ["ProjectRetrieveResponse", "Data"]
+
+class DataTask(BaseModel):
+    task_id: str
+
+    project_id: str
+
+    category_id: str
+
+    type: Optional[str] = None
+
+    title: str
+
+    summary: Optional[str] = None
+
+    brief: Optional[str] = None
+
+    topic: Optional[str] = None
+
+    impact: Optional[int] = None
+
+    reference_url: Optional[str] = None
+
+    reference_label: Optional[str] = None
+
+    status: Optional[Literal["not_started", "in_progress", "done", "abandoned"]] = None
+
+    status_changed_at: Optional[datetime] = None
+
+    is_new: Optional[bool] = None
+
+    created_at: Optional[datetime] = None
+
+
+class DataLiveGeneration(BaseModel):
+    run_id: str
+
+    status: Literal["queued", "running", "completed", "failed"]
+
+    started_at: Optional[datetime] = None
+
+    finished_at: Optional[datetime] = None
+
+    error: Optional[str] = None
 
 
 class Data(BaseModel):
@@ -55,9 +98,9 @@ class Data(BaseModel):
 
     updated_at: Optional[datetime] = None
 
-    live_generation: Optional[LiveGeneration] = None
+    live_generation: Optional[DataLiveGeneration] = None
 
-    tasks: Optional[List[ProjectTask]] = None
+    tasks: Optional[List[DataTask]] = None
 
 
 class ProjectRetrieveResponse(BaseModel):

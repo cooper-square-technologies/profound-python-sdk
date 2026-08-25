@@ -2,10 +2,10 @@
 
 from __future__ import annotations
 
-from typing import List, Optional
+from typing import Iterable, List, Optional
 from typing_extensions import Literal, Required, TypedDict
 
-__all__ = ["FactcheckStreamScoresParams"]
+__all__ = ["FactcheckStreamScoresParams", "Filter"]
 
 
 class FactcheckStreamScoresParams(TypedDict, total=False):
@@ -20,7 +20,7 @@ class FactcheckStreamScoresParams(TypedDict, total=False):
     group_by: List[Literal["date", "model", "region", "persona", "prompt", "topic", "tag", "citation", "theme"]]
     """Up to two dimensions to slice by; empty returns the headline score. `citation` must be alone."""
 
-    filter: Optional["FilterNode"]
+    filter: Optional[Filter]
     """Scope which responses count (see Filtering)."""
 
     limit: Optional[int]
@@ -32,4 +32,22 @@ class FactcheckStreamScoresParams(TypedDict, total=False):
     cursor: Optional[str]
 
 
-from ..shared_params.filter_node import FilterNode
+_FilterReservedKeywords = TypedDict(
+    "_FilterReservedKeywords",
+    {
+        "and": Optional[Iterable["Filter"]],
+        "or": Optional[Iterable["Filter"]],
+        "not": Optional["Filter"],
+    },
+    total=False,
+)
+
+
+class Filter(_FilterReservedKeywords, total=False):
+    """A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group."""
+
+    field: Optional[str]
+
+    op: Optional[str]
+
+    value: object

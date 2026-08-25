@@ -43,8 +43,8 @@ from ...types import (
     agent_retrieve_graph_params,
 )
 from ...types.agent_retrieve_response import AgentRetrieveResponse
-from ...types.shared.agent_version import AgentVersion
-from ...types.shared.agent import Agent
+from ...types.agent_create_response import AgentCreateResponse
+from ...types.agent_publish_response import AgentPublishResponse
 from ...types.agent_update_response import AgentUpdateResponse
 from ...types.agent_retrieve_graph_response import AgentRetrieveGraphResponse
 
@@ -126,7 +126,7 @@ class AgentsResource(SyncAPIResource):
         self,
         agent_id: str,
         *,
-        version: AgentVersion | Omit = omit,
+        version: Literal["published", "draft"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -185,7 +185,7 @@ class AgentsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Agent:
+    ) -> AgentCreateResponse:
         """
         Create a new draft agent owned by the given organization.
 
@@ -204,7 +204,7 @@ class AgentsResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            Agent: Successful Response
+            AgentCreateResponse: Successful Response
 
         Example:
             ```python
@@ -228,7 +228,7 @@ class AgentsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Agent,
+            cast_to=AgentCreateResponse,
         )
 
     def publish(
@@ -241,7 +241,7 @@ class AgentsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Agent:
+    ) -> AgentPublishResponse:
         """
         Publish an agent's latest draft as its live published version.
 
@@ -257,7 +257,7 @@ class AgentsResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            Agent: Successful Response
+            AgentPublishResponse: Successful Response
 
         Example:
             ```python
@@ -273,7 +273,7 @@ class AgentsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Agent,
+            cast_to=AgentPublishResponse,
         )
 
     def update(
@@ -333,7 +333,7 @@ class AgentsResource(SyncAPIResource):
         self,
         agent_id: str,
         *,
-        version: AgentVersion | Omit = omit,
+        version: Literal["published", "draft"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -458,7 +458,7 @@ class AsyncAgentsResource(AsyncAPIResource):
         self,
         agent_id: str,
         *,
-        version: AgentVersion | Omit = omit,
+        version: Literal["published", "draft"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -517,7 +517,7 @@ class AsyncAgentsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Agent:
+    ) -> AgentCreateResponse:
         """
         Create a new draft agent owned by the given organization.
 
@@ -536,7 +536,7 @@ class AsyncAgentsResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            Agent: Successful Response
+            AgentCreateResponse: Successful Response
 
         Example:
             ```python
@@ -560,7 +560,7 @@ class AsyncAgentsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Agent,
+            cast_to=AgentCreateResponse,
         )
 
     async def publish(
@@ -573,7 +573,7 @@ class AsyncAgentsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Agent:
+    ) -> AgentPublishResponse:
         """
         Publish an agent's latest draft as its live published version.
 
@@ -589,7 +589,7 @@ class AsyncAgentsResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            Agent: Successful Response
+            AgentPublishResponse: Successful Response
 
         Example:
             ```python
@@ -605,7 +605,7 @@ class AsyncAgentsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Agent,
+            cast_to=AgentPublishResponse,
         )
 
     async def update(
@@ -665,7 +665,7 @@ class AsyncAgentsResource(AsyncAPIResource):
         self,
         agent_id: str,
         *,
-        version: AgentVersion | Omit = omit,
+        version: Literal["published", "draft"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

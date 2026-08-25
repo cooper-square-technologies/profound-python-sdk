@@ -2,13 +2,11 @@
 
 from __future__ import annotations
 
-from typing_extensions import TypedDict
-
-from .shared.agent_version import AgentVersion
+from typing_extensions import Literal, TypedDict
 
 __all__ = ["AgentRetrieveGraphParams"]
 
 
 class AgentRetrieveGraphParams(TypedDict, total=False):
-    version: AgentVersion
+    version: Literal["published", "draft"]
     """Version of the agent whose graph to retrieve. Use `published` for the live version, or `draft` for the latest unpublished changes. Defaults to `published`."""

@@ -8,9 +8,15 @@ from .._types import SequenceNotStr
 
 from .._utils import PropertyInfo
 
-from .shared_params.project_generation_context_item import ProjectGenerationContextItem
-
-__all__ = ["ProjectCreateParams", "Attachment", "GenerationContext", "GenerationContextDateRange"]
+__all__ = [
+    "ProjectCreateParams",
+    "Attachment",
+    "GenerationContext",
+    "GenerationContextDateRange",
+    "GenerationContextPlatform",
+    "GenerationContextRegion",
+    "GenerationContextTag",
+]
 
 
 class ProjectCreateParams(TypedDict, total=False):
@@ -29,6 +35,30 @@ class ProjectCreateParams(TypedDict, total=False):
     generation_context: Optional[GenerationContext]
 
 
+class GenerationContextTag(TypedDict, total=False):
+    id: Required[str]
+
+    name: Required[str]
+
+    slug: Optional[str]
+
+
+class GenerationContextRegion(TypedDict, total=False):
+    id: Required[str]
+
+    name: Required[str]
+
+    slug: Optional[str]
+
+
+class GenerationContextPlatform(TypedDict, total=False):
+    id: Required[str]
+
+    name: Required[str]
+
+    slug: Optional[str]
+
+
 class GenerationContextDateRange(TypedDict, total=False):
     end_date: Annotated[Optional[str], PropertyInfo(alias="endDate")]
 
@@ -44,15 +74,15 @@ class GenerationContextDateRange(TypedDict, total=False):
 class GenerationContext(TypedDict, total=False):
     date_range: Annotated[Optional[GenerationContextDateRange], PropertyInfo(alias="dateRange")]
 
-    platforms: Iterable[ProjectGenerationContextItem]
+    platforms: Iterable[GenerationContextPlatform]
 
     project_categories: Annotated[
         List[Literal["creative", "earned", "publish", "refresh", "social"]], PropertyInfo(alias="projectCategories")
     ]
 
-    regions: Iterable[ProjectGenerationContextItem]
+    regions: Iterable[GenerationContextRegion]
 
-    tags: Iterable[ProjectGenerationContextItem]
+    tags: Iterable[GenerationContextTag]
 
 
 class Attachment(TypedDict, total=False):

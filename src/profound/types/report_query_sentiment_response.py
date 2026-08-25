@@ -8,9 +8,22 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-from .shared.dimension_ref import DimensionRef
-
-__all__ = ["ReportQuerySentimentResponse", "Info", "Data", "DataPrevious"]
+__all__ = [
+    "ReportQuerySentimentResponse",
+    "Info",
+    "Data",
+    "DataModel",
+    "DataTopic",
+    "DataRegion",
+    "DataPrompt",
+    "DataPersona",
+    "DataTag",
+    "DataTheme",
+    "DataClaim",
+    "DataRun",
+    "DataCompetitor",
+    "DataPrevious",
+]
 
 
 class DataPrevious(BaseModel):
@@ -34,28 +47,88 @@ class DataPrevious(BaseModel):
         __pydantic_extra__: Dict[str, object]
 
 
+class DataCompetitor(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class DataRun(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class DataClaim(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class DataTheme(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class DataTag(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class DataPersona(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class DataPrompt(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class DataRegion(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class DataTopic(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class DataModel(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
 class Data(BaseModel):
     date: Optional[str] = None
 
-    model: Optional[DimensionRef] = None
+    model: Optional[DataModel] = None
 
-    topic: Optional[DimensionRef] = None
+    topic: Optional[DataTopic] = None
 
-    region: Optional[DimensionRef] = None
+    region: Optional[DataRegion] = None
 
-    prompt: Optional[DimensionRef] = None
+    prompt: Optional[DataPrompt] = None
 
-    persona: Optional[DimensionRef] = None
+    persona: Optional[DataPersona] = None
 
-    tag: Optional[DimensionRef] = None
+    tag: Optional[DataTag] = None
 
-    theme: Optional[DimensionRef] = None
+    theme: Optional[DataTheme] = None
 
-    claim: Optional[DimensionRef] = None
+    claim: Optional[DataClaim] = None
 
-    run: Optional[DimensionRef] = None
+    run: Optional[DataRun] = None
 
-    competitor: Optional[DimensionRef] = None
+    competitor: Optional[DataCompetitor] = None
 
     positive_sentiment: Optional[float] = None
 

@@ -1551,7 +1551,7 @@ is ready.
 | Direction | Type |
 | --- | --- |
 | Request | [`AgentCreateParams`](./src/profound/types/agent_create_params.py) |
-| Response | [`Agent`](./src/profound/types/shared/agent.py) |
+| Response | [`AgentCreateResponse`](./src/profound/types/agent_create_response.py) |
 
 ```python
 agent = client.agents.create(
@@ -1570,7 +1570,7 @@ input/output contract is rejected with `422` and is not published.
 
 | Direction | Type |
 | --- | --- |
-| Response | [`Agent`](./src/profound/types/shared/agent.py) |
+| Response | [`AgentPublishResponse`](./src/profound/types/agent_publish_response.py) |
 
 ```python
 agent = client.agents.publish(
@@ -1735,7 +1735,7 @@ Add a document to a knowledge base using JSON text or multipart file upload.
 | Direction | Type |
 | --- | --- |
 | Request | [`DocumentCreateParams`](./src/profound/types/knowledge_bases/document_create_params.py) |
-| Response | [`DocumentOperationResponse`](./src/profound/types/shared/document_operation_response.py) |
+| Response | [`DocumentCreateResponse`](./src/profound/types/knowledge_bases/document_create_response.py) |
 
 ```python
 document = client.knowledge_bases.documents.create(
@@ -1752,7 +1752,7 @@ Overwrite a knowledge base document using JSON text or multipart file upload.
 | Direction | Type |
 | --- | --- |
 | Request | [`DocumentUpdateParams`](./src/profound/types/knowledge_bases/document_update_params.py) |
-| Response | [`DocumentOperationResponse`](./src/profound/types/shared/document_operation_response.py) |
+| Response | [`DocumentUpdateResponse`](./src/profound/types/knowledge_bases/document_update_response.py) |
 
 ```python
 document = client.knowledge_bases.documents.update(
@@ -1769,7 +1769,7 @@ Delete an existing document from a knowledge base.
 | Direction | Type |
 | --- | --- |
 | Request | [`DocumentDeleteParams`](./src/profound/types/knowledge_bases/document_delete_params.py) |
-| Response | [`DocumentOperationResponse`](./src/profound/types/shared/document_operation_response.py) |
+| Response | [`DocumentDeleteResponse`](./src/profound/types/knowledge_bases/document_delete_response.py) |
 
 ```python
 document = client.knowledge_bases.documents.delete(

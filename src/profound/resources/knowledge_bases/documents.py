@@ -17,8 +17,10 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.shared.document_operation_response import DocumentOperationResponse
+from ...types.knowledge_bases.document_create_response import DocumentCreateResponse
 from ...types.knowledge_bases import document_create_params, document_update_params, document_delete_params
+from ...types.knowledge_bases.document_update_response import DocumentUpdateResponse
+from ...types.knowledge_bases.document_delete_response import DocumentDeleteResponse
 
 __all__ = ["DocumentsResource", "AsyncDocumentsResource"]
 
@@ -46,7 +48,7 @@ class DocumentsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> DocumentOperationResponse:
+    ) -> DocumentCreateResponse:
         """
         Add a document to a knowledge base using JSON text or multipart file upload.
 
@@ -62,7 +64,7 @@ class DocumentsResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            DocumentOperationResponse: Successful Response
+            DocumentCreateResponse: Successful Response
 
         Example:
             ```python
@@ -96,7 +98,7 @@ class DocumentsResource(SyncAPIResource):
                     {"organization_id": organization_id}, document_create_params.DocumentCreateParams
                 ),
             ),
-            cast_to=DocumentOperationResponse,
+            cast_to=DocumentCreateResponse,
         )
 
     def update(
@@ -113,7 +115,7 @@ class DocumentsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> DocumentOperationResponse:
+    ) -> DocumentUpdateResponse:
         """
         Overwrite a knowledge base document using JSON text or multipart file upload.
 
@@ -129,7 +131,7 @@ class DocumentsResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            DocumentOperationResponse: Successful Response
+            DocumentUpdateResponse: Successful Response
 
         Example:
             ```python
@@ -163,7 +165,7 @@ class DocumentsResource(SyncAPIResource):
                     {"organization_id": organization_id}, document_update_params.DocumentUpdateParams
                 ),
             ),
-            cast_to=DocumentOperationResponse,
+            cast_to=DocumentUpdateResponse,
         )
 
     def delete(
@@ -178,7 +180,7 @@ class DocumentsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> DocumentOperationResponse:
+    ) -> DocumentDeleteResponse:
         """
         Delete an existing document from a knowledge base.
 
@@ -192,7 +194,7 @@ class DocumentsResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            DocumentOperationResponse: Successful Response
+            DocumentDeleteResponse: Successful Response
 
         Example:
             ```python
@@ -221,7 +223,7 @@ class DocumentsResource(SyncAPIResource):
                     {"organization_id": organization_id}, document_delete_params.DocumentDeleteParams
                 ),
             ),
-            cast_to=DocumentOperationResponse,
+            cast_to=DocumentDeleteResponse,
         )
 
 
@@ -248,7 +250,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> DocumentOperationResponse:
+    ) -> DocumentCreateResponse:
         """
         Add a document to a knowledge base using JSON text or multipart file upload.
 
@@ -264,7 +266,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            DocumentOperationResponse: Successful Response
+            DocumentCreateResponse: Successful Response
 
         Example:
             ```python
@@ -298,7 +300,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
                     {"organization_id": organization_id}, document_create_params.DocumentCreateParams
                 ),
             ),
-            cast_to=DocumentOperationResponse,
+            cast_to=DocumentCreateResponse,
         )
 
     async def update(
@@ -315,7 +317,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> DocumentOperationResponse:
+    ) -> DocumentUpdateResponse:
         """
         Overwrite a knowledge base document using JSON text or multipart file upload.
 
@@ -331,7 +333,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            DocumentOperationResponse: Successful Response
+            DocumentUpdateResponse: Successful Response
 
         Example:
             ```python
@@ -365,7 +367,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
                     {"organization_id": organization_id}, document_update_params.DocumentUpdateParams
                 ),
             ),
-            cast_to=DocumentOperationResponse,
+            cast_to=DocumentUpdateResponse,
         )
 
     async def delete(
@@ -380,7 +382,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> DocumentOperationResponse:
+    ) -> DocumentDeleteResponse:
         """
         Delete an existing document from a knowledge base.
 
@@ -394,7 +396,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            DocumentOperationResponse: Successful Response
+            DocumentDeleteResponse: Successful Response
 
         Example:
             ```python
@@ -423,7 +425,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
                     {"organization_id": organization_id}, document_delete_params.DocumentDeleteParams
                 ),
             ),
-            cast_to=DocumentOperationResponse,
+            cast_to=DocumentDeleteResponse,
         )
 
 

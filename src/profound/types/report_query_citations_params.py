@@ -2,10 +2,10 @@
 
 from __future__ import annotations
 
-from typing import List, Optional
+from typing import Iterable, List, Optional
 from typing_extensions import Literal, Required, TypedDict
 
-__all__ = ["ReportQueryCitationsParams"]
+__all__ = ["ReportQueryCitationsParams", "Filter"]
 
 
 class ReportQueryCitationsParams(TypedDict, total=False):
@@ -29,7 +29,7 @@ class ReportQueryCitationsParams(TypedDict, total=False):
     scope: Literal["all", "owned"]
     """`all` (every cited domain) or `owned` (only your owned domains). Applies to `entity=domain`."""
 
-    filter: Optional["FilterNode"]
+    filter: Optional[Filter]
     """`citation_category` filters on a cited URL's single category; `citation_tag` filters on the custom citation tags a URL carries (a URL can carry several). List the category's tags with `GET /v1/org/categories/{category_id}/citation-tags`."""
 
     limit: Optional[int]
@@ -41,4 +41,22 @@ class ReportQueryCitationsParams(TypedDict, total=False):
     cursor: Optional[str]
 
 
-from .shared_params.filter_node import FilterNode
+_FilterReservedKeywords = TypedDict(
+    "_FilterReservedKeywords",
+    {
+        "and": Optional[Iterable["Filter"]],
+        "or": Optional[Iterable["Filter"]],
+        "not": Optional["Filter"],
+    },
+    total=False,
+)
+
+
+class Filter(_FilterReservedKeywords, total=False):
+    """A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group."""
+
+    field: Optional[str]
+
+    op: Optional[str]
+
+    value: object

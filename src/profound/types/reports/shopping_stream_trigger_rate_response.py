@@ -1,5 +1,7 @@
 # File generated from our OpenAPI spec by Scalar. See README.md for details.
 
+from __future__ import annotations
+
 from typing import Dict, List, Optional, TYPE_CHECKING, Union
 from typing_extensions import TypeAlias
 
@@ -7,21 +9,51 @@ from pydantic import Field as FieldInfo
 
 from ..._models import BaseModel
 
-from ..shared.dimension_ref import DimensionRef
+__all__ = [
+    "ShoppingStreamTriggerRateResponse",
+    "ShoppingTriggerRateV2Info",
+    "ShoppingTriggerRateRow",
+    "ShoppingTriggerRateRowTopic",
+    "ShoppingTriggerRateRowRegion",
+    "ShoppingTriggerRateRowPersona",
+    "ShoppingTriggerRateRowPrompt",
+]
 
-__all__ = ["ShoppingStreamTriggerRateResponse", "ShoppingTriggerRateV2Info", "ShoppingTriggerRateRow"]
+
+class ShoppingTriggerRateRowPrompt(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class ShoppingTriggerRateRowPersona(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class ShoppingTriggerRateRowRegion(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class ShoppingTriggerRateRowTopic(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
 
 
 class ShoppingTriggerRateRow(BaseModel):
     date: Optional[str] = None
 
-    topic: Optional[DimensionRef] = None
+    topic: Optional[ShoppingTriggerRateRowTopic] = None
 
-    region: Optional[DimensionRef] = None
+    region: Optional[ShoppingTriggerRateRowRegion] = None
 
-    persona: Optional[DimensionRef] = None
+    persona: Optional[ShoppingTriggerRateRowPersona] = None
 
-    prompt: Optional[DimensionRef] = None
+    prompt: Optional[ShoppingTriggerRateRowPrompt] = None
 
     total_runs: Optional[int] = None
 

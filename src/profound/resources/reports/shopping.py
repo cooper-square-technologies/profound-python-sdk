@@ -21,7 +21,6 @@ from ..._response import (
 from ..._base_client import make_request_options
 from ..._streaming import Stream, AsyncStream
 from ...types.reports.shopping_brands_response import ShoppingBrandsResponse
-from ...types.shared_params.filter_node import FilterNode
 from ...types.reports import (
     shopping_brands_params,
     shopping_stream_brands_params,
@@ -63,7 +62,7 @@ class ShoppingResource(SyncAPIResource):
         interval: Literal["day", "week", "month"] | Omit = omit,
         scope: Literal["owned", "all"] | Omit = omit,
         assets: Optional[Union[str, SequenceNotStr[str]]] | Omit = omit,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[shopping_brands_params.Filter] | Omit = omit,
         limit: Optional[int] | Omit = omit,
         max_results: Optional[int] | Omit = omit,
         cursor: Optional[str] | Omit = omit,
@@ -145,7 +144,7 @@ class ShoppingResource(SyncAPIResource):
         interval: Literal["day", "week", "month"] | Omit = omit,
         scope: Literal["owned", "all"] | Omit = omit,
         assets: Optional[Union[str, SequenceNotStr[str]]] | Omit = omit,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[shopping_stream_brands_params.Filter] | Omit = omit,
         limit: Optional[int] | Omit = omit,
         max_results: Optional[int] | Omit = omit,
         cursor: Optional[str] | Omit = omit,
@@ -249,7 +248,7 @@ class ShoppingResource(SyncAPIResource):
         include_merchants: bool | Omit = omit,
         target_product: Optional[str] | Omit = omit,
         competitor_limit: int | Omit = omit,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[shopping_products_params.Filter] | Omit = omit,
         limit: Optional[int] | Omit = omit,
         max_results: Optional[int] | Omit = omit,
         cursor: Optional[str] | Omit = omit,
@@ -350,7 +349,7 @@ class ShoppingResource(SyncAPIResource):
         include_merchants: bool | Omit = omit,
         target_product: Optional[str] | Omit = omit,
         competitor_limit: int | Omit = omit,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[shopping_stream_products_params.Filter] | Omit = omit,
         limit: Optional[int] | Omit = omit,
         max_results: Optional[int] | Omit = omit,
         cursor: Optional[str] | Omit = omit,
@@ -453,7 +452,7 @@ class ShoppingResource(SyncAPIResource):
         ]
         | Omit = omit,
         interval: Literal["day", "week", "month"] | Omit = omit,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[shopping_merchants_params.Filter] | Omit = omit,
         limit: Optional[int] | Omit = omit,
         max_results: Optional[int] | Omit = omit,
         cursor: Optional[str] | Omit = omit,
@@ -542,7 +541,7 @@ class ShoppingResource(SyncAPIResource):
         ]
         | Omit = omit,
         interval: Literal["day", "week", "month"] | Omit = omit,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[shopping_stream_merchants_params.Filter] | Omit = omit,
         limit: Optional[int] | Omit = omit,
         max_results: Optional[int] | Omit = omit,
         cursor: Optional[str] | Omit = omit,
@@ -624,7 +623,7 @@ class ShoppingResource(SyncAPIResource):
         metrics: Optional[List[Literal["total_runs", "shopping_triggered_runs", "trigger_rate_percentage"]]]
         | Omit = omit,
         interval: Literal["day", "week", "month"] | Omit = omit,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[shopping_trigger_rate_params.Filter] | Omit = omit,
         limit: Optional[int] | Omit = omit,
         max_results: Optional[int] | Omit = omit,
         cursor: Optional[str] | Omit = omit,
@@ -700,7 +699,7 @@ class ShoppingResource(SyncAPIResource):
         metrics: Optional[List[Literal["total_runs", "shopping_triggered_runs", "trigger_rate_percentage"]]]
         | Omit = omit,
         interval: Literal["day", "week", "month"] | Omit = omit,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[shopping_stream_trigger_rate_params.Filter] | Omit = omit,
         limit: Optional[int] | Omit = omit,
         max_results: Optional[int] | Omit = omit,
         cursor: Optional[str] | Omit = omit,
@@ -793,7 +792,7 @@ class AsyncShoppingResource(AsyncAPIResource):
         interval: Literal["day", "week", "month"] | Omit = omit,
         scope: Literal["owned", "all"] | Omit = omit,
         assets: Optional[Union[str, SequenceNotStr[str]]] | Omit = omit,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[shopping_brands_params.Filter] | Omit = omit,
         limit: Optional[int] | Omit = omit,
         max_results: Optional[int] | Omit = omit,
         cursor: Optional[str] | Omit = omit,
@@ -875,7 +874,7 @@ class AsyncShoppingResource(AsyncAPIResource):
         interval: Literal["day", "week", "month"] | Omit = omit,
         scope: Literal["owned", "all"] | Omit = omit,
         assets: Optional[Union[str, SequenceNotStr[str]]] | Omit = omit,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[shopping_stream_brands_params.Filter] | Omit = omit,
         limit: Optional[int] | Omit = omit,
         max_results: Optional[int] | Omit = omit,
         cursor: Optional[str] | Omit = omit,
@@ -979,7 +978,7 @@ class AsyncShoppingResource(AsyncAPIResource):
         include_merchants: bool | Omit = omit,
         target_product: Optional[str] | Omit = omit,
         competitor_limit: int | Omit = omit,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[shopping_products_params.Filter] | Omit = omit,
         limit: Optional[int] | Omit = omit,
         max_results: Optional[int] | Omit = omit,
         cursor: Optional[str] | Omit = omit,
@@ -1080,7 +1079,7 @@ class AsyncShoppingResource(AsyncAPIResource):
         include_merchants: bool | Omit = omit,
         target_product: Optional[str] | Omit = omit,
         competitor_limit: int | Omit = omit,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[shopping_stream_products_params.Filter] | Omit = omit,
         limit: Optional[int] | Omit = omit,
         max_results: Optional[int] | Omit = omit,
         cursor: Optional[str] | Omit = omit,
@@ -1183,7 +1182,7 @@ class AsyncShoppingResource(AsyncAPIResource):
         ]
         | Omit = omit,
         interval: Literal["day", "week", "month"] | Omit = omit,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[shopping_merchants_params.Filter] | Omit = omit,
         limit: Optional[int] | Omit = omit,
         max_results: Optional[int] | Omit = omit,
         cursor: Optional[str] | Omit = omit,
@@ -1272,7 +1271,7 @@ class AsyncShoppingResource(AsyncAPIResource):
         ]
         | Omit = omit,
         interval: Literal["day", "week", "month"] | Omit = omit,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[shopping_stream_merchants_params.Filter] | Omit = omit,
         limit: Optional[int] | Omit = omit,
         max_results: Optional[int] | Omit = omit,
         cursor: Optional[str] | Omit = omit,
@@ -1354,7 +1353,7 @@ class AsyncShoppingResource(AsyncAPIResource):
         metrics: Optional[List[Literal["total_runs", "shopping_triggered_runs", "trigger_rate_percentage"]]]
         | Omit = omit,
         interval: Literal["day", "week", "month"] | Omit = omit,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[shopping_trigger_rate_params.Filter] | Omit = omit,
         limit: Optional[int] | Omit = omit,
         max_results: Optional[int] | Omit = omit,
         cursor: Optional[str] | Omit = omit,
@@ -1430,7 +1429,7 @@ class AsyncShoppingResource(AsyncAPIResource):
         metrics: Optional[List[Literal["total_runs", "shopping_triggered_runs", "trigger_rate_percentage"]]]
         | Omit = omit,
         interval: Literal["day", "week", "month"] | Omit = omit,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[shopping_stream_trigger_rate_params.Filter] | Omit = omit,
         limit: Optional[int] | Omit = omit,
         max_results: Optional[int] | Omit = omit,
         cursor: Optional[str] | Omit = omit,

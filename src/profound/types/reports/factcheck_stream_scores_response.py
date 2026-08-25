@@ -9,9 +9,19 @@ from pydantic import Field as FieldInfo
 
 from ..._models import BaseModel
 
-from ..shared.dimension_ref import DimensionRef
-
-__all__ = ["FactcheckStreamScoresResponse", "FactcheckScoresInfo", "FactcheckScoreRow", "FactcheckScoreRowCitation"]
+__all__ = [
+    "FactcheckStreamScoresResponse",
+    "FactcheckScoresInfo",
+    "FactcheckScoreRow",
+    "FactcheckScoreRowModel",
+    "FactcheckScoreRowRegion",
+    "FactcheckScoreRowPersona",
+    "FactcheckScoreRowPrompt",
+    "FactcheckScoreRowTopic",
+    "FactcheckScoreRowTag",
+    "FactcheckScoreRowTheme",
+    "FactcheckScoreRowCitation",
+]
 
 
 class FactcheckScoreRowCitation(BaseModel):
@@ -20,22 +30,64 @@ class FactcheckScoreRowCitation(BaseModel):
     citation_category: Optional[str] = None
 
 
+class FactcheckScoreRowTheme(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class FactcheckScoreRowTag(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class FactcheckScoreRowTopic(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class FactcheckScoreRowPrompt(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class FactcheckScoreRowPersona(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class FactcheckScoreRowRegion(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class FactcheckScoreRowModel(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
 class FactcheckScoreRow(BaseModel):
     date: Optional[str] = None
 
-    model: Optional[DimensionRef] = None
+    model: Optional[FactcheckScoreRowModel] = None
 
-    region: Optional[DimensionRef] = None
+    region: Optional[FactcheckScoreRowRegion] = None
 
-    persona: Optional[DimensionRef] = None
+    persona: Optional[FactcheckScoreRowPersona] = None
 
-    prompt: Optional[DimensionRef] = None
+    prompt: Optional[FactcheckScoreRowPrompt] = None
 
-    topic: Optional[DimensionRef] = None
+    topic: Optional[FactcheckScoreRowTopic] = None
 
-    tag: Optional[DimensionRef] = None
+    tag: Optional[FactcheckScoreRowTag] = None
 
-    theme: Optional[DimensionRef] = None
+    theme: Optional[FactcheckScoreRowTheme] = None
 
     citation: Optional[FactcheckScoreRowCitation] = None
 

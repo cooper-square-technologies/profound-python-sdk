@@ -9,17 +9,22 @@ from pydantic import Field as FieldInfo
 
 from ...._models import BaseModel
 
-from ...shared.claim_model_occurrence import ClaimModelOccurrence
-from ...shared.dimension_ref import DimensionRef
-
 __all__ = [
     "ClaimQueryClaimsResponse",
     "Info",
     "Data",
+    "DataModel",
     "DataEvidence",
     "DataCitationSource",
+    "DataRegion",
+    "DataPersona",
+    "DataPrompt",
+    "DataTopic",
+    "DataTag",
     "DataTheme",
+    "DataThemeDimensionRef",
     "DataClaim",
+    "DataClaimModel",
     "DataClaimEvidence",
     "DataClaimCitationSource",
 ]
@@ -49,6 +54,15 @@ class DataClaimEvidence(BaseModel):
     source_updated_at: Optional[str] = None
 
 
+class DataClaimModel(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+    occurrence: Optional[float] = None
+    """Only populated for entries in `models`; omitted from grouped-section `model`."""
+
+
 class DataClaim(BaseModel):
     cluster_id: Optional[str] = None
 
@@ -60,7 +74,7 @@ class DataClaim(BaseModel):
 
     reasoning: Optional[str] = None
 
-    models: Optional[List[ClaimModelOccurrence]] = None
+    models: Optional[List[DataClaimModel]] = None
 
     evidence: Optional[List[DataClaimEvidence]] = None
 
@@ -80,7 +94,43 @@ class DataClaim(BaseModel):
         __pydantic_extra__: Dict[str, object]
 
 
-DataTheme: TypeAlias = Union[str, DimensionRef]
+class DataThemeDimensionRef(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+DataTheme: TypeAlias = Union[str, DataThemeDimensionRef]
+
+
+class DataTag(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class DataTopic(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class DataPrompt(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class DataPersona(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class DataRegion(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
 
 
 class DataCitationSource(BaseModel):
@@ -107,6 +157,15 @@ class DataEvidence(BaseModel):
     source_updated_at: Optional[str] = None
 
 
+class DataModel(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+    occurrence: Optional[float] = None
+    """Only populated for entries in `models`; omitted from grouped-section `model`."""
+
+
 class Data(BaseModel):
     cluster_id: Optional[str] = None
 
@@ -116,23 +175,23 @@ class Data(BaseModel):
 
     reasoning: Optional[str] = None
 
-    models: Optional[List[ClaimModelOccurrence]] = None
+    models: Optional[List[DataModel]] = None
 
     evidence: Optional[List[DataEvidence]] = None
 
     citation_sources: Optional[List[DataCitationSource]] = None
 
-    model: Optional[ClaimModelOccurrence] = None
+    model: Optional[DataModel] = None
 
-    region: Optional[DimensionRef] = None
+    region: Optional[DataRegion] = None
 
-    persona: Optional[DimensionRef] = None
+    persona: Optional[DataPersona] = None
 
-    prompt: Optional[DimensionRef] = None
+    prompt: Optional[DataPrompt] = None
 
-    topic: Optional[DimensionRef] = None
+    topic: Optional[DataTopic] = None
 
-    tag: Optional[DimensionRef] = None
+    tag: Optional[DataTag] = None
 
     theme: Optional[DataTheme] = None
     """Claim theme (string), or an `{id, name}` ref when sectioning by `theme`."""

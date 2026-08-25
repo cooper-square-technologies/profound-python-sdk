@@ -2,8 +2,11 @@
 
 from __future__ import annotations
 
+from .document_create_response import DocumentCreateResponse as DocumentCreateResponse
 from .document_create_params import DocumentCreateParams as DocumentCreateParams
+from .document_update_response import DocumentUpdateResponse as DocumentUpdateResponse
 from .document_update_params import DocumentUpdateParams as DocumentUpdateParams
+from .document_delete_response import DocumentDeleteResponse as DocumentDeleteResponse
 from .document_delete_params import DocumentDeleteParams as DocumentDeleteParams
 from .folder_create_response import FolderCreateResponse as FolderCreateResponse
 from .folder_create_params import FolderCreateParams as FolderCreateParams

@@ -9,9 +9,47 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-from .shared.dimension_ref import DimensionRef
+__all__ = [
+    "ReportStreamVisibilityV2Response",
+    "VisibilityV2Info",
+    "VisibilityRow",
+    "VisibilityRowAsset",
+    "VisibilityRowModel",
+    "VisibilityRowTopic",
+    "VisibilityRowRegion",
+    "VisibilityRowPrompt",
+    "VisibilityRowPersona",
+]
 
-__all__ = ["ReportStreamVisibilityV2Response", "VisibilityV2Info", "VisibilityRow", "VisibilityRowAsset"]
+
+class VisibilityRowPersona(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class VisibilityRowPrompt(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class VisibilityRowRegion(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class VisibilityRowTopic(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class VisibilityRowModel(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
 
 
 class VisibilityRowAsset(BaseModel):
@@ -29,15 +67,15 @@ class VisibilityRow(BaseModel):
 
     date: Optional[str] = None
 
-    model: Optional[DimensionRef] = None
+    model: Optional[VisibilityRowModel] = None
 
-    topic: Optional[DimensionRef] = None
+    topic: Optional[VisibilityRowTopic] = None
 
-    region: Optional[DimensionRef] = None
+    region: Optional[VisibilityRowRegion] = None
 
-    prompt: Optional[DimensionRef] = None
+    prompt: Optional[VisibilityRowPrompt] = None
 
-    persona: Optional[DimensionRef] = None
+    persona: Optional[VisibilityRowPersona] = None
 
     visibility_score: Optional[float] = None
 

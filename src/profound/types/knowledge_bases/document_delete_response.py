@@ -4,10 +4,10 @@ from typing import Optional
 
 from ..._models import BaseModel
 
-__all__ = ["DocumentOperationResponse"]
+__all__ = ["DocumentDeleteResponse"]
 
 
-class DocumentOperationResponse(BaseModel):
+class DocumentDeleteResponse(BaseModel):
     message: str
     """Operation result message."""
 

@@ -1,5 +1,7 @@
 # File generated from our OpenAPI spec by Scalar. See README.md for details.
 
+from __future__ import annotations
+
 from typing import Dict, List, Optional, TYPE_CHECKING, Union
 from typing_extensions import TypeAlias
 
@@ -7,9 +9,32 @@ from pydantic import Field as FieldInfo
 
 from ..._models import BaseModel
 
-from ..shared.dimension_ref import DimensionRef
+__all__ = [
+    "ShoppingStreamBrandsResponse",
+    "ShoppingBrandsV2Info",
+    "ShoppingBrandRow",
+    "ShoppingBrandRowTopic",
+    "ShoppingBrandRowRegion",
+    "ShoppingBrandRowPrompt",
+]
 
-__all__ = ["ShoppingStreamBrandsResponse", "ShoppingBrandsV2Info", "ShoppingBrandRow"]
+
+class ShoppingBrandRowPrompt(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class ShoppingBrandRowRegion(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class ShoppingBrandRowTopic(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
 
 
 class ShoppingBrandRow(BaseModel):
@@ -20,11 +45,11 @@ class ShoppingBrandRow(BaseModel):
 
     date: Optional[str] = None
 
-    topic: Optional[DimensionRef] = None
+    topic: Optional[ShoppingBrandRowTopic] = None
 
-    region: Optional[DimensionRef] = None
+    region: Optional[ShoppingBrandRowRegion] = None
 
-    prompt: Optional[DimensionRef] = None
+    prompt: Optional[ShoppingBrandRowPrompt] = None
 
     visibility_score: Optional[float] = None
 

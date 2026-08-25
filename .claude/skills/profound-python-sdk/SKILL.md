@@ -41,9 +41,9 @@ client = Profound(
     api_key=os.environ.get("PROFOUND_API_KEY"),
 )
 
-organization = client.organizations.regions()
+category = client.organizations.categories.list()
 
-print(organization)
+print(category)
 ```
 
 Method names, parameter shapes, and response types are generated from the API description — do not guess them. Look up the exact call signature in [api.md](../../../api.md) before writing a call.
@@ -71,7 +71,7 @@ Non-success responses throw generated API errors. Error objects expose status, h
 from profound import APIStatusError
 
 try:
-    organization = client.organizations.regions()
+    category = client.organizations.categories.list()
 except APIStatusError as err:
     print(err.status_code, err.message)
     raise

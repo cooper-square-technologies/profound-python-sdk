@@ -8,9 +8,7 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-from .shared.dimension_ref import DimensionRef
-
-__all__ = ["PromptAnswersV2Response", "Info", "Data", "DataCitationDetail", "DataCitationDetailGroup"]
+__all__ = ["PromptAnswersV2Response", "Info", "Data", "DataModel", "DataCitationDetail", "DataCitationDetailGroup"]
 
 
 class DataCitationDetailGroup(BaseModel):
@@ -41,12 +39,18 @@ class DataCitationDetail(BaseModel):
     citation_category: Optional[str] = None
 
 
+class DataModel(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
 class Data(BaseModel):
     run_id: Optional[str] = None
 
     date: Optional[str] = None
 
-    model: Optional[DimensionRef] = None
+    model: Optional[DataModel] = None
 
     topic: Optional[str] = None
 

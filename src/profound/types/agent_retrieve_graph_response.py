@@ -1,10 +1,9 @@
 # File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 from typing import Dict
+from typing_extensions import Literal
 
 from .._models import BaseModel
-
-from .shared.agent_version import AgentVersion
 
 __all__ = ["AgentRetrieveGraphResponse"]
 
@@ -13,7 +12,7 @@ class AgentRetrieveGraphResponse(BaseModel):
     agent_id: str
     """Unique ID of the agent the graph belongs to."""
 
-    version: AgentVersion
+    version: Literal["published", "draft"]
     """Which version of the agent this graph is — `published` or `draft`."""
 
     graph: Dict[str, object]

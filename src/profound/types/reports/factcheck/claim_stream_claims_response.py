@@ -9,17 +9,22 @@ from pydantic import Field as FieldInfo
 
 from ...._models import BaseModel
 
-from ...shared.claim_model_occurrence import ClaimModelOccurrence
-from ...shared.dimension_ref import DimensionRef
-
 __all__ = [
     "ClaimStreamClaimsResponse",
     "FactcheckClaimsInfo",
     "FactcheckClaimsRow",
+    "FactcheckClaimsRowModel",
     "FactcheckClaimsRowEvidence",
     "FactcheckClaimsRowCitationSource",
+    "FactcheckClaimsRowRegion",
+    "FactcheckClaimsRowPersona",
+    "FactcheckClaimsRowPrompt",
+    "FactcheckClaimsRowTopic",
+    "FactcheckClaimsRowTag",
     "FactcheckClaimsRowTheme",
+    "FactcheckClaimsRowThemeDimensionRef",
     "FactcheckClaimsRowClaim",
+    "FactcheckClaimsRowClaimModel",
     "FactcheckClaimsRowClaimEvidence",
     "FactcheckClaimsRowClaimCitationSource",
 ]
@@ -49,6 +54,15 @@ class FactcheckClaimsRowClaimEvidence(BaseModel):
     source_updated_at: Optional[str] = None
 
 
+class FactcheckClaimsRowClaimModel(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+    occurrence: Optional[float] = None
+    """Only populated for entries in `models`; omitted from grouped-section `model`."""
+
+
 class FactcheckClaimsRowClaim(BaseModel):
     cluster_id: Optional[str] = None
 
@@ -60,7 +74,7 @@ class FactcheckClaimsRowClaim(BaseModel):
 
     reasoning: Optional[str] = None
 
-    models: Optional[List[ClaimModelOccurrence]] = None
+    models: Optional[List[FactcheckClaimsRowClaimModel]] = None
 
     evidence: Optional[List[FactcheckClaimsRowClaimEvidence]] = None
 
@@ -80,7 +94,43 @@ class FactcheckClaimsRowClaim(BaseModel):
         __pydantic_extra__: Dict[str, object]
 
 
-FactcheckClaimsRowTheme: TypeAlias = Union[str, DimensionRef]
+class FactcheckClaimsRowThemeDimensionRef(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+FactcheckClaimsRowTheme: TypeAlias = Union[str, FactcheckClaimsRowThemeDimensionRef]
+
+
+class FactcheckClaimsRowTag(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class FactcheckClaimsRowTopic(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class FactcheckClaimsRowPrompt(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class FactcheckClaimsRowPersona(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class FactcheckClaimsRowRegion(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
 
 
 class FactcheckClaimsRowCitationSource(BaseModel):
@@ -107,6 +157,15 @@ class FactcheckClaimsRowEvidence(BaseModel):
     source_updated_at: Optional[str] = None
 
 
+class FactcheckClaimsRowModel(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+    occurrence: Optional[float] = None
+    """Only populated for entries in `models`; omitted from grouped-section `model`."""
+
+
 class FactcheckClaimsRow(BaseModel):
     cluster_id: Optional[str] = None
 
@@ -116,23 +175,23 @@ class FactcheckClaimsRow(BaseModel):
 
     reasoning: Optional[str] = None
 
-    models: Optional[List[ClaimModelOccurrence]] = None
+    models: Optional[List[FactcheckClaimsRowModel]] = None
 
     evidence: Optional[List[FactcheckClaimsRowEvidence]] = None
 
     citation_sources: Optional[List[FactcheckClaimsRowCitationSource]] = None
 
-    model: Optional[ClaimModelOccurrence] = None
+    model: Optional[FactcheckClaimsRowModel] = None
 
-    region: Optional[DimensionRef] = None
+    region: Optional[FactcheckClaimsRowRegion] = None
 
-    persona: Optional[DimensionRef] = None
+    persona: Optional[FactcheckClaimsRowPersona] = None
 
-    prompt: Optional[DimensionRef] = None
+    prompt: Optional[FactcheckClaimsRowPrompt] = None
 
-    topic: Optional[DimensionRef] = None
+    topic: Optional[FactcheckClaimsRowTopic] = None
 
-    tag: Optional[DimensionRef] = None
+    tag: Optional[FactcheckClaimsRowTag] = None
 
     theme: Optional[FactcheckClaimsRowTheme] = None
     """Claim theme (string), or an `{id, name}` ref when sectioning by `theme`."""

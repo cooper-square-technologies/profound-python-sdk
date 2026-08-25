@@ -42,9 +42,9 @@ client = Profound(
     api_key=os.environ.get("PROFOUND_API_KEY"),
 )
 
-organization = client.organizations.regions()
+category = client.organizations.categories.list()
 
-print(organization)
+print(category)
 ```
 
 The examples in the following sections assume a `client` configured as shown above.
@@ -65,7 +65,7 @@ from profound import AsyncProfound
 
 async def main() -> None:
     client = AsyncProfound()
-    organization = await client.organizations.regions()
+    category = await client.organizations.categories.list()
 
 
 asyncio.run(main())
@@ -114,7 +114,7 @@ Non-success responses throw generated API errors. Error objects expose status, h
 from profound import APIStatusError
 
 try:
-    organization = client.organizations.regions()
+    category = client.organizations.categories.list()
 except APIStatusError as err:
     print(err.status_code, err.message)
     raise

@@ -1,5 +1,7 @@
 # File generated from our OpenAPI spec by Scalar. See README.md for details.
 
+from __future__ import annotations
+
 from typing import Dict, List, Optional, TYPE_CHECKING
 from typing_extensions import Literal
 
@@ -7,9 +9,13 @@ from pydantic import Field as FieldInfo
 
 from ...._models import BaseModel
 
-from ...shared.dimension_ref import DimensionRef
+__all__ = ["YoutubeGetChannelsResponse", "Info", "Data", "DataModel"]
 
-__all__ = ["YoutubeGetChannelsResponse", "Info", "Data"]
+
+class DataModel(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
 
 
 class Data(BaseModel):
@@ -31,7 +37,7 @@ class Data(BaseModel):
     video_category: Optional[str] = None
     """Populated for a secondary video-category slice; with group_by `["video_category"]`, the category is returned in `name` instead. An unresolved category is returned as an empty string."""
 
-    model: Optional[DimensionRef] = None
+    model: Optional[DataModel] = None
     """Answer engine as an object `{id, name}`, present when grouped by model. The name matches `info.models`; the id is the model id the other reports accept."""
 
     source_type: Optional[Literal["video", "short", "channel", "playlist", "other"]] = None

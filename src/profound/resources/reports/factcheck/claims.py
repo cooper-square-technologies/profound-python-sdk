@@ -20,7 +20,6 @@ from ...._response import (
 from ...._base_client import make_request_options
 from ...._streaming import Stream, AsyncStream
 from ....types.reports.factcheck.claim_query_claims_response import ClaimQueryClaimsResponse
-from ....types.shared_params.filter_node import FilterNode
 from ....types.reports.factcheck import claim_query_claims_params, claim_stream_claims_params
 from ....types.reports.factcheck.claim_stream_claims_response import ClaimStreamClaimsResponse
 
@@ -43,7 +42,7 @@ class ClaimsResource(SyncAPIResource):
         start_date: str,
         end_date: str,
         group_by: List[Literal["model", "region", "persona", "prompt", "topic", "tag", "theme"]] | Omit = omit,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[claim_query_claims_params.Filter] | Omit = omit,
         include: Optional[List[Literal["theme", "reasoning", "models", "evidence", "citation_sources"]]] | Omit = omit,
         limit: Optional[int] | Omit = omit,
         max_results: Optional[int] | Omit = omit,
@@ -114,7 +113,7 @@ class ClaimsResource(SyncAPIResource):
         start_date: str,
         end_date: str,
         group_by: List[Literal["model", "region", "persona", "prompt", "topic", "tag", "theme"]] | Omit = omit,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[claim_stream_claims_params.Filter] | Omit = omit,
         include: Optional[List[Literal["theme", "reasoning", "models", "evidence", "citation_sources"]]] | Omit = omit,
         limit: Optional[int] | Omit = omit,
         max_results: Optional[int] | Omit = omit,
@@ -201,7 +200,7 @@ class AsyncClaimsResource(AsyncAPIResource):
         start_date: str,
         end_date: str,
         group_by: List[Literal["model", "region", "persona", "prompt", "topic", "tag", "theme"]] | Omit = omit,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[claim_query_claims_params.Filter] | Omit = omit,
         include: Optional[List[Literal["theme", "reasoning", "models", "evidence", "citation_sources"]]] | Omit = omit,
         limit: Optional[int] | Omit = omit,
         max_results: Optional[int] | Omit = omit,
@@ -272,7 +271,7 @@ class AsyncClaimsResource(AsyncAPIResource):
         start_date: str,
         end_date: str,
         group_by: List[Literal["model", "region", "persona", "prompt", "topic", "tag", "theme"]] | Omit = omit,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[claim_stream_claims_params.Filter] | Omit = omit,
         include: Optional[List[Literal["theme", "reasoning", "models", "evidence", "citation_sources"]]] | Omit = omit,
         limit: Optional[int] | Omit = omit,
         max_results: Optional[int] | Omit = omit,

@@ -24,7 +24,6 @@ from ..types.prompt_answers_response import PromptAnswersResponse
 from ..types.shared_params.pagination import Pagination
 from ..types import prompt_answers_params, prompt_answers_v2_params, prompt_stream_answers_v2_params
 from ..types.prompt_answers_v2_response import PromptAnswersV2Response
-from ..types.shared_params.filter_node import FilterNode
 from ..types.prompt_stream_answers_v2_response import PromptStreamAnswersV2Response
 
 __all__ = ["PromptsResource", "AsyncPromptsResource"]
@@ -131,7 +130,7 @@ class PromptsResource(SyncAPIResource):
             ]
         ]
         | Omit = omit,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[prompt_answers_v2_params.Filter] | Omit = omit,
         limit: Optional[int] | Omit = omit,
         max_results: Optional[int] | Omit = omit,
         cursor: Optional[str] | Omit = omit,
@@ -222,7 +221,7 @@ class PromptsResource(SyncAPIResource):
             ]
         ]
         | Omit = omit,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[prompt_stream_answers_v2_params.Filter] | Omit = omit,
         limit: Optional[int] | Omit = omit,
         max_results: Optional[int] | Omit = omit,
         cursor: Optional[str] | Omit = omit,
@@ -391,7 +390,7 @@ class AsyncPromptsResource(AsyncAPIResource):
             ]
         ]
         | Omit = omit,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[prompt_answers_v2_params.Filter] | Omit = omit,
         limit: Optional[int] | Omit = omit,
         max_results: Optional[int] | Omit = omit,
         cursor: Optional[str] | Omit = omit,
@@ -482,7 +481,7 @@ class AsyncPromptsResource(AsyncAPIResource):
             ]
         ]
         | Omit = omit,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[prompt_stream_answers_v2_params.Filter] | Omit = omit,
         limit: Optional[int] | Omit = omit,
         max_results: Optional[int] | Omit = omit,
         cursor: Optional[str] | Omit = omit,

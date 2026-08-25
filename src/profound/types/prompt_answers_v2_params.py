@@ -2,10 +2,10 @@
 
 from __future__ import annotations
 
-from typing import List, Optional
+from typing import Iterable, List, Optional
 from typing_extensions import Literal, Required, TypedDict
 
-__all__ = ["PromptAnswersV2Params"]
+__all__ = ["PromptAnswersV2Params", "Filter"]
 
 
 class PromptAnswersV2Params(TypedDict, total=False):
@@ -42,7 +42,7 @@ class PromptAnswersV2Params(TypedDict, total=False):
     ]
     """Which row fields to return: `run_id`, `date`, `model`, `topic`, `topic_id`, `region`, `persona`, `tags`, `prompt`, `prompt_id`, `response`, `mentions`, `citations`, `citation_details`, `search_queries`, `analysis_types`, `sentiment_claims`. Omit for all fields except `citation_details`, which must be requested explicitly because it is expensive."""
 
-    filter: Optional["FilterNode"]
+    filter: Optional[Filter]
     """and/or/not tree over `model`, `topic`, `region`, `persona`, `prompt`, `tag`, `analysis_type` (visibility/sentiment/factcheck); plus top-level `and` leaves `domain` or `page` (`is` one value, or `in` a list). Substring-search the prompt with `{"field": "prompt", "op": "contains", "value": "…"}`."""
 
     limit: Optional[int]
@@ -54,4 +54,22 @@ class PromptAnswersV2Params(TypedDict, total=False):
     cursor: Optional[str]
 
 
-from .shared_params.filter_node import FilterNode
+_FilterReservedKeywords = TypedDict(
+    "_FilterReservedKeywords",
+    {
+        "and": Optional[Iterable["Filter"]],
+        "or": Optional[Iterable["Filter"]],
+        "not": Optional["Filter"],
+    },
+    total=False,
+)
+
+
+class Filter(_FilterReservedKeywords, total=False):
+    """A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group."""
+
+    field: Optional[str]
+
+    op: Optional[str]
+
+    value: object

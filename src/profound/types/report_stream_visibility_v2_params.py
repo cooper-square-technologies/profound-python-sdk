@@ -2,11 +2,11 @@
 
 from __future__ import annotations
 
-from typing import List, Optional, Union
+from typing import Iterable, List, Optional, Union
 from typing_extensions import Literal, Required, TypeAlias, TypedDict
 from .._types import SequenceNotStr
 
-__all__ = ["ReportStreamVisibilityV2Params", "Assets", "AssetsEntityFilterClause", "Sort"]
+__all__ = ["ReportStreamVisibilityV2Params", "Assets", "AssetsEntityFilterClause", "Filter", "Sort"]
 
 
 class ReportStreamVisibilityV2Params(TypedDict, total=False):
@@ -29,7 +29,7 @@ class ReportStreamVisibilityV2Params(TypedDict, total=False):
     assets: Optional[Assets]
     """A name (`is`), a list (`in`), or {op,value} with op `is`/`in`/`not_in`."""
 
-    filter: Optional["FilterNode"]
+    filter: Optional[Filter]
     """A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group."""
 
     sort: Sort
@@ -45,6 +45,27 @@ class ReportStreamVisibilityV2Params(TypedDict, total=False):
 
 class Sort(TypedDict, total=False):
     field: Literal["visibility_score", "share_of_voice", "average_position"]
+
+
+_FilterReservedKeywords = TypedDict(
+    "_FilterReservedKeywords",
+    {
+        "and": Optional[Iterable["Filter"]],
+        "or": Optional[Iterable["Filter"]],
+        "not": Optional["Filter"],
+    },
+    total=False,
+)
+
+
+class Filter(_FilterReservedKeywords, total=False):
+    """A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group."""
+
+    field: Optional[str]
+
+    op: Optional[str]
+
+    value: object
 
 
 class AssetsEntityFilterClause(TypedDict, total=False):
@@ -68,6 +89,3 @@ class AssetsEntityFilterClause(TypedDict, total=False):
 
 
 Assets: TypeAlias = Union[str, SequenceNotStr[str], AssetsEntityFilterClause]
-
-
-from .shared_params.filter_node import FilterNode

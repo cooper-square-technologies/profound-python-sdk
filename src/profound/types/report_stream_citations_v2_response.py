@@ -1,5 +1,7 @@
 # File generated from our OpenAPI spec by Scalar. See README.md for details.
 
+from __future__ import annotations
+
 from typing import Dict, List, Optional, TYPE_CHECKING, Union
 from typing_extensions import TypeAlias
 
@@ -7,9 +9,46 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-from .shared.dimension_ref import DimensionRef
+__all__ = [
+    "ReportStreamCitationsV2Response",
+    "CitationsV2Info",
+    "CitationRow",
+    "CitationRowModel",
+    "CitationRowTopic",
+    "CitationRowRegion",
+    "CitationRowPersona",
+    "CitationRowPrompt",
+]
 
-__all__ = ["ReportStreamCitationsV2Response", "CitationsV2Info", "CitationRow"]
+
+class CitationRowPrompt(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class CitationRowPersona(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class CitationRowRegion(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class CitationRowTopic(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class CitationRowModel(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
 
 
 class CitationRow(BaseModel):
@@ -21,15 +60,15 @@ class CitationRow(BaseModel):
 
     date: Optional[str] = None
 
-    model: Optional[DimensionRef] = None
+    model: Optional[CitationRowModel] = None
 
-    topic: Optional[DimensionRef] = None
+    topic: Optional[CitationRowTopic] = None
 
-    region: Optional[DimensionRef] = None
+    region: Optional[CitationRowRegion] = None
 
-    persona: Optional[DimensionRef] = None
+    persona: Optional[CitationRowPersona] = None
 
-    prompt: Optional[DimensionRef] = None
+    prompt: Optional[CitationRowPrompt] = None
 
     count: Optional[int] = None
 

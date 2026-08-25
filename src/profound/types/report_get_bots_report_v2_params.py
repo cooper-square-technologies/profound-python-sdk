@@ -10,12 +10,11 @@ from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 
 from .shared_params.pagination import Pagination
-from .shared_params.numeric_metric_filter import NumericMetricFilter
 from .shared_params.path_filter import PathFilter
 from .shared_params.bot_name_filter import BotNameFilter
 from .shared_params.bot_provider_filter import BotProviderFilter
 
-__all__ = ["ReportGetBotsReportV2Params", "Filter", "FilterBotTypeFilter"]
+__all__ = ["ReportGetBotsReportV2Params", "MetricFilter", "Filter", "FilterBotTypeFilter"]
 
 
 class ReportGetBotsReportV2Params(TypedDict, total=False):
@@ -59,7 +58,7 @@ class ReportGetBotsReportV2Params(TypedDict, total=False):
     view_id: Optional[str]
     """Domain segment UUID used to scope the query to a configured subset of hosts and paths."""
 
-    metric_filters: Iterable[NumericMetricFilter]
+    metric_filters: Iterable[MetricFilter]
     """Numeric filters applied after report metrics are calculated."""
 
     filters: Iterable[Filter]
@@ -101,3 +100,11 @@ class FilterBotTypeFilter(TypedDict, total=False):
 Filter: TypeAlias = Annotated[
     Union[PathFilter, BotNameFilter, BotProviderFilter, FilterBotTypeFilter], PropertyInfo(discriminator="field")
 ]
+
+
+class MetricFilter(TypedDict, total=False):
+    field: Required[str]
+
+    operator: Required[Literal[">", ">=", "<", "<=", "=", "==", "!="]]
+
+    value: Required[Union[int, float]]

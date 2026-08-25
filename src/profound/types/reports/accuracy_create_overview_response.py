@@ -8,9 +8,14 @@ from pydantic import Field as FieldInfo
 
 from ..._models import BaseModel
 
-from ..shared.accuracy_trend_point import AccuracyTrendPoint
-
-__all__ = ["AccuracyCreateOverviewResponse", "ScoreBreakdown", "ThemeTrend", "ThemeTrendData", "AvailableSeries"]
+__all__ = [
+    "AccuracyCreateOverviewResponse",
+    "TrendByPeriod",
+    "ScoreBreakdown",
+    "ThemeTrend",
+    "ThemeTrendData",
+    "AvailableSeries",
+]
 
 
 class AvailableSeries(BaseModel):
@@ -51,8 +56,22 @@ class ScoreBreakdown(BaseModel):
     share_change: Optional[float] = FieldInfo(alias="shareChange", default=None)
 
 
+class TrendByPeriod(BaseModel):
+    date: str
+
+    total: int
+
+    accurate: int
+
+    verified: Optional[int] = None
+
+    ratio: float
+
+    prev_period_data: Optional[object] = FieldInfo(alias="prevPeriodData", default=None)
+
+
 class AccuracyCreateOverviewResponse(BaseModel):
-    trend_by_period: List[AccuracyTrendPoint] = FieldInfo(alias="trendByPeriod")
+    trend_by_period: List[TrendByPeriod] = FieldInfo(alias="trendByPeriod")
 
     overall_accuracy: float = FieldInfo(alias="overallAccuracy")
 

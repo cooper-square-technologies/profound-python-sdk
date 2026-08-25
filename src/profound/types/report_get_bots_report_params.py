@@ -9,12 +9,11 @@ from typing_extensions import Annotated, Literal, Required, TypeAlias, TypedDict
 from .._utils import PropertyInfo
 
 from .shared_params.pagination import Pagination
-from .shared_params.numeric_metric_filter import NumericMetricFilter
 from .shared_params.path_filter import PathFilter
 from .shared_params.bot_name_filter import BotNameFilter
 from .shared_params.bot_provider_filter import BotProviderFilter
 
-__all__ = ["ReportGetBotsReportParams", "Filter"]
+__all__ = ["ReportGetBotsReportParams", "MetricFilter", "Filter"]
 
 
 class ReportGetBotsReportParams(TypedDict, total=False):
@@ -52,7 +51,7 @@ class ReportGetBotsReportParams(TypedDict, total=False):
 
     organization_id: Optional[str]
 
-    metric_filters: Iterable[NumericMetricFilter]
+    metric_filters: Iterable[MetricFilter]
     """Numeric filters applied after report metrics are calculated."""
 
     filters: Iterable[Filter]
@@ -60,3 +59,11 @@ class ReportGetBotsReportParams(TypedDict, total=False):
 
 
 Filter: TypeAlias = Annotated[Union[PathFilter, BotNameFilter, BotProviderFilter], PropertyInfo(discriminator="field")]
+
+
+class MetricFilter(TypedDict, total=False):
+    field: Required[str]
+
+    operator: Required[Literal[">", ">=", "<", "<=", "=", "==", "!="]]
+
+    value: Required[Union[int, float]]

@@ -1,14 +1,26 @@
 # File generated from our OpenAPI spec by Scalar. See README.md for details.
 
+from __future__ import annotations
+
 from typing import Dict, List, Optional, TYPE_CHECKING
 
 from pydantic import Field as FieldInfo
 
 from ..._models import BaseModel
 
-from ..shared.dimension_ref import DimensionRef
+__all__ = ["ShoppingProductsResponse", "Info", "Data", "DataTopic", "DataPrompt"]
 
-__all__ = ["ShoppingProductsResponse", "Info", "Data"]
+
+class DataPrompt(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class DataTopic(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
 
 
 class Data(BaseModel):
@@ -16,9 +28,9 @@ class Data(BaseModel):
 
     date: Optional[str] = None
 
-    topic: Optional[DimensionRef] = None
+    topic: Optional[DataTopic] = None
 
-    prompt: Optional[DimensionRef] = None
+    prompt: Optional[DataPrompt] = None
 
     visibility_score: Optional[float] = None
 

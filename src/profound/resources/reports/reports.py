@@ -87,12 +87,10 @@ from ...types import (
 )
 from ...types.report_response import ReportResponse
 from ...types.report_sentiment_v2_response import ReportSentimentV2Response
-from ...types.shared_params.numeric_metric_filter import NumericMetricFilter
 from ...types.report_stream_citations_response import ReportStreamCitationsResponse
 from ...types.report_stream_visibility_response import ReportStreamVisibilityResponse
 from ...types.report_stream_sentiment_response import ReportStreamSentimentResponse
 from ...types.report_stream_citations_v2_response import ReportStreamCitationsV2Response
-from ...types.shared_params.filter_node import FilterNode
 from ...types.report_stream_visibility_v2_response import ReportStreamVisibilityV2Response
 from ...types.report_stream_sentiment_v2_response import ReportStreamSentimentV2Response
 from ...types.report_stream_query_fanouts_response import ReportStreamQueryFanoutsResponse
@@ -515,7 +513,7 @@ class ReportsResource(SyncAPIResource):
         start_date: Union[str, datetime],
         end_date: Union[str, datetime] | Omit = omit,
         organization_id: Optional[str] | Omit = omit,
-        metric_filters: Iterable[NumericMetricFilter] | Omit = omit,
+        metric_filters: Iterable[report_get_referrals_report_params.MetricFilter] | Omit = omit,
         filters: Iterable[report_get_referrals_report_params.Filter] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -598,7 +596,7 @@ class ReportsResource(SyncAPIResource):
         start_date: Union[str, datetime],
         end_date: Union[str, datetime] | Omit = omit,
         organization_id: Optional[str] | Omit = omit,
-        metric_filters: Iterable[NumericMetricFilter] | Omit = omit,
+        metric_filters: Iterable[report_get_bots_report_params.MetricFilter] | Omit = omit,
         filters: Iterable[report_get_bots_report_params.Filter] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1057,7 +1055,7 @@ class ReportsResource(SyncAPIResource):
         metrics: Optional[List[Literal["count", "citation_share", "rank", "first_cited_at"]]] | Omit = omit,
         interval: Literal["day", "week", "month"] | Omit = omit,
         scope: Literal["all", "owned"] | Omit = omit,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[report_stream_citations_v2_params.Filter] | Omit = omit,
         limit: Optional[int] | Omit = omit,
         max_results: Optional[int] | Omit = omit,
         cursor: Optional[str] | Omit = omit,
@@ -1146,7 +1144,7 @@ class ReportsResource(SyncAPIResource):
         interval: Literal["day", "week", "month"] | Omit = omit,
         scope: Literal["owned", "all"] | Omit = omit,
         assets: Optional[report_stream_visibility_v2_params.Assets] | Omit = omit,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[report_stream_visibility_v2_params.Filter] | Omit = omit,
         sort: report_stream_visibility_v2_params.Sort | Omit = omit,
         limit: Optional[int] | Omit = omit,
         max_results: Optional[int] | Omit = omit,
@@ -1243,7 +1241,7 @@ class ReportsResource(SyncAPIResource):
         | Omit = omit,
         metrics: Optional[List[Literal["positive_sentiment", "negative_sentiment", "occurrence"]]] | Omit = omit,
         interval: Literal["day", "week", "month"] | Omit = omit,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[report_stream_sentiment_v2_params.Filter] | Omit = omit,
         sort: report_stream_sentiment_v2_params.Sort | Omit = omit,
         include_cited_websites: bool | Omit = omit,
         limit: Optional[int] | Omit = omit,
@@ -1339,7 +1337,7 @@ class ReportsResource(SyncAPIResource):
         metrics: Optional[List[Literal["fanouts_per_execution", "total_fanouts", "share", "query_variations"]]]
         | Omit = omit,
         interval: Literal["day", "week", "month"] | Omit = omit,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[report_stream_query_fanouts_params.Filter] | Omit = omit,
         sort: Optional[report_stream_query_fanouts_params.Sort] | Omit = omit,
         limit: Optional[int] | Omit = omit,
         max_results: Optional[int] | Omit = omit,
@@ -1428,7 +1426,7 @@ class ReportsResource(SyncAPIResource):
         organization_id: Optional[str] | Omit = omit,
         timezone: str | Omit = omit,
         view_id: Optional[str] | Omit = omit,
-        metric_filters: Iterable[NumericMetricFilter] | Omit = omit,
+        metric_filters: Iterable[report_get_referrals_report_v2_params.MetricFilter] | Omit = omit,
         filters: Iterable[report_get_referrals_report_v2_params.Filter] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1518,7 +1516,7 @@ class ReportsResource(SyncAPIResource):
         organization_id: Optional[str] | Omit = omit,
         timezone: str | Omit = omit,
         view_id: Optional[str] | Omit = omit,
-        metric_filters: Iterable[NumericMetricFilter] | Omit = omit,
+        metric_filters: Iterable[report_get_bots_report_v2_params.MetricFilter] | Omit = omit,
         filters: Iterable[report_get_bots_report_v2_params.Filter] | Omit = omit,
         domain_id: Optional[str] | Omit = omit,
         tags: SequenceNotStr[str] | Omit = omit,
@@ -1621,7 +1619,7 @@ class ReportsResource(SyncAPIResource):
         interval: Literal["day", "week", "month"] | Omit = omit,
         scope: Literal["owned", "all"] | Omit = omit,
         assets: Optional[report_query_visibility_params.Assets] | Omit = omit,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[report_query_visibility_params.Filter] | Omit = omit,
         sort: report_query_visibility_params.Sort | Omit = omit,
         limit: Optional[int] | Omit = omit,
         max_results: Optional[int] | Omit = omit,
@@ -1706,7 +1704,7 @@ class ReportsResource(SyncAPIResource):
         metrics: Optional[List[Literal["count", "citation_share", "rank", "first_cited_at"]]] | Omit = omit,
         interval: Literal["day", "week", "month"] | Omit = omit,
         scope: Literal["all", "owned"] | Omit = omit,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[report_query_citations_params.Filter] | Omit = omit,
         limit: Optional[int] | Omit = omit,
         max_results: Optional[int] | Omit = omit,
         cursor: Optional[str] | Omit = omit,
@@ -1795,7 +1793,7 @@ class ReportsResource(SyncAPIResource):
         | Omit = omit,
         metrics: Optional[List[Literal["positive_sentiment", "negative_sentiment", "occurrence"]]] | Omit = omit,
         interval: Literal["day", "week", "month"] | Omit = omit,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[report_query_sentiment_params.Filter] | Omit = omit,
         sort: report_query_sentiment_params.Sort | Omit = omit,
         include_cited_websites: bool | Omit = omit,
         limit: Optional[int] | Omit = omit,
@@ -1885,7 +1883,7 @@ class ReportsResource(SyncAPIResource):
         metrics: Optional[List[Literal["fanouts_per_execution", "total_fanouts", "share", "query_variations"]]]
         | Omit = omit,
         interval: Literal["day", "week", "month"] | Omit = omit,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[report_query_query_fanouts_params.Filter] | Omit = omit,
         sort: Optional[report_query_query_fanouts_params.Sort] | Omit = omit,
         limit: Optional[int] | Omit = omit,
         max_results: Optional[int] | Omit = omit,
@@ -2366,7 +2364,7 @@ class AsyncReportsResource(AsyncAPIResource):
         start_date: Union[str, datetime],
         end_date: Union[str, datetime] | Omit = omit,
         organization_id: Optional[str] | Omit = omit,
-        metric_filters: Iterable[NumericMetricFilter] | Omit = omit,
+        metric_filters: Iterable[report_get_referrals_report_params.MetricFilter] | Omit = omit,
         filters: Iterable[report_get_referrals_report_params.Filter] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -2449,7 +2447,7 @@ class AsyncReportsResource(AsyncAPIResource):
         start_date: Union[str, datetime],
         end_date: Union[str, datetime] | Omit = omit,
         organization_id: Optional[str] | Omit = omit,
-        metric_filters: Iterable[NumericMetricFilter] | Omit = omit,
+        metric_filters: Iterable[report_get_bots_report_params.MetricFilter] | Omit = omit,
         filters: Iterable[report_get_bots_report_params.Filter] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -2908,7 +2906,7 @@ class AsyncReportsResource(AsyncAPIResource):
         metrics: Optional[List[Literal["count", "citation_share", "rank", "first_cited_at"]]] | Omit = omit,
         interval: Literal["day", "week", "month"] | Omit = omit,
         scope: Literal["all", "owned"] | Omit = omit,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[report_stream_citations_v2_params.Filter] | Omit = omit,
         limit: Optional[int] | Omit = omit,
         max_results: Optional[int] | Omit = omit,
         cursor: Optional[str] | Omit = omit,
@@ -2997,7 +2995,7 @@ class AsyncReportsResource(AsyncAPIResource):
         interval: Literal["day", "week", "month"] | Omit = omit,
         scope: Literal["owned", "all"] | Omit = omit,
         assets: Optional[report_stream_visibility_v2_params.Assets] | Omit = omit,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[report_stream_visibility_v2_params.Filter] | Omit = omit,
         sort: report_stream_visibility_v2_params.Sort | Omit = omit,
         limit: Optional[int] | Omit = omit,
         max_results: Optional[int] | Omit = omit,
@@ -3094,7 +3092,7 @@ class AsyncReportsResource(AsyncAPIResource):
         | Omit = omit,
         metrics: Optional[List[Literal["positive_sentiment", "negative_sentiment", "occurrence"]]] | Omit = omit,
         interval: Literal["day", "week", "month"] | Omit = omit,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[report_stream_sentiment_v2_params.Filter] | Omit = omit,
         sort: report_stream_sentiment_v2_params.Sort | Omit = omit,
         include_cited_websites: bool | Omit = omit,
         limit: Optional[int] | Omit = omit,
@@ -3190,7 +3188,7 @@ class AsyncReportsResource(AsyncAPIResource):
         metrics: Optional[List[Literal["fanouts_per_execution", "total_fanouts", "share", "query_variations"]]]
         | Omit = omit,
         interval: Literal["day", "week", "month"] | Omit = omit,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[report_stream_query_fanouts_params.Filter] | Omit = omit,
         sort: Optional[report_stream_query_fanouts_params.Sort] | Omit = omit,
         limit: Optional[int] | Omit = omit,
         max_results: Optional[int] | Omit = omit,
@@ -3279,7 +3277,7 @@ class AsyncReportsResource(AsyncAPIResource):
         organization_id: Optional[str] | Omit = omit,
         timezone: str | Omit = omit,
         view_id: Optional[str] | Omit = omit,
-        metric_filters: Iterable[NumericMetricFilter] | Omit = omit,
+        metric_filters: Iterable[report_get_referrals_report_v2_params.MetricFilter] | Omit = omit,
         filters: Iterable[report_get_referrals_report_v2_params.Filter] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -3369,7 +3367,7 @@ class AsyncReportsResource(AsyncAPIResource):
         organization_id: Optional[str] | Omit = omit,
         timezone: str | Omit = omit,
         view_id: Optional[str] | Omit = omit,
-        metric_filters: Iterable[NumericMetricFilter] | Omit = omit,
+        metric_filters: Iterable[report_get_bots_report_v2_params.MetricFilter] | Omit = omit,
         filters: Iterable[report_get_bots_report_v2_params.Filter] | Omit = omit,
         domain_id: Optional[str] | Omit = omit,
         tags: SequenceNotStr[str] | Omit = omit,
@@ -3472,7 +3470,7 @@ class AsyncReportsResource(AsyncAPIResource):
         interval: Literal["day", "week", "month"] | Omit = omit,
         scope: Literal["owned", "all"] | Omit = omit,
         assets: Optional[report_query_visibility_params.Assets] | Omit = omit,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[report_query_visibility_params.Filter] | Omit = omit,
         sort: report_query_visibility_params.Sort | Omit = omit,
         limit: Optional[int] | Omit = omit,
         max_results: Optional[int] | Omit = omit,
@@ -3557,7 +3555,7 @@ class AsyncReportsResource(AsyncAPIResource):
         metrics: Optional[List[Literal["count", "citation_share", "rank", "first_cited_at"]]] | Omit = omit,
         interval: Literal["day", "week", "month"] | Omit = omit,
         scope: Literal["all", "owned"] | Omit = omit,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[report_query_citations_params.Filter] | Omit = omit,
         limit: Optional[int] | Omit = omit,
         max_results: Optional[int] | Omit = omit,
         cursor: Optional[str] | Omit = omit,
@@ -3646,7 +3644,7 @@ class AsyncReportsResource(AsyncAPIResource):
         | Omit = omit,
         metrics: Optional[List[Literal["positive_sentiment", "negative_sentiment", "occurrence"]]] | Omit = omit,
         interval: Literal["day", "week", "month"] | Omit = omit,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[report_query_sentiment_params.Filter] | Omit = omit,
         sort: report_query_sentiment_params.Sort | Omit = omit,
         include_cited_websites: bool | Omit = omit,
         limit: Optional[int] | Omit = omit,
@@ -3736,7 +3734,7 @@ class AsyncReportsResource(AsyncAPIResource):
         metrics: Optional[List[Literal["fanouts_per_execution", "total_fanouts", "share", "query_variations"]]]
         | Omit = omit,
         interval: Literal["day", "week", "month"] | Omit = omit,
-        filter: Optional[FilterNode] | Omit = omit,
+        filter: Optional[report_query_query_fanouts_params.Filter] | Omit = omit,
         sort: Optional[report_query_query_fanouts_params.Sort] | Omit = omit,
         limit: Optional[int] | Omit = omit,
         max_results: Optional[int] | Omit = omit,

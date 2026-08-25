@@ -1,14 +1,26 @@
 # File generated from our OpenAPI spec by Scalar. See README.md for details.
 
+from __future__ import annotations
+
 from typing import Dict, List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
 from .._models import BaseModel
 
-from .shared.live_generation import LiveGeneration
+__all__ = ["ProjectUnarchiveResponse", "Data", "DataLiveGeneration"]
 
-__all__ = ["ProjectUnarchiveResponse", "Data"]
+
+class DataLiveGeneration(BaseModel):
+    run_id: str
+
+    status: Literal["queued", "running", "completed", "failed"]
+
+    started_at: Optional[datetime] = None
+
+    finished_at: Optional[datetime] = None
+
+    error: Optional[str] = None
 
 
 class Data(BaseModel):
@@ -54,7 +66,7 @@ class Data(BaseModel):
 
     updated_at: Optional[datetime] = None
 
-    live_generation: Optional[LiveGeneration] = None
+    live_generation: Optional[DataLiveGeneration] = None
 
 
 class ProjectUnarchiveResponse(BaseModel):

@@ -9,9 +9,22 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-from .shared.dimension_ref import DimensionRef
-
-__all__ = ["ReportStreamSentimentV2Response", "SentimentV2Info", "SentimentRow", "SentimentRowPrevious"]
+__all__ = [
+    "ReportStreamSentimentV2Response",
+    "SentimentV2Info",
+    "SentimentRow",
+    "SentimentRowModel",
+    "SentimentRowTopic",
+    "SentimentRowRegion",
+    "SentimentRowPrompt",
+    "SentimentRowPersona",
+    "SentimentRowTag",
+    "SentimentRowTheme",
+    "SentimentRowClaim",
+    "SentimentRowRun",
+    "SentimentRowCompetitor",
+    "SentimentRowPrevious",
+]
 
 
 class SentimentRowPrevious(BaseModel):
@@ -35,28 +48,88 @@ class SentimentRowPrevious(BaseModel):
         __pydantic_extra__: Dict[str, object]
 
 
+class SentimentRowCompetitor(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class SentimentRowRun(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class SentimentRowClaim(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class SentimentRowTheme(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class SentimentRowTag(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class SentimentRowPersona(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class SentimentRowPrompt(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class SentimentRowRegion(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class SentimentRowTopic(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class SentimentRowModel(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
 class SentimentRow(BaseModel):
     date: Optional[str] = None
 
-    model: Optional[DimensionRef] = None
+    model: Optional[SentimentRowModel] = None
 
-    topic: Optional[DimensionRef] = None
+    topic: Optional[SentimentRowTopic] = None
 
-    region: Optional[DimensionRef] = None
+    region: Optional[SentimentRowRegion] = None
 
-    prompt: Optional[DimensionRef] = None
+    prompt: Optional[SentimentRowPrompt] = None
 
-    persona: Optional[DimensionRef] = None
+    persona: Optional[SentimentRowPersona] = None
 
-    tag: Optional[DimensionRef] = None
+    tag: Optional[SentimentRowTag] = None
 
-    theme: Optional[DimensionRef] = None
+    theme: Optional[SentimentRowTheme] = None
 
-    claim: Optional[DimensionRef] = None
+    claim: Optional[SentimentRowClaim] = None
 
-    run: Optional[DimensionRef] = None
+    run: Optional[SentimentRowRun] = None
 
-    competitor: Optional[DimensionRef] = None
+    competitor: Optional[SentimentRowCompetitor] = None
 
     positive_sentiment: Optional[float] = None
 

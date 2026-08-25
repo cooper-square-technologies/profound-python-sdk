@@ -2,10 +2,10 @@
 
 from __future__ import annotations
 
-from typing import List, Optional
+from typing import Iterable, List, Optional
 from typing_extensions import Literal, Required, TypedDict
 
-__all__ = ["ReportQuerySentimentParams", "Sort"]
+__all__ = ["ReportQuerySentimentParams", "Filter", "Sort"]
 
 
 class ReportQuerySentimentParams(TypedDict, total=False):
@@ -34,7 +34,7 @@ class ReportQuerySentimentParams(TypedDict, total=False):
 
     interval: Literal["day", "week", "month"]
 
-    filter: Optional["FilterNode"]
+    filter: Optional[Filter]
     """A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group."""
 
     sort: Sort
@@ -57,4 +57,22 @@ class Sort(TypedDict, total=False):
     dir: Literal["asc", "desc"]
 
 
-from .shared_params.filter_node import FilterNode
+_FilterReservedKeywords = TypedDict(
+    "_FilterReservedKeywords",
+    {
+        "and": Optional[Iterable["Filter"]],
+        "or": Optional[Iterable["Filter"]],
+        "not": Optional["Filter"],
+    },
+    total=False,
+)
+
+
+class Filter(_FilterReservedKeywords, total=False):
+    """A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group."""
+
+    field: Optional[str]
+
+    op: Optional[str]
+
+    value: object

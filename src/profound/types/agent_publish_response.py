@@ -4,14 +4,12 @@ from typing import Optional
 from datetime import datetime
 from typing_extensions import Literal
 
-from ..._models import BaseModel
+from .._models import BaseModel
 
-__all__ = ["Agent"]
+__all__ = ["AgentPublishResponse"]
 
 
-class Agent(BaseModel):
-    """Summary information for an agent."""
-
+class AgentPublishResponse(BaseModel):
     id: str
     """Unique ID for the agent."""
 

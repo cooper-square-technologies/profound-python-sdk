@@ -10,10 +10,9 @@ from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 
 from .shared_params.pagination import Pagination
-from .shared_params.numeric_metric_filter import NumericMetricFilter
 from .shared_params.path_filter import PathFilter
 
-__all__ = ["ReportGetReferralsReportParams", "Filter", "FilterReferralSourceFilter"]
+__all__ = ["ReportGetReferralsReportParams", "MetricFilter", "Filter", "FilterReferralSourceFilter"]
 
 
 class ReportGetReferralsReportParams(TypedDict, total=False):
@@ -51,7 +50,7 @@ class ReportGetReferralsReportParams(TypedDict, total=False):
 
     organization_id: Optional[str]
 
-    metric_filters: Iterable[NumericMetricFilter]
+    metric_filters: Iterable[MetricFilter]
     """Numeric filters applied after report metrics are calculated."""
 
     filters: Iterable[Filter]
@@ -84,3 +83,11 @@ class FilterReferralSourceFilter(TypedDict, total=False):
 
 
 Filter: TypeAlias = Annotated[Union[PathFilter, FilterReferralSourceFilter], PropertyInfo(discriminator="field")]
+
+
+class MetricFilter(TypedDict, total=False):
+    field: Required[str]
+
+    operator: Required[Literal[">", ">=", "<", "<=", "=", "==", "!="]]
+
+    value: Required[Union[int, float]]
