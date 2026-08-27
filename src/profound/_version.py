@@ -1,4 +1,4 @@
 # File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 __title__ = "profound"
-__version__ = "0.57.0"  # x-release-please-version
+__version__ = "0.58.0"  # x-release-please-version

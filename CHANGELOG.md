@@ -1,5 +1,236 @@
 # Changelog
 
+## [0.58.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.57.0...v0.58.0) (2026-08-27)
+
+
+### ⚠ BREAKING CHANGES
+
+* **api:** 2 breaking changes to the SDK surface.
+    - Removed schema `shopping_rows_response`.
+    - Removed schema `profound_shopping_api_asset_name_filter`.
+* **api:** 146 breaking changes to the SDK surface.
+    - Removed operation `organization.listV1OrgGet` (`GET /v1/org`).
+    - Removed operation `organization.listRegionsV1OrgRegionsGet` (`GET /v1/org/regions`).
+    - Removed operation `organization.listModelsV1OrgModelsGet` (`GET /v1/org/models`).
+    - Removed operation `organization.listDomainsV1OrgDomainsGet` (`GET /v1/org/domains`).
+    - Removed operation `organization.listAssetsV1OrgAssetsGet` (`GET /v1/org/assets`).
+    - Removed operation `organization.listPersonasV1OrgPersonasGet` (`GET /v1/org/personas`).
+    - Removed operation `organization.listCategoriesV1OrgCategoriesGet` (`GET /v1/org/categories`).
+    - Removed operation `organization.listCategoryTopicsV1OrgCategoriesCategoryTopicsGet` (`GET /v1/org/categories/{category_id}/topics`).
+    - Removed operation `organization.listCategoryTagsV1OrgCategoriesCategoryTagsGet` (`GET /v1/org/categories/{category_id}/tags`).
+    - Removed operation `organization.listCategoryRegionsV1OrgCategoriesCategoryRegionsGet` (`GET /v1/org/categories/{category_id}/regions`).
+    - Removed operation `organization.listCategoryCitationCategoriesV1OrgCategoriesCategoryCitationCategoriesGet` (`GET /v1/org/categories/{category_id}/citation-categories`).
+    - Removed operation `organization.listCategoryCitationTagsV1OrgCategoriesCategoryCitationTagsGet` (`GET /v1/org/categories/{category_id}/citation-tags`).
+    - Removed operation `organization.listCategoryPromptsV1OrgCategoriesCategoryPromptsGet` (`GET /v1/org/categories/{category_id}/prompts`).
+    - Removed operation `organization.createCategoryPromptsV1OrgCategoriesCategoryIdPromptsPost` (`POST /v1/org/categories/{category_id}/prompts`).
+    - Removed operation `organization.updateCategoryPromptsV1OrgCategoriesCategoryIdPromptsPatch` (`PATCH /v1/org/categories/{category_id}/prompts`).
+    - Removed operation `organization.updateCategoryPromptStatusV1OrgCategoriesCategoryIdPromptsStatusPatch` (`PATCH /v1/org/categories/{category_id}/prompts/status`).
+    - Removed operation `organization.listCategoryAssetsV1OrgCategoriesCategoryAssetsGet` (`GET /v1/org/categories/{category_id}/assets`).
+    - Removed operation `organization.listCategoryPersonasV1OrgCategoriesCategoryPersonasGet` (`GET /v1/org/categories/{category_id}/personas`).
+    - Removed operation `prompts.answers.createV1Post` (`POST /v1/prompts/answers`).
+    - Removed operation `prompts.answers.queryV2V2Post` (`POST /v2/prompts/answers`).
+    - Removed operation `prompts.answers.streamV2V2StreamPost` (`POST /v2/prompts/answers/stream`).
+    - Removed operation `reports.querySentimentV2V1SentimentV2Post` (`POST /v1/reports/sentiment-v2`).
+    - Removed operation `reports.citations.queryV1Post` (`POST /v1/reports/citations`).
+    - Removed operation `reports.citations.streamV1StreamPost` (`POST /v1/reports/citations/stream`).
+    - Removed operation `reports.citations.queryV2V2Post` (`POST /v2/reports/citations`).
+    - Removed operation `reports.citations.streamV2V2StreamPost` (`POST /v2/reports/citations/stream`).
+    - Removed operation `reports.visibility.queryV1Post` (`POST /v1/reports/visibility`).
+    - Removed operation `reports.visibility.streamV1StreamPost` (`POST /v1/reports/visibility/stream`).
+    - Removed operation `reports.visibility.queryV2V2Post` (`POST /v2/reports/visibility`).
+    - Removed operation `reports.visibility.streamV2V2StreamPost` (`POST /v2/reports/visibility/stream`).
+    - Removed operation `reports.sentiment.queryV1Post` (`POST /v1/reports/sentiment`).
+    - Removed operation `reports.sentiment.streamV1StreamPost` (`POST /v1/reports/sentiment/stream`).
+    - Removed operation `reports.sentiment.queryV2V2Post` (`POST /v2/reports/sentiment`).
+    - Removed operation `reports.sentiment.streamV2V2StreamPost` (`POST /v2/reports/sentiment/stream`).
+    - Removed operation `reports.webSearchResults.queryV1Post` (`POST /v1/reports/web-search-results`).
+    - Removed operation `reports.webSearchResults.streamV1StreamPost` (`POST /v1/reports/web-search-results/stream`).
+    - Removed operation `reports.referrals.createV1V1Post` (`POST /v1/reports/referrals`).
+    - Removed operation `reports.referrals.createV2V2Post` (`POST /v2/reports/referrals`).
+    - Removed operation `reports.bots.createV1V1Post` (`POST /v1/reports/bots`).
+    - Removed operation `reports.bots.createV2V2Post` (`POST /v2/reports/bots`).
+    - Removed operation `reports.queryFanouts.v1Post` (`POST /v1/reports/query-fanouts`).
+    - Removed operation `reports.queryFanouts.v2V2Post` (`POST /v2/reports/query-fanouts`).
+    - Removed operation `reports.queryFanouts.streamV2V2StreamPost` (`POST /v2/reports/query-fanouts/stream`).
+    - Removed operation `reports.shopping.visibilityV1VisibilityPost` (`POST /v1/reports/shopping/visibility`).
+    - Removed operation `reports.shopping.itemVisibilityV1ItemVisibilityPost` (`POST /v1/reports/shopping/item-visibility`).
+    - Removed operation `reports.shopping.merchantDistributionV1MerchantDistributionPost` (`POST /v1/reports/shopping/merchant-distribution`).
+    - Removed operation `reports.shopping.merchantVisibilityByBrandV1MerchantVisibilityByBrandPost` (`POST /v1/reports/shopping/merchant-visibility-by-brand`).
+    - Removed operation `reports.shopping.merchantByItemsV1MerchantByItemsPost` (`POST /v1/reports/shopping/merchant-by-items`).
+    - Removed operation `reports.shopping.allItemsWithMerchantsV1AllItemsWithMerchantsPost` (`POST /v1/reports/shopping/all-items-with-merchants`).
+    - Removed operation `reports.shopping.triggerRateV1TriggerRatePost` (`POST /v1/reports/shopping/trigger-rate`).
+    - Removed operation `reports.shopping.triggeredPromptsV1TriggeredPromptsPost` (`POST /v1/reports/shopping/triggered-prompts`).
+    - Removed operation `reports.shopping.triggeredTopicsV1TriggeredTopicsPost` (`POST /v1/reports/shopping/triggered-topics`).
+    - Removed operation `reports.shopping.merchantShareV1MerchantSharePost` (`POST /v1/reports/shopping/merchant-share`).
+    - Removed operation `reports.shopping.productMerchantUrlsV1ProductMerchantUrlsPost` (`POST /v1/reports/shopping/product-merchant-urls`).
+    - Removed operation `reports.shopping.executionsV1ExecutionsPost` (`POST /v1/reports/shopping/executions`).
+    - Removed operation `reports.shopping.queryBrandsV2V2BrandsPost` (`POST /v2/reports/shopping/brands`).
+    - Removed operation `reports.shopping.streamBrandsV2V2BrandsStreamPost` (`POST /v2/reports/shopping/brands/stream`).
+    - Removed operation `reports.shopping.queryProductsV2V2ProductsPost` (`POST /v2/reports/shopping/products`).
+    - Removed operation `reports.shopping.streamProductsV2V2ProductsStreamPost` (`POST /v2/reports/shopping/products/stream`).
+    - Removed operation `reports.shopping.queryMerchantsV2V2MerchantsPost` (`POST /v2/reports/shopping/merchants`).
+    - Removed operation `reports.shopping.streamMerchantsV2V2MerchantsStreamPost` (`POST /v2/reports/shopping/merchants/stream`).
+    - Removed operation `reports.shopping.queryTriggerRateV2V2TriggerRatePost` (`POST /v2/reports/shopping/trigger-rate`).
+    - Removed operation `reports.shopping.streamTriggerRateV2V2TriggerRateStreamPost` (`POST /v2/reports/shopping/trigger-rate/stream`).
+    - Removed operation `reports.accuracy.overviewV1OverviewPost` (`POST /v1/reports/accuracy/overview`).
+    - Removed operation `reports.accuracy.breakdownV1BreakdownPost` (`POST /v1/reports/accuracy/breakdown`).
+    - Removed operation `reports.accuracy.citationAnalysisV1CitationAnalysisPost` (`POST /v1/reports/accuracy/citation-analysis`).
+    - Removed operation `reports.accuracy.topicIdsV1TopicIdsPost` (`POST /v1/reports/accuracy/topic-ids`).
+    - Removed operation `reports.accuracy.inaccurateThemesV1InaccurateThemesPost` (`POST /v1/reports/accuracy/inaccurate-themes`).
+    - Removed operation `reports.accuracy.inaccurateClustersV1InaccurateClustersPost` (`POST /v1/reports/accuracy/inaccurate-clusters`).
+    - Removed operation `reports.accuracy.inaccuracyDriversV1InaccuracyDriversPost` (`POST /v1/reports/accuracy/inaccuracy-drivers`).
+    - Removed operation `reports.accuracy.topInaccurateClaimsV1TopInaccurateClaimsPost` (`POST /v1/reports/accuracy/top-inaccurate-claims`).
+    - Removed operation `reports.accuracy.claimBreakdownV1ClaimBreakdownPost` (`POST /v1/reports/accuracy/claim-breakdown`).
+    - Removed operation `reports.accuracy.claimCitationsV1ClaimCitationsPost` (`POST /v1/reports/accuracy/claim-citations`).
+    - Removed operation `reports.accuracy.clusterExampleRunsV1ClusterExampleRunsPost` (`POST /v1/reports/accuracy/cluster-example-runs`).
+    - Removed operation `reports.accuracy.clusterVerificationPairsV1ClusterVerificationPairsPost` (`POST /v1/reports/accuracy/cluster-verification-pairs`).
+    - Removed operation `reports.accuracy.factcheckSetupStatusV1FactcheckSetupStatusPost` (`POST /v1/reports/accuracy/factcheck-setup-status`).
+    - Removed operation `reports.factcheck.queryScoresV2Post` (`POST /v2/reports/factcheck`).
+    - Removed operation `reports.factcheck.streamScoresV2StreamPost` (`POST /v2/reports/factcheck/stream`).
+    - Removed operation `reports.factcheck.queryClaimsV2ClaimsPost` (`POST /v2/reports/factcheck/claims`).
+    - Removed operation `reports.factcheck.streamClaimsV2ClaimsStreamPost` (`POST /v2/reports/factcheck/claims/stream`).
+    - Removed operation `reports.social.queryYoutubeChannelsV2YoutubeChannelsPost` (`POST /v2/reports/social/youtube/channels`).
+    - Removed operation `reports.social.queryYoutubeVideosV2YoutubeVideosPost` (`POST /v2/reports/social/youtube/videos`).
+    - Removed operation `reports.social.queryYoutubeSummaryV2YoutubeSummaryPost` (`POST /v2/reports/social/youtube/summary`).
+    - Removed operation `content.optimization.listV1AssetIdGet` (`GET /v1/content/{asset_id}/optimization`).
+    - Removed operation `content.optimization.analysisV1AssetIdIdGet` (`GET /v1/content/{asset_id}/optimization/{content_id}`).
+    - Removed operation `knowledgeBases.listV1Get` (`GET /v1/knowledge-bases`).
+    - Removed operation `knowledgeBases.documents.createV1IdPost` (`POST /v1/knowledge-bases/{knowledge_base_id}/documents`).
+    - Removed operation `knowledgeBases.documents.updateV1IdPut` (`PUT /v1/knowledge-bases/{knowledge_base_id}/documents`).
+    - Removed operation `knowledgeBases.documents.deleteV1IdDelete` (`DELETE /v1/knowledge-bases/{knowledge_base_id}/documents`).
+    - Removed operation `knowledgeBases.folders.createV1IdPost` (`POST /v1/knowledge-bases/{knowledge_base_id}/folders`).
+    - Removed operation `knowledgeBases.folders.deleteV1IdDelete` (`DELETE /v1/knowledge-bases/{knowledge_base_id}/folders`).
+    - Removed operation `integrations.listV1Get` (`GET /v1/integrations`).
+    - Removed operation `documents.listV1Get` (`GET /v1/documents`).
+    - Removed operation `documents.createV1Post` (`POST /v1/documents`).
+    - Removed operation `documents.readV1IdGet` (`GET /v1/documents/{document_id}`).
+    - Removed operation `documents.patchV1IdPatch` (`PATCH /v1/documents/{document_id}`).
+    - Removed operation `documents.deleteV1IdDelete` (`DELETE /v1/documents/{document_id}`).
+    - Removed operation `documents.replaceContentV1IdContentPost` (`POST /v1/documents/{document_id}/content`).
+    - Removed operation `openAiAds.listAccountInsightsV1OpenaiAccountInsightsGet` (`GET /v1/ads/openai-ads/ad-account/insights`).
+    - Removed operation `projects.listV1Get` (`GET /v1/projects`).
+    - Removed operation `projects.createV1Post` (`POST /v1/projects`).
+    - Removed operation `projects.retrieveV1Get` (`GET /v1/projects/{project_id}`).
+    - Removed operation `projects.deleteV1IdDelete` (`DELETE /v1/projects/{project_id}`).
+    - Removed operation `projects.listStatusV1StatusGet` (`GET /v1/projects/{project_id}/status`).
+    - Removed operation `projects.archiveV1IdArchivePost` (`POST /v1/projects/{project_id}/archive`).
+    - Removed operation `projects.unarchiveV1IdUnarchivePost` (`POST /v1/projects/{project_id}/unarchive`).
+    - Removed operation `projects.generations.listV1Get` (`GET /v1/projects/generations`).
+    - Removed operation `projects.generations.retrieveStatusV1RunGet` (`GET /v1/projects/generations/{run_id}`).
+    - Removed operation `projects.tasks.listV1IdGet` (`GET /v1/projects/{project_id}/tasks`).
+    - Removed operation `projects.tasks.createV1IdPost` (`POST /v1/projects/{project_id}/tasks`).
+    - Removed operation `projects.tasks.retrieveV1Get` (`GET /v1/projects/{project_id}/tasks/{task_id}`).
+    - Removed operation `projects.tasks.updateV1IdIdPatch` (`PATCH /v1/projects/{project_id}/tasks/{task_id}`).
+    - Removed operation `projects.tasks.deleteV1IdIdDelete` (`DELETE /v1/projects/{project_id}/tasks/{task_id}`).
+    - Removed operation `projects.tasks.updateStatusV1IdIdStatusPost` (`POST /v1/projects/{project_id}/tasks/{task_id}/status`).
+    - Removed operation `agents.listV1Get` (`GET /v1/agents`).
+    - Removed operation `agents.createV1Post` (`POST /v1/agents`).
+    - Removed operation `agents.publishV1IdPublishPost` (`POST /v1/agents/{agent_id}/publish`).
+    - Removed operation `agents.retrieveV1Get` (`GET /v1/agents/{agent_id}`).
+    - Removed operation `agents.updateV1IdPatch` (`PATCH /v1/agents/{agent_id}`).
+    - Removed operation `agents.listGraphV1GraphGet` (`GET /v1/agents/{agent_id}/graph`).
+    - Removed operation `agents.nodeTypes.listV1Get` (`GET /v1/agents/node-types`).
+    - Removed operation `agents.nodeTypes.listSchemaV1SchemaGet` (`GET /v1/agents/node-types/{node_type}/schema`).
+    - Removed operation `agents.runs.v1IdPost` (`POST /v1/agents/{agent_id}/runs`).
+    - Removed operation `agents.runs.retrieveV1Get` (`GET /v1/agents/{agent_id}/runs/{run_id}`).
+    - Removed operation `domainSegments.listV2Get` (`GET /v2/domain-segments`).
+    - Property `citations_response.info` type changed from `info` to `report_info`.
+    - Property `shopping_rows_response.info` type changed from `info` to `report_info`.
+    - Property `web_search_results_response.info` type changed from `info` to `report_info`.
+    - Removed schema `citation_tag`.
+    - Removed schema `citation_tags_response`.
+    - Removed schema `domain_segment_list_item`.
+    - Removed schema `info`.
+    - Removed schema `response`.
+    - Removed schema `result`.
+    - Removed schema `shopping_all_items_with_merchants_query`.
+    - Removed schema `shopping_executions_query`.
+    - Removed schema `shopping_item_visibility_query`.
+    - Removed schema `shopping_merchant_by_items_query`.
+    - Removed schema `shopping_merchant_distribution_query`.
+    - Removed schema `shopping_merchant_share_query`.
+    - Removed schema `shopping_merchant_visibility_by_brand_query`.
+    - Removed schema `shopping_product_merchant_urls_query`.
+    - Removed schema `shopping_trigger_rate_query`.
+    - Removed schema `shopping_triggered_prompts_query`.
+    - Removed schema `shopping_triggered_topics_query`.
+    - Removed schema `shopping_visibility_query`.
+* **api:** 57 breaking changes to the SDK surface.
+    - Removed operation `organizations.regions` (`GET /v1/org/regions`).
+    - Removed operation `organizations.models` (`GET /v1/org/models`).
+    - Removed operation `organizations.domains` (`GET /v1/org/domains`).
+    - Removed operation `organizations.listAssets` (`GET /v1/org/assets`).
+    - Removed operation `organizations.getPersonas` (`GET /v1/org/personas`).
+    - Removed operation `organizations.list` (`GET /v1/org`).
+    - Removed operation `organizations.categories.list` (`GET /v1/org/categories`).
+    - Removed operation `organizations.categories.topics` (`GET /v1/org/categories/{category_id}/topics`).
+    - Removed operation `organizations.categories.tags` (`GET /v1/org/categories/{category_id}/tags`).
+    - Removed operation `organizations.categories.prompts` (`GET /v1/org/categories/{category_id}/prompts`).
+    - Removed operation `organizations.categories.assets` (`GET /v1/org/categories/{category_id}/assets`).
+    - Removed operation `organizations.categories.getCategoryPersonas` (`GET /v1/org/categories/{category_id}/personas`).
+    - Removed operation `organizations.categories.createPrompts` (`POST /v1/org/categories/{category_id}/prompts`).
+    - Removed operation `organizations.categories.updatePrompts` (`PATCH /v1/org/categories/{category_id}/prompts`).
+    - Removed operation `organizations.categories.updatePromptStatus` (`PATCH /v1/org/categories/{category_id}/prompts/status`).
+    - Removed operation `prompts.answers` (`POST /v1/prompts/answers`).
+    - Removed operation `reports.citations` (`POST /v1/reports/citations`).
+    - Removed operation `reports.visibility` (`POST /v1/reports/visibility`).
+    - Removed operation `reports.sentiment` (`POST /v1/reports/sentiment`).
+    - Removed operation `reports.getReferralsReport` (`POST /v1/reports/referrals`).
+    - Removed operation `reports.getBotsReport` (`POST /v1/reports/bots`).
+    - Removed operation `reports.getReferralsReportV2` (`POST /v2/reports/referrals`).
+    - Removed operation `reports.getBotsReportV2` (`POST /v2/reports/bots`).
+    - Removed operation `reports.queryFanouts` (`POST /v1/reports/query-fanouts`).
+    - Removed operation `reports.streamCitations` (`POST /v1/reports/citations/stream`).
+    - Removed operation `reports.streamVisibility` (`POST /v1/reports/visibility/stream`).
+    - Removed operation `reports.streamSentiment` (`POST /v1/reports/sentiment/stream`).
+    - Removed operation `reports.webSearchResults.query` (`POST /v1/reports/web-search-results`).
+    - Removed operation `reports.webSearchResults.stream` (`POST /v1/reports/web-search-results/stream`).
+    - Removed operation `reports.shopping.visibility` (`POST /v1/reports/shopping/visibility`).
+    - Removed operation `reports.shopping.itemVisibility` (`POST /v1/reports/shopping/item-visibility`).
+    - Removed operation `reports.shopping.merchantDistribution` (`POST /v1/reports/shopping/merchant-distribution`).
+    - Removed operation `reports.shopping.merchantVisibilityByBrand` (`POST /v1/reports/shopping/merchant-visibility-by-brand`).
+    - Removed operation `reports.shopping.merchantByItems` (`POST /v1/reports/shopping/merchant-by-items`).
+    - Removed operation `reports.shopping.allItemsWithMerchants` (`POST /v1/reports/shopping/all-items-with-merchants`).
+    - Removed operation `reports.shopping.triggerRate` (`POST /v1/reports/shopping/trigger-rate`).
+    - Removed operation `reports.shopping.merchantShare` (`POST /v1/reports/shopping/merchant-share`).
+    - Removed operation `reports.shopping.productMerchantUrls` (`POST /v1/reports/shopping/product-merchant-urls`).
+    - Removed operation `reports.shopping.executions` (`POST /v1/reports/shopping/executions`).
+    - Removed operation `content.optimization.list` (`GET /v1/content/{asset_id}/optimization`).
+    - Removed operation `content.optimization.retrieve` (`GET /v1/content/{asset_id}/optimization/{content_id}`).
+    - Removed operation `agents.list` (`GET /v1/agents`).
+    - Removed operation `agents.retrieve` (`GET /v1/agents/{agent_id}`).
+    - Removed operation `agents.runs.create` (`POST /v1/agents/{agent_id}/runs`).
+    - Removed operation `agents.runs.retrieve` (`GET /v1/agents/{agent_id}/runs/{run_id}`).
+    - Removed operation `knowledgeBases.list` (`GET /v1/knowledge-bases`).
+    - Removed operation `knowledgeBases.documents.create` (`POST /v1/knowledge-bases/{knowledge_base_id}/documents`).
+    - Removed operation `knowledgeBases.documents.update` (`PUT /v1/knowledge-bases/{knowledge_base_id}/documents`).
+    - Removed operation `knowledgeBases.documents.delete` (`DELETE /v1/knowledge-bases/{knowledge_base_id}/documents`).
+    - Removed operation `knowledgeBases.folders.create` (`POST /v1/knowledge-bases/{knowledge_base_id}/folders`).
+    - Removed operation `knowledgeBases.folders.delete` (`DELETE /v1/knowledge-bases/{knowledge_base_id}/folders`).
+    - Property `citations_response.info` type changed from `report_info` to `info`.
+    - Property `shopping_rows_response.info` type changed from `report_info` to `info`.
+    - Property `web_search_results_response.info` type changed from `report_info` to `info`.
+    - Removed schema `report_info`.
+    - Removed schema `report_response`.
+    - Removed schema `report_result`.
+
+### Features
+
+* **api:** initial SDK generation ([538bd0b](https://github.com/cooper-square-technologies/profound-python-sdk/commit/538bd0b2f9d0242e86a7ad405e9b4c6316f095f1))
+* **api:** remove operation organizations.regions (+373 more changes) ([e145e91](https://github.com/cooper-square-technologies/profound-python-sdk/commit/e145e918f8abf6eb5b810727f86391cff3c8d249))
+* **api:** remove schema shopping_rows_response (+1 more change) ([8d36342](https://github.com/cooper-square-technologies/profound-python-sdk/commit/8d36342051c1569675aa586422076dbeef72f737))
+* **api:** update SDK surface (260 changes) ([14a8c39](https://github.com/cooper-square-technologies/profound-python-sdk/commit/14a8c3920e0f828874b56d7c35e3d1be2b0edcb6))
+* **api:** update SDK surface (6 changes) ([f5412de](https://github.com/cooper-square-technologies/profound-python-sdk/commit/f5412deedfe90eb5e86d8421f81e3b380d7a1c73))
+
+
+### Chores
+
+* **api:** regenerate SDK ([2258903](https://github.com/cooper-square-technologies/profound-python-sdk/commit/2258903e7a77d4551c1aeae2732908592c1463c8))
+* **api:** regenerate SDK ([db1dd02](https://github.com/cooper-square-technologies/profound-python-sdk/commit/db1dd02f49daa18df80e4e1fbfdf8f91d342a7b3))
+* **api:** regenerate SDK ([7df89e4](https://github.com/cooper-square-technologies/profound-python-sdk/commit/7df89e4fc21143c51cfc743904b14c16f79cad38))
+* **api:** regenerate SDK ([9f0120f](https://github.com/cooper-square-technologies/profound-python-sdk/commit/9f0120f93c8d4ab1acddb2ead3646e047d2e1359))
+* **api:** regenerate SDK ([699a281](https://github.com/cooper-square-technologies/profound-python-sdk/commit/699a28179f065163098f0a846297bdbb6292fc7a))
+
 ## 0.57.0 (2026-08-05)
 
 Full Changelog: [v0.56.0...v0.57.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.56.0...v0.57.0)
