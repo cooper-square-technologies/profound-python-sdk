@@ -1,7 +1,7 @@
 {
   "name": "Profound",
   "slug": "profound",
-  "generatorVersion": "0.30.0",
+  "generatorVersion": "0.30.1",
   "servers": [
     "https://api.tryprofound.com"
   ],
