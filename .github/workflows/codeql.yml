@@ -1,0 +1,48 @@
+name: CodeQL
+
+# Advanced setup instead of CodeQL default setup: default setup skipped runs on this
+# repository, leaving pull requests unanalyzed. A workflow file makes the trigger explicit
+# and the run inspectable. Default setup must stay disabled in the repository's code
+# security settings, or GitHub rejects uploads from this workflow.
+on:
+  push:
+    branches:
+      - main
+      - scalar-next
+  pull_request:
+    branches:
+      - main
+      - scalar-next
+  schedule:
+    # Keeps the default branch's results fresh between releases, which are infrequent here.
+    - cron: "27 4 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  analyze:
+    name: Analyze (${{ matrix.language }})
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+    strategy:
+      fail-fast: false
+      matrix:
+        language:
+          - python
+          - actions
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with:
+          persist-credentials: false
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@cdf488f595d80d6e07e03d4674febd5ab45fa938 # v4.37.9
+        with:
+          languages: ${{ matrix.language }}
+          build-mode: none
+      - name: Perform CodeQL analysis
+        uses: github/codeql-action/analyze@cdf488f595d80d6e07e03d4674febd5ab45fa938 # v4.37.9
+        with:
+          category: "/language:${{ matrix.language }}"
