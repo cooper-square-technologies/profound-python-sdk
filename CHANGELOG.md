@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.58.2](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.58.1...v0.58.2) (2026-08-28)
+
+
+### Chores
+
+* **api:** update generated SDK content ([d6fa82e](https://github.com/cooper-square-technologies/profound-python-sdk/commit/d6fa82ea9d4ea46456b2b60714736fd6f112c948))
+
 ## [0.58.1](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.58.0...v0.58.1) (2026-08-28)
 
 
