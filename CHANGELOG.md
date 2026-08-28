@@ -2,24 +2,16 @@
 
 ## [0.58.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.57.0...v0.58.0) (2026-08-27)
 
-This release moves the SDK to a new code generator. The public API surface is unchanged: every operation, method name, and client option available in 0.57.0 is available in 0.58.0, with the same signatures. No code changes are needed to upgrade.
+This release changes how the SDK is generated. Every API and every client method available in 0.57.0 remains available in 0.58.0, with the same signatures and the same behavior, so upgrading needs no code changes. Some generated details shift slightly, such as the ordering of members and the names of internal helpers.
 
 ### Features
 
 * **api:** add the filter schemas `BrandNameFilter`, `MerchantNameFilter`, and `ProductNameFilter` for Shopping v2 reports.
 
-### Internal changes
+### Build
 
-These changes affect the generated internals only. They don't change how you call the SDK.
-
-* **api:** regenerate the client with the new generator, including new streaming internals (`_event_handler.py`, `_send_queue.py`) and lazily imported resource properties.
-* **api:** rename the internal authentication helpers (`_bearer_auth` to `_access_token_header_auth`, `_api_key_header` to `_api_key_header_auth`) and add query and cookie credential support.
-* **build:** replace the release and continuous integration workflows with the new release pipeline, which publishes to the Python Package Index (PyPI) through trusted publishing.
-* **build:** simplify the packaging metadata and drop the development lockfiles from the repository.
-
-### Notes
-
-The regeneration behind this release landed as several intermediate commits that removed and re-added the same operations under two generator naming conventions, so those commit messages describe removals that cancel out. Compared against the 0.57.0 tag, this release keeps 97 API routes, 103 public resource methods, and the same `Profound()` constructor.
+* **build:** publish releases to the Python Package Index (PyPI) through trusted publishing.
+* **build:** simplify the packaging metadata.
 
 ## 0.57.0 (2026-08-05)
 
