@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.58.1](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.58.0...v0.58.1) (2026-08-28)
+
+
+### Chores
+
+* **api:** update generated SDK content ([15a6573](https://github.com/cooper-square-technologies/profound-python-sdk/commit/15a657332c825a3e2f61aad3544f38c9b0b45027))
+
 ## [0.58.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.57.0...v0.58.0) (2026-08-27)
 
 This release changes how the SDK is generated. Every API and every client method available in 0.57.0 remains available in 0.58.0, with the same signatures and the same behavior, so upgrading needs no code changes. Some generated details shift slightly, such as the ordering of members and the names of internal helpers.
