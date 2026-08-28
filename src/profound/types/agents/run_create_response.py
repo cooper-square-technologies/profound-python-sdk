@@ -1,4 +1,4 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 from typing import Optional
 from datetime import datetime
@@ -10,8 +10,6 @@ __all__ = ["RunCreateResponse"]
 
 
 class RunCreateResponse(BaseModel):
-    """Run details returned after a run request is accepted."""
-
     id: str
     """Unique ID for the accepted run."""
 

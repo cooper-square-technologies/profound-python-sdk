@@ -1,28 +1,12 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
-from .ads import (
-    AdsResource,
-    AsyncAdsResource,
-    AdsResourceWithRawResponse,
-    AsyncAdsResourceWithRawResponse,
-    AdsResourceWithStreamingResponse,
-    AsyncAdsResourceWithStreamingResponse,
-)
-from .agents import (
-    AgentsResource,
-    AsyncAgentsResource,
-    AgentsResourceWithRawResponse,
-    AsyncAgentsResourceWithRawResponse,
-    AgentsResourceWithStreamingResponse,
-    AsyncAgentsResourceWithStreamingResponse,
-)
-from .content import (
-    ContentResource,
-    AsyncContentResource,
-    ContentResourceWithRawResponse,
-    AsyncContentResourceWithRawResponse,
-    ContentResourceWithStreamingResponse,
-    AsyncContentResourceWithStreamingResponse,
+from .organizations import (
+    OrganizationsResource,
+    AsyncOrganizationsResource,
+    OrganizationsResourceWithRawResponse,
+    AsyncOrganizationsResourceWithRawResponse,
+    OrganizationsResourceWithStreamingResponse,
+    AsyncOrganizationsResourceWithStreamingResponse,
 )
 from .prompts import (
     PromptsResource,
@@ -40,6 +24,30 @@ from .reports import (
     ReportsResourceWithStreamingResponse,
     AsyncReportsResourceWithStreamingResponse,
 )
+from .content import (
+    ContentResource,
+    AsyncContentResource,
+    ContentResourceWithRawResponse,
+    AsyncContentResourceWithRawResponse,
+    ContentResourceWithStreamingResponse,
+    AsyncContentResourceWithStreamingResponse,
+)
+from .agents import (
+    AgentsResource,
+    AsyncAgentsResource,
+    AgentsResourceWithRawResponse,
+    AsyncAgentsResourceWithRawResponse,
+    AgentsResourceWithStreamingResponse,
+    AsyncAgentsResourceWithStreamingResponse,
+)
+from .knowledge_bases import (
+    KnowledgeBasesResource,
+    AsyncKnowledgeBasesResource,
+    KnowledgeBasesResourceWithRawResponse,
+    AsyncKnowledgeBasesResourceWithRawResponse,
+    KnowledgeBasesResourceWithStreamingResponse,
+    AsyncKnowledgeBasesResourceWithStreamingResponse,
+)
 from .projects import (
     ProjectsResource,
     AsyncProjectsResource,
@@ -47,14 +55,6 @@ from .projects import (
     AsyncProjectsResourceWithRawResponse,
     ProjectsResourceWithStreamingResponse,
     AsyncProjectsResourceWithStreamingResponse,
-)
-from .documents import (
-    DocumentsResource,
-    AsyncDocumentsResource,
-    DocumentsResourceWithRawResponse,
-    AsyncDocumentsResourceWithRawResponse,
-    DocumentsResourceWithStreamingResponse,
-    AsyncDocumentsResourceWithStreamingResponse,
 )
 from .integrations import (
     IntegrationsResource,
@@ -64,21 +64,21 @@ from .integrations import (
     IntegrationsResourceWithStreamingResponse,
     AsyncIntegrationsResourceWithStreamingResponse,
 )
-from .organizations import (
-    OrganizationsResource,
-    AsyncOrganizationsResource,
-    OrganizationsResourceWithRawResponse,
-    AsyncOrganizationsResourceWithRawResponse,
-    OrganizationsResourceWithStreamingResponse,
-    AsyncOrganizationsResourceWithStreamingResponse,
+from .documents import (
+    DocumentsResource,
+    AsyncDocumentsResource,
+    DocumentsResourceWithRawResponse,
+    AsyncDocumentsResourceWithRawResponse,
+    DocumentsResourceWithStreamingResponse,
+    AsyncDocumentsResourceWithStreamingResponse,
 )
-from .knowledge_bases import (
-    KnowledgeBasesResource,
-    AsyncKnowledgeBasesResource,
-    KnowledgeBasesResourceWithRawResponse,
-    AsyncKnowledgeBasesResourceWithRawResponse,
-    KnowledgeBasesResourceWithStreamingResponse,
-    AsyncKnowledgeBasesResourceWithStreamingResponse,
+from .ads import (
+    AdsResource,
+    AsyncAdsResource,
+    AdsResourceWithRawResponse,
+    AsyncAdsResourceWithRawResponse,
+    AdsResourceWithStreamingResponse,
+    AsyncAdsResourceWithStreamingResponse,
 )
 
 __all__ = [

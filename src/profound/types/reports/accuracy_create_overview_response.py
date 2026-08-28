@@ -1,4 +1,6 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
+
+from __future__ import annotations
 
 from typing import List, Optional
 
@@ -8,38 +10,12 @@ from ..._models import BaseModel
 
 __all__ = [
     "AccuracyCreateOverviewResponse",
-    "ScoreBreakdown",
     "TrendByPeriod",
-    "AvailableSeries",
+    "ScoreBreakdown",
     "ThemeTrend",
     "ThemeTrendData",
+    "AvailableSeries",
 ]
-
-
-class ScoreBreakdown(BaseModel):
-    count: int
-
-    share: float
-
-    status: str
-
-    count_change: Optional[int] = FieldInfo(alias="countChange", default=None)
-
-    share_change: Optional[float] = FieldInfo(alias="shareChange", default=None)
-
-
-class TrendByPeriod(BaseModel):
-    accurate: int
-
-    date: str
-
-    ratio: float
-
-    total: int
-
-    prev_period_data: Optional[object] = FieldInfo(alias="prevPeriodData", default=None)
-
-    verified: Optional[int] = None
 
 
 class AvailableSeries(BaseModel):
@@ -51,32 +27,58 @@ class AvailableSeries(BaseModel):
 
 
 class ThemeTrendData(BaseModel):
-    accurate: int
-
     date: str
 
-    ratio: float
-
     total: int
+
+    accurate: int
+
+    ratio: float
 
 
 class ThemeTrend(BaseModel):
     id: str
 
+    label: str
+
     data: List[ThemeTrendData]
 
-    label: str
+
+class ScoreBreakdown(BaseModel):
+    status: str
+
+    count: int
+
+    share: float
+
+    count_change: Optional[int] = FieldInfo(alias="countChange", default=None)
+
+    share_change: Optional[float] = FieldInfo(alias="shareChange", default=None)
+
+
+class TrendByPeriod(BaseModel):
+    date: str
+
+    total: int
+
+    accurate: int
+
+    verified: Optional[int] = None
+
+    ratio: float
+
+    prev_period_data: Optional[object] = FieldInfo(alias="prevPeriodData", default=None)
 
 
 class AccuracyCreateOverviewResponse(BaseModel):
-    overall_accuracy: float = FieldInfo(alias="overallAccuracy")
-
-    score_breakdown: List[ScoreBreakdown] = FieldInfo(alias="scoreBreakdown")
-
     trend_by_period: List[TrendByPeriod] = FieldInfo(alias="trendByPeriod")
+
+    overall_accuracy: float = FieldInfo(alias="overallAccuracy")
 
     accuracy_change: Optional[float] = FieldInfo(alias="accuracyChange", default=None)
 
-    available_series: Optional[List[AvailableSeries]] = FieldInfo(alias="availableSeries", default=None)
+    score_breakdown: List[ScoreBreakdown] = FieldInfo(alias="scoreBreakdown")
 
     theme_trend: Optional[List[ThemeTrend]] = FieldInfo(alias="themeTrend", default=None)
+
+    available_series: Optional[List[AvailableSeries]] = FieldInfo(alias="availableSeries", default=None)

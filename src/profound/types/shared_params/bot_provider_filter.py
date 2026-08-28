@@ -1,4 +1,4 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 from __future__ import annotations
 
@@ -9,8 +9,6 @@ __all__ = ["BotProviderFilter"]
 
 
 class BotProviderFilter(TypedDict, total=False):
-    """Filter by bot provider"""
-
     field: Required[Literal["bot_provider"]]
 
     operator: Required[

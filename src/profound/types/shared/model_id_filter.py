@@ -1,4 +1,4 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 from typing import List, Union
 from typing_extensions import Literal
@@ -12,7 +12,6 @@ class ModelIDFilter(BaseModel):
     """Filter by AI model/platform UUID."""
 
     field: Literal["model_id", "model"]
-    """- `model` - Deprecated"""
 
     operator: Literal["is", "not_is", "in", "not_in"]
 

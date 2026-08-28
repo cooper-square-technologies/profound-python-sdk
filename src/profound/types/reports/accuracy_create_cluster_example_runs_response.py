@@ -1,4 +1,4 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 from typing import List
 
@@ -10,17 +10,17 @@ __all__ = ["AccuracyCreateClusterExampleRunsResponse", "Data"]
 
 
 class Data(BaseModel):
+    run_id: str = FieldInfo(alias="runId")
+
     claim: str
 
-    created_at: str = FieldInfo(alias="createdAt")
+    response_snippet: str = FieldInfo(alias="responseSnippet")
 
     api_model_id: str = FieldInfo(alias="modelId")
 
     region_id: str = FieldInfo(alias="regionId")
 
-    response_snippet: str = FieldInfo(alias="responseSnippet")
-
-    run_id: str = FieldInfo(alias="runId")
+    created_at: str = FieldInfo(alias="createdAt")
 
 
 class AccuracyCreateClusterExampleRunsResponse(BaseModel):

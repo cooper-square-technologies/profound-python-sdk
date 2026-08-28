@@ -1,21 +1,22 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
-from typing import List, Union
+from typing import List, Optional, Union
 
 from .._models import BaseModel
+
 from .report_info import ReportInfo
 
 __all__ = ["ReportCitationsResponse", "Data"]
 
 
 class Data(BaseModel):
-    dimensions: List[str]
+    metrics: List[Optional[Union[int, float, str]]]
 
-    metrics: List[Union[float, str, None]]
+    dimensions: List[str]
 
 
 class ReportCitationsResponse(BaseModel):
-    data: List[Data]
-
     info: ReportInfo
     """Base model for report information."""
+
+    data: List[Data]

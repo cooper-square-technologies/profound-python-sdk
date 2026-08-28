@@ -1,13 +1,5 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
-from .tasks import (
-    TasksResource,
-    AsyncTasksResource,
-    TasksResourceWithRawResponse,
-    AsyncTasksResourceWithRawResponse,
-    TasksResourceWithStreamingResponse,
-    AsyncTasksResourceWithStreamingResponse,
-)
 from .projects import (
     ProjectsResource,
     AsyncProjectsResource,
@@ -24,8 +16,22 @@ from .generations import (
     GenerationsResourceWithStreamingResponse,
     AsyncGenerationsResourceWithStreamingResponse,
 )
+from .tasks import (
+    TasksResource,
+    AsyncTasksResource,
+    TasksResourceWithRawResponse,
+    AsyncTasksResourceWithRawResponse,
+    TasksResourceWithStreamingResponse,
+    AsyncTasksResourceWithStreamingResponse,
+)
 
 __all__ = [
+    "ProjectsResource",
+    "AsyncProjectsResource",
+    "ProjectsResourceWithRawResponse",
+    "AsyncProjectsResourceWithRawResponse",
+    "ProjectsResourceWithStreamingResponse",
+    "AsyncProjectsResourceWithStreamingResponse",
     "GenerationsResource",
     "AsyncGenerationsResource",
     "GenerationsResourceWithRawResponse",
@@ -38,10 +44,4 @@ __all__ = [
     "AsyncTasksResourceWithRawResponse",
     "TasksResourceWithStreamingResponse",
     "AsyncTasksResourceWithStreamingResponse",
-    "ProjectsResource",
-    "AsyncProjectsResource",
-    "ProjectsResourceWithRawResponse",
-    "AsyncProjectsResourceWithRawResponse",
-    "ProjectsResourceWithStreamingResponse",
-    "AsyncProjectsResourceWithStreamingResponse",
 ]

@@ -1,4 +1,4 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 from typing import Optional
 
@@ -10,6 +10,6 @@ __all__ = ["PersonaProfileBehavior"]
 
 
 class PersonaProfileBehavior(BaseModel):
-    motivations: Optional[str] = None
-
     pain_points: Optional[str] = FieldInfo(alias="painPoints", default=None)
+
+    motivations: Optional[str] = None

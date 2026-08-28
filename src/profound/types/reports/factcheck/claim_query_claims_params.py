@@ -1,8 +1,8 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 from __future__ import annotations
 
-from typing import List, Iterable, Optional
+from typing import Iterable, List, Optional
 from typing_extensions import Literal, Required, TypedDict
 
 __all__ = ["ClaimQueryClaimsParams", "Filter"]
@@ -11,22 +11,17 @@ __all__ = ["ClaimQueryClaimsParams", "Filter"]
 class ClaimQueryClaimsParams(TypedDict, total=False):
     category_id: Required[str]
 
-    end_date: Required[str]
-    """YYYY-MM-DD, ET, inclusive"""
-
     start_date: Required[str]
     """YYYY-MM-DD, ET, inclusive"""
 
-    cursor: Optional[str]
-
-    filter: Optional[Filter]
-    """A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group."""
+    end_date: Required[str]
+    """YYYY-MM-DD, ET, inclusive"""
 
     group_by: List[Literal["model", "region", "persona", "prompt", "topic", "tag", "theme"]]
-    """Optional single dim to section the claims (e.g.
+    """Optional single dim to section the claims (e.g. per model). Empty → one flat claim list."""
 
-    per model). Empty → one flat claim list.
-    """
+    filter: Optional[Filter]
+    """Scope which responses count (see Filtering)."""
 
     include: Optional[List[Literal["theme", "reasoning", "models", "evidence", "citation_sources"]]]
     """Optional per-claim detail fields to add to each claim (see options)."""
@@ -37,13 +32,15 @@ class ClaimQueryClaimsParams(TypedDict, total=False):
     max_results: Optional[int]
     """Stream only: cap entries returned."""
 
+    cursor: Optional[str]
+
 
 _FilterReservedKeywords = TypedDict(
     "_FilterReservedKeywords",
     {
-        "and": Optional[Iterable[object]],
-        "not": object,
-        "or": Optional[Iterable[object]],
+        "and": Optional[Iterable["Filter"]],
+        "or": Optional[Iterable["Filter"]],
+        "not": Optional["Filter"],
     },
     total=False,
 )

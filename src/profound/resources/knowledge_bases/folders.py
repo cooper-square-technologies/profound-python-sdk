@@ -1,10 +1,10 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 from __future__ import annotations
 
-from typing import Optional
-
 import httpx
+
+from typing import Optional
 
 from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ..._utils import path_template, maybe_transform, async_maybe_transform
@@ -17,8 +17,8 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.knowledge_bases import folder_create_params, folder_delete_params
 from ...types.knowledge_bases.folder_create_response import FolderCreateResponse
+from ...types.knowledge_bases import folder_create_params, folder_delete_params
 from ...types.knowledge_bases.folder_delete_response import FolderDeleteResponse
 
 __all__ = ["FoldersResource", "AsyncFoldersResource"]
@@ -27,21 +27,10 @@ __all__ = ["FoldersResource", "AsyncFoldersResource"]
 class FoldersResource(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> FoldersResourceWithRawResponse:
-        """
-        This property can be used as a prefix for any HTTP method call to return
-        the raw response object instead of the parsed content.
-
-        For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#accessing-raw-response-data-eg-headers
-        """
         return FoldersResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> FoldersResourceWithStreamingResponse:
-        """
-        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
-
-        For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#with_streaming_response
-        """
         return FoldersResourceWithStreamingResponse(self)
 
     def create(
@@ -61,25 +50,35 @@ class FoldersResource(SyncAPIResource):
         Create an empty folder at the requested knowledge base path.
 
         Args:
-          knowledge_base_id: Unique knowledge base ID.
+            knowledge_base_id: Unique knowledge base ID.
+            path: Folder path to create.
+            organization_id: Organization scope for API keys that can access multiple organizations.
+            extra_headers: Send extra headers with the request.
+            extra_query: Send extra query parameters with the request.
+            extra_body: Send extra JSON properties with the request.
+            timeout: Override the client-level default timeout for this request, in seconds.
 
-          path: Folder path to create.
+        Returns:
+            FolderCreateResponse: Successful Response
 
-          organization_id: Organization scope for API keys that can access multiple organizations.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
+        Example:
+            ```python
+            folder = client.knowledge_bases.folders.create(
+                knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+                path="x",
+            )
+            ```
         """
-        if not knowledge_base_id:
+        if knowledge_base_id is None or (isinstance(knowledge_base_id, str) and not knowledge_base_id):
             raise ValueError(f"Expected a non-empty value for `knowledge_base_id` but received {knowledge_base_id!r}")
         return self._post(
-            path_template("/v1/knowledge-bases/{knowledge_base_id}/folders", knowledge_base_id=knowledge_base_id),
-            body=maybe_transform({"path": path}, folder_create_params.FolderCreateParams),
+            path_template(
+                "/v1/knowledge-bases/{knowledge_base_id}/folders", **{"knowledge_base_id": knowledge_base_id}
+            ),
+            body=maybe_transform(
+                {"path": path},
+                folder_create_params.FolderCreateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -95,8 +94,8 @@ class FoldersResource(SyncAPIResource):
         knowledge_base_id: str,
         *,
         path: str,
-        organization_id: Optional[str] | Omit = omit,
         recursive: bool | Omit = omit,
+        organization_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -104,33 +103,37 @@ class FoldersResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FolderDeleteResponse:
-        """Delete a folder.
-
-        With recursive=false, non-empty folders return 409 and no
-        contents are deleted.
+        """
+        Delete a folder. With recursive=false, non-empty folders return 409 and no contents are deleted.
 
         Args:
-          knowledge_base_id: Unique knowledge base ID.
+            knowledge_base_id: Unique knowledge base ID.
+            path: Folder path to delete.
+            recursive: When false, only empty folders are deleted and non-empty folders return a conflict. When true, the folder and all contents are deleted.
+            organization_id: Organization scope for API keys that can access multiple organizations.
+            extra_headers: Send extra headers with the request.
+            extra_query: Send extra query parameters with the request.
+            extra_body: Send extra JSON properties with the request.
+            timeout: Override the client-level default timeout for this request, in seconds.
 
-          path: Folder path to delete.
+        Returns:
+            FolderDeleteResponse: Successful Response
 
-          organization_id: Organization scope for API keys that can access multiple organizations.
-
-          recursive: When false, only empty folders are deleted and non-empty folders return a
-              conflict. When true, the folder and all contents are deleted.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
+        Example:
+            ```python
+            folder = client.knowledge_bases.folders.delete(
+                knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+                path="x",
+                recursive=False,
+            )
+            ```
         """
-        if not knowledge_base_id:
+        if knowledge_base_id is None or (isinstance(knowledge_base_id, str) and not knowledge_base_id):
             raise ValueError(f"Expected a non-empty value for `knowledge_base_id` but received {knowledge_base_id!r}")
         return self._delete(
-            path_template("/v1/knowledge-bases/{knowledge_base_id}/folders", knowledge_base_id=knowledge_base_id),
+            path_template(
+                "/v1/knowledge-bases/{knowledge_base_id}/folders", **{"knowledge_base_id": knowledge_base_id}
+            ),
             body=maybe_transform(
                 {
                     "path": path,
@@ -152,21 +155,10 @@ class FoldersResource(SyncAPIResource):
 class AsyncFoldersResource(AsyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AsyncFoldersResourceWithRawResponse:
-        """
-        This property can be used as a prefix for any HTTP method call to return
-        the raw response object instead of the parsed content.
-
-        For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#accessing-raw-response-data-eg-headers
-        """
         return AsyncFoldersResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> AsyncFoldersResourceWithStreamingResponse:
-        """
-        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
-
-        For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#with_streaming_response
-        """
         return AsyncFoldersResourceWithStreamingResponse(self)
 
     async def create(
@@ -186,25 +178,35 @@ class AsyncFoldersResource(AsyncAPIResource):
         Create an empty folder at the requested knowledge base path.
 
         Args:
-          knowledge_base_id: Unique knowledge base ID.
+            knowledge_base_id: Unique knowledge base ID.
+            path: Folder path to create.
+            organization_id: Organization scope for API keys that can access multiple organizations.
+            extra_headers: Send extra headers with the request.
+            extra_query: Send extra query parameters with the request.
+            extra_body: Send extra JSON properties with the request.
+            timeout: Override the client-level default timeout for this request, in seconds.
 
-          path: Folder path to create.
+        Returns:
+            FolderCreateResponse: Successful Response
 
-          organization_id: Organization scope for API keys that can access multiple organizations.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
+        Example:
+            ```python
+            folder = await client.knowledge_bases.folders.create(
+                knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+                path="x",
+            )
+            ```
         """
-        if not knowledge_base_id:
+        if knowledge_base_id is None or (isinstance(knowledge_base_id, str) and not knowledge_base_id):
             raise ValueError(f"Expected a non-empty value for `knowledge_base_id` but received {knowledge_base_id!r}")
         return await self._post(
-            path_template("/v1/knowledge-bases/{knowledge_base_id}/folders", knowledge_base_id=knowledge_base_id),
-            body=await async_maybe_transform({"path": path}, folder_create_params.FolderCreateParams),
+            path_template(
+                "/v1/knowledge-bases/{knowledge_base_id}/folders", **{"knowledge_base_id": knowledge_base_id}
+            ),
+            body=await async_maybe_transform(
+                {"path": path},
+                folder_create_params.FolderCreateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -222,8 +224,8 @@ class AsyncFoldersResource(AsyncAPIResource):
         knowledge_base_id: str,
         *,
         path: str,
-        organization_id: Optional[str] | Omit = omit,
         recursive: bool | Omit = omit,
+        organization_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -231,33 +233,37 @@ class AsyncFoldersResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FolderDeleteResponse:
-        """Delete a folder.
-
-        With recursive=false, non-empty folders return 409 and no
-        contents are deleted.
+        """
+        Delete a folder. With recursive=false, non-empty folders return 409 and no contents are deleted.
 
         Args:
-          knowledge_base_id: Unique knowledge base ID.
+            knowledge_base_id: Unique knowledge base ID.
+            path: Folder path to delete.
+            recursive: When false, only empty folders are deleted and non-empty folders return a conflict. When true, the folder and all contents are deleted.
+            organization_id: Organization scope for API keys that can access multiple organizations.
+            extra_headers: Send extra headers with the request.
+            extra_query: Send extra query parameters with the request.
+            extra_body: Send extra JSON properties with the request.
+            timeout: Override the client-level default timeout for this request, in seconds.
 
-          path: Folder path to delete.
+        Returns:
+            FolderDeleteResponse: Successful Response
 
-          organization_id: Organization scope for API keys that can access multiple organizations.
-
-          recursive: When false, only empty folders are deleted and non-empty folders return a
-              conflict. When true, the folder and all contents are deleted.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
+        Example:
+            ```python
+            folder = await client.knowledge_bases.folders.delete(
+                knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+                path="x",
+                recursive=False,
+            )
+            ```
         """
-        if not knowledge_base_id:
+        if knowledge_base_id is None or (isinstance(knowledge_base_id, str) and not knowledge_base_id):
             raise ValueError(f"Expected a non-empty value for `knowledge_base_id` but received {knowledge_base_id!r}")
         return await self._delete(
-            path_template("/v1/knowledge-bases/{knowledge_base_id}/folders", knowledge_base_id=knowledge_base_id),
+            path_template(
+                "/v1/knowledge-bases/{knowledge_base_id}/folders", **{"knowledge_base_id": knowledge_base_id}
+            ),
             body=await async_maybe_transform(
                 {
                     "path": path,

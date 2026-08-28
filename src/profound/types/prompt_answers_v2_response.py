@@ -1,12 +1,14 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
-from typing import TYPE_CHECKING, Dict, List, Optional
+from __future__ import annotations
+
+from typing import Dict, List, Optional, TYPE_CHECKING
 
 from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-__all__ = ["PromptAnswersV2Response", "Data", "DataCitationDetail", "DataCitationDetailGroup", "DataModel", "Info"]
+__all__ = ["PromptAnswersV2Response", "Info", "Data", "DataModel", "DataCitationDetail", "DataCitationDetailGroup"]
 
 
 class DataCitationDetailGroup(BaseModel):
@@ -16,81 +18,68 @@ class DataCitationDetailGroup(BaseModel):
 
 
 class DataCitationDetail(BaseModel):
+    url: str
+
     clean_url: str
+
+    title: str
+
+    text: Optional[str] = None
 
     hostname: str
 
     path: str
 
-    title: str
-
-    url: str
-
-    citation_category: Optional[str] = None
-
-    first_cited_at: Optional[str] = None
+    positions: Optional[List[int]] = None
 
     groups: Optional[List[DataCitationDetailGroup]] = None
 
-    positions: Optional[List[int]] = None
+    first_cited_at: Optional[str] = None
 
-    text: Optional[str] = None
+    citation_category: Optional[str] = None
 
 
 class DataModel(BaseModel):
-    """An ``{id, name}`` reference for a grouped dimension value."""
-
     id: Optional[str] = None
 
     name: Optional[str] = None
 
 
 class Data(BaseModel):
-    """One answer row.
-
-    Present fields depend on `include`; `model` is an `{id, name}` reference.
-    """
-
-    analysis_types: Optional[List[str]] = None
-
-    citation_details: Optional[List[DataCitationDetail]] = None
-    """Citation metadata.
-
-    `positions` identify citation locations in the answer text. Each `groups` entry
-    represents a rendered citation pill; `group_position` is the source's position
-    within that pill.
-    """
-
-    citations: Optional[List[str]] = None
+    run_id: Optional[str] = None
 
     date: Optional[str] = None
 
-    mentions: Optional[List[str]] = None
-
     model: Optional[DataModel] = None
-    """An `{id, name}` reference for a grouped dimension value."""
+
+    topic: Optional[str] = None
+
+    topic_id: Optional[str] = None
+
+    region: Optional[str] = None
 
     persona: Optional[str] = None
+
+    tags: Optional[List[str]] = None
 
     prompt: Optional[str] = None
 
     prompt_id: Optional[str] = None
 
-    region: Optional[str] = None
-
     response: Optional[str] = None
 
-    run_id: Optional[str] = None
+    mentions: Optional[List[str]] = None
+
+    citations: Optional[List[str]] = None
+
+    citation_details: Optional[List[DataCitationDetail]] = None
+    """Citation metadata. `positions` identify citation locations in the answer text. Each `groups` entry represents a rendered citation pill, including single-source pills; `group_position` is the source's position within that pill."""
 
     search_queries: Optional[List[str]] = None
 
+    analysis_types: Optional[List[str]] = None
+
     sentiment_claims: Optional[List[Dict[str, object]]] = None
-
-    tags: Optional[List[str]] = None
-
-    topic: Optional[str] = None
-
-    topic_id: Optional[str] = None
 
     if TYPE_CHECKING:
         # Some versions of Pydantic <2.8.0 have a bug and don’t allow assigning a
@@ -101,19 +90,20 @@ class Data(BaseModel):
         # To access properties that are not valid identifiers you can use `getattr`, e.g.
         # `getattr(obj, '$type')`
         def __getattr__(self, attr: str) -> object: ...
+
     else:
         __pydantic_extra__: Dict[str, object]
 
 
 class Info(BaseModel):
+    total_results: Optional[int] = None
+    """Total rows matching the query before pagination (null when not computed)."""
+
     count: int
     """Number of rows returned in `data` for this page."""
 
-    end_date: str
-    """Echoed request end date (YYYY-MM-DD, ET)."""
-
-    include: List[str]
-    """Row fields returned (echoes `include`, or all fields when omitted)."""
+    next_cursor: Optional[str] = None
+    """Opaque cursor for the next page; null on the last page."""
 
     models: List[str]
     """Display names of the models the report covers."""
@@ -121,14 +111,14 @@ class Info(BaseModel):
     start_date: str
     """Echoed request start date (YYYY-MM-DD, ET)."""
 
+    end_date: str
+    """Echoed request end date (YYYY-MM-DD, ET)."""
+
     filter: Optional[Dict[str, object]] = None
     """Echoed normalized filter tree, or null when no filter was sent."""
 
-    next_cursor: Optional[str] = None
-    """Opaque cursor for the next page; null on the last page."""
-
-    total_results: Optional[int] = None
-    """Total rows matching the query before pagination (null when not computed)."""
+    include: List[str]
+    """Row fields returned (echoes `include`, or all fields when omitted)."""
 
     if TYPE_CHECKING:
         # Some versions of Pydantic <2.8.0 have a bug and don’t allow assigning a
@@ -139,11 +129,12 @@ class Info(BaseModel):
         # To access properties that are not valid identifiers you can use `getattr`, e.g.
         # `getattr(obj, '$type')`
         def __getattr__(self, attr: str) -> object: ...
+
     else:
         __pydantic_extra__: Dict[str, object]
 
 
 class PromptAnswersV2Response(BaseModel):
-    data: List[Data]
-
     info: Info
+
+    data: List[Data]

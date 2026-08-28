@@ -1,27 +1,30 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
+
+from __future__ import annotations
 
 from typing import List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
 from ..._models import BaseModel
+
 from ..shared.pagination import Pagination
 
-__all__ = ["OptimizationListResponse", "Data", "Info", "InfoQuery"]
+__all__ = ["OptimizationListResponse", "Info", "InfoQuery", "Data"]
 
 
 class Data(BaseModel):
     id: str
 
+    title: str
+
     created_at: datetime
 
     extracted_input: Optional[str] = None
 
-    status: str
-
-    title: str
-
     type: Literal["file", "text", "url"]
+
+    status: str
 
 
 class InfoQuery(BaseModel):
@@ -32,12 +35,12 @@ class InfoQuery(BaseModel):
 
 
 class Info(BaseModel):
-    query: InfoQuery
-
     total_rows: int
+
+    query: InfoQuery
 
 
 class OptimizationListResponse(BaseModel):
-    data: List[Data]
-
     info: Info
+
+    data: List[Data]

@@ -1,4 +1,6 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
+
+from __future__ import annotations
 
 from typing import Dict, List, Optional
 from datetime import datetime
@@ -9,76 +11,70 @@ from .._models import BaseModel
 __all__ = ["ProjectRetrieveResponse", "Data", "DataLiveGeneration", "DataTask"]
 
 
-class DataLiveGeneration(BaseModel):
-    run_id: str
-
-    status: Literal["queued", "running", "completed", "failed"]
-
-    error: Optional[str] = None
-
-    finished_at: Optional[datetime] = None
-
-    started_at: Optional[datetime] = None
-
-
 class DataTask(BaseModel):
-    category_id: str
+    task_id: str
 
     project_id: str
 
-    task_id: str
+    category_id: str
+
+    type: Optional[str] = None
 
     title: str
 
+    summary: Optional[str] = None
+
     brief: Optional[str] = None
 
-    created_at: Optional[datetime] = None
+    topic: Optional[str] = None
 
     impact: Optional[int] = None
 
-    is_new: Optional[bool] = None
+    reference_url: Optional[str] = None
 
     reference_label: Optional[str] = None
-
-    reference_url: Optional[str] = None
 
     status: Optional[Literal["not_started", "in_progress", "done", "abandoned"]] = None
 
     status_changed_at: Optional[datetime] = None
 
-    summary: Optional[str] = None
-
-    topic: Optional[str] = None
-
-    type: Optional[str] = None
-
-
-class Data(BaseModel):
-    category_id: str
-
-    project_id: str
-
-    title: str
+    is_new: Optional[bool] = None
 
     created_at: Optional[datetime] = None
 
-    initiated_by_user_id: Optional[str] = None
 
-    latest_version_id: Optional[str] = None
+class DataLiveGeneration(BaseModel):
+    run_id: str
 
-    live_generation: Optional[DataLiveGeneration] = None
+    status: Literal["queued", "running", "completed", "failed"]
 
-    measurement: Optional[Dict[str, object]] = None
+    started_at: Optional[datetime] = None
 
-    new_task_count: Optional[int] = None
+    finished_at: Optional[datetime] = None
+
+    error: Optional[str] = None
+
+
+class Data(BaseModel):
+    project_id: str
+
+    category_id: str
 
     origin_run_id: Optional[str] = None
 
+    initiated_by_user_id: Optional[str] = None
+
+    title: str
+
+    summary: Optional[str] = None
+
+    why: Optional[str] = None
+
+    topics: Optional[List[str]] = None
+
     prompts: Optional[List[str]] = None
 
-    retired_at: Optional[datetime] = None
-
-    retired_reason: Optional[str] = None
+    measurement: Optional[Dict[str, object]] = None
 
     source_kind: Optional[Literal["generate", "adhoc"]] = None
 
@@ -86,19 +82,25 @@ class Data(BaseModel):
 
     status: Optional[Literal["suggested", "tracked", "retired"]] = None
 
-    summary: Optional[str] = None
-
     task_count: Optional[int] = None
 
-    tasks: Optional[List[DataTask]] = None
+    new_task_count: Optional[int] = None
 
-    topics: Optional[List[str]] = None
+    retired_at: Optional[datetime] = None
 
-    updated_at: Optional[datetime] = None
+    retired_reason: Optional[str] = None
+
+    latest_version_id: Optional[str] = None
 
     version_count: Optional[int] = None
 
-    why: Optional[str] = None
+    created_at: Optional[datetime] = None
+
+    updated_at: Optional[datetime] = None
+
+    live_generation: Optional[DataLiveGeneration] = None
+
+    tasks: Optional[List[DataTask]] = None
 
 
 class ProjectRetrieveResponse(BaseModel):

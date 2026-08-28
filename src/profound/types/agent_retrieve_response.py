@@ -1,4 +1,6 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
+
+from __future__ import annotations
 
 from typing import Dict, List, Optional
 from datetime import datetime
@@ -11,36 +13,12 @@ from .._models import BaseModel
 __all__ = ["AgentRetrieveResponse", "Schema", "Validation", "ValidationIssue"]
 
 
-class Schema(BaseModel):
-    """Schema metadata for an agent."""
-
-    input: Dict[str, object]
-    """JSON Schema for the agent's `inputs` object.
-
-    Use the top-level property keys as input field names when starting a run.
-    """
-
-    output: Dict[str, object]
-    """
-    JSON Schema for the `outputs` object returned by
-    `GET /v1/agents/{agent_id}/runs/{run_id}`.
-    """
-
-
 class ValidationIssue(BaseModel):
-    """A single problem found while validating an agent's graph."""
-
     code: str
     """Stable machine-readable identifier for the kind of issue."""
 
     message: str
     """Human-readable description of the issue."""
-
-    field: Optional[str] = None
-    """Name of the offending field on the node, if field-specific."""
-
-    field_title: Optional[str] = None
-    """Display title of the affected field, if available."""
 
     node_id: Optional[str] = None
     """ID of the node the issue applies to, if node-specific."""
@@ -48,17 +26,17 @@ class ValidationIssue(BaseModel):
     node_title: Optional[str] = None
     """Display title of the affected node, if available."""
 
+    field: Optional[str] = None
+    """Name of the offending field on the node, if field-specific."""
+
+    field_title: Optional[str] = None
+    """Display title of the affected field, if available."""
+
     violation: Optional[str] = None
     """The specific constraint that was violated, if available."""
 
 
 class Validation(BaseModel):
-    """Result of validating an agent's graph.
-
-    Mirrors the report computed on every read, so callers can confirm a draft
-    is publishable before calling publish.
-    """
-
     valid: bool
     """Whether the agent's graph is valid and ready to publish."""
 
@@ -66,33 +44,35 @@ class Validation(BaseModel):
     """Problems found while validating the graph. Empty when `valid` is true."""
 
 
-class AgentRetrieveResponse(BaseModel):
-    """Detailed information for an agent."""
+class Schema(BaseModel):
+    input: Dict[str, object]
+    """JSON Schema for the agent's `inputs` object. Use the top-level property keys as input field names when starting a run."""
 
+    output: Dict[str, object]
+    """JSON Schema for the `outputs` object returned by `GET /v1/agents/{agent_id}/runs/{run_id}`."""
+
+
+class AgentRetrieveResponse(BaseModel):
     id: str
     """Unique ID for the agent."""
-
-    created_at: datetime
-    """When the agent was created."""
-
-    name: str
-    """Display name of the agent."""
 
     organization_id: str
     """Unique ID of the organization that owns the agent."""
 
+    name: str
+    """Display name of the agent."""
+
     status: Literal["draft", "published", "unknown"]
     """Current status of the agent."""
+
+    created_at: datetime
+    """When the agent was created."""
 
     description: Optional[str] = None
     """Short description of the agent, if provided."""
 
     schema_: Optional[Schema] = FieldInfo(alias="schema", default=None)
-    """Schema metadata for an agent."""
+    """Input and output schemas for this agent. Omitted while the agent's graph cannot be previewed (e.g. an empty or structurally-invalid draft); check `validation` to see what needs fixing."""
 
     validation: Optional[Validation] = None
-    """Result of validating an agent's graph.
-
-    Mirrors the report computed on every read, so callers can confirm a draft is
-    publishable before calling publish.
-    """
+    """Validation report for the agent's graph, when available. Use `validation.valid` to check the agent is publishable."""

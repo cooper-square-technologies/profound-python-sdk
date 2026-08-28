@@ -1,4 +1,4 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 from .ads import (
     AdsResource,
@@ -18,16 +18,16 @@ from .openai_ads import (
 )
 
 __all__ = [
-    "OpenAIAdsResource",
-    "AsyncOpenAIAdsResource",
-    "OpenAIAdsResourceWithRawResponse",
-    "AsyncOpenAIAdsResourceWithRawResponse",
-    "OpenAIAdsResourceWithStreamingResponse",
-    "AsyncOpenAIAdsResourceWithStreamingResponse",
     "AdsResource",
     "AsyncAdsResource",
     "AdsResourceWithRawResponse",
     "AsyncAdsResourceWithRawResponse",
     "AdsResourceWithStreamingResponse",
     "AsyncAdsResourceWithStreamingResponse",
+    "OpenAIAdsResource",
+    "AsyncOpenAIAdsResource",
+    "OpenAIAdsResourceWithRawResponse",
+    "AsyncOpenAIAdsResourceWithRawResponse",
+    "OpenAIAdsResourceWithStreamingResponse",
+    "AsyncOpenAIAdsResourceWithStreamingResponse",
 ]

@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.58.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.57.0...v0.58.0) (2026-08-27)
+
+This release changes how the SDK is generated. Every API and every client method available in 0.57.0 remains available in 0.58.0, with the same signatures and the same behavior, so upgrading needs no code changes. Some generated details shift slightly, such as the ordering of members and the names of internal helpers.
+
+### Features
+
+* **api:** add the filter schemas `BrandNameFilter`, `MerchantNameFilter`, and `ProductNameFilter` for Shopping v2 reports.
+
+### Build
+
+* **build:** publish releases to the Python Package Index (PyPI) through trusted publishing.
+* **build:** simplify the packaging metadata.
+
 ## 0.57.0 (2026-08-05)
 
 Full Changelog: [v0.56.0...v0.57.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.56.0...v0.57.0)

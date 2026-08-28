@@ -1,4 +1,4 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 from typing import List, Optional
 
@@ -10,25 +10,25 @@ __all__ = ["AccuracyCreateInaccurateThemesResponse", "Data"]
 
 
 class Data(BaseModel):
-    inaccurate_claim_count: int = FieldInfo(alias="inaccurateClaimCount")
-
-    inaccurate_cluster_count: int = FieldInfo(alias="inaccurateClusterCount")
+    theme_id: str = FieldInfo(alias="themeId")
 
     neutral_theme: str = FieldInfo(alias="neutralTheme")
 
-    response_count: int = FieldInfo(alias="responseCount")
+    description: Optional[str] = None
 
-    response_share: float = FieldInfo(alias="responseShare")
+    inaccurate_claim_count: int = FieldInfo(alias="inaccurateClaimCount")
 
-    theme_id: str = FieldInfo(alias="themeId")
+    inaccurate_cluster_count: int = FieldInfo(alias="inaccurateClusterCount")
 
     total_claim_count: int = FieldInfo(alias="totalClaimCount")
 
     total_cluster_count: int = FieldInfo(alias="totalClusterCount")
 
+    response_count: int = FieldInfo(alias="responseCount")
+
     total_response_count: int = FieldInfo(alias="totalResponseCount")
 
-    description: Optional[str] = None
+    response_share: float = FieldInfo(alias="responseShare")
 
     response_share_delta: Optional[float] = FieldInfo(alias="responseShareDelta", default=None)
 

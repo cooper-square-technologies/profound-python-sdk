@@ -1,4 +1,4 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 from typing import List
 
@@ -8,11 +8,11 @@ __all__ = ["CategoryGetCitationCategoriesResponse", "Data"]
 
 
 class Data(BaseModel):
-    name: str
-    """Display name."""
-
     value: str
     """Value to pass to the v2 citations `citation_category` filter."""
+
+    name: str
+    """Display name."""
 
 
 class CategoryGetCitationCategoriesResponse(BaseModel):

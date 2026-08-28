@@ -1,21 +1,20 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 from typing import List
 from datetime import datetime
 from typing_extensions import TypeAlias
 
 from .._models import BaseModel
+
 from .organization import Organization
 
 __all__ = ["OrganizationDomainsResponse", "OrganizationDomainsResponseItem"]
 
 
 class OrganizationDomainsResponseItem(BaseModel):
-    """A domain paired with the organization edge it belongs to."""
+    created_at: datetime
 
     id: str
-
-    created_at: datetime
 
     name: str
 

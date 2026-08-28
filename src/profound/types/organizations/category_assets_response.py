@@ -1,4 +1,4 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 from typing import List, Optional
 from datetime import datetime
@@ -12,17 +12,17 @@ __all__ = ["CategoryAssetsResponse", "CategoryAssetsResponseItem"]
 class CategoryAssetsResponseItem(BaseModel):
     id: str
 
-    created_at: datetime
-
-    is_owned: bool
-
-    logo_url: str
-
     name: str
 
     website: str
 
     alternate_domains: Optional[List[str]] = None
+
+    is_owned: bool
+
+    created_at: datetime
+
+    logo_url: str
 
 
 CategoryAssetsResponse: TypeAlias = List[CategoryAssetsResponseItem]

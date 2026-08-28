@@ -1,4 +1,4 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 from typing import List, Union
 from typing_extensions import Literal
@@ -9,7 +9,8 @@ __all__ = ["PromptTypeFilter"]
 
 
 class PromptTypeFilter(BaseModel):
-    """Filter by prompt type (visibility or sentiment).
+    """
+    Filter by prompt type (visibility or sentiment).
 
     .. deprecated::
         Use :class:`AnalysisTypeFilter` instead. ``prompt_type`` is normalised

@@ -1,4 +1,4 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 from __future__ import annotations
 
@@ -9,13 +9,6 @@ __all__ = ["PromptTypeFilter"]
 
 
 class PromptTypeFilter(TypedDict, total=False):
-    """Filter by prompt type (visibility or sentiment).
-
-    .. deprecated::
-        Use :class:`AnalysisTypeFilter` instead. ``prompt_type`` is normalised
-        to ``analysis_type`` at parse time.
-    """
-
     field: Required[Literal["prompt_type"]]
 
     operator: Required[

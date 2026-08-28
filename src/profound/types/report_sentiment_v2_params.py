@@ -1,13 +1,14 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 from __future__ import annotations
 
-from typing import Dict, List, Union, Iterable
+from typing import Dict, Iterable, List, Optional, Union
 from datetime import datetime
-from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
-
+from typing_extensions import Annotated, Literal, Required, TypeAlias, TypedDict
 from .._types import SequenceNotStr
+
 from .._utils import PropertyInfo
+
 from .shared_params.pagination import Pagination
 
 __all__ = [
@@ -29,29 +30,21 @@ __all__ = [
 
 
 class ReportSentimentV2Params(TypedDict, total=False):
-    asset_name: Required[str]
-
     category_id: Required[str]
 
-    end_date: Required[Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]]
-    """End date for the report.
-
-    Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
-    """
-
-    metrics: Required[List[Literal["sentiment", "occurrence"]]]
+    asset_name: Required[str]
 
     start_date: Required[Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]]
-    """Start date for the report.
+    """Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp."""
 
-    Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
-    """
+    end_date: Required[Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]]
+    """End date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp."""
 
-    comparison_end_date: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
-    """End of the previous period for delta computation."""
-
-    comparison_start_date: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
+    comparison_start_date: Annotated[Optional[Union[str, datetime]], PropertyInfo(format="iso8601")]
     """Start of the previous period for delta computation."""
+
+    comparison_end_date: Annotated[Optional[Union[str, datetime]], PropertyInfo(format="iso8601")]
+    """End of the previous period for delta computation."""
 
     date_bucket: Literal["day", "week", "month"]
     """Date bucket for the report. Only used when dimensions includes date."""
@@ -61,92 +54,38 @@ class ReportSentimentV2Params(TypedDict, total=False):
     ]
     """Dimensions to group the report by."""
 
+    metrics: Required[List[Literal["sentiment", "occurrence"]]]
+
     filters: Iterable[Filter]
     """List of filters to apply to the sentiment-v2 report."""
 
     order_by: Dict[str, Literal["asc", "desc"]]
-    """Custom ordering of report results.
-
-    Dimension keys must also be present in dimensions. The sentiment metric orders
-    by positive_sentiment.
-    """
+    """Custom ordering of report results. Dimension keys must also be present in dimensions. The sentiment metric orders by positive_sentiment."""
 
     pagination: Pagination
     """Pagination settings for the report results."""
 
 
-class FilterSentimentV2ModelIDFilter(TypedDict, total=False):
-    field: Required[Literal["model_id"]]
+class FilterSentimentV2SentimentFilter(TypedDict, total=False):
+    field: Required[Literal["sentiment"]]
+
+    operator: Required[Literal["is", "not_is", "in", "not_in"]]
+
+    value: Required[Union[Literal["positive", "negative"], List[Literal["positive", "negative"]]]]
+
+
+class FilterSentimentV2ClaimIDFilter(TypedDict, total=False):
+    field: Required[Literal["claim_id"]]
 
     operator: Required[Literal["is", "not_is", "in", "not_in"]]
 
     value: Required[Union[str, SequenceNotStr[str]]]
 
 
-class FilterSentimentV2RegionIDFilter(TypedDict, total=False):
-    field: Required[Literal["region_id"]]
+class FilterSentimentV2ThemeIDFilter(TypedDict, total=False):
+    field: Required[Literal["theme_id"]]
 
     operator: Required[Literal["is", "not_is", "in", "not_in"]]
-
-    value: Required[Union[str, SequenceNotStr[str]]]
-
-
-class FilterSentimentV2TopicIDFilter(TypedDict, total=False):
-    field: Required[Literal["topic_id"]]
-
-    operator: Required[Literal["is", "not_is", "in", "not_in"]]
-
-    value: Required[Union[str, SequenceNotStr[str]]]
-
-
-class FilterSentimentV2PromptIDFilter(TypedDict, total=False):
-    field: Required[Literal["prompt_id"]]
-
-    operator: Required[Literal["is", "not_is", "in", "not_in"]]
-
-    value: Required[Union[str, SequenceNotStr[str]]]
-
-
-class FilterSentimentV2PersonaIDFilter(TypedDict, total=False):
-    field: Required[Literal["persona_id"]]
-
-    operator: Required[Literal["is", "not_is", "in", "not_in"]]
-
-    value: Required[Union[str, SequenceNotStr[str]]]
-
-
-class FilterSentimentV2TagIDFilter(TypedDict, total=False):
-    field: Required[Literal["tag_id"]]
-
-    operator: Required[Literal["is", "not_is", "in", "not_in"]]
-
-    value: Required[Union[str, SequenceNotStr[str]]]
-
-
-class FilterSentimentV2RunIDFilter(TypedDict, total=False):
-    field: Required[Literal["run_id"]]
-
-    operator: Required[Literal["is", "not_is", "in", "not_in"]]
-
-    value: Required[Union[str, SequenceNotStr[str]]]
-
-
-class FilterSentimentV2ThemeFilter(TypedDict, total=False):
-    field: Required[Literal["theme"]]
-
-    operator: Required[
-        Literal[
-            "is",
-            "not_is",
-            "in",
-            "not_in",
-            "contains",
-            "not_contains",
-            "matches",
-            "contains_case_insensitive",
-            "not_contains_case_insensitive",
-        ]
-    ]
 
     value: Required[Union[str, SequenceNotStr[str]]]
 
@@ -171,41 +110,96 @@ class FilterSentimentV2ClaimFilter(TypedDict, total=False):
     value: Required[Union[str, SequenceNotStr[str]]]
 
 
-class FilterSentimentV2ThemeIDFilter(TypedDict, total=False):
-    field: Required[Literal["theme_id"]]
+class FilterSentimentV2ThemeFilter(TypedDict, total=False):
+    field: Required[Literal["theme"]]
+
+    operator: Required[
+        Literal[
+            "is",
+            "not_is",
+            "in",
+            "not_in",
+            "contains",
+            "not_contains",
+            "matches",
+            "contains_case_insensitive",
+            "not_contains_case_insensitive",
+        ]
+    ]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
+class FilterSentimentV2RunIDFilter(TypedDict, total=False):
+    field: Required[Literal["run_id"]]
 
     operator: Required[Literal["is", "not_is", "in", "not_in"]]
 
     value: Required[Union[str, SequenceNotStr[str]]]
 
 
-class FilterSentimentV2ClaimIDFilter(TypedDict, total=False):
-    field: Required[Literal["claim_id"]]
+class FilterSentimentV2TagIDFilter(TypedDict, total=False):
+    field: Required[Literal["tag_id"]]
 
     operator: Required[Literal["is", "not_is", "in", "not_in"]]
 
     value: Required[Union[str, SequenceNotStr[str]]]
 
 
-class FilterSentimentV2SentimentFilter(TypedDict, total=False):
-    field: Required[Literal["sentiment"]]
+class FilterSentimentV2PersonaIDFilter(TypedDict, total=False):
+    field: Required[Literal["persona_id"]]
 
     operator: Required[Literal["is", "not_is", "in", "not_in"]]
 
-    value: Required[Union[Literal["positive", "negative"], List[Literal["positive", "negative"]]]]
+    value: Required[Union[str, SequenceNotStr[str]]]
 
 
-Filter: TypeAlias = Union[
-    FilterSentimentV2ModelIDFilter,
-    FilterSentimentV2RegionIDFilter,
-    FilterSentimentV2TopicIDFilter,
-    FilterSentimentV2PromptIDFilter,
-    FilterSentimentV2PersonaIDFilter,
-    FilterSentimentV2TagIDFilter,
-    FilterSentimentV2RunIDFilter,
-    FilterSentimentV2ThemeFilter,
-    FilterSentimentV2ClaimFilter,
-    FilterSentimentV2ThemeIDFilter,
-    FilterSentimentV2ClaimIDFilter,
-    FilterSentimentV2SentimentFilter,
+class FilterSentimentV2PromptIDFilter(TypedDict, total=False):
+    field: Required[Literal["prompt_id"]]
+
+    operator: Required[Literal["is", "not_is", "in", "not_in"]]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
+class FilterSentimentV2TopicIDFilter(TypedDict, total=False):
+    field: Required[Literal["topic_id"]]
+
+    operator: Required[Literal["is", "not_is", "in", "not_in"]]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
+class FilterSentimentV2RegionIDFilter(TypedDict, total=False):
+    field: Required[Literal["region_id"]]
+
+    operator: Required[Literal["is", "not_is", "in", "not_in"]]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
+class FilterSentimentV2ModelIDFilter(TypedDict, total=False):
+    field: Required[Literal["model_id"]]
+
+    operator: Required[Literal["is", "not_is", "in", "not_in"]]
+
+    value: Required[Union[str, SequenceNotStr[str]]]
+
+
+Filter: TypeAlias = Annotated[
+    Union[
+        FilterSentimentV2ModelIDFilter,
+        FilterSentimentV2RegionIDFilter,
+        FilterSentimentV2TopicIDFilter,
+        FilterSentimentV2PromptIDFilter,
+        FilterSentimentV2PersonaIDFilter,
+        FilterSentimentV2TagIDFilter,
+        FilterSentimentV2RunIDFilter,
+        FilterSentimentV2ThemeFilter,
+        FilterSentimentV2ClaimFilter,
+        FilterSentimentV2ThemeIDFilter,
+        FilterSentimentV2ClaimIDFilter,
+        FilterSentimentV2SentimentFilter,
+    ],
+    PropertyInfo(discriminator="field"),
 ]

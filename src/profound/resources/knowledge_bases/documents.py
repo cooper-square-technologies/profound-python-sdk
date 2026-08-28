@@ -1,14 +1,13 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 from __future__ import annotations
 
-from typing import Mapping, Optional, cast
-
 import httpx
 
-from ..._files import deepcopy_with_paths
+from typing import Optional
+
 from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from ..._utils import extract_files, path_template, maybe_transform, async_maybe_transform
+from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -18,10 +17,10 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.knowledge_bases import document_create_params, document_delete_params, document_update_params
 from ...types.knowledge_bases.document_create_response import DocumentCreateResponse
-from ...types.knowledge_bases.document_delete_response import DocumentDeleteResponse
+from ...types.knowledge_bases import document_create_params, document_update_params, document_delete_params
 from ...types.knowledge_bases.document_update_response import DocumentUpdateResponse
+from ...types.knowledge_bases.document_delete_response import DocumentDeleteResponse
 
 __all__ = ["DocumentsResource", "AsyncDocumentsResource"]
 
@@ -29,21 +28,10 @@ __all__ = ["DocumentsResource", "AsyncDocumentsResource"]
 class DocumentsResource(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> DocumentsResourceWithRawResponse:
-        """
-        This property can be used as a prefix for any HTTP method call to return
-        the raw response object instead of the parsed content.
-
-        For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#accessing-raw-response-data-eg-headers
-        """
         return DocumentsResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> DocumentsResourceWithStreamingResponse:
-        """
-        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
-
-        For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#with_streaming_response
-        """
         return DocumentsResourceWithStreamingResponse(self)
 
     def create(
@@ -52,8 +40,8 @@ class DocumentsResource(SyncAPIResource):
         *,
         name: str,
         text: str,
-        organization_id: Optional[str] | Omit = omit,
         folder: Optional[str] | Omit = omit,
+        organization_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -65,44 +53,42 @@ class DocumentsResource(SyncAPIResource):
         Add a document to a knowledge base using JSON text or multipart file upload.
 
         Args:
-          knowledge_base_id: Unique knowledge base ID.
+            knowledge_base_id: Unique knowledge base ID.
+            name: Unique document name.
+            text: Text content to add to the document.
+            folder: Folder path to add the document under.
+            organization_id: Organization scope for API keys that can access multiple organizations.
+            extra_headers: Send extra headers with the request.
+            extra_query: Send extra query parameters with the request.
+            extra_body: Send extra JSON properties with the request.
+            timeout: Override the client-level default timeout for this request, in seconds.
 
-          name: Unique document name.
+        Returns:
+            DocumentCreateResponse: Successful Response
 
-          text: Text content to add to the document.
-
-          organization_id: Organization scope for API keys that can access multiple organizations.
-
-          folder: Folder path to add the document under.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
+        Example:
+            ```python
+            document = client.knowledge_bases.documents.create(
+                knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+                name="x",
+                text="x",
+            )
+            ```
         """
-        if not knowledge_base_id:
+        if knowledge_base_id is None or (isinstance(knowledge_base_id, str) and not knowledge_base_id):
             raise ValueError(f"Expected a non-empty value for `knowledge_base_id` but received {knowledge_base_id!r}")
-        body = deepcopy_with_paths(
-            {
-                "name": name,
-                "text": text,
-                "folder": folder,
-            },
-            [["file"]],
-        )
-        files = extract_files(cast(Mapping[str, object], body), paths=[["file"]])
-        if files:
-            # It should be noted that the actual Content-Type header that will be
-            # sent to the server will contain a `boundary` parameter, e.g.
-            # multipart/form-data; boundary=---abc--
-            extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
         return self._post(
-            path_template("/v1/knowledge-bases/{knowledge_base_id}/documents", knowledge_base_id=knowledge_base_id),
-            body=maybe_transform(body, document_create_params.DocumentCreateParams),
-            files=files,
+            path_template(
+                "/v1/knowledge-bases/{knowledge_base_id}/documents", **{"knowledge_base_id": knowledge_base_id}
+            ),
+            body=maybe_transform(
+                {
+                    "name": name,
+                    "text": text,
+                    "folder": folder,
+                },
+                document_create_params.DocumentCreateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -121,8 +107,8 @@ class DocumentsResource(SyncAPIResource):
         *,
         name: str,
         text: str,
-        organization_id: Optional[str] | Omit = omit,
         folder: Optional[str] | Omit = omit,
+        organization_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -134,44 +120,42 @@ class DocumentsResource(SyncAPIResource):
         Overwrite a knowledge base document using JSON text or multipart file upload.
 
         Args:
-          knowledge_base_id: Unique knowledge base ID.
+            knowledge_base_id: Unique knowledge base ID.
+            name: Document name or path to update.
+            text: Replacement text content for the document.
+            folder: Folder path containing the document.
+            organization_id: Organization scope for API keys that can access multiple organizations.
+            extra_headers: Send extra headers with the request.
+            extra_query: Send extra query parameters with the request.
+            extra_body: Send extra JSON properties with the request.
+            timeout: Override the client-level default timeout for this request, in seconds.
 
-          name: Document name or path to update.
+        Returns:
+            DocumentUpdateResponse: Successful Response
 
-          text: Replacement text content for the document.
-
-          organization_id: Organization scope for API keys that can access multiple organizations.
-
-          folder: Folder path containing the document.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
+        Example:
+            ```python
+            document = client.knowledge_bases.documents.update(
+                knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+                name="x",
+                text="x",
+            )
+            ```
         """
-        if not knowledge_base_id:
+        if knowledge_base_id is None or (isinstance(knowledge_base_id, str) and not knowledge_base_id):
             raise ValueError(f"Expected a non-empty value for `knowledge_base_id` but received {knowledge_base_id!r}")
-        body = deepcopy_with_paths(
-            {
-                "name": name,
-                "text": text,
-                "folder": folder,
-            },
-            [["file"]],
-        )
-        files = extract_files(cast(Mapping[str, object], body), paths=[["file"]])
-        if files:
-            # It should be noted that the actual Content-Type header that will be
-            # sent to the server will contain a `boundary` parameter, e.g.
-            # multipart/form-data; boundary=---abc--
-            extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
         return self._put(
-            path_template("/v1/knowledge-bases/{knowledge_base_id}/documents", knowledge_base_id=knowledge_base_id),
-            body=maybe_transform(body, document_update_params.DocumentUpdateParams),
-            files=files,
+            path_template(
+                "/v1/knowledge-bases/{knowledge_base_id}/documents", **{"knowledge_base_id": knowledge_base_id}
+            ),
+            body=maybe_transform(
+                {
+                    "name": name,
+                    "text": text,
+                    "folder": folder,
+                },
+                document_update_params.DocumentUpdateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -201,25 +185,35 @@ class DocumentsResource(SyncAPIResource):
         Delete an existing document from a knowledge base.
 
         Args:
-          knowledge_base_id: Unique knowledge base ID.
+            knowledge_base_id: Unique knowledge base ID.
+            name: Document path to delete.
+            organization_id: Organization scope for API keys that can access multiple organizations.
+            extra_headers: Send extra headers with the request.
+            extra_query: Send extra query parameters with the request.
+            extra_body: Send extra JSON properties with the request.
+            timeout: Override the client-level default timeout for this request, in seconds.
 
-          name: Document path to delete.
+        Returns:
+            DocumentDeleteResponse: Successful Response
 
-          organization_id: Organization scope for API keys that can access multiple organizations.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
+        Example:
+            ```python
+            document = client.knowledge_bases.documents.delete(
+                knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+                name="x",
+            )
+            ```
         """
-        if not knowledge_base_id:
+        if knowledge_base_id is None or (isinstance(knowledge_base_id, str) and not knowledge_base_id):
             raise ValueError(f"Expected a non-empty value for `knowledge_base_id` but received {knowledge_base_id!r}")
         return self._delete(
-            path_template("/v1/knowledge-bases/{knowledge_base_id}/documents", knowledge_base_id=knowledge_base_id),
-            body=maybe_transform({"name": name}, document_delete_params.DocumentDeleteParams),
+            path_template(
+                "/v1/knowledge-bases/{knowledge_base_id}/documents", **{"knowledge_base_id": knowledge_base_id}
+            ),
+            body=maybe_transform(
+                {"name": name},
+                document_delete_params.DocumentDeleteParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -236,21 +230,10 @@ class DocumentsResource(SyncAPIResource):
 class AsyncDocumentsResource(AsyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AsyncDocumentsResourceWithRawResponse:
-        """
-        This property can be used as a prefix for any HTTP method call to return
-        the raw response object instead of the parsed content.
-
-        For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#accessing-raw-response-data-eg-headers
-        """
         return AsyncDocumentsResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> AsyncDocumentsResourceWithStreamingResponse:
-        """
-        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
-
-        For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#with_streaming_response
-        """
         return AsyncDocumentsResourceWithStreamingResponse(self)
 
     async def create(
@@ -259,8 +242,8 @@ class AsyncDocumentsResource(AsyncAPIResource):
         *,
         name: str,
         text: str,
-        organization_id: Optional[str] | Omit = omit,
         folder: Optional[str] | Omit = omit,
+        organization_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -272,44 +255,42 @@ class AsyncDocumentsResource(AsyncAPIResource):
         Add a document to a knowledge base using JSON text or multipart file upload.
 
         Args:
-          knowledge_base_id: Unique knowledge base ID.
+            knowledge_base_id: Unique knowledge base ID.
+            name: Unique document name.
+            text: Text content to add to the document.
+            folder: Folder path to add the document under.
+            organization_id: Organization scope for API keys that can access multiple organizations.
+            extra_headers: Send extra headers with the request.
+            extra_query: Send extra query parameters with the request.
+            extra_body: Send extra JSON properties with the request.
+            timeout: Override the client-level default timeout for this request, in seconds.
 
-          name: Unique document name.
+        Returns:
+            DocumentCreateResponse: Successful Response
 
-          text: Text content to add to the document.
-
-          organization_id: Organization scope for API keys that can access multiple organizations.
-
-          folder: Folder path to add the document under.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
+        Example:
+            ```python
+            document = await client.knowledge_bases.documents.create(
+                knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+                name="x",
+                text="x",
+            )
+            ```
         """
-        if not knowledge_base_id:
+        if knowledge_base_id is None or (isinstance(knowledge_base_id, str) and not knowledge_base_id):
             raise ValueError(f"Expected a non-empty value for `knowledge_base_id` but received {knowledge_base_id!r}")
-        body = deepcopy_with_paths(
-            {
-                "name": name,
-                "text": text,
-                "folder": folder,
-            },
-            [["file"]],
-        )
-        files = extract_files(cast(Mapping[str, object], body), paths=[["file"]])
-        if files:
-            # It should be noted that the actual Content-Type header that will be
-            # sent to the server will contain a `boundary` parameter, e.g.
-            # multipart/form-data; boundary=---abc--
-            extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
         return await self._post(
-            path_template("/v1/knowledge-bases/{knowledge_base_id}/documents", knowledge_base_id=knowledge_base_id),
-            body=await async_maybe_transform(body, document_create_params.DocumentCreateParams),
-            files=files,
+            path_template(
+                "/v1/knowledge-bases/{knowledge_base_id}/documents", **{"knowledge_base_id": knowledge_base_id}
+            ),
+            body=await async_maybe_transform(
+                {
+                    "name": name,
+                    "text": text,
+                    "folder": folder,
+                },
+                document_create_params.DocumentCreateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -328,8 +309,8 @@ class AsyncDocumentsResource(AsyncAPIResource):
         *,
         name: str,
         text: str,
-        organization_id: Optional[str] | Omit = omit,
         folder: Optional[str] | Omit = omit,
+        organization_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -341,44 +322,42 @@ class AsyncDocumentsResource(AsyncAPIResource):
         Overwrite a knowledge base document using JSON text or multipart file upload.
 
         Args:
-          knowledge_base_id: Unique knowledge base ID.
+            knowledge_base_id: Unique knowledge base ID.
+            name: Document name or path to update.
+            text: Replacement text content for the document.
+            folder: Folder path containing the document.
+            organization_id: Organization scope for API keys that can access multiple organizations.
+            extra_headers: Send extra headers with the request.
+            extra_query: Send extra query parameters with the request.
+            extra_body: Send extra JSON properties with the request.
+            timeout: Override the client-level default timeout for this request, in seconds.
 
-          name: Document name or path to update.
+        Returns:
+            DocumentUpdateResponse: Successful Response
 
-          text: Replacement text content for the document.
-
-          organization_id: Organization scope for API keys that can access multiple organizations.
-
-          folder: Folder path containing the document.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
+        Example:
+            ```python
+            document = await client.knowledge_bases.documents.update(
+                knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+                name="x",
+                text="x",
+            )
+            ```
         """
-        if not knowledge_base_id:
+        if knowledge_base_id is None or (isinstance(knowledge_base_id, str) and not knowledge_base_id):
             raise ValueError(f"Expected a non-empty value for `knowledge_base_id` but received {knowledge_base_id!r}")
-        body = deepcopy_with_paths(
-            {
-                "name": name,
-                "text": text,
-                "folder": folder,
-            },
-            [["file"]],
-        )
-        files = extract_files(cast(Mapping[str, object], body), paths=[["file"]])
-        if files:
-            # It should be noted that the actual Content-Type header that will be
-            # sent to the server will contain a `boundary` parameter, e.g.
-            # multipart/form-data; boundary=---abc--
-            extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
         return await self._put(
-            path_template("/v1/knowledge-bases/{knowledge_base_id}/documents", knowledge_base_id=knowledge_base_id),
-            body=await async_maybe_transform(body, document_update_params.DocumentUpdateParams),
-            files=files,
+            path_template(
+                "/v1/knowledge-bases/{knowledge_base_id}/documents", **{"knowledge_base_id": knowledge_base_id}
+            ),
+            body=await async_maybe_transform(
+                {
+                    "name": name,
+                    "text": text,
+                    "folder": folder,
+                },
+                document_update_params.DocumentUpdateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -408,25 +387,35 @@ class AsyncDocumentsResource(AsyncAPIResource):
         Delete an existing document from a knowledge base.
 
         Args:
-          knowledge_base_id: Unique knowledge base ID.
+            knowledge_base_id: Unique knowledge base ID.
+            name: Document path to delete.
+            organization_id: Organization scope for API keys that can access multiple organizations.
+            extra_headers: Send extra headers with the request.
+            extra_query: Send extra query parameters with the request.
+            extra_body: Send extra JSON properties with the request.
+            timeout: Override the client-level default timeout for this request, in seconds.
 
-          name: Document path to delete.
+        Returns:
+            DocumentDeleteResponse: Successful Response
 
-          organization_id: Organization scope for API keys that can access multiple organizations.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
+        Example:
+            ```python
+            document = await client.knowledge_bases.documents.delete(
+                knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+                name="x",
+            )
+            ```
         """
-        if not knowledge_base_id:
+        if knowledge_base_id is None or (isinstance(knowledge_base_id, str) and not knowledge_base_id):
             raise ValueError(f"Expected a non-empty value for `knowledge_base_id` but received {knowledge_base_id!r}")
         return await self._delete(
-            path_template("/v1/knowledge-bases/{knowledge_base_id}/documents", knowledge_base_id=knowledge_base_id),
-            body=await async_maybe_transform({"name": name}, document_delete_params.DocumentDeleteParams),
+            path_template(
+                "/v1/knowledge-bases/{knowledge_base_id}/documents", **{"knowledge_base_id": knowledge_base_id}
+            ),
+            body=await async_maybe_transform(
+                {"name": name},
+                document_delete_params.DocumentDeleteParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,

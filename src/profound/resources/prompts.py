@@ -1,14 +1,13 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 from __future__ import annotations
 
-from typing import Any, List, Union, Iterable, Optional, cast
+import httpx
+
+from typing import Iterable, List, Optional, Union
 from datetime import datetime
 from typing_extensions import Literal
 
-import httpx
-
-from ..types import prompt_answers_params, prompt_answers_v2_params, prompt_stream_answers_v2_params
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -19,10 +18,11 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from .._streaming import Stream, AsyncStream
 from .._base_client import make_request_options
+from .._streaming import Stream, AsyncStream
 from ..types.prompt_answers_response import PromptAnswersResponse
 from ..types.shared_params.pagination import Pagination
+from ..types import prompt_answers_params, prompt_answers_v2_params, prompt_stream_answers_v2_params
 from ..types.prompt_answers_v2_response import PromptAnswersV2Response
 from ..types.prompt_stream_answers_v2_response import PromptStreamAnswersV2Response
 
@@ -32,32 +32,21 @@ __all__ = ["PromptsResource", "AsyncPromptsResource"]
 class PromptsResource(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> PromptsResourceWithRawResponse:
-        """
-        This property can be used as a prefix for any HTTP method call to return
-        the raw response object instead of the parsed content.
-
-        For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#accessing-raw-response-data-eg-headers
-        """
         return PromptsResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> PromptsResourceWithStreamingResponse:
-        """
-        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
-
-        For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#with_streaming_response
-        """
         return PromptsResourceWithStreamingResponse(self)
 
     def answers(
         self,
         *,
         category_id: str,
-        end_date: Union[str, datetime],
         start_date: Union[str, datetime],
+        end_date: Union[str, datetime],
+        pagination: Pagination | Omit = omit,
         filters: Iterable[prompt_answers_params.Filter] | Omit = omit,
         include: prompt_answers_params.Include | Omit = omit,
-        pagination: Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -69,28 +58,39 @@ class PromptsResource(SyncAPIResource):
         Get Answers
 
         Args:
-          filters: List of filters to apply to the answers report.
+            category_id: Body parameter.
+            start_date: Body parameter.
+            end_date: Body parameter.
+            pagination: Pagination parameters for the results. Default is 10,000 rows with no offset.
+            filters: List of filters to apply to the answers report.
+            include: Body parameter.
+            extra_headers: Send extra headers with the request.
+            extra_query: Send extra query parameters with the request.
+            extra_body: Send extra JSON properties with the request.
+            timeout: Override the client-level default timeout for this request, in seconds.
 
-          pagination: Pagination parameters for the results. Default is 10,000 rows with no offset.
+        Returns:
+            PromptAnswersResponse: Successful Response
 
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
+        Example:
+            ```python
+            prompt = client.prompts.answers(
+                category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+                start_date="2024-01-01T00:00:00.000Z",
+                end_date="2024-01-01T00:00:00.000Z",
+            )
+            ```
         """
         return self._post(
             "/v1/prompts/answers",
             body=maybe_transform(
                 {
                     "category_id": category_id,
-                    "end_date": end_date,
                     "start_date": start_date,
+                    "end_date": end_date,
+                    "pagination": pagination,
                     "filters": filters,
                     "include": include,
-                    "pagination": pagination,
                 },
                 prompt_answers_params.PromptAnswersParams,
             ),
@@ -104,10 +104,8 @@ class PromptsResource(SyncAPIResource):
         self,
         *,
         category_id: str,
-        end_date: str,
         start_date: str,
-        cursor: Optional[str] | Omit = omit,
-        filter: Optional[prompt_answers_v2_params.Filter] | Omit = omit,
+        end_date: str,
         include: Optional[
             List[
                 Literal[
@@ -132,8 +130,10 @@ class PromptsResource(SyncAPIResource):
             ]
         ]
         | Omit = omit,
+        filter: Optional[prompt_answers_v2_params.Filter] | Omit = omit,
         limit: Optional[int] | Omit = omit,
         max_results: Optional[int] | Omit = omit,
+        cursor: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -145,42 +145,43 @@ class PromptsResource(SyncAPIResource):
         Query Answers V2
 
         Args:
-          end_date: YYYY-MM-DD, ET, inclusive
+            category_id: Body parameter.
+            start_date: YYYY-MM-DD, ET, inclusive
+            end_date: YYYY-MM-DD, ET, inclusive
+            include: Which row fields to return: `run_id`, `date`, `model`, `topic`, `topic_id`, `region`, `persona`, `tags`, `prompt`, `prompt_id`, `response`, `mentions`, `citations`, `citation_details`, `search_queries`, `analysis_types`, `sentiment_claims`. Omit for all fields except `citation_details`, which must be requested explicitly because it is expensive.
+            filter: and/or/not tree over `model`, `topic`, `region`, `persona`, `prompt`, `tag`, `analysis_type` (visibility/sentiment/factcheck); plus top-level `and` leaves `domain` or `page` (`is` one value, or `in` a list). Substring-search the prompt with `{"field": "prompt", "op": "contains", "value": "…"}`.
+            limit: Page size; default 10, max 200.
+            max_results: Stream endpoint only: cap the number of streamed rows (default: all).
+            cursor: Body parameter.
+            extra_headers: Send extra headers with the request.
+            extra_query: Send extra query parameters with the request.
+            extra_body: Send extra JSON properties with the request.
+            timeout: Override the client-level default timeout for this request, in seconds.
 
-          start_date: YYYY-MM-DD, ET, inclusive
+        Returns:
+            PromptAnswersV2Response: Successful Response
 
-          filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
-
-          include: Which row fields to return: `run_id`, `date`, `model`, `topic`, `topic_id`,
-              `region`, `persona`, `tags`, `prompt`, `prompt_id`, `response`, `mentions`,
-              `citations`, `citation_details`, `search_queries`, `analysis_types`,
-              `sentiment_claims`. Omit for all fields except `citation_details`, which must be
-              requested explicitly because it is expensive.
-
-          limit: Page size; default 10, max 200.
-
-          max_results: Stream endpoint only: cap the number of streamed rows (default: all).
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
+        Example:
+            ```python
+            prompt = client.prompts.answers_v2(
+                category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+                start_date="",
+                end_date="",
+            )
+            ```
         """
         return self._post(
             "/v2/prompts/answers",
             body=maybe_transform(
                 {
                     "category_id": category_id,
-                    "end_date": end_date,
                     "start_date": start_date,
-                    "cursor": cursor,
-                    "filter": filter,
+                    "end_date": end_date,
                     "include": include,
+                    "filter": filter,
                     "limit": limit,
                     "max_results": max_results,
+                    "cursor": cursor,
                 },
                 prompt_answers_v2_params.PromptAnswersV2Params,
             ),
@@ -194,10 +195,8 @@ class PromptsResource(SyncAPIResource):
         self,
         *,
         category_id: str,
-        end_date: str,
         start_date: str,
-        cursor: Optional[str] | Omit = omit,
-        filter: Optional[prompt_stream_answers_v2_params.Filter] | Omit = omit,
+        end_date: str,
         include: Optional[
             List[
                 Literal[
@@ -222,8 +221,10 @@ class PromptsResource(SyncAPIResource):
             ]
         ]
         | Omit = omit,
+        filter: Optional[prompt_stream_answers_v2_params.Filter] | Omit = omit,
         limit: Optional[int] | Omit = omit,
         max_results: Optional[int] | Omit = omit,
+        cursor: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -235,29 +236,33 @@ class PromptsResource(SyncAPIResource):
         Stream Answers V2
 
         Args:
-          end_date: YYYY-MM-DD, ET, inclusive
+            category_id: Body parameter.
+            start_date: YYYY-MM-DD, ET, inclusive
+            end_date: YYYY-MM-DD, ET, inclusive
+            include: Which row fields to return: `run_id`, `date`, `model`, `topic`, `topic_id`, `region`, `persona`, `tags`, `prompt`, `prompt_id`, `response`, `mentions`, `citations`, `citation_details`, `search_queries`, `analysis_types`, `sentiment_claims`. Omit for all fields except `citation_details`, which must be requested explicitly because it is expensive.
+            filter: and/or/not tree over `model`, `topic`, `region`, `persona`, `prompt`, `tag`, `analysis_type` (visibility/sentiment/factcheck); plus top-level `and` leaves `domain` or `page` (`is` one value, or `in` a list). Substring-search the prompt with `{"field": "prompt", "op": "contains", "value": "…"}`.
+            limit: Page size; default 10, max 200.
+            max_results: Stream endpoint only: cap the number of streamed rows (default: all).
+            cursor: Body parameter.
+            extra_headers: Send extra headers with the request.
+            extra_query: Send extra query parameters with the request.
+            extra_body: Send extra JSON properties with the request.
+            timeout: Override the client-level default timeout for this request, in seconds.
 
-          start_date: YYYY-MM-DD, ET, inclusive
+        Returns:
+            Stream[PromptStreamAnswersV2Response]: Server-sent events stream. Emits one `summary` event (the report `info` block) first, then one `result` event per row.
 
-          filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
+        Example:
+            ```python
+            stream = client.prompts.stream_answers_v2(
+                category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+                start_date="",
+                end_date="",
+            )
 
-          include: Which row fields to return: `run_id`, `date`, `model`, `topic`, `topic_id`,
-              `region`, `persona`, `tags`, `prompt`, `prompt_id`, `response`, `mentions`,
-              `citations`, `citation_details`, `search_queries`, `analysis_types`,
-              `sentiment_claims`. Omit for all fields except `citation_details`, which must be
-              requested explicitly because it is expensive.
-
-          limit: Page size; default 10, max 200.
-
-          max_results: Stream endpoint only: cap the number of streamed rows (default: all).
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
+            for event in stream:
+                print(event)
+            ```
         """
         extra_headers = {"Accept": "text/event-stream", **(extra_headers or {})}
         return self._post(
@@ -265,22 +270,20 @@ class PromptsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "category_id": category_id,
-                    "end_date": end_date,
                     "start_date": start_date,
-                    "cursor": cursor,
-                    "filter": filter,
+                    "end_date": end_date,
                     "include": include,
+                    "filter": filter,
                     "limit": limit,
                     "max_results": max_results,
+                    "cursor": cursor,
                 },
                 prompt_stream_answers_v2_params.PromptStreamAnswersV2Params,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=cast(
-                Any, PromptStreamAnswersV2Response
-            ),  # Union types cannot be passed in as arguments in the type system
+            cast_to=PromptStreamAnswersV2Response,
             stream=True,
             stream_cls=Stream[PromptStreamAnswersV2Response],
         )
@@ -289,32 +292,21 @@ class PromptsResource(SyncAPIResource):
 class AsyncPromptsResource(AsyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AsyncPromptsResourceWithRawResponse:
-        """
-        This property can be used as a prefix for any HTTP method call to return
-        the raw response object instead of the parsed content.
-
-        For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#accessing-raw-response-data-eg-headers
-        """
         return AsyncPromptsResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> AsyncPromptsResourceWithStreamingResponse:
-        """
-        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
-
-        For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#with_streaming_response
-        """
         return AsyncPromptsResourceWithStreamingResponse(self)
 
     async def answers(
         self,
         *,
         category_id: str,
-        end_date: Union[str, datetime],
         start_date: Union[str, datetime],
+        end_date: Union[str, datetime],
+        pagination: Pagination | Omit = omit,
         filters: Iterable[prompt_answers_params.Filter] | Omit = omit,
         include: prompt_answers_params.Include | Omit = omit,
-        pagination: Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -326,28 +318,39 @@ class AsyncPromptsResource(AsyncAPIResource):
         Get Answers
 
         Args:
-          filters: List of filters to apply to the answers report.
+            category_id: Body parameter.
+            start_date: Body parameter.
+            end_date: Body parameter.
+            pagination: Pagination parameters for the results. Default is 10,000 rows with no offset.
+            filters: List of filters to apply to the answers report.
+            include: Body parameter.
+            extra_headers: Send extra headers with the request.
+            extra_query: Send extra query parameters with the request.
+            extra_body: Send extra JSON properties with the request.
+            timeout: Override the client-level default timeout for this request, in seconds.
 
-          pagination: Pagination parameters for the results. Default is 10,000 rows with no offset.
+        Returns:
+            PromptAnswersResponse: Successful Response
 
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
+        Example:
+            ```python
+            prompt = await client.prompts.answers(
+                category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+                start_date="2024-01-01T00:00:00.000Z",
+                end_date="2024-01-01T00:00:00.000Z",
+            )
+            ```
         """
         return await self._post(
             "/v1/prompts/answers",
             body=await async_maybe_transform(
                 {
                     "category_id": category_id,
-                    "end_date": end_date,
                     "start_date": start_date,
+                    "end_date": end_date,
+                    "pagination": pagination,
                     "filters": filters,
                     "include": include,
-                    "pagination": pagination,
                 },
                 prompt_answers_params.PromptAnswersParams,
             ),
@@ -361,10 +364,8 @@ class AsyncPromptsResource(AsyncAPIResource):
         self,
         *,
         category_id: str,
-        end_date: str,
         start_date: str,
-        cursor: Optional[str] | Omit = omit,
-        filter: Optional[prompt_answers_v2_params.Filter] | Omit = omit,
+        end_date: str,
         include: Optional[
             List[
                 Literal[
@@ -389,8 +390,10 @@ class AsyncPromptsResource(AsyncAPIResource):
             ]
         ]
         | Omit = omit,
+        filter: Optional[prompt_answers_v2_params.Filter] | Omit = omit,
         limit: Optional[int] | Omit = omit,
         max_results: Optional[int] | Omit = omit,
+        cursor: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -402,42 +405,43 @@ class AsyncPromptsResource(AsyncAPIResource):
         Query Answers V2
 
         Args:
-          end_date: YYYY-MM-DD, ET, inclusive
+            category_id: Body parameter.
+            start_date: YYYY-MM-DD, ET, inclusive
+            end_date: YYYY-MM-DD, ET, inclusive
+            include: Which row fields to return: `run_id`, `date`, `model`, `topic`, `topic_id`, `region`, `persona`, `tags`, `prompt`, `prompt_id`, `response`, `mentions`, `citations`, `citation_details`, `search_queries`, `analysis_types`, `sentiment_claims`. Omit for all fields except `citation_details`, which must be requested explicitly because it is expensive.
+            filter: and/or/not tree over `model`, `topic`, `region`, `persona`, `prompt`, `tag`, `analysis_type` (visibility/sentiment/factcheck); plus top-level `and` leaves `domain` or `page` (`is` one value, or `in` a list). Substring-search the prompt with `{"field": "prompt", "op": "contains", "value": "…"}`.
+            limit: Page size; default 10, max 200.
+            max_results: Stream endpoint only: cap the number of streamed rows (default: all).
+            cursor: Body parameter.
+            extra_headers: Send extra headers with the request.
+            extra_query: Send extra query parameters with the request.
+            extra_body: Send extra JSON properties with the request.
+            timeout: Override the client-level default timeout for this request, in seconds.
 
-          start_date: YYYY-MM-DD, ET, inclusive
+        Returns:
+            PromptAnswersV2Response: Successful Response
 
-          filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
-
-          include: Which row fields to return: `run_id`, `date`, `model`, `topic`, `topic_id`,
-              `region`, `persona`, `tags`, `prompt`, `prompt_id`, `response`, `mentions`,
-              `citations`, `citation_details`, `search_queries`, `analysis_types`,
-              `sentiment_claims`. Omit for all fields except `citation_details`, which must be
-              requested explicitly because it is expensive.
-
-          limit: Page size; default 10, max 200.
-
-          max_results: Stream endpoint only: cap the number of streamed rows (default: all).
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
+        Example:
+            ```python
+            prompt = await client.prompts.answers_v2(
+                category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+                start_date="",
+                end_date="",
+            )
+            ```
         """
         return await self._post(
             "/v2/prompts/answers",
             body=await async_maybe_transform(
                 {
                     "category_id": category_id,
-                    "end_date": end_date,
                     "start_date": start_date,
-                    "cursor": cursor,
-                    "filter": filter,
+                    "end_date": end_date,
                     "include": include,
+                    "filter": filter,
                     "limit": limit,
                     "max_results": max_results,
+                    "cursor": cursor,
                 },
                 prompt_answers_v2_params.PromptAnswersV2Params,
             ),
@@ -451,10 +455,8 @@ class AsyncPromptsResource(AsyncAPIResource):
         self,
         *,
         category_id: str,
-        end_date: str,
         start_date: str,
-        cursor: Optional[str] | Omit = omit,
-        filter: Optional[prompt_stream_answers_v2_params.Filter] | Omit = omit,
+        end_date: str,
         include: Optional[
             List[
                 Literal[
@@ -479,8 +481,10 @@ class AsyncPromptsResource(AsyncAPIResource):
             ]
         ]
         | Omit = omit,
+        filter: Optional[prompt_stream_answers_v2_params.Filter] | Omit = omit,
         limit: Optional[int] | Omit = omit,
         max_results: Optional[int] | Omit = omit,
+        cursor: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -492,29 +496,33 @@ class AsyncPromptsResource(AsyncAPIResource):
         Stream Answers V2
 
         Args:
-          end_date: YYYY-MM-DD, ET, inclusive
+            category_id: Body parameter.
+            start_date: YYYY-MM-DD, ET, inclusive
+            end_date: YYYY-MM-DD, ET, inclusive
+            include: Which row fields to return: `run_id`, `date`, `model`, `topic`, `topic_id`, `region`, `persona`, `tags`, `prompt`, `prompt_id`, `response`, `mentions`, `citations`, `citation_details`, `search_queries`, `analysis_types`, `sentiment_claims`. Omit for all fields except `citation_details`, which must be requested explicitly because it is expensive.
+            filter: and/or/not tree over `model`, `topic`, `region`, `persona`, `prompt`, `tag`, `analysis_type` (visibility/sentiment/factcheck); plus top-level `and` leaves `domain` or `page` (`is` one value, or `in` a list). Substring-search the prompt with `{"field": "prompt", "op": "contains", "value": "…"}`.
+            limit: Page size; default 10, max 200.
+            max_results: Stream endpoint only: cap the number of streamed rows (default: all).
+            cursor: Body parameter.
+            extra_headers: Send extra headers with the request.
+            extra_query: Send extra query parameters with the request.
+            extra_body: Send extra JSON properties with the request.
+            timeout: Override the client-level default timeout for this request, in seconds.
 
-          start_date: YYYY-MM-DD, ET, inclusive
+        Returns:
+            AsyncStream[PromptStreamAnswersV2Response]: Server-sent events stream. Emits one `summary` event (the report `info` block) first, then one `result` event per row.
 
-          filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
+        Example:
+            ```python
+            stream = await client.prompts.stream_answers_v2(
+                category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+                start_date="",
+                end_date="",
+            )
 
-          include: Which row fields to return: `run_id`, `date`, `model`, `topic`, `topic_id`,
-              `region`, `persona`, `tags`, `prompt`, `prompt_id`, `response`, `mentions`,
-              `citations`, `citation_details`, `search_queries`, `analysis_types`,
-              `sentiment_claims`. Omit for all fields except `citation_details`, which must be
-              requested explicitly because it is expensive.
-
-          limit: Page size; default 10, max 200.
-
-          max_results: Stream endpoint only: cap the number of streamed rows (default: all).
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
+            async for event in stream:
+                print(event)
+            ```
         """
         extra_headers = {"Accept": "text/event-stream", **(extra_headers or {})}
         return await self._post(
@@ -522,22 +530,20 @@ class AsyncPromptsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "category_id": category_id,
-                    "end_date": end_date,
                     "start_date": start_date,
-                    "cursor": cursor,
-                    "filter": filter,
+                    "end_date": end_date,
                     "include": include,
+                    "filter": filter,
                     "limit": limit,
                     "max_results": max_results,
+                    "cursor": cursor,
                 },
                 prompt_stream_answers_v2_params.PromptStreamAnswersV2Params,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=cast(
-                Any, PromptStreamAnswersV2Response
-            ),  # Union types cannot be passed in as arguments in the type system
+            cast_to=PromptStreamAnswersV2Response,
             stream=True,
             stream_cls=AsyncStream[PromptStreamAnswersV2Response],
         )

@@ -1,4 +1,4 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 from __future__ import annotations
 
@@ -9,12 +9,6 @@ __all__ = ["IDOrNameParam"]
 
 
 class IDOrNameParam(TypedDict, total=False):
-    """Reference by id, name, or both.
-
-    Plain strings work too:
-    UUIDs become id lookups, other strings become name lookups.
-    """
-
     id: Optional[str]
     """UUID of the resource."""
 

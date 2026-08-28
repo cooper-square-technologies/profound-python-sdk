@@ -56,10 +56,41 @@ class Stream(Generic[_T]):
         response = self.response
         process_data = self._client._process_response_data
         iterator = self._iter_events()
+        content_type = (response.headers.get("content-type") or "").lower()
+        is_jsonl = "json" in content_type and "event-stream" not in content_type
 
         try:
+            if is_jsonl:
+                # Newline-delimited JSON (`application/jsonl`,
+                # `application/x-jsonl`, etc.) has no SSE framing, so the
+                # `_decoder.iter_bytes` path above would never yield. We
+                # parse each non-empty line as one event so callers can
+                # iterate without caring whether the wire format is SSE
+                # or JSONL.
+                buffer = b""
+                for chunk in response.iter_bytes():
+                    if not chunk:
+                        continue
+                    buffer += chunk
+                    while b"\n" in buffer:
+                        line, buffer = buffer.split(b"\n", 1)
+                        text = line.decode("utf-8").strip()
+                        if not text:
+                            continue
+                        yield process_data(data=json.loads(text), cast_to=cast_to, response=response)
+                tail = buffer.decode("utf-8").strip()
+                if tail:
+                    yield process_data(data=json.loads(tail), cast_to=cast_to, response=response)
+                return
+
             for sse in iterator:
-                yield process_data(data=sse.json(), cast_to=cast_to, response=response)
+                if not sse.data:
+                    continue
+                try:
+                    payload = sse.json()
+                except Exception:
+                    payload = sse.data
+                yield process_data(data=payload, cast_to=cast_to, response=response)
         finally:
             # Ensure the response is closed even if the consumer doesn't read all data
             response.close()
@@ -122,10 +153,36 @@ class AsyncStream(Generic[_T]):
         response = self.response
         process_data = self._client._process_response_data
         iterator = self._iter_events()
+        content_type = (response.headers.get("content-type") or "").lower()
+        is_jsonl = "json" in content_type and "event-stream" not in content_type
 
         try:
+            if is_jsonl:
+                # See the sync sibling for why JSONL gets its own branch.
+                buffer = b""
+                async for chunk in response.aiter_bytes():
+                    if not chunk:
+                        continue
+                    buffer += chunk
+                    while b"\n" in buffer:
+                        line, buffer = buffer.split(b"\n", 1)
+                        text = line.decode("utf-8").strip()
+                        if not text:
+                            continue
+                        yield process_data(data=json.loads(text), cast_to=cast_to, response=response)
+                tail = buffer.decode("utf-8").strip()
+                if tail:
+                    yield process_data(data=json.loads(tail), cast_to=cast_to, response=response)
+                return
+
             async for sse in iterator:
-                yield process_data(data=sse.json(), cast_to=cast_to, response=response)
+                if not sse.data:
+                    continue
+                try:
+                    payload = sse.json()
+                except Exception:
+                    payload = sse.data
+                yield process_data(data=payload, cast_to=cast_to, response=response)
         finally:
             # Ensure the response is closed even if the consumer doesn't read all data
             await response.aclose()

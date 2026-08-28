@@ -1,53 +1,54 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 from typing import List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
 from ..._models import BaseModel
+
 from ..named_resource import NamedResource
 
-__all__ = ["CategoryPromptsResponse", "Data", "Info"]
+__all__ = ["CategoryPromptsResponse", "Info", "Data"]
 
 
 class Data(BaseModel):
     id: str
 
-    created_at: datetime
+    analysis_types: Optional[List[Literal["visibility", "sentiment", "sentiment_v2", "accuracy"]]] = None
 
-    language: str
-
-    platforms: List[NamedResource]
+    prompt_type: Optional[str] = None
 
     prompt: str
 
-    regions: List[NamedResource]
+    language: str
 
     status: Literal["active", "disabled"]
 
     topic: NamedResource
     """Generic id+name reference used across domain boundaries."""
 
-    updated_at: datetime
+    tags: Optional[List[NamedResource]] = None
 
-    analysis_types: Optional[List[Literal["visibility", "sentiment", "sentiment_v2", "accuracy"]]] = None
+    regions: List[NamedResource]
+
+    platforms: List[NamedResource]
 
     personas: Optional[List[NamedResource]] = None
 
-    prompt_type: Optional[str] = None
+    created_at: datetime
 
-    tags: Optional[List[NamedResource]] = None
+    updated_at: datetime
 
 
 class Info(BaseModel):
+    total_rows: int
+
     limit: int
 
     next_cursor: Optional[str] = None
 
-    total_rows: int
-
 
 class CategoryPromptsResponse(BaseModel):
-    data: List[Data]
-
     info: Info
+
+    data: List[Data]

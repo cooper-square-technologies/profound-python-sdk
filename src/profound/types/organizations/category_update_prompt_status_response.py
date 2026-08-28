@@ -1,4 +1,4 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 from typing import Optional
 
@@ -8,8 +8,6 @@ __all__ = ["CategoryUpdatePromptStatusResponse"]
 
 
 class CategoryUpdatePromptStatusResponse(BaseModel):
-    """Response from updating prompt statuses."""
-
     dry_run: bool
     """Whether this was a dry run (no changes persisted)."""
 

@@ -1,12 +1,12 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
-from .folders import (
-    FoldersResource,
-    AsyncFoldersResource,
-    FoldersResourceWithRawResponse,
-    AsyncFoldersResourceWithRawResponse,
-    FoldersResourceWithStreamingResponse,
-    AsyncFoldersResourceWithStreamingResponse,
+from .knowledge_bases import (
+    KnowledgeBasesResource,
+    AsyncKnowledgeBasesResource,
+    KnowledgeBasesResourceWithRawResponse,
+    AsyncKnowledgeBasesResourceWithRawResponse,
+    KnowledgeBasesResourceWithStreamingResponse,
+    AsyncKnowledgeBasesResourceWithStreamingResponse,
 )
 from .documents import (
     DocumentsResource,
@@ -16,16 +16,22 @@ from .documents import (
     DocumentsResourceWithStreamingResponse,
     AsyncDocumentsResourceWithStreamingResponse,
 )
-from .knowledge_bases import (
-    KnowledgeBasesResource,
-    AsyncKnowledgeBasesResource,
-    KnowledgeBasesResourceWithRawResponse,
-    AsyncKnowledgeBasesResourceWithRawResponse,
-    KnowledgeBasesResourceWithStreamingResponse,
-    AsyncKnowledgeBasesResourceWithStreamingResponse,
+from .folders import (
+    FoldersResource,
+    AsyncFoldersResource,
+    FoldersResourceWithRawResponse,
+    AsyncFoldersResourceWithRawResponse,
+    FoldersResourceWithStreamingResponse,
+    AsyncFoldersResourceWithStreamingResponse,
 )
 
 __all__ = [
+    "KnowledgeBasesResource",
+    "AsyncKnowledgeBasesResource",
+    "KnowledgeBasesResourceWithRawResponse",
+    "AsyncKnowledgeBasesResourceWithRawResponse",
+    "KnowledgeBasesResourceWithStreamingResponse",
+    "AsyncKnowledgeBasesResourceWithStreamingResponse",
     "DocumentsResource",
     "AsyncDocumentsResource",
     "DocumentsResourceWithRawResponse",
@@ -38,10 +44,4 @@ __all__ = [
     "AsyncFoldersResourceWithRawResponse",
     "FoldersResourceWithStreamingResponse",
     "AsyncFoldersResourceWithStreamingResponse",
-    "KnowledgeBasesResource",
-    "AsyncKnowledgeBasesResource",
-    "KnowledgeBasesResourceWithRawResponse",
-    "AsyncKnowledgeBasesResourceWithRawResponse",
-    "KnowledgeBasesResourceWithStreamingResponse",
-    "AsyncKnowledgeBasesResourceWithStreamingResponse",
 ]

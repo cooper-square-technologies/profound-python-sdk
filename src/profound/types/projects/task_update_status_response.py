@@ -1,4 +1,4 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 from typing import Optional
 from datetime import datetime
@@ -10,13 +10,13 @@ __all__ = ["TaskUpdateStatusResponse", "Data"]
 
 
 class Data(BaseModel):
-    changed_at: datetime
+    task_id: str
 
     project_id: str
 
     status: Literal["not_started", "in_progress", "done", "abandoned"]
 
-    task_id: str
+    changed_at: datetime
 
     changed_by: Optional[str] = None
 

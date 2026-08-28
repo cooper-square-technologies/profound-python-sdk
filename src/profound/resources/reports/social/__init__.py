@@ -1,4 +1,4 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 from .social import (
     SocialResource,
@@ -18,16 +18,16 @@ from .youtube import (
 )
 
 __all__ = [
-    "YoutubeResource",
-    "AsyncYoutubeResource",
-    "YoutubeResourceWithRawResponse",
-    "AsyncYoutubeResourceWithRawResponse",
-    "YoutubeResourceWithStreamingResponse",
-    "AsyncYoutubeResourceWithStreamingResponse",
     "SocialResource",
     "AsyncSocialResource",
     "SocialResourceWithRawResponse",
     "AsyncSocialResourceWithRawResponse",
     "SocialResourceWithStreamingResponse",
     "AsyncSocialResourceWithStreamingResponse",
+    "YoutubeResource",
+    "AsyncYoutubeResource",
+    "YoutubeResourceWithRawResponse",
+    "AsyncYoutubeResourceWithRawResponse",
+    "YoutubeResourceWithStreamingResponse",
+    "AsyncYoutubeResourceWithStreamingResponse",
 ]

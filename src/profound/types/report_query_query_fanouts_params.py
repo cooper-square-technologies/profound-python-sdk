@@ -1,8 +1,8 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 from __future__ import annotations
 
-from typing import List, Iterable, Optional
+from typing import Iterable, List, Optional
 from typing_extensions import Literal, Required, TypedDict
 
 __all__ = ["ReportQueryQueryFanoutsParams", "Filter", "Sort"]
@@ -11,20 +11,22 @@ __all__ = ["ReportQueryQueryFanoutsParams", "Filter", "Sort"]
 class ReportQueryQueryFanoutsParams(TypedDict, total=False):
     category_id: Required[str]
 
-    end_date: Required[str]
-    """YYYY-MM-DD, ET, inclusive"""
-
     start_date: Required[str]
     """YYYY-MM-DD, ET, inclusive"""
 
-    cursor: Optional[str]
+    end_date: Required[str]
+    """YYYY-MM-DD, ET, inclusive"""
+
+    group_by: List[Literal["date", "model", "region", "prompt", "query"]]
+
+    metrics: Optional[List[Literal["fanouts_per_execution", "total_fanouts", "share", "query_variations"]]]
+
+    interval: Literal["day", "week", "month"]
 
     filter: Optional[Filter]
     """A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group."""
 
-    group_by: List[Literal["date", "model", "region", "prompt", "query"]]
-
-    interval: Literal["day", "week", "month"]
+    sort: Optional[Sort]
 
     limit: Optional[int]
     """Page size; default 10, max 50."""
@@ -32,17 +34,21 @@ class ReportQueryQueryFanoutsParams(TypedDict, total=False):
     max_results: Optional[int]
     """Stream endpoint only: cap the number of streamed rows (default: all)."""
 
-    metrics: Optional[List[Literal["fanouts_per_execution", "total_fanouts", "share", "query_variations"]]]
+    cursor: Optional[str]
 
-    sort: Optional[Sort]
+
+class Sort(TypedDict, total=False):
+    field: Required[str]
+
+    dir: Literal["asc", "desc"]
 
 
 _FilterReservedKeywords = TypedDict(
     "_FilterReservedKeywords",
     {
-        "and": Optional[Iterable[object]],
-        "not": object,
-        "or": Optional[Iterable[object]],
+        "and": Optional[Iterable["Filter"]],
+        "or": Optional[Iterable["Filter"]],
+        "not": Optional["Filter"],
     },
     total=False,
 )
@@ -56,9 +62,3 @@ class Filter(_FilterReservedKeywords, total=False):
     op: Optional[str]
 
     value: object
-
-
-class Sort(TypedDict, total=False):
-    field: Required[str]
-
-    dir: Literal["asc", "desc"]

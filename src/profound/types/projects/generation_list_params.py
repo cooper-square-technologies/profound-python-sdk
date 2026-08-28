@@ -1,4 +1,4 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 from __future__ import annotations
 
@@ -12,9 +12,9 @@ class GenerationListParams(TypedDict, total=False):
     category_id: Required[str]
     """Category that owns the project."""
 
+    status: Optional[str]
+    """Comma-separated generation statuses: queued, running, completed, failed."""
+
     limit: int
 
     offset: int
-
-    status: Optional[str]
-    """Comma-separated generation statuses: queued, running, completed, failed."""

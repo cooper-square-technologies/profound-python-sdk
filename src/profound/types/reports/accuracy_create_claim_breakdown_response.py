@@ -1,4 +1,4 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 from typing import List, Optional
 
@@ -9,30 +9,18 @@ from ..._models import BaseModel
 __all__ = ["AccuracyCreateClaimBreakdownResponse", "Platform", "Prompt"]
 
 
-class Platform(BaseModel):
-    id: str
-
-    label: str
-
-    prev_response_count: int = FieldInfo(alias="prevResponseCount")
-
-    prev_total_response_count: int = FieldInfo(alias="prevTotalResponseCount")
-
-    response_count: int = FieldInfo(alias="responseCount")
-
-    response_share: float = FieldInfo(alias="responseShare")
-
-    total_response_count: int = FieldInfo(alias="totalResponseCount")
-
-    response_share_delta: Optional[float] = FieldInfo(alias="responseShareDelta", default=None)
-
-
 class Prompt(BaseModel):
     id: str
 
-    has_current: bool = FieldInfo(alias="hasCurrent")
-
     label: str
+
+    response_count: int = FieldInfo(alias="responseCount")
+
+    total_response_count: int = FieldInfo(alias="totalResponseCount")
+
+    response_share: float = FieldInfo(alias="responseShare")
+
+    response_share_delta: Optional[float] = FieldInfo(alias="responseShareDelta", default=None)
 
     prev_response_count: int = FieldInfo(alias="prevResponseCount")
 
@@ -42,15 +30,27 @@ class Prompt(BaseModel):
 
     prompt_text: str = FieldInfo(alias="promptText")
 
-    response_count: int = FieldInfo(alias="responseCount")
-
-    response_share: float = FieldInfo(alias="responseShare")
-
     topic_id: str = FieldInfo(alias="topicId")
+
+    has_current: bool = FieldInfo(alias="hasCurrent")
+
+
+class Platform(BaseModel):
+    id: str
+
+    label: str
+
+    response_count: int = FieldInfo(alias="responseCount")
 
     total_response_count: int = FieldInfo(alias="totalResponseCount")
 
+    response_share: float = FieldInfo(alias="responseShare")
+
     response_share_delta: Optional[float] = FieldInfo(alias="responseShareDelta", default=None)
+
+    prev_response_count: int = FieldInfo(alias="prevResponseCount")
+
+    prev_total_response_count: int = FieldInfo(alias="prevTotalResponseCount")
 
 
 class AccuracyCreateClaimBreakdownResponse(BaseModel):

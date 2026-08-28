@@ -1,4 +1,4 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 from typing import Optional
 
@@ -10,8 +10,8 @@ __all__ = ["FieldDiff"]
 class FieldDiff(BaseModel):
     """Shows the old and new value for a changed field."""
 
-    new: Optional[object] = None
-    """New value."""
-
     old: Optional[object] = None
     """Previous value."""
+
+    new: Optional[object] = None
+    """New value."""

@@ -1,11 +1,11 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 from __future__ import annotations
 
-from typing import List, Iterable, Optional
-from typing_extensions import Literal, Required, Annotated, TypedDict
-
+from typing import Iterable, List, Optional
+from typing_extensions import Annotated, Literal, Required, TypedDict
 from .._types import SequenceNotStr
+
 from .._utils import PropertyInfo
 
 __all__ = [
@@ -22,44 +22,20 @@ __all__ = [
 class ProjectCreateParams(TypedDict, total=False):
     category_id: Required[str]
 
-    attachments: Iterable[Attachment]
-
-    focus: Optional[str]
-
-    generation_context: Optional[GenerationContext]
+    title: Optional[str]
 
     project_name: Optional[str]
 
-    title: Optional[str]
+    focus: Optional[str]
 
     topics: SequenceNotStr[str]
 
+    attachments: Iterable[Attachment]
 
-class Attachment(TypedDict, total=False):
-    id: Required[str]
-
-    data_base64: Required[str]
-
-    mime_type: Required[str]
-
-    name: Required[str]
-
-    size_bytes: Required[int]
+    generation_context: Optional[GenerationContext]
 
 
-class GenerationContextDateRange(TypedDict, total=False):
-    label: Required[str]
-
-    preset: Required[str]
-
-    end_date: Annotated[Optional[str], PropertyInfo(alias="endDate")]
-
-    mode: Optional[Literal["custom", "relative"]]
-
-    start_date: Annotated[Optional[str], PropertyInfo(alias="startDate")]
-
-
-class GenerationContextPlatform(TypedDict, total=False):
+class GenerationContextTag(TypedDict, total=False):
     id: Required[str]
 
     name: Required[str]
@@ -75,12 +51,24 @@ class GenerationContextRegion(TypedDict, total=False):
     slug: Optional[str]
 
 
-class GenerationContextTag(TypedDict, total=False):
+class GenerationContextPlatform(TypedDict, total=False):
     id: Required[str]
 
     name: Required[str]
 
     slug: Optional[str]
+
+
+class GenerationContextDateRange(TypedDict, total=False):
+    end_date: Annotated[Optional[str], PropertyInfo(alias="endDate")]
+
+    label: Required[str]
+
+    mode: Optional[Literal["custom", "relative"]]
+
+    preset: Required[str]
+
+    start_date: Annotated[Optional[str], PropertyInfo(alias="startDate")]
 
 
 class GenerationContext(TypedDict, total=False):
@@ -95,3 +83,15 @@ class GenerationContext(TypedDict, total=False):
     regions: Iterable[GenerationContextRegion]
 
     tags: Iterable[GenerationContextTag]
+
+
+class Attachment(TypedDict, total=False):
+    id: Required[str]
+
+    name: Required[str]
+
+    mime_type: Required[str]
+
+    size_bytes: Required[int]
+
+    data_base64: Required[str]

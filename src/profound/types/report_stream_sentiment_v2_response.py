@@ -1,6 +1,8 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
-from typing import TYPE_CHECKING, Dict, List, Union, Optional
+from __future__ import annotations
+
+from typing import Dict, List, Optional, TYPE_CHECKING, Union
 from typing_extensions import TypeAlias
 
 from pydantic import Field as FieldInfo
@@ -11,34 +13,162 @@ __all__ = [
     "ReportStreamSentimentV2Response",
     "SentimentV2Info",
     "SentimentRow",
-    "SentimentRowClaim",
-    "SentimentRowCompetitor",
     "SentimentRowModel",
-    "SentimentRowPersona",
-    "SentimentRowPrevious",
-    "SentimentRowPrompt",
+    "SentimentRowTopic",
     "SentimentRowRegion",
-    "SentimentRowRun",
+    "SentimentRowPrompt",
+    "SentimentRowPersona",
     "SentimentRowTag",
     "SentimentRowTheme",
-    "SentimentRowTopic",
+    "SentimentRowClaim",
+    "SentimentRowRun",
+    "SentimentRowCompetitor",
+    "SentimentRowPrevious",
 ]
 
 
-class SentimentV2Info(BaseModel):
-    """`summary` event payload (the report `info` block)."""
+class SentimentRowPrevious(BaseModel):
+    positive_sentiment: Optional[float] = None
 
-    asset: str
-    """The analyzed brand name."""
+    negative_sentiment: Optional[float] = None
+
+    occurrence: Optional[float] = None
+
+    if TYPE_CHECKING:
+        # Some versions of Pydantic <2.8.0 have a bug and don’t allow assigning a
+        # value to this field, so for compatibility we avoid doing it at runtime.
+        __pydantic_extra__: Dict[str, object] = FieldInfo(init=False)  # pyright: ignore[reportIncompatibleVariableOverride]
+
+        # Stub to indicate that arbitrary properties are accepted.
+        # To access properties that are not valid identifiers you can use `getattr`, e.g.
+        # `getattr(obj, '$type')`
+        def __getattr__(self, attr: str) -> object: ...
+
+    else:
+        __pydantic_extra__: Dict[str, object]
+
+
+class SentimentRowCompetitor(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class SentimentRowRun(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class SentimentRowClaim(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class SentimentRowTheme(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class SentimentRowTag(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class SentimentRowPersona(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class SentimentRowPrompt(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class SentimentRowRegion(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class SentimentRowTopic(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class SentimentRowModel(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class SentimentRow(BaseModel):
+    date: Optional[str] = None
+
+    model: Optional[SentimentRowModel] = None
+
+    topic: Optional[SentimentRowTopic] = None
+
+    region: Optional[SentimentRowRegion] = None
+
+    prompt: Optional[SentimentRowPrompt] = None
+
+    persona: Optional[SentimentRowPersona] = None
+
+    tag: Optional[SentimentRowTag] = None
+
+    theme: Optional[SentimentRowTheme] = None
+
+    claim: Optional[SentimentRowClaim] = None
+
+    run: Optional[SentimentRowRun] = None
+
+    competitor: Optional[SentimentRowCompetitor] = None
+
+    positive_sentiment: Optional[float] = None
+
+    negative_sentiment: Optional[float] = None
+
+    occurrence: Optional[float] = None
+
+    previous: Optional[SentimentRowPrevious] = None
+    """Comparison-window metrics (when requested)."""
+
+    prev_date: Optional[str] = None
+
+    cited_websites: Optional[List[str]] = None
+
+    rank: Optional[int] = None
+
+    if TYPE_CHECKING:
+        # Some versions of Pydantic <2.8.0 have a bug and don’t allow assigning a
+        # value to this field, so for compatibility we avoid doing it at runtime.
+        __pydantic_extra__: Dict[str, object] = FieldInfo(init=False)  # pyright: ignore[reportIncompatibleVariableOverride]
+
+        # Stub to indicate that arbitrary properties are accepted.
+        # To access properties that are not valid identifiers you can use `getattr`, e.g.
+        # `getattr(obj, '$type')`
+        def __getattr__(self, attr: str) -> object: ...
+
+    else:
+        __pydantic_extra__: Dict[str, object]
+
+
+class SentimentV2Info(BaseModel):
+    total_results: Optional[int] = None
+    """Total rows matching the query before pagination (null when not computed)."""
 
     count: int
     """Number of rows returned in `data` for this page."""
 
-    end_date: str
-    """Echoed request end date (YYYY-MM-DD, ET)."""
-
-    metrics: List[str]
-    """Sentiment metrics returned per row."""
+    next_cursor: Optional[str] = None
+    """Opaque cursor for the next page; null on the last page."""
 
     models: List[str]
     """Display names of the models the report covers."""
@@ -46,74 +176,23 @@ class SentimentV2Info(BaseModel):
     start_date: str
     """Echoed request start date (YYYY-MM-DD, ET)."""
 
-    comparison_end_date: Optional[str] = None
-    """Comparison-window end (when requested)."""
-
-    comparison_start_date: Optional[str] = None
-    """Comparison-window start (when requested)."""
+    end_date: str
+    """Echoed request end date (YYYY-MM-DD, ET)."""
 
     filter: Optional[Dict[str, object]] = None
     """Echoed normalized filter tree, or null when no filter was sent."""
 
-    next_cursor: Optional[str] = None
-    """Opaque cursor for the next page; null on the last page."""
+    asset: str
+    """The analyzed brand name."""
 
-    total_results: Optional[int] = None
-    """Total rows matching the query before pagination (null when not computed)."""
+    metrics: List[str]
+    """Sentiment metrics returned per row."""
 
-    if TYPE_CHECKING:
-        # Some versions of Pydantic <2.8.0 have a bug and don’t allow assigning a
-        # value to this field, so for compatibility we avoid doing it at runtime.
-        __pydantic_extra__: Dict[str, object] = FieldInfo(init=False)  # pyright: ignore[reportIncompatibleVariableOverride]
+    comparison_start_date: Optional[str] = None
+    """Comparison-window start (when requested)."""
 
-        # Stub to indicate that arbitrary properties are accepted.
-        # To access properties that are not valid identifiers you can use `getattr`, e.g.
-        # `getattr(obj, '$type')`
-        def __getattr__(self, attr: str) -> object: ...
-    else:
-        __pydantic_extra__: Dict[str, object]
-
-
-class SentimentRowClaim(BaseModel):
-    """An ``{id, name}`` reference for a grouped dimension value."""
-
-    id: Optional[str] = None
-
-    name: Optional[str] = None
-
-
-class SentimentRowCompetitor(BaseModel):
-    """An ``{id, name}`` reference for a grouped dimension value."""
-
-    id: Optional[str] = None
-
-    name: Optional[str] = None
-
-
-class SentimentRowModel(BaseModel):
-    """An ``{id, name}`` reference for a grouped dimension value."""
-
-    id: Optional[str] = None
-
-    name: Optional[str] = None
-
-
-class SentimentRowPersona(BaseModel):
-    """An ``{id, name}`` reference for a grouped dimension value."""
-
-    id: Optional[str] = None
-
-    name: Optional[str] = None
-
-
-class SentimentRowPrevious(BaseModel):
-    """Comparison-window metrics (when requested)."""
-
-    negative_sentiment: Optional[float] = None
-
-    occurrence: Optional[float] = None
-
-    positive_sentiment: Optional[float] = None
+    comparison_end_date: Optional[str] = None
+    """Comparison-window end (when requested)."""
 
     if TYPE_CHECKING:
         # Some versions of Pydantic <2.8.0 have a bug and don’t allow assigning a
@@ -124,117 +203,7 @@ class SentimentRowPrevious(BaseModel):
         # To access properties that are not valid identifiers you can use `getattr`, e.g.
         # `getattr(obj, '$type')`
         def __getattr__(self, attr: str) -> object: ...
-    else:
-        __pydantic_extra__: Dict[str, object]
 
-
-class SentimentRowPrompt(BaseModel):
-    """An ``{id, name}`` reference for a grouped dimension value."""
-
-    id: Optional[str] = None
-
-    name: Optional[str] = None
-
-
-class SentimentRowRegion(BaseModel):
-    """An ``{id, name}`` reference for a grouped dimension value."""
-
-    id: Optional[str] = None
-
-    name: Optional[str] = None
-
-
-class SentimentRowRun(BaseModel):
-    """An ``{id, name}`` reference for a grouped dimension value."""
-
-    id: Optional[str] = None
-
-    name: Optional[str] = None
-
-
-class SentimentRowTag(BaseModel):
-    """An ``{id, name}`` reference for a grouped dimension value."""
-
-    id: Optional[str] = None
-
-    name: Optional[str] = None
-
-
-class SentimentRowTheme(BaseModel):
-    """An ``{id, name}`` reference for a grouped dimension value."""
-
-    id: Optional[str] = None
-
-    name: Optional[str] = None
-
-
-class SentimentRowTopic(BaseModel):
-    """An ``{id, name}`` reference for a grouped dimension value."""
-
-    id: Optional[str] = None
-
-    name: Optional[str] = None
-
-
-class SentimentRow(BaseModel):
-    """`result` event payload — one sentiment row."""
-
-    cited_websites: Optional[List[str]] = None
-
-    claim: Optional[SentimentRowClaim] = None
-    """An `{id, name}` reference for a grouped dimension value."""
-
-    competitor: Optional[SentimentRowCompetitor] = None
-    """An `{id, name}` reference for a grouped dimension value."""
-
-    date: Optional[str] = None
-
-    model: Optional[SentimentRowModel] = None
-    """An `{id, name}` reference for a grouped dimension value."""
-
-    negative_sentiment: Optional[float] = None
-
-    occurrence: Optional[float] = None
-
-    persona: Optional[SentimentRowPersona] = None
-    """An `{id, name}` reference for a grouped dimension value."""
-
-    positive_sentiment: Optional[float] = None
-
-    prev_date: Optional[str] = None
-
-    previous: Optional[SentimentRowPrevious] = None
-    """Comparison-window metrics (when requested)."""
-
-    prompt: Optional[SentimentRowPrompt] = None
-    """An `{id, name}` reference for a grouped dimension value."""
-
-    rank: Optional[int] = None
-
-    region: Optional[SentimentRowRegion] = None
-    """An `{id, name}` reference for a grouped dimension value."""
-
-    run: Optional[SentimentRowRun] = None
-    """An `{id, name}` reference for a grouped dimension value."""
-
-    tag: Optional[SentimentRowTag] = None
-    """An `{id, name}` reference for a grouped dimension value."""
-
-    theme: Optional[SentimentRowTheme] = None
-    """An `{id, name}` reference for a grouped dimension value."""
-
-    topic: Optional[SentimentRowTopic] = None
-    """An `{id, name}` reference for a grouped dimension value."""
-
-    if TYPE_CHECKING:
-        # Some versions of Pydantic <2.8.0 have a bug and don’t allow assigning a
-        # value to this field, so for compatibility we avoid doing it at runtime.
-        __pydantic_extra__: Dict[str, object] = FieldInfo(init=False)  # pyright: ignore[reportIncompatibleVariableOverride]
-
-        # Stub to indicate that arbitrary properties are accepted.
-        # To access properties that are not valid identifiers you can use `getattr`, e.g.
-        # `getattr(obj, '$type')`
-        def __getattr__(self, attr: str) -> object: ...
     else:
         __pydantic_extra__: Dict[str, object]
 

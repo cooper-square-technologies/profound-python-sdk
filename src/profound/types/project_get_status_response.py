@@ -1,4 +1,6 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
+
+from __future__ import annotations
 
 from typing import Optional
 from datetime import datetime
@@ -14,17 +16,17 @@ class DataLiveGeneration(BaseModel):
 
     status: Literal["queued", "running", "completed", "failed"]
 
-    error: Optional[str] = None
+    started_at: Optional[datetime] = None
 
     finished_at: Optional[datetime] = None
 
-    started_at: Optional[datetime] = None
+    error: Optional[str] = None
 
 
 class Data(BaseModel):
-    category_id: str
-
     project_id: str
+
+    category_id: str
 
     status: Literal["suggested", "tracked", "retired"]
 

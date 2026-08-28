@@ -1,13 +1,5 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
-from .categories import (
-    CategoriesResource,
-    AsyncCategoriesResource,
-    CategoriesResourceWithRawResponse,
-    AsyncCategoriesResourceWithRawResponse,
-    CategoriesResourceWithStreamingResponse,
-    AsyncCategoriesResourceWithStreamingResponse,
-)
 from .organizations import (
     OrganizationsResource,
     AsyncOrganizationsResource,
@@ -16,18 +8,26 @@ from .organizations import (
     OrganizationsResourceWithStreamingResponse,
     AsyncOrganizationsResourceWithStreamingResponse,
 )
+from .categories import (
+    CategoriesResource,
+    AsyncCategoriesResource,
+    CategoriesResourceWithRawResponse,
+    AsyncCategoriesResourceWithRawResponse,
+    CategoriesResourceWithStreamingResponse,
+    AsyncCategoriesResourceWithStreamingResponse,
+)
 
 __all__ = [
-    "CategoriesResource",
-    "AsyncCategoriesResource",
-    "CategoriesResourceWithRawResponse",
-    "AsyncCategoriesResourceWithRawResponse",
-    "CategoriesResourceWithStreamingResponse",
-    "AsyncCategoriesResourceWithStreamingResponse",
     "OrganizationsResource",
     "AsyncOrganizationsResource",
     "OrganizationsResourceWithRawResponse",
     "AsyncOrganizationsResourceWithRawResponse",
     "OrganizationsResourceWithStreamingResponse",
     "AsyncOrganizationsResourceWithStreamingResponse",
+    "CategoriesResource",
+    "AsyncCategoriesResource",
+    "CategoriesResourceWithRawResponse",
+    "AsyncCategoriesResourceWithRawResponse",
+    "CategoriesResourceWithStreamingResponse",
+    "AsyncCategoriesResourceWithStreamingResponse",
 ]

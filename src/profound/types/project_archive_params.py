@@ -1,4 +1,4 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 from __future__ import annotations
 
@@ -9,7 +9,7 @@ __all__ = ["ProjectArchiveParams"]
 
 
 class ProjectArchiveParams(TypedDict, total=False):
+    reason: Optional[str]
+
     category_id: Required[str]
     """Category that owns the project."""
-
-    reason: Optional[str]

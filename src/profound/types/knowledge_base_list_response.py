@@ -1,9 +1,10 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 from typing import List, Optional
 from datetime import datetime
 
 from .._models import BaseModel
+
 from .shared.cursor_pagination import CursorPagination
 
 __all__ = ["KnowledgeBaseListResponse", "Data"]
@@ -13,17 +14,17 @@ class Data(BaseModel):
     id: str
     """Unique knowledge base ID."""
 
-    created_at: datetime
-    """Creation timestamp."""
-
     name: str
     """Knowledge base name."""
+
+    slug: Optional[str] = None
+    """Knowledge base slug."""
 
     description: Optional[str] = None
     """Knowledge base description."""
 
-    slug: Optional[str] = None
-    """Knowledge base slug."""
+    created_at: datetime
+    """Creation timestamp."""
 
 
 class KnowledgeBaseListResponse(BaseModel):

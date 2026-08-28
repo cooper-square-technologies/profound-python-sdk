@@ -1,10 +1,9 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 from __future__ import annotations
 
-from typing import List, Union, Iterable, Optional
+from typing import Iterable, List, Optional, Union
 from typing_extensions import Literal, Required, TypeAlias, TypedDict
-
 from .._types import SequenceNotStr
 
 __all__ = ["ReportQueryVisibilityParams", "Assets", "AssetsEntityFilterClause", "Filter", "Sort"]
@@ -13,23 +12,27 @@ __all__ = ["ReportQueryVisibilityParams", "Assets", "AssetsEntityFilterClause", 
 class ReportQueryVisibilityParams(TypedDict, total=False):
     category_id: Required[str]
 
+    start_date: Required[str]
+    """YYYY-MM-DD, ET, inclusive"""
+
     end_date: Required[str]
     """YYYY-MM-DD, ET, inclusive"""
 
-    start_date: Required[str]
-    """YYYY-MM-DD, ET, inclusive"""
+    group_by: List[Literal["date", "model", "topic", "region", "prompt", "persona"]]
+
+    metrics: Optional[List[Literal["visibility_score", "share_of_voice", "average_position"]]]
+
+    interval: Literal["day", "week", "month"]
+
+    scope: Literal["owned", "all"]
 
     assets: Optional[Assets]
     """A name (`is`), a list (`in`), or {op,value} with op `is`/`in`/`not_in`."""
 
-    cursor: Optional[str]
-
     filter: Optional[Filter]
     """A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group."""
 
-    group_by: List[Literal["date", "model", "topic", "region", "prompt", "persona"]]
-
-    interval: Literal["day", "week", "month"]
+    sort: Sort
 
     limit: Optional[int]
     """Page size; default 10, max 50."""
@@ -37,11 +40,32 @@ class ReportQueryVisibilityParams(TypedDict, total=False):
     max_results: Optional[int]
     """Stream endpoint only: cap the number of streamed rows (default: all)."""
 
-    metrics: Optional[List[Literal["visibility_score", "share_of_voice", "average_position"]]]
+    cursor: Optional[str]
 
-    scope: Literal["owned", "all"]
 
-    sort: Sort
+class Sort(TypedDict, total=False):
+    field: Literal["visibility_score", "share_of_voice", "average_position"]
+
+
+_FilterReservedKeywords = TypedDict(
+    "_FilterReservedKeywords",
+    {
+        "and": Optional[Iterable["Filter"]],
+        "or": Optional[Iterable["Filter"]],
+        "not": Optional["Filter"],
+    },
+    total=False,
+)
+
+
+class Filter(_FilterReservedKeywords, total=False):
+    """A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group."""
+
+    field: Optional[str]
+
+    op: Optional[str]
+
+    value: object
 
 
 class AssetsEntityFilterClause(TypedDict, total=False):
@@ -65,27 +89,3 @@ class AssetsEntityFilterClause(TypedDict, total=False):
 
 
 Assets: TypeAlias = Union[str, SequenceNotStr[str], AssetsEntityFilterClause]
-
-_FilterReservedKeywords = TypedDict(
-    "_FilterReservedKeywords",
-    {
-        "and": Optional[Iterable[object]],
-        "not": object,
-        "or": Optional[Iterable[object]],
-    },
-    total=False,
-)
-
-
-class Filter(_FilterReservedKeywords, total=False):
-    """A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group."""
-
-    field: Optional[str]
-
-    op: Optional[str]
-
-    value: object
-
-
-class Sort(TypedDict, total=False):
-    field: Literal["visibility_score", "share_of_voice", "average_position"]

@@ -1,6 +1,8 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
-from typing import Dict, List, Union, Optional
+from __future__ import annotations
+
+from typing import Dict, List, Optional, Union
 from typing_extensions import Literal
 
 from ..._models import BaseModel
@@ -8,49 +10,27 @@ from ..._models import BaseModel
 __all__ = [
     "OptimizationRetrieveResponse",
     "Data",
+    "DataContent",
     "DataAeoContentScore",
     "DataAeoContentScoreTargetZone",
     "DataAnalysis",
     "DataAnalysisBreakdown",
-    "DataContent",
-    "DataInputs",
-    "DataInputsPrompt",
-    "DataInputsTopic",
-    "DataInputsUser",
     "DataRecommendation",
     "DataRecommendationImpact",
     "DataRecommendationSuggestion",
+    "DataInputs",
+    "DataInputsTopic",
+    "DataInputsPrompt",
+    "DataInputsUser",
 ]
 
 
-class DataAeoContentScoreTargetZone(BaseModel):
-    high: float
-
-    low: float
-
-
-class DataAeoContentScore(BaseModel):
-    target_zone: DataAeoContentScoreTargetZone
-
-    value: float
-
-
-class DataAnalysisBreakdown(BaseModel):
-    score: float
-
-    title: str
-
-    weight: float
-
-
-class DataAnalysis(BaseModel):
-    breakdown: List[DataAnalysisBreakdown]
-
-
-class DataContent(BaseModel):
-    format: Literal["markdown", "html"]
+class DataInputsUser(BaseModel):
+    type: Literal["file", "text", "url"]
 
     value: str
+
+    metadata: Dict[str, Union[int, str]]
 
 
 class DataInputsPrompt(BaseModel):
@@ -65,56 +45,78 @@ class DataInputsTopic(BaseModel):
     name: str
 
 
-class DataInputsUser(BaseModel):
-    metadata: Dict[str, Union[int, str]]
-
-    type: Literal["file", "text", "url"]
-
-    value: str
-
-
 class DataInputs(BaseModel):
+    topic: Optional[DataInputsTopic] = None
+
     prompt: Optional[DataInputsPrompt] = None
 
     top_citations: List[str]
 
-    topic: Optional[DataInputsTopic] = None
-
     user: DataInputsUser
 
 
-class DataRecommendationImpact(BaseModel):
-    score: float
-
-    section: str
-
-
 class DataRecommendationSuggestion(BaseModel):
+    text: str
+
     rationale: str
 
-    text: str
+
+class DataRecommendationImpact(BaseModel):
+    section: str
+
+    score: float
 
 
 class DataRecommendation(BaseModel):
-    impact: Optional[DataRecommendationImpact] = None
+    title: str
 
     status: Literal["done", "pending"]
 
+    impact: Optional[DataRecommendationImpact] = None
+
     suggestion: DataRecommendationSuggestion
 
+
+class DataAnalysisBreakdown(BaseModel):
     title: str
+
+    weight: float
+
+    score: float
+
+
+class DataAnalysis(BaseModel):
+    breakdown: List[DataAnalysisBreakdown]
+
+
+class DataAeoContentScoreTargetZone(BaseModel):
+    low: float
+
+    high: float
+
+
+class DataAeoContentScore(BaseModel):
+    target_zone: DataAeoContentScoreTargetZone
+
+    value: float
+
+
+class DataContent(BaseModel):
+    format: Literal["markdown", "html"]
+
+    value: str
 
 
 class Data(BaseModel):
+    content: DataContent
+
     aeo_content_score: Optional[DataAeoContentScore] = None
 
     analysis: DataAnalysis
 
-    content: DataContent
+    recommendations: List[DataRecommendation]
 
     inputs: DataInputs
-
-    recommendations: List[DataRecommendation]
 
 
 class OptimizationRetrieveResponse(BaseModel):

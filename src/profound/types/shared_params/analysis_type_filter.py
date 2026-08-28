@@ -1,4 +1,4 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 from __future__ import annotations
 
@@ -9,8 +9,6 @@ __all__ = ["AnalysisTypeFilter"]
 
 
 class AnalysisTypeFilter(TypedDict, total=False):
-    """Filter by analysis type (visibility, sentiment, or accuracy)."""
-
     field: Required[Literal["analysis_type"]]
 
     operator: Required[

@@ -1,4 +1,4 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 from typing import Optional
 from datetime import datetime
@@ -10,35 +10,35 @@ __all__ = ["TaskCreateResponse", "Data"]
 
 
 class Data(BaseModel):
-    category_id: str
+    task_id: str
 
     project_id: str
 
-    task_id: str
+    category_id: str
+
+    type: Optional[str] = None
 
     title: str
 
+    summary: Optional[str] = None
+
     brief: Optional[str] = None
 
-    created_at: Optional[datetime] = None
+    topic: Optional[str] = None
 
     impact: Optional[int] = None
 
-    is_new: Optional[bool] = None
+    reference_url: Optional[str] = None
 
     reference_label: Optional[str] = None
-
-    reference_url: Optional[str] = None
 
     status: Optional[Literal["not_started", "in_progress", "done", "abandoned"]] = None
 
     status_changed_at: Optional[datetime] = None
 
-    summary: Optional[str] = None
+    is_new: Optional[bool] = None
 
-    topic: Optional[str] = None
-
-    type: Optional[str] = None
+    created_at: Optional[datetime] = None
 
 
 class TaskCreateResponse(BaseModel):

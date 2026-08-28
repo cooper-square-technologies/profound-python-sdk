@@ -1,6 +1,8 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
-from typing import TYPE_CHECKING, Dict, List, Optional
+from __future__ import annotations
+
+from typing import Dict, List, Optional, TYPE_CHECKING
 
 from pydantic import Field as FieldInfo
 
@@ -8,62 +10,28 @@ from .._models import BaseModel
 
 __all__ = [
     "ReportQuerySentimentResponse",
+    "Info",
     "Data",
-    "DataClaim",
-    "DataCompetitor",
     "DataModel",
-    "DataPersona",
-    "DataPrevious",
-    "DataPrompt",
+    "DataTopic",
     "DataRegion",
-    "DataRun",
+    "DataPrompt",
+    "DataPersona",
     "DataTag",
     "DataTheme",
-    "DataTopic",
-    "Info",
+    "DataClaim",
+    "DataRun",
+    "DataCompetitor",
+    "DataPrevious",
 ]
 
 
-class DataClaim(BaseModel):
-    """An ``{id, name}`` reference for a grouped dimension value."""
-
-    id: Optional[str] = None
-
-    name: Optional[str] = None
-
-
-class DataCompetitor(BaseModel):
-    """An ``{id, name}`` reference for a grouped dimension value."""
-
-    id: Optional[str] = None
-
-    name: Optional[str] = None
-
-
-class DataModel(BaseModel):
-    """An ``{id, name}`` reference for a grouped dimension value."""
-
-    id: Optional[str] = None
-
-    name: Optional[str] = None
-
-
-class DataPersona(BaseModel):
-    """An ``{id, name}`` reference for a grouped dimension value."""
-
-    id: Optional[str] = None
-
-    name: Optional[str] = None
-
-
 class DataPrevious(BaseModel):
-    """Comparison-window metrics (when requested)."""
+    positive_sentiment: Optional[float] = None
 
     negative_sentiment: Optional[float] = None
 
     occurrence: Optional[float] = None
-
-    positive_sentiment: Optional[float] = None
 
     if TYPE_CHECKING:
         # Some versions of Pydantic <2.8.0 have a bug and don’t allow assigning a
@@ -74,110 +42,108 @@ class DataPrevious(BaseModel):
         # To access properties that are not valid identifiers you can use `getattr`, e.g.
         # `getattr(obj, '$type')`
         def __getattr__(self, attr: str) -> object: ...
+
     else:
         __pydantic_extra__: Dict[str, object]
 
 
-class DataPrompt(BaseModel):
-    """An ``{id, name}`` reference for a grouped dimension value."""
-
-    id: Optional[str] = None
-
-    name: Optional[str] = None
-
-
-class DataRegion(BaseModel):
-    """An ``{id, name}`` reference for a grouped dimension value."""
-
+class DataCompetitor(BaseModel):
     id: Optional[str] = None
 
     name: Optional[str] = None
 
 
 class DataRun(BaseModel):
-    """An ``{id, name}`` reference for a grouped dimension value."""
-
     id: Optional[str] = None
 
     name: Optional[str] = None
 
 
-class DataTag(BaseModel):
-    """An ``{id, name}`` reference for a grouped dimension value."""
-
+class DataClaim(BaseModel):
     id: Optional[str] = None
 
     name: Optional[str] = None
 
 
 class DataTheme(BaseModel):
-    """An ``{id, name}`` reference for a grouped dimension value."""
+    id: Optional[str] = None
 
+    name: Optional[str] = None
+
+
+class DataTag(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class DataPersona(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class DataPrompt(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+
+class DataRegion(BaseModel):
     id: Optional[str] = None
 
     name: Optional[str] = None
 
 
 class DataTopic(BaseModel):
-    """An ``{id, name}`` reference for a grouped dimension value."""
+    id: Optional[str] = None
 
+    name: Optional[str] = None
+
+
+class DataModel(BaseModel):
     id: Optional[str] = None
 
     name: Optional[str] = None
 
 
 class Data(BaseModel):
-    """One group-combination row.
-
-    Group dims and metrics present depend on `group_by`/`metrics`.
-    """
-
-    cited_websites: Optional[List[str]] = None
-
-    claim: Optional[DataClaim] = None
-    """An `{id, name}` reference for a grouped dimension value."""
-
-    competitor: Optional[DataCompetitor] = None
-    """An `{id, name}` reference for a grouped dimension value."""
-
     date: Optional[str] = None
 
     model: Optional[DataModel] = None
-    """An `{id, name}` reference for a grouped dimension value."""
+
+    topic: Optional[DataTopic] = None
+
+    region: Optional[DataRegion] = None
+
+    prompt: Optional[DataPrompt] = None
+
+    persona: Optional[DataPersona] = None
+
+    tag: Optional[DataTag] = None
+
+    theme: Optional[DataTheme] = None
+
+    claim: Optional[DataClaim] = None
+
+    run: Optional[DataRun] = None
+
+    competitor: Optional[DataCompetitor] = None
+
+    positive_sentiment: Optional[float] = None
 
     negative_sentiment: Optional[float] = None
 
     occurrence: Optional[float] = None
 
-    persona: Optional[DataPersona] = None
-    """An `{id, name}` reference for a grouped dimension value."""
-
-    positive_sentiment: Optional[float] = None
-
-    prev_date: Optional[str] = None
-
     previous: Optional[DataPrevious] = None
     """Comparison-window metrics (when requested)."""
 
-    prompt: Optional[DataPrompt] = None
-    """An `{id, name}` reference for a grouped dimension value."""
+    prev_date: Optional[str] = None
+
+    cited_websites: Optional[List[str]] = None
 
     rank: Optional[int] = None
-
-    region: Optional[DataRegion] = None
-    """An `{id, name}` reference for a grouped dimension value."""
-
-    run: Optional[DataRun] = None
-    """An `{id, name}` reference for a grouped dimension value."""
-
-    tag: Optional[DataTag] = None
-    """An `{id, name}` reference for a grouped dimension value."""
-
-    theme: Optional[DataTheme] = None
-    """An `{id, name}` reference for a grouped dimension value."""
-
-    topic: Optional[DataTopic] = None
-    """An `{id, name}` reference for a grouped dimension value."""
 
     if TYPE_CHECKING:
         # Some versions of Pydantic <2.8.0 have a bug and don’t allow assigning a
@@ -188,22 +154,20 @@ class Data(BaseModel):
         # To access properties that are not valid identifiers you can use `getattr`, e.g.
         # `getattr(obj, '$type')`
         def __getattr__(self, attr: str) -> object: ...
+
     else:
         __pydantic_extra__: Dict[str, object]
 
 
 class Info(BaseModel):
-    asset: str
-    """The analyzed brand name."""
+    total_results: Optional[int] = None
+    """Total rows matching the query before pagination (null when not computed)."""
 
     count: int
     """Number of rows returned in `data` for this page."""
 
-    end_date: str
-    """Echoed request end date (YYYY-MM-DD, ET)."""
-
-    metrics: List[str]
-    """Sentiment metrics returned per row."""
+    next_cursor: Optional[str] = None
+    """Opaque cursor for the next page; null on the last page."""
 
     models: List[str]
     """Display names of the models the report covers."""
@@ -211,20 +175,23 @@ class Info(BaseModel):
     start_date: str
     """Echoed request start date (YYYY-MM-DD, ET)."""
 
-    comparison_end_date: Optional[str] = None
-    """Comparison-window end (when requested)."""
-
-    comparison_start_date: Optional[str] = None
-    """Comparison-window start (when requested)."""
+    end_date: str
+    """Echoed request end date (YYYY-MM-DD, ET)."""
 
     filter: Optional[Dict[str, object]] = None
     """Echoed normalized filter tree, or null when no filter was sent."""
 
-    next_cursor: Optional[str] = None
-    """Opaque cursor for the next page; null on the last page."""
+    asset: str
+    """The analyzed brand name."""
 
-    total_results: Optional[int] = None
-    """Total rows matching the query before pagination (null when not computed)."""
+    metrics: List[str]
+    """Sentiment metrics returned per row."""
+
+    comparison_start_date: Optional[str] = None
+    """Comparison-window start (when requested)."""
+
+    comparison_end_date: Optional[str] = None
+    """Comparison-window end (when requested)."""
 
     if TYPE_CHECKING:
         # Some versions of Pydantic <2.8.0 have a bug and don’t allow assigning a
@@ -235,11 +202,12 @@ class Info(BaseModel):
         # To access properties that are not valid identifiers you can use `getattr`, e.g.
         # `getattr(obj, '$type')`
         def __getattr__(self, attr: str) -> object: ...
+
     else:
         __pydantic_extra__: Dict[str, object]
 
 
 class ReportQuerySentimentResponse(BaseModel):
-    data: List[Data]
-
     info: Info
+
+    data: List[Data]

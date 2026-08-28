@@ -1,8 +1,18 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 from __future__ import annotations
 
+import httpx
+
 from ...._compat import cached_property
+from ...._resource import SyncAPIResource, AsyncAPIResource
+from ...._response import (
+    to_raw_response_wrapper,
+    to_streamed_response_wrapper,
+    async_to_raw_response_wrapper,
+    async_to_streamed_response_wrapper,
+)
+from ...._base_client import make_request_options
 from .ad_account import (
     AdAccountResource,
     AsyncAdAccountResource,
@@ -11,7 +21,6 @@ from .ad_account import (
     AdAccountResourceWithStreamingResponse,
     AsyncAdAccountResourceWithStreamingResponse,
 )
-from ...._resource import SyncAPIResource, AsyncAPIResource
 
 __all__ = ["OpenAIAdsResource", "AsyncOpenAIAdsResource"]
 
@@ -23,21 +32,10 @@ class OpenAIAdsResource(SyncAPIResource):
 
     @cached_property
     def with_raw_response(self) -> OpenAIAdsResourceWithRawResponse:
-        """
-        This property can be used as a prefix for any HTTP method call to return
-        the raw response object instead of the parsed content.
-
-        For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#accessing-raw-response-data-eg-headers
-        """
         return OpenAIAdsResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> OpenAIAdsResourceWithStreamingResponse:
-        """
-        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
-
-        For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#with_streaming_response
-        """
         return OpenAIAdsResourceWithStreamingResponse(self)
 
 
@@ -48,21 +46,10 @@ class AsyncOpenAIAdsResource(AsyncAPIResource):
 
     @cached_property
     def with_raw_response(self) -> AsyncOpenAIAdsResourceWithRawResponse:
-        """
-        This property can be used as a prefix for any HTTP method call to return
-        the raw response object instead of the parsed content.
-
-        For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#accessing-raw-response-data-eg-headers
-        """
         return AsyncOpenAIAdsResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> AsyncOpenAIAdsResourceWithStreamingResponse:
-        """
-        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
-
-        For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#with_streaming_response
-        """
         return AsyncOpenAIAdsResourceWithStreamingResponse(self)
 
 

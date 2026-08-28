@@ -1,4 +1,4 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 from typing import List, Union
 from typing_extensions import Literal
@@ -9,9 +9,8 @@ __all__ = ["BotNameFilter"]
 
 
 class BotNameFilter(BaseModel):
-    """Filter by bot name (user agent).
-
-    Values come from analytics data and should
+    """
+    Filter by bot name (user agent). Values come from analytics data and should
     not be enum-constrained because web-v2 may send newly cataloged user-agent names.
     """
 

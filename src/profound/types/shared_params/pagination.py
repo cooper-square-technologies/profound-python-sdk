@@ -1,4 +1,4 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 from __future__ import annotations
 
@@ -8,8 +8,6 @@ __all__ = ["Pagination"]
 
 
 class Pagination(TypedDict, total=False):
-    """Offset-based pagination parameters."""
-
     limit: int
     """Maximum number of results to return. Default is 10,000, maximum is 50,000."""
 

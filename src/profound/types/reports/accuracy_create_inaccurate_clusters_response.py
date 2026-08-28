@@ -1,4 +1,6 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
+
+from __future__ import annotations
 
 from typing import List, Optional
 
@@ -16,13 +18,13 @@ class DataModel(BaseModel):
 
 
 class Data(BaseModel):
+    cluster_id: str = FieldInfo(alias="clusterId")
+
     canonical_claim: str = FieldInfo(alias="canonicalClaim")
 
-    citation_hostnames: List[str] = FieldInfo(alias="citationHostnames")
+    neutral_theme: Optional[str] = FieldInfo(alias="neutralTheme", default=None)
 
-    claim_count: int = FieldInfo(alias="claimCount")
-
-    cluster_id: str = FieldInfo(alias="clusterId")
+    description: Optional[str] = None
 
     kb_path: str = FieldInfo(alias="kbPath")
 
@@ -30,19 +32,19 @@ class Data(BaseModel):
 
     reasoning: str
 
-    response_count: int = FieldInfo(alias="responseCount")
+    claim_count: int = FieldInfo(alias="claimCount")
 
-    response_share: float = FieldInfo(alias="responseShare")
+    response_count: int = FieldInfo(alias="responseCount")
 
     total_response_count: int = FieldInfo(alias="totalResponseCount")
 
-    description: Optional[str] = None
-
-    models: Optional[List[DataModel]] = None
-
-    neutral_theme: Optional[str] = FieldInfo(alias="neutralTheme", default=None)
+    response_share: float = FieldInfo(alias="responseShare")
 
     response_share_delta: Optional[float] = FieldInfo(alias="responseShareDelta", default=None)
+
+    citation_hostnames: List[str] = FieldInfo(alias="citationHostnames")
+
+    models: Optional[List[DataModel]] = None
 
 
 class AccuracyCreateInaccurateClustersResponse(BaseModel):

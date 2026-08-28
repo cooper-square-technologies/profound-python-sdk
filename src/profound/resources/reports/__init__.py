@@ -1,13 +1,5 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
-from .social import (
-    SocialResource,
-    AsyncSocialResource,
-    SocialResourceWithRawResponse,
-    AsyncSocialResourceWithRawResponse,
-    SocialResourceWithStreamingResponse,
-    AsyncSocialResourceWithStreamingResponse,
-)
 from .reports import (
     ReportsResource,
     AsyncReportsResource,
@@ -15,30 +7,6 @@ from .reports import (
     AsyncReportsResourceWithRawResponse,
     ReportsResourceWithStreamingResponse,
     AsyncReportsResourceWithStreamingResponse,
-)
-from .accuracy import (
-    AccuracyResource,
-    AsyncAccuracyResource,
-    AccuracyResourceWithRawResponse,
-    AsyncAccuracyResourceWithRawResponse,
-    AccuracyResourceWithStreamingResponse,
-    AsyncAccuracyResourceWithStreamingResponse,
-)
-from .shopping import (
-    ShoppingResource,
-    AsyncShoppingResource,
-    ShoppingResourceWithRawResponse,
-    AsyncShoppingResourceWithRawResponse,
-    ShoppingResourceWithStreamingResponse,
-    AsyncShoppingResourceWithStreamingResponse,
-)
-from .factcheck import (
-    FactcheckResource,
-    AsyncFactcheckResource,
-    FactcheckResourceWithRawResponse,
-    AsyncFactcheckResourceWithRawResponse,
-    FactcheckResourceWithStreamingResponse,
-    AsyncFactcheckResourceWithStreamingResponse,
 )
 from .web_search_results import (
     WebSearchResultsResource,
@@ -48,8 +16,46 @@ from .web_search_results import (
     WebSearchResultsResourceWithStreamingResponse,
     AsyncWebSearchResultsResourceWithStreamingResponse,
 )
+from .shopping import (
+    ShoppingResource,
+    AsyncShoppingResource,
+    ShoppingResourceWithRawResponse,
+    AsyncShoppingResourceWithRawResponse,
+    ShoppingResourceWithStreamingResponse,
+    AsyncShoppingResourceWithStreamingResponse,
+)
+from .accuracy import (
+    AccuracyResource,
+    AsyncAccuracyResource,
+    AccuracyResourceWithRawResponse,
+    AsyncAccuracyResourceWithRawResponse,
+    AccuracyResourceWithStreamingResponse,
+    AsyncAccuracyResourceWithStreamingResponse,
+)
+from .factcheck import (
+    FactcheckResource,
+    AsyncFactcheckResource,
+    FactcheckResourceWithRawResponse,
+    AsyncFactcheckResourceWithRawResponse,
+    FactcheckResourceWithStreamingResponse,
+    AsyncFactcheckResourceWithStreamingResponse,
+)
+from .social import (
+    SocialResource,
+    AsyncSocialResource,
+    SocialResourceWithRawResponse,
+    AsyncSocialResourceWithRawResponse,
+    SocialResourceWithStreamingResponse,
+    AsyncSocialResourceWithStreamingResponse,
+)
 
 __all__ = [
+    "ReportsResource",
+    "AsyncReportsResource",
+    "ReportsResourceWithRawResponse",
+    "AsyncReportsResourceWithRawResponse",
+    "ReportsResourceWithStreamingResponse",
+    "AsyncReportsResourceWithStreamingResponse",
     "WebSearchResultsResource",
     "AsyncWebSearchResultsResource",
     "WebSearchResultsResourceWithRawResponse",
@@ -80,10 +86,4 @@ __all__ = [
     "AsyncSocialResourceWithRawResponse",
     "SocialResourceWithStreamingResponse",
     "AsyncSocialResourceWithStreamingResponse",
-    "ReportsResource",
-    "AsyncReportsResource",
-    "ReportsResourceWithRawResponse",
-    "AsyncReportsResourceWithRawResponse",
-    "ReportsResourceWithStreamingResponse",
-    "AsyncReportsResourceWithStreamingResponse",
 ]

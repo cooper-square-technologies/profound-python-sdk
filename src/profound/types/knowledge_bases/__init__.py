@@ -1,14 +1,14 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 from __future__ import annotations
 
-from .folder_create_params import FolderCreateParams as FolderCreateParams
-from .folder_delete_params import FolderDeleteParams as FolderDeleteParams
-from .document_create_params import DocumentCreateParams as DocumentCreateParams
-from .document_delete_params import DocumentDeleteParams as DocumentDeleteParams
-from .document_update_params import DocumentUpdateParams as DocumentUpdateParams
-from .folder_create_response import FolderCreateResponse as FolderCreateResponse
-from .folder_delete_response import FolderDeleteResponse as FolderDeleteResponse
 from .document_create_response import DocumentCreateResponse as DocumentCreateResponse
-from .document_delete_response import DocumentDeleteResponse as DocumentDeleteResponse
+from .document_create_params import DocumentCreateParams as DocumentCreateParams
 from .document_update_response import DocumentUpdateResponse as DocumentUpdateResponse
+from .document_update_params import DocumentUpdateParams as DocumentUpdateParams
+from .document_delete_response import DocumentDeleteResponse as DocumentDeleteResponse
+from .document_delete_params import DocumentDeleteParams as DocumentDeleteParams
+from .folder_create_response import FolderCreateResponse as FolderCreateResponse
+from .folder_create_params import FolderCreateParams as FolderCreateParams
+from .folder_delete_response import FolderDeleteResponse as FolderDeleteResponse
+from .folder_delete_params import FolderDeleteParams as FolderDeleteParams

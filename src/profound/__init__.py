@@ -1,4 +1,4 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 import typing as _t
 
@@ -6,16 +6,16 @@ from . import types
 from ._types import NOT_GIVEN, Omit, NoneType, NotGiven, Transport, ProxiesTypes, omit, not_given
 from ._utils import file_from_path
 from ._client import (
-    ENVIRONMENTS,
     Client,
     Stream,
-    Timeout,
     Profound,
+    Timeout,
     Transport,
     AsyncClient,
     AsyncStream,
     AsyncProfound,
     RequestOptions,
+    ENVIRONMENTS,
 )
 from ._models import BaseModel
 from ._version import __title__, __version__
@@ -23,9 +23,9 @@ from ._response import APIResponse as APIResponse, AsyncAPIResponse as AsyncAPIR
 from ._constants import DEFAULT_TIMEOUT, DEFAULT_MAX_RETRIES, DEFAULT_CONNECTION_LIMITS
 from ._exceptions import (
     APIError,
+    ProfoundError,
     ConflictError,
     NotFoundError,
-    ProfoundError,
     APIStatusError,
     RateLimitError,
     APITimeoutError,
@@ -41,6 +41,7 @@ from ._base_client import DefaultHttpxClient, DefaultAioHttpClient, DefaultAsync
 from ._utils._logs import setup_logging as _setup_logging
 
 __all__ = [
+    "ENVIRONMENTS",
     "types",
     "__version__",
     "__title__",
@@ -74,7 +75,6 @@ __all__ = [
     "AsyncStream",
     "Profound",
     "AsyncProfound",
-    "ENVIRONMENTS",
     "file_from_path",
     "BaseModel",
     "DEFAULT_TIMEOUT",
@@ -90,15 +90,11 @@ if not _t.TYPE_CHECKING:
 
 _setup_logging()
 
-# Update the __module__ attribute for exported symbols so that
-# error messages point to this module instead of the module
-# it was originally defined in, e.g.
-# profound._exceptions.NotFoundError -> profound.NotFoundError
 __locals = locals()
-for __name in __all__:
-    if not __name.startswith("__"):
+__module_name = __name__
+for __export_name in __all__:
+    if not __export_name.startswith("__"):
         try:
-            __locals[__name].__module__ = "profound"
+            __locals[__export_name].__module__ = __module_name
         except (TypeError, AttributeError):
-            # Some of our exported symbols are builtins which we can't set attributes for.
             pass

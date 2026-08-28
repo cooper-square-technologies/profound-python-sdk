@@ -1,39 +1,34 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
-from typing import TYPE_CHECKING, Dict, List, Optional
+from typing import Dict, List, Optional, TYPE_CHECKING
 
 from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-__all__ = ["ReportQueryQueryFanoutsResponse", "Data", "Info"]
+__all__ = ["ReportQueryQueryFanoutsResponse", "Info", "Data"]
 
 
 class Data(BaseModel):
-    """One row.
-
-    Group dimensions are plain values (not `{id, name}`); metrics present depend on `metrics`.
-    """
-
     date: Optional[str] = None
 
-    fanouts_per_execution: Optional[float] = None
-
     model: Optional[str] = None
+
+    region: Optional[str] = None
 
     prompt: Optional[str] = None
 
     query: Optional[str] = None
 
-    query_variations: Optional[int] = None
+    total_fanouts: Optional[float] = None
 
-    rank: Optional[int] = None
-
-    region: Optional[str] = None
+    fanouts_per_execution: Optional[float] = None
 
     share: Optional[float] = None
 
-    total_fanouts: Optional[float] = None
+    query_variations: Optional[int] = None
+
+    rank: Optional[int] = None
 
     if TYPE_CHECKING:
         # Some versions of Pydantic <2.8.0 have a bug and don’t allow assigning a
@@ -44,22 +39,20 @@ class Data(BaseModel):
         # To access properties that are not valid identifiers you can use `getattr`, e.g.
         # `getattr(obj, '$type')`
         def __getattr__(self, attr: str) -> object: ...
+
     else:
         __pydantic_extra__: Dict[str, object]
 
 
 class Info(BaseModel):
+    total_results: Optional[int] = None
+    """Total rows matching the query before pagination (null when not computed)."""
+
     count: int
     """Number of rows returned in `data` for this page."""
 
-    coverage_note: str
-    """Caveat about which runs the fanout metrics cover."""
-
-    end_date: str
-    """Echoed request end date (YYYY-MM-DD, ET)."""
-
-    metrics: List[str]
-    """Fanout metrics returned per row."""
+    next_cursor: Optional[str] = None
+    """Opaque cursor for the next page; null on the last page."""
 
     models: List[str]
     """Display names of the models the report covers."""
@@ -67,14 +60,17 @@ class Info(BaseModel):
     start_date: str
     """Echoed request start date (YYYY-MM-DD, ET)."""
 
+    end_date: str
+    """Echoed request end date (YYYY-MM-DD, ET)."""
+
     filter: Optional[Dict[str, object]] = None
     """Echoed normalized filter tree, or null when no filter was sent."""
 
-    next_cursor: Optional[str] = None
-    """Opaque cursor for the next page; null on the last page."""
+    metrics: List[str]
+    """Fanout metrics returned per row."""
 
-    total_results: Optional[int] = None
-    """Total rows matching the query before pagination (null when not computed)."""
+    coverage_note: str
+    """Caveat about which runs the fanout metrics cover."""
 
     if TYPE_CHECKING:
         # Some versions of Pydantic <2.8.0 have a bug and don’t allow assigning a
@@ -85,11 +81,12 @@ class Info(BaseModel):
         # To access properties that are not valid identifiers you can use `getattr`, e.g.
         # `getattr(obj, '$type')`
         def __getattr__(self, attr: str) -> object: ...
+
     else:
         __pydantic_extra__: Dict[str, object]
 
 
 class ReportQueryQueryFanoutsResponse(BaseModel):
-    data: List[Data]
-
     info: Info
+
+    data: List[Data]

@@ -1,12 +1,12 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 from __future__ import annotations
 
-from typing import Any, Dict, List, Union, Iterable, Optional, cast
+import httpx
+
+from typing import Dict, Iterable, List, Optional, Union
 from datetime import datetime
 from typing_extensions import Literal
-
-import httpx
 
 from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
@@ -18,11 +18,11 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ..._streaming import Stream, AsyncStream
 from ..._base_client import make_request_options
-from ...types.reports import web_search_result_query_params, web_search_result_stream_params
-from ...types.shared_params.pagination import Pagination
+from ..._streaming import Stream, AsyncStream
 from ...types.reports.web_search_result_query_response import WebSearchResultQueryResponse
+from ...types.shared_params.pagination import Pagination
+from ...types.reports import web_search_result_query_params, web_search_result_stream_params
 from ...types.reports.web_search_result_stream_response import WebSearchResultStreamResponse
 
 __all__ = ["WebSearchResultsResource", "AsyncWebSearchResultsResource"]
@@ -31,30 +31,15 @@ __all__ = ["WebSearchResultsResource", "AsyncWebSearchResultsResource"]
 class WebSearchResultsResource(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> WebSearchResultsResourceWithRawResponse:
-        """
-        This property can be used as a prefix for any HTTP method call to return
-        the raw response object instead of the parsed content.
-
-        For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#accessing-raw-response-data-eg-headers
-        """
         return WebSearchResultsResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> WebSearchResultsResourceWithStreamingResponse:
-        """
-        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
-
-        For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#with_streaming_response
-        """
         return WebSearchResultsResourceWithStreamingResponse(self)
 
     def query(
         self,
         *,
-        category_id: str,
-        end_date: Union[str, datetime],
-        metrics: List[Literal["count", "search_share"]],
-        start_date: Union[str, datetime],
         date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
         dimensions: List[
             Literal[
@@ -75,9 +60,13 @@ class WebSearchResultsResource(SyncAPIResource):
             ]
         ]
         | Omit = omit,
-        filters: Iterable[web_search_result_query_params.Filter] | Omit = omit,
+        metrics: List[Literal["count", "search_share"]],
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
         pagination: Pagination | Omit = omit,
+        category_id: str,
+        start_date: Union[str, datetime],
+        end_date: Union[str, datetime],
+        filters: Iterable[web_search_result_query_params.Filter] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -89,51 +78,49 @@ class WebSearchResultsResource(SyncAPIResource):
         Get web search results for a given category.
 
         Args:
-          end_date: End date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full
-              ISO timestamp.
+            date_interval: Date interval for the report. (only used with date dimension)
+            dimensions: Dimensions to group the report by.
+            metrics: Metrics to include. `search_share` is the per-prompt occurrence rate.
+            order_by: Custom ordering of the report results.
+            pagination: Pagination settings for the report results.
+            category_id: Body parameter.
+            start_date: Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
+            end_date: End date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
+            filters: List of filters to apply to the web search results report.
+            extra_headers: Send extra headers with the request.
+            extra_query: Send extra query parameters with the request.
+            extra_body: Send extra JSON properties with the request.
+            timeout: Override the client-level default timeout for this request, in seconds.
 
-          metrics: Metrics to include. `search_share` is the per-prompt occurrence rate.
+        Returns:
+            WebSearchResultQueryResponse: Successful Response
 
-          start_date: Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or
-              full ISO timestamp.
-
-          date_interval: Date interval for the report. (only used with date dimension)
-
-          dimensions: Dimensions to group the report by.
-
-          filters: List of filters to apply to the web search results report.
-
-          order_by: Custom ordering of the report results.
-
-                  The order is a record of key-value pairs where:
-                  - `key` is the field to order by, which can be a metric or dimension
-                  - `value` is the direction of the order, either `asc` for ascending or `desc` for descending.
-
-                  When not specified, the default order is the first metric in the query descending.
-
-          pagination: Pagination settings for the report results.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
+        Example:
+            ```python
+            web_search_result = client.reports.web_search_results.query(
+                date_interval="day",
+                dimensions=[],
+                metrics=[],
+                order_by={},
+                category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+                start_date="2024-01-01T00:00:00.000Z",
+                end_date="2024-01-01T00:00:00.000Z",
+            )
+            ```
         """
         return self._post(
             "/v1/reports/web-search-results",
             body=maybe_transform(
                 {
-                    "category_id": category_id,
-                    "end_date": end_date,
-                    "metrics": metrics,
-                    "start_date": start_date,
                     "date_interval": date_interval,
                     "dimensions": dimensions,
-                    "filters": filters,
+                    "metrics": metrics,
                     "order_by": order_by,
                     "pagination": pagination,
+                    "category_id": category_id,
+                    "start_date": start_date,
+                    "end_date": end_date,
+                    "filters": filters,
                 },
                 web_search_result_query_params.WebSearchResultQueryParams,
             ),
@@ -146,10 +133,6 @@ class WebSearchResultsResource(SyncAPIResource):
     def stream(
         self,
         *,
-        category_id: str,
-        end_date: Union[str, datetime],
-        metrics: List[Literal["count", "search_share"]],
-        start_date: Union[str, datetime],
         date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
         dimensions: List[
             Literal[
@@ -170,9 +153,13 @@ class WebSearchResultsResource(SyncAPIResource):
             ]
         ]
         | Omit = omit,
-        filters: Iterable[web_search_result_stream_params.Filter] | Omit = omit,
+        metrics: List[Literal["count", "search_share"]],
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
         pagination: Optional[Pagination] | Omit = omit,
+        category_id: str,
+        start_date: Union[str, datetime],
+        end_date: Union[str, datetime],
+        filters: Iterable[web_search_result_stream_params.Filter] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -180,66 +167,64 @@ class WebSearchResultsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Stream[WebSearchResultStreamResponse]:
-        """Stream Web Search Results
+        """
+        Stream Web Search Results
 
         Args:
-          end_date: End date for the report.
+            date_interval: Date interval for the report. (only used with date dimension)
+            dimensions: Dimensions to group the report by.
+            metrics: Metrics to include. `search_share` is the per-prompt occurrence rate.
+            order_by: Custom ordering of the report results.
+            pagination: Body parameter.
+            category_id: Body parameter.
+            start_date: Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
+            end_date: End date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
+            filters: List of filters to apply to the web search results report.
+            extra_headers: Send extra headers with the request.
+            extra_query: Send extra query parameters with the request.
+            extra_body: Send extra JSON properties with the request.
+            timeout: Override the client-level default timeout for this request, in seconds.
 
-        Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full
-              ISO timestamp.
+        Returns:
+            Stream[WebSearchResultStreamResponse]: Server-sent events stream. Emits a `summary` event first, then one `row` event per streamed row.
 
-          metrics: Metrics to include. `search_share` is the per-prompt occurrence rate.
+        Example:
+            ```python
+            stream = client.reports.web_search_results.stream(
+                date_interval="day",
+                dimensions=[],
+                metrics=[],
+                order_by={},
+                category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+                start_date="2024-01-01T00:00:00.000Z",
+                end_date="2024-01-01T00:00:00.000Z",
+            )
 
-          start_date: Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or
-              full ISO timestamp.
-
-          date_interval: Date interval for the report. (only used with date dimension)
-
-          dimensions: Dimensions to group the report by.
-
-          filters: List of filters to apply to the web search results report.
-
-          order_by: Custom ordering of the report results.
-
-                  The order is a record of key-value pairs where:
-                  - `key` is the field to order by, which can be a metric or dimension
-                  - `value` is the direction of the order, either `asc` for ascending or `desc` for descending.
-
-                  When not specified, the default order is the first metric in the query descending.
-
-          pagination: Offset-based pagination parameters.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
+            for event in stream:
+                print(event)
+            ```
         """
         extra_headers = {"Accept": "text/event-stream", **(extra_headers or {})}
         return self._post(
             "/v1/reports/web-search-results/stream",
             body=maybe_transform(
                 {
-                    "category_id": category_id,
-                    "end_date": end_date,
-                    "metrics": metrics,
-                    "start_date": start_date,
                     "date_interval": date_interval,
                     "dimensions": dimensions,
-                    "filters": filters,
+                    "metrics": metrics,
                     "order_by": order_by,
                     "pagination": pagination,
+                    "category_id": category_id,
+                    "start_date": start_date,
+                    "end_date": end_date,
+                    "filters": filters,
                 },
                 web_search_result_stream_params.WebSearchResultStreamParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=cast(
-                Any, WebSearchResultStreamResponse
-            ),  # Union types cannot be passed in as arguments in the type system
+            cast_to=WebSearchResultStreamResponse,
             stream=True,
             stream_cls=Stream[WebSearchResultStreamResponse],
         )
@@ -248,30 +233,15 @@ class WebSearchResultsResource(SyncAPIResource):
 class AsyncWebSearchResultsResource(AsyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AsyncWebSearchResultsResourceWithRawResponse:
-        """
-        This property can be used as a prefix for any HTTP method call to return
-        the raw response object instead of the parsed content.
-
-        For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#accessing-raw-response-data-eg-headers
-        """
         return AsyncWebSearchResultsResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> AsyncWebSearchResultsResourceWithStreamingResponse:
-        """
-        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
-
-        For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#with_streaming_response
-        """
         return AsyncWebSearchResultsResourceWithStreamingResponse(self)
 
     async def query(
         self,
         *,
-        category_id: str,
-        end_date: Union[str, datetime],
-        metrics: List[Literal["count", "search_share"]],
-        start_date: Union[str, datetime],
         date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
         dimensions: List[
             Literal[
@@ -292,9 +262,13 @@ class AsyncWebSearchResultsResource(AsyncAPIResource):
             ]
         ]
         | Omit = omit,
-        filters: Iterable[web_search_result_query_params.Filter] | Omit = omit,
+        metrics: List[Literal["count", "search_share"]],
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
         pagination: Pagination | Omit = omit,
+        category_id: str,
+        start_date: Union[str, datetime],
+        end_date: Union[str, datetime],
+        filters: Iterable[web_search_result_query_params.Filter] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -306,51 +280,49 @@ class AsyncWebSearchResultsResource(AsyncAPIResource):
         Get web search results for a given category.
 
         Args:
-          end_date: End date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full
-              ISO timestamp.
+            date_interval: Date interval for the report. (only used with date dimension)
+            dimensions: Dimensions to group the report by.
+            metrics: Metrics to include. `search_share` is the per-prompt occurrence rate.
+            order_by: Custom ordering of the report results.
+            pagination: Pagination settings for the report results.
+            category_id: Body parameter.
+            start_date: Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
+            end_date: End date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
+            filters: List of filters to apply to the web search results report.
+            extra_headers: Send extra headers with the request.
+            extra_query: Send extra query parameters with the request.
+            extra_body: Send extra JSON properties with the request.
+            timeout: Override the client-level default timeout for this request, in seconds.
 
-          metrics: Metrics to include. `search_share` is the per-prompt occurrence rate.
+        Returns:
+            WebSearchResultQueryResponse: Successful Response
 
-          start_date: Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or
-              full ISO timestamp.
-
-          date_interval: Date interval for the report. (only used with date dimension)
-
-          dimensions: Dimensions to group the report by.
-
-          filters: List of filters to apply to the web search results report.
-
-          order_by: Custom ordering of the report results.
-
-                  The order is a record of key-value pairs where:
-                  - `key` is the field to order by, which can be a metric or dimension
-                  - `value` is the direction of the order, either `asc` for ascending or `desc` for descending.
-
-                  When not specified, the default order is the first metric in the query descending.
-
-          pagination: Pagination settings for the report results.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
+        Example:
+            ```python
+            web_search_result = await client.reports.web_search_results.query(
+                date_interval="day",
+                dimensions=[],
+                metrics=[],
+                order_by={},
+                category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+                start_date="2024-01-01T00:00:00.000Z",
+                end_date="2024-01-01T00:00:00.000Z",
+            )
+            ```
         """
         return await self._post(
             "/v1/reports/web-search-results",
             body=await async_maybe_transform(
                 {
-                    "category_id": category_id,
-                    "end_date": end_date,
-                    "metrics": metrics,
-                    "start_date": start_date,
                     "date_interval": date_interval,
                     "dimensions": dimensions,
-                    "filters": filters,
+                    "metrics": metrics,
                     "order_by": order_by,
                     "pagination": pagination,
+                    "category_id": category_id,
+                    "start_date": start_date,
+                    "end_date": end_date,
+                    "filters": filters,
                 },
                 web_search_result_query_params.WebSearchResultQueryParams,
             ),
@@ -363,10 +335,6 @@ class AsyncWebSearchResultsResource(AsyncAPIResource):
     async def stream(
         self,
         *,
-        category_id: str,
-        end_date: Union[str, datetime],
-        metrics: List[Literal["count", "search_share"]],
-        start_date: Union[str, datetime],
         date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"] | Omit = omit,
         dimensions: List[
             Literal[
@@ -387,9 +355,13 @@ class AsyncWebSearchResultsResource(AsyncAPIResource):
             ]
         ]
         | Omit = omit,
-        filters: Iterable[web_search_result_stream_params.Filter] | Omit = omit,
+        metrics: List[Literal["count", "search_share"]],
         order_by: Dict[str, Literal["asc", "desc"]] | Omit = omit,
         pagination: Optional[Pagination] | Omit = omit,
+        category_id: str,
+        start_date: Union[str, datetime],
+        end_date: Union[str, datetime],
+        filters: Iterable[web_search_result_stream_params.Filter] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -397,66 +369,64 @@ class AsyncWebSearchResultsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncStream[WebSearchResultStreamResponse]:
-        """Stream Web Search Results
+        """
+        Stream Web Search Results
 
         Args:
-          end_date: End date for the report.
+            date_interval: Date interval for the report. (only used with date dimension)
+            dimensions: Dimensions to group the report by.
+            metrics: Metrics to include. `search_share` is the per-prompt occurrence rate.
+            order_by: Custom ordering of the report results.
+            pagination: Body parameter.
+            category_id: Body parameter.
+            start_date: Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
+            end_date: End date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
+            filters: List of filters to apply to the web search results report.
+            extra_headers: Send extra headers with the request.
+            extra_query: Send extra query parameters with the request.
+            extra_body: Send extra JSON properties with the request.
+            timeout: Override the client-level default timeout for this request, in seconds.
 
-        Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full
-              ISO timestamp.
+        Returns:
+            AsyncStream[WebSearchResultStreamResponse]: Server-sent events stream. Emits a `summary` event first, then one `row` event per streamed row.
 
-          metrics: Metrics to include. `search_share` is the per-prompt occurrence rate.
+        Example:
+            ```python
+            stream = await client.reports.web_search_results.stream(
+                date_interval="day",
+                dimensions=[],
+                metrics=[],
+                order_by={},
+                category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+                start_date="2024-01-01T00:00:00.000Z",
+                end_date="2024-01-01T00:00:00.000Z",
+            )
 
-          start_date: Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or
-              full ISO timestamp.
-
-          date_interval: Date interval for the report. (only used with date dimension)
-
-          dimensions: Dimensions to group the report by.
-
-          filters: List of filters to apply to the web search results report.
-
-          order_by: Custom ordering of the report results.
-
-                  The order is a record of key-value pairs where:
-                  - `key` is the field to order by, which can be a metric or dimension
-                  - `value` is the direction of the order, either `asc` for ascending or `desc` for descending.
-
-                  When not specified, the default order is the first metric in the query descending.
-
-          pagination: Offset-based pagination parameters.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
+            async for event in stream:
+                print(event)
+            ```
         """
         extra_headers = {"Accept": "text/event-stream", **(extra_headers or {})}
         return await self._post(
             "/v1/reports/web-search-results/stream",
             body=await async_maybe_transform(
                 {
-                    "category_id": category_id,
-                    "end_date": end_date,
-                    "metrics": metrics,
-                    "start_date": start_date,
                     "date_interval": date_interval,
                     "dimensions": dimensions,
-                    "filters": filters,
+                    "metrics": metrics,
                     "order_by": order_by,
                     "pagination": pagination,
+                    "category_id": category_id,
+                    "start_date": start_date,
+                    "end_date": end_date,
+                    "filters": filters,
                 },
                 web_search_result_stream_params.WebSearchResultStreamParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=cast(
-                Any, WebSearchResultStreamResponse
-            ),  # Union types cannot be passed in as arguments in the type system
+            cast_to=WebSearchResultStreamResponse,
             stream=True,
             stream_cls=AsyncStream[WebSearchResultStreamResponse],
         )

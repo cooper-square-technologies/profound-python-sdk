@@ -1,13 +1,5 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
-from .ad_account import (
-    AdAccountResource,
-    AsyncAdAccountResource,
-    AdAccountResourceWithRawResponse,
-    AsyncAdAccountResourceWithRawResponse,
-    AdAccountResourceWithStreamingResponse,
-    AsyncAdAccountResourceWithStreamingResponse,
-)
 from .openai_ads import (
     OpenAIAdsResource,
     AsyncOpenAIAdsResource,
@@ -16,18 +8,26 @@ from .openai_ads import (
     OpenAIAdsResourceWithStreamingResponse,
     AsyncOpenAIAdsResourceWithStreamingResponse,
 )
+from .ad_account import (
+    AdAccountResource,
+    AsyncAdAccountResource,
+    AdAccountResourceWithRawResponse,
+    AsyncAdAccountResourceWithRawResponse,
+    AdAccountResourceWithStreamingResponse,
+    AsyncAdAccountResourceWithStreamingResponse,
+)
 
 __all__ = [
-    "AdAccountResource",
-    "AsyncAdAccountResource",
-    "AdAccountResourceWithRawResponse",
-    "AsyncAdAccountResourceWithRawResponse",
-    "AdAccountResourceWithStreamingResponse",
-    "AsyncAdAccountResourceWithStreamingResponse",
     "OpenAIAdsResource",
     "AsyncOpenAIAdsResource",
     "OpenAIAdsResourceWithRawResponse",
     "AsyncOpenAIAdsResourceWithRawResponse",
     "OpenAIAdsResourceWithStreamingResponse",
     "AsyncOpenAIAdsResourceWithStreamingResponse",
+    "AdAccountResource",
+    "AsyncAdAccountResource",
+    "AdAccountResourceWithRawResponse",
+    "AsyncAdAccountResourceWithRawResponse",
+    "AdAccountResourceWithStreamingResponse",
+    "AsyncAdAccountResourceWithStreamingResponse",
 ]

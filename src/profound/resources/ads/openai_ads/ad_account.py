@@ -1,13 +1,14 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 from __future__ import annotations
 
-from typing import Optional
-from typing_extensions import Literal
-
 import httpx
 
-from ...._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
+from typing import Optional
+from typing_extensions import Literal
+from ...._types import SequenceNotStr
+
+from ...._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ...._utils import maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
@@ -18,8 +19,8 @@ from ...._response import (
     async_to_streamed_response_wrapper,
 )
 from ...._base_client import make_request_options
-from ....types.ads.openai_ads import ad_account_retrieve_insights_params
 from ....types.ads.openai_ads.ad_account_retrieve_insights_response import AdAccountRetrieveInsightsResponse
+from ....types.ads.openai_ads import ad_account_retrieve_insights_params
 
 __all__ = ["AdAccountResource", "AsyncAdAccountResource"]
 
@@ -27,33 +28,22 @@ __all__ = ["AdAccountResource", "AsyncAdAccountResource"]
 class AdAccountResource(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AdAccountResourceWithRawResponse:
-        """
-        This property can be used as a prefix for any HTTP method call to return
-        the raw response object instead of the parsed content.
-
-        For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#accessing-raw-response-data-eg-headers
-        """
         return AdAccountResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> AdAccountResourceWithStreamingResponse:
-        """
-        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
-
-        For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#with_streaming_response
-        """
         return AdAccountResourceWithStreamingResponse(self)
 
     def retrieve_insights(
         self,
         *,
-        after: Optional[str] | Omit = omit,
-        aggregation_level: Optional[Literal["ad_account", "campaign", "ad_group", "ad"]] | Omit = omit,
-        before: Optional[str] | Omit = omit,
-        limit: Optional[int] | Omit = omit,
         organization_id: Optional[str] | Omit = omit,
+        aggregation_level: Optional[Literal["ad_account", "campaign", "ad_group", "ad"]] | Omit = omit,
         time_granularity: Optional[Literal["hourly", "daily", "monthly", "none"]] | Omit = omit,
         time_ranges: Optional[SequenceNotStr[str]] | Omit = omit,
+        limit: Optional[int] | Omit = omit,
+        after: Optional[str] | Omit = omit,
+        before: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -64,33 +54,30 @@ class AdAccountResource(SyncAPIResource):
         """
         Get ad account insights for the organization's OpenAI Ads partner brand.
 
-        `aggregation_level=campaign` returns one row per campaign (with `campaign_id` /
-        `campaign_name` and all metrics), so every campaign's insights come back in a
-        single call; `time_granularity=daily` gives per-day rows (e.g. daily spend).
+        `aggregation_level=campaign` returns one row per campaign (with `campaign_id`
+        / `campaign_name` and all metrics), so every campaign's insights come back in
+        a single call; `time_granularity=daily` gives per-day rows (e.g. daily spend).
 
         Args:
-          after: Return items after this ID (forward pagination).
+            organization_id: Organization scope for API keys that can access multiple organizations.
+            aggregation_level: Row entity for the insights breakdown. `campaign` returns one row per campaign.
+            time_granularity: Time bucket for the rows; `none` or omitted returns totals over the whole range.
+            time_ranges: Time ranges as JSON objects, e.g. `{"type": "date_range", "since": "2026-07-01", "until": "2026-07-18"}`.
+            limit: Maximum rows to return.
+            after: Return items after this ID (forward pagination).
+            before: Return items before this ID (backward pagination).
+            extra_headers: Send extra headers with the request.
+            extra_query: Send extra query parameters with the request.
+            extra_body: Send extra JSON properties with the request.
+            timeout: Override the client-level default timeout for this request, in seconds.
 
-          aggregation_level: Row entity for the insights breakdown. `campaign` returns one row per campaign.
+        Returns:
+            AdAccountRetrieveInsightsResponse: Successful Response
 
-          before: Return items before this ID (backward pagination).
-
-          limit: Maximum rows to return.
-
-          organization_id: Organization scope for API keys that can access multiple organizations.
-
-          time_granularity: Time bucket for the rows; `none` or omitted returns totals over the whole range.
-
-          time_ranges: Time ranges as JSON objects, e.g.
-              `{"type": "date_range", "since": "2026-07-01", "until": "2026-07-18"}`.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
+        Example:
+            ```python
+            ad_account = client.ads.openai_ads.ad_account.retrieve_insights()
+            ```
         """
         return self._get(
             "/v1/ads/openai-ads/ad-account/insights",
@@ -101,13 +88,13 @@ class AdAccountResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "after": after,
-                        "aggregation_level": aggregation_level,
-                        "before": before,
-                        "limit": limit,
                         "organization_id": organization_id,
+                        "aggregation_level": aggregation_level,
                         "time_granularity": time_granularity,
                         "time_ranges": time_ranges,
+                        "limit": limit,
+                        "after": after,
+                        "before": before,
                     },
                     ad_account_retrieve_insights_params.AdAccountRetrieveInsightsParams,
                 ),
@@ -119,33 +106,22 @@ class AdAccountResource(SyncAPIResource):
 class AsyncAdAccountResource(AsyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AsyncAdAccountResourceWithRawResponse:
-        """
-        This property can be used as a prefix for any HTTP method call to return
-        the raw response object instead of the parsed content.
-
-        For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#accessing-raw-response-data-eg-headers
-        """
         return AsyncAdAccountResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> AsyncAdAccountResourceWithStreamingResponse:
-        """
-        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
-
-        For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#with_streaming_response
-        """
         return AsyncAdAccountResourceWithStreamingResponse(self)
 
     async def retrieve_insights(
         self,
         *,
-        after: Optional[str] | Omit = omit,
-        aggregation_level: Optional[Literal["ad_account", "campaign", "ad_group", "ad"]] | Omit = omit,
-        before: Optional[str] | Omit = omit,
-        limit: Optional[int] | Omit = omit,
         organization_id: Optional[str] | Omit = omit,
+        aggregation_level: Optional[Literal["ad_account", "campaign", "ad_group", "ad"]] | Omit = omit,
         time_granularity: Optional[Literal["hourly", "daily", "monthly", "none"]] | Omit = omit,
         time_ranges: Optional[SequenceNotStr[str]] | Omit = omit,
+        limit: Optional[int] | Omit = omit,
+        after: Optional[str] | Omit = omit,
+        before: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -156,33 +132,30 @@ class AsyncAdAccountResource(AsyncAPIResource):
         """
         Get ad account insights for the organization's OpenAI Ads partner brand.
 
-        `aggregation_level=campaign` returns one row per campaign (with `campaign_id` /
-        `campaign_name` and all metrics), so every campaign's insights come back in a
-        single call; `time_granularity=daily` gives per-day rows (e.g. daily spend).
+        `aggregation_level=campaign` returns one row per campaign (with `campaign_id`
+        / `campaign_name` and all metrics), so every campaign's insights come back in
+        a single call; `time_granularity=daily` gives per-day rows (e.g. daily spend).
 
         Args:
-          after: Return items after this ID (forward pagination).
+            organization_id: Organization scope for API keys that can access multiple organizations.
+            aggregation_level: Row entity for the insights breakdown. `campaign` returns one row per campaign.
+            time_granularity: Time bucket for the rows; `none` or omitted returns totals over the whole range.
+            time_ranges: Time ranges as JSON objects, e.g. `{"type": "date_range", "since": "2026-07-01", "until": "2026-07-18"}`.
+            limit: Maximum rows to return.
+            after: Return items after this ID (forward pagination).
+            before: Return items before this ID (backward pagination).
+            extra_headers: Send extra headers with the request.
+            extra_query: Send extra query parameters with the request.
+            extra_body: Send extra JSON properties with the request.
+            timeout: Override the client-level default timeout for this request, in seconds.
 
-          aggregation_level: Row entity for the insights breakdown. `campaign` returns one row per campaign.
+        Returns:
+            AdAccountRetrieveInsightsResponse: Successful Response
 
-          before: Return items before this ID (backward pagination).
-
-          limit: Maximum rows to return.
-
-          organization_id: Organization scope for API keys that can access multiple organizations.
-
-          time_granularity: Time bucket for the rows; `none` or omitted returns totals over the whole range.
-
-          time_ranges: Time ranges as JSON objects, e.g.
-              `{"type": "date_range", "since": "2026-07-01", "until": "2026-07-18"}`.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
+        Example:
+            ```python
+            ad_account = await client.ads.openai_ads.ad_account.retrieve_insights()
+            ```
         """
         return await self._get(
             "/v1/ads/openai-ads/ad-account/insights",
@@ -193,13 +166,13 @@ class AsyncAdAccountResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
-                        "after": after,
-                        "aggregation_level": aggregation_level,
-                        "before": before,
-                        "limit": limit,
                         "organization_id": organization_id,
+                        "aggregation_level": aggregation_level,
                         "time_granularity": time_granularity,
                         "time_ranges": time_ranges,
+                        "limit": limit,
+                        "after": after,
+                        "before": before,
                     },
                     ad_account_retrieve_insights_params.AdAccountRetrieveInsightsParams,
                 ),

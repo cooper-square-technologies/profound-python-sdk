@@ -1,4 +1,4 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 from __future__ import annotations
 
@@ -15,8 +15,8 @@ class DocumentCreateParams(TypedDict, total=False):
     text: Required[str]
     """Text content to add to the document."""
 
-    organization_id: Optional[str]
-    """Organization scope for API keys that can access multiple organizations."""
-
     folder: Optional[str]
     """Folder path to add the document under."""
+
+    organization_id: Optional[str]
+    """Organization scope for API keys that can access multiple organizations."""

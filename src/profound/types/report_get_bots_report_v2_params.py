@@ -1,77 +1,73 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 from __future__ import annotations
 
-from typing import Dict, List, Union, Iterable, Optional
+from typing import Dict, Iterable, List, Optional, Union
 from datetime import datetime
-from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
-
+from typing_extensions import Annotated, Literal, Required, TypeAlias, TypedDict
 from .._types import SequenceNotStr
+
 from .._utils import PropertyInfo
+
 from .shared_params.pagination import Pagination
 from .shared_params.path_filter import PathFilter
 from .shared_params.bot_name_filter import BotNameFilter
 from .shared_params.bot_provider_filter import BotProviderFilter
 
-__all__ = ["ReportGetBotsReportV2Params", "Filter", "FilterBotTypeFilter", "MetricFilter"]
+__all__ = ["ReportGetBotsReportV2Params", "MetricFilter", "Filter", "FilterBotTypeFilter"]
 
 
 class ReportGetBotsReportV2Params(TypedDict, total=False):
-    domain: Required[str]
-    """Domain to query logs for."""
-
-    metrics: Required[List[Literal["count", "citations", "indexing", "training", "last_visit", "agents"]]]
-
-    start_date: Required[Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]]
-    """Start date for logs.
-
-    Accepts: YYYY-MM-DD, YYYY-MM-DD HH:MM, YYYY-MM-DD HH:MM:SS, or full ISO
-    timestamp.
-    """
-
     date_interval: Literal["hour", "day", "week", "month", "quarter", "year", "relative_week"]
     """Date interval for the report. (only used with date dimension)"""
 
-    dimensions: List[Literal["date", "hour", "path", "bot_name", "bot_provider", "bot_type"]]
+    dimensions: List[Literal["date", "hour", "host", "path", "bot_name", "bot_provider", "bot_type"]]
     """Dimensions to group the report by."""
 
-    domain_id: Optional[str]
-    """Domain UUID used for tag lookups."""
-
-    end_date: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
-    """End date in UTC.
-
-    Accepts same formats as start_date. Defaults to now UTC if omitted.
-    """
-
-    filters: Iterable[Filter]
-    """Filters for bots report."""
-
-    metric_filters: Iterable[MetricFilter]
-    """Numeric filters applied after report metrics are calculated."""
+    metrics: Required[List[Literal["count", "citations", "indexing", "training", "last_visit", "agents"]]]
 
     order_by: Dict[str, Literal["asc", "desc"]]
-    """Custom ordering of the report results.
-
-    The order is a record of key-value pairs where:
-
-    - key is the field to order by, which can be a metric or dimension
-    - value is the direction of the order, either 'asc' for ascending or 'desc' for
-      descending.
-
-    When not specified, the default order is the first metric in the query
-    descending.
     """
-
-    organization_id: Optional[str]
+    
+    Custom ordering of the report results.
+    
+    The order is a record of key-value pairs where:
+    - key is the field to order by, which can be a metric or dimension
+    - value is the direction of the order, either 'asc' for ascending or 'desc' for descending.
+    
+    When not specified, the default order is the first metric in the query descending.
+    """
 
     pagination: Pagination
     """Pagination settings for the report results."""
 
-    tags: SequenceNotStr[str]
+    domain: Required[str]
+    """Domain to query logs for."""
+
+    start_date: Required[Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]]
+    """Start date for logs. Accepts: YYYY-MM-DD, YYYY-MM-DD HH:MM, YYYY-MM-DD HH:MM:SS, or full ISO timestamp."""
+
+    end_date: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
+    """End date in UTC. Accepts same formats as start_date. Defaults to now UTC if omitted."""
+
+    organization_id: Optional[str]
 
     timezone: str
     """IANA timezone name for date bucketing and filter boundaries."""
+
+    view_id: Optional[str]
+    """Domain segment UUID used to scope the query to a configured subset of hosts and paths."""
+
+    metric_filters: Iterable[MetricFilter]
+    """Numeric filters applied after report metrics are calculated."""
+
+    filters: Iterable[Filter]
+    """Filters for bots report."""
+
+    domain_id: Optional[str]
+    """Domain UUID used for tag lookups."""
+
+    tags: SequenceNotStr[str]
 
 
 class FilterBotTypeFilter(TypedDict, total=False):
@@ -101,7 +97,9 @@ class FilterBotTypeFilter(TypedDict, total=False):
     ]
 
 
-Filter: TypeAlias = Union[PathFilter, BotNameFilter, BotProviderFilter, FilterBotTypeFilter]
+Filter: TypeAlias = Annotated[
+    Union[PathFilter, BotNameFilter, BotProviderFilter, FilterBotTypeFilter], PropertyInfo(discriminator="field")
+]
 
 
 class MetricFilter(TypedDict, total=False):
@@ -109,4 +107,4 @@ class MetricFilter(TypedDict, total=False):
 
     operator: Required[Literal[">", ">=", "<", "<=", "=", "==", "!="]]
 
-    value: Required[float]
+    value: Required[Union[int, float]]

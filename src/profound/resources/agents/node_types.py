@@ -1,4 +1,4 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 from __future__ import annotations
 
@@ -24,21 +24,10 @@ __all__ = ["NodeTypesResource", "AsyncNodeTypesResource"]
 class NodeTypesResource(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> NodeTypesResourceWithRawResponse:
-        """
-        This property can be used as a prefix for any HTTP method call to return
-        the raw response object instead of the parsed content.
-
-        For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#accessing-raw-response-data-eg-headers
-        """
         return NodeTypesResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> NodeTypesResourceWithStreamingResponse:
-        """
-        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
-
-        For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#with_streaming_response
-        """
         return NodeTypesResourceWithStreamingResponse(self)
 
     def list(
@@ -54,9 +43,23 @@ class NodeTypesResource(SyncAPIResource):
         """
         List the node types available for building agents.
 
-        The set is deterministic and does not depend on the caller, so the response is
-        safe to cache across sessions. Integration-dependent and dynamic-schema node
-        types are intentionally excluded in v1.
+        The set is deterministic and does not depend on the caller, so the response
+        is safe to cache across sessions. Integration-dependent and dynamic-schema
+        node types are intentionally excluded in v1.
+
+        Args:
+            extra_headers: Send extra headers with the request.
+            extra_query: Send extra query parameters with the request.
+            extra_body: Send extra JSON properties with the request.
+            timeout: Override the client-level default timeout for this request, in seconds.
+
+        Returns:
+            NodeTypeListResponse: Successful Response
+
+        Example:
+            ```python
+            node_type = client.agents.node_types.list()
+            ```
         """
         return self._get(
             "/v1/agents/node-types",
@@ -80,24 +83,30 @@ class NodeTypesResource(SyncAPIResource):
         """
         Retrieve the JSON schema for a single node type.
 
-        The `schema` field is an opaque JSON Schema for the node's configuration. Use
-        `schema_version` as a cache key — it bumps whenever the schema changes.
+        The `schema` field is an opaque JSON Schema for the node's configuration.
+        Use `schema_version` as a cache key — it bumps whenever the schema changes.
 
         Args:
-          node_type: The node type to fetch the schema for, e.g. `llm`.
+            node_type: The node type to fetch the schema for, e.g. `llm`.
+            extra_headers: Send extra headers with the request.
+            extra_query: Send extra query parameters with the request.
+            extra_body: Send extra JSON properties with the request.
+            timeout: Override the client-level default timeout for this request, in seconds.
 
-          extra_headers: Send extra headers
+        Returns:
+            NodeTypeRetrieveSchemaResponse: Successful Response
 
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
+        Example:
+            ```python
+            node_type = client.agents.node_types.retrieve_schema(
+                node_type="nodeType",
+            )
+            ```
         """
-        if not node_type:
+        if node_type is None or (isinstance(node_type, str) and not node_type):
             raise ValueError(f"Expected a non-empty value for `node_type` but received {node_type!r}")
         return self._get(
-            path_template("/v1/agents/node-types/{node_type}/schema", node_type=node_type),
+            path_template("/v1/agents/node-types/{node_type}/schema", **{"node_type": node_type}),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -108,21 +117,10 @@ class NodeTypesResource(SyncAPIResource):
 class AsyncNodeTypesResource(AsyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AsyncNodeTypesResourceWithRawResponse:
-        """
-        This property can be used as a prefix for any HTTP method call to return
-        the raw response object instead of the parsed content.
-
-        For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#accessing-raw-response-data-eg-headers
-        """
         return AsyncNodeTypesResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> AsyncNodeTypesResourceWithStreamingResponse:
-        """
-        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
-
-        For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#with_streaming_response
-        """
         return AsyncNodeTypesResourceWithStreamingResponse(self)
 
     async def list(
@@ -138,9 +136,23 @@ class AsyncNodeTypesResource(AsyncAPIResource):
         """
         List the node types available for building agents.
 
-        The set is deterministic and does not depend on the caller, so the response is
-        safe to cache across sessions. Integration-dependent and dynamic-schema node
-        types are intentionally excluded in v1.
+        The set is deterministic and does not depend on the caller, so the response
+        is safe to cache across sessions. Integration-dependent and dynamic-schema
+        node types are intentionally excluded in v1.
+
+        Args:
+            extra_headers: Send extra headers with the request.
+            extra_query: Send extra query parameters with the request.
+            extra_body: Send extra JSON properties with the request.
+            timeout: Override the client-level default timeout for this request, in seconds.
+
+        Returns:
+            NodeTypeListResponse: Successful Response
+
+        Example:
+            ```python
+            node_type = await client.agents.node_types.list()
+            ```
         """
         return await self._get(
             "/v1/agents/node-types",
@@ -164,24 +176,30 @@ class AsyncNodeTypesResource(AsyncAPIResource):
         """
         Retrieve the JSON schema for a single node type.
 
-        The `schema` field is an opaque JSON Schema for the node's configuration. Use
-        `schema_version` as a cache key — it bumps whenever the schema changes.
+        The `schema` field is an opaque JSON Schema for the node's configuration.
+        Use `schema_version` as a cache key — it bumps whenever the schema changes.
 
         Args:
-          node_type: The node type to fetch the schema for, e.g. `llm`.
+            node_type: The node type to fetch the schema for, e.g. `llm`.
+            extra_headers: Send extra headers with the request.
+            extra_query: Send extra query parameters with the request.
+            extra_body: Send extra JSON properties with the request.
+            timeout: Override the client-level default timeout for this request, in seconds.
 
-          extra_headers: Send extra headers
+        Returns:
+            NodeTypeRetrieveSchemaResponse: Successful Response
 
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
+        Example:
+            ```python
+            node_type = await client.agents.node_types.retrieve_schema(
+                node_type="nodeType",
+            )
+            ```
         """
-        if not node_type:
+        if node_type is None or (isinstance(node_type, str) and not node_type):
             raise ValueError(f"Expected a non-empty value for `node_type` but received {node_type!r}")
         return await self._get(
-            path_template("/v1/agents/node-types/{node_type}/schema", node_type=node_type),
+            path_template("/v1/agents/node-types/{node_type}/schema", **{"node_type": node_type}),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

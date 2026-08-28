@@ -1,4 +1,6 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
+
+from __future__ import annotations
 
 from typing import Dict, List, Optional
 from typing_extensions import Literal
@@ -18,18 +20,46 @@ __all__ = [
 ]
 
 
-class Info(BaseModel):
-    query: Dict[str, object]
+class DataGroupMetadata(BaseModel):
+    theme: Optional[str] = None
 
-    total_rows: int
+    claim: Optional[str] = None
+
+    sentiment: Optional[Literal["positive", "negative"]] = None
+
+    prompt_id: Optional[str] = None
+
+    prompt_text: Optional[str] = None
+
+    topic_id: Optional[str] = None
+
+    run_id: Optional[str] = None
+
+    created_at: Optional[str] = None
+
+    api_model_id: Optional[str] = FieldInfo(alias="model_id", default=None)
+
+    region_id: Optional[str] = None
+
+    persona_id: Optional[str] = None
+
+    asset_name: Optional[str] = None
+
+    child_count_total: Optional[int] = None
+
+    child_count_matching: Optional[int] = None
+
+    parent_matches_search: Optional[bool] = None
+
+    child_matches_search: Optional[bool] = None
 
 
-class DataScoresCurrent(BaseModel):
-    assessment_count: int
+class DataScoresPrevious(BaseModel):
+    positive_sentiment: float
 
     negative_sentiment: float
 
-    positive_sentiment: float
+    assessment_count: int
 
     occurrence: Optional[float] = None
 
@@ -38,12 +68,12 @@ class DataScoresCurrent(BaseModel):
     total_response_count: Optional[int] = None
 
 
-class DataScoresPrevious(BaseModel):
-    assessment_count: int
+class DataScoresCurrent(BaseModel):
+    positive_sentiment: float
 
     negative_sentiment: float
 
-    positive_sentiment: float
+    assessment_count: int
 
     occurrence: Optional[float] = None
 
@@ -58,56 +88,28 @@ class DataScores(BaseModel):
     previous: Optional[DataScoresPrevious] = None
 
 
-class DataGroupMetadata(BaseModel):
-    asset_name: Optional[str] = None
-
-    child_count_matching: Optional[int] = None
-
-    child_count_total: Optional[int] = None
-
-    child_matches_search: Optional[bool] = None
-
-    claim: Optional[str] = None
-
-    created_at: Optional[str] = None
-
-    api_model_id: Optional[str] = FieldInfo(alias="model_id", default=None)
-
-    parent_matches_search: Optional[bool] = None
-
-    persona_id: Optional[str] = None
-
-    prompt_id: Optional[str] = None
-
-    prompt_text: Optional[str] = None
-
-    region_id: Optional[str] = None
-
-    run_id: Optional[str] = None
-
-    sentiment: Optional[Literal["positive", "negative"]] = None
-
-    theme: Optional[str] = None
-
-    topic_id: Optional[str] = None
-
-
 class Data(BaseModel):
     scores: DataScores
 
-    cited_website_hrefs: Optional[List[str]] = None
-
     date: Optional[str] = None
-
-    group_ids: Optional[Dict[str, str]] = None
-
-    group_metadata: Optional[DataGroupMetadata] = None
-
-    group_names: Optional[Dict[str, str]] = None
 
     prev_date: Optional[str] = None
 
+    group_ids: Optional[Dict[str, str]] = None
+
+    group_names: Optional[Dict[str, str]] = None
+
+    group_metadata: Optional[DataGroupMetadata] = None
+
+    cited_website_hrefs: Optional[List[str]] = None
+
     total_count: Optional[int] = None
+
+
+class Info(BaseModel):
+    query: Dict[str, object]
+
+    total_rows: int
 
 
 class ReportSentimentV2Response(BaseModel):

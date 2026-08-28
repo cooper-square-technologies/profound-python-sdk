@@ -1,31 +1,14 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 from __future__ import annotations
 
-from typing import Optional
-
 import httpx
 
-from ...types import knowledge_base_list_params, knowledge_base_search_params
-from .folders import (
-    FoldersResource,
-    AsyncFoldersResource,
-    FoldersResourceWithRawResponse,
-    AsyncFoldersResourceWithRawResponse,
-    FoldersResourceWithStreamingResponse,
-    AsyncFoldersResourceWithStreamingResponse,
-)
+from typing import Optional
+
 from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
-from .documents import (
-    DocumentsResource,
-    AsyncDocumentsResource,
-    DocumentsResourceWithRawResponse,
-    AsyncDocumentsResourceWithRawResponse,
-    DocumentsResourceWithStreamingResponse,
-    AsyncDocumentsResourceWithStreamingResponse,
-)
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
     to_raw_response_wrapper,
@@ -34,7 +17,24 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
+from .documents import (
+    DocumentsResource,
+    AsyncDocumentsResource,
+    DocumentsResourceWithRawResponse,
+    AsyncDocumentsResourceWithRawResponse,
+    DocumentsResourceWithStreamingResponse,
+    AsyncDocumentsResourceWithStreamingResponse,
+)
+from .folders import (
+    FoldersResource,
+    AsyncFoldersResource,
+    FoldersResourceWithRawResponse,
+    AsyncFoldersResourceWithRawResponse,
+    FoldersResourceWithStreamingResponse,
+    AsyncFoldersResourceWithStreamingResponse,
+)
 from ...types.knowledge_base_list_response import KnowledgeBaseListResponse
+from ...types import knowledge_base_list_params, knowledge_base_search_params
 from ...types.knowledge_base_search_response import KnowledgeBaseSearchResponse
 
 __all__ = ["KnowledgeBasesResource", "AsyncKnowledgeBasesResource"]
@@ -51,21 +51,10 @@ class KnowledgeBasesResource(SyncAPIResource):
 
     @cached_property
     def with_raw_response(self) -> KnowledgeBasesResourceWithRawResponse:
-        """
-        This property can be used as a prefix for any HTTP method call to return
-        the raw response object instead of the parsed content.
-
-        For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#accessing-raw-response-data-eg-headers
-        """
         return KnowledgeBasesResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> KnowledgeBasesResourceWithStreamingResponse:
-        """
-        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
-
-        For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#with_streaming_response
-        """
         return KnowledgeBasesResourceWithStreamingResponse(self)
 
     def list(
@@ -83,15 +72,19 @@ class KnowledgeBasesResource(SyncAPIResource):
         List knowledge bases accessible to the API key.
 
         Args:
-          organization_id: Organization scope for API keys that can access multiple organizations.
+            organization_id: Organization scope for API keys that can access multiple organizations.
+            extra_headers: Send extra headers with the request.
+            extra_query: Send extra query parameters with the request.
+            extra_body: Send extra JSON properties with the request.
+            timeout: Override the client-level default timeout for this request, in seconds.
 
-          extra_headers: Send extra headers
+        Returns:
+            KnowledgeBaseListResponse: Successful Response
 
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
+        Example:
+            ```python
+            knowledge_base = client.knowledge_bases.list()
+            ```
         """
         return self._get(
             "/v1/knowledge-bases",
@@ -113,9 +106,9 @@ class KnowledgeBasesResource(SyncAPIResource):
         *,
         query: str,
         top_k: int,
-        organization_id: Optional[str] | Omit = omit,
-        filters: Optional[knowledge_base_search_params.Filters] | Omit = omit,
         return_full_page: bool | Omit = omit,
+        filters: Optional[knowledge_base_search_params.Filters] | Omit = omit,
+        organization_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -127,36 +120,40 @@ class KnowledgeBasesResource(SyncAPIResource):
         Search a knowledge base and return matching snippets or pages.
 
         Args:
-          knowledge_base_id: Unique knowledge base ID.
+            knowledge_base_id: Unique knowledge base ID.
+            query: Search query.
+            top_k: Maximum number of results to return.
+            return_full_page: Return full page content instead of snippets.
+            filters: Optional search filters.
+            organization_id: Organization scope for API keys that can access multiple organizations.
+            extra_headers: Send extra headers with the request.
+            extra_query: Send extra query parameters with the request.
+            extra_body: Send extra JSON properties with the request.
+            timeout: Override the client-level default timeout for this request, in seconds.
 
-          query: Search query.
+        Returns:
+            KnowledgeBaseSearchResponse: Successful Response
 
-          top_k: Maximum number of results to return.
-
-          organization_id: Organization scope for API keys that can access multiple organizations.
-
-          filters: Optional search filters.
-
-          return_full_page: Return full page content instead of snippets.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
+        Example:
+            ```python
+            knowledge_base = client.knowledge_bases.search(
+                knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+                query="x",
+                top_k=0,
+                return_full_page=False,
+            )
+            ```
         """
-        if not knowledge_base_id:
+        if knowledge_base_id is None or (isinstance(knowledge_base_id, str) and not knowledge_base_id):
             raise ValueError(f"Expected a non-empty value for `knowledge_base_id` but received {knowledge_base_id!r}")
         return self._post(
-            path_template("/v1/knowledge-bases/{knowledge_base_id}/search", knowledge_base_id=knowledge_base_id),
+            path_template("/v1/knowledge-bases/{knowledge_base_id}/search", **{"knowledge_base_id": knowledge_base_id}),
             body=maybe_transform(
                 {
                     "query": query,
                     "top_k": top_k,
-                    "filters": filters,
                     "return_full_page": return_full_page,
+                    "filters": filters,
                 },
                 knowledge_base_search_params.KnowledgeBaseSearchParams,
             ),
@@ -184,21 +181,10 @@ class AsyncKnowledgeBasesResource(AsyncAPIResource):
 
     @cached_property
     def with_raw_response(self) -> AsyncKnowledgeBasesResourceWithRawResponse:
-        """
-        This property can be used as a prefix for any HTTP method call to return
-        the raw response object instead of the parsed content.
-
-        For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#accessing-raw-response-data-eg-headers
-        """
         return AsyncKnowledgeBasesResourceWithRawResponse(self)
 
     @cached_property
     def with_streaming_response(self) -> AsyncKnowledgeBasesResourceWithStreamingResponse:
-        """
-        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
-
-        For more information, see https://www.github.com/cooper-square-technologies/profound-python-sdk#with_streaming_response
-        """
         return AsyncKnowledgeBasesResourceWithStreamingResponse(self)
 
     async def list(
@@ -216,15 +202,19 @@ class AsyncKnowledgeBasesResource(AsyncAPIResource):
         List knowledge bases accessible to the API key.
 
         Args:
-          organization_id: Organization scope for API keys that can access multiple organizations.
+            organization_id: Organization scope for API keys that can access multiple organizations.
+            extra_headers: Send extra headers with the request.
+            extra_query: Send extra query parameters with the request.
+            extra_body: Send extra JSON properties with the request.
+            timeout: Override the client-level default timeout for this request, in seconds.
 
-          extra_headers: Send extra headers
+        Returns:
+            KnowledgeBaseListResponse: Successful Response
 
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
+        Example:
+            ```python
+            knowledge_base = await client.knowledge_bases.list()
+            ```
         """
         return await self._get(
             "/v1/knowledge-bases",
@@ -246,9 +236,9 @@ class AsyncKnowledgeBasesResource(AsyncAPIResource):
         *,
         query: str,
         top_k: int,
-        organization_id: Optional[str] | Omit = omit,
-        filters: Optional[knowledge_base_search_params.Filters] | Omit = omit,
         return_full_page: bool | Omit = omit,
+        filters: Optional[knowledge_base_search_params.Filters] | Omit = omit,
+        organization_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -260,36 +250,40 @@ class AsyncKnowledgeBasesResource(AsyncAPIResource):
         Search a knowledge base and return matching snippets or pages.
 
         Args:
-          knowledge_base_id: Unique knowledge base ID.
+            knowledge_base_id: Unique knowledge base ID.
+            query: Search query.
+            top_k: Maximum number of results to return.
+            return_full_page: Return full page content instead of snippets.
+            filters: Optional search filters.
+            organization_id: Organization scope for API keys that can access multiple organizations.
+            extra_headers: Send extra headers with the request.
+            extra_query: Send extra query parameters with the request.
+            extra_body: Send extra JSON properties with the request.
+            timeout: Override the client-level default timeout for this request, in seconds.
 
-          query: Search query.
+        Returns:
+            KnowledgeBaseSearchResponse: Successful Response
 
-          top_k: Maximum number of results to return.
-
-          organization_id: Organization scope for API keys that can access multiple organizations.
-
-          filters: Optional search filters.
-
-          return_full_page: Return full page content instead of snippets.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
+        Example:
+            ```python
+            knowledge_base = await client.knowledge_bases.search(
+                knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+                query="x",
+                top_k=0,
+                return_full_page=False,
+            )
+            ```
         """
-        if not knowledge_base_id:
+        if knowledge_base_id is None or (isinstance(knowledge_base_id, str) and not knowledge_base_id):
             raise ValueError(f"Expected a non-empty value for `knowledge_base_id` but received {knowledge_base_id!r}")
         return await self._post(
-            path_template("/v1/knowledge-bases/{knowledge_base_id}/search", knowledge_base_id=knowledge_base_id),
+            path_template("/v1/knowledge-bases/{knowledge_base_id}/search", **{"knowledge_base_id": knowledge_base_id}),
             body=await async_maybe_transform(
                 {
                     "query": query,
                     "top_k": top_k,
-                    "filters": filters,
                     "return_full_page": return_full_page,
+                    "filters": filters,
                 },
                 knowledge_base_search_params.KnowledgeBaseSearchParams,
             ),

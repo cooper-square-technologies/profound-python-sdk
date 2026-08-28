@@ -1,13 +1,5 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
-from .claims import (
-    ClaimsResource,
-    AsyncClaimsResource,
-    ClaimsResourceWithRawResponse,
-    AsyncClaimsResourceWithRawResponse,
-    ClaimsResourceWithStreamingResponse,
-    AsyncClaimsResourceWithStreamingResponse,
-)
 from .factcheck import (
     FactcheckResource,
     AsyncFactcheckResource,
@@ -16,18 +8,26 @@ from .factcheck import (
     FactcheckResourceWithStreamingResponse,
     AsyncFactcheckResourceWithStreamingResponse,
 )
+from .claims import (
+    ClaimsResource,
+    AsyncClaimsResource,
+    ClaimsResourceWithRawResponse,
+    AsyncClaimsResourceWithRawResponse,
+    ClaimsResourceWithStreamingResponse,
+    AsyncClaimsResourceWithStreamingResponse,
+)
 
 __all__ = [
-    "ClaimsResource",
-    "AsyncClaimsResource",
-    "ClaimsResourceWithRawResponse",
-    "AsyncClaimsResourceWithRawResponse",
-    "ClaimsResourceWithStreamingResponse",
-    "AsyncClaimsResourceWithStreamingResponse",
     "FactcheckResource",
     "AsyncFactcheckResource",
     "FactcheckResourceWithRawResponse",
     "AsyncFactcheckResourceWithRawResponse",
     "FactcheckResourceWithStreamingResponse",
     "AsyncFactcheckResourceWithStreamingResponse",
+    "ClaimsResource",
+    "AsyncClaimsResource",
+    "ClaimsResourceWithRawResponse",
+    "AsyncClaimsResourceWithRawResponse",
+    "ClaimsResourceWithStreamingResponse",
+    "AsyncClaimsResourceWithStreamingResponse",
 ]

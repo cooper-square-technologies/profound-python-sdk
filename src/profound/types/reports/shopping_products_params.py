@@ -1,8 +1,8 @@
-# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+# File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 from __future__ import annotations
 
-from typing import List, Iterable, Optional
+from typing import Iterable, List, Optional
 from typing_extensions import Literal, Required, TypedDict
 
 __all__ = ["ShoppingProductsParams", "Filter"]
@@ -11,32 +11,13 @@ __all__ = ["ShoppingProductsParams", "Filter"]
 class ShoppingProductsParams(TypedDict, total=False):
     category_id: Required[str]
 
-    end_date: Required[str]
-    """YYYY-MM-DD, ET, inclusive"""
-
     start_date: Required[str]
     """YYYY-MM-DD, ET, inclusive"""
 
-    competitor_limit: int
-    """Competitors returned when `target_product` is set."""
-
-    cursor: Optional[str]
-
-    filter: Optional[Filter]
-    """A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group."""
+    end_date: Required[str]
+    """YYYY-MM-DD, ET, inclusive"""
 
     group_by: List[Literal["date", "topic", "prompt"]]
-
-    include_merchants: bool
-    """Include per-product merchant offers (names, prices, urls, images)."""
-
-    interval: Literal["day", "week", "month"]
-
-    limit: Optional[int]
-    """Page size; default 10, max 50."""
-
-    max_results: Optional[int]
-    """Stream endpoint only: cap streamed rows."""
 
     metrics: Optional[
         List[
@@ -54,16 +35,35 @@ class ShoppingProductsParams(TypedDict, total=False):
         ]
     ]
 
+    interval: Literal["day", "week", "month"]
+
+    include_merchants: bool
+    """Include per-product merchant offers (names, prices, urls, images)."""
+
     target_product: Optional[str]
     """Return this product plus its top competitors (item view only)."""
+
+    competitor_limit: int
+    """Competitors returned when `target_product` is set."""
+
+    filter: Optional[Filter]
+    """A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group."""
+
+    limit: Optional[int]
+    """Page size; default 10, max 50."""
+
+    max_results: Optional[int]
+    """Stream endpoint only: cap streamed rows."""
+
+    cursor: Optional[str]
 
 
 _FilterReservedKeywords = TypedDict(
     "_FilterReservedKeywords",
     {
-        "and": Optional[Iterable[object]],
-        "not": object,
-        "or": Optional[Iterable[object]],
+        "and": Optional[Iterable["Filter"]],
+        "or": Optional[Iterable["Filter"]],
+        "not": Optional["Filter"],
     },
     total=False,
 )
