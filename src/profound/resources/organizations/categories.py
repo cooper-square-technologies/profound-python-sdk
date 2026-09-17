@@ -374,7 +374,9 @@ class CategoriesResource(SyncAPIResource):
             ```python
             category = client.organizations.categories.create_prompts(
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-                prompts=[],
+                prompts=[
+                    {"prompt": "x", "topic": {}, "language": "", "tags": [], "regions": [{}], "platforms": [{}], "personas": []}
+                ],
                 dry_run=False,
             )
             ```
@@ -428,7 +430,7 @@ class CategoriesResource(SyncAPIResource):
             ```python
             category = client.organizations.categories.update_prompts(
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-                prompts=[],
+                prompts=[{"id": ""}],
                 dry_run=False,
             )
             ```
@@ -489,7 +491,7 @@ class CategoriesResource(SyncAPIResource):
             ```python
             category = client.organizations.categories.update_prompt_status(
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-                prompt_ids=[],
+                prompt_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
                 status="active",
                 dry_run=False,
             )
@@ -931,7 +933,9 @@ class AsyncCategoriesResource(AsyncAPIResource):
             ```python
             category = await client.organizations.categories.create_prompts(
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-                prompts=[],
+                prompts=[
+                    {"prompt": "x", "topic": {}, "language": "", "tags": [], "regions": [{}], "platforms": [{}], "personas": []}
+                ],
                 dry_run=False,
             )
             ```
@@ -985,7 +989,7 @@ class AsyncCategoriesResource(AsyncAPIResource):
             ```python
             category = await client.organizations.categories.update_prompts(
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-                prompts=[],
+                prompts=[{"id": ""}],
                 dry_run=False,
             )
             ```
@@ -1046,7 +1050,7 @@ class AsyncCategoriesResource(AsyncAPIResource):
             ```python
             category = await client.organizations.categories.update_prompt_status(
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-                prompt_ids=[],
+                prompt_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
                 status="active",
                 dry_run=False,
             )

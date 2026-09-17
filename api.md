@@ -337,7 +337,9 @@ Create one or more prompts in a category. Topics and tags are auto-created if re
 ```python
 category = client.organizations.categories.create_prompts(
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    prompts=[],
+    prompts=[
+        {"prompt": "x", "topic": {}, "language": "", "tags": [], "regions": [{}], "platforms": [{}], "personas": []}
+    ],
     dry_run=False,
 )
 ```
@@ -354,7 +356,7 @@ Update one or more existing prompts. Only provided fields are changed. Dimension
 ```python
 category = client.organizations.categories.update_prompts(
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    prompts=[],
+    prompts=[{"id": ""}],
     dry_run=False,
 )
 ```
@@ -376,7 +378,7 @@ Status options:
 ```python
 category = client.organizations.categories.update_prompt_status(
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    prompt_ids=[],
+    prompt_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
     status="active",
     dry_run=False,
 )
@@ -480,7 +482,7 @@ otherwise eligible citations in its denominator when this filter is used.
 report = client.reports.citations(
     date_interval="day",
     dimensions=[],
-    metrics=[],
+    metrics=["count"],
     order_by={},
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     start_date="2024-01-01T00:00:00.000Z",
@@ -501,7 +503,7 @@ Query visibility report.
 report = client.reports.visibility(
     date_interval="day",
     dimensions=[],
-    metrics=[],
+    metrics=["share_of_voice"],
     order_by={},
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     start_date="2024-01-01T00:00:00.000Z",
@@ -522,7 +524,7 @@ Get citations for a given category.
 report = client.reports.sentiment(
     date_interval="day",
     dimensions=[],
-    metrics=[],
+    metrics=["positive"],
     order_by={},
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     start_date="2024-01-01T00:00:00.000Z",
@@ -544,7 +546,7 @@ report = client.reports.sentiment_v2(
     start_date="2024-01-01T00:00:00.000Z",
     end_date="2024-01-01T00:00:00.000Z",
     date_bucket="day",
-    metrics=[],
+    metrics=["sentiment"],
 )
 ```
 
@@ -564,7 +566,7 @@ for large date ranges and high-traffic sites.
 report = client.reports.get_referrals_report(
     date_interval="day",
     dimensions=[],
-    metrics=[],
+    metrics=["visits"],
     order_by={},
     domain="",
     start_date="2024-01-01T00:00:00.000Z",
@@ -594,7 +596,7 @@ Metrics:
 report = client.reports.get_bots_report(
     date_interval="day",
     dimensions=[],
-    metrics=[],
+    metrics=["count"],
     order_by={},
     domain="",
     start_date="2024-01-01T00:00:00.000Z",
@@ -612,7 +614,7 @@ report = client.reports.get_bots_report(
 report = client.reports.query_fanouts(
     date_interval="day",
     dimensions=[],
-    metrics=[],
+    metrics=["fanouts_per_execution"],
     order_by={},
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     start_date="2024-01-01T00:00:00.000Z",
@@ -633,7 +635,7 @@ Stream citations with the same filter semantics as the non-streaming route.
 stream = client.reports.stream_citations(
     date_interval="day",
     dimensions=[],
-    metrics=[],
+    metrics=["count"],
     order_by={},
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     start_date="2024-01-01T00:00:00.000Z",
@@ -655,7 +657,7 @@ for event in stream:
 stream = client.reports.stream_visibility(
     date_interval="day",
     dimensions=[],
-    metrics=[],
+    metrics=["share_of_voice"],
     order_by={},
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     start_date="2024-01-01T00:00:00.000Z",
@@ -677,7 +679,7 @@ for event in stream:
 stream = client.reports.stream_sentiment(
     date_interval="day",
     dimensions=[],
-    metrics=[],
+    metrics=["positive"],
     order_by={},
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     start_date="2024-01-01T00:00:00.000Z",
@@ -785,7 +787,7 @@ When `view_id` is provided, the query is scoped to that domain segment's hosts a
 report = client.reports.get_referrals_report_v2(
     date_interval="day",
     dimensions=[],
-    metrics=[],
+    metrics=["visits"],
     order_by={},
     domain="",
     start_date="2024-01-01T00:00:00.000Z",
@@ -819,7 +821,7 @@ Dimensions:
 report = client.reports.get_bots_report_v2(
     date_interval="day",
     dimensions=[],
-    metrics=[],
+    metrics=["count"],
     order_by={},
     domain="",
     start_date="2024-01-01T00:00:00.000Z",
@@ -911,7 +913,7 @@ Get web search results for a given category.
 web_search_result = client.reports.web_search_results.query(
     date_interval="day",
     dimensions=[],
-    metrics=[],
+    metrics=["count"],
     order_by={},
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     start_date="2024-01-01T00:00:00.000Z",
@@ -930,7 +932,7 @@ web_search_result = client.reports.web_search_results.query(
 stream = client.reports.web_search_results.stream(
     date_interval="day",
     dimensions=[],
-    metrics=[],
+    metrics=["count"],
     order_by={},
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     start_date="2024-01-01T00:00:00.000Z",
@@ -1721,7 +1723,7 @@ Search a knowledge base and return matching snippets or pages.
 knowledge_base = client.knowledge_bases.search(
     knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     query="x",
-    top_k=0,
+    top_k=1,
     return_full_page=False,
 )
 ```

@@ -100,7 +100,7 @@ class WebSearchResultsResource(SyncAPIResource):
             web_search_result = client.reports.web_search_results.query(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["count"],
                 order_by={},
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -193,7 +193,7 @@ class WebSearchResultsResource(SyncAPIResource):
             stream = client.reports.web_search_results.stream(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["count"],
                 order_by={},
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -302,7 +302,7 @@ class AsyncWebSearchResultsResource(AsyncAPIResource):
             web_search_result = await client.reports.web_search_results.query(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["count"],
                 order_by={},
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -395,7 +395,7 @@ class AsyncWebSearchResultsResource(AsyncAPIResource):
             stream = await client.reports.web_search_results.stream(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["count"],
                 order_by={},
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 start_date="2024-01-01T00:00:00.000Z",

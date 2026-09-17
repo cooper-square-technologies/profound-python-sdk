@@ -199,7 +199,7 @@ class ReportsResource(SyncAPIResource):
             report = client.reports.citations(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["count"],
                 order_by={},
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -291,7 +291,7 @@ class ReportsResource(SyncAPIResource):
             report = client.reports.visibility(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["share_of_voice"],
                 order_by={},
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -383,7 +383,7 @@ class ReportsResource(SyncAPIResource):
             report = client.reports.sentiment(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["positive"],
                 order_by={},
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -472,7 +472,7 @@ class ReportsResource(SyncAPIResource):
                 start_date="2024-01-01T00:00:00.000Z",
                 end_date="2024-01-01T00:00:00.000Z",
                 date_bucket="day",
-                metrics=[],
+                metrics=["sentiment"],
             )
             ```
         """
@@ -553,7 +553,7 @@ class ReportsResource(SyncAPIResource):
             report = client.reports.get_referrals_report(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["visits"],
                 order_by={},
                 domain="",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -643,7 +643,7 @@ class ReportsResource(SyncAPIResource):
             report = client.reports.get_bots_report(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["count"],
                 order_by={},
                 domain="",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -719,7 +719,7 @@ class ReportsResource(SyncAPIResource):
             report = client.reports.query_fanouts(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["fanouts_per_execution"],
                 order_by={},
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -812,7 +812,7 @@ class ReportsResource(SyncAPIResource):
             stream = client.reports.stream_citations(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["count"],
                 order_by={},
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -910,7 +910,7 @@ class ReportsResource(SyncAPIResource):
             stream = client.reports.stream_visibility(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["share_of_voice"],
                 order_by={},
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -1008,7 +1008,7 @@ class ReportsResource(SyncAPIResource):
             stream = client.reports.stream_sentiment(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["positive"],
                 order_by={},
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -1468,7 +1468,7 @@ class ReportsResource(SyncAPIResource):
             report = client.reports.get_referrals_report_v2(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["visits"],
                 order_by={},
                 domain="",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -1572,7 +1572,7 @@ class ReportsResource(SyncAPIResource):
             report = client.reports.get_bots_report_v2(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["count"],
                 order_by={},
                 domain="",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -2050,7 +2050,7 @@ class AsyncReportsResource(AsyncAPIResource):
             report = await client.reports.citations(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["count"],
                 order_by={},
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -2142,7 +2142,7 @@ class AsyncReportsResource(AsyncAPIResource):
             report = await client.reports.visibility(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["share_of_voice"],
                 order_by={},
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -2234,7 +2234,7 @@ class AsyncReportsResource(AsyncAPIResource):
             report = await client.reports.sentiment(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["positive"],
                 order_by={},
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -2323,7 +2323,7 @@ class AsyncReportsResource(AsyncAPIResource):
                 start_date="2024-01-01T00:00:00.000Z",
                 end_date="2024-01-01T00:00:00.000Z",
                 date_bucket="day",
-                metrics=[],
+                metrics=["sentiment"],
             )
             ```
         """
@@ -2404,7 +2404,7 @@ class AsyncReportsResource(AsyncAPIResource):
             report = await client.reports.get_referrals_report(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["visits"],
                 order_by={},
                 domain="",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -2494,7 +2494,7 @@ class AsyncReportsResource(AsyncAPIResource):
             report = await client.reports.get_bots_report(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["count"],
                 order_by={},
                 domain="",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -2570,7 +2570,7 @@ class AsyncReportsResource(AsyncAPIResource):
             report = await client.reports.query_fanouts(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["fanouts_per_execution"],
                 order_by={},
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -2663,7 +2663,7 @@ class AsyncReportsResource(AsyncAPIResource):
             stream = await client.reports.stream_citations(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["count"],
                 order_by={},
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -2761,7 +2761,7 @@ class AsyncReportsResource(AsyncAPIResource):
             stream = await client.reports.stream_visibility(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["share_of_voice"],
                 order_by={},
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -2859,7 +2859,7 @@ class AsyncReportsResource(AsyncAPIResource):
             stream = await client.reports.stream_sentiment(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["positive"],
                 order_by={},
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -3319,7 +3319,7 @@ class AsyncReportsResource(AsyncAPIResource):
             report = await client.reports.get_referrals_report_v2(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["visits"],
                 order_by={},
                 domain="",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -3423,7 +3423,7 @@ class AsyncReportsResource(AsyncAPIResource):
             report = await client.reports.get_bots_report_v2(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["count"],
                 order_by={},
                 domain="",
                 start_date="2024-01-01T00:00:00.000Z",

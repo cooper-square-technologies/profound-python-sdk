@@ -1,7 +1,7 @@
 {
   "name": "Profound",
   "slug": "profound",
-  "generatorVersion": "0.32.0",
+  "generatorVersion": "0.32.14",
   "servers": [
     "https://api.tryprofound.com"
   ],
@@ -553,7 +553,9 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "minimum": 1
+              }
             }
           },
           {
@@ -564,7 +566,9 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "minimum": 0
+              }
             }
           },
           {
@@ -4522,7 +4526,10 @@
                 {
                   "kind": "primitive",
                   "type": "integer",
-                  "validation": {}
+                  "validation": {
+                    "maximum": 200,
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
@@ -4540,7 +4547,10 @@
               "variants": [
                 {
                   "kind": "primitive",
-                  "type": "integer"
+                  "type": "integer",
+                  "validation": {
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
@@ -7821,7 +7831,10 @@
                 {
                   "kind": "primitive",
                   "type": "integer",
-                  "validation": {}
+                  "validation": {
+                    "maximum": 50,
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
@@ -7839,7 +7852,10 @@
               "variants": [
                 {
                   "kind": "primitive",
-                  "type": "integer"
+                  "type": "integer",
+                  "validation": {
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
@@ -8864,7 +8880,9 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "minimum": 1
+              }
             }
           },
           {
@@ -8875,7 +8893,9 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "minimum": 0
+              }
             }
           },
           {
@@ -9616,7 +9636,9 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "minimum": 1
+              }
             }
           },
           {
@@ -9627,7 +9649,9 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "minimum": 0
+              }
             }
           }
         ],
@@ -10793,7 +10817,10 @@
                 {
                   "kind": "primitive",
                   "type": "integer",
-                  "validation": {}
+                  "validation": {
+                    "minimum": 1,
+                    "maximum": 5
+                  }
                 },
                 {
                   "kind": "null"
@@ -11178,7 +11205,10 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "maximum": 50000,
+                "exclusiveMinimum": 0
+              }
             }
           },
           {
@@ -12688,7 +12718,10 @@
                 {
                   "kind": "primitive",
                   "type": "integer",
-                  "validation": {}
+                  "validation": {
+                    "maximum": 100,
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
@@ -12706,7 +12739,10 @@
               "variants": [
                 {
                   "kind": "primitive",
-                  "type": "integer"
+                  "type": "integer",
+                  "validation": {
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
@@ -13625,7 +13661,10 @@
                 {
                   "kind": "primitive",
                   "type": "integer",
-                  "validation": {}
+                  "validation": {
+                    "maximum": 100,
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
@@ -13643,7 +13682,10 @@
               "variants": [
                 {
                   "kind": "primitive",
-                  "type": "integer"
+                  "type": "integer",
+                  "validation": {
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
@@ -14467,7 +14509,10 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "minimum": 1,
+                "maximum": 50
+              }
             }
           }
         ],
@@ -14979,7 +15024,10 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "minimum": 1,
+                "maximum": 10000
+              }
             }
           },
           {
@@ -14990,7 +15038,9 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "minimum": 0
+              }
             }
           },
           {
@@ -15477,7 +15527,9 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "minimum": 1
+              }
             }
           },
           {
@@ -15488,7 +15540,9 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "minimum": 0
+              }
             }
           },
           {
@@ -17475,7 +17529,10 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "maximum": 50000,
+                "exclusiveMinimum": 0
+              }
             }
           },
           {
@@ -17486,7 +17543,9 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "minimum": 0
+              }
             }
           }
         ],
@@ -18210,7 +18269,9 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "minimum": 0
+              }
             }
           },
           {
@@ -18221,7 +18282,9 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "minimum": 0
+              }
             }
           },
           {
@@ -18288,7 +18351,9 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "minimum": 0
+              }
             }
           },
           {
@@ -18407,7 +18472,10 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "maximum": 10485760,
+                "exclusiveMinimum": 0
+              }
             }
           },
           {
@@ -18659,7 +18727,9 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "minimum": 0
+              }
             }
           },
           {
@@ -18670,7 +18740,9 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "minimum": 0
+              }
             }
           },
           {
@@ -18737,7 +18809,9 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "minimum": 0
+              }
             }
           },
           {
@@ -19529,7 +19603,9 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "minimum": 0
+              }
             }
           },
           {
@@ -19540,7 +19616,9 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "minimum": 0
+              }
             }
           },
           {
@@ -19875,7 +19953,10 @@
                 {
                   "kind": "primitive",
                   "type": "integer",
-                  "validation": {}
+                  "validation": {
+                    "minimum": 1,
+                    "maximum": 5
+                  }
                 },
                 {
                   "kind": "null"
@@ -20132,7 +20213,10 @@
                 {
                   "kind": "primitive",
                   "type": "integer",
-                  "validation": {}
+                  "validation": {
+                    "minimum": 1,
+                    "maximum": 5
+                  }
                 },
                 {
                   "kind": "null"
@@ -22108,7 +22192,10 @@
                 {
                   "kind": "primitive",
                   "type": "integer",
-                  "validation": {}
+                  "validation": {
+                    "maximum": 50,
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
@@ -22126,7 +22213,10 @@
               "variants": [
                 {
                   "kind": "primitive",
-                  "type": "integer"
+                  "type": "integer",
+                  "validation": {
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
@@ -24105,7 +24195,10 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "minimum": 1,
+                "maximum": 100
+              }
             }
           },
           {
@@ -25951,7 +26044,10 @@
                 {
                   "kind": "primitive",
                   "type": "integer",
-                  "validation": {}
+                  "validation": {
+                    "maximum": 50,
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
@@ -25969,7 +26065,10 @@
               "variants": [
                 {
                   "kind": "primitive",
-                  "type": "integer"
+                  "type": "integer",
+                  "validation": {
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
@@ -28037,7 +28136,10 @@
                 {
                   "kind": "primitive",
                   "type": "integer",
-                  "validation": {}
+                  "validation": {
+                    "maximum": 50,
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
@@ -28056,7 +28158,10 @@
                 {
                   "kind": "primitive",
                   "type": "integer",
-                  "validation": {}
+                  "validation": {
+                    "maximum": 50000,
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
@@ -28660,7 +28765,10 @@
                 {
                   "kind": "primitive",
                   "type": "integer",
-                  "validation": {}
+                  "validation": {
+                    "maximum": 50,
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
@@ -28679,7 +28787,10 @@
                 {
                   "kind": "primitive",
                   "type": "integer",
-                  "validation": {}
+                  "validation": {
+                    "maximum": 50000,
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
@@ -29377,7 +29488,9 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "minimum": 1
+              }
             }
           },
           {
@@ -29409,7 +29522,10 @@
                 {
                   "kind": "primitive",
                   "type": "integer",
-                  "validation": {}
+                  "validation": {
+                    "maximum": 50,
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
@@ -29428,7 +29544,10 @@
                 {
                   "kind": "primitive",
                   "type": "integer",
-                  "validation": {}
+                  "validation": {
+                    "maximum": 50000,
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
@@ -29938,7 +30057,10 @@
                 {
                   "kind": "primitive",
                   "type": "integer",
-                  "validation": {}
+                  "validation": {
+                    "maximum": 50,
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
@@ -29957,7 +30079,10 @@
                 {
                   "kind": "primitive",
                   "type": "integer",
-                  "validation": {}
+                  "validation": {
+                    "maximum": 50000,
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
@@ -31974,7 +32099,10 @@
             "type": {
               "kind": "primitive",
               "type": "integer",
-              "validation": {}
+              "validation": {
+                "minimum": 1,
+                "maximum": 50
+              }
             }
           }
         ],
@@ -32499,7 +32627,10 @@
                 {
                   "kind": "primitive",
                   "type": "integer",
-                  "validation": {}
+                  "validation": {
+                    "minimum": 1,
+                    "maximum": 5
+                  }
                 },
                 {
                   "kind": "null"
@@ -34185,7 +34316,10 @@
                 {
                   "kind": "primitive",
                   "type": "integer",
-                  "validation": {}
+                  "validation": {
+                    "maximum": 50,
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
@@ -34203,7 +34337,10 @@
               "variants": [
                 {
                   "kind": "primitive",
-                  "type": "integer"
+                  "type": "integer",
+                  "validation": {
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
@@ -35217,7 +35354,10 @@
                 {
                   "kind": "primitive",
                   "type": "integer",
-                  "validation": {}
+                  "validation": {
+                    "maximum": 50,
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
@@ -36264,7 +36404,10 @@
                 {
                   "kind": "primitive",
                   "type": "integer",
-                  "validation": {}
+                  "validation": {
+                    "maximum": 50,
+                    "exclusiveMinimum": 0
+                  }
                 },
                 {
                   "kind": "null"
