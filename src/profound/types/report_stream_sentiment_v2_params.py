@@ -26,11 +26,13 @@ class ReportStreamSentimentV2Params(TypedDict, total=False):
     comparison_end_date: Optional[str]
     """YYYY-MM-DD, ET, inclusive (with start)."""
 
+    source: Literal["response", "citation"]
+
     group_by: List[
         Literal["date", "model", "topic", "region", "prompt", "persona", "tag", "theme", "claim", "run", "competitor"]
     ]
 
-    metrics: Optional[List[Literal["positive_sentiment", "negative_sentiment", "occurrence"]]]
+    metrics: Optional[List[Literal["positive_sentiment", "negative_sentiment", "occurrence", "citation_share"]]]
 
     interval: Literal["day", "week", "month"]
 
@@ -52,7 +54,7 @@ class ReportStreamSentimentV2Params(TypedDict, total=False):
 
 
 class Sort(TypedDict, total=False):
-    field: Literal["occurrence", "positive_sentiment", "negative_sentiment"]
+    field: Literal["occurrence", "positive_sentiment", "negative_sentiment", "citation_share"]
 
     dir: Literal["asc", "desc"]
 

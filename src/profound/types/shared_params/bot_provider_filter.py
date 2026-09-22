@@ -52,6 +52,7 @@ class BotProviderFilter(TypedDict, total=False):
                 "yahoo",
                 "commoncrawl",
                 "openclaw",
+                "exa",
             ],
             List[
                 Literal[
@@ -79,6 +80,7 @@ class BotProviderFilter(TypedDict, total=False):
                     "yahoo",
                     "commoncrawl",
                     "openclaw",
+                    "exa",
                 ]
             ],
         ]

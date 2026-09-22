@@ -51,6 +51,7 @@ class BotProviderFilter(BaseModel):
             "yahoo",
             "commoncrawl",
             "openclaw",
+            "exa",
         ],
         List[
             Literal[
@@ -78,6 +79,7 @@ class BotProviderFilter(BaseModel):
                 "yahoo",
                 "commoncrawl",
                 "openclaw",
+                "exa",
             ]
         ],
     ]
