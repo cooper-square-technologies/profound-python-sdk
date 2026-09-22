@@ -143,6 +143,11 @@ Complete reference of every operation, grouped by resource. See [the README](./R
   - [`Ads OpenaiAds`](#ads-openaiads)
     - [`Ads OpenaiAds AdAccount`](#ads-openaiads-adaccount)
       - [Get Account Insights](#get-account-insights)
+- [`PromptVolumes`](#promptvolumes)
+  - [`PromptVolumes Volume`](#promptvolumes-volume)
+    - [Get On The Fly Volume](#get-on-the-fly-volume)
+  - [`PromptVolumes Intents`](#promptvolumes-intents)
+    - [Get On The Fly Intent Shares](#get-on-the-fly-intent-shares)
 
 ## Setup
 
@@ -2270,4 +2275,57 @@ a single call; `time_granularity=daily` gives per-day rows (e.g. daily spend).
 
 ```python
 ad_account = client.ads.openai_ads.ad_account.retrieve_insights()
+```
+
+## `PromptVolumes`
+
+### `PromptVolumes Volume`
+
+#### Get On The Fly Volume
+
+Weekly and monthly volume projections for one keyword.
+
+Each organization can look up 1,000 distinct normalized keywords per UTC
+day. Repeats consume no additional allowance. New keywords over the cap
+return 429 with X-KeywordQuota-* and Retry-After headers. Quota admission
+requires Redis (503 when unavailable); empty results and query failures
+retain the reservation. Slices with at most two users are omitted.
+
+| Direction | Type |
+| --- | --- |
+| Request | [`VolumeOnTheFlyParams`](./src/profound/types/prompt_volumes/volume_on_the_fly_params.py) |
+| Response | [`VolumeOnTheFlyResponse`](./src/profound/types/prompt_volumes/volume_on_the_fly_response.py) |
+
+```python
+volume = client.prompt_volumes.volume.on_the_fly(
+    keyword="",
+    matching_type="exact_match",
+    start_date="2024-01-01",
+    end_date="2024-01-01",
+)
+```
+
+### `PromptVolumes Intents`
+
+#### Get On The Fly Intent Shares
+
+Intent shares for one keyword across the requested cohort weeks.
+
+Shares are fractions from 0 to 1 over classified matching conversations.
+Cohorts with at most two matching users are omitted for privacy. This
+endpoint shares the volume endpoint's burst limit but consumes no daily
+keyword quota.
+
+| Direction | Type |
+| --- | --- |
+| Request | [`IntentOnTheFlyParams`](./src/profound/types/prompt_volumes/intent_on_the_fly_params.py) |
+| Response | [`IntentOnTheFlyResponse`](./src/profound/types/prompt_volumes/intent_on_the_fly_response.py) |
+
+```python
+intent = client.prompt_volumes.intents.on_the_fly(
+    keyword="",
+    matching_type="exact_match",
+    start_date="2024-01-01",
+    end_date="2024-01-01",
+)
 ```

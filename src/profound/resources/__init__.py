@@ -80,6 +80,14 @@ from .ads import (
     AdsResourceWithStreamingResponse,
     AsyncAdsResourceWithStreamingResponse,
 )
+from .prompt_volumes import (
+    PromptVolumesResource,
+    AsyncPromptVolumesResource,
+    PromptVolumesResourceWithRawResponse,
+    AsyncPromptVolumesResourceWithRawResponse,
+    PromptVolumesResourceWithStreamingResponse,
+    AsyncPromptVolumesResourceWithStreamingResponse,
+)
 
 __all__ = [
     "OrganizationsResource",
@@ -142,4 +150,10 @@ __all__ = [
     "AsyncAdsResourceWithRawResponse",
     "AdsResourceWithStreamingResponse",
     "AsyncAdsResourceWithStreamingResponse",
+    "PromptVolumesResource",
+    "AsyncPromptVolumesResource",
+    "PromptVolumesResourceWithRawResponse",
+    "AsyncPromptVolumesResourceWithRawResponse",
+    "PromptVolumesResourceWithStreamingResponse",
+    "AsyncPromptVolumesResourceWithStreamingResponse",
 ]
