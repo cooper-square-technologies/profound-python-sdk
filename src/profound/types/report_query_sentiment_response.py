@@ -33,6 +33,8 @@ class DataPrevious(BaseModel):
 
     occurrence: Optional[float] = None
 
+    citation_share: Optional[float] = None
+
     if TYPE_CHECKING:
         # Some versions of Pydantic <2.8.0 have a bug and don’t allow assigning a
         # value to this field, so for compatibility we avoid doing it at runtime.
@@ -140,11 +142,15 @@ class Data(BaseModel):
     competitor: Optional[DataCompetitor] = None
     """An ``{id, name}`` reference for a grouped dimension value."""
 
+    page: Optional[str] = None
+
     positive_sentiment: Optional[float] = None
 
     negative_sentiment: Optional[float] = None
 
     occurrence: Optional[float] = None
+
+    citation_share: Optional[float] = None
 
     previous: Optional[DataPrevious] = None
     """Comparison-window metrics (when requested)."""

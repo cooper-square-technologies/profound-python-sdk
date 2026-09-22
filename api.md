@@ -746,6 +746,7 @@ stream = client.reports.stream_sentiment_v2(
     asset="",
     start_date="",
     end_date="",
+    source="response",
     interval="day",
     include_cited_websites=False,
 )
@@ -879,6 +880,7 @@ report = client.reports.query_sentiment(
     asset="",
     start_date="",
     end_date="",
+    source="response",
     interval="day",
     include_cited_websites=False,
 )

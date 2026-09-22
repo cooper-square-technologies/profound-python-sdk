@@ -642,6 +642,7 @@ def _smoke_case_53() -> None:
         asset="",
         start_date="",
         end_date="",
+        source="response",
         interval="day",
         include_cited_websites=False,
     )
@@ -658,6 +659,7 @@ def _smoke_case_54() -> None:
         end_date="",
         comparison_start_date="",
         comparison_end_date="",
+        source="response",
         group_by=["date"],
         metrics=["positive_sentiment"],
         interval="day",
@@ -828,6 +830,7 @@ def _smoke_case_65() -> None:
         asset="",
         start_date="",
         end_date="",
+        source="response",
         interval="day",
         include_cited_websites=False,
     )
@@ -841,6 +844,7 @@ def _smoke_case_66() -> None:
         end_date="",
         comparison_start_date="",
         comparison_end_date="",
+        source="response",
         group_by=["date"],
         metrics=["positive_sentiment"],
         interval="day",

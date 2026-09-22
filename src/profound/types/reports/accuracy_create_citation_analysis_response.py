@@ -55,4 +55,7 @@ class AccuracyCreateCitationAnalysisResponse(BaseModel):
 
     markdown_content: str = FieldInfo(alias="markdownContent")
 
+    markdown_content_truncated: Optional[bool] = FieldInfo(alias="markdownContentTruncated", default=None)
+    """Whether the page preview was shortened."""
+
     claims: Optional[List[Claim]] = None

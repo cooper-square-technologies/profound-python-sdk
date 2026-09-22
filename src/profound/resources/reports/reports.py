@@ -1233,13 +1233,15 @@ class ReportsResource(SyncAPIResource):
         end_date: str,
         comparison_start_date: Optional[str] | Omit = omit,
         comparison_end_date: Optional[str] | Omit = omit,
+        source: Literal["response", "citation"] | Omit = omit,
         group_by: List[
             Literal[
                 "date", "model", "topic", "region", "prompt", "persona", "tag", "theme", "claim", "run", "competitor"
             ]
         ]
         | Omit = omit,
-        metrics: Optional[List[Literal["positive_sentiment", "negative_sentiment", "occurrence"]]] | Omit = omit,
+        metrics: Optional[List[Literal["positive_sentiment", "negative_sentiment", "occurrence", "citation_share"]]]
+        | Omit = omit,
         interval: Literal["day", "week", "month"] | Omit = omit,
         filter: Optional[report_stream_sentiment_v2_params.Filter] | Omit = omit,
         sort: report_stream_sentiment_v2_params.Sort | Omit = omit,
@@ -1264,6 +1266,7 @@ class ReportsResource(SyncAPIResource):
             end_date: YYYY-MM-DD, ET, inclusive
             comparison_start_date: YYYY-MM-DD, ET, inclusive (with end).
             comparison_end_date: YYYY-MM-DD, ET, inclusive (with start).
+            source: Body parameter.
             group_by: Body parameter.
             metrics: Body parameter.
             interval: Body parameter.
@@ -1288,6 +1291,7 @@ class ReportsResource(SyncAPIResource):
                 asset="",
                 start_date="",
                 end_date="",
+                source="response",
                 interval="day",
                 include_cited_websites=False,
             )
@@ -1307,6 +1311,7 @@ class ReportsResource(SyncAPIResource):
                     "end_date": end_date,
                     "comparison_start_date": comparison_start_date,
                     "comparison_end_date": comparison_end_date,
+                    "source": source,
                     "group_by": group_by,
                     "metrics": metrics,
                     "interval": interval,
@@ -1785,13 +1790,15 @@ class ReportsResource(SyncAPIResource):
         end_date: str,
         comparison_start_date: Optional[str] | Omit = omit,
         comparison_end_date: Optional[str] | Omit = omit,
+        source: Literal["response", "citation"] | Omit = omit,
         group_by: List[
             Literal[
                 "date", "model", "topic", "region", "prompt", "persona", "tag", "theme", "claim", "run", "competitor"
             ]
         ]
         | Omit = omit,
-        metrics: Optional[List[Literal["positive_sentiment", "negative_sentiment", "occurrence"]]] | Omit = omit,
+        metrics: Optional[List[Literal["positive_sentiment", "negative_sentiment", "occurrence", "citation_share"]]]
+        | Omit = omit,
         interval: Literal["day", "week", "month"] | Omit = omit,
         filter: Optional[report_query_sentiment_params.Filter] | Omit = omit,
         sort: report_query_sentiment_params.Sort | Omit = omit,
@@ -1816,6 +1823,7 @@ class ReportsResource(SyncAPIResource):
             end_date: YYYY-MM-DD, ET, inclusive
             comparison_start_date: YYYY-MM-DD, ET, inclusive (with end).
             comparison_end_date: YYYY-MM-DD, ET, inclusive (with start).
+            source: Body parameter.
             group_by: Body parameter.
             metrics: Body parameter.
             interval: Body parameter.
@@ -1840,6 +1848,7 @@ class ReportsResource(SyncAPIResource):
                 asset="",
                 start_date="",
                 end_date="",
+                source="response",
                 interval="day",
                 include_cited_websites=False,
             )
@@ -1855,6 +1864,7 @@ class ReportsResource(SyncAPIResource):
                     "end_date": end_date,
                     "comparison_start_date": comparison_start_date,
                     "comparison_end_date": comparison_end_date,
+                    "source": source,
                     "group_by": group_by,
                     "metrics": metrics,
                     "interval": interval,
@@ -3084,13 +3094,15 @@ class AsyncReportsResource(AsyncAPIResource):
         end_date: str,
         comparison_start_date: Optional[str] | Omit = omit,
         comparison_end_date: Optional[str] | Omit = omit,
+        source: Literal["response", "citation"] | Omit = omit,
         group_by: List[
             Literal[
                 "date", "model", "topic", "region", "prompt", "persona", "tag", "theme", "claim", "run", "competitor"
             ]
         ]
         | Omit = omit,
-        metrics: Optional[List[Literal["positive_sentiment", "negative_sentiment", "occurrence"]]] | Omit = omit,
+        metrics: Optional[List[Literal["positive_sentiment", "negative_sentiment", "occurrence", "citation_share"]]]
+        | Omit = omit,
         interval: Literal["day", "week", "month"] | Omit = omit,
         filter: Optional[report_stream_sentiment_v2_params.Filter] | Omit = omit,
         sort: report_stream_sentiment_v2_params.Sort | Omit = omit,
@@ -3115,6 +3127,7 @@ class AsyncReportsResource(AsyncAPIResource):
             end_date: YYYY-MM-DD, ET, inclusive
             comparison_start_date: YYYY-MM-DD, ET, inclusive (with end).
             comparison_end_date: YYYY-MM-DD, ET, inclusive (with start).
+            source: Body parameter.
             group_by: Body parameter.
             metrics: Body parameter.
             interval: Body parameter.
@@ -3139,6 +3152,7 @@ class AsyncReportsResource(AsyncAPIResource):
                 asset="",
                 start_date="",
                 end_date="",
+                source="response",
                 interval="day",
                 include_cited_websites=False,
             )
@@ -3158,6 +3172,7 @@ class AsyncReportsResource(AsyncAPIResource):
                     "end_date": end_date,
                     "comparison_start_date": comparison_start_date,
                     "comparison_end_date": comparison_end_date,
+                    "source": source,
                     "group_by": group_by,
                     "metrics": metrics,
                     "interval": interval,
@@ -3636,13 +3651,15 @@ class AsyncReportsResource(AsyncAPIResource):
         end_date: str,
         comparison_start_date: Optional[str] | Omit = omit,
         comparison_end_date: Optional[str] | Omit = omit,
+        source: Literal["response", "citation"] | Omit = omit,
         group_by: List[
             Literal[
                 "date", "model", "topic", "region", "prompt", "persona", "tag", "theme", "claim", "run", "competitor"
             ]
         ]
         | Omit = omit,
-        metrics: Optional[List[Literal["positive_sentiment", "negative_sentiment", "occurrence"]]] | Omit = omit,
+        metrics: Optional[List[Literal["positive_sentiment", "negative_sentiment", "occurrence", "citation_share"]]]
+        | Omit = omit,
         interval: Literal["day", "week", "month"] | Omit = omit,
         filter: Optional[report_query_sentiment_params.Filter] | Omit = omit,
         sort: report_query_sentiment_params.Sort | Omit = omit,
@@ -3667,6 +3684,7 @@ class AsyncReportsResource(AsyncAPIResource):
             end_date: YYYY-MM-DD, ET, inclusive
             comparison_start_date: YYYY-MM-DD, ET, inclusive (with end).
             comparison_end_date: YYYY-MM-DD, ET, inclusive (with start).
+            source: Body parameter.
             group_by: Body parameter.
             metrics: Body parameter.
             interval: Body parameter.
@@ -3691,6 +3709,7 @@ class AsyncReportsResource(AsyncAPIResource):
                 asset="",
                 start_date="",
                 end_date="",
+                source="response",
                 interval="day",
                 include_cited_websites=False,
             )
@@ -3706,6 +3725,7 @@ class AsyncReportsResource(AsyncAPIResource):
                     "end_date": end_date,
                     "comparison_start_date": comparison_start_date,
                     "comparison_end_date": comparison_end_date,
+                    "source": source,
                     "group_by": group_by,
                     "metrics": metrics,
                     "interval": interval,

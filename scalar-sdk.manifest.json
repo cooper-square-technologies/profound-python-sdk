@@ -1012,6 +1012,16 @@
             }
           },
           {
+            "name": "markdownContentTruncated",
+            "publicName": "markdownContentTruncated",
+            "required": false,
+            "deprecated": false,
+            "type": {
+              "kind": "primitive",
+              "type": "boolean"
+            }
+          },
+          {
             "name": "claims",
             "publicName": "claims",
             "required": false,
@@ -2497,6 +2507,31 @@
             }
           },
           {
+            "name": "outputs_expanded",
+            "publicName": "outputs_expanded",
+            "required": false,
+            "deprecated": false,
+            "type": {
+              "kind": "union",
+              "variants": [
+                {
+                  "kind": "record",
+                  "value": {
+                    "kind": "ref",
+                    "name": "agent_run_output_detail"
+                  },
+                  "propertyNames": {
+                    "kind": "primitive",
+                    "type": "string"
+                  }
+                },
+                {
+                  "kind": "null"
+                }
+              ]
+            }
+          },
+          {
             "name": "steps",
             "publicName": "steps",
             "required": false,
@@ -2515,6 +2550,45 @@
                   "kind": "null"
                 }
               ]
+            }
+          }
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "agent_run_output_detail",
+      "source": "agent_run_output_detail",
+      "publicAliases": [],
+      "deprecated": false,
+      "type": {
+        "kind": "object",
+        "properties": [
+          {
+            "name": "title",
+            "publicName": "title",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "union",
+              "variants": [
+                {
+                  "kind": "primitive",
+                  "type": "string"
+                },
+                {
+                  "kind": "null"
+                }
+              ]
+            }
+          },
+          {
+            "name": "value",
+            "publicName": "value",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "unknown"
             }
           }
         ],
@@ -4958,7 +5032,8 @@
                     "baidu",
                     "yahoo",
                     "commoncrawl",
-                    "openclaw"
+                    "openclaw",
+                    "exa"
                   ],
                   "names": [
                     "Openai",
@@ -4984,9 +5059,11 @@
                     "Baidu",
                     "Yahoo",
                     "Commoncrawl",
-                    "Openclaw"
+                    "Openclaw",
+                    "Exa"
                   ],
                   "deprecations": [
+                    false,
                     false,
                     false,
                     false,
@@ -5041,7 +5118,8 @@
                       "baidu",
                       "yahoo",
                       "commoncrawl",
-                      "openclaw"
+                      "openclaw",
+                      "exa"
                     ],
                     "names": [
                       "Openai",
@@ -5067,9 +5145,11 @@
                       "Baidu",
                       "Yahoo",
                       "Commoncrawl",
-                      "Openclaw"
+                      "Openclaw",
+                      "Exa"
                     ],
                     "deprecations": [
+                      false,
                       false,
                       false,
                       false,
@@ -24384,6 +24464,24 @@
                 }
               ]
             }
+          },
+          {
+            "name": "citation_share",
+            "publicName": "citation_share",
+            "required": false,
+            "deprecated": false,
+            "type": {
+              "kind": "union",
+              "variants": [
+                {
+                  "kind": "primitive",
+                  "type": "number"
+                },
+                {
+                  "kind": "null"
+                }
+              ]
+            }
           }
         ],
         "additionalProperties": {
@@ -24954,6 +25052,24 @@
             }
           },
           {
+            "name": "page",
+            "publicName": "page",
+            "required": false,
+            "deprecated": false,
+            "type": {
+              "kind": "union",
+              "variants": [
+                {
+                  "kind": "primitive",
+                  "type": "string"
+                },
+                {
+                  "kind": "null"
+                }
+              ]
+            }
+          },
+          {
             "name": "positive_sentiment",
             "publicName": "positive_sentiment",
             "required": false,
@@ -24992,6 +25108,24 @@
           {
             "name": "occurrence",
             "publicName": "occurrence",
+            "required": false,
+            "deprecated": false,
+            "type": {
+              "kind": "union",
+              "variants": [
+                {
+                  "kind": "primitive",
+                  "type": "number"
+                },
+                {
+                  "kind": "null"
+                }
+              ]
+            }
+          },
+          {
+            "name": "citation_share",
+            "publicName": "citation_share",
             "required": false,
             "deprecated": false,
             "type": {
@@ -25886,6 +26020,27 @@
             }
           },
           {
+            "name": "source",
+            "publicName": "source",
+            "required": false,
+            "deprecated": false,
+            "type": {
+              "kind": "enum",
+              "values": [
+                "response",
+                "citation"
+              ],
+              "names": [
+                "Response",
+                "Citation"
+              ],
+              "deprecations": [
+                false,
+                false
+              ]
+            }
+          },
+          {
             "name": "group_by",
             "publicName": "group_by",
             "required": false,
@@ -25951,14 +26106,17 @@
                     "values": [
                       "positive_sentiment",
                       "negative_sentiment",
-                      "occurrence"
+                      "occurrence",
+                      "citation_share"
                     ],
                     "names": [
                       "PositiveSentiment",
                       "NegativeSentiment",
-                      "Occurrence"
+                      "Occurrence",
+                      "CitationShare"
                     ],
                     "deprecations": [
+                      false,
                       false,
                       false,
                       false
@@ -36598,14 +36756,17 @@
               "values": [
                 "occurrence",
                 "positive_sentiment",
-                "negative_sentiment"
+                "negative_sentiment",
+                "citation_share"
               ],
               "names": [
                 "Occurrence",
                 "PositiveSentiment",
-                "NegativeSentiment"
+                "NegativeSentiment",
+                "CitationShare"
               ],
               "deprecations": [
+                false,
                 false,
                 false,
                 false
@@ -40392,6 +40553,7 @@
         "end_date",
         "comparison_start_date",
         "comparison_end_date",
+        "source",
         "group_by",
         "metrics",
         "interval",
@@ -40409,6 +40571,7 @@
         "end_date",
         "comparison_start_date",
         "comparison_end_date",
+        "source",
         "group_by",
         "metrics",
         "interval",
@@ -40442,6 +40605,10 @@
         },
         {
           "name": "comparison_end_date",
+          "required": false
+        },
+        {
+          "name": "source",
           "required": false
         },
         {
@@ -41358,6 +41525,7 @@
         "end_date",
         "comparison_start_date",
         "comparison_end_date",
+        "source",
         "group_by",
         "metrics",
         "interval",
@@ -41375,6 +41543,7 @@
         "end_date",
         "comparison_start_date",
         "comparison_end_date",
+        "source",
         "group_by",
         "metrics",
         "interval",
@@ -41408,6 +41577,10 @@
         },
         {
           "name": "comparison_end_date",
+          "required": false
+        },
+        {
+          "name": "source",
           "required": false
         },
         {
