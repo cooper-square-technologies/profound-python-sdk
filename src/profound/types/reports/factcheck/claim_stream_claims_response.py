@@ -184,14 +184,19 @@ class FactcheckClaimsRow(BaseModel):
     model: Optional[FactcheckClaimsRowModel] = None
 
     region: Optional[FactcheckClaimsRowRegion] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     persona: Optional[FactcheckClaimsRowPersona] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     prompt: Optional[FactcheckClaimsRowPrompt] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     topic: Optional[FactcheckClaimsRowTopic] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     tag: Optional[FactcheckClaimsRowTag] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     theme: Optional[FactcheckClaimsRowTheme] = None
     """Claim theme (string), or an `{id, name}` ref when sectioning by `theme`."""

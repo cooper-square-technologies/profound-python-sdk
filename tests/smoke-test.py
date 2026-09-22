@@ -18,7 +18,7 @@ from profound import Profound
 
 # The shared smoke-test runner injects base URL and credentials through the same
 # environment variables the generated client reads in normal use.
-client = Profound(max_retries=0, timeout=30)
+client = Profound(max_retries=2, timeout=10)
 
 
 class SmokeResult(TypedDict, total=False):
@@ -119,6 +119,8 @@ def _smoke_case_14() -> None:
     category = client.organizations.categories.prompts(
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         limit=10000,
+        order_by="created_at",
+        order_dir="desc",
         status=["active"],
     )
 
@@ -129,7 +131,7 @@ def _smoke_case_15() -> None:
         limit=10000,
         cursor="cursor",
         order_by="created_at",
-        order_dir="asc",
+        order_dir="desc",
         analysis_type=["visibility"],
         prompt_type=["visibility"],
         status=["active"],
@@ -1739,24 +1741,18 @@ def _smoke_case_128() -> None:
 def _smoke_case_129() -> None:
     agent = client.agents.retrieve(
         agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    )
-
-
-def _smoke_case_130() -> None:
-    agent = client.agents.retrieve(
-        agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         version="published",
     )
 
 
-def _smoke_case_131() -> None:
+def _smoke_case_130() -> None:
     agent = client.agents.create(
         organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         name="x",
     )
 
 
-def _smoke_case_132() -> None:
+def _smoke_case_131() -> None:
     agent = client.agents.create(
         organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         name="x",
@@ -1765,46 +1761,40 @@ def _smoke_case_132() -> None:
     )
 
 
-def _smoke_case_133() -> None:
+def _smoke_case_132() -> None:
     agent = client.agents.publish(
         agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     )
 
 
-def _smoke_case_134() -> None:
+def _smoke_case_133() -> None:
     agent = client.agents.update(
         agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         graph={},
     )
 
 
-def _smoke_case_135() -> None:
-    agent = client.agents.retrieve_graph(
-        agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    )
-
-
-def _smoke_case_136() -> None:
+def _smoke_case_134() -> None:
     agent = client.agents.retrieve_graph(
         agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         version="published",
     )
 
 
-def _smoke_case_137() -> None:
+def _smoke_case_135() -> None:
     run = client.agents.runs.create(
         agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     )
 
 
-def _smoke_case_138() -> None:
+def _smoke_case_136() -> None:
     run = client.agents.runs.create(
         agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         inputs={},
     )
 
 
-def _smoke_case_139() -> None:
+def _smoke_case_137() -> None:
     run = client.agents.runs.retrieve(
         agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         run_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -1812,27 +1802,27 @@ def _smoke_case_139() -> None:
     )
 
 
-def _smoke_case_140() -> None:
+def _smoke_case_138() -> None:
     node_type = client.agents.node_types.list()
 
 
-def _smoke_case_141() -> None:
+def _smoke_case_139() -> None:
     node_type = client.agents.node_types.retrieve_schema(
         node_type="nodeType",
     )
 
 
-def _smoke_case_142() -> None:
+def _smoke_case_140() -> None:
     knowledge_base = client.knowledge_bases.list()
 
 
-def _smoke_case_143() -> None:
+def _smoke_case_141() -> None:
     knowledge_base = client.knowledge_bases.list(
         organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     )
 
 
-def _smoke_case_144() -> None:
+def _smoke_case_142() -> None:
     knowledge_base = client.knowledge_bases.search(
         knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         query="x",
@@ -1841,7 +1831,7 @@ def _smoke_case_144() -> None:
     )
 
 
-def _smoke_case_145() -> None:
+def _smoke_case_143() -> None:
     knowledge_base = client.knowledge_bases.search(
         knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         query="x",
@@ -1852,7 +1842,7 @@ def _smoke_case_145() -> None:
     )
 
 
-def _smoke_case_146() -> None:
+def _smoke_case_144() -> None:
     document = client.knowledge_bases.documents.create(
         knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         name="x",
@@ -1860,8 +1850,26 @@ def _smoke_case_146() -> None:
     )
 
 
-def _smoke_case_147() -> None:
+def _smoke_case_145() -> None:
     document = client.knowledge_bases.documents.create(
+        knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+        name="x",
+        text="x",
+        folder="x",
+        organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    )
+
+
+def _smoke_case_146() -> None:
+    document = client.knowledge_bases.documents.update(
+        knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+        name="x",
+        text="x",
+    )
+
+
+def _smoke_case_147() -> None:
+    document = client.knowledge_bases.documents.update(
         knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         name="x",
         text="x",
@@ -1871,71 +1879,53 @@ def _smoke_case_147() -> None:
 
 
 def _smoke_case_148() -> None:
-    document = client.knowledge_bases.documents.update(
+    document = client.knowledge_bases.documents.delete(
         knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         name="x",
-        text="x",
     )
 
 
 def _smoke_case_149() -> None:
-    document = client.knowledge_bases.documents.update(
+    document = client.knowledge_bases.documents.delete(
         knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         name="x",
-        text="x",
-        folder="x",
         organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     )
 
 
 def _smoke_case_150() -> None:
-    document = client.knowledge_bases.documents.delete(
+    folder = client.knowledge_bases.folders.create(
         knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-        name="x",
+        path="x",
     )
 
 
 def _smoke_case_151() -> None:
-    document = client.knowledge_bases.documents.delete(
+    folder = client.knowledge_bases.folders.create(
         knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-        name="x",
+        path="x",
         organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     )
 
 
 def _smoke_case_152() -> None:
-    folder = client.knowledge_bases.folders.create(
+    folder = client.knowledge_bases.folders.delete(
         knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         path="x",
+        recursive=False,
     )
 
 
 def _smoke_case_153() -> None:
-    folder = client.knowledge_bases.folders.create(
+    folder = client.knowledge_bases.folders.delete(
         knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         path="x",
+        recursive=False,
         organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     )
 
 
 def _smoke_case_154() -> None:
-    folder = client.knowledge_bases.folders.delete(
-        knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-        path="x",
-        recursive=False,
-    )
-
-
-def _smoke_case_155() -> None:
-    folder = client.knowledge_bases.folders.delete(
-        knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-        path="x",
-        recursive=False,
-        organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    )
-
-
-def _smoke_case_156() -> None:
     project = client.projects.list(
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         limit=100,
@@ -1943,7 +1933,7 @@ def _smoke_case_156() -> None:
     )
 
 
-def _smoke_case_157() -> None:
+def _smoke_case_155() -> None:
     project = client.projects.list(
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         status="status",
@@ -1952,13 +1942,13 @@ def _smoke_case_157() -> None:
     )
 
 
-def _smoke_case_158() -> None:
+def _smoke_case_156() -> None:
     project = client.projects.create(
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     )
 
 
-def _smoke_case_159() -> None:
+def _smoke_case_157() -> None:
     project = client.projects.create(
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         title="x",
@@ -1976,35 +1966,35 @@ def _smoke_case_159() -> None:
     )
 
 
-def _smoke_case_160() -> None:
+def _smoke_case_158() -> None:
     project = client.projects.retrieve(
         project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     )
 
 
-def _smoke_case_161() -> None:
+def _smoke_case_159() -> None:
     client.projects.delete(
         project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     )
 
 
-def _smoke_case_162() -> None:
+def _smoke_case_160() -> None:
     project = client.projects.get_status(
         project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     )
 
 
-def _smoke_case_163() -> None:
+def _smoke_case_161() -> None:
     project = client.projects.archive(
         project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     )
 
 
-def _smoke_case_164() -> None:
+def _smoke_case_162() -> None:
     project = client.projects.archive(
         project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         reason="x",
@@ -2012,14 +2002,14 @@ def _smoke_case_164() -> None:
     )
 
 
-def _smoke_case_165() -> None:
+def _smoke_case_163() -> None:
     project = client.projects.unarchive(
         project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     )
 
 
-def _smoke_case_166() -> None:
+def _smoke_case_164() -> None:
     generation = client.projects.generations.list(
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         limit=100,
@@ -2027,7 +2017,7 @@ def _smoke_case_166() -> None:
     )
 
 
-def _smoke_case_167() -> None:
+def _smoke_case_165() -> None:
     generation = client.projects.generations.list(
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         status="status",
@@ -2036,21 +2026,21 @@ def _smoke_case_167() -> None:
     )
 
 
-def _smoke_case_168() -> None:
+def _smoke_case_166() -> None:
     generation = client.projects.generations.retrieve(
         run_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     )
 
 
-def _smoke_case_169() -> None:
+def _smoke_case_167() -> None:
     task = client.projects.tasks.list(
         project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     )
 
 
-def _smoke_case_170() -> None:
+def _smoke_case_168() -> None:
     task = client.projects.tasks.create(
         project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         title="x",
@@ -2058,7 +2048,7 @@ def _smoke_case_170() -> None:
     )
 
 
-def _smoke_case_171() -> None:
+def _smoke_case_169() -> None:
     task = client.projects.tasks.create(
         project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         title="x",
@@ -2074,7 +2064,7 @@ def _smoke_case_171() -> None:
     )
 
 
-def _smoke_case_172() -> None:
+def _smoke_case_170() -> None:
     task = client.projects.tasks.retrieve(
         project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         task_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -2082,7 +2072,7 @@ def _smoke_case_172() -> None:
     )
 
 
-def _smoke_case_173() -> None:
+def _smoke_case_171() -> None:
     task = client.projects.tasks.update(
         project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         task_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -2090,7 +2080,7 @@ def _smoke_case_173() -> None:
     )
 
 
-def _smoke_case_174() -> None:
+def _smoke_case_172() -> None:
     task = client.projects.tasks.update(
         project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         task_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -2106,7 +2096,7 @@ def _smoke_case_174() -> None:
     )
 
 
-def _smoke_case_175() -> None:
+def _smoke_case_173() -> None:
     client.projects.tasks.delete(
         project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         task_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -2114,7 +2104,7 @@ def _smoke_case_175() -> None:
     )
 
 
-def _smoke_case_176() -> None:
+def _smoke_case_174() -> None:
     task = client.projects.tasks.update_status(
         project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         task_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -2123,7 +2113,7 @@ def _smoke_case_176() -> None:
     )
 
 
-def _smoke_case_177() -> None:
+def _smoke_case_175() -> None:
     task = client.projects.tasks.update_status(
         project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         task_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -2133,11 +2123,11 @@ def _smoke_case_177() -> None:
     )
 
 
-def _smoke_case_178() -> None:
+def _smoke_case_176() -> None:
     integration = client.integrations.list()
 
 
-def _smoke_case_179() -> None:
+def _smoke_case_177() -> None:
     integration = client.integrations.list(
         organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         provider="provider",
@@ -2145,7 +2135,7 @@ def _smoke_case_179() -> None:
     )
 
 
-def _smoke_case_180() -> None:
+def _smoke_case_178() -> None:
     document = client.documents.create(
         id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -2154,14 +2144,14 @@ def _smoke_case_180() -> None:
     )
 
 
-def _smoke_case_181() -> None:
+def _smoke_case_179() -> None:
     document = client.documents.list(
         organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         limit=20,
     )
 
 
-def _smoke_case_182() -> None:
+def _smoke_case_180() -> None:
     document = client.documents.list(
         organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         q="q",
@@ -2171,7 +2161,7 @@ def _smoke_case_182() -> None:
     )
 
 
-def _smoke_case_183() -> None:
+def _smoke_case_181() -> None:
     document = client.documents.retrieve(
         document_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -2181,14 +2171,14 @@ def _smoke_case_183() -> None:
     )
 
 
-def _smoke_case_184() -> None:
+def _smoke_case_182() -> None:
     document = client.documents.update(
         document_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     )
 
 
-def _smoke_case_185() -> None:
+def _smoke_case_183() -> None:
     document = client.documents.update(
         document_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -2197,14 +2187,14 @@ def _smoke_case_185() -> None:
     )
 
 
-def _smoke_case_186() -> None:
+def _smoke_case_184() -> None:
     client.documents.delete(
         document_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     )
 
 
-def _smoke_case_187() -> None:
+def _smoke_case_185() -> None:
     document = client.documents.replace_content(
         document_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -2213,11 +2203,11 @@ def _smoke_case_187() -> None:
     )
 
 
-def _smoke_case_188() -> None:
+def _smoke_case_186() -> None:
     ad_account = client.ads.openai_ads.ad_account.retrieve_insights()
 
 
-def _smoke_case_189() -> None:
+def _smoke_case_187() -> None:
     ad_account = client.ads.openai_ads.ad_account.retrieve_insights(
         organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         aggregation_level="ad_account",
@@ -3120,411 +3110,395 @@ cases: list[SmokeCase] = [
         "operation": "retrieve",
         "method": "GET",
         "path": "/v1/agents/{agent_id}",
-        "label": "required params",
         "run": _smoke_case_129,
     },
     {
-        "operation": "retrieve",
-        "method": "GET",
-        "path": "/v1/agents/{agent_id}",
-        "label": "all params",
+        "operation": "create",
+        "method": "POST",
+        "path": "/v1/agents",
+        "label": "required params",
         "run": _smoke_case_130,
     },
     {
         "operation": "create",
         "method": "POST",
         "path": "/v1/agents",
-        "label": "required params",
-        "run": _smoke_case_131,
-    },
-    {
-        "operation": "create",
-        "method": "POST",
-        "path": "/v1/agents",
         "label": "all params",
-        "run": _smoke_case_132,
+        "run": _smoke_case_131,
     },
     {
         "operation": "publish",
         "method": "POST",
         "path": "/v1/agents/{agent_id}/publish",
-        "run": _smoke_case_133,
+        "run": _smoke_case_132,
     },
     {
         "operation": "update",
         "method": "PATCH",
         "path": "/v1/agents/{agent_id}",
-        "run": _smoke_case_134,
+        "run": _smoke_case_133,
     },
     {
         "operation": "retrieveGraph",
         "method": "GET",
         "path": "/v1/agents/{agent_id}/graph",
+        "run": _smoke_case_134,
+    },
+    {
+        "operation": "create",
+        "method": "POST",
+        "path": "/v1/agents/{agent_id}/runs",
         "label": "required params",
         "run": _smoke_case_135,
     },
     {
-        "operation": "retrieveGraph",
-        "method": "GET",
-        "path": "/v1/agents/{agent_id}/graph",
+        "operation": "create",
+        "method": "POST",
+        "path": "/v1/agents/{agent_id}/runs",
         "label": "all params",
         "run": _smoke_case_136,
-    },
-    {
-        "operation": "create",
-        "method": "POST",
-        "path": "/v1/agents/{agent_id}/runs",
-        "label": "required params",
-        "run": _smoke_case_137,
-    },
-    {
-        "operation": "create",
-        "method": "POST",
-        "path": "/v1/agents/{agent_id}/runs",
-        "label": "all params",
-        "run": _smoke_case_138,
     },
     {
         "operation": "retrieve",
         "method": "GET",
         "path": "/v1/agents/{agent_id}/runs/{run_id}",
-        "run": _smoke_case_139,
+        "run": _smoke_case_137,
     },
     {
         "operation": "list",
         "method": "GET",
         "path": "/v1/agents/node-types",
-        "run": _smoke_case_140,
+        "run": _smoke_case_138,
     },
     {
         "operation": "retrieveSchema",
         "method": "GET",
         "path": "/v1/agents/node-types/{node_type}/schema",
-        "run": _smoke_case_141,
+        "run": _smoke_case_139,
     },
     {
         "operation": "list",
         "method": "GET",
         "path": "/v1/knowledge-bases",
+        "label": "required params",
+        "run": _smoke_case_140,
+    },
+    {
+        "operation": "list",
+        "method": "GET",
+        "path": "/v1/knowledge-bases",
+        "label": "all params",
+        "run": _smoke_case_141,
+    },
+    {
+        "operation": "search",
+        "method": "POST",
+        "path": "/v1/knowledge-bases/{knowledge_base_id}/search",
         "label": "required params",
         "run": _smoke_case_142,
     },
     {
-        "operation": "list",
-        "method": "GET",
-        "path": "/v1/knowledge-bases",
+        "operation": "search",
+        "method": "POST",
+        "path": "/v1/knowledge-bases/{knowledge_base_id}/search",
         "label": "all params",
         "run": _smoke_case_143,
     },
     {
-        "operation": "search",
+        "operation": "create",
         "method": "POST",
-        "path": "/v1/knowledge-bases/{knowledge_base_id}/search",
+        "path": "/v1/knowledge-bases/{knowledge_base_id}/documents",
         "label": "required params",
         "run": _smoke_case_144,
     },
     {
-        "operation": "search",
+        "operation": "create",
         "method": "POST",
-        "path": "/v1/knowledge-bases/{knowledge_base_id}/search",
+        "path": "/v1/knowledge-bases/{knowledge_base_id}/documents",
         "label": "all params",
         "run": _smoke_case_145,
     },
     {
-        "operation": "create",
-        "method": "POST",
+        "operation": "update",
+        "method": "PUT",
         "path": "/v1/knowledge-bases/{knowledge_base_id}/documents",
         "label": "required params",
         "run": _smoke_case_146,
     },
     {
-        "operation": "create",
-        "method": "POST",
+        "operation": "update",
+        "method": "PUT",
         "path": "/v1/knowledge-bases/{knowledge_base_id}/documents",
         "label": "all params",
         "run": _smoke_case_147,
     },
     {
-        "operation": "update",
-        "method": "PUT",
+        "operation": "delete",
+        "method": "DELETE",
         "path": "/v1/knowledge-bases/{knowledge_base_id}/documents",
         "label": "required params",
         "run": _smoke_case_148,
     },
     {
-        "operation": "update",
-        "method": "PUT",
+        "operation": "delete",
+        "method": "DELETE",
         "path": "/v1/knowledge-bases/{knowledge_base_id}/documents",
         "label": "all params",
         "run": _smoke_case_149,
     },
     {
-        "operation": "delete",
-        "method": "DELETE",
-        "path": "/v1/knowledge-bases/{knowledge_base_id}/documents",
+        "operation": "create",
+        "method": "POST",
+        "path": "/v1/knowledge-bases/{knowledge_base_id}/folders",
         "label": "required params",
         "run": _smoke_case_150,
     },
     {
-        "operation": "delete",
-        "method": "DELETE",
-        "path": "/v1/knowledge-bases/{knowledge_base_id}/documents",
+        "operation": "create",
+        "method": "POST",
+        "path": "/v1/knowledge-bases/{knowledge_base_id}/folders",
         "label": "all params",
         "run": _smoke_case_151,
     },
     {
-        "operation": "create",
-        "method": "POST",
+        "operation": "delete",
+        "method": "DELETE",
         "path": "/v1/knowledge-bases/{knowledge_base_id}/folders",
         "label": "required params",
         "run": _smoke_case_152,
     },
     {
-        "operation": "create",
-        "method": "POST",
+        "operation": "delete",
+        "method": "DELETE",
         "path": "/v1/knowledge-bases/{knowledge_base_id}/folders",
         "label": "all params",
         "run": _smoke_case_153,
     },
     {
-        "operation": "delete",
-        "method": "DELETE",
-        "path": "/v1/knowledge-bases/{knowledge_base_id}/folders",
+        "operation": "list",
+        "method": "GET",
+        "path": "/v1/projects",
         "label": "required params",
         "run": _smoke_case_154,
     },
     {
-        "operation": "delete",
-        "method": "DELETE",
-        "path": "/v1/knowledge-bases/{knowledge_base_id}/folders",
+        "operation": "list",
+        "method": "GET",
+        "path": "/v1/projects",
         "label": "all params",
         "run": _smoke_case_155,
     },
     {
-        "operation": "list",
-        "method": "GET",
+        "operation": "create",
+        "method": "POST",
         "path": "/v1/projects",
         "label": "required params",
         "run": _smoke_case_156,
     },
     {
-        "operation": "list",
-        "method": "GET",
+        "operation": "create",
+        "method": "POST",
         "path": "/v1/projects",
         "label": "all params",
         "run": _smoke_case_157,
     },
     {
-        "operation": "create",
-        "method": "POST",
-        "path": "/v1/projects",
-        "label": "required params",
-        "run": _smoke_case_158,
-    },
-    {
-        "operation": "create",
-        "method": "POST",
-        "path": "/v1/projects",
-        "label": "all params",
-        "run": _smoke_case_159,
-    },
-    {
         "operation": "retrieve",
         "method": "GET",
         "path": "/v1/projects/{project_id}",
-        "run": _smoke_case_160,
+        "run": _smoke_case_158,
     },
     {
         "operation": "delete",
         "method": "DELETE",
         "path": "/v1/projects/{project_id}",
-        "run": _smoke_case_161,
+        "run": _smoke_case_159,
     },
     {
         "operation": "getStatus",
         "method": "GET",
         "path": "/v1/projects/{project_id}/status",
-        "run": _smoke_case_162,
+        "run": _smoke_case_160,
     },
     {
         "operation": "archive",
         "method": "POST",
         "path": "/v1/projects/{project_id}/archive",
         "label": "required params",
-        "run": _smoke_case_163,
+        "run": _smoke_case_161,
     },
     {
         "operation": "archive",
         "method": "POST",
         "path": "/v1/projects/{project_id}/archive",
         "label": "all params",
-        "run": _smoke_case_164,
+        "run": _smoke_case_162,
     },
     {
         "operation": "unarchive",
         "method": "POST",
         "path": "/v1/projects/{project_id}/unarchive",
-        "run": _smoke_case_165,
+        "run": _smoke_case_163,
     },
     {
         "operation": "list",
         "method": "GET",
         "path": "/v1/projects/generations",
         "label": "required params",
-        "run": _smoke_case_166,
+        "run": _smoke_case_164,
     },
     {
         "operation": "list",
         "method": "GET",
         "path": "/v1/projects/generations",
         "label": "all params",
-        "run": _smoke_case_167,
+        "run": _smoke_case_165,
     },
     {
         "operation": "retrieve",
         "method": "GET",
         "path": "/v1/projects/generations/{run_id}",
-        "run": _smoke_case_168,
+        "run": _smoke_case_166,
     },
     {
         "operation": "list",
         "method": "GET",
         "path": "/v1/projects/{project_id}/tasks",
-        "run": _smoke_case_169,
+        "run": _smoke_case_167,
     },
     {
         "operation": "create",
         "method": "POST",
         "path": "/v1/projects/{project_id}/tasks",
         "label": "required params",
-        "run": _smoke_case_170,
+        "run": _smoke_case_168,
     },
     {
         "operation": "create",
         "method": "POST",
         "path": "/v1/projects/{project_id}/tasks",
         "label": "all params",
-        "run": _smoke_case_171,
+        "run": _smoke_case_169,
     },
     {
         "operation": "retrieve",
         "method": "GET",
         "path": "/v1/projects/{project_id}/tasks/{task_id}",
-        "run": _smoke_case_172,
+        "run": _smoke_case_170,
     },
     {
         "operation": "update",
         "method": "PATCH",
         "path": "/v1/projects/{project_id}/tasks/{task_id}",
         "label": "required params",
-        "run": _smoke_case_173,
+        "run": _smoke_case_171,
     },
     {
         "operation": "update",
         "method": "PATCH",
         "path": "/v1/projects/{project_id}/tasks/{task_id}",
         "label": "all params",
-        "run": _smoke_case_174,
+        "run": _smoke_case_172,
     },
     {
         "operation": "delete",
         "method": "DELETE",
         "path": "/v1/projects/{project_id}/tasks/{task_id}",
-        "run": _smoke_case_175,
+        "run": _smoke_case_173,
     },
     {
         "operation": "updateStatus",
         "method": "POST",
         "path": "/v1/projects/{project_id}/tasks/{task_id}/status",
         "label": "required params",
-        "run": _smoke_case_176,
+        "run": _smoke_case_174,
     },
     {
         "operation": "updateStatus",
         "method": "POST",
         "path": "/v1/projects/{project_id}/tasks/{task_id}/status",
         "label": "all params",
-        "run": _smoke_case_177,
+        "run": _smoke_case_175,
     },
     {
         "operation": "list",
         "method": "GET",
         "path": "/v1/integrations",
         "label": "required params",
+        "run": _smoke_case_176,
+    },
+    {
+        "operation": "list",
+        "method": "GET",
+        "path": "/v1/integrations",
+        "label": "all params",
+        "run": _smoke_case_177,
+    },
+    {
+        "operation": "create",
+        "method": "POST",
+        "path": "/v1/documents",
         "run": _smoke_case_178,
     },
     {
         "operation": "list",
         "method": "GET",
-        "path": "/v1/integrations",
-        "label": "all params",
+        "path": "/v1/documents",
+        "label": "required params",
         "run": _smoke_case_179,
     },
     {
-        "operation": "create",
-        "method": "POST",
-        "path": "/v1/documents",
-        "run": _smoke_case_180,
-    },
-    {
-        "operation": "list",
-        "method": "GET",
-        "path": "/v1/documents",
-        "label": "required params",
-        "run": _smoke_case_181,
-    },
-    {
         "operation": "list",
         "method": "GET",
         "path": "/v1/documents",
         "label": "all params",
-        "run": _smoke_case_182,
+        "run": _smoke_case_180,
     },
     {
         "operation": "retrieve",
         "method": "GET",
         "path": "/v1/documents/{document_id}",
-        "run": _smoke_case_183,
+        "run": _smoke_case_181,
     },
     {
         "operation": "update",
         "method": "PATCH",
         "path": "/v1/documents/{document_id}",
         "label": "required params",
-        "run": _smoke_case_184,
+        "run": _smoke_case_182,
     },
     {
         "operation": "update",
         "method": "PATCH",
         "path": "/v1/documents/{document_id}",
         "label": "all params",
-        "run": _smoke_case_185,
+        "run": _smoke_case_183,
     },
     {
         "operation": "delete",
         "method": "DELETE",
         "path": "/v1/documents/{document_id}",
-        "run": _smoke_case_186,
+        "run": _smoke_case_184,
     },
     {
         "operation": "replaceContent",
         "method": "POST",
         "path": "/v1/documents/{document_id}/content",
-        "run": _smoke_case_187,
+        "run": _smoke_case_185,
     },
     {
         "operation": "retrieveInsights",
         "method": "GET",
         "path": "/v1/ads/openai-ads/ad-account/insights",
         "label": "required params",
-        "run": _smoke_case_188,
+        "run": _smoke_case_186,
     },
     {
         "operation": "retrieveInsights",
         "method": "GET",
         "path": "/v1/ads/openai-ads/ad-account/insights",
         "label": "all params",
-        "run": _smoke_case_189,
+        "run": _smoke_case_187,
     },
 ]
 

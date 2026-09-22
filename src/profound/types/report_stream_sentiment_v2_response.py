@@ -112,24 +112,34 @@ class SentimentRow(BaseModel):
     date: Optional[str] = None
 
     model: Optional[SentimentRowModel] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     topic: Optional[SentimentRowTopic] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     region: Optional[SentimentRowRegion] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     prompt: Optional[SentimentRowPrompt] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     persona: Optional[SentimentRowPersona] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     tag: Optional[SentimentRowTag] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     theme: Optional[SentimentRowTheme] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     claim: Optional[SentimentRowClaim] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     run: Optional[SentimentRowRun] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     competitor: Optional[SentimentRowCompetitor] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     positive_sentiment: Optional[float] = None
 

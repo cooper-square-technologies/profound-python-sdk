@@ -1,7 +1,7 @@
 {
   "name": "Profound",
   "slug": "profound",
-  "generatorVersion": "0.32.14",
+  "generatorVersion": "0.33.2",
   "servers": [
     "https://api.tryprofound.com"
   ],
@@ -37542,13 +37542,15 @@
           "name": "order_by",
           "required": false,
           "style": "form",
-          "explode": true
+          "explode": true,
+          "defaultValue": "created_at"
         },
         {
           "name": "order_dir",
           "required": false,
           "style": "form",
-          "explode": true
+          "explode": true,
+          "defaultValue": "desc"
         },
         {
           "name": "analysis_type",
@@ -46534,7 +46536,8 @@
           "name": "version",
           "required": false,
           "style": "form",
-          "explode": true
+          "explode": true,
+          "defaultValue": "published"
         }
       ],
       "headerParamDetails": [],
@@ -46908,7 +46911,8 @@
           "name": "version",
           "required": false,
           "style": "form",
-          "explode": true
+          "explode": true,
+          "defaultValue": "published"
         }
       ],
       "headerParamDetails": [],
