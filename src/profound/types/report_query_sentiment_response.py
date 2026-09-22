@@ -33,6 +33,8 @@ class DataPrevious(BaseModel):
 
     occurrence: Optional[float] = None
 
+    citation_share: Optional[float] = None
+
     if TYPE_CHECKING:
         # Some versions of Pydantic <2.8.0 have a bug and don’t allow assigning a
         # value to this field, so for compatibility we avoid doing it at runtime.
@@ -111,30 +113,44 @@ class Data(BaseModel):
     date: Optional[str] = None
 
     model: Optional[DataModel] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     topic: Optional[DataTopic] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     region: Optional[DataRegion] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     prompt: Optional[DataPrompt] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     persona: Optional[DataPersona] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     tag: Optional[DataTag] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     theme: Optional[DataTheme] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     claim: Optional[DataClaim] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     run: Optional[DataRun] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     competitor: Optional[DataCompetitor] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
+
+    page: Optional[str] = None
 
     positive_sentiment: Optional[float] = None
 
     negative_sentiment: Optional[float] = None
 
     occurrence: Optional[float] = None
+
+    citation_share: Optional[float] = None
 
     previous: Optional[DataPrevious] = None
     """Comparison-window metrics (when requested)."""

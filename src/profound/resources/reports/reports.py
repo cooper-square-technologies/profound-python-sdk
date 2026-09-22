@@ -199,7 +199,7 @@ class ReportsResource(SyncAPIResource):
             report = client.reports.citations(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["count"],
                 order_by={},
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -291,7 +291,7 @@ class ReportsResource(SyncAPIResource):
             report = client.reports.visibility(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["share_of_voice"],
                 order_by={},
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -383,7 +383,7 @@ class ReportsResource(SyncAPIResource):
             report = client.reports.sentiment(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["positive"],
                 order_by={},
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -472,7 +472,7 @@ class ReportsResource(SyncAPIResource):
                 start_date="2024-01-01T00:00:00.000Z",
                 end_date="2024-01-01T00:00:00.000Z",
                 date_bucket="day",
-                metrics=[],
+                metrics=["sentiment"],
             )
             ```
         """
@@ -553,7 +553,7 @@ class ReportsResource(SyncAPIResource):
             report = client.reports.get_referrals_report(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["visits"],
                 order_by={},
                 domain="",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -643,7 +643,7 @@ class ReportsResource(SyncAPIResource):
             report = client.reports.get_bots_report(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["count"],
                 order_by={},
                 domain="",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -719,7 +719,7 @@ class ReportsResource(SyncAPIResource):
             report = client.reports.query_fanouts(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["fanouts_per_execution"],
                 order_by={},
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -794,7 +794,7 @@ class ReportsResource(SyncAPIResource):
             dimensions: Dimensions to group the report by.
             metrics: Metrics to include. `share_of_voice` is deprecated, use `citation_share` instead.
             order_by: Custom ordering of the report results.
-            pagination: Body parameter.
+            pagination: Offset-based pagination parameters.
             category_id: Body parameter.
             start_date: Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
             end_date: End date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
@@ -812,7 +812,7 @@ class ReportsResource(SyncAPIResource):
             stream = client.reports.stream_citations(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["count"],
                 order_by={},
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -892,7 +892,7 @@ class ReportsResource(SyncAPIResource):
             dimensions: Dimensions to group the report by.
             metrics: Body parameter.
             order_by: Custom ordering of the report results.
-            pagination: Body parameter.
+            pagination: Offset-based pagination parameters.
             category_id: Body parameter.
             start_date: Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
             end_date: End date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
@@ -910,7 +910,7 @@ class ReportsResource(SyncAPIResource):
             stream = client.reports.stream_visibility(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["share_of_voice"],
                 order_by={},
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -990,7 +990,7 @@ class ReportsResource(SyncAPIResource):
             dimensions: Dimensions to group the report by.
             metrics: Body parameter.
             order_by: Custom ordering of the report results.
-            pagination: Body parameter.
+            pagination: Offset-based pagination parameters.
             category_id: Body parameter.
             start_date: Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
             end_date: End date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
@@ -1008,7 +1008,7 @@ class ReportsResource(SyncAPIResource):
             stream = client.reports.stream_sentiment(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["positive"],
                 order_by={},
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -1168,7 +1168,7 @@ class ReportsResource(SyncAPIResource):
             interval: Body parameter.
             scope: Body parameter.
             assets: A name (`is`), a list (`in`), or {op,value} with op `is`/`in`/`not_in`.
-            filter: Body parameter.
+            filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
             sort: Body parameter.
             limit: Page size; default 10, max 50.
             max_results: Stream endpoint only: cap the number of streamed rows (default: all).
@@ -1233,13 +1233,15 @@ class ReportsResource(SyncAPIResource):
         end_date: str,
         comparison_start_date: Optional[str] | Omit = omit,
         comparison_end_date: Optional[str] | Omit = omit,
+        source: Literal["response", "citation"] | Omit = omit,
         group_by: List[
             Literal[
                 "date", "model", "topic", "region", "prompt", "persona", "tag", "theme", "claim", "run", "competitor"
             ]
         ]
         | Omit = omit,
-        metrics: Optional[List[Literal["positive_sentiment", "negative_sentiment", "occurrence"]]] | Omit = omit,
+        metrics: Optional[List[Literal["positive_sentiment", "negative_sentiment", "occurrence", "citation_share"]]]
+        | Omit = omit,
         interval: Literal["day", "week", "month"] | Omit = omit,
         filter: Optional[report_stream_sentiment_v2_params.Filter] | Omit = omit,
         sort: report_stream_sentiment_v2_params.Sort | Omit = omit,
@@ -1264,10 +1266,11 @@ class ReportsResource(SyncAPIResource):
             end_date: YYYY-MM-DD, ET, inclusive
             comparison_start_date: YYYY-MM-DD, ET, inclusive (with end).
             comparison_end_date: YYYY-MM-DD, ET, inclusive (with start).
+            source: Body parameter.
             group_by: Body parameter.
             metrics: Body parameter.
             interval: Body parameter.
-            filter: Body parameter.
+            filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
             sort: Body parameter.
             include_cited_websites: Return cited websites per row (only when grouping by `theme`/`claim`).
             limit: Page size; default 10, max 50.
@@ -1288,6 +1291,7 @@ class ReportsResource(SyncAPIResource):
                 asset="",
                 start_date="",
                 end_date="",
+                source="response",
                 interval="day",
                 include_cited_websites=False,
             )
@@ -1307,6 +1311,7 @@ class ReportsResource(SyncAPIResource):
                     "end_date": end_date,
                     "comparison_start_date": comparison_start_date,
                     "comparison_end_date": comparison_end_date,
+                    "source": source,
                     "group_by": group_by,
                     "metrics": metrics,
                     "interval": interval,
@@ -1359,7 +1364,7 @@ class ReportsResource(SyncAPIResource):
             group_by: Body parameter.
             metrics: Body parameter.
             interval: Body parameter.
-            filter: Body parameter.
+            filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
             sort: Body parameter.
             limit: Page size; default 10, max 50.
             max_results: Stream endpoint only: cap the number of streamed rows (default: all).
@@ -1468,7 +1473,7 @@ class ReportsResource(SyncAPIResource):
             report = client.reports.get_referrals_report_v2(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["visits"],
                 order_by={},
                 domain="",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -1572,7 +1577,7 @@ class ReportsResource(SyncAPIResource):
             report = client.reports.get_bots_report_v2(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["count"],
                 order_by={},
                 domain="",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -1643,7 +1648,7 @@ class ReportsResource(SyncAPIResource):
             interval: Body parameter.
             scope: Body parameter.
             assets: A name (`is`), a list (`in`), or {op,value} with op `is`/`in`/`not_in`.
-            filter: Body parameter.
+            filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
             sort: Body parameter.
             limit: Page size; default 10, max 50.
             max_results: Stream endpoint only: cap the number of streamed rows (default: all).
@@ -1785,13 +1790,15 @@ class ReportsResource(SyncAPIResource):
         end_date: str,
         comparison_start_date: Optional[str] | Omit = omit,
         comparison_end_date: Optional[str] | Omit = omit,
+        source: Literal["response", "citation"] | Omit = omit,
         group_by: List[
             Literal[
                 "date", "model", "topic", "region", "prompt", "persona", "tag", "theme", "claim", "run", "competitor"
             ]
         ]
         | Omit = omit,
-        metrics: Optional[List[Literal["positive_sentiment", "negative_sentiment", "occurrence"]]] | Omit = omit,
+        metrics: Optional[List[Literal["positive_sentiment", "negative_sentiment", "occurrence", "citation_share"]]]
+        | Omit = omit,
         interval: Literal["day", "week", "month"] | Omit = omit,
         filter: Optional[report_query_sentiment_params.Filter] | Omit = omit,
         sort: report_query_sentiment_params.Sort | Omit = omit,
@@ -1816,10 +1823,11 @@ class ReportsResource(SyncAPIResource):
             end_date: YYYY-MM-DD, ET, inclusive
             comparison_start_date: YYYY-MM-DD, ET, inclusive (with end).
             comparison_end_date: YYYY-MM-DD, ET, inclusive (with start).
+            source: Body parameter.
             group_by: Body parameter.
             metrics: Body parameter.
             interval: Body parameter.
-            filter: Body parameter.
+            filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
             sort: Body parameter.
             include_cited_websites: Return cited websites per row (only when grouping by `theme`/`claim`).
             limit: Page size; default 10, max 50.
@@ -1840,6 +1848,7 @@ class ReportsResource(SyncAPIResource):
                 asset="",
                 start_date="",
                 end_date="",
+                source="response",
                 interval="day",
                 include_cited_websites=False,
             )
@@ -1855,6 +1864,7 @@ class ReportsResource(SyncAPIResource):
                     "end_date": end_date,
                     "comparison_start_date": comparison_start_date,
                     "comparison_end_date": comparison_end_date,
+                    "source": source,
                     "group_by": group_by,
                     "metrics": metrics,
                     "interval": interval,
@@ -1905,7 +1915,7 @@ class ReportsResource(SyncAPIResource):
             group_by: Body parameter.
             metrics: Body parameter.
             interval: Body parameter.
-            filter: Body parameter.
+            filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
             sort: Body parameter.
             limit: Page size; default 10, max 50.
             max_results: Stream endpoint only: cap the number of streamed rows (default: all).
@@ -2050,7 +2060,7 @@ class AsyncReportsResource(AsyncAPIResource):
             report = await client.reports.citations(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["count"],
                 order_by={},
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -2142,7 +2152,7 @@ class AsyncReportsResource(AsyncAPIResource):
             report = await client.reports.visibility(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["share_of_voice"],
                 order_by={},
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -2234,7 +2244,7 @@ class AsyncReportsResource(AsyncAPIResource):
             report = await client.reports.sentiment(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["positive"],
                 order_by={},
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -2323,7 +2333,7 @@ class AsyncReportsResource(AsyncAPIResource):
                 start_date="2024-01-01T00:00:00.000Z",
                 end_date="2024-01-01T00:00:00.000Z",
                 date_bucket="day",
-                metrics=[],
+                metrics=["sentiment"],
             )
             ```
         """
@@ -2404,7 +2414,7 @@ class AsyncReportsResource(AsyncAPIResource):
             report = await client.reports.get_referrals_report(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["visits"],
                 order_by={},
                 domain="",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -2494,7 +2504,7 @@ class AsyncReportsResource(AsyncAPIResource):
             report = await client.reports.get_bots_report(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["count"],
                 order_by={},
                 domain="",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -2570,7 +2580,7 @@ class AsyncReportsResource(AsyncAPIResource):
             report = await client.reports.query_fanouts(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["fanouts_per_execution"],
                 order_by={},
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -2645,7 +2655,7 @@ class AsyncReportsResource(AsyncAPIResource):
             dimensions: Dimensions to group the report by.
             metrics: Metrics to include. `share_of_voice` is deprecated, use `citation_share` instead.
             order_by: Custom ordering of the report results.
-            pagination: Body parameter.
+            pagination: Offset-based pagination parameters.
             category_id: Body parameter.
             start_date: Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
             end_date: End date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
@@ -2663,7 +2673,7 @@ class AsyncReportsResource(AsyncAPIResource):
             stream = await client.reports.stream_citations(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["count"],
                 order_by={},
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -2743,7 +2753,7 @@ class AsyncReportsResource(AsyncAPIResource):
             dimensions: Dimensions to group the report by.
             metrics: Body parameter.
             order_by: Custom ordering of the report results.
-            pagination: Body parameter.
+            pagination: Offset-based pagination parameters.
             category_id: Body parameter.
             start_date: Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
             end_date: End date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
@@ -2761,7 +2771,7 @@ class AsyncReportsResource(AsyncAPIResource):
             stream = await client.reports.stream_visibility(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["share_of_voice"],
                 order_by={},
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -2841,7 +2851,7 @@ class AsyncReportsResource(AsyncAPIResource):
             dimensions: Dimensions to group the report by.
             metrics: Body parameter.
             order_by: Custom ordering of the report results.
-            pagination: Body parameter.
+            pagination: Offset-based pagination parameters.
             category_id: Body parameter.
             start_date: Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
             end_date: End date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
@@ -2859,7 +2869,7 @@ class AsyncReportsResource(AsyncAPIResource):
             stream = await client.reports.stream_sentiment(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["positive"],
                 order_by={},
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -3019,7 +3029,7 @@ class AsyncReportsResource(AsyncAPIResource):
             interval: Body parameter.
             scope: Body parameter.
             assets: A name (`is`), a list (`in`), or {op,value} with op `is`/`in`/`not_in`.
-            filter: Body parameter.
+            filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
             sort: Body parameter.
             limit: Page size; default 10, max 50.
             max_results: Stream endpoint only: cap the number of streamed rows (default: all).
@@ -3084,13 +3094,15 @@ class AsyncReportsResource(AsyncAPIResource):
         end_date: str,
         comparison_start_date: Optional[str] | Omit = omit,
         comparison_end_date: Optional[str] | Omit = omit,
+        source: Literal["response", "citation"] | Omit = omit,
         group_by: List[
             Literal[
                 "date", "model", "topic", "region", "prompt", "persona", "tag", "theme", "claim", "run", "competitor"
             ]
         ]
         | Omit = omit,
-        metrics: Optional[List[Literal["positive_sentiment", "negative_sentiment", "occurrence"]]] | Omit = omit,
+        metrics: Optional[List[Literal["positive_sentiment", "negative_sentiment", "occurrence", "citation_share"]]]
+        | Omit = omit,
         interval: Literal["day", "week", "month"] | Omit = omit,
         filter: Optional[report_stream_sentiment_v2_params.Filter] | Omit = omit,
         sort: report_stream_sentiment_v2_params.Sort | Omit = omit,
@@ -3115,10 +3127,11 @@ class AsyncReportsResource(AsyncAPIResource):
             end_date: YYYY-MM-DD, ET, inclusive
             comparison_start_date: YYYY-MM-DD, ET, inclusive (with end).
             comparison_end_date: YYYY-MM-DD, ET, inclusive (with start).
+            source: Body parameter.
             group_by: Body parameter.
             metrics: Body parameter.
             interval: Body parameter.
-            filter: Body parameter.
+            filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
             sort: Body parameter.
             include_cited_websites: Return cited websites per row (only when grouping by `theme`/`claim`).
             limit: Page size; default 10, max 50.
@@ -3139,6 +3152,7 @@ class AsyncReportsResource(AsyncAPIResource):
                 asset="",
                 start_date="",
                 end_date="",
+                source="response",
                 interval="day",
                 include_cited_websites=False,
             )
@@ -3158,6 +3172,7 @@ class AsyncReportsResource(AsyncAPIResource):
                     "end_date": end_date,
                     "comparison_start_date": comparison_start_date,
                     "comparison_end_date": comparison_end_date,
+                    "source": source,
                     "group_by": group_by,
                     "metrics": metrics,
                     "interval": interval,
@@ -3210,7 +3225,7 @@ class AsyncReportsResource(AsyncAPIResource):
             group_by: Body parameter.
             metrics: Body parameter.
             interval: Body parameter.
-            filter: Body parameter.
+            filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
             sort: Body parameter.
             limit: Page size; default 10, max 50.
             max_results: Stream endpoint only: cap the number of streamed rows (default: all).
@@ -3319,7 +3334,7 @@ class AsyncReportsResource(AsyncAPIResource):
             report = await client.reports.get_referrals_report_v2(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["visits"],
                 order_by={},
                 domain="",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -3423,7 +3438,7 @@ class AsyncReportsResource(AsyncAPIResource):
             report = await client.reports.get_bots_report_v2(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["count"],
                 order_by={},
                 domain="",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -3494,7 +3509,7 @@ class AsyncReportsResource(AsyncAPIResource):
             interval: Body parameter.
             scope: Body parameter.
             assets: A name (`is`), a list (`in`), or {op,value} with op `is`/`in`/`not_in`.
-            filter: Body parameter.
+            filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
             sort: Body parameter.
             limit: Page size; default 10, max 50.
             max_results: Stream endpoint only: cap the number of streamed rows (default: all).
@@ -3636,13 +3651,15 @@ class AsyncReportsResource(AsyncAPIResource):
         end_date: str,
         comparison_start_date: Optional[str] | Omit = omit,
         comparison_end_date: Optional[str] | Omit = omit,
+        source: Literal["response", "citation"] | Omit = omit,
         group_by: List[
             Literal[
                 "date", "model", "topic", "region", "prompt", "persona", "tag", "theme", "claim", "run", "competitor"
             ]
         ]
         | Omit = omit,
-        metrics: Optional[List[Literal["positive_sentiment", "negative_sentiment", "occurrence"]]] | Omit = omit,
+        metrics: Optional[List[Literal["positive_sentiment", "negative_sentiment", "occurrence", "citation_share"]]]
+        | Omit = omit,
         interval: Literal["day", "week", "month"] | Omit = omit,
         filter: Optional[report_query_sentiment_params.Filter] | Omit = omit,
         sort: report_query_sentiment_params.Sort | Omit = omit,
@@ -3667,10 +3684,11 @@ class AsyncReportsResource(AsyncAPIResource):
             end_date: YYYY-MM-DD, ET, inclusive
             comparison_start_date: YYYY-MM-DD, ET, inclusive (with end).
             comparison_end_date: YYYY-MM-DD, ET, inclusive (with start).
+            source: Body parameter.
             group_by: Body parameter.
             metrics: Body parameter.
             interval: Body parameter.
-            filter: Body parameter.
+            filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
             sort: Body parameter.
             include_cited_websites: Return cited websites per row (only when grouping by `theme`/`claim`).
             limit: Page size; default 10, max 50.
@@ -3691,6 +3709,7 @@ class AsyncReportsResource(AsyncAPIResource):
                 asset="",
                 start_date="",
                 end_date="",
+                source="response",
                 interval="day",
                 include_cited_websites=False,
             )
@@ -3706,6 +3725,7 @@ class AsyncReportsResource(AsyncAPIResource):
                     "end_date": end_date,
                     "comparison_start_date": comparison_start_date,
                     "comparison_end_date": comparison_end_date,
+                    "source": source,
                     "group_by": group_by,
                     "metrics": metrics,
                     "interval": interval,
@@ -3756,7 +3776,7 @@ class AsyncReportsResource(AsyncAPIResource):
             group_by: Body parameter.
             metrics: Body parameter.
             interval: Body parameter.
-            filter: Body parameter.
+            filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
             sort: Body parameter.
             limit: Page size; default 10, max 50.
             max_results: Stream endpoint only: cap the number of streamed rows (default: all).

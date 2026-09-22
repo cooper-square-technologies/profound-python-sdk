@@ -139,7 +139,7 @@ class KnowledgeBasesResource(SyncAPIResource):
             knowledge_base = client.knowledge_bases.search(
                 knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 query="x",
-                top_k=0,
+                top_k=1,
                 return_full_page=False,
             )
             ```
@@ -269,7 +269,7 @@ class AsyncKnowledgeBasesResource(AsyncAPIResource):
             knowledge_base = await client.knowledge_bases.search(
                 knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 query="x",
-                top_k=0,
+                top_k=1,
                 return_full_page=False,
             )
             ```

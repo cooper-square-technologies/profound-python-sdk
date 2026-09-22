@@ -76,18 +76,25 @@ class FactcheckScoreRow(BaseModel):
     date: Optional[str] = None
 
     model: Optional[FactcheckScoreRowModel] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     region: Optional[FactcheckScoreRowRegion] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     persona: Optional[FactcheckScoreRowPersona] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     prompt: Optional[FactcheckScoreRowPrompt] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     topic: Optional[FactcheckScoreRowTopic] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     tag: Optional[FactcheckScoreRowTag] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     theme: Optional[FactcheckScoreRowTheme] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     citation: Optional[FactcheckScoreRowCitation] = None
 

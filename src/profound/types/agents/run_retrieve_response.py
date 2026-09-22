@@ -6,7 +6,7 @@ from typing_extensions import Literal
 
 from ..._models import BaseModel
 
-__all__ = ["RunRetrieveResponse", "Step"]
+__all__ = ["RunRetrieveResponse", "OutputsExpanded", "Step"]
 
 
 class Step(BaseModel):
@@ -35,6 +35,14 @@ class Step(BaseModel):
     """Raw output payload this node produced. Included only when the request asks for `verbose`."""
 
 
+class OutputsExpanded(BaseModel):
+    title: Optional[str] = None
+    """The agent's configured, human-readable key for this output. null when the agent has no configured key for this output."""
+
+    value: object
+    """Value returned for the output variable."""
+
+
 class RunRetrieveResponse(BaseModel):
     id: str
     """Unique ID for the run."""
@@ -55,7 +63,10 @@ class RunRetrieveResponse(BaseModel):
     """Error details, when the run fails and error information is available."""
 
     outputs: Optional[Dict[str, object]] = None
-    """Output values returned by the run, keyed by variable ID. This object conforms to `schema.output` from the agent detail response and is empty when no outputs are available."""
+    """Output values returned by the run, keyed by output-variable UUID. This UUID-keyed object is retained for compatibility and is empty when no outputs are available."""
+
+    outputs_expanded: Optional[Dict[str, OutputsExpanded]] = None
+    """Expanded form of `outputs`, keyed by the same output-variable UUIDs. Each entry carries the agent's configured human-readable key as `title` alongside the returned value. `title` is null when the agent has no configured key for that output. Entries preserve the key order of `outputs`. The UUID-keyed `outputs` field remains the stable compatibility field."""
 
     steps: Optional[List[Step]] = None
     """Ordered step-by-step execution trace — one entry per node that ran, in execution order. Always present once the run has executed a node; per-node `outputs` inside each step are included only when the request asks for `verbose`."""

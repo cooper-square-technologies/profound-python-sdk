@@ -68,14 +68,19 @@ class VisibilityRow(BaseModel):
     date: Optional[str] = None
 
     model: Optional[VisibilityRowModel] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     topic: Optional[VisibilityRowTopic] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     region: Optional[VisibilityRowRegion] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     prompt: Optional[VisibilityRowPrompt] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     persona: Optional[VisibilityRowPersona] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     visibility_score: Optional[float] = None
 

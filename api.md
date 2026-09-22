@@ -143,6 +143,11 @@ Complete reference of every operation, grouped by resource. See [the README](./R
   - [`Ads OpenaiAds`](#ads-openaiads)
     - [`Ads OpenaiAds AdAccount`](#ads-openaiads-adaccount)
       - [Get Account Insights](#get-account-insights)
+- [`PromptVolumes`](#promptvolumes)
+  - [`PromptVolumes Volume`](#promptvolumes-volume)
+    - [Get On The Fly Volume](#get-on-the-fly-volume)
+  - [`PromptVolumes Intents`](#promptvolumes-intents)
+    - [Get On The Fly Intent Shares](#get-on-the-fly-intent-shares)
 
 ## Setup
 
@@ -297,6 +302,8 @@ Retrieve prompts in a category with optional filtering by type, topic, tag, regi
 category = client.organizations.categories.prompts(
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     limit=10000,
+    order_by="created_at",
+    order_dir="desc",
     status=["active"],
 )
 ```
@@ -337,7 +344,9 @@ Create one or more prompts in a category. Topics and tags are auto-created if re
 ```python
 category = client.organizations.categories.create_prompts(
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    prompts=[],
+    prompts=[
+        {"prompt": "x", "topic": {}, "language": "", "tags": [], "regions": [{}], "platforms": [{}], "personas": []}
+    ],
     dry_run=False,
 )
 ```
@@ -354,7 +363,7 @@ Update one or more existing prompts. Only provided fields are changed. Dimension
 ```python
 category = client.organizations.categories.update_prompts(
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    prompts=[],
+    prompts=[{"id": ""}],
     dry_run=False,
 )
 ```
@@ -376,7 +385,7 @@ Status options:
 ```python
 category = client.organizations.categories.update_prompt_status(
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    prompt_ids=[],
+    prompt_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
     status="active",
     dry_run=False,
 )
@@ -480,7 +489,7 @@ otherwise eligible citations in its denominator when this filter is used.
 report = client.reports.citations(
     date_interval="day",
     dimensions=[],
-    metrics=[],
+    metrics=["count"],
     order_by={},
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     start_date="2024-01-01T00:00:00.000Z",
@@ -501,7 +510,7 @@ Query visibility report.
 report = client.reports.visibility(
     date_interval="day",
     dimensions=[],
-    metrics=[],
+    metrics=["share_of_voice"],
     order_by={},
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     start_date="2024-01-01T00:00:00.000Z",
@@ -522,7 +531,7 @@ Get citations for a given category.
 report = client.reports.sentiment(
     date_interval="day",
     dimensions=[],
-    metrics=[],
+    metrics=["positive"],
     order_by={},
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     start_date="2024-01-01T00:00:00.000Z",
@@ -544,7 +553,7 @@ report = client.reports.sentiment_v2(
     start_date="2024-01-01T00:00:00.000Z",
     end_date="2024-01-01T00:00:00.000Z",
     date_bucket="day",
-    metrics=[],
+    metrics=["sentiment"],
 )
 ```
 
@@ -564,7 +573,7 @@ for large date ranges and high-traffic sites.
 report = client.reports.get_referrals_report(
     date_interval="day",
     dimensions=[],
-    metrics=[],
+    metrics=["visits"],
     order_by={},
     domain="",
     start_date="2024-01-01T00:00:00.000Z",
@@ -594,7 +603,7 @@ Metrics:
 report = client.reports.get_bots_report(
     date_interval="day",
     dimensions=[],
-    metrics=[],
+    metrics=["count"],
     order_by={},
     domain="",
     start_date="2024-01-01T00:00:00.000Z",
@@ -612,7 +621,7 @@ report = client.reports.get_bots_report(
 report = client.reports.query_fanouts(
     date_interval="day",
     dimensions=[],
-    metrics=[],
+    metrics=["fanouts_per_execution"],
     order_by={},
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     start_date="2024-01-01T00:00:00.000Z",
@@ -633,7 +642,7 @@ Stream citations with the same filter semantics as the non-streaming route.
 stream = client.reports.stream_citations(
     date_interval="day",
     dimensions=[],
-    metrics=[],
+    metrics=["count"],
     order_by={},
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     start_date="2024-01-01T00:00:00.000Z",
@@ -655,7 +664,7 @@ for event in stream:
 stream = client.reports.stream_visibility(
     date_interval="day",
     dimensions=[],
-    metrics=[],
+    metrics=["share_of_voice"],
     order_by={},
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     start_date="2024-01-01T00:00:00.000Z",
@@ -677,7 +686,7 @@ for event in stream:
 stream = client.reports.stream_sentiment(
     date_interval="day",
     dimensions=[],
-    metrics=[],
+    metrics=["positive"],
     order_by={},
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     start_date="2024-01-01T00:00:00.000Z",
@@ -742,6 +751,7 @@ stream = client.reports.stream_sentiment_v2(
     asset="",
     start_date="",
     end_date="",
+    source="response",
     interval="day",
     include_cited_websites=False,
 )
@@ -785,7 +795,7 @@ When `view_id` is provided, the query is scoped to that domain segment's hosts a
 report = client.reports.get_referrals_report_v2(
     date_interval="day",
     dimensions=[],
-    metrics=[],
+    metrics=["visits"],
     order_by={},
     domain="",
     start_date="2024-01-01T00:00:00.000Z",
@@ -819,7 +829,7 @@ Dimensions:
 report = client.reports.get_bots_report_v2(
     date_interval="day",
     dimensions=[],
-    metrics=[],
+    metrics=["count"],
     order_by={},
     domain="",
     start_date="2024-01-01T00:00:00.000Z",
@@ -875,6 +885,7 @@ report = client.reports.query_sentiment(
     asset="",
     start_date="",
     end_date="",
+    source="response",
     interval="day",
     include_cited_websites=False,
 )
@@ -911,7 +922,7 @@ Get web search results for a given category.
 web_search_result = client.reports.web_search_results.query(
     date_interval="day",
     dimensions=[],
-    metrics=[],
+    metrics=["count"],
     order_by={},
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     start_date="2024-01-01T00:00:00.000Z",
@@ -930,7 +941,7 @@ web_search_result = client.reports.web_search_results.query(
 stream = client.reports.web_search_results.stream(
     date_interval="day",
     dimensions=[],
-    metrics=[],
+    metrics=["count"],
     order_by={},
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     start_date="2024-01-01T00:00:00.000Z",
@@ -1537,6 +1548,7 @@ unpublished changes. Use the `version` parameter to choose which state to return
 ```python
 agent = client.agents.retrieve(
     agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    version="published",
 )
 ```
 
@@ -1617,6 +1629,7 @@ across its organization.
 ```python
 agent = client.agents.retrieve_graph(
     agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    version="published",
 )
 ```
 
@@ -1721,7 +1734,7 @@ Search a knowledge base and return matching snippets or pages.
 knowledge_base = client.knowledge_bases.search(
     knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     query="x",
-    top_k=0,
+    top_k=1,
     return_full_page=False,
 )
 ```
@@ -2262,4 +2275,57 @@ a single call; `time_granularity=daily` gives per-day rows (e.g. daily spend).
 
 ```python
 ad_account = client.ads.openai_ads.ad_account.retrieve_insights()
+```
+
+## `PromptVolumes`
+
+### `PromptVolumes Volume`
+
+#### Get On The Fly Volume
+
+Weekly and monthly volume projections for one keyword.
+
+Each organization can look up 1,000 distinct normalized keywords per UTC
+day. Repeats consume no additional allowance. New keywords over the cap
+return 429 with X-KeywordQuota-* and Retry-After headers. Quota admission
+requires Redis (503 when unavailable); empty results and query failures
+retain the reservation. Slices with at most two users are omitted.
+
+| Direction | Type |
+| --- | --- |
+| Request | [`VolumeOnTheFlyParams`](./src/profound/types/prompt_volumes/volume_on_the_fly_params.py) |
+| Response | [`VolumeOnTheFlyResponse`](./src/profound/types/prompt_volumes/volume_on_the_fly_response.py) |
+
+```python
+volume = client.prompt_volumes.volume.on_the_fly(
+    keyword="",
+    matching_type="exact_match",
+    start_date="2024-01-01",
+    end_date="2024-01-01",
+)
+```
+
+### `PromptVolumes Intents`
+
+#### Get On The Fly Intent Shares
+
+Intent shares for one keyword across the requested cohort weeks.
+
+Shares are fractions from 0 to 1 over classified matching conversations.
+Cohorts with at most two matching users are omitted for privacy. This
+endpoint shares the volume endpoint's burst limit but consumes no daily
+keyword quota.
+
+| Direction | Type |
+| --- | --- |
+| Request | [`IntentOnTheFlyParams`](./src/profound/types/prompt_volumes/intent_on_the_fly_params.py) |
+| Response | [`IntentOnTheFlyResponse`](./src/profound/types/prompt_volumes/intent_on_the_fly_response.py) |
+
+```python
+intent = client.prompt_volumes.intents.on_the_fly(
+    keyword="",
+    matching_type="exact_match",
+    start_date="2024-01-01",
+    end_date="2024-01-01",
+)
 ```

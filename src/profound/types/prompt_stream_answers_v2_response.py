@@ -59,6 +59,7 @@ class AnswerRow(BaseModel):
     date: Optional[str] = None
 
     model: Optional[AnswerRowModel] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     topic: Optional[str] = None
 

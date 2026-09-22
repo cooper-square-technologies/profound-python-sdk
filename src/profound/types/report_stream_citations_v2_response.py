@@ -61,14 +61,19 @@ class CitationRow(BaseModel):
     date: Optional[str] = None
 
     model: Optional[CitationRowModel] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     topic: Optional[CitationRowTopic] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     region: Optional[CitationRowRegion] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     persona: Optional[CitationRowPersona] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     prompt: Optional[CitationRowPrompt] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     count: Optional[int] = None
 

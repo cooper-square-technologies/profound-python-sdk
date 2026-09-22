@@ -85,7 +85,7 @@ class ShoppingResource(SyncAPIResource):
             interval: Body parameter.
             scope: Body parameter.
             assets: Restrict to these asset names (a name or list). Overrides `scope`.
-            filter: Body parameter.
+            filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
             limit: Page size for scope=all; default 10, max 50.
             max_results: Stream endpoint only: cap the number of streamed rows (default: all).
             cursor: Body parameter.
@@ -167,7 +167,7 @@ class ShoppingResource(SyncAPIResource):
             interval: Body parameter.
             scope: Body parameter.
             assets: Restrict to these asset names (a name or list). Overrides `scope`.
-            filter: Body parameter.
+            filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
             limit: Page size for scope=all; default 10, max 50.
             max_results: Stream endpoint only: cap the number of streamed rows (default: all).
             cursor: Body parameter.
@@ -272,7 +272,7 @@ class ShoppingResource(SyncAPIResource):
             include_merchants: Include per-product merchant offers (names, prices, urls, images).
             target_product: Return this product plus its top competitors (item view only).
             competitor_limit: Competitors returned when `target_product` is set.
-            filter: Body parameter.
+            filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
             limit: Page size; default 10, max 50.
             max_results: Stream endpoint only: cap streamed rows.
             cursor: Body parameter.
@@ -373,7 +373,7 @@ class ShoppingResource(SyncAPIResource):
             include_merchants: Include per-product merchant offers (names, prices, urls, images).
             target_product: Return this product plus its top competitors (item view only).
             competitor_limit: Competitors returned when `target_product` is set.
-            filter: Body parameter.
+            filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
             limit: Page size; default 10, max 50.
             max_results: Stream endpoint only: cap streamed rows.
             cursor: Body parameter.
@@ -473,7 +473,7 @@ class ShoppingResource(SyncAPIResource):
             group_by: `[]` = distribution; `[brand]` = brand share within each merchant; `[product]` = top products per merchant. `date` (distribution only) adds a time series.
             metrics: Defaults to the chosen view's metrics; must be valid for that view.
             interval: Body parameter.
-            filter: Body parameter.
+            filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
             limit: Page size; default 10, max 50.
             max_results: Stream endpoint only: cap streamed rows.
             cursor: Body parameter.
@@ -562,7 +562,7 @@ class ShoppingResource(SyncAPIResource):
             group_by: `[]` = distribution; `[brand]` = brand share within each merchant; `[product]` = top products per merchant. `date` (distribution only) adds a time series.
             metrics: Defaults to the chosen view's metrics; must be valid for that view.
             interval: Body parameter.
-            filter: Body parameter.
+            filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
             limit: Page size; default 10, max 50.
             max_results: Stream endpoint only: cap streamed rows.
             cursor: Body parameter.
@@ -644,7 +644,7 @@ class ShoppingResource(SyncAPIResource):
             group_by: Group by `prompt`/`topic` for the per-prompt/-topic trigger rate.
             metrics: Body parameter.
             interval: Body parameter.
-            filter: Body parameter.
+            filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
             limit: Page size; default 10, max 50.
             max_results: Stream endpoint only: cap streamed rows.
             cursor: Body parameter.
@@ -720,7 +720,7 @@ class ShoppingResource(SyncAPIResource):
             group_by: Group by `prompt`/`topic` for the per-prompt/-topic trigger rate.
             metrics: Body parameter.
             interval: Body parameter.
-            filter: Body parameter.
+            filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
             limit: Page size; default 10, max 50.
             max_results: Stream endpoint only: cap streamed rows.
             cursor: Body parameter.
@@ -815,7 +815,7 @@ class AsyncShoppingResource(AsyncAPIResource):
             interval: Body parameter.
             scope: Body parameter.
             assets: Restrict to these asset names (a name or list). Overrides `scope`.
-            filter: Body parameter.
+            filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
             limit: Page size for scope=all; default 10, max 50.
             max_results: Stream endpoint only: cap the number of streamed rows (default: all).
             cursor: Body parameter.
@@ -897,7 +897,7 @@ class AsyncShoppingResource(AsyncAPIResource):
             interval: Body parameter.
             scope: Body parameter.
             assets: Restrict to these asset names (a name or list). Overrides `scope`.
-            filter: Body parameter.
+            filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
             limit: Page size for scope=all; default 10, max 50.
             max_results: Stream endpoint only: cap the number of streamed rows (default: all).
             cursor: Body parameter.
@@ -1002,7 +1002,7 @@ class AsyncShoppingResource(AsyncAPIResource):
             include_merchants: Include per-product merchant offers (names, prices, urls, images).
             target_product: Return this product plus its top competitors (item view only).
             competitor_limit: Competitors returned when `target_product` is set.
-            filter: Body parameter.
+            filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
             limit: Page size; default 10, max 50.
             max_results: Stream endpoint only: cap streamed rows.
             cursor: Body parameter.
@@ -1103,7 +1103,7 @@ class AsyncShoppingResource(AsyncAPIResource):
             include_merchants: Include per-product merchant offers (names, prices, urls, images).
             target_product: Return this product plus its top competitors (item view only).
             competitor_limit: Competitors returned when `target_product` is set.
-            filter: Body parameter.
+            filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
             limit: Page size; default 10, max 50.
             max_results: Stream endpoint only: cap streamed rows.
             cursor: Body parameter.
@@ -1203,7 +1203,7 @@ class AsyncShoppingResource(AsyncAPIResource):
             group_by: `[]` = distribution; `[brand]` = brand share within each merchant; `[product]` = top products per merchant. `date` (distribution only) adds a time series.
             metrics: Defaults to the chosen view's metrics; must be valid for that view.
             interval: Body parameter.
-            filter: Body parameter.
+            filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
             limit: Page size; default 10, max 50.
             max_results: Stream endpoint only: cap streamed rows.
             cursor: Body parameter.
@@ -1292,7 +1292,7 @@ class AsyncShoppingResource(AsyncAPIResource):
             group_by: `[]` = distribution; `[brand]` = brand share within each merchant; `[product]` = top products per merchant. `date` (distribution only) adds a time series.
             metrics: Defaults to the chosen view's metrics; must be valid for that view.
             interval: Body parameter.
-            filter: Body parameter.
+            filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
             limit: Page size; default 10, max 50.
             max_results: Stream endpoint only: cap streamed rows.
             cursor: Body parameter.
@@ -1374,7 +1374,7 @@ class AsyncShoppingResource(AsyncAPIResource):
             group_by: Group by `prompt`/`topic` for the per-prompt/-topic trigger rate.
             metrics: Body parameter.
             interval: Body parameter.
-            filter: Body parameter.
+            filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
             limit: Page size; default 10, max 50.
             max_results: Stream endpoint only: cap streamed rows.
             cursor: Body parameter.
@@ -1450,7 +1450,7 @@ class AsyncShoppingResource(AsyncAPIResource):
             group_by: Group by `prompt`/`topic` for the per-prompt/-topic trigger rate.
             metrics: Body parameter.
             interval: Body parameter.
-            filter: Body parameter.
+            filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
             limit: Page size; default 10, max 50.
             max_results: Stream endpoint only: cap streamed rows.
             cursor: Body parameter.

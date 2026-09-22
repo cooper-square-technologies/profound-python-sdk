@@ -18,7 +18,7 @@ from profound import Profound
 
 # The shared smoke-test runner injects base URL and credentials through the same
 # environment variables the generated client reads in normal use.
-client = Profound(max_retries=0, timeout=30)
+client = Profound(max_retries=2, timeout=10)
 
 
 class SmokeResult(TypedDict, total=False):
@@ -119,6 +119,8 @@ def _smoke_case_14() -> None:
     category = client.organizations.categories.prompts(
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         limit=10000,
+        order_by="created_at",
+        order_dir="desc",
         status=["active"],
     )
 
@@ -129,7 +131,7 @@ def _smoke_case_15() -> None:
         limit=10000,
         cursor="cursor",
         order_by="created_at",
-        order_dir="asc",
+        order_dir="desc",
         analysis_type=["visibility"],
         prompt_type=["visibility"],
         status=["active"],
@@ -156,7 +158,9 @@ def _smoke_case_17() -> None:
 def _smoke_case_18() -> None:
     category = client.organizations.categories.create_prompts(
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-        prompts=[],
+        prompts=[
+            {"prompt": "x", "topic": {}, "language": "", "tags": [], "regions": [{}], "platforms": [{}], "personas": []}
+        ],
         dry_run=False,
     )
 
@@ -164,7 +168,7 @@ def _smoke_case_18() -> None:
 def _smoke_case_19() -> None:
     category = client.organizations.categories.update_prompts(
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-        prompts=[],
+        prompts=[{"id": ""}],
         dry_run=False,
     )
 
@@ -172,7 +176,7 @@ def _smoke_case_19() -> None:
 def _smoke_case_20() -> None:
     category = client.organizations.categories.update_prompt_status(
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-        prompt_ids=[],
+        prompt_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
         status="active",
         dry_run=False,
     )
@@ -204,7 +208,7 @@ def _smoke_case_24() -> None:
         start_date="2024-01-01T00:00:00.000Z",
         end_date="2024-01-01T00:00:00.000Z",
         pagination={"limit": 10000, "offset": 0},
-        filters=[],
+        filters=[{"field": "region_id", "operator": "is", "value": "7c9e6679-7425-40de-944b-e07fc1f90ae7"}],
         include={
             "run_id": False,
             "created_at": True,
@@ -247,10 +251,10 @@ def _smoke_case_26() -> None:
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         start_date="",
         end_date="",
-        include=[],
+        include=["run_id"],
         filter={"and_": [], "or_": [], "not_": {}, "field": "", "op": "", "value": {}},
-        limit=0,
-        max_results=0,
+        limit=1,
+        max_results=1,
         cursor="",
     )
 
@@ -271,10 +275,10 @@ def _smoke_case_28() -> None:
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         start_date="",
         end_date="",
-        include=[],
+        include=["run_id"],
         filter={"and_": [], "or_": [], "not_": {}, "field": "", "op": "", "value": {}},
-        limit=0,
-        max_results=0,
+        limit=1,
+        max_results=1,
         cursor="",
     )
 
@@ -286,7 +290,7 @@ def _smoke_case_29() -> None:
     report = client.reports.citations(
         date_interval="day",
         dimensions=[],
-        metrics=[],
+        metrics=["count"],
         order_by={},
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         start_date="2024-01-01T00:00:00.000Z",
@@ -298,13 +302,13 @@ def _smoke_case_30() -> None:
     report = client.reports.citations(
         date_interval="day",
         dimensions=[],
-        metrics=[],
+        metrics=["count"],
         order_by={},
         pagination={"limit": 10000, "offset": 0},
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         start_date="2024-01-01T00:00:00.000Z",
         end_date="2024-01-01T00:00:00.000Z",
-        filters=[],
+        filters=[{"field": "hostname", "operator": "is", "value": ""}],
     )
 
 
@@ -312,7 +316,7 @@ def _smoke_case_31() -> None:
     report = client.reports.visibility(
         date_interval="day",
         dimensions=[],
-        metrics=[],
+        metrics=["share_of_voice"],
         order_by={},
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         start_date="2024-01-01T00:00:00.000Z",
@@ -324,13 +328,13 @@ def _smoke_case_32() -> None:
     report = client.reports.visibility(
         date_interval="day",
         dimensions=[],
-        metrics=[],
+        metrics=["share_of_voice"],
         order_by={},
         pagination={"limit": 10000, "offset": 0},
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         start_date="2024-01-01T00:00:00.000Z",
         end_date="2024-01-01T00:00:00.000Z",
-        filters=[],
+        filters=[{"field": "region_id", "operator": "is", "value": "7c9e6679-7425-40de-944b-e07fc1f90ae7"}],
     )
 
 
@@ -338,7 +342,7 @@ def _smoke_case_33() -> None:
     report = client.reports.sentiment(
         date_interval="day",
         dimensions=[],
-        metrics=[],
+        metrics=["positive"],
         order_by={},
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         start_date="2024-01-01T00:00:00.000Z",
@@ -350,13 +354,13 @@ def _smoke_case_34() -> None:
     report = client.reports.sentiment(
         date_interval="day",
         dimensions=[],
-        metrics=[],
+        metrics=["positive"],
         order_by={},
         pagination={"limit": 10000, "offset": 0},
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         start_date="2024-01-01T00:00:00.000Z",
         end_date="2024-01-01T00:00:00.000Z",
-        filters=[],
+        filters=[{"field": "asset_id", "operator": "is", "value": "7c9e6679-7425-40de-944b-e07fc1f90ae7"}],
     )
 
 
@@ -367,7 +371,7 @@ def _smoke_case_35() -> None:
         start_date="2024-01-01T00:00:00.000Z",
         end_date="2024-01-01T00:00:00.000Z",
         date_bucket="day",
-        metrics=[],
+        metrics=["sentiment"],
     )
 
 
@@ -380,10 +384,10 @@ def _smoke_case_36() -> None:
         comparison_start_date="2024-01-01T00:00:00.000Z",
         comparison_end_date="2024-01-01T00:00:00.000Z",
         date_bucket="day",
-        dimensions=[],
-        metrics=[],
-        filters=[],
-        order_by={},
+        dimensions=["date"],
+        metrics=["sentiment"],
+        filters=[{"field": "model_id", "operator": "is", "value": "7c9e6679-7425-40de-944b-e07fc1f90ae7"}],
+        order_by={"occurrence": "desc"},
         pagination={"limit": 10000, "offset": 0},
     )
 
@@ -392,7 +396,7 @@ def _smoke_case_37() -> None:
     report = client.reports.get_referrals_report(
         date_interval="day",
         dimensions=[],
-        metrics=[],
+        metrics=["visits"],
         order_by={},
         domain="",
         start_date="2024-01-01T00:00:00.000Z",
@@ -403,15 +407,15 @@ def _smoke_case_38() -> None:
     report = client.reports.get_referrals_report(
         date_interval="day",
         dimensions=[],
-        metrics=[],
+        metrics=["visits"],
         order_by={},
         pagination={"limit": 10000, "offset": 0},
         domain="",
         start_date="2024-01-01T00:00:00.000Z",
         end_date="2024-01-01T00:00:00.000Z",
         organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-        metric_filters=[],
-        filters=[],
+        metric_filters=[{"field": "", "operator": ">", "value": 0}],
+        filters=[{"field": "path", "operator": "is", "value": ""}],
     )
 
 
@@ -419,7 +423,7 @@ def _smoke_case_39() -> None:
     report = client.reports.get_bots_report(
         date_interval="day",
         dimensions=[],
-        metrics=[],
+        metrics=["count"],
         order_by={},
         domain="",
         start_date="2024-01-01T00:00:00.000Z",
@@ -430,15 +434,15 @@ def _smoke_case_40() -> None:
     report = client.reports.get_bots_report(
         date_interval="day",
         dimensions=[],
-        metrics=[],
+        metrics=["count"],
         order_by={},
         pagination={"limit": 10000, "offset": 0},
         domain="",
         start_date="2024-01-01T00:00:00.000Z",
         end_date="2024-01-01T00:00:00.000Z",
         organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-        metric_filters=[],
-        filters=[],
+        metric_filters=[{"field": "", "operator": ">", "value": 0}],
+        filters=[{"field": "path", "operator": "is", "value": ""}],
     )
 
 
@@ -446,7 +450,7 @@ def _smoke_case_41() -> None:
     report = client.reports.query_fanouts(
         date_interval="day",
         dimensions=[],
-        metrics=[],
+        metrics=["fanouts_per_execution"],
         order_by={},
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         start_date="2024-01-01T00:00:00.000Z",
@@ -458,13 +462,13 @@ def _smoke_case_42() -> None:
     report = client.reports.query_fanouts(
         date_interval="day",
         dimensions=[],
-        metrics=[],
+        metrics=["fanouts_per_execution"],
         order_by={},
         pagination={"limit": 10000, "offset": 0},
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         start_date="2024-01-01T00:00:00.000Z",
         end_date="2024-01-01T00:00:00.000Z",
-        filters=[],
+        filters=[{"field": "region_id", "operator": "is", "value": "7c9e6679-7425-40de-944b-e07fc1f90ae7"}],
     )
 
 
@@ -472,7 +476,7 @@ def _smoke_case_43() -> None:
     stream = client.reports.stream_citations(
         date_interval="day",
         dimensions=[],
-        metrics=[],
+        metrics=["count"],
         order_by={},
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         start_date="2024-01-01T00:00:00.000Z",
@@ -487,13 +491,13 @@ def _smoke_case_44() -> None:
     stream = client.reports.stream_citations(
         date_interval="day",
         dimensions=[],
-        metrics=[],
+        metrics=["count"],
         order_by={},
         pagination={"limit": 10000, "offset": 0},
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         start_date="2024-01-01T00:00:00.000Z",
         end_date="2024-01-01T00:00:00.000Z",
-        filters=[],
+        filters=[{"field": "hostname", "operator": "is", "value": ""}],
     )
 
     for event in stream:
@@ -504,7 +508,7 @@ def _smoke_case_45() -> None:
     stream = client.reports.stream_visibility(
         date_interval="day",
         dimensions=[],
-        metrics=[],
+        metrics=["share_of_voice"],
         order_by={},
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         start_date="2024-01-01T00:00:00.000Z",
@@ -519,13 +523,13 @@ def _smoke_case_46() -> None:
     stream = client.reports.stream_visibility(
         date_interval="day",
         dimensions=[],
-        metrics=[],
+        metrics=["share_of_voice"],
         order_by={},
         pagination={"limit": 10000, "offset": 0},
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         start_date="2024-01-01T00:00:00.000Z",
         end_date="2024-01-01T00:00:00.000Z",
-        filters=[],
+        filters=[{"field": "region_id", "operator": "is", "value": "7c9e6679-7425-40de-944b-e07fc1f90ae7"}],
     )
 
     for event in stream:
@@ -536,7 +540,7 @@ def _smoke_case_47() -> None:
     stream = client.reports.stream_sentiment(
         date_interval="day",
         dimensions=[],
-        metrics=[],
+        metrics=["positive"],
         order_by={},
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         start_date="2024-01-01T00:00:00.000Z",
@@ -551,13 +555,13 @@ def _smoke_case_48() -> None:
     stream = client.reports.stream_sentiment(
         date_interval="day",
         dimensions=[],
-        metrics=[],
+        metrics=["positive"],
         order_by={},
         pagination={"limit": 10000, "offset": 0},
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         start_date="2024-01-01T00:00:00.000Z",
         end_date="2024-01-01T00:00:00.000Z",
-        filters=[],
+        filters=[{"field": "asset_id", "operator": "is", "value": "7c9e6679-7425-40de-944b-e07fc1f90ae7"}],
     )
 
     for event in stream:
@@ -584,13 +588,13 @@ def _smoke_case_50() -> None:
         start_date="",
         end_date="",
         entity="domain",
-        group_by=[],
-        metrics=[],
+        group_by=["page"],
+        metrics=["count"],
         interval="day",
         scope="all",
         filter={"and_": [], "or_": [], "not_": {}, "field": "", "op": "", "value": {}},
-        limit=0,
-        max_results=0,
+        limit=1,
+        max_results=1,
         cursor="",
     )
 
@@ -616,15 +620,15 @@ def _smoke_case_52() -> None:
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         start_date="",
         end_date="",
-        group_by=[],
-        metrics=[],
+        group_by=["date"],
+        metrics=["visibility_score"],
         interval="day",
         scope="owned",
         assets="",
         filter={"and_": [], "or_": [], "not_": {}, "field": "", "op": "", "value": {}},
         sort={"field": "visibility_score"},
-        limit=0,
-        max_results=0,
+        limit=1,
+        max_results=1,
         cursor="",
     )
 
@@ -638,6 +642,7 @@ def _smoke_case_53() -> None:
         asset="",
         start_date="",
         end_date="",
+        source="response",
         interval="day",
         include_cited_websites=False,
     )
@@ -654,14 +659,15 @@ def _smoke_case_54() -> None:
         end_date="",
         comparison_start_date="",
         comparison_end_date="",
-        group_by=[],
-        metrics=[],
+        source="response",
+        group_by=["date"],
+        metrics=["positive_sentiment"],
         interval="day",
         filter={"and_": [], "or_": [], "not_": {}, "field": "", "op": "", "value": {}},
         sort={"field": "positive_sentiment", "dir": "desc"},
         include_cited_websites=False,
-        limit=0,
-        max_results=0,
+        limit=1,
+        max_results=1,
         cursor="",
     )
 
@@ -686,13 +692,13 @@ def _smoke_case_56() -> None:
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         start_date="",
         end_date="",
-        group_by=[],
-        metrics=[],
+        group_by=["date"],
+        metrics=["fanouts_per_execution"],
         interval="day",
         filter={"and_": [], "or_": [], "not_": {}, "field": "", "op": "", "value": {}},
         sort={"field": "", "dir": "desc"},
-        limit=0,
-        max_results=0,
+        limit=1,
+        max_results=1,
         cursor="",
     )
 
@@ -704,7 +710,7 @@ def _smoke_case_57() -> None:
     report = client.reports.get_referrals_report_v2(
         date_interval="day",
         dimensions=[],
-        metrics=[],
+        metrics=["visits"],
         order_by={},
         domain="",
         start_date="2024-01-01T00:00:00.000Z",
@@ -716,7 +722,7 @@ def _smoke_case_58() -> None:
     report = client.reports.get_referrals_report_v2(
         date_interval="day",
         dimensions=[],
-        metrics=[],
+        metrics=["visits"],
         order_by={},
         pagination={"limit": 10000, "offset": 0},
         domain="",
@@ -725,8 +731,8 @@ def _smoke_case_58() -> None:
         organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         timezone="UTC",
         view_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-        metric_filters=[],
-        filters=[],
+        metric_filters=[{"field": "", "operator": ">", "value": 0}],
+        filters=[{"field": "path", "operator": "is", "value": ""}],
     )
 
 
@@ -734,7 +740,7 @@ def _smoke_case_59() -> None:
     report = client.reports.get_bots_report_v2(
         date_interval="day",
         dimensions=[],
-        metrics=[],
+        metrics=["count"],
         order_by={},
         domain="",
         start_date="2024-01-01T00:00:00.000Z",
@@ -746,7 +752,7 @@ def _smoke_case_60() -> None:
     report = client.reports.get_bots_report_v2(
         date_interval="day",
         dimensions=[],
-        metrics=[],
+        metrics=["count"],
         order_by={},
         pagination={"limit": 10000, "offset": 0},
         domain="",
@@ -755,10 +761,10 @@ def _smoke_case_60() -> None:
         organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         timezone="UTC",
         view_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-        metric_filters=[],
-        filters=[],
+        metric_filters=[{"field": "", "operator": ">", "value": 0}],
+        filters=[{"field": "path", "operator": "is", "value": ""}],
         domain_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-        tags=[],
+        tags=[""],
     )
 
 
@@ -777,15 +783,15 @@ def _smoke_case_62() -> None:
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         start_date="",
         end_date="",
-        group_by=[],
-        metrics=[],
+        group_by=["date"],
+        metrics=["visibility_score"],
         interval="day",
         scope="owned",
         assets="",
         filter={"and_": [], "or_": [], "not_": {}, "field": "", "op": "", "value": {}},
         sort={"field": "visibility_score"},
-        limit=0,
-        max_results=0,
+        limit=1,
+        max_results=1,
         cursor="",
     )
 
@@ -807,13 +813,13 @@ def _smoke_case_64() -> None:
         start_date="",
         end_date="",
         entity="domain",
-        group_by=[],
-        metrics=[],
+        group_by=["page"],
+        metrics=["count"],
         interval="day",
         scope="all",
         filter={"and_": [], "or_": [], "not_": {}, "field": "", "op": "", "value": {}},
-        limit=0,
-        max_results=0,
+        limit=1,
+        max_results=1,
         cursor="",
     )
 
@@ -824,6 +830,7 @@ def _smoke_case_65() -> None:
         asset="",
         start_date="",
         end_date="",
+        source="response",
         interval="day",
         include_cited_websites=False,
     )
@@ -837,14 +844,15 @@ def _smoke_case_66() -> None:
         end_date="",
         comparison_start_date="",
         comparison_end_date="",
-        group_by=[],
-        metrics=[],
+        source="response",
+        group_by=["date"],
+        metrics=["positive_sentiment"],
         interval="day",
         filter={"and_": [], "or_": [], "not_": {}, "field": "", "op": "", "value": {}},
         sort={"field": "positive_sentiment", "dir": "desc"},
         include_cited_websites=False,
-        limit=0,
-        max_results=0,
+        limit=1,
+        max_results=1,
         cursor="",
     )
 
@@ -863,13 +871,13 @@ def _smoke_case_68() -> None:
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         start_date="",
         end_date="",
-        group_by=[],
-        metrics=[],
+        group_by=["date"],
+        metrics=["fanouts_per_execution"],
         interval="day",
         filter={"and_": [], "or_": [], "not_": {}, "field": "", "op": "", "value": {}},
         sort={"field": "", "dir": "desc"},
-        limit=0,
-        max_results=0,
+        limit=1,
+        max_results=1,
         cursor="",
     )
 
@@ -878,7 +886,7 @@ def _smoke_case_69() -> None:
     web_search_result = client.reports.web_search_results.query(
         date_interval="day",
         dimensions=[],
-        metrics=[],
+        metrics=["count"],
         order_by={},
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         start_date="2024-01-01T00:00:00.000Z",
@@ -890,13 +898,13 @@ def _smoke_case_70() -> None:
     web_search_result = client.reports.web_search_results.query(
         date_interval="day",
         dimensions=[],
-        metrics=[],
+        metrics=["count"],
         order_by={},
         pagination={"limit": 10000, "offset": 0},
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         start_date="2024-01-01T00:00:00.000Z",
         end_date="2024-01-01T00:00:00.000Z",
-        filters=[],
+        filters=[{"field": "hostname", "operator": "is", "value": ""}],
     )
 
 
@@ -904,7 +912,7 @@ def _smoke_case_71() -> None:
     stream = client.reports.web_search_results.stream(
         date_interval="day",
         dimensions=[],
-        metrics=[],
+        metrics=["count"],
         order_by={},
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         start_date="2024-01-01T00:00:00.000Z",
@@ -919,13 +927,13 @@ def _smoke_case_72() -> None:
     stream = client.reports.web_search_results.stream(
         date_interval="day",
         dimensions=[],
-        metrics=[],
+        metrics=["count"],
         order_by={},
         pagination={"limit": 10000, "offset": 0},
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         start_date="2024-01-01T00:00:00.000Z",
         end_date="2024-01-01T00:00:00.000Z",
-        filters=[],
+        filters=[{"field": "hostname", "operator": "is", "value": ""}],
     )
 
     for event in stream:
@@ -947,14 +955,14 @@ def _smoke_case_74() -> None:
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         start_date="",
         end_date="",
-        group_by=[],
-        metrics=[],
+        group_by=["date"],
+        metrics=["visibility_score"],
         interval="day",
         scope="owned",
         assets="",
         filter={"and_": [], "or_": [], "not_": {}, "field": "", "op": "", "value": {}},
-        limit=0,
-        max_results=0,
+        limit=1,
+        max_results=1,
         cursor="",
     )
 
@@ -977,14 +985,14 @@ def _smoke_case_76() -> None:
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         start_date="",
         end_date="",
-        group_by=[],
-        metrics=[],
+        group_by=["date"],
+        metrics=["visibility_score"],
         interval="day",
         scope="owned",
         assets="",
         filter={"and_": [], "or_": [], "not_": {}, "field": "", "op": "", "value": {}},
-        limit=0,
-        max_results=0,
+        limit=1,
+        max_results=1,
         cursor="",
     )
 
@@ -1008,15 +1016,15 @@ def _smoke_case_78() -> None:
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         start_date="",
         end_date="",
-        group_by=[],
-        metrics=[],
+        group_by=["date"],
+        metrics=["visibility_score"],
         interval="day",
         include_merchants=False,
         target_product="x",
         competitor_limit=5,
         filter={"and_": [], "or_": [], "not_": {}, "field": "", "op": "", "value": {}},
-        limit=0,
-        max_results=0,
+        limit=1,
+        max_results=1,
         cursor="",
     )
 
@@ -1040,15 +1048,15 @@ def _smoke_case_80() -> None:
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         start_date="",
         end_date="",
-        group_by=[],
-        metrics=[],
+        group_by=["date"],
+        metrics=["visibility_score"],
         interval="day",
         include_merchants=False,
         target_product="x",
         competitor_limit=5,
         filter={"and_": [], "or_": [], "not_": {}, "field": "", "op": "", "value": {}},
-        limit=0,
-        max_results=0,
+        limit=1,
+        max_results=1,
         cursor="",
     )
 
@@ -1070,12 +1078,12 @@ def _smoke_case_82() -> None:
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         start_date="",
         end_date="",
-        group_by=[],
-        metrics=[],
+        group_by=["date"],
+        metrics=["merchant_share"],
         interval="day",
         filter={"and_": [], "or_": [], "not_": {}, "field": "", "op": "", "value": {}},
-        limit=0,
-        max_results=0,
+        limit=1,
+        max_results=1,
         cursor="",
     )
 
@@ -1097,12 +1105,12 @@ def _smoke_case_84() -> None:
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         start_date="",
         end_date="",
-        group_by=[],
-        metrics=[],
+        group_by=["date"],
+        metrics=["merchant_share"],
         interval="day",
         filter={"and_": [], "or_": [], "not_": {}, "field": "", "op": "", "value": {}},
-        limit=0,
-        max_results=0,
+        limit=1,
+        max_results=1,
         cursor="",
     )
 
@@ -1124,12 +1132,12 @@ def _smoke_case_86() -> None:
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         start_date="",
         end_date="",
-        group_by=[],
-        metrics=[],
+        group_by=["date"],
+        metrics=["total_runs"],
         interval="day",
         filter={"and_": [], "or_": [], "not_": {}, "field": "", "op": "", "value": {}},
-        limit=0,
-        max_results=0,
+        limit=1,
+        max_results=1,
         cursor="",
     )
 
@@ -1151,12 +1159,12 @@ def _smoke_case_88() -> None:
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         start_date="",
         end_date="",
-        group_by=[],
-        metrics=[],
+        group_by=["date"],
+        metrics=["total_runs"],
         interval="day",
         filter={"and_": [], "or_": [], "not_": {}, "field": "", "op": "", "value": {}},
-        limit=0,
-        max_results=0,
+        limit=1,
+        max_results=1,
         cursor="",
     )
 
@@ -1184,17 +1192,17 @@ def _smoke_case_90() -> None:
         comparison_start_date="",
         comparison_end_date="",
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-        topic_ids=[],
+        topic_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
         exclude_topic_ids=False,
-        tag_ids=[],
+        tag_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
         tag_filter_type="any",
         include_no_tag=False,
-        region_ids=[],
-        platform_ids=[],
-        persona_ids=[],
+        region_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
+        platform_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
+        persona_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
         include_no_persona=False,
-        prompt_ids=[],
-        citation_categories=[],
+        prompt_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
+        citation_categories=[""],
         date_bucket="",
         group_by="period",
     )
@@ -1224,19 +1232,19 @@ def _smoke_case_92() -> None:
         comparison_start_date="",
         comparison_end_date="",
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-        topic_ids=[],
+        topic_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
         exclude_topic_ids=False,
-        tag_ids=[],
+        tag_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
         tag_filter_type="any",
         include_no_tag=False,
-        region_ids=[],
-        platform_ids=[],
-        persona_ids=[],
+        region_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
+        platform_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
+        persona_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
         include_no_persona=False,
-        prompt_ids=[],
-        citation_categories=[],
+        prompt_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
+        citation_categories=[""],
         breakdown_by="citation",
-        group_by=[],
+        group_by=["platform"],
         date_bucket="",
         limit=10,
         offset=0,
@@ -1287,17 +1295,17 @@ def _smoke_case_96() -> None:
         comparison_start_date="",
         comparison_end_date="",
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-        topic_ids=[],
+        topic_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
         exclude_topic_ids=False,
-        tag_ids=[],
+        tag_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
         tag_filter_type="any",
         include_no_tag=False,
-        region_ids=[],
-        platform_ids=[],
-        persona_ids=[],
+        region_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
+        platform_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
+        persona_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
         include_no_persona=False,
-        prompt_ids=[],
-        citation_categories=[],
+        prompt_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
+        citation_categories=[""],
         limit=10,
         offset=0,
         sort_by="response_share",
@@ -1328,17 +1336,17 @@ def _smoke_case_98() -> None:
         comparison_start_date="",
         comparison_end_date="",
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-        topic_ids=[],
+        topic_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
         exclude_topic_ids=False,
-        tag_ids=[],
+        tag_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
         tag_filter_type="any",
         include_no_tag=False,
-        region_ids=[],
-        platform_ids=[],
-        persona_ids=[],
+        region_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
+        platform_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
+        persona_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
         include_no_persona=False,
-        prompt_ids=[],
-        citation_categories=[],
+        prompt_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
+        citation_categories=[""],
         theme_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         limit=5000,
         offset=0,
@@ -1367,17 +1375,17 @@ def _smoke_case_100() -> None:
         comparison_start_date="",
         comparison_end_date="",
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-        topic_ids=[],
+        topic_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
         exclude_topic_ids=False,
-        tag_ids=[],
+        tag_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
         tag_filter_type="any",
         include_no_tag=False,
-        region_ids=[],
-        platform_ids=[],
-        persona_ids=[],
+        region_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
+        platform_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
+        persona_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
         include_no_persona=False,
-        prompt_ids=[],
-        citation_categories=[],
+        prompt_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
+        citation_categories=[""],
         limit=5,
     )
 
@@ -1402,17 +1410,17 @@ def _smoke_case_102() -> None:
         comparison_start_date="",
         comparison_end_date="",
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-        topic_ids=[],
+        topic_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
         exclude_topic_ids=False,
-        tag_ids=[],
+        tag_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
         tag_filter_type="any",
         include_no_tag=False,
-        region_ids=[],
-        platform_ids=[],
-        persona_ids=[],
+        region_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
+        platform_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
+        persona_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
         include_no_persona=False,
-        prompt_ids=[],
-        citation_categories=[],
+        prompt_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
+        citation_categories=[""],
         limit=5,
     )
 
@@ -1437,17 +1445,17 @@ def _smoke_case_104() -> None:
         comparison_start_date="",
         comparison_end_date="",
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-        topic_ids=[],
+        topic_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
         exclude_topic_ids=False,
-        tag_ids=[],
+        tag_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
         tag_filter_type="any",
         include_no_tag=False,
-        region_ids=[],
-        platform_ids=[],
-        persona_ids=[],
+        region_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
+        platform_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
+        persona_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
         include_no_persona=False,
-        prompt_ids=[],
-        citation_categories=[],
+        prompt_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
+        citation_categories=[""],
         cluster_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     )
 
@@ -1475,17 +1483,17 @@ def _smoke_case_106() -> None:
         comparison_start_date="",
         comparison_end_date="",
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-        topic_ids=[],
+        topic_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
         exclude_topic_ids=False,
-        tag_ids=[],
+        tag_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
         tag_filter_type="any",
         include_no_tag=False,
-        region_ids=[],
-        platform_ids=[],
-        persona_ids=[],
+        region_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
+        platform_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
+        persona_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
         include_no_persona=False,
-        prompt_ids=[],
-        citation_categories=[],
+        prompt_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
+        citation_categories=[""],
         cluster_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         limit=10,
         offset=0,
@@ -1516,17 +1524,17 @@ def _smoke_case_108() -> None:
         comparison_start_date="",
         comparison_end_date="",
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-        topic_ids=[],
+        topic_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
         exclude_topic_ids=False,
-        tag_ids=[],
+        tag_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
         tag_filter_type="any",
         include_no_tag=False,
-        region_ids=[],
-        platform_ids=[],
-        persona_ids=[],
+        region_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
+        platform_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
+        persona_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
         include_no_persona=False,
-        prompt_ids=[],
-        citation_categories=[],
+        prompt_ids=["7c9e6679-7425-40de-944b-e07fc1f90ae7"],
+        citation_categories=[""],
         cluster_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         limit=20,
         offset=0,
@@ -1559,10 +1567,10 @@ def _smoke_case_112() -> None:
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         start_date="",
         end_date="",
-        group_by=[],
+        group_by=["date"],
         filter={"and_": [], "or_": [], "not_": {}, "field": "", "op": "", "value": {}},
-        limit=0,
-        max_results=0,
+        limit=1,
+        max_results=1,
         cursor="",
     )
 
@@ -1583,10 +1591,10 @@ def _smoke_case_114() -> None:
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         start_date="",
         end_date="",
-        group_by=[],
+        group_by=["date"],
         filter={"and_": [], "or_": [], "not_": {}, "field": "", "op": "", "value": {}},
-        limit=0,
-        max_results=0,
+        limit=1,
+        max_results=1,
         cursor="",
     )
 
@@ -1607,11 +1615,11 @@ def _smoke_case_116() -> None:
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         start_date="",
         end_date="",
-        group_by=[],
+        group_by=["model"],
         filter={"and_": [], "or_": [], "not_": {}, "field": "", "op": "", "value": {}},
-        include=[],
-        limit=0,
-        max_results=0,
+        include=["theme"],
+        limit=1,
+        max_results=1,
         cursor="",
     )
 
@@ -1632,11 +1640,11 @@ def _smoke_case_118() -> None:
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         start_date="",
         end_date="",
-        group_by=[],
+        group_by=["model"],
         filter={"and_": [], "or_": [], "not_": {}, "field": "", "op": "", "value": {}},
-        include=[],
-        limit=0,
-        max_results=0,
+        include=["theme"],
+        limit=1,
+        max_results=1,
         cursor="",
     )
 
@@ -1658,10 +1666,10 @@ def _smoke_case_120() -> None:
         start_date="",
         end_date="",
         filter={"and_": [], "or_": [], "not_": {}, "field": "", "op": "", "value": {}},
-        limit=0,
+        limit=1,
         cursor="",
-        source_types=[],
-        group_by=[],
+        source_types=["video"],
+        group_by=["channel"],
         interval="day",
     )
 
@@ -1681,9 +1689,9 @@ def _smoke_case_122() -> None:
         start_date="",
         end_date="",
         filter={"and_": [], "or_": [], "not_": {}, "field": "", "op": "", "value": {}},
-        limit=0,
+        limit=1,
         cursor="",
-        source_types=[],
+        source_types=["video"],
         attribution="attributed",
     )
 
@@ -1737,24 +1745,18 @@ def _smoke_case_128() -> None:
 def _smoke_case_129() -> None:
     agent = client.agents.retrieve(
         agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    )
-
-
-def _smoke_case_130() -> None:
-    agent = client.agents.retrieve(
-        agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         version="published",
     )
 
 
-def _smoke_case_131() -> None:
+def _smoke_case_130() -> None:
     agent = client.agents.create(
         organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         name="x",
     )
 
 
-def _smoke_case_132() -> None:
+def _smoke_case_131() -> None:
     agent = client.agents.create(
         organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         name="x",
@@ -1763,46 +1765,40 @@ def _smoke_case_132() -> None:
     )
 
 
-def _smoke_case_133() -> None:
+def _smoke_case_132() -> None:
     agent = client.agents.publish(
         agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     )
 
 
-def _smoke_case_134() -> None:
+def _smoke_case_133() -> None:
     agent = client.agents.update(
         agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         graph={},
     )
 
 
-def _smoke_case_135() -> None:
-    agent = client.agents.retrieve_graph(
-        agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    )
-
-
-def _smoke_case_136() -> None:
+def _smoke_case_134() -> None:
     agent = client.agents.retrieve_graph(
         agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         version="published",
     )
 
 
-def _smoke_case_137() -> None:
+def _smoke_case_135() -> None:
     run = client.agents.runs.create(
         agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     )
 
 
-def _smoke_case_138() -> None:
+def _smoke_case_136() -> None:
     run = client.agents.runs.create(
         agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         inputs={},
     )
 
 
-def _smoke_case_139() -> None:
+def _smoke_case_137() -> None:
     run = client.agents.runs.retrieve(
         agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         run_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -1810,47 +1806,47 @@ def _smoke_case_139() -> None:
     )
 
 
-def _smoke_case_140() -> None:
+def _smoke_case_138() -> None:
     node_type = client.agents.node_types.list()
 
 
-def _smoke_case_141() -> None:
+def _smoke_case_139() -> None:
     node_type = client.agents.node_types.retrieve_schema(
         node_type="nodeType",
     )
 
 
-def _smoke_case_142() -> None:
+def _smoke_case_140() -> None:
     knowledge_base = client.knowledge_bases.list()
 
 
-def _smoke_case_143() -> None:
+def _smoke_case_141() -> None:
     knowledge_base = client.knowledge_bases.list(
         organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     )
 
 
-def _smoke_case_144() -> None:
+def _smoke_case_142() -> None:
     knowledge_base = client.knowledge_bases.search(
         knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         query="x",
-        top_k=0,
+        top_k=1,
         return_full_page=False,
     )
 
 
-def _smoke_case_145() -> None:
+def _smoke_case_143() -> None:
     knowledge_base = client.knowledge_bases.search(
         knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         query="x",
-        top_k=0,
+        top_k=1,
         return_full_page=False,
-        filters={"tags": [], "folders": []},
+        filters={"tags": ["x"], "folders": ["x"]},
         organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     )
 
 
-def _smoke_case_146() -> None:
+def _smoke_case_144() -> None:
     document = client.knowledge_bases.documents.create(
         knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         name="x",
@@ -1858,8 +1854,26 @@ def _smoke_case_146() -> None:
     )
 
 
-def _smoke_case_147() -> None:
+def _smoke_case_145() -> None:
     document = client.knowledge_bases.documents.create(
+        knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+        name="x",
+        text="x",
+        folder="x",
+        organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    )
+
+
+def _smoke_case_146() -> None:
+    document = client.knowledge_bases.documents.update(
+        knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+        name="x",
+        text="x",
+    )
+
+
+def _smoke_case_147() -> None:
+    document = client.knowledge_bases.documents.update(
         knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         name="x",
         text="x",
@@ -1869,71 +1883,53 @@ def _smoke_case_147() -> None:
 
 
 def _smoke_case_148() -> None:
-    document = client.knowledge_bases.documents.update(
+    document = client.knowledge_bases.documents.delete(
         knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         name="x",
-        text="x",
     )
 
 
 def _smoke_case_149() -> None:
-    document = client.knowledge_bases.documents.update(
+    document = client.knowledge_bases.documents.delete(
         knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         name="x",
-        text="x",
-        folder="x",
         organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     )
 
 
 def _smoke_case_150() -> None:
-    document = client.knowledge_bases.documents.delete(
+    folder = client.knowledge_bases.folders.create(
         knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-        name="x",
+        path="x",
     )
 
 
 def _smoke_case_151() -> None:
-    document = client.knowledge_bases.documents.delete(
+    folder = client.knowledge_bases.folders.create(
         knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-        name="x",
+        path="x",
         organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     )
 
 
 def _smoke_case_152() -> None:
-    folder = client.knowledge_bases.folders.create(
+    folder = client.knowledge_bases.folders.delete(
         knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         path="x",
+        recursive=False,
     )
 
 
 def _smoke_case_153() -> None:
-    folder = client.knowledge_bases.folders.create(
+    folder = client.knowledge_bases.folders.delete(
         knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         path="x",
+        recursive=False,
         organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     )
 
 
 def _smoke_case_154() -> None:
-    folder = client.knowledge_bases.folders.delete(
-        knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-        path="x",
-        recursive=False,
-    )
-
-
-def _smoke_case_155() -> None:
-    folder = client.knowledge_bases.folders.delete(
-        knowledge_base_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-        path="x",
-        recursive=False,
-        organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    )
-
-
-def _smoke_case_156() -> None:
     project = client.projects.list(
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         limit=100,
@@ -1941,7 +1937,7 @@ def _smoke_case_156() -> None:
     )
 
 
-def _smoke_case_157() -> None:
+def _smoke_case_155() -> None:
     project = client.projects.list(
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         status="status",
@@ -1950,59 +1946,59 @@ def _smoke_case_157() -> None:
     )
 
 
-def _smoke_case_158() -> None:
+def _smoke_case_156() -> None:
     project = client.projects.create(
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     )
 
 
-def _smoke_case_159() -> None:
+def _smoke_case_157() -> None:
     project = client.projects.create(
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         title="x",
         project_name="x",
         focus="x",
-        topics=[],
-        attachments=[],
+        topics=["x"],
+        attachments=[{"id": "x", "name": "x", "mime_type": "x", "size_bytes": 1, "data_base64": "x"}],
         generation_context={
             "date_range": {"label": "x", "preset": "x"},
-            "platforms": [],
-            "project_categories": [],
-            "regions": [],
-            "tags": [],
+            "platforms": [{"id": "x", "name": "x"}],
+            "project_categories": ["creative"],
+            "regions": [{"id": "x", "name": "x"}],
+            "tags": [{"id": "x", "name": "x"}],
         },
     )
 
 
-def _smoke_case_160() -> None:
+def _smoke_case_158() -> None:
     project = client.projects.retrieve(
         project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     )
 
 
-def _smoke_case_161() -> None:
+def _smoke_case_159() -> None:
     client.projects.delete(
         project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     )
 
 
-def _smoke_case_162() -> None:
+def _smoke_case_160() -> None:
     project = client.projects.get_status(
         project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     )
 
 
-def _smoke_case_163() -> None:
+def _smoke_case_161() -> None:
     project = client.projects.archive(
         project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     )
 
 
-def _smoke_case_164() -> None:
+def _smoke_case_162() -> None:
     project = client.projects.archive(
         project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         reason="x",
@@ -2010,14 +2006,14 @@ def _smoke_case_164() -> None:
     )
 
 
-def _smoke_case_165() -> None:
+def _smoke_case_163() -> None:
     project = client.projects.unarchive(
         project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     )
 
 
-def _smoke_case_166() -> None:
+def _smoke_case_164() -> None:
     generation = client.projects.generations.list(
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         limit=100,
@@ -2025,7 +2021,7 @@ def _smoke_case_166() -> None:
     )
 
 
-def _smoke_case_167() -> None:
+def _smoke_case_165() -> None:
     generation = client.projects.generations.list(
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         status="status",
@@ -2034,21 +2030,21 @@ def _smoke_case_167() -> None:
     )
 
 
-def _smoke_case_168() -> None:
+def _smoke_case_166() -> None:
     generation = client.projects.generations.retrieve(
         run_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     )
 
 
-def _smoke_case_169() -> None:
+def _smoke_case_167() -> None:
     task = client.projects.tasks.list(
         project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     )
 
 
-def _smoke_case_170() -> None:
+def _smoke_case_168() -> None:
     task = client.projects.tasks.create(
         project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         title="x",
@@ -2056,7 +2052,7 @@ def _smoke_case_170() -> None:
     )
 
 
-def _smoke_case_171() -> None:
+def _smoke_case_169() -> None:
     task = client.projects.tasks.create(
         project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         title="x",
@@ -2064,7 +2060,7 @@ def _smoke_case_171() -> None:
         brief="x",
         type="x",
         topic="x",
-        impact=0,
+        impact=1,
         reference_url="x",
         reference_label="x",
         position=0,
@@ -2072,7 +2068,7 @@ def _smoke_case_171() -> None:
     )
 
 
-def _smoke_case_172() -> None:
+def _smoke_case_170() -> None:
     task = client.projects.tasks.retrieve(
         project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         task_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -2080,7 +2076,7 @@ def _smoke_case_172() -> None:
     )
 
 
-def _smoke_case_173() -> None:
+def _smoke_case_171() -> None:
     task = client.projects.tasks.update(
         project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         task_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -2088,7 +2084,7 @@ def _smoke_case_173() -> None:
     )
 
 
-def _smoke_case_174() -> None:
+def _smoke_case_172() -> None:
     task = client.projects.tasks.update(
         project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         task_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -2097,14 +2093,14 @@ def _smoke_case_174() -> None:
         brief="x",
         type="x",
         topic="x",
-        impact=0,
+        impact=1,
         reference_url="x",
         reference_label="x",
         category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     )
 
 
-def _smoke_case_175() -> None:
+def _smoke_case_173() -> None:
     client.projects.tasks.delete(
         project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         task_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -2112,7 +2108,7 @@ def _smoke_case_175() -> None:
     )
 
 
-def _smoke_case_176() -> None:
+def _smoke_case_174() -> None:
     task = client.projects.tasks.update_status(
         project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         task_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -2121,7 +2117,7 @@ def _smoke_case_176() -> None:
     )
 
 
-def _smoke_case_177() -> None:
+def _smoke_case_175() -> None:
     task = client.projects.tasks.update_status(
         project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         task_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -2131,11 +2127,11 @@ def _smoke_case_177() -> None:
     )
 
 
-def _smoke_case_178() -> None:
+def _smoke_case_176() -> None:
     integration = client.integrations.list()
 
 
-def _smoke_case_179() -> None:
+def _smoke_case_177() -> None:
     integration = client.integrations.list(
         organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         provider="provider",
@@ -2143,7 +2139,7 @@ def _smoke_case_179() -> None:
     )
 
 
-def _smoke_case_180() -> None:
+def _smoke_case_178() -> None:
     document = client.documents.create(
         id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -2152,14 +2148,14 @@ def _smoke_case_180() -> None:
     )
 
 
-def _smoke_case_181() -> None:
+def _smoke_case_179() -> None:
     document = client.documents.list(
         organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         limit=20,
     )
 
 
-def _smoke_case_182() -> None:
+def _smoke_case_180() -> None:
     document = client.documents.list(
         organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         q="q",
@@ -2169,7 +2165,7 @@ def _smoke_case_182() -> None:
     )
 
 
-def _smoke_case_183() -> None:
+def _smoke_case_181() -> None:
     document = client.documents.retrieve(
         document_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -2179,14 +2175,14 @@ def _smoke_case_183() -> None:
     )
 
 
-def _smoke_case_184() -> None:
+def _smoke_case_182() -> None:
     document = client.documents.update(
         document_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     )
 
 
-def _smoke_case_185() -> None:
+def _smoke_case_183() -> None:
     document = client.documents.update(
         document_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -2195,14 +2191,14 @@ def _smoke_case_185() -> None:
     )
 
 
-def _smoke_case_186() -> None:
+def _smoke_case_184() -> None:
     client.documents.delete(
         document_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     )
 
 
-def _smoke_case_187() -> None:
+def _smoke_case_185() -> None:
     document = client.documents.replace_content(
         document_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
@@ -2211,11 +2207,11 @@ def _smoke_case_187() -> None:
     )
 
 
-def _smoke_case_188() -> None:
+def _smoke_case_186() -> None:
     ad_account = client.ads.openai_ads.ad_account.retrieve_insights()
 
 
-def _smoke_case_189() -> None:
+def _smoke_case_187() -> None:
     ad_account = client.ads.openai_ads.ad_account.retrieve_insights(
         organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
         aggregation_level="ad_account",
@@ -2224,6 +2220,47 @@ def _smoke_case_189() -> None:
         limit=1,
         after="after",
         before="before",
+    )
+
+
+def _smoke_case_188() -> None:
+    volume = client.prompt_volumes.volume.on_the_fly(
+        keyword="",
+        matching_type="exact_match",
+        start_date="2024-01-01",
+        end_date="2024-01-01",
+    )
+
+
+def _smoke_case_189() -> None:
+    volume = client.prompt_volumes.volume.on_the_fly(
+        keyword="",
+        matching_type="exact_match",
+        start_date="2024-01-01",
+        end_date="2024-01-01",
+        regions=[""],
+        platforms=[""],
+        organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    )
+
+
+def _smoke_case_190() -> None:
+    intent = client.prompt_volumes.intents.on_the_fly(
+        keyword="",
+        matching_type="exact_match",
+        start_date="2024-01-01",
+        end_date="2024-01-01",
+    )
+
+
+def _smoke_case_191() -> None:
+    intent = client.prompt_volumes.intents.on_the_fly(
+        keyword="",
+        matching_type="exact_match",
+        start_date="2024-01-01",
+        end_date="2024-01-01",
+        regions=[""],
+        platforms=[""],
     )
 
 
@@ -3118,411 +3155,423 @@ cases: list[SmokeCase] = [
         "operation": "retrieve",
         "method": "GET",
         "path": "/v1/agents/{agent_id}",
-        "label": "required params",
         "run": _smoke_case_129,
     },
     {
-        "operation": "retrieve",
-        "method": "GET",
-        "path": "/v1/agents/{agent_id}",
-        "label": "all params",
+        "operation": "create",
+        "method": "POST",
+        "path": "/v1/agents",
+        "label": "required params",
         "run": _smoke_case_130,
     },
     {
         "operation": "create",
         "method": "POST",
         "path": "/v1/agents",
-        "label": "required params",
-        "run": _smoke_case_131,
-    },
-    {
-        "operation": "create",
-        "method": "POST",
-        "path": "/v1/agents",
         "label": "all params",
-        "run": _smoke_case_132,
+        "run": _smoke_case_131,
     },
     {
         "operation": "publish",
         "method": "POST",
         "path": "/v1/agents/{agent_id}/publish",
-        "run": _smoke_case_133,
+        "run": _smoke_case_132,
     },
     {
         "operation": "update",
         "method": "PATCH",
         "path": "/v1/agents/{agent_id}",
-        "run": _smoke_case_134,
+        "run": _smoke_case_133,
     },
     {
         "operation": "retrieveGraph",
         "method": "GET",
         "path": "/v1/agents/{agent_id}/graph",
+        "run": _smoke_case_134,
+    },
+    {
+        "operation": "create",
+        "method": "POST",
+        "path": "/v1/agents/{agent_id}/runs",
         "label": "required params",
         "run": _smoke_case_135,
     },
     {
-        "operation": "retrieveGraph",
-        "method": "GET",
-        "path": "/v1/agents/{agent_id}/graph",
+        "operation": "create",
+        "method": "POST",
+        "path": "/v1/agents/{agent_id}/runs",
         "label": "all params",
         "run": _smoke_case_136,
-    },
-    {
-        "operation": "create",
-        "method": "POST",
-        "path": "/v1/agents/{agent_id}/runs",
-        "label": "required params",
-        "run": _smoke_case_137,
-    },
-    {
-        "operation": "create",
-        "method": "POST",
-        "path": "/v1/agents/{agent_id}/runs",
-        "label": "all params",
-        "run": _smoke_case_138,
     },
     {
         "operation": "retrieve",
         "method": "GET",
         "path": "/v1/agents/{agent_id}/runs/{run_id}",
-        "run": _smoke_case_139,
+        "run": _smoke_case_137,
     },
     {
         "operation": "list",
         "method": "GET",
         "path": "/v1/agents/node-types",
-        "run": _smoke_case_140,
+        "run": _smoke_case_138,
     },
     {
         "operation": "retrieveSchema",
         "method": "GET",
         "path": "/v1/agents/node-types/{node_type}/schema",
-        "run": _smoke_case_141,
+        "run": _smoke_case_139,
     },
     {
         "operation": "list",
         "method": "GET",
         "path": "/v1/knowledge-bases",
+        "label": "required params",
+        "run": _smoke_case_140,
+    },
+    {
+        "operation": "list",
+        "method": "GET",
+        "path": "/v1/knowledge-bases",
+        "label": "all params",
+        "run": _smoke_case_141,
+    },
+    {
+        "operation": "search",
+        "method": "POST",
+        "path": "/v1/knowledge-bases/{knowledge_base_id}/search",
         "label": "required params",
         "run": _smoke_case_142,
     },
     {
-        "operation": "list",
-        "method": "GET",
-        "path": "/v1/knowledge-bases",
+        "operation": "search",
+        "method": "POST",
+        "path": "/v1/knowledge-bases/{knowledge_base_id}/search",
         "label": "all params",
         "run": _smoke_case_143,
     },
     {
-        "operation": "search",
+        "operation": "create",
         "method": "POST",
-        "path": "/v1/knowledge-bases/{knowledge_base_id}/search",
+        "path": "/v1/knowledge-bases/{knowledge_base_id}/documents",
         "label": "required params",
         "run": _smoke_case_144,
     },
     {
-        "operation": "search",
+        "operation": "create",
         "method": "POST",
-        "path": "/v1/knowledge-bases/{knowledge_base_id}/search",
+        "path": "/v1/knowledge-bases/{knowledge_base_id}/documents",
         "label": "all params",
         "run": _smoke_case_145,
     },
     {
-        "operation": "create",
-        "method": "POST",
+        "operation": "update",
+        "method": "PUT",
         "path": "/v1/knowledge-bases/{knowledge_base_id}/documents",
         "label": "required params",
         "run": _smoke_case_146,
     },
     {
-        "operation": "create",
-        "method": "POST",
+        "operation": "update",
+        "method": "PUT",
         "path": "/v1/knowledge-bases/{knowledge_base_id}/documents",
         "label": "all params",
         "run": _smoke_case_147,
     },
     {
-        "operation": "update",
-        "method": "PUT",
+        "operation": "delete",
+        "method": "DELETE",
         "path": "/v1/knowledge-bases/{knowledge_base_id}/documents",
         "label": "required params",
         "run": _smoke_case_148,
     },
     {
-        "operation": "update",
-        "method": "PUT",
+        "operation": "delete",
+        "method": "DELETE",
         "path": "/v1/knowledge-bases/{knowledge_base_id}/documents",
         "label": "all params",
         "run": _smoke_case_149,
     },
     {
-        "operation": "delete",
-        "method": "DELETE",
-        "path": "/v1/knowledge-bases/{knowledge_base_id}/documents",
+        "operation": "create",
+        "method": "POST",
+        "path": "/v1/knowledge-bases/{knowledge_base_id}/folders",
         "label": "required params",
         "run": _smoke_case_150,
     },
     {
-        "operation": "delete",
-        "method": "DELETE",
-        "path": "/v1/knowledge-bases/{knowledge_base_id}/documents",
+        "operation": "create",
+        "method": "POST",
+        "path": "/v1/knowledge-bases/{knowledge_base_id}/folders",
         "label": "all params",
         "run": _smoke_case_151,
     },
     {
-        "operation": "create",
-        "method": "POST",
+        "operation": "delete",
+        "method": "DELETE",
         "path": "/v1/knowledge-bases/{knowledge_base_id}/folders",
         "label": "required params",
         "run": _smoke_case_152,
     },
     {
-        "operation": "create",
-        "method": "POST",
+        "operation": "delete",
+        "method": "DELETE",
         "path": "/v1/knowledge-bases/{knowledge_base_id}/folders",
         "label": "all params",
         "run": _smoke_case_153,
     },
     {
-        "operation": "delete",
-        "method": "DELETE",
-        "path": "/v1/knowledge-bases/{knowledge_base_id}/folders",
+        "operation": "list",
+        "method": "GET",
+        "path": "/v1/projects",
         "label": "required params",
         "run": _smoke_case_154,
     },
     {
-        "operation": "delete",
-        "method": "DELETE",
-        "path": "/v1/knowledge-bases/{knowledge_base_id}/folders",
+        "operation": "list",
+        "method": "GET",
+        "path": "/v1/projects",
         "label": "all params",
         "run": _smoke_case_155,
     },
     {
-        "operation": "list",
-        "method": "GET",
+        "operation": "create",
+        "method": "POST",
         "path": "/v1/projects",
         "label": "required params",
         "run": _smoke_case_156,
     },
     {
-        "operation": "list",
-        "method": "GET",
+        "operation": "create",
+        "method": "POST",
         "path": "/v1/projects",
         "label": "all params",
         "run": _smoke_case_157,
     },
     {
-        "operation": "create",
-        "method": "POST",
-        "path": "/v1/projects",
-        "label": "required params",
-        "run": _smoke_case_158,
-    },
-    {
-        "operation": "create",
-        "method": "POST",
-        "path": "/v1/projects",
-        "label": "all params",
-        "run": _smoke_case_159,
-    },
-    {
         "operation": "retrieve",
         "method": "GET",
         "path": "/v1/projects/{project_id}",
-        "run": _smoke_case_160,
+        "run": _smoke_case_158,
     },
     {
         "operation": "delete",
         "method": "DELETE",
         "path": "/v1/projects/{project_id}",
-        "run": _smoke_case_161,
+        "run": _smoke_case_159,
     },
     {
         "operation": "getStatus",
         "method": "GET",
         "path": "/v1/projects/{project_id}/status",
-        "run": _smoke_case_162,
+        "run": _smoke_case_160,
     },
     {
         "operation": "archive",
         "method": "POST",
         "path": "/v1/projects/{project_id}/archive",
         "label": "required params",
-        "run": _smoke_case_163,
+        "run": _smoke_case_161,
     },
     {
         "operation": "archive",
         "method": "POST",
         "path": "/v1/projects/{project_id}/archive",
         "label": "all params",
-        "run": _smoke_case_164,
+        "run": _smoke_case_162,
     },
     {
         "operation": "unarchive",
         "method": "POST",
         "path": "/v1/projects/{project_id}/unarchive",
-        "run": _smoke_case_165,
+        "run": _smoke_case_163,
     },
     {
         "operation": "list",
         "method": "GET",
         "path": "/v1/projects/generations",
         "label": "required params",
-        "run": _smoke_case_166,
+        "run": _smoke_case_164,
     },
     {
         "operation": "list",
         "method": "GET",
         "path": "/v1/projects/generations",
         "label": "all params",
-        "run": _smoke_case_167,
+        "run": _smoke_case_165,
     },
     {
         "operation": "retrieve",
         "method": "GET",
         "path": "/v1/projects/generations/{run_id}",
-        "run": _smoke_case_168,
+        "run": _smoke_case_166,
     },
     {
         "operation": "list",
         "method": "GET",
         "path": "/v1/projects/{project_id}/tasks",
-        "run": _smoke_case_169,
+        "run": _smoke_case_167,
     },
     {
         "operation": "create",
         "method": "POST",
         "path": "/v1/projects/{project_id}/tasks",
         "label": "required params",
-        "run": _smoke_case_170,
+        "run": _smoke_case_168,
     },
     {
         "operation": "create",
         "method": "POST",
         "path": "/v1/projects/{project_id}/tasks",
         "label": "all params",
-        "run": _smoke_case_171,
+        "run": _smoke_case_169,
     },
     {
         "operation": "retrieve",
         "method": "GET",
         "path": "/v1/projects/{project_id}/tasks/{task_id}",
-        "run": _smoke_case_172,
+        "run": _smoke_case_170,
     },
     {
         "operation": "update",
         "method": "PATCH",
         "path": "/v1/projects/{project_id}/tasks/{task_id}",
         "label": "required params",
-        "run": _smoke_case_173,
+        "run": _smoke_case_171,
     },
     {
         "operation": "update",
         "method": "PATCH",
         "path": "/v1/projects/{project_id}/tasks/{task_id}",
         "label": "all params",
-        "run": _smoke_case_174,
+        "run": _smoke_case_172,
     },
     {
         "operation": "delete",
         "method": "DELETE",
         "path": "/v1/projects/{project_id}/tasks/{task_id}",
-        "run": _smoke_case_175,
+        "run": _smoke_case_173,
     },
     {
         "operation": "updateStatus",
         "method": "POST",
         "path": "/v1/projects/{project_id}/tasks/{task_id}/status",
         "label": "required params",
-        "run": _smoke_case_176,
+        "run": _smoke_case_174,
     },
     {
         "operation": "updateStatus",
         "method": "POST",
         "path": "/v1/projects/{project_id}/tasks/{task_id}/status",
         "label": "all params",
-        "run": _smoke_case_177,
+        "run": _smoke_case_175,
     },
     {
         "operation": "list",
         "method": "GET",
         "path": "/v1/integrations",
         "label": "required params",
+        "run": _smoke_case_176,
+    },
+    {
+        "operation": "list",
+        "method": "GET",
+        "path": "/v1/integrations",
+        "label": "all params",
+        "run": _smoke_case_177,
+    },
+    {
+        "operation": "create",
+        "method": "POST",
+        "path": "/v1/documents",
         "run": _smoke_case_178,
     },
     {
         "operation": "list",
         "method": "GET",
-        "path": "/v1/integrations",
-        "label": "all params",
+        "path": "/v1/documents",
+        "label": "required params",
         "run": _smoke_case_179,
     },
     {
-        "operation": "create",
-        "method": "POST",
-        "path": "/v1/documents",
-        "run": _smoke_case_180,
-    },
-    {
-        "operation": "list",
-        "method": "GET",
-        "path": "/v1/documents",
-        "label": "required params",
-        "run": _smoke_case_181,
-    },
-    {
         "operation": "list",
         "method": "GET",
         "path": "/v1/documents",
         "label": "all params",
-        "run": _smoke_case_182,
+        "run": _smoke_case_180,
     },
     {
         "operation": "retrieve",
         "method": "GET",
         "path": "/v1/documents/{document_id}",
-        "run": _smoke_case_183,
+        "run": _smoke_case_181,
     },
     {
         "operation": "update",
         "method": "PATCH",
         "path": "/v1/documents/{document_id}",
         "label": "required params",
-        "run": _smoke_case_184,
+        "run": _smoke_case_182,
     },
     {
         "operation": "update",
         "method": "PATCH",
         "path": "/v1/documents/{document_id}",
         "label": "all params",
-        "run": _smoke_case_185,
+        "run": _smoke_case_183,
     },
     {
         "operation": "delete",
         "method": "DELETE",
         "path": "/v1/documents/{document_id}",
-        "run": _smoke_case_186,
+        "run": _smoke_case_184,
     },
     {
         "operation": "replaceContent",
         "method": "POST",
         "path": "/v1/documents/{document_id}/content",
-        "run": _smoke_case_187,
+        "run": _smoke_case_185,
     },
     {
         "operation": "retrieveInsights",
         "method": "GET",
         "path": "/v1/ads/openai-ads/ad-account/insights",
         "label": "required params",
-        "run": _smoke_case_188,
+        "run": _smoke_case_186,
     },
     {
         "operation": "retrieveInsights",
         "method": "GET",
         "path": "/v1/ads/openai-ads/ad-account/insights",
         "label": "all params",
+        "run": _smoke_case_187,
+    },
+    {
+        "operation": "onTheFly",
+        "method": "POST",
+        "path": "/v2/prompt-volumes/volume/on-the-fly",
+        "label": "required params",
+        "run": _smoke_case_188,
+    },
+    {
+        "operation": "onTheFly",
+        "method": "POST",
+        "path": "/v2/prompt-volumes/volume/on-the-fly",
+        "label": "all params",
         "run": _smoke_case_189,
+    },
+    {
+        "operation": "onTheFly",
+        "method": "POST",
+        "path": "/v2/prompt-volumes/intents/on-the-fly",
+        "label": "required params",
+        "run": _smoke_case_190,
+    },
+    {
+        "operation": "onTheFly",
+        "method": "POST",
+        "path": "/v2/prompt-volumes/intents/on-the-fly",
+        "label": "all params",
+        "run": _smoke_case_191,
     },
 ]
 

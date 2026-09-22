@@ -1,5 +1,82 @@
 # Changelog
 
+## [0.60.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.59.2...v0.60.0) (2026-09-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* **api:** 3 breaking changes to the SDK surface.
+    - Property `bot_provider_filter.value` type changed from `enum(openai | anthropic | chatgpt | …) | Array<enum(openai | anthropic | chatgpt | …)>` to `enum(openai | anthropic | chatgpt | …) | Array<enum(openai | anthropic | chatgpt | …)>`.
+    - Property `sentiment_v2_query.metrics` type changed from `Array<enum(positive_sentiment | negative_sentiment | occurrence)> | null` to `Array<enum(positive_sentiment | negative_sentiment | occurrence | …)> | null`.
+    - Property `app_routes_v2_answer_engine_insights_reports_sentiment_sort_spec.field` type changed from `enum(occurrence | positive_sentiment | negative_sentiment)` to `enum(occurrence | positive_sentiment | negative_sentiment | …)`.
+* **api:** 4 breaking changes to the SDK surface.
+    - Serialization or defaults of query param `order_by` on `organizations.categories.prompts` changed.
+    - Serialization or defaults of query param `order_dir` on `organizations.categories.prompts` changed.
+    - Serialization or defaults of query param `version` on `agents.retrieve` changed.
+    - Serialization or defaults of query param `version` on `agents.retrieveGraph` changed.
+* **api:** 54 breaking changes to the SDK surface.
+    - Property `accuracy_breakdown_query.limit` type changed from `integer` to `integer`.
+    - Property `accuracy_breakdown_query.offset` type changed from `integer` to `integer`.
+    - Property `answers_v2_query.limit` type changed from `integer | null` to `integer | null`.
+    - Property `answers_v2_query.max_results` type changed from `integer | null` to `integer | null`.
+    - Property `citations_v2_query.limit` type changed from `integer | null` to `integer | null`.
+    - Property `citations_v2_query.max_results` type changed from `integer | null` to `integer | null`.
+    - Property `claim_citations_query.limit` type changed from `integer` to `integer`.
+    - Property `claim_citations_query.offset` type changed from `integer` to `integer`.
+    - Property `cluster_example_runs_query.limit` type changed from `integer` to `integer`.
+    - Property `cluster_example_runs_query.offset` type changed from `integer` to `integer`.
+    - Property `create_project_task_request.impact` type changed from `integer | null` to `integer | null`.
+    - Property `cursor_pagination.limit` type changed from `integer` to `integer`.
+    - Property `factcheck_claims_query.limit` type changed from `integer | null` to `integer | null`.
+    - Property `factcheck_claims_query.max_results` type changed from `integer | null` to `integer | null`.
+    - Property `factcheck_scores_query.limit` type changed from `integer | null` to `integer | null`.
+    - Property `factcheck_scores_query.max_results` type changed from `integer | null` to `integer | null`.
+    - Property `inaccuracy_drivers_query.limit` type changed from `integer` to `integer`.
+    - Property `inaccurate_clusters_query.limit` type changed from `integer` to `integer`.
+    - Property `inaccurate_clusters_query.offset` type changed from `integer` to `integer`.
+    - Property `inaccurate_themes_query.limit` type changed from `integer` to `integer`.
+    - Property `inaccurate_themes_query.offset` type changed from `integer` to `integer`.
+    - Property `pagination.limit` type changed from `integer` to `integer`.
+    - Property `pagination.offset` type changed from `integer` to `integer`.
+    - Property `project.task_count` type changed from `integer` to `integer`.
+    - Property `project.new_task_count` type changed from `integer` to `integer`.
+    - Property `project.version_count` type changed from `integer` to `integer`.
+    - Property `project_attachment.size_bytes` type changed from `integer` to `integer`.
+    - Property `project_detail.task_count` type changed from `integer` to `integer`.
+    - Property `project_detail.new_task_count` type changed from `integer` to `integer`.
+    - Property `project_detail.version_count` type changed from `integer` to `integer`.
+    - Property `project_list_item.task_count` type changed from `integer` to `integer`.
+    - Property `project_list_item.new_task_count` type changed from `integer` to `integer`.
+    - Property `project_task.impact` type changed from `integer | null` to `integer | null`.
+    - Property `project_task_detail.impact` type changed from `integer | null` to `integer | null`.
+    - Property `query_fanouts_v2_query.limit` type changed from `integer | null` to `integer | null`.
+    - Property `query_fanouts_v2_query.max_results` type changed from `integer | null` to `integer | null`.
+    - Property `search_knowledge_base_request.top_k` type changed from `integer` to `integer`.
+    - Property `sentiment_v2_query.limit` type changed from `integer | null` to `integer | null`.
+    - Property `sentiment_v2_query.max_results` type changed from `integer | null` to `integer | null`.
+    - Property `shopping_brands_v2_query.limit` type changed from `integer | null` to `integer | null`.
+    - Property `shopping_brands_v2_query.max_results` type changed from `integer | null` to `integer | null`.
+    - Property `shopping_merchants_v2_query.limit` type changed from `integer | null` to `integer | null`.
+    - Property `shopping_merchants_v2_query.max_results` type changed from `integer | null` to `integer | null`.
+    - Property `shopping_products_v2_query.competitor_limit` type changed from `integer` to `integer`.
+    - Property `shopping_products_v2_query.limit` type changed from `integer | null` to `integer | null`.
+    - Property `shopping_products_v2_query.max_results` type changed from `integer | null` to `integer | null`.
+    - Property `shopping_trigger_rate_v2_query.limit` type changed from `integer | null` to `integer | null`.
+    - Property `shopping_trigger_rate_v2_query.max_results` type changed from `integer | null` to `integer | null`.
+    - Property `top_inaccurate_claims_query.limit` type changed from `integer` to `integer`.
+    - Property `update_project_task_request.impact` type changed from `integer | null` to `integer | null`.
+    - Property `visibility_v2_query.limit` type changed from `integer | null` to `integer | null`.
+    - Property `visibility_v2_query.max_results` type changed from `integer | null` to `integer | null`.
+    - Property `youtube_channels_query.limit` type changed from `integer | null` to `integer | null`.
+    - Property `youtube_videos_query.limit` type changed from `integer | null` to `integer | null`.
+
+### Features
+
+* **api:** add operation promptVolumes.volume.onTheFly (+8 more changes) ([0965536](https://github.com/cooper-square-technologies/profound-python-sdk/commit/0965536bcdf61e61cdaa0b51458382e0f75ab6d3))
+* **api:** update property bot_provider_filter.value (+11 more changes) ([8b57f9f](https://github.com/cooper-square-technologies/profound-python-sdk/commit/8b57f9f702a22a835c612c489852ad658326ce31))
+* **api:** update SDK surface (5 changes) ([6eb950a](https://github.com/cooper-square-technologies/profound-python-sdk/commit/6eb950aff02f795d1d1d727ec35d0074fa34d74c))
+* **api:** update SDK surface (55 changes) ([d4627bc](https://github.com/cooper-square-technologies/profound-python-sdk/commit/d4627bc8aca4b43246090076b24fec50a5e31bbe))
+
 ## [0.59.2](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.58.1...v0.59.2) (2026-09-08)
 
 

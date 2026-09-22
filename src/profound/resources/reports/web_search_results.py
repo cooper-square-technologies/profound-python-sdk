@@ -100,7 +100,7 @@ class WebSearchResultsResource(SyncAPIResource):
             web_search_result = client.reports.web_search_results.query(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["count"],
                 order_by={},
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -175,7 +175,7 @@ class WebSearchResultsResource(SyncAPIResource):
             dimensions: Dimensions to group the report by.
             metrics: Metrics to include. `search_share` is the per-prompt occurrence rate.
             order_by: Custom ordering of the report results.
-            pagination: Body parameter.
+            pagination: Offset-based pagination parameters.
             category_id: Body parameter.
             start_date: Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
             end_date: End date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
@@ -193,7 +193,7 @@ class WebSearchResultsResource(SyncAPIResource):
             stream = client.reports.web_search_results.stream(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["count"],
                 order_by={},
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -302,7 +302,7 @@ class AsyncWebSearchResultsResource(AsyncAPIResource):
             web_search_result = await client.reports.web_search_results.query(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["count"],
                 order_by={},
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 start_date="2024-01-01T00:00:00.000Z",
@@ -377,7 +377,7 @@ class AsyncWebSearchResultsResource(AsyncAPIResource):
             dimensions: Dimensions to group the report by.
             metrics: Metrics to include. `search_share` is the per-prompt occurrence rate.
             order_by: Custom ordering of the report results.
-            pagination: Body parameter.
+            pagination: Offset-based pagination parameters.
             category_id: Body parameter.
             start_date: Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
             end_date: End date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
@@ -395,7 +395,7 @@ class AsyncWebSearchResultsResource(AsyncAPIResource):
             stream = await client.reports.web_search_results.stream(
                 date_interval="day",
                 dimensions=[],
-                metrics=[],
+                metrics=["count"],
                 order_by={},
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 start_date="2024-01-01T00:00:00.000Z",

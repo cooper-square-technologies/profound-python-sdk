@@ -39,12 +39,16 @@ class Data(BaseModel):
     date: Optional[str] = None
 
     topic: Optional[DataTopic] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     region: Optional[DataRegion] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     persona: Optional[DataPersona] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     prompt: Optional[DataPrompt] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     total_runs: Optional[int] = None
 
