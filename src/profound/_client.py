@@ -44,6 +44,7 @@ if TYPE_CHECKING:
         integrations,
         documents,
         ads,
+        prompt_volumes,
     )
     from .resources.organizations import OrganizationsResource, AsyncOrganizationsResource
     from .resources.prompts import PromptsResource, AsyncPromptsResource
@@ -55,6 +56,7 @@ if TYPE_CHECKING:
     from .resources.integrations import IntegrationsResource, AsyncIntegrationsResource
     from .resources.documents import DocumentsResource, AsyncDocumentsResource
     from .resources.ads import AdsResource, AsyncAdsResource
+    from .resources.prompt_volumes import PromptVolumesResource, AsyncPromptVolumesResource
 
 # Serializes lazy resource imports so concurrent cold access from multiple
 # threads cannot deadlock on CPython import locks (see CPython 3.14).
@@ -226,6 +228,12 @@ class Profound(SyncAPIClient):
         with _RESOURCE_IMPORT_LOCK:
             from .resources.ads import AdsResource
         return AdsResource(self)
+
+    @cached_property
+    def prompt_volumes(self) -> "PromptVolumesResource":
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.prompt_volumes import PromptVolumesResource
+        return PromptVolumesResource(self)
 
     @cached_property
     def with_raw_response(self) -> ProfoundWithRawResponse:
@@ -524,6 +532,12 @@ class AsyncProfound(AsyncAPIClient):
         return AsyncAdsResource(self)
 
     @cached_property
+    def prompt_volumes(self) -> "AsyncPromptVolumesResource":
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.prompt_volumes import AsyncPromptVolumesResource
+        return AsyncPromptVolumesResource(self)
+
+    @cached_property
     def with_raw_response(self) -> AsyncProfoundWithRawResponse:
         return AsyncProfoundWithRawResponse(self)
 
@@ -736,6 +750,12 @@ class ProfoundWithRawResponse:
             from .resources.ads import AdsResourceWithRawResponse
         return AdsResourceWithRawResponse(self._client.ads)
 
+    @cached_property
+    def prompt_volumes(self) -> prompt_volumes.PromptVolumesResourceWithRawResponse:
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.prompt_volumes import PromptVolumesResourceWithRawResponse
+        return PromptVolumesResourceWithRawResponse(self._client.prompt_volumes)
+
 
 class AsyncProfoundWithRawResponse:
     _client: AsyncProfound
@@ -802,6 +822,12 @@ class AsyncProfoundWithRawResponse:
         with _RESOURCE_IMPORT_LOCK:
             from .resources.ads import AsyncAdsResourceWithRawResponse
         return AsyncAdsResourceWithRawResponse(self._client.ads)
+
+    @cached_property
+    def prompt_volumes(self) -> prompt_volumes.AsyncPromptVolumesResourceWithRawResponse:
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.prompt_volumes import AsyncPromptVolumesResourceWithRawResponse
+        return AsyncPromptVolumesResourceWithRawResponse(self._client.prompt_volumes)
 
 
 class ProfoundWithStreamedResponse:
@@ -870,6 +896,12 @@ class ProfoundWithStreamedResponse:
             from .resources.ads import AdsResourceWithStreamingResponse
         return AdsResourceWithStreamingResponse(self._client.ads)
 
+    @cached_property
+    def prompt_volumes(self) -> prompt_volumes.PromptVolumesResourceWithStreamingResponse:
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.prompt_volumes import PromptVolumesResourceWithStreamingResponse
+        return PromptVolumesResourceWithStreamingResponse(self._client.prompt_volumes)
+
 
 class AsyncProfoundWithStreamedResponse:
     _client: AsyncProfound
@@ -936,6 +968,12 @@ class AsyncProfoundWithStreamedResponse:
         with _RESOURCE_IMPORT_LOCK:
             from .resources.ads import AsyncAdsResourceWithStreamingResponse
         return AsyncAdsResourceWithStreamingResponse(self._client.ads)
+
+    @cached_property
+    def prompt_volumes(self) -> prompt_volumes.AsyncPromptVolumesResourceWithStreamingResponse:
+        with _RESOURCE_IMPORT_LOCK:
+            from .resources.prompt_volumes import AsyncPromptVolumesResourceWithStreamingResponse
+        return AsyncPromptVolumesResourceWithStreamingResponse(self._client.prompt_volumes)
 
 
 # Alias names for the documented `Client` / `AsyncClient` symbols.

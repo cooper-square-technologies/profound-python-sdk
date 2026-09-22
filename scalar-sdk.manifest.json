@@ -17594,6 +17594,400 @@
       }
     },
     {
+      "name": "otf_intent_share_data",
+      "source": "otf_intent_share_data",
+      "publicAliases": [],
+      "deprecated": false,
+      "type": {
+        "kind": "object",
+        "properties": [
+          {
+            "name": "main_classification",
+            "publicName": "main_classification",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "primitive",
+              "type": "string"
+            }
+          },
+          {
+            "name": "sub_category_classification",
+            "publicName": "sub_category_classification",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "union",
+              "variants": [
+                {
+                  "kind": "primitive",
+                  "type": "string"
+                },
+                {
+                  "kind": "null"
+                }
+              ]
+            }
+          },
+          {
+            "name": "pct_conversation",
+            "publicName": "pct_conversation",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "primitive",
+              "type": "number"
+            }
+          }
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "otf_intent_shares_query",
+      "source": "otf_intent_shares_query",
+      "publicAliases": [],
+      "deprecated": false,
+      "type": {
+        "kind": "object",
+        "properties": [
+          {
+            "name": "keyword",
+            "publicName": "keyword",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "primitive",
+              "type": "string"
+            }
+          },
+          {
+            "name": "matching_type",
+            "publicName": "matching_type",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "enum",
+              "values": [
+                "exact_match",
+                "phrase_match"
+              ],
+              "names": [
+                "ExactMatch",
+                "PhraseMatch"
+              ],
+              "deprecations": [
+                false,
+                false
+              ]
+            }
+          },
+          {
+            "name": "start_date",
+            "publicName": "start_date",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "primitive",
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "end_date",
+            "publicName": "end_date",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "primitive",
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "regions",
+            "publicName": "regions",
+            "required": false,
+            "deprecated": false,
+            "type": {
+              "kind": "array",
+              "items": {
+                "kind": "primitive",
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "platforms",
+            "publicName": "platforms",
+            "required": false,
+            "deprecated": false,
+            "type": {
+              "kind": "array",
+              "items": {
+                "kind": "primitive",
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "otf_intent_shares_response",
+      "source": "otf_intent_shares_response",
+      "publicAliases": [],
+      "deprecated": false,
+      "type": {
+        "kind": "object",
+        "properties": [
+          {
+            "name": "info",
+            "publicName": "info",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "ref",
+              "name": "volume_response_info"
+            }
+          },
+          {
+            "name": "data",
+            "publicName": "data",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "array",
+              "items": {
+                "kind": "ref",
+                "name": "otf_intent_share_data"
+              }
+            }
+          }
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "otf_volume_data",
+      "source": "otf_volume_data",
+      "publicAliases": [],
+      "deprecated": false,
+      "type": {
+        "kind": "object",
+        "properties": [
+          {
+            "name": "country_code",
+            "publicName": "country_code",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "primitive",
+              "type": "string"
+            }
+          },
+          {
+            "name": "platform",
+            "publicName": "platform",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "primitive",
+              "type": "string"
+            }
+          },
+          {
+            "name": "matching_type",
+            "publicName": "matching_type",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "primitive",
+              "type": "string"
+            }
+          },
+          {
+            "name": "frequency",
+            "publicName": "frequency",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "primitive",
+              "type": "string"
+            }
+          },
+          {
+            "name": "date",
+            "publicName": "date",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "primitive",
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "volume",
+            "publicName": "volume",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "primitive",
+              "type": "number"
+            }
+          }
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "otf_volume_request",
+      "source": "otf_volume_request",
+      "publicAliases": [],
+      "deprecated": false,
+      "type": {
+        "kind": "object",
+        "properties": [
+          {
+            "name": "keyword",
+            "publicName": "keyword",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "primitive",
+              "type": "string"
+            }
+          },
+          {
+            "name": "matching_type",
+            "publicName": "matching_type",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "enum",
+              "values": [
+                "exact_match",
+                "phrase_match"
+              ],
+              "names": [
+                "ExactMatch",
+                "PhraseMatch"
+              ],
+              "deprecations": [
+                false,
+                false
+              ]
+            }
+          },
+          {
+            "name": "start_date",
+            "publicName": "start_date",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "primitive",
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "end_date",
+            "publicName": "end_date",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "primitive",
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "regions",
+            "publicName": "regions",
+            "required": false,
+            "deprecated": false,
+            "type": {
+              "kind": "array",
+              "items": {
+                "kind": "primitive",
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "platforms",
+            "publicName": "platforms",
+            "required": false,
+            "deprecated": false,
+            "type": {
+              "kind": "array",
+              "items": {
+                "kind": "primitive",
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "organization_id",
+            "publicName": "organization_id",
+            "required": false,
+            "deprecated": false,
+            "type": {
+              "kind": "union",
+              "variants": [
+                {
+                  "kind": "primitive",
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "kind": "null"
+                }
+              ]
+            }
+          }
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "otf_volume_response",
+      "source": "otf_volume_response",
+      "publicAliases": [],
+      "deprecated": false,
+      "type": {
+        "kind": "object",
+        "properties": [
+          {
+            "name": "info",
+            "publicName": "info",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "ref",
+              "name": "volume_response_info"
+            }
+          },
+          {
+            "name": "data",
+            "publicName": "data",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "array",
+              "items": {
+                "kind": "ref",
+                "name": "otf_volume_data"
+              }
+            }
+          }
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
       "name": "pagination",
       "source": "pagination",
       "publicAliases": [],
@@ -34564,6 +34958,59 @@
       }
     },
     {
+      "name": "volume_response_info",
+      "source": "volume_response_info",
+      "publicAliases": [],
+      "deprecated": false,
+      "type": {
+        "kind": "object",
+        "properties": [
+          {
+            "name": "total_rows",
+            "publicName": "total_rows",
+            "required": true,
+            "deprecated": false,
+            "type": {
+              "kind": "primitive",
+              "type": "integer"
+            }
+          },
+          {
+            "name": "truncated",
+            "publicName": "truncated",
+            "required": false,
+            "deprecated": false,
+            "type": {
+              "kind": "primitive",
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "query",
+            "publicName": "query",
+            "required": false,
+            "deprecated": false,
+            "type": {
+              "kind": "union",
+              "variants": [
+                {
+                  "kind": "object",
+                  "properties": [],
+                  "additionalProperties": {
+                    "kind": "unknown"
+                  }
+                },
+                {
+                  "kind": "null"
+                }
+              ]
+            }
+          }
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
       "name": "web_search_results_query",
       "source": "web_search_results_query",
       "publicAliases": [],
@@ -36952,7 +37399,10 @@
     "documents",
     "ads",
     "ads.openaiAds",
-    "ads.openaiAds.adAccount"
+    "ads.openaiAds.adAccount",
+    "promptVolumes",
+    "promptVolumes.volume",
+    "promptVolumes.intents"
   ],
   "publicResources": [
     "organizations",
@@ -36981,7 +37431,10 @@
     "documents",
     "ads",
     "ads.openaiAds",
-    "ads.openaiAds.adAccount"
+    "ads.openaiAds.adAccount",
+    "promptVolumes",
+    "promptVolumes.volume",
+    "promptVolumes.intents"
   ],
   "operations": [
     {
@@ -50687,6 +51140,250 @@
       },
       "responseModel": {
         "name": "insights_response",
+        "publicAliases": []
+      },
+      "result": {
+        "successStatus": "200",
+        "errorStatuses": [
+          "422"
+        ]
+      },
+      "errorResponses": [
+        {
+          "status": "422",
+          "contentType": "application/json",
+          "encoding": "json",
+          "contents": [
+            {
+              "contentType": "application/json",
+              "encoding": "json"
+            }
+          ],
+          "model": {
+            "name": "http_validation_error",
+            "publicAliases": []
+          }
+        }
+      ],
+      "responseLinks": [],
+      "transport": "http"
+    },
+    {
+      "resource": "promptVolumes.volume",
+      "publicResource": "promptVolumes.volume",
+      "operation": "onTheFly",
+      "publicOperation": "onTheFly",
+      "deprecated": false,
+      "method": "POST",
+      "path": "/v2/prompt-volumes/volume/on-the-fly",
+      "pathParams": [],
+      "publicPathParams": [],
+      "queryParams": [],
+      "publicQueryParams": [],
+      "headerParams": [],
+      "publicHeaderParams": [],
+      "bodyParams": [
+        "keyword",
+        "matching_type",
+        "start_date",
+        "end_date",
+        "regions",
+        "platforms",
+        "organization_id"
+      ],
+      "publicBodyParams": [
+        "keyword",
+        "matching_type",
+        "start_date",
+        "end_date",
+        "regions",
+        "platforms",
+        "organization_id"
+      ],
+      "bodyParamDetails": [
+        {
+          "name": "keyword",
+          "required": true
+        },
+        {
+          "name": "matching_type",
+          "required": true
+        },
+        {
+          "name": "start_date",
+          "required": true
+        },
+        {
+          "name": "end_date",
+          "required": true
+        },
+        {
+          "name": "regions",
+          "required": false
+        },
+        {
+          "name": "platforms",
+          "required": false
+        },
+        {
+          "name": "organization_id",
+          "required": false
+        }
+      ],
+      "pathParamDetails": [],
+      "queryParamDetails": [],
+      "headerParamDetails": [],
+      "cookieParams": [],
+      "publicCookieParams": [],
+      "cookieParamDetails": [],
+      "paramsModel": {
+        "publicName": "VolumeOnTheFlyParams"
+      },
+      "requestBody": {
+        "contentType": "application/json",
+        "encoding": "json",
+        "contents": [
+          {
+            "contentType": "application/json",
+            "encoding": "json"
+          }
+        ],
+        "required": true,
+        "publicName": "body",
+        "publicIdentifier": "body"
+      },
+      "response": {
+        "status": "200",
+        "contentType": "application/json",
+        "encoding": "json",
+        "contents": [
+          {
+            "contentType": "application/json",
+            "encoding": "json"
+          }
+        ]
+      },
+      "responseModel": {
+        "name": "otf_volume_response",
+        "publicAliases": []
+      },
+      "result": {
+        "successStatus": "200",
+        "errorStatuses": [
+          "422"
+        ]
+      },
+      "errorResponses": [
+        {
+          "status": "422",
+          "contentType": "application/json",
+          "encoding": "json",
+          "contents": [
+            {
+              "contentType": "application/json",
+              "encoding": "json"
+            }
+          ],
+          "model": {
+            "name": "http_validation_error",
+            "publicAliases": []
+          }
+        }
+      ],
+      "responseLinks": [],
+      "transport": "http"
+    },
+    {
+      "resource": "promptVolumes.intents",
+      "publicResource": "promptVolumes.intents",
+      "operation": "onTheFly",
+      "publicOperation": "onTheFly",
+      "deprecated": false,
+      "method": "POST",
+      "path": "/v2/prompt-volumes/intents/on-the-fly",
+      "pathParams": [],
+      "publicPathParams": [],
+      "queryParams": [],
+      "publicQueryParams": [],
+      "headerParams": [],
+      "publicHeaderParams": [],
+      "bodyParams": [
+        "keyword",
+        "matching_type",
+        "start_date",
+        "end_date",
+        "regions",
+        "platforms"
+      ],
+      "publicBodyParams": [
+        "keyword",
+        "matching_type",
+        "start_date",
+        "end_date",
+        "regions",
+        "platforms"
+      ],
+      "bodyParamDetails": [
+        {
+          "name": "keyword",
+          "required": true
+        },
+        {
+          "name": "matching_type",
+          "required": true
+        },
+        {
+          "name": "start_date",
+          "required": true
+        },
+        {
+          "name": "end_date",
+          "required": true
+        },
+        {
+          "name": "regions",
+          "required": false
+        },
+        {
+          "name": "platforms",
+          "required": false
+        }
+      ],
+      "pathParamDetails": [],
+      "queryParamDetails": [],
+      "headerParamDetails": [],
+      "cookieParams": [],
+      "publicCookieParams": [],
+      "cookieParamDetails": [],
+      "paramsModel": {
+        "publicName": "IntentOnTheFlyParams"
+      },
+      "requestBody": {
+        "contentType": "application/json",
+        "encoding": "json",
+        "contents": [
+          {
+            "contentType": "application/json",
+            "encoding": "json"
+          }
+        ],
+        "required": true,
+        "publicName": "body",
+        "publicIdentifier": "body"
+      },
+      "response": {
+        "status": "200",
+        "contentType": "application/json",
+        "encoding": "json",
+        "contents": [
+          {
+            "contentType": "application/json",
+            "encoding": "json"
+          }
+        ]
+      },
+      "responseModel": {
+        "name": "otf_intent_shares_response",
         "publicAliases": []
       },
       "result": {

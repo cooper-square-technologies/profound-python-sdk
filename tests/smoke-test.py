@@ -2223,6 +2223,47 @@ def _smoke_case_187() -> None:
     )
 
 
+def _smoke_case_188() -> None:
+    volume = client.prompt_volumes.volume.on_the_fly(
+        keyword="",
+        matching_type="exact_match",
+        start_date="2024-01-01",
+        end_date="2024-01-01",
+    )
+
+
+def _smoke_case_189() -> None:
+    volume = client.prompt_volumes.volume.on_the_fly(
+        keyword="",
+        matching_type="exact_match",
+        start_date="2024-01-01",
+        end_date="2024-01-01",
+        regions=[""],
+        platforms=[""],
+        organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    )
+
+
+def _smoke_case_190() -> None:
+    intent = client.prompt_volumes.intents.on_the_fly(
+        keyword="",
+        matching_type="exact_match",
+        start_date="2024-01-01",
+        end_date="2024-01-01",
+    )
+
+
+def _smoke_case_191() -> None:
+    intent = client.prompt_volumes.intents.on_the_fly(
+        keyword="",
+        matching_type="exact_match",
+        start_date="2024-01-01",
+        end_date="2024-01-01",
+        regions=[""],
+        platforms=[""],
+    )
+
+
 cases: list[SmokeCase] = [
     {
         "operation": "regions",
@@ -3503,6 +3544,34 @@ cases: list[SmokeCase] = [
         "path": "/v1/ads/openai-ads/ad-account/insights",
         "label": "all params",
         "run": _smoke_case_187,
+    },
+    {
+        "operation": "onTheFly",
+        "method": "POST",
+        "path": "/v2/prompt-volumes/volume/on-the-fly",
+        "label": "required params",
+        "run": _smoke_case_188,
+    },
+    {
+        "operation": "onTheFly",
+        "method": "POST",
+        "path": "/v2/prompt-volumes/volume/on-the-fly",
+        "label": "all params",
+        "run": _smoke_case_189,
+    },
+    {
+        "operation": "onTheFly",
+        "method": "POST",
+        "path": "/v2/prompt-volumes/intents/on-the-fly",
+        "label": "required params",
+        "run": _smoke_case_190,
+    },
+    {
+        "operation": "onTheFly",
+        "method": "POST",
+        "path": "/v2/prompt-volumes/intents/on-the-fly",
+        "label": "all params",
+        "run": _smoke_case_191,
     },
 ]
 
