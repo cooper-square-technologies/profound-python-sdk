@@ -155,6 +155,7 @@ class AgentsResource(SyncAPIResource):
             ```python
             agent = client.agents.retrieve(
                 agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+                version="published",
             )
             ```
         """
@@ -365,6 +366,7 @@ class AgentsResource(SyncAPIResource):
             ```python
             agent = client.agents.retrieve_graph(
                 agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+                version="published",
             )
             ```
         """
@@ -487,6 +489,7 @@ class AsyncAgentsResource(AsyncAPIResource):
             ```python
             agent = await client.agents.retrieve(
                 agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+                version="published",
             )
             ```
         """
@@ -697,6 +700,7 @@ class AsyncAgentsResource(AsyncAPIResource):
             ```python
             agent = await client.agents.retrieve_graph(
                 agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+                version="published",
             )
             ```
         """

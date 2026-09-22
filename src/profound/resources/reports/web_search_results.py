@@ -175,7 +175,7 @@ class WebSearchResultsResource(SyncAPIResource):
             dimensions: Dimensions to group the report by.
             metrics: Metrics to include. `search_share` is the per-prompt occurrence rate.
             order_by: Custom ordering of the report results.
-            pagination: Body parameter.
+            pagination: Offset-based pagination parameters.
             category_id: Body parameter.
             start_date: Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
             end_date: End date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
@@ -377,7 +377,7 @@ class AsyncWebSearchResultsResource(AsyncAPIResource):
             dimensions: Dimensions to group the report by.
             metrics: Metrics to include. `search_share` is the per-prompt occurrence rate.
             order_by: Custom ordering of the report results.
-            pagination: Body parameter.
+            pagination: Offset-based pagination parameters.
             category_id: Body parameter.
             start_date: Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
             end_date: End date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.

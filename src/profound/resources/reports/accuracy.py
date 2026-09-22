@@ -230,7 +230,7 @@ class AccuracyResource(SyncAPIResource):
             search_query: Body parameter.
             sort_by: Body parameter.
             sort_order: Body parameter.
-            pagination: Body parameter.
+            pagination: Canonical grouped pagination plan for Accuracy Breakdown rows.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -1427,7 +1427,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
             search_query: Body parameter.
             sort_by: Body parameter.
             sort_order: Body parameter.
-            pagination: Body parameter.
+            pagination: Canonical grouped pagination plan for Accuracy Breakdown rows.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.

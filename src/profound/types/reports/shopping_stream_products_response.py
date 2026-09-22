@@ -36,8 +36,10 @@ class ShoppingProductRow(BaseModel):
     date: Optional[str] = None
 
     topic: Optional[ShoppingProductRowTopic] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     prompt: Optional[ShoppingProductRowPrompt] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     visibility_score: Optional[float] = None
 

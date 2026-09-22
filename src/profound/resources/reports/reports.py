@@ -794,7 +794,7 @@ class ReportsResource(SyncAPIResource):
             dimensions: Dimensions to group the report by.
             metrics: Metrics to include. `share_of_voice` is deprecated, use `citation_share` instead.
             order_by: Custom ordering of the report results.
-            pagination: Body parameter.
+            pagination: Offset-based pagination parameters.
             category_id: Body parameter.
             start_date: Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
             end_date: End date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
@@ -892,7 +892,7 @@ class ReportsResource(SyncAPIResource):
             dimensions: Dimensions to group the report by.
             metrics: Body parameter.
             order_by: Custom ordering of the report results.
-            pagination: Body parameter.
+            pagination: Offset-based pagination parameters.
             category_id: Body parameter.
             start_date: Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
             end_date: End date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
@@ -990,7 +990,7 @@ class ReportsResource(SyncAPIResource):
             dimensions: Dimensions to group the report by.
             metrics: Body parameter.
             order_by: Custom ordering of the report results.
-            pagination: Body parameter.
+            pagination: Offset-based pagination parameters.
             category_id: Body parameter.
             start_date: Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
             end_date: End date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
@@ -1168,7 +1168,7 @@ class ReportsResource(SyncAPIResource):
             interval: Body parameter.
             scope: Body parameter.
             assets: A name (`is`), a list (`in`), or {op,value} with op `is`/`in`/`not_in`.
-            filter: Body parameter.
+            filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
             sort: Body parameter.
             limit: Page size; default 10, max 50.
             max_results: Stream endpoint only: cap the number of streamed rows (default: all).
@@ -1267,7 +1267,7 @@ class ReportsResource(SyncAPIResource):
             group_by: Body parameter.
             metrics: Body parameter.
             interval: Body parameter.
-            filter: Body parameter.
+            filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
             sort: Body parameter.
             include_cited_websites: Return cited websites per row (only when grouping by `theme`/`claim`).
             limit: Page size; default 10, max 50.
@@ -1359,7 +1359,7 @@ class ReportsResource(SyncAPIResource):
             group_by: Body parameter.
             metrics: Body parameter.
             interval: Body parameter.
-            filter: Body parameter.
+            filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
             sort: Body parameter.
             limit: Page size; default 10, max 50.
             max_results: Stream endpoint only: cap the number of streamed rows (default: all).
@@ -1643,7 +1643,7 @@ class ReportsResource(SyncAPIResource):
             interval: Body parameter.
             scope: Body parameter.
             assets: A name (`is`), a list (`in`), or {op,value} with op `is`/`in`/`not_in`.
-            filter: Body parameter.
+            filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
             sort: Body parameter.
             limit: Page size; default 10, max 50.
             max_results: Stream endpoint only: cap the number of streamed rows (default: all).
@@ -1819,7 +1819,7 @@ class ReportsResource(SyncAPIResource):
             group_by: Body parameter.
             metrics: Body parameter.
             interval: Body parameter.
-            filter: Body parameter.
+            filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
             sort: Body parameter.
             include_cited_websites: Return cited websites per row (only when grouping by `theme`/`claim`).
             limit: Page size; default 10, max 50.
@@ -1905,7 +1905,7 @@ class ReportsResource(SyncAPIResource):
             group_by: Body parameter.
             metrics: Body parameter.
             interval: Body parameter.
-            filter: Body parameter.
+            filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
             sort: Body parameter.
             limit: Page size; default 10, max 50.
             max_results: Stream endpoint only: cap the number of streamed rows (default: all).
@@ -2645,7 +2645,7 @@ class AsyncReportsResource(AsyncAPIResource):
             dimensions: Dimensions to group the report by.
             metrics: Metrics to include. `share_of_voice` is deprecated, use `citation_share` instead.
             order_by: Custom ordering of the report results.
-            pagination: Body parameter.
+            pagination: Offset-based pagination parameters.
             category_id: Body parameter.
             start_date: Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
             end_date: End date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
@@ -2743,7 +2743,7 @@ class AsyncReportsResource(AsyncAPIResource):
             dimensions: Dimensions to group the report by.
             metrics: Body parameter.
             order_by: Custom ordering of the report results.
-            pagination: Body parameter.
+            pagination: Offset-based pagination parameters.
             category_id: Body parameter.
             start_date: Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
             end_date: End date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
@@ -2841,7 +2841,7 @@ class AsyncReportsResource(AsyncAPIResource):
             dimensions: Dimensions to group the report by.
             metrics: Body parameter.
             order_by: Custom ordering of the report results.
-            pagination: Body parameter.
+            pagination: Offset-based pagination parameters.
             category_id: Body parameter.
             start_date: Start date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
             end_date: End date for the report. Accepts formats: YYYY-MM-DD, YYYY-MM-DD HH:MM, or full ISO timestamp.
@@ -3019,7 +3019,7 @@ class AsyncReportsResource(AsyncAPIResource):
             interval: Body parameter.
             scope: Body parameter.
             assets: A name (`is`), a list (`in`), or {op,value} with op `is`/`in`/`not_in`.
-            filter: Body parameter.
+            filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
             sort: Body parameter.
             limit: Page size; default 10, max 50.
             max_results: Stream endpoint only: cap the number of streamed rows (default: all).
@@ -3118,7 +3118,7 @@ class AsyncReportsResource(AsyncAPIResource):
             group_by: Body parameter.
             metrics: Body parameter.
             interval: Body parameter.
-            filter: Body parameter.
+            filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
             sort: Body parameter.
             include_cited_websites: Return cited websites per row (only when grouping by `theme`/`claim`).
             limit: Page size; default 10, max 50.
@@ -3210,7 +3210,7 @@ class AsyncReportsResource(AsyncAPIResource):
             group_by: Body parameter.
             metrics: Body parameter.
             interval: Body parameter.
-            filter: Body parameter.
+            filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
             sort: Body parameter.
             limit: Page size; default 10, max 50.
             max_results: Stream endpoint only: cap the number of streamed rows (default: all).
@@ -3494,7 +3494,7 @@ class AsyncReportsResource(AsyncAPIResource):
             interval: Body parameter.
             scope: Body parameter.
             assets: A name (`is`), a list (`in`), or {op,value} with op `is`/`in`/`not_in`.
-            filter: Body parameter.
+            filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
             sort: Body parameter.
             limit: Page size; default 10, max 50.
             max_results: Stream endpoint only: cap the number of streamed rows (default: all).
@@ -3670,7 +3670,7 @@ class AsyncReportsResource(AsyncAPIResource):
             group_by: Body parameter.
             metrics: Body parameter.
             interval: Body parameter.
-            filter: Body parameter.
+            filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
             sort: Body parameter.
             include_cited_websites: Return cited websites per row (only when grouping by `theme`/`claim`).
             limit: Page size; default 10, max 50.
@@ -3756,7 +3756,7 @@ class AsyncReportsResource(AsyncAPIResource):
             group_by: Body parameter.
             metrics: Body parameter.
             interval: Body parameter.
-            filter: Body parameter.
+            filter: A leaf (`field`/`op`/`value`) or an `and`/`or`/`not` group.
             sort: Body parameter.
             limit: Page size; default 10, max 50.
             max_results: Stream endpoint only: cap the number of streamed rows (default: all).

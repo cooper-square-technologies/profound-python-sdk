@@ -226,6 +226,8 @@ class CategoriesResource(SyncAPIResource):
             category = client.organizations.categories.prompts(
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 limit=10000,
+                order_by="created_at",
+                order_dir="desc",
                 status=["active"],
             )
             ```
@@ -785,6 +787,8 @@ class AsyncCategoriesResource(AsyncAPIResource):
             category = await client.organizations.categories.prompts(
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 limit=10000,
+                order_by="created_at",
+                order_dir="desc",
                 status=["active"],
             )
             ```

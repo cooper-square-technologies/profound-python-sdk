@@ -29,8 +29,10 @@ class Data(BaseModel):
     date: Optional[str] = None
 
     topic: Optional[DataTopic] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     prompt: Optional[DataPrompt] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     visibility_score: Optional[float] = None
 

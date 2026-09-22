@@ -75,18 +75,25 @@ class Data(BaseModel):
     date: Optional[str] = None
 
     model: Optional[DataModel] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     region: Optional[DataRegion] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     persona: Optional[DataPersona] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     prompt: Optional[DataPrompt] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     topic: Optional[DataTopic] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     tag: Optional[DataTag] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     theme: Optional[DataTheme] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     citation: Optional[DataCitation] = None
 

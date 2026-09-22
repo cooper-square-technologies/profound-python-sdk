@@ -297,6 +297,8 @@ Retrieve prompts in a category with optional filtering by type, topic, tag, regi
 category = client.organizations.categories.prompts(
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     limit=10000,
+    order_by="created_at",
+    order_dir="desc",
     status=["active"],
 )
 ```
@@ -1539,6 +1541,7 @@ unpublished changes. Use the `version` parameter to choose which state to return
 ```python
 agent = client.agents.retrieve(
     agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    version="published",
 )
 ```
 
@@ -1619,6 +1622,7 @@ across its organization.
 ```python
 agent = client.agents.retrieve_graph(
     agent_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    version="published",
 )
 ```
 

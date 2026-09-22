@@ -48,12 +48,16 @@ class ShoppingTriggerRateRow(BaseModel):
     date: Optional[str] = None
 
     topic: Optional[ShoppingTriggerRateRowTopic] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     region: Optional[ShoppingTriggerRateRowRegion] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     persona: Optional[ShoppingTriggerRateRowPersona] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     prompt: Optional[ShoppingTriggerRateRowPrompt] = None
+    """An ``{id, name}`` reference for a grouped dimension value."""
 
     total_runs: Optional[int] = None
 
