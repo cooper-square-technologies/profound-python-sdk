@@ -1,0 +1,230 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "x",
+    "version": "0"
+  },
+  "paths": {},
+  "x-profound-filter-grammar": {
+    "version": 1,
+    "max_depth": 3,
+    "operators": [
+      "is",
+      "not_is",
+      "in",
+      "not_in",
+      "contains",
+      "not_contains",
+      "matches",
+      "contains_case_insensitive",
+      "not_contains_case_insensitive",
+      "exists"
+    ],
+    "fields": {
+      "analysis_type": {
+        "layer": "entity",
+        "ops": [
+          "is",
+          "not_is",
+          "in",
+          "not_in"
+        ]
+      },
+      "citation_category": {
+        "layer": "entity",
+        "ops": [
+          "is",
+          "in"
+        ]
+      },
+      "citation_tag": {
+        "layer": "entity",
+        "ops": [
+          "is",
+          "in"
+        ]
+      },
+      "claim": {
+        "layer": "entity",
+        "ops": [
+          "is",
+          "in"
+        ]
+      },
+      "domain": {
+        "layer": "entity",
+        "ops": [
+          "is",
+          "not_is",
+          "in",
+          "not_in",
+          "contains",
+          "not_contains",
+          "matches",
+          "contains_case_insensitive",
+          "not_contains_case_insensitive"
+        ]
+      },
+      "model": {
+        "layer": "prompt",
+        "ops": [
+          "is",
+          "not_is",
+          "in",
+          "not_in",
+          "contains",
+          "not_contains",
+          "matches",
+          "contains_case_insensitive",
+          "not_contains_case_insensitive"
+        ]
+      },
+      "page": {
+        "layer": "entity",
+        "ops": [
+          "is",
+          "not_is",
+          "in",
+          "not_in",
+          "contains",
+          "not_contains",
+          "matches",
+          "contains_case_insensitive",
+          "not_contains_case_insensitive"
+        ]
+      },
+      "persona": {
+        "layer": "prompt",
+        "ops": [
+          "is",
+          "not_is",
+          "in",
+          "not_in",
+          "contains",
+          "not_contains",
+          "matches",
+          "contains_case_insensitive",
+          "not_contains_case_insensitive",
+          "exists"
+        ]
+      },
+      "prompt": {
+        "layer": "prompt",
+        "ops": [
+          "is",
+          "not_is",
+          "in",
+          "not_in",
+          "contains",
+          "not_contains",
+          "matches",
+          "contains_case_insensitive",
+          "not_contains_case_insensitive"
+        ]
+      },
+      "region": {
+        "layer": "prompt",
+        "ops": [
+          "is",
+          "not_is",
+          "in",
+          "not_in",
+          "contains",
+          "not_contains",
+          "matches",
+          "contains_case_insensitive",
+          "not_contains_case_insensitive"
+        ]
+      },
+      "tag": {
+        "layer": "prompt",
+        "ops": [
+          "is",
+          "not_is",
+          "in",
+          "not_in",
+          "contains",
+          "not_contains",
+          "matches",
+          "contains_case_insensitive",
+          "not_contains_case_insensitive",
+          "exists"
+        ]
+      },
+      "theme": {
+        "layer": "entity",
+        "ops": [
+          "is",
+          "in"
+        ]
+      },
+      "topic": {
+        "layer": "prompt",
+        "ops": [
+          "is",
+          "not_is",
+          "in",
+          "not_in",
+          "contains",
+          "not_contains",
+          "matches",
+          "contains_case_insensitive",
+          "not_contains_case_insensitive"
+        ]
+      }
+    },
+    "reports": {
+      "visibility": [
+        "model",
+        "persona",
+        "prompt",
+        "region",
+        "tag",
+        "topic"
+      ],
+      "citations": [
+        "analysis_type",
+        "citation_category",
+        "citation_tag",
+        "domain",
+        "model",
+        "page",
+        "persona",
+        "prompt",
+        "region",
+        "tag",
+        "topic"
+      ],
+      "sentiment": [
+        "claim",
+        "model",
+        "persona",
+        "prompt",
+        "region",
+        "tag",
+        "theme",
+        "topic"
+      ],
+      "query_fanouts": [
+        "analysis_type",
+        "model",
+        "persona",
+        "prompt",
+        "region",
+        "tag",
+        "topic"
+      ],
+      "answers": [
+        "analysis_type",
+        "domain",
+        "model",
+        "page",
+        "persona",
+        "prompt",
+        "region",
+        "tag",
+        "topic"
+      ]
+    }
+  }
+}
