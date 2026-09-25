@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import httpx
 
-from typing import Union
+from typing import List, Union
 from datetime import date
 from typing_extensions import Literal
 from ..._types import SequenceNotStr
@@ -43,7 +43,7 @@ class IntentsResource(SyncAPIResource):
         start_date: Union[str, date],
         end_date: Union[str, date],
         regions: SequenceNotStr[str] | Omit = omit,
-        platforms: SequenceNotStr[str] | Omit = omit,
+        platforms: List[Literal["chatgpt.com", "gemini.google.com", "perplexity.ai"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -54,18 +54,16 @@ class IntentsResource(SyncAPIResource):
         """
         Intent shares for one keyword across the requested cohort weeks.
 
-        Shares are fractions from 0 to 1 over classified matching conversations.
-        Cohorts with at most two matching users are omitted for privacy. This
-        endpoint shares the volume endpoint's burst limit but consumes no daily
-        keyword quota.
+        Shares are fractions from 0 to 1. Cohorts with two or fewer matching users
+        are omitted for privacy. Doesn't use the daily keyword allowance.
 
         Args:
             keyword: Body parameter.
             matching_type: Body parameter.
             start_date: Body parameter.
             end_date: Body parameter.
-            regions: Body parameter.
-            platforms: Body parameter.
+            regions: ISO 3166-1 alpha-3 country codes (e.g. USA). Omit to include every region.
+            platforms: Platforms to restrict to. Omit to include every platform.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -121,7 +119,7 @@ class AsyncIntentsResource(AsyncAPIResource):
         start_date: Union[str, date],
         end_date: Union[str, date],
         regions: SequenceNotStr[str] | Omit = omit,
-        platforms: SequenceNotStr[str] | Omit = omit,
+        platforms: List[Literal["chatgpt.com", "gemini.google.com", "perplexity.ai"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -132,18 +130,16 @@ class AsyncIntentsResource(AsyncAPIResource):
         """
         Intent shares for one keyword across the requested cohort weeks.
 
-        Shares are fractions from 0 to 1 over classified matching conversations.
-        Cohorts with at most two matching users are omitted for privacy. This
-        endpoint shares the volume endpoint's burst limit but consumes no daily
-        keyword quota.
+        Shares are fractions from 0 to 1. Cohorts with two or fewer matching users
+        are omitted for privacy. Doesn't use the daily keyword allowance.
 
         Args:
             keyword: Body parameter.
             matching_type: Body parameter.
             start_date: Body parameter.
             end_date: Body parameter.
-            regions: Body parameter.
-            platforms: Body parameter.
+            regions: ISO 3166-1 alpha-3 country codes (e.g. USA). Omit to include every region.
+            platforms: Platforms to restrict to. Omit to include every platform.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
