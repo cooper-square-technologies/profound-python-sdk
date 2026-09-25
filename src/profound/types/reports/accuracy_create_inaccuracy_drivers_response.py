@@ -21,8 +21,10 @@ class Data(BaseModel):
     snippet_claim_id: str = FieldInfo(alias="snippetClaimId")
 
     claim_occurrence: float = FieldInfo(alias="claimOccurrence")
+    """Claim response share as a 0-100 percent, not citation share."""
 
     claim_occurrence_delta: Optional[float] = FieldInfo(alias="claimOccurrenceDelta", default=None)
+    """Change in claim occurrence in percentage points."""
 
     href: str
 

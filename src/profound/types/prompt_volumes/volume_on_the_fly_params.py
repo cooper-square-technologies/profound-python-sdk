@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Optional, Union
+from typing import List, Optional, Union
 from datetime import date
 from typing_extensions import Annotated, Literal, Required, TypedDict
 from ..._types import SequenceNotStr
@@ -22,8 +22,10 @@ class VolumeOnTheFlyParams(TypedDict, total=False):
     end_date: Required[Annotated[Union[str, date], PropertyInfo(format="iso8601")]]
 
     regions: SequenceNotStr[str]
+    """ISO 3166-1 alpha-3 country codes (e.g. USA). Omit to include every region."""
 
-    platforms: SequenceNotStr[str]
+    platforms: List[Literal["chatgpt.com", "gemini.google.com", "perplexity.ai"]]
+    """Platforms to restrict to. Omit to include every platform."""
 
     organization_id: Optional[str]
     """Organization whose daily keyword allowance is used. Required in the JSON request body for API keys with multiple organizations that have API access. If omitted or null, defaults to the API key's sole organization with API access or the token's active organization. For OAuth/M2M tokens, any supplied organization_id must match the token's organization."""
