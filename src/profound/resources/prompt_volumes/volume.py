@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import httpx
 
-from typing import Optional, Union
+from typing import List, Optional, Union
 from datetime import date
 from typing_extensions import Literal
 from ..._types import SequenceNotStr
@@ -43,7 +43,7 @@ class VolumeResource(SyncAPIResource):
         start_date: Union[str, date],
         end_date: Union[str, date],
         regions: SequenceNotStr[str] | Omit = omit,
-        platforms: SequenceNotStr[str] | Omit = omit,
+        platforms: List[Literal["chatgpt.com", "gemini.google.com", "perplexity.ai"]] | Omit = omit,
         organization_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -55,19 +55,17 @@ class VolumeResource(SyncAPIResource):
         """
         Weekly and monthly volume projections for one keyword.
 
-        Each organization can look up 1,000 distinct normalized keywords per UTC
-        day. Repeats consume no additional allowance. New keywords over the cap
-        return 429 with X-KeywordQuota-* and Retry-After headers. Quota admission
-        requires Redis (503 when unavailable); empty results and query failures
-        retain the reservation. Slices with at most two users are omitted.
+        Each organization can look up 1,000 distinct keywords per UTC day; over
+        the cap returns 429 with Retry-After. Slices with two or fewer users are
+        omitted for privacy.
 
         Args:
             keyword: Body parameter.
             matching_type: Body parameter.
             start_date: Body parameter.
             end_date: Body parameter.
-            regions: Body parameter.
-            platforms: Body parameter.
+            regions: ISO 3166-1 alpha-3 country codes (e.g. USA). Omit to include every region.
+            platforms: Platforms to restrict to. Omit to include every platform.
             organization_id: Organization whose daily keyword allowance is used. Required in the JSON request body for API keys with multiple organizations that have API access. If omitted or null, defaults to the API key's sole organization with API access or the token's active organization. For OAuth/M2M tokens, any supplied organization_id must match the token's organization.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
@@ -125,7 +123,7 @@ class AsyncVolumeResource(AsyncAPIResource):
         start_date: Union[str, date],
         end_date: Union[str, date],
         regions: SequenceNotStr[str] | Omit = omit,
-        platforms: SequenceNotStr[str] | Omit = omit,
+        platforms: List[Literal["chatgpt.com", "gemini.google.com", "perplexity.ai"]] | Omit = omit,
         organization_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -137,19 +135,17 @@ class AsyncVolumeResource(AsyncAPIResource):
         """
         Weekly and monthly volume projections for one keyword.
 
-        Each organization can look up 1,000 distinct normalized keywords per UTC
-        day. Repeats consume no additional allowance. New keywords over the cap
-        return 429 with X-KeywordQuota-* and Retry-After headers. Quota admission
-        requires Redis (503 when unavailable); empty results and query failures
-        retain the reservation. Slices with at most two users are omitted.
+        Each organization can look up 1,000 distinct keywords per UTC day; over
+        the cap returns 429 with Retry-After. Slices with two or fewer users are
+        omitted for privacy.
 
         Args:
             keyword: Body parameter.
             matching_type: Body parameter.
             start_date: Body parameter.
             end_date: Body parameter.
-            regions: Body parameter.
-            platforms: Body parameter.
+            regions: ISO 3166-1 alpha-3 country codes (e.g. USA). Omit to include every region.
+            platforms: Platforms to restrict to. Omit to include every platform.
             organization_id: Organization whose daily keyword allowance is used. Required in the JSON request body for API keys with multiple organizations that have API access. If omitted or null, defaults to the API key's sole organization with API access or the token's active organization. For OAuth/M2M tokens, any supplied organization_id must match the token's organization.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.

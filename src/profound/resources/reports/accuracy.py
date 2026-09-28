@@ -70,6 +70,7 @@ class AccuracyResource(SyncAPIResource):
         comparison_start_date: Optional[str] | Omit = omit,
         comparison_end_date: Optional[str] | Omit = omit,
         category_id: str,
+        languages: Optional[SequenceNotStr[str]] | Omit = omit,
         topic_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         exclude_topic_ids: bool | Omit = omit,
         tag_ids: Optional[SequenceNotStr[str]] | Omit = omit,
@@ -99,6 +100,7 @@ class AccuracyResource(SyncAPIResource):
             comparison_start_date: Body parameter.
             comparison_end_date: Body parameter.
             category_id: Body parameter.
+            languages: Body parameter.
             topic_ids: Body parameter.
             exclude_topic_ids: Body parameter.
             tag_ids: Body parameter.
@@ -143,6 +145,7 @@ class AccuracyResource(SyncAPIResource):
                     "comparison_start_date": comparison_start_date,
                     "comparison_end_date": comparison_end_date,
                     "category_id": category_id,
+                    "languages": languages,
                     "topic_ids": topic_ids,
                     "exclude_topic_ids": exclude_topic_ids,
                     "tag_ids": tag_ids,
@@ -173,6 +176,7 @@ class AccuracyResource(SyncAPIResource):
         comparison_start_date: Optional[str] | Omit = omit,
         comparison_end_date: Optional[str] | Omit = omit,
         category_id: str,
+        languages: Optional[SequenceNotStr[str]] | Omit = omit,
         topic_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         exclude_topic_ids: bool | Omit = omit,
         tag_ids: Optional[SequenceNotStr[str]] | Omit = omit,
@@ -211,6 +215,7 @@ class AccuracyResource(SyncAPIResource):
             comparison_start_date: Body parameter.
             comparison_end_date: Body parameter.
             category_id: Body parameter.
+            languages: Body parameter.
             topic_ids: Body parameter.
             exclude_topic_ids: Body parameter.
             tag_ids: Body parameter.
@@ -266,6 +271,7 @@ class AccuracyResource(SyncAPIResource):
                     "comparison_start_date": comparison_start_date,
                     "comparison_end_date": comparison_end_date,
                     "category_id": category_id,
+                    "languages": languages,
                     "topic_ids": topic_ids,
                     "exclude_topic_ids": exclude_topic_ids,
                     "tag_ids": tag_ids,
@@ -413,6 +419,7 @@ class AccuracyResource(SyncAPIResource):
         comparison_start_date: Optional[str] | Omit = omit,
         comparison_end_date: Optional[str] | Omit = omit,
         category_id: str,
+        languages: Optional[SequenceNotStr[str]] | Omit = omit,
         topic_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         exclude_topic_ids: bool | Omit = omit,
         tag_ids: Optional[SequenceNotStr[str]] | Omit = omit,
@@ -445,6 +452,7 @@ class AccuracyResource(SyncAPIResource):
             comparison_start_date: Body parameter.
             comparison_end_date: Body parameter.
             category_id: Body parameter.
+            languages: Body parameter.
             topic_ids: Body parameter.
             exclude_topic_ids: Body parameter.
             tag_ids: Body parameter.
@@ -495,6 +503,7 @@ class AccuracyResource(SyncAPIResource):
                     "comparison_start_date": comparison_start_date,
                     "comparison_end_date": comparison_end_date,
                     "category_id": category_id,
+                    "languages": languages,
                     "topic_ids": topic_ids,
                     "exclude_topic_ids": exclude_topic_ids,
                     "tag_ids": tag_ids,
@@ -528,6 +537,7 @@ class AccuracyResource(SyncAPIResource):
         comparison_start_date: Optional[str] | Omit = omit,
         comparison_end_date: Optional[str] | Omit = omit,
         category_id: str,
+        languages: Optional[SequenceNotStr[str]] | Omit = omit,
         topic_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         exclude_topic_ids: bool | Omit = omit,
         tag_ids: Optional[SequenceNotStr[str]] | Omit = omit,
@@ -560,6 +570,7 @@ class AccuracyResource(SyncAPIResource):
             comparison_start_date: Body parameter.
             comparison_end_date: Body parameter.
             category_id: Body parameter.
+            languages: Body parameter.
             topic_ids: Body parameter.
             exclude_topic_ids: Body parameter.
             tag_ids: Body parameter.
@@ -609,6 +620,7 @@ class AccuracyResource(SyncAPIResource):
                     "comparison_start_date": comparison_start_date,
                     "comparison_end_date": comparison_end_date,
                     "category_id": category_id,
+                    "languages": languages,
                     "topic_ids": topic_ids,
                     "exclude_topic_ids": exclude_topic_ids,
                     "tag_ids": tag_ids,
@@ -642,6 +654,7 @@ class AccuracyResource(SyncAPIResource):
         comparison_start_date: Optional[str] | Omit = omit,
         comparison_end_date: Optional[str] | Omit = omit,
         category_id: str,
+        languages: Optional[SequenceNotStr[str]] | Omit = omit,
         topic_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         exclude_topic_ids: bool | Omit = omit,
         tag_ids: Optional[SequenceNotStr[str]] | Omit = omit,
@@ -670,6 +683,7 @@ class AccuracyResource(SyncAPIResource):
             comparison_start_date: Body parameter.
             comparison_end_date: Body parameter.
             category_id: Body parameter.
+            languages: Body parameter.
             topic_ids: Body parameter.
             exclude_topic_ids: Body parameter.
             tag_ids: Body parameter.
@@ -713,6 +727,7 @@ class AccuracyResource(SyncAPIResource):
                     "comparison_start_date": comparison_start_date,
                     "comparison_end_date": comparison_end_date,
                     "category_id": category_id,
+                    "languages": languages,
                     "topic_ids": topic_ids,
                     "exclude_topic_ids": exclude_topic_ids,
                     "tag_ids": tag_ids,
@@ -742,6 +757,7 @@ class AccuracyResource(SyncAPIResource):
         comparison_start_date: Optional[str] | Omit = omit,
         comparison_end_date: Optional[str] | Omit = omit,
         category_id: str,
+        languages: Optional[SequenceNotStr[str]] | Omit = omit,
         topic_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         exclude_topic_ids: bool | Omit = omit,
         tag_ids: Optional[SequenceNotStr[str]] | Omit = omit,
@@ -770,6 +786,7 @@ class AccuracyResource(SyncAPIResource):
             comparison_start_date: Body parameter.
             comparison_end_date: Body parameter.
             category_id: Body parameter.
+            languages: Body parameter.
             topic_ids: Body parameter.
             exclude_topic_ids: Body parameter.
             tag_ids: Body parameter.
@@ -813,6 +830,7 @@ class AccuracyResource(SyncAPIResource):
                     "comparison_start_date": comparison_start_date,
                     "comparison_end_date": comparison_end_date,
                     "category_id": category_id,
+                    "languages": languages,
                     "topic_ids": topic_ids,
                     "exclude_topic_ids": exclude_topic_ids,
                     "tag_ids": tag_ids,
@@ -842,6 +860,7 @@ class AccuracyResource(SyncAPIResource):
         comparison_start_date: Optional[str] | Omit = omit,
         comparison_end_date: Optional[str] | Omit = omit,
         category_id: str,
+        languages: Optional[SequenceNotStr[str]] | Omit = omit,
         topic_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         exclude_topic_ids: bool | Omit = omit,
         tag_ids: Optional[SequenceNotStr[str]] | Omit = omit,
@@ -870,6 +889,7 @@ class AccuracyResource(SyncAPIResource):
             comparison_start_date: Body parameter.
             comparison_end_date: Body parameter.
             category_id: Body parameter.
+            languages: Body parameter.
             topic_ids: Body parameter.
             exclude_topic_ids: Body parameter.
             tag_ids: Body parameter.
@@ -913,6 +933,7 @@ class AccuracyResource(SyncAPIResource):
                     "comparison_start_date": comparison_start_date,
                     "comparison_end_date": comparison_end_date,
                     "category_id": category_id,
+                    "languages": languages,
                     "topic_ids": topic_ids,
                     "exclude_topic_ids": exclude_topic_ids,
                     "tag_ids": tag_ids,
@@ -942,6 +963,7 @@ class AccuracyResource(SyncAPIResource):
         comparison_start_date: Optional[str] | Omit = omit,
         comparison_end_date: Optional[str] | Omit = omit,
         category_id: str,
+        languages: Optional[SequenceNotStr[str]] | Omit = omit,
         topic_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         exclude_topic_ids: bool | Omit = omit,
         tag_ids: Optional[SequenceNotStr[str]] | Omit = omit,
@@ -974,6 +996,7 @@ class AccuracyResource(SyncAPIResource):
             comparison_start_date: Body parameter.
             comparison_end_date: Body parameter.
             category_id: Body parameter.
+            languages: Body parameter.
             topic_ids: Body parameter.
             exclude_topic_ids: Body parameter.
             tag_ids: Body parameter.
@@ -1024,6 +1047,7 @@ class AccuracyResource(SyncAPIResource):
                     "comparison_start_date": comparison_start_date,
                     "comparison_end_date": comparison_end_date,
                     "category_id": category_id,
+                    "languages": languages,
                     "topic_ids": topic_ids,
                     "exclude_topic_ids": exclude_topic_ids,
                     "tag_ids": tag_ids,
@@ -1057,6 +1081,7 @@ class AccuracyResource(SyncAPIResource):
         comparison_start_date: Optional[str] | Omit = omit,
         comparison_end_date: Optional[str] | Omit = omit,
         category_id: str,
+        languages: Optional[SequenceNotStr[str]] | Omit = omit,
         topic_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         exclude_topic_ids: bool | Omit = omit,
         tag_ids: Optional[SequenceNotStr[str]] | Omit = omit,
@@ -1087,6 +1112,7 @@ class AccuracyResource(SyncAPIResource):
             comparison_start_date: Body parameter.
             comparison_end_date: Body parameter.
             category_id: Body parameter.
+            languages: Body parameter.
             topic_ids: Body parameter.
             exclude_topic_ids: Body parameter.
             tag_ids: Body parameter.
@@ -1134,6 +1160,7 @@ class AccuracyResource(SyncAPIResource):
                     "comparison_start_date": comparison_start_date,
                     "comparison_end_date": comparison_end_date,
                     "category_id": category_id,
+                    "languages": languages,
                     "topic_ids": topic_ids,
                     "exclude_topic_ids": exclude_topic_ids,
                     "tag_ids": tag_ids,
@@ -1267,6 +1294,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
         comparison_start_date: Optional[str] | Omit = omit,
         comparison_end_date: Optional[str] | Omit = omit,
         category_id: str,
+        languages: Optional[SequenceNotStr[str]] | Omit = omit,
         topic_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         exclude_topic_ids: bool | Omit = omit,
         tag_ids: Optional[SequenceNotStr[str]] | Omit = omit,
@@ -1296,6 +1324,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
             comparison_start_date: Body parameter.
             comparison_end_date: Body parameter.
             category_id: Body parameter.
+            languages: Body parameter.
             topic_ids: Body parameter.
             exclude_topic_ids: Body parameter.
             tag_ids: Body parameter.
@@ -1340,6 +1369,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
                     "comparison_start_date": comparison_start_date,
                     "comparison_end_date": comparison_end_date,
                     "category_id": category_id,
+                    "languages": languages,
                     "topic_ids": topic_ids,
                     "exclude_topic_ids": exclude_topic_ids,
                     "tag_ids": tag_ids,
@@ -1370,6 +1400,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
         comparison_start_date: Optional[str] | Omit = omit,
         comparison_end_date: Optional[str] | Omit = omit,
         category_id: str,
+        languages: Optional[SequenceNotStr[str]] | Omit = omit,
         topic_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         exclude_topic_ids: bool | Omit = omit,
         tag_ids: Optional[SequenceNotStr[str]] | Omit = omit,
@@ -1408,6 +1439,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
             comparison_start_date: Body parameter.
             comparison_end_date: Body parameter.
             category_id: Body parameter.
+            languages: Body parameter.
             topic_ids: Body parameter.
             exclude_topic_ids: Body parameter.
             tag_ids: Body parameter.
@@ -1463,6 +1495,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
                     "comparison_start_date": comparison_start_date,
                     "comparison_end_date": comparison_end_date,
                     "category_id": category_id,
+                    "languages": languages,
                     "topic_ids": topic_ids,
                     "exclude_topic_ids": exclude_topic_ids,
                     "tag_ids": tag_ids,
@@ -1610,6 +1643,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
         comparison_start_date: Optional[str] | Omit = omit,
         comparison_end_date: Optional[str] | Omit = omit,
         category_id: str,
+        languages: Optional[SequenceNotStr[str]] | Omit = omit,
         topic_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         exclude_topic_ids: bool | Omit = omit,
         tag_ids: Optional[SequenceNotStr[str]] | Omit = omit,
@@ -1642,6 +1676,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
             comparison_start_date: Body parameter.
             comparison_end_date: Body parameter.
             category_id: Body parameter.
+            languages: Body parameter.
             topic_ids: Body parameter.
             exclude_topic_ids: Body parameter.
             tag_ids: Body parameter.
@@ -1692,6 +1727,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
                     "comparison_start_date": comparison_start_date,
                     "comparison_end_date": comparison_end_date,
                     "category_id": category_id,
+                    "languages": languages,
                     "topic_ids": topic_ids,
                     "exclude_topic_ids": exclude_topic_ids,
                     "tag_ids": tag_ids,
@@ -1725,6 +1761,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
         comparison_start_date: Optional[str] | Omit = omit,
         comparison_end_date: Optional[str] | Omit = omit,
         category_id: str,
+        languages: Optional[SequenceNotStr[str]] | Omit = omit,
         topic_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         exclude_topic_ids: bool | Omit = omit,
         tag_ids: Optional[SequenceNotStr[str]] | Omit = omit,
@@ -1757,6 +1794,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
             comparison_start_date: Body parameter.
             comparison_end_date: Body parameter.
             category_id: Body parameter.
+            languages: Body parameter.
             topic_ids: Body parameter.
             exclude_topic_ids: Body parameter.
             tag_ids: Body parameter.
@@ -1806,6 +1844,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
                     "comparison_start_date": comparison_start_date,
                     "comparison_end_date": comparison_end_date,
                     "category_id": category_id,
+                    "languages": languages,
                     "topic_ids": topic_ids,
                     "exclude_topic_ids": exclude_topic_ids,
                     "tag_ids": tag_ids,
@@ -1839,6 +1878,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
         comparison_start_date: Optional[str] | Omit = omit,
         comparison_end_date: Optional[str] | Omit = omit,
         category_id: str,
+        languages: Optional[SequenceNotStr[str]] | Omit = omit,
         topic_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         exclude_topic_ids: bool | Omit = omit,
         tag_ids: Optional[SequenceNotStr[str]] | Omit = omit,
@@ -1867,6 +1907,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
             comparison_start_date: Body parameter.
             comparison_end_date: Body parameter.
             category_id: Body parameter.
+            languages: Body parameter.
             topic_ids: Body parameter.
             exclude_topic_ids: Body parameter.
             tag_ids: Body parameter.
@@ -1910,6 +1951,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
                     "comparison_start_date": comparison_start_date,
                     "comparison_end_date": comparison_end_date,
                     "category_id": category_id,
+                    "languages": languages,
                     "topic_ids": topic_ids,
                     "exclude_topic_ids": exclude_topic_ids,
                     "tag_ids": tag_ids,
@@ -1939,6 +1981,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
         comparison_start_date: Optional[str] | Omit = omit,
         comparison_end_date: Optional[str] | Omit = omit,
         category_id: str,
+        languages: Optional[SequenceNotStr[str]] | Omit = omit,
         topic_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         exclude_topic_ids: bool | Omit = omit,
         tag_ids: Optional[SequenceNotStr[str]] | Omit = omit,
@@ -1967,6 +2010,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
             comparison_start_date: Body parameter.
             comparison_end_date: Body parameter.
             category_id: Body parameter.
+            languages: Body parameter.
             topic_ids: Body parameter.
             exclude_topic_ids: Body parameter.
             tag_ids: Body parameter.
@@ -2010,6 +2054,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
                     "comparison_start_date": comparison_start_date,
                     "comparison_end_date": comparison_end_date,
                     "category_id": category_id,
+                    "languages": languages,
                     "topic_ids": topic_ids,
                     "exclude_topic_ids": exclude_topic_ids,
                     "tag_ids": tag_ids,
@@ -2039,6 +2084,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
         comparison_start_date: Optional[str] | Omit = omit,
         comparison_end_date: Optional[str] | Omit = omit,
         category_id: str,
+        languages: Optional[SequenceNotStr[str]] | Omit = omit,
         topic_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         exclude_topic_ids: bool | Omit = omit,
         tag_ids: Optional[SequenceNotStr[str]] | Omit = omit,
@@ -2067,6 +2113,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
             comparison_start_date: Body parameter.
             comparison_end_date: Body parameter.
             category_id: Body parameter.
+            languages: Body parameter.
             topic_ids: Body parameter.
             exclude_topic_ids: Body parameter.
             tag_ids: Body parameter.
@@ -2110,6 +2157,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
                     "comparison_start_date": comparison_start_date,
                     "comparison_end_date": comparison_end_date,
                     "category_id": category_id,
+                    "languages": languages,
                     "topic_ids": topic_ids,
                     "exclude_topic_ids": exclude_topic_ids,
                     "tag_ids": tag_ids,
@@ -2139,6 +2187,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
         comparison_start_date: Optional[str] | Omit = omit,
         comparison_end_date: Optional[str] | Omit = omit,
         category_id: str,
+        languages: Optional[SequenceNotStr[str]] | Omit = omit,
         topic_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         exclude_topic_ids: bool | Omit = omit,
         tag_ids: Optional[SequenceNotStr[str]] | Omit = omit,
@@ -2171,6 +2220,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
             comparison_start_date: Body parameter.
             comparison_end_date: Body parameter.
             category_id: Body parameter.
+            languages: Body parameter.
             topic_ids: Body parameter.
             exclude_topic_ids: Body parameter.
             tag_ids: Body parameter.
@@ -2221,6 +2271,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
                     "comparison_start_date": comparison_start_date,
                     "comparison_end_date": comparison_end_date,
                     "category_id": category_id,
+                    "languages": languages,
                     "topic_ids": topic_ids,
                     "exclude_topic_ids": exclude_topic_ids,
                     "tag_ids": tag_ids,
@@ -2254,6 +2305,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
         comparison_start_date: Optional[str] | Omit = omit,
         comparison_end_date: Optional[str] | Omit = omit,
         category_id: str,
+        languages: Optional[SequenceNotStr[str]] | Omit = omit,
         topic_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         exclude_topic_ids: bool | Omit = omit,
         tag_ids: Optional[SequenceNotStr[str]] | Omit = omit,
@@ -2284,6 +2336,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
             comparison_start_date: Body parameter.
             comparison_end_date: Body parameter.
             category_id: Body parameter.
+            languages: Body parameter.
             topic_ids: Body parameter.
             exclude_topic_ids: Body parameter.
             tag_ids: Body parameter.
@@ -2331,6 +2384,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
                     "comparison_start_date": comparison_start_date,
                     "comparison_end_date": comparison_end_date,
                     "category_id": category_id,
+                    "languages": languages,
                     "topic_ids": topic_ids,
                     "exclude_topic_ids": exclude_topic_ids,
                     "tag_ids": tag_ids,

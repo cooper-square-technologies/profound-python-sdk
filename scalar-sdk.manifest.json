@@ -1,7 +1,7 @@
 {
   "name": "Profound",
   "slug": "profound",
-  "generatorVersion": "0.33.2",
+  "generatorVersion": "0.33.3",
   "servers": [
     "https://api.tryprofound.com"
   ],
@@ -232,6 +232,27 @@
               "kind": "primitive",
               "type": "string",
               "format": "uuid"
+            }
+          },
+          {
+            "name": "languages",
+            "publicName": "languages",
+            "required": false,
+            "deprecated": false,
+            "type": {
+              "kind": "union",
+              "variants": [
+                {
+                  "kind": "array",
+                  "items": {
+                    "kind": "primitive",
+                    "type": "string"
+                  }
+                },
+                {
+                  "kind": "null"
+                }
+              ]
             }
           },
           {
@@ -1299,6 +1320,27 @@
               "kind": "primitive",
               "type": "string",
               "format": "uuid"
+            }
+          },
+          {
+            "name": "languages",
+            "publicName": "languages",
+            "required": false,
+            "deprecated": false,
+            "type": {
+              "kind": "union",
+              "variants": [
+                {
+                  "kind": "array",
+                  "items": {
+                    "kind": "primitive",
+                    "type": "string"
+                  }
+                },
+                {
+                  "kind": "null"
+                }
+              ]
             }
           },
           {
@@ -5023,7 +5065,6 @@
                     "duckduckgo",
                     "you",
                     "you.com",
-                    "xai",
                     "grok",
                     "gemini",
                     "mistral",
@@ -5050,7 +5091,6 @@
                     "Duckduckgo",
                     "You",
                     "YouCom",
-                    "Xai",
                     "Grok",
                     "Gemini",
                     "Mistral",
@@ -5063,7 +5103,6 @@
                     "Exa"
                   ],
                   "deprecations": [
-                    false,
                     false,
                     false,
                     false,
@@ -5109,7 +5148,6 @@
                       "duckduckgo",
                       "you",
                       "you.com",
-                      "xai",
                       "grok",
                       "gemini",
                       "mistral",
@@ -5136,7 +5174,6 @@
                       "Duckduckgo",
                       "You",
                       "YouCom",
-                      "Xai",
                       "Grok",
                       "Gemini",
                       "Mistral",
@@ -5149,7 +5186,6 @@
                       "Exa"
                     ],
                     "deprecations": [
-                      false,
                       false,
                       false,
                       false,
@@ -8076,6 +8112,27 @@
             }
           },
           {
+            "name": "languages",
+            "publicName": "languages",
+            "required": false,
+            "deprecated": false,
+            "type": {
+              "kind": "union",
+              "variants": [
+                {
+                  "kind": "array",
+                  "items": {
+                    "kind": "primitive",
+                    "type": "string"
+                  }
+                },
+                {
+                  "kind": "null"
+                }
+              ]
+            }
+          },
+          {
             "name": "topic_ids",
             "publicName": "topic_ids",
             "required": false,
@@ -8735,6 +8792,27 @@
               "kind": "primitive",
               "type": "string",
               "format": "uuid"
+            }
+          },
+          {
+            "name": "languages",
+            "publicName": "languages",
+            "required": false,
+            "deprecated": false,
+            "type": {
+              "kind": "union",
+              "variants": [
+                {
+                  "kind": "array",
+                  "items": {
+                    "kind": "primitive",
+                    "type": "string"
+                  }
+                },
+                {
+                  "kind": "null"
+                }
+              ]
             }
           },
           {
@@ -9491,6 +9569,27 @@
               "kind": "primitive",
               "type": "string",
               "format": "uuid"
+            }
+          },
+          {
+            "name": "languages",
+            "publicName": "languages",
+            "required": false,
+            "deprecated": false,
+            "type": {
+              "kind": "union",
+              "variants": [
+                {
+                  "kind": "array",
+                  "items": {
+                    "kind": "primitive",
+                    "type": "string"
+                  }
+                },
+                {
+                  "kind": "null"
+                }
+              ]
             }
           },
           {
@@ -14378,6 +14477,27 @@
             }
           },
           {
+            "name": "languages",
+            "publicName": "languages",
+            "required": false,
+            "deprecated": false,
+            "type": {
+              "kind": "union",
+              "variants": [
+                {
+                  "kind": "array",
+                  "items": {
+                    "kind": "primitive",
+                    "type": "string"
+                  }
+                },
+                {
+                  "kind": "null"
+                }
+              ]
+            }
+          },
+          {
             "name": "topic_ids",
             "publicName": "topic_ids",
             "required": false,
@@ -14871,6 +14991,27 @@
               "kind": "primitive",
               "type": "string",
               "format": "uuid"
+            }
+          },
+          {
+            "name": "languages",
+            "publicName": "languages",
+            "required": false,
+            "deprecated": false,
+            "type": {
+              "kind": "union",
+              "variants": [
+                {
+                  "kind": "array",
+                  "items": {
+                    "kind": "primitive",
+                    "type": "string"
+                  }
+                },
+                {
+                  "kind": "null"
+                }
+              ]
             }
           },
           {
@@ -15393,6 +15534,27 @@
               "kind": "primitive",
               "type": "string",
               "format": "uuid"
+            }
+          },
+          {
+            "name": "languages",
+            "publicName": "languages",
+            "required": false,
+            "deprecated": false,
+            "type": {
+              "kind": "union",
+              "variants": [
+                {
+                  "kind": "array",
+                  "items": {
+                    "kind": "primitive",
+                    "type": "string"
+                  }
+                },
+                {
+                  "kind": "null"
+                }
+              ]
             }
           },
           {
@@ -17725,8 +17887,22 @@
             "type": {
               "kind": "array",
               "items": {
-                "kind": "primitive",
-                "type": "string"
+                "kind": "enum",
+                "values": [
+                  "chatgpt.com",
+                  "gemini.google.com",
+                  "perplexity.ai"
+                ],
+                "names": [
+                  "ChatgptCom",
+                  "GeminiGoogleCom",
+                  "PerplexityAi"
+                ],
+                "deprecations": [
+                  false,
+                  false,
+                  false
+                ]
               }
             }
           }
@@ -17924,8 +18100,22 @@
             "type": {
               "kind": "array",
               "items": {
-                "kind": "primitive",
-                "type": "string"
+                "kind": "enum",
+                "values": [
+                  "chatgpt.com",
+                  "gemini.google.com",
+                  "perplexity.ai"
+                ],
+                "names": [
+                  "ChatgptCom",
+                  "GeminiGoogleCom",
+                  "PerplexityAi"
+                ],
+                "deprecations": [
+                  false,
+                  false,
+                  false
+                ]
               }
             }
           },
@@ -32440,6 +32630,27 @@
             }
           },
           {
+            "name": "languages",
+            "publicName": "languages",
+            "required": false,
+            "deprecated": false,
+            "type": {
+              "kind": "union",
+              "variants": [
+                {
+                  "kind": "array",
+                  "items": {
+                    "kind": "primitive",
+                    "type": "string"
+                  }
+                },
+                {
+                  "kind": "null"
+                }
+              ]
+            }
+          },
+          {
             "name": "topic_ids",
             "publicName": "topic_ids",
             "required": false,
@@ -43768,6 +43979,7 @@
         "comparison_start_date",
         "comparison_end_date",
         "category_id",
+        "languages",
         "topic_ids",
         "exclude_topic_ids",
         "tag_ids",
@@ -43788,6 +44000,7 @@
         "comparison_start_date",
         "comparison_end_date",
         "category_id",
+        "languages",
         "topic_ids",
         "exclude_topic_ids",
         "tag_ids",
@@ -43822,6 +44035,10 @@
         {
           "name": "category_id",
           "required": true
+        },
+        {
+          "name": "languages",
+          "required": false
         },
         {
           "name": "topic_ids",
@@ -43959,6 +44176,7 @@
         "comparison_start_date",
         "comparison_end_date",
         "category_id",
+        "languages",
         "topic_ids",
         "exclude_topic_ids",
         "tag_ids",
@@ -43986,6 +44204,7 @@
         "comparison_start_date",
         "comparison_end_date",
         "category_id",
+        "languages",
         "topic_ids",
         "exclude_topic_ids",
         "tag_ids",
@@ -44027,6 +44246,10 @@
         {
           "name": "category_id",
           "required": true
+        },
+        {
+          "name": "languages",
+          "required": false
         },
         {
           "name": "topic_ids",
@@ -44396,6 +44619,7 @@
         "comparison_start_date",
         "comparison_end_date",
         "category_id",
+        "languages",
         "topic_ids",
         "exclude_topic_ids",
         "tag_ids",
@@ -44419,6 +44643,7 @@
         "comparison_start_date",
         "comparison_end_date",
         "category_id",
+        "languages",
         "topic_ids",
         "exclude_topic_ids",
         "tag_ids",
@@ -44456,6 +44681,10 @@
         {
           "name": "category_id",
           "required": true
+        },
+        {
+          "name": "languages",
+          "required": false
         },
         {
           "name": "topic_ids",
@@ -44605,6 +44834,7 @@
         "comparison_start_date",
         "comparison_end_date",
         "category_id",
+        "languages",
         "topic_ids",
         "exclude_topic_ids",
         "tag_ids",
@@ -44628,6 +44858,7 @@
         "comparison_start_date",
         "comparison_end_date",
         "category_id",
+        "languages",
         "topic_ids",
         "exclude_topic_ids",
         "tag_ids",
@@ -44665,6 +44896,10 @@
         {
           "name": "category_id",
           "required": true
+        },
+        {
+          "name": "languages",
+          "required": false
         },
         {
           "name": "topic_ids",
@@ -44814,6 +45049,7 @@
         "comparison_start_date",
         "comparison_end_date",
         "category_id",
+        "languages",
         "topic_ids",
         "exclude_topic_ids",
         "tag_ids",
@@ -44833,6 +45069,7 @@
         "comparison_start_date",
         "comparison_end_date",
         "category_id",
+        "languages",
         "topic_ids",
         "exclude_topic_ids",
         "tag_ids",
@@ -44866,6 +45103,10 @@
         {
           "name": "category_id",
           "required": true
+        },
+        {
+          "name": "languages",
+          "required": false
         },
         {
           "name": "topic_ids",
@@ -44999,6 +45240,7 @@
         "comparison_start_date",
         "comparison_end_date",
         "category_id",
+        "languages",
         "topic_ids",
         "exclude_topic_ids",
         "tag_ids",
@@ -45018,6 +45260,7 @@
         "comparison_start_date",
         "comparison_end_date",
         "category_id",
+        "languages",
         "topic_ids",
         "exclude_topic_ids",
         "tag_ids",
@@ -45051,6 +45294,10 @@
         {
           "name": "category_id",
           "required": true
+        },
+        {
+          "name": "languages",
+          "required": false
         },
         {
           "name": "topic_ids",
@@ -45184,6 +45431,7 @@
         "comparison_start_date",
         "comparison_end_date",
         "category_id",
+        "languages",
         "topic_ids",
         "exclude_topic_ids",
         "tag_ids",
@@ -45203,6 +45451,7 @@
         "comparison_start_date",
         "comparison_end_date",
         "category_id",
+        "languages",
         "topic_ids",
         "exclude_topic_ids",
         "tag_ids",
@@ -45236,6 +45485,10 @@
         {
           "name": "category_id",
           "required": true
+        },
+        {
+          "name": "languages",
+          "required": false
         },
         {
           "name": "topic_ids",
@@ -45369,6 +45622,7 @@
         "comparison_start_date",
         "comparison_end_date",
         "category_id",
+        "languages",
         "topic_ids",
         "exclude_topic_ids",
         "tag_ids",
@@ -45392,6 +45646,7 @@
         "comparison_start_date",
         "comparison_end_date",
         "category_id",
+        "languages",
         "topic_ids",
         "exclude_topic_ids",
         "tag_ids",
@@ -45429,6 +45684,10 @@
         {
           "name": "category_id",
           "required": true
+        },
+        {
+          "name": "languages",
+          "required": false
         },
         {
           "name": "topic_ids",
@@ -45578,6 +45837,7 @@
         "comparison_start_date",
         "comparison_end_date",
         "category_id",
+        "languages",
         "topic_ids",
         "exclude_topic_ids",
         "tag_ids",
@@ -45599,6 +45859,7 @@
         "comparison_start_date",
         "comparison_end_date",
         "category_id",
+        "languages",
         "topic_ids",
         "exclude_topic_ids",
         "tag_ids",
@@ -45634,6 +45895,10 @@
         {
           "name": "category_id",
           "required": true
+        },
+        {
+          "name": "languages",
+          "required": false
         },
         {
           "name": "topic_ids",

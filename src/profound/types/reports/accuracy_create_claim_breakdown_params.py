@@ -20,6 +20,8 @@ class AccuracyCreateClaimBreakdownParams(TypedDict, total=False):
 
     category_id: Required[str]
 
+    languages: Optional[SequenceNotStr[str]]
+
     topic_ids: Optional[SequenceNotStr[str]]
 
     exclude_topic_ids: bool
