@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.61.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.60.0...v0.61.0) (2026-09-25)
+
+
+### ⚠ BREAKING CHANGES
+
+* **api:** 3 breaking changes to the SDK surface.
+    - Property `bot_provider_filter.value` type changed from `enum(openai | anthropic | chatgpt | …) | Array<enum(openai | anthropic | chatgpt | …)>` to `enum(openai | anthropic | chatgpt | …) | Array<enum(openai | anthropic | chatgpt | …)>`.
+    - Property `otf_intent_shares_query.platforms` type changed from `Array<string>` to `Array<enum(chatgpt.com | gemini.google.com | perplexity.ai)>`.
+    - Property `otf_volume_request.platforms` type changed from `Array<string>` to `Array<enum(chatgpt.com | gemini.google.com | perplexity.ai)>`.
+
+### Features
+
+* **api:** update property bot_provider_filter.value (+21 more changes) ([9db93d3](https://github.com/cooper-square-technologies/profound-python-sdk/commit/9db93d313f6cff0d4e977d3359ebe7683fecd304))
+
 ## [0.60.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.59.2...v0.60.0) (2026-09-22)
 
 
