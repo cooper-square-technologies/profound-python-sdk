@@ -21,7 +21,7 @@ from typing_extensions import TypeGuard, get_args
 
 import sniffio
 
-from .._types import Omit, NotGiven, FileTypes, ArrayFormat, HeadersLike
+from .._types import Omit, Headers, NotGiven, FileTypes, ArrayFormat, HeadersLike
 
 _T = TypeVar("_T")
 _TupleT = TypeVar("_TupleT", bound=Tuple[object, ...])
@@ -203,19 +203,14 @@ def is_iterable(obj: object) -> TypeGuard[Iterable[object]]:
     return isinstance(obj, Iterable)
 
 
-# copied from https://github.com/Rapptz/RoboDanny
 def human_join(seq: Sequence[str], *, delim: str = ", ", final: str = "or") -> str:
-    size = len(seq)
-    if size == 0:
+    """Joins `seq` into an English list: `"a"`, `"a or b"`, `"a, b or c"` (no comma before `final`)."""
+    if not seq:
         return ""
-
-    if size == 1:
-        return seq[0]
-
-    if size == 2:
-        return f"{seq[0]} {final} {seq[1]}"
-
-    return delim.join(seq[:-1]) + f" {final} {seq[-1]}"
+    *head, last = seq
+    if not head:
+        return last
+    return f"{delim.join(head)} {final} {last}"
 
 
 def quote(string: str) -> str:
@@ -323,6 +318,20 @@ def strip_not_given(obj: object | None) -> object:
         return obj
 
     return {key: value for key, value in obj.items() if not isinstance(value, NotGiven)}
+
+
+def merge_default_headers(defaults: Mapping[str, str], headers: Headers | None) -> dict[str, str | Omit]:
+    """Merge an operation's configured default headers under `headers`, which win per header name.
+
+    Header names are case-insensitive, and `httpx.Headers` keeps every spelling it is handed, so a
+    default is dropped whenever `headers` already names that header in any casing. A plain dict merge
+    would send both `x-beta: <default>` and the caller's `X-Beta: <theirs>`.
+    """
+    named = {name.lower() for name in headers} if headers else set()
+    merged: dict[str, str | Omit] = {name: value for name, value in defaults.items() if name.lower() not in named}
+    if headers:
+        merged.update(headers)
+    return merged
 
 
 def coerce_integer(val: str) -> int:

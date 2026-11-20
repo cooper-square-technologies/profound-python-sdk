@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Optional
+from typing import Iterable, Optional
 from typing_extensions import Literal, Required, TypedDict
 from ..._types import SequenceNotStr
 
@@ -10,6 +10,15 @@ __all__ = ["AccuracyCreateInaccurateClustersParams"]
 
 
 class AccuracyCreateInaccurateClustersParams(TypedDict, total=False):
+    citation_categories: Optional[SequenceNotStr[str]]
+    """Legacy category names or V2 classification/custom names. ORed with citation_category_pairs."""
+
+    citation_category_taxonomy: Literal["legacy", "v2"]
+    """Dataset used for category assignments and filters. V2 leaf group values are JSON [classification, subcategory] pairs."""
+
+    citation_category_pairs: Optional[Iterable[Iterable[object]]]
+    """V2-only exact [classification, subcategory] selections, ORed with citation_categories. An empty subcategory matches only the leaf with no subcategory under that classification."""
+
     start_date: Required[str]
 
     end_date: Required[str]
@@ -42,7 +51,7 @@ class AccuracyCreateInaccurateClustersParams(TypedDict, total=False):
 
     prompt_ids: Optional[SequenceNotStr[str]]
 
-    citation_categories: Optional[SequenceNotStr[str]]
+    verification_status: Literal["inaccurate", "not_enough_data"]
 
     theme_id: Optional[str]
 
@@ -53,3 +62,9 @@ class AccuracyCreateInaccurateClustersParams(TypedDict, total=False):
     search_query: Optional[str]
 
     include_models: bool
+
+    include_citations: bool
+    """Include citation URLs and optional legacy hostnames."""
+
+    include_citation_hostnames: bool
+    """Include legacy run-wide citation hostnames. Disable to skip this lookup; cited page URLs remain included."""

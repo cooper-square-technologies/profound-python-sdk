@@ -61,7 +61,7 @@ class OptimizationResource(SyncAPIResource):
 
         Example:
             ```python
-            optimization = client.content.optimization.list(
+            content_optimizations = client.content.optimization.list(
                 asset_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 limit=10000,
                 offset=0,
@@ -172,7 +172,7 @@ class AsyncOptimizationResource(AsyncAPIResource):
 
         Example:
             ```python
-            optimization = await client.content.optimization.list(
+            content_optimizations = await client.content.optimization.list(
                 asset_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 limit=10000,
                 offset=0,

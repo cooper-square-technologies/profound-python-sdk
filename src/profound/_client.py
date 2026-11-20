@@ -24,8 +24,11 @@ from ._types import (
 from ._utils import is_given, is_mapping_t, get_async_library
 from ._compat import cached_property
 from ._exceptions import APIStatusError
+from ._models import SecurityOptions
 from ._base_client import (
     DEFAULT_MAX_RETRIES,
+    AuthLocations,
+    SchemeCredentials,
     SyncAPIClient,
     AsyncAPIClient,
 )
@@ -99,7 +102,8 @@ class Profound(SyncAPIClient):
         default_headers: Mapping[str, str] | None = None,
         default_query: Mapping[str, object] | None = None,
         # Configure a custom httpx client.
-        # We provide a `DefaultHttpxClient` class that you can pass to retain the default values we use for `limits`, `timeout` & `follow_redirects`.
+        # We provide a `DefaultHttpxClient` class that you can pass to retain the default values we use for `limits` & `timeout`.
+        # The SDK follows redirects itself, whatever the client's `follow_redirects` says.
         # See the [httpx documentation](https://www.python-httpx.org/api/#client) for more details.
         http_client: httpx.Client | None = None,
         # Enable or disable schema validation for data returned by the API.
@@ -257,14 +261,29 @@ class Profound(SyncAPIClient):
         }
 
     @override
-    def _auth_query(self, security: dict[str, bool]) -> dict[str, str]:
-        _ = security
+    def _auth_query(self, security: SecurityOptions | None) -> dict[str, str]:
+        if security is not None:
+            return self._select_auth(security).query
         return {}
 
     @override
-    def _auth_cookies(self, security: dict[str, bool]) -> dict[str, str]:
-        _ = security
+    def _auth_cookies(self, security: SecurityOptions | None) -> dict[str, str]:
+        if security is not None:
+            return self._select_auth(security).cookies
         return {}
+
+    @property
+    @override
+    def _auth_by_scheme(self) -> dict[str, SchemeCredentials]:
+        return {
+            "BearerAuth": SchemeCredentials(headers=self._access_token_header_auth),
+            "APIKeyHeader": SchemeCredentials(headers=self._api_key_header_auth),
+        }
+
+    @property
+    @override
+    def _auth_locations(self) -> AuthLocations:
+        return AuthLocations(headers=frozenset({"authorization", "x-api-key"}))
 
     @property
     def _access_token_header_auth(self) -> dict[str, str]:
@@ -401,7 +420,8 @@ class AsyncProfound(AsyncAPIClient):
         default_headers: Mapping[str, str] | None = None,
         default_query: Mapping[str, object] | None = None,
         # Configure a custom httpx client.
-        # We provide a `DefaultAsyncHttpxClient` class that you can pass to retain the default values we use for `limits`, `timeout` & `follow_redirects`.
+        # We provide a `DefaultAsyncHttpxClient` class that you can pass to retain the default values we use for `limits` & `timeout`.
+        # The SDK follows redirects itself, whatever the client's `follow_redirects` says.
         # See the [httpx documentation](https://www.python-httpx.org/api/#asyncclient) for more details.
         http_client: httpx.AsyncClient | None = None,
         # Enable or disable schema validation for data returned by the API.
@@ -559,14 +579,29 @@ class AsyncProfound(AsyncAPIClient):
         }
 
     @override
-    def _auth_query(self, security: dict[str, bool]) -> dict[str, str]:
-        _ = security
+    def _auth_query(self, security: SecurityOptions | None) -> dict[str, str]:
+        if security is not None:
+            return self._select_auth(security).query
         return {}
 
     @override
-    def _auth_cookies(self, security: dict[str, bool]) -> dict[str, str]:
-        _ = security
+    def _auth_cookies(self, security: SecurityOptions | None) -> dict[str, str]:
+        if security is not None:
+            return self._select_auth(security).cookies
         return {}
+
+    @property
+    @override
+    def _auth_by_scheme(self) -> dict[str, SchemeCredentials]:
+        return {
+            "BearerAuth": SchemeCredentials(headers=self._access_token_header_auth),
+            "APIKeyHeader": SchemeCredentials(headers=self._api_key_header_auth),
+        }
+
+    @property
+    @override
+    def _auth_locations(self) -> AuthLocations:
+        return AuthLocations(headers=frozenset({"authorization", "x-api-key"}))
 
     @property
     def _access_token_header_auth(self) -> dict[str, str]:

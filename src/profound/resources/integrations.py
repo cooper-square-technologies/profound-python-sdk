@@ -67,7 +67,7 @@ class IntegrationsResource(SyncAPIResource):
 
         Example:
             ```python
-            integration = client.integrations.list()
+            integrations = client.integrations.list()
             ```
         """
         return self._get(
@@ -129,7 +129,7 @@ class AsyncIntegrationsResource(AsyncAPIResource):
 
         Example:
             ```python
-            integration = await client.integrations.list()
+            integrations = await client.integrations.list()
             ```
         """
         return await self._get(

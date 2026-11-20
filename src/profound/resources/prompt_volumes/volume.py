@@ -38,12 +38,12 @@ class VolumeResource(SyncAPIResource):
     def on_the_fly(
         self,
         *,
-        keyword: str,
         matching_type: Literal["exact_match", "phrase_match"],
         start_date: Union[str, date],
         end_date: Union[str, date],
         regions: SequenceNotStr[str] | Omit = omit,
         platforms: List[Literal["chatgpt.com", "gemini.google.com", "perplexity.ai"]] | Omit = omit,
+        keyword: str,
         organization_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -60,12 +60,12 @@ class VolumeResource(SyncAPIResource):
         omitted for privacy.
 
         Args:
-            keyword: Body parameter.
-            matching_type: Body parameter.
-            start_date: Body parameter.
-            end_date: Body parameter.
+            matching_type: phrase_match: all tokens anywhere in the prompt. exact_match: tokens plus the normalized keyword as a contiguous substring.
+            start_date: Inclusive first event week (YYYY-MM-DD). Must not be after end_date.
+            end_date: Inclusive last event week (YYYY-MM-DD). Must not be before start_date.
             regions: ISO 3166-1 alpha-3 country codes (e.g. USA). Omit to include every region.
             platforms: Platforms to restrict to. Omit to include every platform.
+            keyword: Keyword or phrase to project demand for. One keyword per call.
             organization_id: Organization whose daily keyword allowance is used. Required in the JSON request body for API keys with multiple organizations that have API access. If omitted or null, defaults to the API key's sole organization with API access or the token's active organization. For OAuth/M2M tokens, any supplied organization_id must match the token's organization.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
@@ -78,10 +78,10 @@ class VolumeResource(SyncAPIResource):
         Example:
             ```python
             volume = client.prompt_volumes.volume.on_the_fly(
-                keyword="",
                 matching_type="exact_match",
                 start_date="2024-01-01",
                 end_date="2024-01-01",
+                keyword="x",
             )
             ```
         """
@@ -89,12 +89,12 @@ class VolumeResource(SyncAPIResource):
             "/v2/prompt-volumes/volume/on-the-fly",
             body=maybe_transform(
                 {
-                    "keyword": keyword,
                     "matching_type": matching_type,
                     "start_date": start_date,
                     "end_date": end_date,
                     "regions": regions,
                     "platforms": platforms,
+                    "keyword": keyword,
                     "organization_id": organization_id,
                 },
                 volume_on_the_fly_params.VolumeOnTheFlyParams,
@@ -118,12 +118,12 @@ class AsyncVolumeResource(AsyncAPIResource):
     async def on_the_fly(
         self,
         *,
-        keyword: str,
         matching_type: Literal["exact_match", "phrase_match"],
         start_date: Union[str, date],
         end_date: Union[str, date],
         regions: SequenceNotStr[str] | Omit = omit,
         platforms: List[Literal["chatgpt.com", "gemini.google.com", "perplexity.ai"]] | Omit = omit,
+        keyword: str,
         organization_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -140,12 +140,12 @@ class AsyncVolumeResource(AsyncAPIResource):
         omitted for privacy.
 
         Args:
-            keyword: Body parameter.
-            matching_type: Body parameter.
-            start_date: Body parameter.
-            end_date: Body parameter.
+            matching_type: phrase_match: all tokens anywhere in the prompt. exact_match: tokens plus the normalized keyword as a contiguous substring.
+            start_date: Inclusive first event week (YYYY-MM-DD). Must not be after end_date.
+            end_date: Inclusive last event week (YYYY-MM-DD). Must not be before start_date.
             regions: ISO 3166-1 alpha-3 country codes (e.g. USA). Omit to include every region.
             platforms: Platforms to restrict to. Omit to include every platform.
+            keyword: Keyword or phrase to project demand for. One keyword per call.
             organization_id: Organization whose daily keyword allowance is used. Required in the JSON request body for API keys with multiple organizations that have API access. If omitted or null, defaults to the API key's sole organization with API access or the token's active organization. For OAuth/M2M tokens, any supplied organization_id must match the token's organization.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
@@ -158,10 +158,10 @@ class AsyncVolumeResource(AsyncAPIResource):
         Example:
             ```python
             volume = await client.prompt_volumes.volume.on_the_fly(
-                keyword="",
                 matching_type="exact_match",
                 start_date="2024-01-01",
                 end_date="2024-01-01",
+                keyword="x",
             )
             ```
         """
@@ -169,12 +169,12 @@ class AsyncVolumeResource(AsyncAPIResource):
             "/v2/prompt-volumes/volume/on-the-fly",
             body=await async_maybe_transform(
                 {
-                    "keyword": keyword,
                     "matching_type": matching_type,
                     "start_date": start_date,
                     "end_date": end_date,
                     "regions": regions,
                     "platforms": platforms,
+                    "keyword": keyword,
                     "organization_id": organization_id,
                 },
                 volume_on_the_fly_params.VolumeOnTheFlyParams,

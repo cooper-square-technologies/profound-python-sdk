@@ -44,6 +44,12 @@ class Data(BaseModel):
 
     citation_hostnames: List[str] = FieldInfo(alias="citationHostnames")
 
+    citation_urls: Optional[List[str]] = FieldInfo(alias="citationUrls", default=None)
+    """Lexically sorted, unranked sample of up to 100 complete cited page URLs, each at most 8192 UTF-8 bytes, with a 4 MiB URL JSON budget shared across response rows. Check citation_urls_truncated for omissions."""
+
+    citation_urls_truncated: Optional[bool] = FieldInfo(alias="citationUrlsTruncated", default=None)
+    """Whether citation_urls is an incomplete sample because citation count or byte limits were reached."""
+
     models: Optional[List[DataModel]] = None
 
 

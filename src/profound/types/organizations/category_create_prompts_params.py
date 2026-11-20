@@ -45,7 +45,7 @@ class Prompt(TypedDict, total=False):
     personas: Iterable[IDOrNameParam]
     """Personas to use when collecting. Omit for default (no persona)."""
 
-    analysis_types: Optional[List[Literal["visibility", "sentiment", "sentiment_v2", "accuracy"]]]
+    analysis_types: Optional[List[Literal["visibility", "sentiment", "accuracy"]]]
     """Analysis types: 'visibility', 'sentiment', 'accuracy'. Defaults to ['visibility']."""
 
     prompt_type: Optional[str]

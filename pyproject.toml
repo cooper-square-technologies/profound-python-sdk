@@ -1,6 +1,6 @@
 [project]
 name = "profound"
-version = "0.61.0" # x-release-please-version
+version = "0.62.0" # x-release-please-version
 description = "profound Python client."
 readme = "README.md"
 license = "Apache-2.0"
@@ -13,15 +13,20 @@ dependencies = [
   "pydantic>=1.9.0, <3",
   "typing-extensions>=4.14, <5",
   "anyio>=3.5.0, <5",
-  "distro>=1.7.0, <2",
   "sniffio",
 ]
 
 [project.urls]
 Documentation = "https://docs.tryprofound.com"
+Source = "https://github.com/cooper-square-technologies/profound-python-sdk"
+Issues = "https://github.com/cooper-square-technologies/profound-python-sdk/issues"
+Changelog = "https://github.com/cooper-square-technologies/profound-python-sdk/blob/main/CHANGELOG.md"
 
 [project.optional-dependencies]
 aiohttp = ["aiohttp", "httpx_aiohttp>=0.1.9"]
+
+[dependency-groups]
+dev = ["pytest>=8.3.4"]
 
 [build-system]
 requires = ["hatchling>=1.18.0"]
@@ -32,3 +37,6 @@ packages = ["src/profound"]
 
 [tool.ruff]
 line-length = 120
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

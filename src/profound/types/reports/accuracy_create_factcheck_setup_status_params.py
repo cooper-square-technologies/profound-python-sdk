@@ -9,3 +9,4 @@ __all__ = ["AccuracyCreateFactcheckSetupStatusParams"]
 
 class AccuracyCreateFactcheckSetupStatusParams(TypedDict, total=False):
     category_id: Required[str]
+    """Category UUID. Access is enforced before the tool runs."""

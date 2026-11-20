@@ -17,7 +17,7 @@ class CategoryListResponseItem(BaseModel):
 
     internal_name: Optional[str] = None
 
-    organization: Organization
+    organization: Optional[Organization] = None
 
 
 CategoryListResponse: TypeAlias = List[CategoryListResponseItem]

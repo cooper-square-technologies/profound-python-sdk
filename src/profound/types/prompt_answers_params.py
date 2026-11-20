@@ -67,10 +67,10 @@ class Include(TypedDict, total=False):
     search_triggered: bool
 
     themes: bool
-    """Use 'sentiment_themes' instead"""
+    """Deprecated and always empty: legacy (v1) sentiment is retired. Use /v2/reports/answers (sentiment_claims) or /v2/reports/sentiment."""
 
     sentiment_themes: bool
-    """Uses legacy sentiment data."""
+    """Deprecated and always empty: legacy (v1) sentiment is retired. Use /v2/reports/answers (sentiment_claims) or /v2/reports/sentiment."""
 
     topic: bool
 
