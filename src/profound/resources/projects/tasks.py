@@ -72,7 +72,7 @@ class TasksResource(SyncAPIResource):
 
         Example:
             ```python
-            task = client.projects.tasks.list(
+            project_tasks = client.projects.tasks.list(
                 project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
             )
@@ -473,7 +473,7 @@ class AsyncTasksResource(AsyncAPIResource):
 
         Example:
             ```python
-            task = await client.projects.tasks.list(
+            project_tasks = await client.projects.tasks.list(
                 project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
             )

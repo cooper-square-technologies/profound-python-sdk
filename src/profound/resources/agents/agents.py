@@ -102,7 +102,7 @@ class AgentsResource(SyncAPIResource):
 
         Example:
             ```python
-            agent = client.agents.list(
+            agents = client.agents.list(
                 limit=100,
             )
             ```
@@ -436,7 +436,7 @@ class AsyncAgentsResource(AsyncAPIResource):
 
         Example:
             ```python
-            agent = await client.agents.list(
+            agents = await client.agents.list(
                 limit=100,
             )
             ```

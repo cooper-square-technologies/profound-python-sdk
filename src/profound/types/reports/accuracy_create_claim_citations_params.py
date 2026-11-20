@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Optional
+from typing import Iterable, Optional
 from typing_extensions import Literal, Required, TypedDict
 from ..._types import SequenceNotStr
 
@@ -10,6 +10,15 @@ __all__ = ["AccuracyCreateClaimCitationsParams"]
 
 
 class AccuracyCreateClaimCitationsParams(TypedDict, total=False):
+    citation_categories: Optional[SequenceNotStr[str]]
+    """Legacy category names or V2 classification/custom names. ORed with citation_category_pairs."""
+
+    citation_category_taxonomy: Literal["legacy", "v2"]
+    """Dataset used for category assignments and filters. V2 leaf group values are JSON [classification, subcategory] pairs."""
+
+    citation_category_pairs: Optional[Iterable[Iterable[object]]]
+    """V2-only exact [classification, subcategory] selections, ORed with citation_categories. An empty subcategory matches only the leaf with no subcategory under that classification."""
+
     start_date: Required[str]
 
     end_date: Required[str]
@@ -41,8 +50,6 @@ class AccuracyCreateClaimCitationsParams(TypedDict, total=False):
     include_no_persona: bool
 
     prompt_ids: Optional[SequenceNotStr[str]]
-
-    citation_categories: Optional[SequenceNotStr[str]]
 
     cluster_id: Required[str]
 

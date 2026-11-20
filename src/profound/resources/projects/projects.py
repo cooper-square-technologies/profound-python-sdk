@@ -4,8 +4,7 @@ from __future__ import annotations
 
 import httpx
 
-from typing import Iterable, Optional
-from ..._types import SequenceNotStr
+from typing import Optional
 
 from ..._types import Body, Omit, Query, Headers, NotGiven, NoneType, omit, not_given
 from ..._utils import path_template, maybe_transform, async_maybe_transform
@@ -37,7 +36,6 @@ from .tasks import (
 from ...types.project_list_response import ProjectListResponse
 from ...types import (
     project_list_params,
-    project_create_params,
     project_retrieve_params,
     project_delete_params,
     project_get_status_params,
@@ -127,13 +125,6 @@ class ProjectsResource(SyncAPIResource):
     def create(
         self,
         *,
-        category_id: str,
-        title: Optional[str] | Omit = omit,
-        project_name: Optional[str] | Omit = omit,
-        focus: Optional[str] | Omit = omit,
-        topics: SequenceNotStr[str] | Omit = omit,
-        attachments: Iterable[project_create_params.Attachment] | Omit = omit,
-        generation_context: Optional[project_create_params.GenerationContext] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -145,13 +136,6 @@ class ProjectsResource(SyncAPIResource):
         Create Project
 
         Args:
-            category_id: Body parameter.
-            title: Body parameter.
-            project_name: Body parameter.
-            focus: Body parameter.
-            topics: Body parameter.
-            attachments: Body parameter.
-            generation_context: Body parameter.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -162,25 +146,13 @@ class ProjectsResource(SyncAPIResource):
 
         Example:
             ```python
-            project = client.projects.create(
-                category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-            )
+            project = client.projects.create()
             ```
+
+        Deprecated: this method is deprecated.
         """
         return self._post(
             "/v1/projects",
-            body=maybe_transform(
-                {
-                    "category_id": category_id,
-                    "title": title,
-                    "project_name": project_name,
-                    "focus": focus,
-                    "topics": topics,
-                    "attachments": attachments,
-                    "generation_context": generation_context,
-                },
-                project_create_params.ProjectCreateParams,
-            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -509,13 +481,6 @@ class AsyncProjectsResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        category_id: str,
-        title: Optional[str] | Omit = omit,
-        project_name: Optional[str] | Omit = omit,
-        focus: Optional[str] | Omit = omit,
-        topics: SequenceNotStr[str] | Omit = omit,
-        attachments: Iterable[project_create_params.Attachment] | Omit = omit,
-        generation_context: Optional[project_create_params.GenerationContext] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -527,13 +492,6 @@ class AsyncProjectsResource(AsyncAPIResource):
         Create Project
 
         Args:
-            category_id: Body parameter.
-            title: Body parameter.
-            project_name: Body parameter.
-            focus: Body parameter.
-            topics: Body parameter.
-            attachments: Body parameter.
-            generation_context: Body parameter.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -544,25 +502,13 @@ class AsyncProjectsResource(AsyncAPIResource):
 
         Example:
             ```python
-            project = await client.projects.create(
-                category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-            )
+            project = await client.projects.create()
             ```
+
+        Deprecated: this method is deprecated.
         """
         return await self._post(
             "/v1/projects",
-            body=await async_maybe_transform(
-                {
-                    "category_id": category_id,
-                    "title": title,
-                    "project_name": project_name,
-                    "focus": focus,
-                    "topics": topics,
-                    "attachments": attachments,
-                    "generation_context": generation_context,
-                },
-                project_create_params.ProjectCreateParams,
-            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

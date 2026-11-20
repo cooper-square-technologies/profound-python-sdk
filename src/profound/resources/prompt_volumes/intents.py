@@ -38,12 +38,12 @@ class IntentsResource(SyncAPIResource):
     def on_the_fly(
         self,
         *,
-        keyword: str,
         matching_type: Literal["exact_match", "phrase_match"],
         start_date: Union[str, date],
         end_date: Union[str, date],
         regions: SequenceNotStr[str] | Omit = omit,
         platforms: List[Literal["chatgpt.com", "gemini.google.com", "perplexity.ai"]] | Omit = omit,
+        keyword: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -58,12 +58,12 @@ class IntentsResource(SyncAPIResource):
         are omitted for privacy. Doesn't use the daily keyword allowance.
 
         Args:
-            keyword: Body parameter.
-            matching_type: Body parameter.
-            start_date: Body parameter.
-            end_date: Body parameter.
+            matching_type: phrase_match: all tokens anywhere in the prompt. exact_match: tokens plus the normalized keyword as a contiguous substring.
+            start_date: Inclusive first event week (YYYY-MM-DD). Must not be after end_date.
+            end_date: Inclusive last event week (YYYY-MM-DD). Must not be before start_date.
             regions: ISO 3166-1 alpha-3 country codes (e.g. USA). Omit to include every region.
             platforms: Platforms to restrict to. Omit to include every platform.
+            keyword: Keyword or phrase whose matching conversations are classified by intent. One keyword per call.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -75,10 +75,10 @@ class IntentsResource(SyncAPIResource):
         Example:
             ```python
             intent = client.prompt_volumes.intents.on_the_fly(
-                keyword="",
                 matching_type="exact_match",
                 start_date="2024-01-01",
                 end_date="2024-01-01",
+                keyword="x",
             )
             ```
         """
@@ -86,12 +86,12 @@ class IntentsResource(SyncAPIResource):
             "/v2/prompt-volumes/intents/on-the-fly",
             body=maybe_transform(
                 {
-                    "keyword": keyword,
                     "matching_type": matching_type,
                     "start_date": start_date,
                     "end_date": end_date,
                     "regions": regions,
                     "platforms": platforms,
+                    "keyword": keyword,
                 },
                 intent_on_the_fly_params.IntentOnTheFlyParams,
             ),
@@ -114,12 +114,12 @@ class AsyncIntentsResource(AsyncAPIResource):
     async def on_the_fly(
         self,
         *,
-        keyword: str,
         matching_type: Literal["exact_match", "phrase_match"],
         start_date: Union[str, date],
         end_date: Union[str, date],
         regions: SequenceNotStr[str] | Omit = omit,
         platforms: List[Literal["chatgpt.com", "gemini.google.com", "perplexity.ai"]] | Omit = omit,
+        keyword: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -134,12 +134,12 @@ class AsyncIntentsResource(AsyncAPIResource):
         are omitted for privacy. Doesn't use the daily keyword allowance.
 
         Args:
-            keyword: Body parameter.
-            matching_type: Body parameter.
-            start_date: Body parameter.
-            end_date: Body parameter.
+            matching_type: phrase_match: all tokens anywhere in the prompt. exact_match: tokens plus the normalized keyword as a contiguous substring.
+            start_date: Inclusive first event week (YYYY-MM-DD). Must not be after end_date.
+            end_date: Inclusive last event week (YYYY-MM-DD). Must not be before start_date.
             regions: ISO 3166-1 alpha-3 country codes (e.g. USA). Omit to include every region.
             platforms: Platforms to restrict to. Omit to include every platform.
+            keyword: Keyword or phrase whose matching conversations are classified by intent. One keyword per call.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -151,10 +151,10 @@ class AsyncIntentsResource(AsyncAPIResource):
         Example:
             ```python
             intent = await client.prompt_volumes.intents.on_the_fly(
-                keyword="",
                 matching_type="exact_match",
                 start_date="2024-01-01",
                 end_date="2024-01-01",
+                keyword="x",
             )
             ```
         """
@@ -162,12 +162,12 @@ class AsyncIntentsResource(AsyncAPIResource):
             "/v2/prompt-volumes/intents/on-the-fly",
             body=await async_maybe_transform(
                 {
-                    "keyword": keyword,
                     "matching_type": matching_type,
                     "start_date": start_date,
                     "end_date": end_date,
                     "regions": regions,
                     "platforms": platforms,
+                    "keyword": keyword,
                 },
                 intent_on_the_fly_params.IntentOnTheFlyParams,
             ),

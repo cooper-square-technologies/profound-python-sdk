@@ -36,7 +36,7 @@ class Prompt(BaseModel):
     """Resolved personas."""
 
     analysis_types: Optional[List[Literal["visibility", "sentiment", "sentiment_v2", "accuracy"]]] = None
-    """Analysis types assigned to this prompt."""
+    """Analysis types assigned to this prompt. `sentiment_v2` is current sentiment, the same as the `sentiment` input."""
 
     asset: Optional[NamedResource] = None
     """Resolved asset, if applicable."""

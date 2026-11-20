@@ -4,10 +4,8 @@ from __future__ import annotations
 
 import httpx
 
-from typing import Optional
-
-from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from ..._utils import path_template, maybe_transform, async_maybe_transform
+from ..._types import Body, Query, Headers, NotGiven, not_given
+from ..._utils import path_template
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -18,7 +16,6 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.projects.generation_list_response import GenerationListResponse
-from ...types.projects import generation_list_params, generation_retrieve_params
 from ...types.projects.generation_retrieve_response import GenerationRetrieveResponse
 
 __all__ = ["GenerationsResource", "AsyncGenerationsResource"]
@@ -36,10 +33,6 @@ class GenerationsResource(SyncAPIResource):
     def list(
         self,
         *,
-        category_id: str,
-        status: Optional[str] | Omit = omit,
-        limit: int | Omit = omit,
-        offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -51,10 +44,6 @@ class GenerationsResource(SyncAPIResource):
         List Project Generations
 
         Args:
-            category_id: Category that owns the project.
-            status: Comma-separated generation statuses: queued, running, completed, failed.
-            limit: Query parameter.
-            offset: Query parameter.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -65,24 +54,15 @@ class GenerationsResource(SyncAPIResource):
 
         Example:
             ```python
-            generation = client.projects.generations.list(
-                category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-                limit=100,
-                offset=0,
-            )
+            generation = client.projects.generations.list()
             ```
+
+        Deprecated: this method is deprecated.
         """
         return self._get(
             "/v1/projects/generations",
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {"category_id": category_id, "status": status, "limit": limit, "offset": offset},
-                    generation_list_params.GenerationListParams,
-                ),
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=GenerationListResponse,
         )
@@ -91,7 +71,6 @@ class GenerationsResource(SyncAPIResource):
         self,
         run_id: str,
         *,
-        category_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -104,7 +83,6 @@ class GenerationsResource(SyncAPIResource):
 
         Args:
             run_id: Unique project generation run ID.
-            category_id: Category that owns the project.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -117,22 +95,17 @@ class GenerationsResource(SyncAPIResource):
             ```python
             generation = client.projects.generations.retrieve(
                 run_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-                category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
             )
             ```
+
+        Deprecated: this method is deprecated.
         """
         if run_id is None or (isinstance(run_id, str) and not run_id):
             raise ValueError(f"Expected a non-empty value for `run_id` but received {run_id!r}")
         return self._get(
             path_template("/v1/projects/generations/{run_id}", **{"run_id": run_id}),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {"category_id": category_id}, generation_retrieve_params.GenerationRetrieveParams
-                ),
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=GenerationRetrieveResponse,
         )
@@ -150,10 +123,6 @@ class AsyncGenerationsResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        category_id: str,
-        status: Optional[str] | Omit = omit,
-        limit: int | Omit = omit,
-        offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -165,10 +134,6 @@ class AsyncGenerationsResource(AsyncAPIResource):
         List Project Generations
 
         Args:
-            category_id: Category that owns the project.
-            status: Comma-separated generation statuses: queued, running, completed, failed.
-            limit: Query parameter.
-            offset: Query parameter.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -179,24 +144,15 @@ class AsyncGenerationsResource(AsyncAPIResource):
 
         Example:
             ```python
-            generation = await client.projects.generations.list(
-                category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-                limit=100,
-                offset=0,
-            )
+            generation = await client.projects.generations.list()
             ```
+
+        Deprecated: this method is deprecated.
         """
         return await self._get(
             "/v1/projects/generations",
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {"category_id": category_id, "status": status, "limit": limit, "offset": offset},
-                    generation_list_params.GenerationListParams,
-                ),
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=GenerationListResponse,
         )
@@ -205,7 +161,6 @@ class AsyncGenerationsResource(AsyncAPIResource):
         self,
         run_id: str,
         *,
-        category_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -218,7 +173,6 @@ class AsyncGenerationsResource(AsyncAPIResource):
 
         Args:
             run_id: Unique project generation run ID.
-            category_id: Category that owns the project.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -231,22 +185,17 @@ class AsyncGenerationsResource(AsyncAPIResource):
             ```python
             generation = await client.projects.generations.retrieve(
                 run_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-                category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
             )
             ```
+
+        Deprecated: this method is deprecated.
         """
         if run_id is None or (isinstance(run_id, str) and not run_id):
             raise ValueError(f"Expected a non-empty value for `run_id` but received {run_id!r}")
         return await self._get(
             path_template("/v1/projects/generations/{run_id}", **{"run_id": run_id}),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {"category_id": category_id}, generation_retrieve_params.GenerationRetrieveParams
-                ),
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=GenerationRetrieveResponse,
         )

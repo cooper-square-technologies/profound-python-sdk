@@ -45,7 +45,7 @@ class Prompt(TypedDict, total=False):
     personas: Optional[Iterable[IDOrNameParam]]
     """New persona set. Replaces all existing personas."""
 
-    analysis_types: Optional[List[Literal["visibility", "sentiment", "sentiment_v2", "accuracy"]]]
+    analysis_types: Optional[List[Literal["visibility", "sentiment", "accuracy"]]]
     """New analysis types. Replaces all existing analysis types on the prompt."""
 
     prompt_type: Optional[str]

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import httpx
 
-from typing import List, Optional
+from typing import Iterable, List, Optional
 from typing_extensions import Literal
 from ..._types import SequenceNotStr
 
@@ -65,6 +65,9 @@ class AccuracyResource(SyncAPIResource):
     def create_overview(
         self,
         *,
+        citation_categories: Optional[SequenceNotStr[str]] | Omit = omit,
+        citation_category_taxonomy: Literal["legacy", "v2"] | Omit = omit,
+        citation_category_pairs: Optional[Iterable[Iterable[object]]] | Omit = omit,
         start_date: str,
         end_date: str,
         comparison_start_date: Optional[str] | Omit = omit,
@@ -81,7 +84,6 @@ class AccuracyResource(SyncAPIResource):
         persona_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         include_no_persona: bool | Omit = omit,
         prompt_ids: Optional[SequenceNotStr[str]] | Omit = omit,
-        citation_categories: Optional[SequenceNotStr[str]] | Omit = omit,
         date_bucket: Optional[str] | Omit = omit,
         group_by: Literal["period", "theme"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -95,6 +97,9 @@ class AccuracyResource(SyncAPIResource):
         Accuracy Overview
 
         Args:
+            citation_categories: Legacy category names or V2 classification/custom names. ORed with citation_category_pairs.
+            citation_category_taxonomy: Dataset used for category assignments and filters. V2 leaf group values are JSON [classification, subcategory] pairs.
+            citation_category_pairs: V2-only exact [classification, subcategory] selections, ORed with citation_categories. An empty subcategory matches only the leaf with no subcategory under that classification.
             start_date: Body parameter.
             end_date: Body parameter.
             comparison_start_date: Body parameter.
@@ -111,7 +116,6 @@ class AccuracyResource(SyncAPIResource):
             persona_ids: Body parameter.
             include_no_persona: Body parameter.
             prompt_ids: Body parameter.
-            citation_categories: Body parameter.
             date_bucket: Body parameter.
             group_by: Body parameter.
             extra_headers: Send extra headers with the request.
@@ -125,13 +129,14 @@ class AccuracyResource(SyncAPIResource):
         Example:
             ```python
             accuracy = client.reports.accuracy.create_overview(
+                citation_category_taxonomy="legacy",
                 start_date="",
                 end_date="",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 exclude_topic_ids=False,
                 tag_filter_type="any",
-                include_no_tag=False,
-                include_no_persona=False,
+                include_no_tag=True,
+                include_no_persona=True,
                 group_by="period",
             )
             ```
@@ -140,6 +145,9 @@ class AccuracyResource(SyncAPIResource):
             "/v1/reports/accuracy/overview",
             body=maybe_transform(
                 {
+                    "citation_categories": citation_categories,
+                    "citation_category_taxonomy": citation_category_taxonomy,
+                    "citation_category_pairs": citation_category_pairs,
                     "start_date": start_date,
                     "end_date": end_date,
                     "comparison_start_date": comparison_start_date,
@@ -156,7 +164,6 @@ class AccuracyResource(SyncAPIResource):
                     "persona_ids": persona_ids,
                     "include_no_persona": include_no_persona,
                     "prompt_ids": prompt_ids,
-                    "citation_categories": citation_categories,
                     "date_bucket": date_bucket,
                     "group_by": group_by,
                 },
@@ -171,6 +178,9 @@ class AccuracyResource(SyncAPIResource):
     def create_breakdown(
         self,
         *,
+        citation_categories: Optional[SequenceNotStr[str]] | Omit = omit,
+        citation_category_taxonomy: Literal["legacy", "v2"] | Omit = omit,
+        citation_category_pairs: Optional[Iterable[Iterable[object]]] | Omit = omit,
         start_date: str,
         end_date: str,
         comparison_start_date: Optional[str] | Omit = omit,
@@ -187,7 +197,6 @@ class AccuracyResource(SyncAPIResource):
         persona_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         include_no_persona: bool | Omit = omit,
         prompt_ids: Optional[SequenceNotStr[str]] | Omit = omit,
-        citation_categories: Optional[SequenceNotStr[str]] | Omit = omit,
         breakdown_by: Literal["citation", "platform", "topic", "prompt", "tag", "region", "persona", "theme"]
         | Omit = omit,
         group_by: Optional[List[Literal["platform", "topic", "prompt", "tag", "region", "persona", "theme", "date"]]]
@@ -210,6 +219,9 @@ class AccuracyResource(SyncAPIResource):
         Accuracy Breakdown
 
         Args:
+            citation_categories: Legacy category names or V2 classification/custom names. ORed with citation_category_pairs.
+            citation_category_taxonomy: Dataset used for category assignments and filters. V2 leaf group values are JSON [classification, subcategory] pairs.
+            citation_category_pairs: V2-only exact [classification, subcategory] selections, ORed with citation_categories. An empty subcategory matches only the leaf with no subcategory under that classification.
             start_date: Body parameter.
             end_date: Body parameter.
             comparison_start_date: Body parameter.
@@ -226,7 +238,6 @@ class AccuracyResource(SyncAPIResource):
             persona_ids: Body parameter.
             include_no_persona: Body parameter.
             prompt_ids: Body parameter.
-            citation_categories: Body parameter.
             breakdown_by: Body parameter.
             group_by: Body parameter.
             date_bucket: Body parameter.
@@ -247,13 +258,14 @@ class AccuracyResource(SyncAPIResource):
         Example:
             ```python
             accuracy = client.reports.accuracy.create_breakdown(
+                citation_category_taxonomy="legacy",
                 start_date="",
                 end_date="",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 exclude_topic_ids=False,
                 tag_filter_type="any",
-                include_no_tag=False,
-                include_no_persona=False,
+                include_no_tag=True,
+                include_no_persona=True,
                 breakdown_by="citation",
                 limit=10,
                 offset=0,
@@ -266,6 +278,9 @@ class AccuracyResource(SyncAPIResource):
             "/v1/reports/accuracy/breakdown",
             body=maybe_transform(
                 {
+                    "citation_categories": citation_categories,
+                    "citation_category_taxonomy": citation_category_taxonomy,
+                    "citation_category_pairs": citation_category_pairs,
                     "start_date": start_date,
                     "end_date": end_date,
                     "comparison_start_date": comparison_start_date,
@@ -282,7 +297,6 @@ class AccuracyResource(SyncAPIResource):
                     "persona_ids": persona_ids,
                     "include_no_persona": include_no_persona,
                     "prompt_ids": prompt_ids,
-                    "citation_categories": citation_categories,
                     "breakdown_by": breakdown_by,
                     "group_by": group_by,
                     "date_bucket": date_bucket,
@@ -335,7 +349,7 @@ class AccuracyResource(SyncAPIResource):
             ```python
             accuracy = client.reports.accuracy.create_citation_analysis(
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-                clean_href="",
+                clean_href="x",
                 start_date="",
                 end_date="",
             )
@@ -414,6 +428,9 @@ class AccuracyResource(SyncAPIResource):
     def create_inaccurate_themes(
         self,
         *,
+        citation_categories: Optional[SequenceNotStr[str]] | Omit = omit,
+        citation_category_taxonomy: Literal["legacy", "v2"] | Omit = omit,
+        citation_category_pairs: Optional[Iterable[Iterable[object]]] | Omit = omit,
         start_date: str,
         end_date: str,
         comparison_start_date: Optional[str] | Omit = omit,
@@ -430,7 +447,7 @@ class AccuracyResource(SyncAPIResource):
         persona_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         include_no_persona: bool | Omit = omit,
         prompt_ids: Optional[SequenceNotStr[str]] | Omit = omit,
-        citation_categories: Optional[SequenceNotStr[str]] | Omit = omit,
+        verification_status: Literal["inaccurate", "not_enough_data"] | Omit = omit,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
         sort_by: Literal["response_share"] | Omit = omit,
@@ -447,6 +464,9 @@ class AccuracyResource(SyncAPIResource):
         Accuracy Inaccurate Themes
 
         Args:
+            citation_categories: Legacy category names or V2 classification/custom names. ORed with citation_category_pairs.
+            citation_category_taxonomy: Dataset used for category assignments and filters. V2 leaf group values are JSON [classification, subcategory] pairs.
+            citation_category_pairs: V2-only exact [classification, subcategory] selections, ORed with citation_categories. An empty subcategory matches only the leaf with no subcategory under that classification.
             start_date: Body parameter.
             end_date: Body parameter.
             comparison_start_date: Body parameter.
@@ -463,7 +483,7 @@ class AccuracyResource(SyncAPIResource):
             persona_ids: Body parameter.
             include_no_persona: Body parameter.
             prompt_ids: Body parameter.
-            citation_categories: Body parameter.
+            verification_status: Body parameter.
             limit: Body parameter.
             offset: Body parameter.
             sort_by: Body parameter.
@@ -480,13 +500,15 @@ class AccuracyResource(SyncAPIResource):
         Example:
             ```python
             accuracy = client.reports.accuracy.create_inaccurate_themes(
+                citation_category_taxonomy="legacy",
                 start_date="",
                 end_date="",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 exclude_topic_ids=False,
                 tag_filter_type="any",
-                include_no_tag=False,
-                include_no_persona=False,
+                include_no_tag=True,
+                include_no_persona=True,
+                verification_status="inaccurate",
                 limit=10,
                 offset=0,
                 sort_by="response_share",
@@ -498,6 +520,9 @@ class AccuracyResource(SyncAPIResource):
             "/v1/reports/accuracy/inaccurate-themes",
             body=maybe_transform(
                 {
+                    "citation_categories": citation_categories,
+                    "citation_category_taxonomy": citation_category_taxonomy,
+                    "citation_category_pairs": citation_category_pairs,
                     "start_date": start_date,
                     "end_date": end_date,
                     "comparison_start_date": comparison_start_date,
@@ -514,7 +539,7 @@ class AccuracyResource(SyncAPIResource):
                     "persona_ids": persona_ids,
                     "include_no_persona": include_no_persona,
                     "prompt_ids": prompt_ids,
-                    "citation_categories": citation_categories,
+                    "verification_status": verification_status,
                     "limit": limit,
                     "offset": offset,
                     "sort_by": sort_by,
@@ -532,6 +557,9 @@ class AccuracyResource(SyncAPIResource):
     def create_inaccurate_clusters(
         self,
         *,
+        citation_categories: Optional[SequenceNotStr[str]] | Omit = omit,
+        citation_category_taxonomy: Literal["legacy", "v2"] | Omit = omit,
+        citation_category_pairs: Optional[Iterable[Iterable[object]]] | Omit = omit,
         start_date: str,
         end_date: str,
         comparison_start_date: Optional[str] | Omit = omit,
@@ -548,12 +576,14 @@ class AccuracyResource(SyncAPIResource):
         persona_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         include_no_persona: bool | Omit = omit,
         prompt_ids: Optional[SequenceNotStr[str]] | Omit = omit,
-        citation_categories: Optional[SequenceNotStr[str]] | Omit = omit,
+        verification_status: Literal["inaccurate", "not_enough_data"] | Omit = omit,
         theme_id: Optional[str] | Omit = omit,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
         search_query: Optional[str] | Omit = omit,
         include_models: bool | Omit = omit,
+        include_citations: bool | Omit = omit,
+        include_citation_hostnames: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -565,6 +595,9 @@ class AccuracyResource(SyncAPIResource):
         Accuracy Inaccurate Clusters
 
         Args:
+            citation_categories: Legacy category names or V2 classification/custom names. ORed with citation_category_pairs.
+            citation_category_taxonomy: Dataset used for category assignments and filters. V2 leaf group values are JSON [classification, subcategory] pairs.
+            citation_category_pairs: V2-only exact [classification, subcategory] selections, ORed with citation_categories. An empty subcategory matches only the leaf with no subcategory under that classification.
             start_date: Body parameter.
             end_date: Body parameter.
             comparison_start_date: Body parameter.
@@ -581,12 +614,14 @@ class AccuracyResource(SyncAPIResource):
             persona_ids: Body parameter.
             include_no_persona: Body parameter.
             prompt_ids: Body parameter.
-            citation_categories: Body parameter.
+            verification_status: Body parameter.
             theme_id: Body parameter.
             limit: Body parameter.
             offset: Body parameter.
             search_query: Body parameter.
             include_models: Body parameter.
+            include_citations: Include citation URLs and optional legacy hostnames.
+            include_citation_hostnames: Include legacy run-wide citation hostnames. Disable to skip this lookup; cited page URLs remain included.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -598,16 +633,20 @@ class AccuracyResource(SyncAPIResource):
         Example:
             ```python
             accuracy = client.reports.accuracy.create_inaccurate_clusters(
+                citation_category_taxonomy="legacy",
                 start_date="",
                 end_date="",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 exclude_topic_ids=False,
                 tag_filter_type="any",
-                include_no_tag=False,
-                include_no_persona=False,
+                include_no_tag=True,
+                include_no_persona=True,
+                verification_status="inaccurate",
                 limit=5000,
                 offset=0,
                 include_models=False,
+                include_citations=True,
+                include_citation_hostnames=True,
             )
             ```
         """
@@ -615,6 +654,9 @@ class AccuracyResource(SyncAPIResource):
             "/v1/reports/accuracy/inaccurate-clusters",
             body=maybe_transform(
                 {
+                    "citation_categories": citation_categories,
+                    "citation_category_taxonomy": citation_category_taxonomy,
+                    "citation_category_pairs": citation_category_pairs,
                     "start_date": start_date,
                     "end_date": end_date,
                     "comparison_start_date": comparison_start_date,
@@ -631,12 +673,14 @@ class AccuracyResource(SyncAPIResource):
                     "persona_ids": persona_ids,
                     "include_no_persona": include_no_persona,
                     "prompt_ids": prompt_ids,
-                    "citation_categories": citation_categories,
+                    "verification_status": verification_status,
                     "theme_id": theme_id,
                     "limit": limit,
                     "offset": offset,
                     "search_query": search_query,
                     "include_models": include_models,
+                    "include_citations": include_citations,
+                    "include_citation_hostnames": include_citation_hostnames,
                 },
                 accuracy_create_inaccurate_clusters_params.AccuracyCreateInaccurateClustersParams,
             ),
@@ -649,6 +693,9 @@ class AccuracyResource(SyncAPIResource):
     def create_inaccuracy_drivers(
         self,
         *,
+        citation_categories: Optional[SequenceNotStr[str]] | Omit = omit,
+        citation_category_taxonomy: Literal["legacy", "v2"] | Omit = omit,
+        citation_category_pairs: Optional[Iterable[Iterable[object]]] | Omit = omit,
         start_date: str,
         end_date: str,
         comparison_start_date: Optional[str] | Omit = omit,
@@ -665,7 +712,6 @@ class AccuracyResource(SyncAPIResource):
         persona_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         include_no_persona: bool | Omit = omit,
         prompt_ids: Optional[SequenceNotStr[str]] | Omit = omit,
-        citation_categories: Optional[SequenceNotStr[str]] | Omit = omit,
         limit: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -678,6 +724,9 @@ class AccuracyResource(SyncAPIResource):
         Accuracy Inaccuracy Drivers
 
         Args:
+            citation_categories: Legacy category names or V2 classification/custom names. ORed with citation_category_pairs.
+            citation_category_taxonomy: Dataset used for category assignments and filters. V2 leaf group values are JSON [classification, subcategory] pairs.
+            citation_category_pairs: V2-only exact [classification, subcategory] selections, ORed with citation_categories. An empty subcategory matches only the leaf with no subcategory under that classification.
             start_date: Body parameter.
             end_date: Body parameter.
             comparison_start_date: Body parameter.
@@ -694,7 +743,6 @@ class AccuracyResource(SyncAPIResource):
             persona_ids: Body parameter.
             include_no_persona: Body parameter.
             prompt_ids: Body parameter.
-            citation_categories: Body parameter.
             limit: Body parameter.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
@@ -707,13 +755,14 @@ class AccuracyResource(SyncAPIResource):
         Example:
             ```python
             accuracy = client.reports.accuracy.create_inaccuracy_drivers(
+                citation_category_taxonomy="legacy",
                 start_date="",
                 end_date="",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 exclude_topic_ids=False,
                 tag_filter_type="any",
-                include_no_tag=False,
-                include_no_persona=False,
+                include_no_tag=True,
+                include_no_persona=True,
                 limit=5,
             )
             ```
@@ -722,6 +771,9 @@ class AccuracyResource(SyncAPIResource):
             "/v1/reports/accuracy/inaccuracy-drivers",
             body=maybe_transform(
                 {
+                    "citation_categories": citation_categories,
+                    "citation_category_taxonomy": citation_category_taxonomy,
+                    "citation_category_pairs": citation_category_pairs,
                     "start_date": start_date,
                     "end_date": end_date,
                     "comparison_start_date": comparison_start_date,
@@ -738,7 +790,6 @@ class AccuracyResource(SyncAPIResource):
                     "persona_ids": persona_ids,
                     "include_no_persona": include_no_persona,
                     "prompt_ids": prompt_ids,
-                    "citation_categories": citation_categories,
                     "limit": limit,
                 },
                 accuracy_create_inaccuracy_drivers_params.AccuracyCreateInaccuracyDriversParams,
@@ -752,6 +803,9 @@ class AccuracyResource(SyncAPIResource):
     def create_top_inaccurate_claims(
         self,
         *,
+        citation_categories: Optional[SequenceNotStr[str]] | Omit = omit,
+        citation_category_taxonomy: Literal["legacy", "v2"] | Omit = omit,
+        citation_category_pairs: Optional[Iterable[Iterable[object]]] | Omit = omit,
         start_date: str,
         end_date: str,
         comparison_start_date: Optional[str] | Omit = omit,
@@ -768,7 +822,6 @@ class AccuracyResource(SyncAPIResource):
         persona_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         include_no_persona: bool | Omit = omit,
         prompt_ids: Optional[SequenceNotStr[str]] | Omit = omit,
-        citation_categories: Optional[SequenceNotStr[str]] | Omit = omit,
         limit: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -781,6 +834,9 @@ class AccuracyResource(SyncAPIResource):
         Accuracy Top Inaccurate Claims
 
         Args:
+            citation_categories: Legacy category names or V2 classification/custom names. ORed with citation_category_pairs.
+            citation_category_taxonomy: Dataset used for category assignments and filters. V2 leaf group values are JSON [classification, subcategory] pairs.
+            citation_category_pairs: V2-only exact [classification, subcategory] selections, ORed with citation_categories. An empty subcategory matches only the leaf with no subcategory under that classification.
             start_date: Body parameter.
             end_date: Body parameter.
             comparison_start_date: Body parameter.
@@ -797,7 +853,6 @@ class AccuracyResource(SyncAPIResource):
             persona_ids: Body parameter.
             include_no_persona: Body parameter.
             prompt_ids: Body parameter.
-            citation_categories: Body parameter.
             limit: Body parameter.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
@@ -810,13 +865,14 @@ class AccuracyResource(SyncAPIResource):
         Example:
             ```python
             accuracy = client.reports.accuracy.create_top_inaccurate_claims(
+                citation_category_taxonomy="legacy",
                 start_date="",
                 end_date="",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 exclude_topic_ids=False,
                 tag_filter_type="any",
-                include_no_tag=False,
-                include_no_persona=False,
+                include_no_tag=True,
+                include_no_persona=True,
                 limit=5,
             )
             ```
@@ -825,6 +881,9 @@ class AccuracyResource(SyncAPIResource):
             "/v1/reports/accuracy/top-inaccurate-claims",
             body=maybe_transform(
                 {
+                    "citation_categories": citation_categories,
+                    "citation_category_taxonomy": citation_category_taxonomy,
+                    "citation_category_pairs": citation_category_pairs,
                     "start_date": start_date,
                     "end_date": end_date,
                     "comparison_start_date": comparison_start_date,
@@ -841,7 +900,6 @@ class AccuracyResource(SyncAPIResource):
                     "persona_ids": persona_ids,
                     "include_no_persona": include_no_persona,
                     "prompt_ids": prompt_ids,
-                    "citation_categories": citation_categories,
                     "limit": limit,
                 },
                 accuracy_create_top_inaccurate_claims_params.AccuracyCreateTopInaccurateClaimsParams,
@@ -855,6 +913,9 @@ class AccuracyResource(SyncAPIResource):
     def create_claim_breakdown(
         self,
         *,
+        citation_categories: Optional[SequenceNotStr[str]] | Omit = omit,
+        citation_category_taxonomy: Literal["legacy", "v2"] | Omit = omit,
+        citation_category_pairs: Optional[Iterable[Iterable[object]]] | Omit = omit,
         start_date: str,
         end_date: str,
         comparison_start_date: Optional[str] | Omit = omit,
@@ -871,8 +932,8 @@ class AccuracyResource(SyncAPIResource):
         persona_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         include_no_persona: bool | Omit = omit,
         prompt_ids: Optional[SequenceNotStr[str]] | Omit = omit,
-        citation_categories: Optional[SequenceNotStr[str]] | Omit = omit,
         cluster_id: str,
+        verification_status: Literal["inaccurate", "not_enough_data"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -884,6 +945,9 @@ class AccuracyResource(SyncAPIResource):
         Accuracy Claim Breakdown
 
         Args:
+            citation_categories: Legacy category names or V2 classification/custom names. ORed with citation_category_pairs.
+            citation_category_taxonomy: Dataset used for category assignments and filters. V2 leaf group values are JSON [classification, subcategory] pairs.
+            citation_category_pairs: V2-only exact [classification, subcategory] selections, ORed with citation_categories. An empty subcategory matches only the leaf with no subcategory under that classification.
             start_date: Body parameter.
             end_date: Body parameter.
             comparison_start_date: Body parameter.
@@ -900,8 +964,8 @@ class AccuracyResource(SyncAPIResource):
             persona_ids: Body parameter.
             include_no_persona: Body parameter.
             prompt_ids: Body parameter.
-            citation_categories: Body parameter.
             cluster_id: Body parameter.
+            verification_status: Body parameter.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -913,14 +977,16 @@ class AccuracyResource(SyncAPIResource):
         Example:
             ```python
             accuracy = client.reports.accuracy.create_claim_breakdown(
+                citation_category_taxonomy="legacy",
                 start_date="",
                 end_date="",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 exclude_topic_ids=False,
                 tag_filter_type="any",
-                include_no_tag=False,
-                include_no_persona=False,
+                include_no_tag=True,
+                include_no_persona=True,
                 cluster_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+                verification_status="inaccurate",
             )
             ```
         """
@@ -928,6 +994,9 @@ class AccuracyResource(SyncAPIResource):
             "/v1/reports/accuracy/claim-breakdown",
             body=maybe_transform(
                 {
+                    "citation_categories": citation_categories,
+                    "citation_category_taxonomy": citation_category_taxonomy,
+                    "citation_category_pairs": citation_category_pairs,
                     "start_date": start_date,
                     "end_date": end_date,
                     "comparison_start_date": comparison_start_date,
@@ -944,8 +1013,8 @@ class AccuracyResource(SyncAPIResource):
                     "persona_ids": persona_ids,
                     "include_no_persona": include_no_persona,
                     "prompt_ids": prompt_ids,
-                    "citation_categories": citation_categories,
                     "cluster_id": cluster_id,
+                    "verification_status": verification_status,
                 },
                 accuracy_create_claim_breakdown_params.AccuracyCreateClaimBreakdownParams,
             ),
@@ -958,6 +1027,9 @@ class AccuracyResource(SyncAPIResource):
     def create_claim_citations(
         self,
         *,
+        citation_categories: Optional[SequenceNotStr[str]] | Omit = omit,
+        citation_category_taxonomy: Literal["legacy", "v2"] | Omit = omit,
+        citation_category_pairs: Optional[Iterable[Iterable[object]]] | Omit = omit,
         start_date: str,
         end_date: str,
         comparison_start_date: Optional[str] | Omit = omit,
@@ -974,7 +1046,6 @@ class AccuracyResource(SyncAPIResource):
         persona_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         include_no_persona: bool | Omit = omit,
         prompt_ids: Optional[SequenceNotStr[str]] | Omit = omit,
-        citation_categories: Optional[SequenceNotStr[str]] | Omit = omit,
         cluster_id: str,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
@@ -991,6 +1062,9 @@ class AccuracyResource(SyncAPIResource):
         Accuracy Claim Citations
 
         Args:
+            citation_categories: Legacy category names or V2 classification/custom names. ORed with citation_category_pairs.
+            citation_category_taxonomy: Dataset used for category assignments and filters. V2 leaf group values are JSON [classification, subcategory] pairs.
+            citation_category_pairs: V2-only exact [classification, subcategory] selections, ORed with citation_categories. An empty subcategory matches only the leaf with no subcategory under that classification.
             start_date: Body parameter.
             end_date: Body parameter.
             comparison_start_date: Body parameter.
@@ -1007,7 +1081,6 @@ class AccuracyResource(SyncAPIResource):
             persona_ids: Body parameter.
             include_no_persona: Body parameter.
             prompt_ids: Body parameter.
-            citation_categories: Body parameter.
             cluster_id: Body parameter.
             limit: Body parameter.
             offset: Body parameter.
@@ -1024,13 +1097,14 @@ class AccuracyResource(SyncAPIResource):
         Example:
             ```python
             accuracy = client.reports.accuracy.create_claim_citations(
+                citation_category_taxonomy="legacy",
                 start_date="",
                 end_date="",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 exclude_topic_ids=False,
                 tag_filter_type="any",
-                include_no_tag=False,
-                include_no_persona=False,
+                include_no_tag=True,
+                include_no_persona=True,
                 cluster_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 limit=10,
                 offset=0,
@@ -1042,6 +1116,9 @@ class AccuracyResource(SyncAPIResource):
             "/v1/reports/accuracy/claim-citations",
             body=maybe_transform(
                 {
+                    "citation_categories": citation_categories,
+                    "citation_category_taxonomy": citation_category_taxonomy,
+                    "citation_category_pairs": citation_category_pairs,
                     "start_date": start_date,
                     "end_date": end_date,
                     "comparison_start_date": comparison_start_date,
@@ -1058,7 +1135,6 @@ class AccuracyResource(SyncAPIResource):
                     "persona_ids": persona_ids,
                     "include_no_persona": include_no_persona,
                     "prompt_ids": prompt_ids,
-                    "citation_categories": citation_categories,
                     "cluster_id": cluster_id,
                     "limit": limit,
                     "offset": offset,
@@ -1076,6 +1152,9 @@ class AccuracyResource(SyncAPIResource):
     def create_cluster_example_runs(
         self,
         *,
+        citation_categories: Optional[SequenceNotStr[str]] | Omit = omit,
+        citation_category_taxonomy: Literal["legacy", "v2"] | Omit = omit,
+        citation_category_pairs: Optional[Iterable[Iterable[object]]] | Omit = omit,
         start_date: str,
         end_date: str,
         comparison_start_date: Optional[str] | Omit = omit,
@@ -1092,7 +1171,6 @@ class AccuracyResource(SyncAPIResource):
         persona_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         include_no_persona: bool | Omit = omit,
         prompt_ids: Optional[SequenceNotStr[str]] | Omit = omit,
-        citation_categories: Optional[SequenceNotStr[str]] | Omit = omit,
         cluster_id: str,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
@@ -1107,6 +1185,9 @@ class AccuracyResource(SyncAPIResource):
         Accuracy Cluster Example Runs
 
         Args:
+            citation_categories: Legacy category names or V2 classification/custom names. ORed with citation_category_pairs.
+            citation_category_taxonomy: Dataset used for category assignments and filters. V2 leaf group values are JSON [classification, subcategory] pairs.
+            citation_category_pairs: V2-only exact [classification, subcategory] selections, ORed with citation_categories. An empty subcategory matches only the leaf with no subcategory under that classification.
             start_date: Body parameter.
             end_date: Body parameter.
             comparison_start_date: Body parameter.
@@ -1123,7 +1204,6 @@ class AccuracyResource(SyncAPIResource):
             persona_ids: Body parameter.
             include_no_persona: Body parameter.
             prompt_ids: Body parameter.
-            citation_categories: Body parameter.
             cluster_id: Body parameter.
             limit: Body parameter.
             offset: Body parameter.
@@ -1137,14 +1217,15 @@ class AccuracyResource(SyncAPIResource):
 
         Example:
             ```python
-            accuracy = client.reports.accuracy.create_cluster_example_runs(
+            cluster_example_runs = client.reports.accuracy.create_cluster_example_runs(
+                citation_category_taxonomy="legacy",
                 start_date="",
                 end_date="",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 exclude_topic_ids=False,
                 tag_filter_type="any",
-                include_no_tag=False,
-                include_no_persona=False,
+                include_no_tag=True,
+                include_no_persona=True,
                 cluster_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 limit=20,
                 offset=0,
@@ -1155,6 +1236,9 @@ class AccuracyResource(SyncAPIResource):
             "/v1/reports/accuracy/cluster-example-runs",
             body=maybe_transform(
                 {
+                    "citation_categories": citation_categories,
+                    "citation_category_taxonomy": citation_category_taxonomy,
+                    "citation_category_pairs": citation_category_pairs,
                     "start_date": start_date,
                     "end_date": end_date,
                     "comparison_start_date": comparison_start_date,
@@ -1171,7 +1255,6 @@ class AccuracyResource(SyncAPIResource):
                     "persona_ids": persona_ids,
                     "include_no_persona": include_no_persona,
                     "prompt_ids": prompt_ids,
-                    "citation_categories": citation_categories,
                     "cluster_id": cluster_id,
                     "limit": limit,
                     "offset": offset,
@@ -1200,8 +1283,8 @@ class AccuracyResource(SyncAPIResource):
         Accuracy Cluster Verification Pairs
 
         Args:
-            category_id: Body parameter.
-            cluster_id: Body parameter.
+            category_id: Category UUID. Access is enforced before the tool runs.
+            cluster_id: Claim cluster UUID returned by a FactCheck table.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -1212,7 +1295,7 @@ class AccuracyResource(SyncAPIResource):
 
         Example:
             ```python
-            accuracy = client.reports.accuracy.create_cluster_verification_pairs(
+            cluster_verification_pairs = client.reports.accuracy.create_cluster_verification_pairs(
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 cluster_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
             )
@@ -1248,7 +1331,7 @@ class AccuracyResource(SyncAPIResource):
         Accuracy Factcheck Setup Status
 
         Args:
-            category_id: Body parameter.
+            category_id: Category UUID. Access is enforced before the tool runs.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -1289,6 +1372,9 @@ class AsyncAccuracyResource(AsyncAPIResource):
     async def create_overview(
         self,
         *,
+        citation_categories: Optional[SequenceNotStr[str]] | Omit = omit,
+        citation_category_taxonomy: Literal["legacy", "v2"] | Omit = omit,
+        citation_category_pairs: Optional[Iterable[Iterable[object]]] | Omit = omit,
         start_date: str,
         end_date: str,
         comparison_start_date: Optional[str] | Omit = omit,
@@ -1305,7 +1391,6 @@ class AsyncAccuracyResource(AsyncAPIResource):
         persona_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         include_no_persona: bool | Omit = omit,
         prompt_ids: Optional[SequenceNotStr[str]] | Omit = omit,
-        citation_categories: Optional[SequenceNotStr[str]] | Omit = omit,
         date_bucket: Optional[str] | Omit = omit,
         group_by: Literal["period", "theme"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1319,6 +1404,9 @@ class AsyncAccuracyResource(AsyncAPIResource):
         Accuracy Overview
 
         Args:
+            citation_categories: Legacy category names or V2 classification/custom names. ORed with citation_category_pairs.
+            citation_category_taxonomy: Dataset used for category assignments and filters. V2 leaf group values are JSON [classification, subcategory] pairs.
+            citation_category_pairs: V2-only exact [classification, subcategory] selections, ORed with citation_categories. An empty subcategory matches only the leaf with no subcategory under that classification.
             start_date: Body parameter.
             end_date: Body parameter.
             comparison_start_date: Body parameter.
@@ -1335,7 +1423,6 @@ class AsyncAccuracyResource(AsyncAPIResource):
             persona_ids: Body parameter.
             include_no_persona: Body parameter.
             prompt_ids: Body parameter.
-            citation_categories: Body parameter.
             date_bucket: Body parameter.
             group_by: Body parameter.
             extra_headers: Send extra headers with the request.
@@ -1349,13 +1436,14 @@ class AsyncAccuracyResource(AsyncAPIResource):
         Example:
             ```python
             accuracy = await client.reports.accuracy.create_overview(
+                citation_category_taxonomy="legacy",
                 start_date="",
                 end_date="",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 exclude_topic_ids=False,
                 tag_filter_type="any",
-                include_no_tag=False,
-                include_no_persona=False,
+                include_no_tag=True,
+                include_no_persona=True,
                 group_by="period",
             )
             ```
@@ -1364,6 +1452,9 @@ class AsyncAccuracyResource(AsyncAPIResource):
             "/v1/reports/accuracy/overview",
             body=await async_maybe_transform(
                 {
+                    "citation_categories": citation_categories,
+                    "citation_category_taxonomy": citation_category_taxonomy,
+                    "citation_category_pairs": citation_category_pairs,
                     "start_date": start_date,
                     "end_date": end_date,
                     "comparison_start_date": comparison_start_date,
@@ -1380,7 +1471,6 @@ class AsyncAccuracyResource(AsyncAPIResource):
                     "persona_ids": persona_ids,
                     "include_no_persona": include_no_persona,
                     "prompt_ids": prompt_ids,
-                    "citation_categories": citation_categories,
                     "date_bucket": date_bucket,
                     "group_by": group_by,
                 },
@@ -1395,6 +1485,9 @@ class AsyncAccuracyResource(AsyncAPIResource):
     async def create_breakdown(
         self,
         *,
+        citation_categories: Optional[SequenceNotStr[str]] | Omit = omit,
+        citation_category_taxonomy: Literal["legacy", "v2"] | Omit = omit,
+        citation_category_pairs: Optional[Iterable[Iterable[object]]] | Omit = omit,
         start_date: str,
         end_date: str,
         comparison_start_date: Optional[str] | Omit = omit,
@@ -1411,7 +1504,6 @@ class AsyncAccuracyResource(AsyncAPIResource):
         persona_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         include_no_persona: bool | Omit = omit,
         prompt_ids: Optional[SequenceNotStr[str]] | Omit = omit,
-        citation_categories: Optional[SequenceNotStr[str]] | Omit = omit,
         breakdown_by: Literal["citation", "platform", "topic", "prompt", "tag", "region", "persona", "theme"]
         | Omit = omit,
         group_by: Optional[List[Literal["platform", "topic", "prompt", "tag", "region", "persona", "theme", "date"]]]
@@ -1434,6 +1526,9 @@ class AsyncAccuracyResource(AsyncAPIResource):
         Accuracy Breakdown
 
         Args:
+            citation_categories: Legacy category names or V2 classification/custom names. ORed with citation_category_pairs.
+            citation_category_taxonomy: Dataset used for category assignments and filters. V2 leaf group values are JSON [classification, subcategory] pairs.
+            citation_category_pairs: V2-only exact [classification, subcategory] selections, ORed with citation_categories. An empty subcategory matches only the leaf with no subcategory under that classification.
             start_date: Body parameter.
             end_date: Body parameter.
             comparison_start_date: Body parameter.
@@ -1450,7 +1545,6 @@ class AsyncAccuracyResource(AsyncAPIResource):
             persona_ids: Body parameter.
             include_no_persona: Body parameter.
             prompt_ids: Body parameter.
-            citation_categories: Body parameter.
             breakdown_by: Body parameter.
             group_by: Body parameter.
             date_bucket: Body parameter.
@@ -1471,13 +1565,14 @@ class AsyncAccuracyResource(AsyncAPIResource):
         Example:
             ```python
             accuracy = await client.reports.accuracy.create_breakdown(
+                citation_category_taxonomy="legacy",
                 start_date="",
                 end_date="",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 exclude_topic_ids=False,
                 tag_filter_type="any",
-                include_no_tag=False,
-                include_no_persona=False,
+                include_no_tag=True,
+                include_no_persona=True,
                 breakdown_by="citation",
                 limit=10,
                 offset=0,
@@ -1490,6 +1585,9 @@ class AsyncAccuracyResource(AsyncAPIResource):
             "/v1/reports/accuracy/breakdown",
             body=await async_maybe_transform(
                 {
+                    "citation_categories": citation_categories,
+                    "citation_category_taxonomy": citation_category_taxonomy,
+                    "citation_category_pairs": citation_category_pairs,
                     "start_date": start_date,
                     "end_date": end_date,
                     "comparison_start_date": comparison_start_date,
@@ -1506,7 +1604,6 @@ class AsyncAccuracyResource(AsyncAPIResource):
                     "persona_ids": persona_ids,
                     "include_no_persona": include_no_persona,
                     "prompt_ids": prompt_ids,
-                    "citation_categories": citation_categories,
                     "breakdown_by": breakdown_by,
                     "group_by": group_by,
                     "date_bucket": date_bucket,
@@ -1559,7 +1656,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
             ```python
             accuracy = await client.reports.accuracy.create_citation_analysis(
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-                clean_href="",
+                clean_href="x",
                 start_date="",
                 end_date="",
             )
@@ -1638,6 +1735,9 @@ class AsyncAccuracyResource(AsyncAPIResource):
     async def create_inaccurate_themes(
         self,
         *,
+        citation_categories: Optional[SequenceNotStr[str]] | Omit = omit,
+        citation_category_taxonomy: Literal["legacy", "v2"] | Omit = omit,
+        citation_category_pairs: Optional[Iterable[Iterable[object]]] | Omit = omit,
         start_date: str,
         end_date: str,
         comparison_start_date: Optional[str] | Omit = omit,
@@ -1654,7 +1754,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
         persona_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         include_no_persona: bool | Omit = omit,
         prompt_ids: Optional[SequenceNotStr[str]] | Omit = omit,
-        citation_categories: Optional[SequenceNotStr[str]] | Omit = omit,
+        verification_status: Literal["inaccurate", "not_enough_data"] | Omit = omit,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
         sort_by: Literal["response_share"] | Omit = omit,
@@ -1671,6 +1771,9 @@ class AsyncAccuracyResource(AsyncAPIResource):
         Accuracy Inaccurate Themes
 
         Args:
+            citation_categories: Legacy category names or V2 classification/custom names. ORed with citation_category_pairs.
+            citation_category_taxonomy: Dataset used for category assignments and filters. V2 leaf group values are JSON [classification, subcategory] pairs.
+            citation_category_pairs: V2-only exact [classification, subcategory] selections, ORed with citation_categories. An empty subcategory matches only the leaf with no subcategory under that classification.
             start_date: Body parameter.
             end_date: Body parameter.
             comparison_start_date: Body parameter.
@@ -1687,7 +1790,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
             persona_ids: Body parameter.
             include_no_persona: Body parameter.
             prompt_ids: Body parameter.
-            citation_categories: Body parameter.
+            verification_status: Body parameter.
             limit: Body parameter.
             offset: Body parameter.
             sort_by: Body parameter.
@@ -1704,13 +1807,15 @@ class AsyncAccuracyResource(AsyncAPIResource):
         Example:
             ```python
             accuracy = await client.reports.accuracy.create_inaccurate_themes(
+                citation_category_taxonomy="legacy",
                 start_date="",
                 end_date="",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 exclude_topic_ids=False,
                 tag_filter_type="any",
-                include_no_tag=False,
-                include_no_persona=False,
+                include_no_tag=True,
+                include_no_persona=True,
+                verification_status="inaccurate",
                 limit=10,
                 offset=0,
                 sort_by="response_share",
@@ -1722,6 +1827,9 @@ class AsyncAccuracyResource(AsyncAPIResource):
             "/v1/reports/accuracy/inaccurate-themes",
             body=await async_maybe_transform(
                 {
+                    "citation_categories": citation_categories,
+                    "citation_category_taxonomy": citation_category_taxonomy,
+                    "citation_category_pairs": citation_category_pairs,
                     "start_date": start_date,
                     "end_date": end_date,
                     "comparison_start_date": comparison_start_date,
@@ -1738,7 +1846,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
                     "persona_ids": persona_ids,
                     "include_no_persona": include_no_persona,
                     "prompt_ids": prompt_ids,
-                    "citation_categories": citation_categories,
+                    "verification_status": verification_status,
                     "limit": limit,
                     "offset": offset,
                     "sort_by": sort_by,
@@ -1756,6 +1864,9 @@ class AsyncAccuracyResource(AsyncAPIResource):
     async def create_inaccurate_clusters(
         self,
         *,
+        citation_categories: Optional[SequenceNotStr[str]] | Omit = omit,
+        citation_category_taxonomy: Literal["legacy", "v2"] | Omit = omit,
+        citation_category_pairs: Optional[Iterable[Iterable[object]]] | Omit = omit,
         start_date: str,
         end_date: str,
         comparison_start_date: Optional[str] | Omit = omit,
@@ -1772,12 +1883,14 @@ class AsyncAccuracyResource(AsyncAPIResource):
         persona_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         include_no_persona: bool | Omit = omit,
         prompt_ids: Optional[SequenceNotStr[str]] | Omit = omit,
-        citation_categories: Optional[SequenceNotStr[str]] | Omit = omit,
+        verification_status: Literal["inaccurate", "not_enough_data"] | Omit = omit,
         theme_id: Optional[str] | Omit = omit,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
         search_query: Optional[str] | Omit = omit,
         include_models: bool | Omit = omit,
+        include_citations: bool | Omit = omit,
+        include_citation_hostnames: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1789,6 +1902,9 @@ class AsyncAccuracyResource(AsyncAPIResource):
         Accuracy Inaccurate Clusters
 
         Args:
+            citation_categories: Legacy category names or V2 classification/custom names. ORed with citation_category_pairs.
+            citation_category_taxonomy: Dataset used for category assignments and filters. V2 leaf group values are JSON [classification, subcategory] pairs.
+            citation_category_pairs: V2-only exact [classification, subcategory] selections, ORed with citation_categories. An empty subcategory matches only the leaf with no subcategory under that classification.
             start_date: Body parameter.
             end_date: Body parameter.
             comparison_start_date: Body parameter.
@@ -1805,12 +1921,14 @@ class AsyncAccuracyResource(AsyncAPIResource):
             persona_ids: Body parameter.
             include_no_persona: Body parameter.
             prompt_ids: Body parameter.
-            citation_categories: Body parameter.
+            verification_status: Body parameter.
             theme_id: Body parameter.
             limit: Body parameter.
             offset: Body parameter.
             search_query: Body parameter.
             include_models: Body parameter.
+            include_citations: Include citation URLs and optional legacy hostnames.
+            include_citation_hostnames: Include legacy run-wide citation hostnames. Disable to skip this lookup; cited page URLs remain included.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -1822,16 +1940,20 @@ class AsyncAccuracyResource(AsyncAPIResource):
         Example:
             ```python
             accuracy = await client.reports.accuracy.create_inaccurate_clusters(
+                citation_category_taxonomy="legacy",
                 start_date="",
                 end_date="",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 exclude_topic_ids=False,
                 tag_filter_type="any",
-                include_no_tag=False,
-                include_no_persona=False,
+                include_no_tag=True,
+                include_no_persona=True,
+                verification_status="inaccurate",
                 limit=5000,
                 offset=0,
                 include_models=False,
+                include_citations=True,
+                include_citation_hostnames=True,
             )
             ```
         """
@@ -1839,6 +1961,9 @@ class AsyncAccuracyResource(AsyncAPIResource):
             "/v1/reports/accuracy/inaccurate-clusters",
             body=await async_maybe_transform(
                 {
+                    "citation_categories": citation_categories,
+                    "citation_category_taxonomy": citation_category_taxonomy,
+                    "citation_category_pairs": citation_category_pairs,
                     "start_date": start_date,
                     "end_date": end_date,
                     "comparison_start_date": comparison_start_date,
@@ -1855,12 +1980,14 @@ class AsyncAccuracyResource(AsyncAPIResource):
                     "persona_ids": persona_ids,
                     "include_no_persona": include_no_persona,
                     "prompt_ids": prompt_ids,
-                    "citation_categories": citation_categories,
+                    "verification_status": verification_status,
                     "theme_id": theme_id,
                     "limit": limit,
                     "offset": offset,
                     "search_query": search_query,
                     "include_models": include_models,
+                    "include_citations": include_citations,
+                    "include_citation_hostnames": include_citation_hostnames,
                 },
                 accuracy_create_inaccurate_clusters_params.AccuracyCreateInaccurateClustersParams,
             ),
@@ -1873,6 +2000,9 @@ class AsyncAccuracyResource(AsyncAPIResource):
     async def create_inaccuracy_drivers(
         self,
         *,
+        citation_categories: Optional[SequenceNotStr[str]] | Omit = omit,
+        citation_category_taxonomy: Literal["legacy", "v2"] | Omit = omit,
+        citation_category_pairs: Optional[Iterable[Iterable[object]]] | Omit = omit,
         start_date: str,
         end_date: str,
         comparison_start_date: Optional[str] | Omit = omit,
@@ -1889,7 +2019,6 @@ class AsyncAccuracyResource(AsyncAPIResource):
         persona_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         include_no_persona: bool | Omit = omit,
         prompt_ids: Optional[SequenceNotStr[str]] | Omit = omit,
-        citation_categories: Optional[SequenceNotStr[str]] | Omit = omit,
         limit: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1902,6 +2031,9 @@ class AsyncAccuracyResource(AsyncAPIResource):
         Accuracy Inaccuracy Drivers
 
         Args:
+            citation_categories: Legacy category names or V2 classification/custom names. ORed with citation_category_pairs.
+            citation_category_taxonomy: Dataset used for category assignments and filters. V2 leaf group values are JSON [classification, subcategory] pairs.
+            citation_category_pairs: V2-only exact [classification, subcategory] selections, ORed with citation_categories. An empty subcategory matches only the leaf with no subcategory under that classification.
             start_date: Body parameter.
             end_date: Body parameter.
             comparison_start_date: Body parameter.
@@ -1918,7 +2050,6 @@ class AsyncAccuracyResource(AsyncAPIResource):
             persona_ids: Body parameter.
             include_no_persona: Body parameter.
             prompt_ids: Body parameter.
-            citation_categories: Body parameter.
             limit: Body parameter.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
@@ -1931,13 +2062,14 @@ class AsyncAccuracyResource(AsyncAPIResource):
         Example:
             ```python
             accuracy = await client.reports.accuracy.create_inaccuracy_drivers(
+                citation_category_taxonomy="legacy",
                 start_date="",
                 end_date="",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 exclude_topic_ids=False,
                 tag_filter_type="any",
-                include_no_tag=False,
-                include_no_persona=False,
+                include_no_tag=True,
+                include_no_persona=True,
                 limit=5,
             )
             ```
@@ -1946,6 +2078,9 @@ class AsyncAccuracyResource(AsyncAPIResource):
             "/v1/reports/accuracy/inaccuracy-drivers",
             body=await async_maybe_transform(
                 {
+                    "citation_categories": citation_categories,
+                    "citation_category_taxonomy": citation_category_taxonomy,
+                    "citation_category_pairs": citation_category_pairs,
                     "start_date": start_date,
                     "end_date": end_date,
                     "comparison_start_date": comparison_start_date,
@@ -1962,7 +2097,6 @@ class AsyncAccuracyResource(AsyncAPIResource):
                     "persona_ids": persona_ids,
                     "include_no_persona": include_no_persona,
                     "prompt_ids": prompt_ids,
-                    "citation_categories": citation_categories,
                     "limit": limit,
                 },
                 accuracy_create_inaccuracy_drivers_params.AccuracyCreateInaccuracyDriversParams,
@@ -1976,6 +2110,9 @@ class AsyncAccuracyResource(AsyncAPIResource):
     async def create_top_inaccurate_claims(
         self,
         *,
+        citation_categories: Optional[SequenceNotStr[str]] | Omit = omit,
+        citation_category_taxonomy: Literal["legacy", "v2"] | Omit = omit,
+        citation_category_pairs: Optional[Iterable[Iterable[object]]] | Omit = omit,
         start_date: str,
         end_date: str,
         comparison_start_date: Optional[str] | Omit = omit,
@@ -1992,7 +2129,6 @@ class AsyncAccuracyResource(AsyncAPIResource):
         persona_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         include_no_persona: bool | Omit = omit,
         prompt_ids: Optional[SequenceNotStr[str]] | Omit = omit,
-        citation_categories: Optional[SequenceNotStr[str]] | Omit = omit,
         limit: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -2005,6 +2141,9 @@ class AsyncAccuracyResource(AsyncAPIResource):
         Accuracy Top Inaccurate Claims
 
         Args:
+            citation_categories: Legacy category names or V2 classification/custom names. ORed with citation_category_pairs.
+            citation_category_taxonomy: Dataset used for category assignments and filters. V2 leaf group values are JSON [classification, subcategory] pairs.
+            citation_category_pairs: V2-only exact [classification, subcategory] selections, ORed with citation_categories. An empty subcategory matches only the leaf with no subcategory under that classification.
             start_date: Body parameter.
             end_date: Body parameter.
             comparison_start_date: Body parameter.
@@ -2021,7 +2160,6 @@ class AsyncAccuracyResource(AsyncAPIResource):
             persona_ids: Body parameter.
             include_no_persona: Body parameter.
             prompt_ids: Body parameter.
-            citation_categories: Body parameter.
             limit: Body parameter.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
@@ -2034,13 +2172,14 @@ class AsyncAccuracyResource(AsyncAPIResource):
         Example:
             ```python
             accuracy = await client.reports.accuracy.create_top_inaccurate_claims(
+                citation_category_taxonomy="legacy",
                 start_date="",
                 end_date="",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 exclude_topic_ids=False,
                 tag_filter_type="any",
-                include_no_tag=False,
-                include_no_persona=False,
+                include_no_tag=True,
+                include_no_persona=True,
                 limit=5,
             )
             ```
@@ -2049,6 +2188,9 @@ class AsyncAccuracyResource(AsyncAPIResource):
             "/v1/reports/accuracy/top-inaccurate-claims",
             body=await async_maybe_transform(
                 {
+                    "citation_categories": citation_categories,
+                    "citation_category_taxonomy": citation_category_taxonomy,
+                    "citation_category_pairs": citation_category_pairs,
                     "start_date": start_date,
                     "end_date": end_date,
                     "comparison_start_date": comparison_start_date,
@@ -2065,7 +2207,6 @@ class AsyncAccuracyResource(AsyncAPIResource):
                     "persona_ids": persona_ids,
                     "include_no_persona": include_no_persona,
                     "prompt_ids": prompt_ids,
-                    "citation_categories": citation_categories,
                     "limit": limit,
                 },
                 accuracy_create_top_inaccurate_claims_params.AccuracyCreateTopInaccurateClaimsParams,
@@ -2079,6 +2220,9 @@ class AsyncAccuracyResource(AsyncAPIResource):
     async def create_claim_breakdown(
         self,
         *,
+        citation_categories: Optional[SequenceNotStr[str]] | Omit = omit,
+        citation_category_taxonomy: Literal["legacy", "v2"] | Omit = omit,
+        citation_category_pairs: Optional[Iterable[Iterable[object]]] | Omit = omit,
         start_date: str,
         end_date: str,
         comparison_start_date: Optional[str] | Omit = omit,
@@ -2095,8 +2239,8 @@ class AsyncAccuracyResource(AsyncAPIResource):
         persona_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         include_no_persona: bool | Omit = omit,
         prompt_ids: Optional[SequenceNotStr[str]] | Omit = omit,
-        citation_categories: Optional[SequenceNotStr[str]] | Omit = omit,
         cluster_id: str,
+        verification_status: Literal["inaccurate", "not_enough_data"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -2108,6 +2252,9 @@ class AsyncAccuracyResource(AsyncAPIResource):
         Accuracy Claim Breakdown
 
         Args:
+            citation_categories: Legacy category names or V2 classification/custom names. ORed with citation_category_pairs.
+            citation_category_taxonomy: Dataset used for category assignments and filters. V2 leaf group values are JSON [classification, subcategory] pairs.
+            citation_category_pairs: V2-only exact [classification, subcategory] selections, ORed with citation_categories. An empty subcategory matches only the leaf with no subcategory under that classification.
             start_date: Body parameter.
             end_date: Body parameter.
             comparison_start_date: Body parameter.
@@ -2124,8 +2271,8 @@ class AsyncAccuracyResource(AsyncAPIResource):
             persona_ids: Body parameter.
             include_no_persona: Body parameter.
             prompt_ids: Body parameter.
-            citation_categories: Body parameter.
             cluster_id: Body parameter.
+            verification_status: Body parameter.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -2137,14 +2284,16 @@ class AsyncAccuracyResource(AsyncAPIResource):
         Example:
             ```python
             accuracy = await client.reports.accuracy.create_claim_breakdown(
+                citation_category_taxonomy="legacy",
                 start_date="",
                 end_date="",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 exclude_topic_ids=False,
                 tag_filter_type="any",
-                include_no_tag=False,
-                include_no_persona=False,
+                include_no_tag=True,
+                include_no_persona=True,
                 cluster_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+                verification_status="inaccurate",
             )
             ```
         """
@@ -2152,6 +2301,9 @@ class AsyncAccuracyResource(AsyncAPIResource):
             "/v1/reports/accuracy/claim-breakdown",
             body=await async_maybe_transform(
                 {
+                    "citation_categories": citation_categories,
+                    "citation_category_taxonomy": citation_category_taxonomy,
+                    "citation_category_pairs": citation_category_pairs,
                     "start_date": start_date,
                     "end_date": end_date,
                     "comparison_start_date": comparison_start_date,
@@ -2168,8 +2320,8 @@ class AsyncAccuracyResource(AsyncAPIResource):
                     "persona_ids": persona_ids,
                     "include_no_persona": include_no_persona,
                     "prompt_ids": prompt_ids,
-                    "citation_categories": citation_categories,
                     "cluster_id": cluster_id,
+                    "verification_status": verification_status,
                 },
                 accuracy_create_claim_breakdown_params.AccuracyCreateClaimBreakdownParams,
             ),
@@ -2182,6 +2334,9 @@ class AsyncAccuracyResource(AsyncAPIResource):
     async def create_claim_citations(
         self,
         *,
+        citation_categories: Optional[SequenceNotStr[str]] | Omit = omit,
+        citation_category_taxonomy: Literal["legacy", "v2"] | Omit = omit,
+        citation_category_pairs: Optional[Iterable[Iterable[object]]] | Omit = omit,
         start_date: str,
         end_date: str,
         comparison_start_date: Optional[str] | Omit = omit,
@@ -2198,7 +2353,6 @@ class AsyncAccuracyResource(AsyncAPIResource):
         persona_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         include_no_persona: bool | Omit = omit,
         prompt_ids: Optional[SequenceNotStr[str]] | Omit = omit,
-        citation_categories: Optional[SequenceNotStr[str]] | Omit = omit,
         cluster_id: str,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
@@ -2215,6 +2369,9 @@ class AsyncAccuracyResource(AsyncAPIResource):
         Accuracy Claim Citations
 
         Args:
+            citation_categories: Legacy category names or V2 classification/custom names. ORed with citation_category_pairs.
+            citation_category_taxonomy: Dataset used for category assignments and filters. V2 leaf group values are JSON [classification, subcategory] pairs.
+            citation_category_pairs: V2-only exact [classification, subcategory] selections, ORed with citation_categories. An empty subcategory matches only the leaf with no subcategory under that classification.
             start_date: Body parameter.
             end_date: Body parameter.
             comparison_start_date: Body parameter.
@@ -2231,7 +2388,6 @@ class AsyncAccuracyResource(AsyncAPIResource):
             persona_ids: Body parameter.
             include_no_persona: Body parameter.
             prompt_ids: Body parameter.
-            citation_categories: Body parameter.
             cluster_id: Body parameter.
             limit: Body parameter.
             offset: Body parameter.
@@ -2248,13 +2404,14 @@ class AsyncAccuracyResource(AsyncAPIResource):
         Example:
             ```python
             accuracy = await client.reports.accuracy.create_claim_citations(
+                citation_category_taxonomy="legacy",
                 start_date="",
                 end_date="",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 exclude_topic_ids=False,
                 tag_filter_type="any",
-                include_no_tag=False,
-                include_no_persona=False,
+                include_no_tag=True,
+                include_no_persona=True,
                 cluster_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 limit=10,
                 offset=0,
@@ -2266,6 +2423,9 @@ class AsyncAccuracyResource(AsyncAPIResource):
             "/v1/reports/accuracy/claim-citations",
             body=await async_maybe_transform(
                 {
+                    "citation_categories": citation_categories,
+                    "citation_category_taxonomy": citation_category_taxonomy,
+                    "citation_category_pairs": citation_category_pairs,
                     "start_date": start_date,
                     "end_date": end_date,
                     "comparison_start_date": comparison_start_date,
@@ -2282,7 +2442,6 @@ class AsyncAccuracyResource(AsyncAPIResource):
                     "persona_ids": persona_ids,
                     "include_no_persona": include_no_persona,
                     "prompt_ids": prompt_ids,
-                    "citation_categories": citation_categories,
                     "cluster_id": cluster_id,
                     "limit": limit,
                     "offset": offset,
@@ -2300,6 +2459,9 @@ class AsyncAccuracyResource(AsyncAPIResource):
     async def create_cluster_example_runs(
         self,
         *,
+        citation_categories: Optional[SequenceNotStr[str]] | Omit = omit,
+        citation_category_taxonomy: Literal["legacy", "v2"] | Omit = omit,
+        citation_category_pairs: Optional[Iterable[Iterable[object]]] | Omit = omit,
         start_date: str,
         end_date: str,
         comparison_start_date: Optional[str] | Omit = omit,
@@ -2316,7 +2478,6 @@ class AsyncAccuracyResource(AsyncAPIResource):
         persona_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         include_no_persona: bool | Omit = omit,
         prompt_ids: Optional[SequenceNotStr[str]] | Omit = omit,
-        citation_categories: Optional[SequenceNotStr[str]] | Omit = omit,
         cluster_id: str,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
@@ -2331,6 +2492,9 @@ class AsyncAccuracyResource(AsyncAPIResource):
         Accuracy Cluster Example Runs
 
         Args:
+            citation_categories: Legacy category names or V2 classification/custom names. ORed with citation_category_pairs.
+            citation_category_taxonomy: Dataset used for category assignments and filters. V2 leaf group values are JSON [classification, subcategory] pairs.
+            citation_category_pairs: V2-only exact [classification, subcategory] selections, ORed with citation_categories. An empty subcategory matches only the leaf with no subcategory under that classification.
             start_date: Body parameter.
             end_date: Body parameter.
             comparison_start_date: Body parameter.
@@ -2347,7 +2511,6 @@ class AsyncAccuracyResource(AsyncAPIResource):
             persona_ids: Body parameter.
             include_no_persona: Body parameter.
             prompt_ids: Body parameter.
-            citation_categories: Body parameter.
             cluster_id: Body parameter.
             limit: Body parameter.
             offset: Body parameter.
@@ -2361,14 +2524,15 @@ class AsyncAccuracyResource(AsyncAPIResource):
 
         Example:
             ```python
-            accuracy = await client.reports.accuracy.create_cluster_example_runs(
+            cluster_example_runs = await client.reports.accuracy.create_cluster_example_runs(
+                citation_category_taxonomy="legacy",
                 start_date="",
                 end_date="",
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 exclude_topic_ids=False,
                 tag_filter_type="any",
-                include_no_tag=False,
-                include_no_persona=False,
+                include_no_tag=True,
+                include_no_persona=True,
                 cluster_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 limit=20,
                 offset=0,
@@ -2379,6 +2543,9 @@ class AsyncAccuracyResource(AsyncAPIResource):
             "/v1/reports/accuracy/cluster-example-runs",
             body=await async_maybe_transform(
                 {
+                    "citation_categories": citation_categories,
+                    "citation_category_taxonomy": citation_category_taxonomy,
+                    "citation_category_pairs": citation_category_pairs,
                     "start_date": start_date,
                     "end_date": end_date,
                     "comparison_start_date": comparison_start_date,
@@ -2395,7 +2562,6 @@ class AsyncAccuracyResource(AsyncAPIResource):
                     "persona_ids": persona_ids,
                     "include_no_persona": include_no_persona,
                     "prompt_ids": prompt_ids,
-                    "citation_categories": citation_categories,
                     "cluster_id": cluster_id,
                     "limit": limit,
                     "offset": offset,
@@ -2424,8 +2590,8 @@ class AsyncAccuracyResource(AsyncAPIResource):
         Accuracy Cluster Verification Pairs
 
         Args:
-            category_id: Body parameter.
-            cluster_id: Body parameter.
+            category_id: Category UUID. Access is enforced before the tool runs.
+            cluster_id: Claim cluster UUID returned by a FactCheck table.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
@@ -2436,7 +2602,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
 
         Example:
             ```python
-            accuracy = await client.reports.accuracy.create_cluster_verification_pairs(
+            cluster_verification_pairs = await client.reports.accuracy.create_cluster_verification_pairs(
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 cluster_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
             )
@@ -2472,7 +2638,7 @@ class AsyncAccuracyResource(AsyncAPIResource):
         Accuracy Factcheck Setup Status
 
         Args:
-            category_id: Body parameter.
+            category_id: Category UUID. Access is enforced before the tool runs.
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.

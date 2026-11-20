@@ -43,9 +43,9 @@ class NodeTypesResource(SyncAPIResource):
         """
         List the node types available for building agents.
 
-        The set is deterministic and does not depend on the caller, so the response
-        is safe to cache across sessions. Integration-dependent and dynamic-schema
-        node types are intentionally excluded in v1.
+        Amazon Selling Partner nodes are omitted unless `showAmazonSellingPartnerIntegration`
+        is enabled for one of the caller's organizations. Dynamic-schema node types stay
+        excluded in v1.
 
         Args:
             extra_headers: Send extra headers with the request.
@@ -136,9 +136,9 @@ class AsyncNodeTypesResource(AsyncAPIResource):
         """
         List the node types available for building agents.
 
-        The set is deterministic and does not depend on the caller, so the response
-        is safe to cache across sessions. Integration-dependent and dynamic-schema
-        node types are intentionally excluded in v1.
+        Amazon Selling Partner nodes are omitted unless `showAmazonSellingPartnerIntegration`
+        is enabled for one of the caller's organizations. Dynamic-schema node types stay
+        excluded in v1.
 
         Args:
             extra_headers: Send extra headers with the request.

@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Scalar. See README.md for details.
 
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Union
 from datetime import date
 
 from ..._models import BaseModel
@@ -27,7 +27,7 @@ class Info(BaseModel):
 
     truncated: Optional[bool] = None
 
-    query: Optional[Dict[str, object]] = None
+    query: Optional[Dict[str, Optional[Union[str, int, float, bool, List[object], Dict[str, object]]]]] = None
 
 
 class VolumeOnTheFlyResponse(BaseModel):

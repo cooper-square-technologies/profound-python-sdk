@@ -1,7 +1,6 @@
 # File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 from typing import List, Optional
-from datetime import datetime
 from typing_extensions import Literal
 
 from ..._models import BaseModel
@@ -15,6 +14,7 @@ class Data(BaseModel):
     id: str
 
     analysis_types: Optional[List[Literal["visibility", "sentiment", "sentiment_v2", "accuracy"]]] = None
+    """Analysis types assigned to this prompt. `sentiment_v2` is current sentiment, the same as the `sentiment` input."""
 
     prompt_type: Optional[str] = None
 
@@ -35,9 +35,9 @@ class Data(BaseModel):
 
     personas: Optional[List[NamedResource]] = None
 
-    created_at: datetime
+    created_at: str
 
-    updated_at: datetime
+    updated_at: str
 
 
 class Info(BaseModel):
