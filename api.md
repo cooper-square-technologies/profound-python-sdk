@@ -231,7 +231,7 @@ association is silently dropped.
 | Response | [`OrganizationGetPersonasResponse`](./src/profound/types/organization_get_personas_response.py) |
 
 ```python
-organization = client.organizations.get_personas()
+organization_personas_with_categories = client.organizations.get_personas()
 ```
 
 ### List organizations
@@ -250,7 +250,10 @@ organization = client.organizations.list()
 
 #### Get Categories
 
-Get the organization categories, one row per (category, organization) pair.
+Get categories, one row per (category, organization) pair.
+
+Super-org members discover all categories regardless of organization_ids, including
+categories with no organization association (organization is null).
 
 | Direction | Type |
 | --- | --- |
@@ -327,7 +330,7 @@ category = client.organizations.categories.assets(
 | Response | [`CategoryGetCategoryPersonasResponse`](./src/profound/types/organizations/category_get_category_personas_response.py) |
 
 ```python
-category = client.organizations.categories.get_category_personas(
+category_personas = client.organizations.categories.get_category_personas(
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
 )
 ```
@@ -414,7 +417,7 @@ Get the citation categories for a category: the built-in buckets plus any custom
 | Response | [`CategoryGetCitationCategoriesResponse`](./src/profound/types/organizations/category_get_citation_categories_response.py) |
 
 ```python
-category = client.organizations.categories.get_citation_categories(
+citation_categories = client.organizations.categories.get_citation_categories(
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
 )
 ```
@@ -1111,13 +1114,14 @@ for event in stream:
 
 ```python
 accuracy = client.reports.accuracy.create_overview(
+    citation_category_taxonomy="legacy",
     start_date="",
     end_date="",
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     exclude_topic_ids=False,
     tag_filter_type="any",
-    include_no_tag=False,
-    include_no_persona=False,
+    include_no_tag=True,
+    include_no_persona=True,
     group_by="period",
 )
 ```
@@ -1131,13 +1135,14 @@ accuracy = client.reports.accuracy.create_overview(
 
 ```python
 accuracy = client.reports.accuracy.create_breakdown(
+    citation_category_taxonomy="legacy",
     start_date="",
     end_date="",
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     exclude_topic_ids=False,
     tag_filter_type="any",
-    include_no_tag=False,
-    include_no_persona=False,
+    include_no_tag=True,
+    include_no_persona=True,
     breakdown_by="citation",
     limit=10,
     offset=0,
@@ -1156,7 +1161,7 @@ accuracy = client.reports.accuracy.create_breakdown(
 ```python
 accuracy = client.reports.accuracy.create_citation_analysis(
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    clean_href="",
+    clean_href="x",
     start_date="",
     end_date="",
 )
@@ -1186,13 +1191,15 @@ accuracy = client.reports.accuracy.create_topic_ids(
 
 ```python
 accuracy = client.reports.accuracy.create_inaccurate_themes(
+    citation_category_taxonomy="legacy",
     start_date="",
     end_date="",
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     exclude_topic_ids=False,
     tag_filter_type="any",
-    include_no_tag=False,
-    include_no_persona=False,
+    include_no_tag=True,
+    include_no_persona=True,
+    verification_status="inaccurate",
     limit=10,
     offset=0,
     sort_by="response_share",
@@ -1209,16 +1216,20 @@ accuracy = client.reports.accuracy.create_inaccurate_themes(
 
 ```python
 accuracy = client.reports.accuracy.create_inaccurate_clusters(
+    citation_category_taxonomy="legacy",
     start_date="",
     end_date="",
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     exclude_topic_ids=False,
     tag_filter_type="any",
-    include_no_tag=False,
-    include_no_persona=False,
+    include_no_tag=True,
+    include_no_persona=True,
+    verification_status="inaccurate",
     limit=5000,
     offset=0,
     include_models=False,
+    include_citations=True,
+    include_citation_hostnames=True,
 )
 ```
 
@@ -1231,13 +1242,14 @@ accuracy = client.reports.accuracy.create_inaccurate_clusters(
 
 ```python
 accuracy = client.reports.accuracy.create_inaccuracy_drivers(
+    citation_category_taxonomy="legacy",
     start_date="",
     end_date="",
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     exclude_topic_ids=False,
     tag_filter_type="any",
-    include_no_tag=False,
-    include_no_persona=False,
+    include_no_tag=True,
+    include_no_persona=True,
     limit=5,
 )
 ```
@@ -1251,13 +1263,14 @@ accuracy = client.reports.accuracy.create_inaccuracy_drivers(
 
 ```python
 accuracy = client.reports.accuracy.create_top_inaccurate_claims(
+    citation_category_taxonomy="legacy",
     start_date="",
     end_date="",
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     exclude_topic_ids=False,
     tag_filter_type="any",
-    include_no_tag=False,
-    include_no_persona=False,
+    include_no_tag=True,
+    include_no_persona=True,
     limit=5,
 )
 ```
@@ -1271,14 +1284,16 @@ accuracy = client.reports.accuracy.create_top_inaccurate_claims(
 
 ```python
 accuracy = client.reports.accuracy.create_claim_breakdown(
+    citation_category_taxonomy="legacy",
     start_date="",
     end_date="",
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     exclude_topic_ids=False,
     tag_filter_type="any",
-    include_no_tag=False,
-    include_no_persona=False,
+    include_no_tag=True,
+    include_no_persona=True,
     cluster_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    verification_status="inaccurate",
 )
 ```
 
@@ -1291,13 +1306,14 @@ accuracy = client.reports.accuracy.create_claim_breakdown(
 
 ```python
 accuracy = client.reports.accuracy.create_claim_citations(
+    citation_category_taxonomy="legacy",
     start_date="",
     end_date="",
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     exclude_topic_ids=False,
     tag_filter_type="any",
-    include_no_tag=False,
-    include_no_persona=False,
+    include_no_tag=True,
+    include_no_persona=True,
     cluster_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     limit=10,
     offset=0,
@@ -1313,14 +1329,15 @@ accuracy = client.reports.accuracy.create_claim_citations(
 | Response | [`AccuracyCreateClusterExampleRunsResponse`](./src/profound/types/reports/accuracy_create_cluster_example_runs_response.py) |
 
 ```python
-accuracy = client.reports.accuracy.create_cluster_example_runs(
+cluster_example_runs = client.reports.accuracy.create_cluster_example_runs(
+    citation_category_taxonomy="legacy",
     start_date="",
     end_date="",
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     exclude_topic_ids=False,
     tag_filter_type="any",
-    include_no_tag=False,
-    include_no_persona=False,
+    include_no_tag=True,
+    include_no_persona=True,
     cluster_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     limit=20,
     offset=0,
@@ -1335,7 +1352,7 @@ accuracy = client.reports.accuracy.create_cluster_example_runs(
 | Response | [`AccuracyCreateClusterVerificationPairsResponse`](./src/profound/types/reports/accuracy_create_cluster_verification_pairs_response.py) |
 
 ```python
-accuracy = client.reports.accuracy.create_cluster_verification_pairs(
+cluster_verification_pairs = client.reports.accuracy.create_cluster_verification_pairs(
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     cluster_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
 )
@@ -1492,7 +1509,7 @@ youtube = client.reports.social.youtube.get_summary(
 | Response | [`OptimizationListResponse`](./src/profound/types/content/optimization_list_response.py) |
 
 ```python
-optimization = client.content.optimization.list(
+content_optimizations = client.content.optimization.list(
     asset_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     limit=10000,
     offset=0,
@@ -1528,7 +1545,7 @@ published yet.
 | Response | [`AgentListResponse`](./src/profound/types/agent_list_response.py) |
 
 ```python
-agent = client.agents.list(
+agents = client.agents.list(
     limit=100,
 )
 ```
@@ -1677,9 +1694,9 @@ run = client.agents.runs.retrieve(
 
 List the node types available for building agents.
 
-The set is deterministic and does not depend on the caller, so the response
-is safe to cache across sessions. Integration-dependent and dynamic-schema
-node types are intentionally excluded in v1.
+Amazon Selling Partner nodes are omitted unless `showAmazonSellingPartnerIntegration`
+is enabled for one of the caller's organizations. Dynamic-schema node types stay
+excluded in v1.
 
 | Direction | Type |
 | --- | --- |
@@ -1847,13 +1864,10 @@ project = client.projects.list(
 
 | Direction | Type |
 | --- | --- |
-| Request | [`ProjectCreateParams`](./src/profound/types/project_create_params.py) |
 | Response | [`ProjectCreateResponse`](./src/profound/types/project_create_response.py) |
 
 ```python
-project = client.projects.create(
-    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-)
+project = client.projects.create()
 ```
 
 ### Get Project
@@ -1931,28 +1945,21 @@ project = client.projects.unarchive(
 
 | Direction | Type |
 | --- | --- |
-| Request | [`GenerationListParams`](./src/profound/types/projects/generation_list_params.py) |
 | Response | [`GenerationListResponse`](./src/profound/types/projects/generation_list_response.py) |
 
 ```python
-generation = client.projects.generations.list(
-    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    limit=100,
-    offset=0,
-)
+generation = client.projects.generations.list()
 ```
 
 #### Get Project Generation Status
 
 | Direction | Type |
 | --- | --- |
-| Request | [`GenerationRetrieveParams`](./src/profound/types/projects/generation_retrieve_params.py) |
 | Response | [`GenerationRetrieveResponse`](./src/profound/types/projects/generation_retrieve_response.py) |
 
 ```python
 generation = client.projects.generations.retrieve(
     run_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
-    category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
 )
 ```
 
@@ -1966,7 +1973,7 @@ generation = client.projects.generations.retrieve(
 | Response | [`TaskListResponse`](./src/profound/types/projects/task_list_response.py) |
 
 ```python
-task = client.projects.tasks.list(
+project_tasks = client.projects.tasks.list(
     project_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
 )
@@ -2063,7 +2070,7 @@ Each row's `integration_id` is the value a hub-backed node needs bound to it.
 | Response | [`IntegrationListResponse`](./src/profound/types/integration_list_response.py) |
 
 ```python
-integration = client.integrations.list()
+integrations = client.integrations.list()
 ```
 
 ## `Documents`
@@ -2121,7 +2128,7 @@ documents, so the last page of a walk may legitimately be an empty one.
 | Response | [`DocumentListResponse`](./src/profound/types/document_list_response.py) |
 
 ```python
-document = client.documents.list(
+documents = client.documents.list(
     organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
     limit=20,
 )
@@ -2296,10 +2303,10 @@ omitted for privacy.
 
 ```python
 volume = client.prompt_volumes.volume.on_the_fly(
-    keyword="",
     matching_type="exact_match",
     start_date="2024-01-01",
     end_date="2024-01-01",
+    keyword="x",
 )
 ```
 
@@ -2319,9 +2326,9 @@ are omitted for privacy. Doesn't use the daily keyword allowance.
 
 ```python
 intent = client.prompt_volumes.intents.on_the_fly(
-    keyword="",
     matching_type="exact_match",
     start_date="2024-01-01",
     end_date="2024-01-01",
+    keyword="x",
 )
 ```

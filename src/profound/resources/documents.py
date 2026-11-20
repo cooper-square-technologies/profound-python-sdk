@@ -160,7 +160,7 @@ class DocumentsResource(SyncAPIResource):
 
         Example:
             ```python
-            document = client.documents.list(
+            documents = client.documents.list(
                 organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 limit=20,
             )
@@ -602,7 +602,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
 
         Example:
             ```python
-            document = await client.documents.list(
+            documents = await client.documents.list(
                 organization_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
                 limit=20,
             )

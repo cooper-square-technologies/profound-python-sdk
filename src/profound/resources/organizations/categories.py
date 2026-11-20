@@ -62,7 +62,10 @@ class CategoriesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CategoryListResponse:
         """
-        Get the organization categories, one row per (category, organization) pair.
+        Get categories, one row per (category, organization) pair.
+
+        Super-org members discover all categories regardless of organization_ids, including
+        categories with no organization association (organization is null).
 
         Args:
             organization_ids: Restrict results to one or more organizations the caller belongs to. Repeat the parameter to target multiple orgs (e.g. `?organization_ids=<id1>&organization_ids=<id2>`). Omit to return data from every organization the caller has access to.
@@ -181,7 +184,7 @@ class CategoriesResource(SyncAPIResource):
         cursor: Optional[str] | Omit = omit,
         order_by: Literal["created_at", "prompt"] | Omit = omit,
         order_dir: Literal["asc", "desc"] | Omit = omit,
-        analysis_type: List[Literal["visibility", "sentiment", "sentiment_v2", "accuracy"]] | Omit = omit,
+        analysis_type: List[Literal["visibility", "sentiment", "accuracy"]] | Omit = omit,
         prompt_type: List[Literal["visibility", "sentiment"]] | Omit = omit,
         status: List[Literal["active", "disabled"]] | Omit = omit,
         topic_id: SequenceNotStr[str] | Omit = omit,
@@ -329,7 +332,7 @@ class CategoriesResource(SyncAPIResource):
 
         Example:
             ```python
-            category = client.organizations.categories.get_category_personas(
+            category_personas = client.organizations.categories.get_category_personas(
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
             )
             ```
@@ -584,7 +587,7 @@ class CategoriesResource(SyncAPIResource):
 
         Example:
             ```python
-            category = client.organizations.categories.get_citation_categories(
+            citation_categories = client.organizations.categories.get_citation_categories(
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
             )
             ```
@@ -621,7 +624,10 @@ class AsyncCategoriesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CategoryListResponse:
         """
-        Get the organization categories, one row per (category, organization) pair.
+        Get categories, one row per (category, organization) pair.
+
+        Super-org members discover all categories regardless of organization_ids, including
+        categories with no organization association (organization is null).
 
         Args:
             organization_ids: Restrict results to one or more organizations the caller belongs to. Repeat the parameter to target multiple orgs (e.g. `?organization_ids=<id1>&organization_ids=<id2>`). Omit to return data from every organization the caller has access to.
@@ -742,7 +748,7 @@ class AsyncCategoriesResource(AsyncAPIResource):
         cursor: Optional[str] | Omit = omit,
         order_by: Literal["created_at", "prompt"] | Omit = omit,
         order_dir: Literal["asc", "desc"] | Omit = omit,
-        analysis_type: List[Literal["visibility", "sentiment", "sentiment_v2", "accuracy"]] | Omit = omit,
+        analysis_type: List[Literal["visibility", "sentiment", "accuracy"]] | Omit = omit,
         prompt_type: List[Literal["visibility", "sentiment"]] | Omit = omit,
         status: List[Literal["active", "disabled"]] | Omit = omit,
         topic_id: SequenceNotStr[str] | Omit = omit,
@@ -890,7 +896,7 @@ class AsyncCategoriesResource(AsyncAPIResource):
 
         Example:
             ```python
-            category = await client.organizations.categories.get_category_personas(
+            category_personas = await client.organizations.categories.get_category_personas(
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
             )
             ```
@@ -1145,7 +1151,7 @@ class AsyncCategoriesResource(AsyncAPIResource):
 
         Example:
             ```python
-            category = await client.organizations.categories.get_citation_categories(
+            citation_categories = await client.organizations.categories.get_citation_categories(
                 category_id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
             )
             ```

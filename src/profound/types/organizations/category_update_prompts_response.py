@@ -1,5 +1,7 @@
 # File generated from our OpenAPI spec by Scalar. See README.md for details.
 
+from __future__ import annotations
+
 from typing import List, Optional
 
 from ..._models import BaseModel
@@ -7,7 +9,37 @@ from ..._models import BaseModel
 from .field_diff import FieldDiff
 from .named_resource_diff_list import NamedResourceDiffList
 
-__all__ = ["CategoryUpdatePromptsResponse", "Prompt"]
+__all__ = [
+    "CategoryUpdatePromptsResponse",
+    "Prompt",
+    "PromptPlatforms",
+    "PromptPlatformsAdded",
+    "PromptPlatformsRemoved",
+]
+
+
+class PromptPlatformsRemoved(BaseModel):
+    id: str
+
+    name: str
+
+    slug: str
+    """Stable platform slug, independent of its display name."""
+
+
+class PromptPlatformsAdded(BaseModel):
+    id: str
+
+    name: str
+
+    slug: str
+    """Stable platform slug, independent of its display name."""
+
+
+class PromptPlatforms(BaseModel):
+    added: Optional[List[PromptPlatformsAdded]] = None
+
+    removed: Optional[List[PromptPlatformsRemoved]] = None
 
 
 class Prompt(BaseModel):
@@ -29,7 +61,7 @@ class Prompt(BaseModel):
     regions: Optional[NamedResourceDiffList] = None
     """Regions added and removed."""
 
-    platforms: Optional[NamedResourceDiffList] = None
+    platforms: Optional[PromptPlatforms] = None
     """Platforms added and removed."""
 
     personas: Optional[NamedResourceDiffList] = None

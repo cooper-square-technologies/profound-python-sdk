@@ -32,6 +32,8 @@ class Data(BaseModel):
 
 
 class AccuracyCreateClaimCitationsResponse(BaseModel):
+    evidence_scope: Optional[str] = FieldInfo(alias="evidenceScope", default=None)
+
     data: List[Data]
 
     total_count: int = FieldInfo(alias="totalCount")

@@ -699,7 +699,7 @@ class ReportsResource(SyncAPIResource):
         Args:
             date_interval: Date interval for the report. (only used with date dimension)
             dimensions: Dimensions to group the report by.
-            metrics: Metrics to return for each row.
+            metrics: fanouts_per_execution: average searches the model issued per answer. total_fanouts: searches issued. share: a query's occurrences over its prompt's total fanouts (requires the query dimension). query_variations: distinct search strings per row (not available with the query dimension).
             order_by: Custom ordering. Keys must be a requested metric or the ``date`` dimension. Values are ``asc`` or ``desc``. Defaults to first metric descending.
             pagination: Pagination settings for the report results.
             category_id: Body parameter.
@@ -2560,7 +2560,7 @@ class AsyncReportsResource(AsyncAPIResource):
         Args:
             date_interval: Date interval for the report. (only used with date dimension)
             dimensions: Dimensions to group the report by.
-            metrics: Metrics to return for each row.
+            metrics: fanouts_per_execution: average searches the model issued per answer. total_fanouts: searches issued. share: a query's occurrences over its prompt's total fanouts (requires the query dimension). query_variations: distinct search strings per row (not available with the query dimension).
             order_by: Custom ordering. Keys must be a requested metric or the ``date`` dimension. Values are ``asc`` or ``desc``. Defaults to first metric descending.
             pagination: Pagination settings for the report results.
             category_id: Body parameter.

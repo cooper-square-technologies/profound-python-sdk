@@ -252,7 +252,7 @@ class OrganizationsResource(SyncAPIResource):
 
         Example:
             ```python
-            organization = client.organizations.get_personas()
+            organization_personas_with_categories = client.organizations.get_personas()
             ```
         """
         return self._get(
@@ -516,7 +516,7 @@ class AsyncOrganizationsResource(AsyncAPIResource):
 
         Example:
             ```python
-            organization = await client.organizations.get_personas()
+            organization_personas_with_categories = await client.organizations.get_personas()
             ```
         """
         return await self._get(

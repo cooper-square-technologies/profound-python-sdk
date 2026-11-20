@@ -80,9 +80,10 @@ class Data(BaseModel):
     search_triggered: Optional[bool] = None
 
     themes: Optional[List[str]] = None
+    """Deprecated and always empty: legacy (v1) sentiment is retired. Use /v2/reports/answers (sentiment_claims) or /v2/reports/sentiment."""
 
     sentiment_themes: Optional[List[DataSentimentTheme]] = None
-    """Uses legacy sentiment data."""
+    """Deprecated and always empty: legacy (v1) sentiment is retired. Use /v2/reports/answers (sentiment_claims) or /v2/reports/sentiment."""
 
     search_queries: Optional[List[str]] = None
 

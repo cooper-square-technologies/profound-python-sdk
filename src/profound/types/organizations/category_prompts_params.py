@@ -22,7 +22,7 @@ class CategoryPromptsParams(TypedDict, total=False):
     order_dir: Literal["asc", "desc"]
     """Sort direction for the selected order field."""
 
-    analysis_type: List[Literal["visibility", "sentiment", "sentiment_v2", "accuracy"]]
+    analysis_type: List[Literal["visibility", "sentiment", "accuracy"]]
     """Filter by analysis type (visibility, sentiment, accuracy)."""
 
     prompt_type: List[Literal["visibility", "sentiment"]]

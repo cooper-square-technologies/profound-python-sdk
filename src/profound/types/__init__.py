@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from . import (
     reports,
+    prompt_volumes,
 )
 from .. import _compat
 
@@ -90,7 +91,6 @@ from .knowledge_base_search_params import KnowledgeBaseSearchParams as Knowledge
 from .project_list_response import ProjectListResponse as ProjectListResponse
 from .project_list_params import ProjectListParams as ProjectListParams
 from .project_create_response import ProjectCreateResponse as ProjectCreateResponse
-from .project_create_params import ProjectCreateParams as ProjectCreateParams
 from .project_retrieve_response import ProjectRetrieveResponse as ProjectRetrieveResponse
 from .project_retrieve_params import ProjectRetrieveParams as ProjectRetrieveParams
 from .project_delete_params import ProjectDeleteParams as ProjectDeleteParams
@@ -133,5 +133,9 @@ from .shared.topic_id_filter import TopicIDFilter as TopicIDFilter
 # names their annotations mention are all bound by the time the model schema is built.
 if _compat.PYDANTIC_V1:
     reports.accuracy_create_overview_response.AccuracyCreateOverviewResponse.update_forward_refs()  # type: ignore
+    prompt_volumes.volume_on_the_fly_response.VolumeOnTheFlyResponse.update_forward_refs()  # type: ignore
+    prompt_volumes.intent_on_the_fly_response.IntentOnTheFlyResponse.update_forward_refs()  # type: ignore
 else:
     reports.accuracy_create_overview_response.AccuracyCreateOverviewResponse.model_rebuild(_parent_namespace_depth=0)
+    prompt_volumes.volume_on_the_fly_response.VolumeOnTheFlyResponse.model_rebuild(_parent_namespace_depth=0)
+    prompt_volumes.intent_on_the_fly_response.IntentOnTheFlyResponse.model_rebuild(_parent_namespace_depth=0)
