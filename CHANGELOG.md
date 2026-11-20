@@ -1,5 +1,53 @@
 # Changelog
 
+## [0.62.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.61.0...v0.62.0) (2026-11-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* **api:** 37 breaking changes to the SDK surface.
+    - enum-values GET v1/org/categories/{p}/prompts.analysis_type[] — values differ — only after: [—], only before: [sentiment_v2] (breaking: enum value removed; the old value no longer resolves)
+    - request-shape GET v1/projects/generations.category_id — field only in before (breaking: the new snapshot no longer has it)
+    - request-shape GET v1/projects/generations.status — field only in before (breaking: the new snapshot no longer has it)
+    - request-shape GET v1/projects/generations.limit — field only in before (breaking: the new snapshot no longer has it)
+    - request-shape GET v1/projects/generations.offset — field only in before (breaking: the new snapshot no longer has it)
+    - request-shape GET v1/projects/generations/{p}.category_id — field only in before (breaking: the new snapshot no longer has it)
+    - enum-values PATCH v1/org/categories/{p}/prompts.prompts[].analysis_types[] — values differ — only after: [—], only before: [sentiment_v2] (breaking: enum value removed; the old value no longer resolves)
+    - enum-values POST v1/org/categories/{p}/prompts.prompts[].analysis_types[] — values differ — only after: [—], only before: [sentiment_v2] (breaking: enum value removed; the old value no longer resolves)
+    - request-shape POST v1/projects.category_id — field only in before (breaking: the new snapshot no longer has it)
+    - request-shape POST v1/projects.title — field only in before (breaking: the new snapshot no longer has it)
+    - request-shape POST v1/projects.project_name — field only in before (breaking: the new snapshot no longer has it)
+    - request-shape POST v1/projects.focus — field only in before (breaking: the new snapshot no longer has it)
+    - request-shape POST v1/projects.topics — field only in before (breaking: the new snapshot no longer has it)
+    - request-shape POST v1/projects.attachments — field only in before (breaking: the new snapshot no longer has it)
+    - request-shape POST v1/projects.generation_context — field only in before (breaking: the new snapshot no longer has it)
+    - enum-values POST v1/prompts/answers.filters[]|AnalysisTypeFilter.value|List[Literal[accuracy, sentiment, visibility]][] — values differ — only after: [—], only before: [sentiment_v2] (breaking: enum value removed; the old value no longer resolves)
+    - enum-values POST v1/prompts/answers.filters[]|AnalysisTypeFilter.value|Literal[accuracy, sentiment, visibility] — values differ — only after: [—], only before: [sentiment_v2] (breaking: enum value removed; the old value no longer resolves)
+    - types-files types/project_create_params.py — type file only in before (7 members: 0 matched by name and kind elsewhere in after, 7 not found) (breaking: the new snapshot no longer has it)
+    - types-files types/projects/generation_list_params.py — type file only in before (1 member: 0 matched by name and kind elsewhere in after, 1 not found) (breaking: the new snapshot no longer has it)
+    - types-files types/projects/generation_retrieve_params.py — type file only in before (1 member: 0 matched by name and kind elsewhere in after, 1 not found) (breaking: the new snapshot no longer has it)
+    - types-classes types/__init__.py:ProjectCreateParams — reexport only in before (breaking: removed; prompt_volumes appeared in its place, likely a rename)
+    - types-classes types/project_create_response.py:Data — class only in before (breaking: the new snapshot no longer has it)
+    - types-classes types/projects/__init__.py:GenerationListParams — reexport only in before (breaking: the new snapshot no longer has it)
+    - types-classes types/projects/__init__.py:GenerationRetrieveParams — reexport only in before (breaking: the new snapshot no longer has it)
+    - types-classes types/projects/generation_list_response.py:Data — class only in before (breaking: the new snapshot no longer has it)
+    - types-classes types/projects/generation_retrieve_response.py:Data — class only in before (breaking: the new snapshot no longer has it)
+    - response-shape GET v1/org/categories→[].organization — required in before only (review: direction-dependent; read the hunk)
+    - response-shape GET v1/org/categories→[].organization — optional wrapper only in after (review: direction-dependent; read the hunk)
+    - response-shape GET v1/org/categories/{p}/prompts→.data[].created_at — datetime-typed on one side, plain string on the other (review: direction-dependent; read the hunk)
+    - response-shape GET v1/org/categories/{p}/prompts→.data[].updated_at — datetime-typed on one side, plain string on the other (review: direction-dependent; read the hunk)
+    - response-shape GET v1/projects/generations→ — untyped in after, typed in the other (review: direction-dependent; read the hunk)
+    - response-shape GET v1/projects/generations/{p}→ — untyped in after, typed in the other (review: direction-dependent; read the hunk)
+    - response-shape POST v1/projects→ — untyped in after, typed in the other (review: direction-dependent; read the hunk)
+    - response-shape POST v2/prompt-volumes/intents/on-the-fly→.info.query{} — optional wrapper only in after (review: direction-dependent; read the hunk)
+    - response-shape POST v2/prompt-volumes/intents/on-the-fly→.info.query{} — untyped in before, typed in the other (review: direction-dependent; read the hunk)
+    - response-shape POST v2/prompt-volumes/volume/on-the-fly→.info.query{} — optional wrapper only in after (review: direction-dependent; read the hunk)
+    - response-shape POST v2/prompt-volumes/volume/on-the-fly→.info.query{} — untyped in before, typed in the other (review: direction-dependent; read the hunk)
+
+### Features
+
+* **api:** update SDK surface (69 changes) ([9b8b0d6](https://github.com/cooper-square-technologies/profound-python-sdk/commit/9b8b0d645f10e3be27f258b4ddcb81dff9fe35c1))
+
 ## [0.61.0](https://github.com/cooper-square-technologies/profound-python-sdk/compare/v0.60.0...v0.61.0) (2026-09-25)
 
 
